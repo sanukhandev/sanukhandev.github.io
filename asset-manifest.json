@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/static/css/main.4957d23f.css",
-    "main.js": "/static/js/main.06a7d072.js",
-    "index.html": "/index.html",
-    "main.4957d23f.css.map": "/static/css/main.4957d23f.css.map",
-    "main.06a7d072.js.map": "/static/js/main.06a7d072.js.map"
+    "main.css": "/sanu-new-portfolio/static/css/main.4957d23f.css",
+    "main.js": "/sanu-new-portfolio/static/js/main.06a7d072.js",
+    "index.html": "/sanu-new-portfolio/index.html",
+    "main.4957d23f.css.map": "/sanu-new-portfolio/static/css/main.4957d23f.css.map",
+    "main.06a7d072.js.map": "/sanu-new-portfolio/static/js/main.06a7d072.js.map"
   },
   "entrypoints": [
     "static/css/main.4957d23f.css",
