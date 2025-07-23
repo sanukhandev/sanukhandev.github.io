@@ -4,6 +4,7 @@ import { ArrowRight, Code, Coffee } from 'lucide-react';
 const Hero = ({ data }) => {
   const [typedTitle, setTypedTitle] = useState('');
   useEffect(() => {
+    if (!data.title) return; // Prevent undefined
     let i = 0;
     const interval = setInterval(() => {
       setTypedTitle((prev) => prev + data.title[i]);
@@ -12,6 +13,14 @@ const Hero = ({ data }) => {
     }, 70);
     return () => clearInterval(interval);
   }, [data.title]);
+
+  // Split at the dot for line break
+  const dotIndex = data.title ? data.title.indexOf('.') : -1;
+  const firstLine = dotIndex !== -1 ? data.title.slice(0, dotIndex + 1) : data.title || '';
+  const secondLine = dotIndex !== -1 ? data.title.slice(dotIndex + 1) : '';
+  const isTypingFirstLine = typedTitle.length <= firstLine.length;
+  const displayedFirst = typedTitle.slice(0, Math.min(typedTitle.length, firstLine.length));
+  const displayedSecond = typedTitle.length > firstLine.length ? typedTitle.slice(firstLine.length) : '';
 
   return (
     <section className="hero">
@@ -23,7 +32,9 @@ const Hero = ({ data }) => {
           </div>
           
           <h1 className="hero-title typewriter">
-            {typedTitle}
+            {displayedFirst}
+            {firstLine && typedTitle.length >= firstLine.length && <br />}
+            {displayedSecond}
             <span className="typewriter-cursor">|</span>
           </h1>
           
