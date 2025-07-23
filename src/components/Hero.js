@@ -1,7 +1,18 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ArrowRight, Code, Coffee } from 'lucide-react';
 
 const Hero = ({ data }) => {
+  const [typedTitle, setTypedTitle] = useState('');
+  useEffect(() => {
+    let i = 0;
+    const interval = setInterval(() => {
+      setTypedTitle((prev) => prev + data.title[i]);
+      i++;
+      if (i >= data.title.length) clearInterval(interval);
+    }, 70);
+    return () => clearInterval(interval);
+  }, [data.title]);
+
   return (
     <section className="hero">
       <div className="hero-container">
@@ -11,8 +22,9 @@ const Hero = ({ data }) => {
             <span>Full Stack Developer</span>
           </div>
           
-          <h1 className="hero-title">
-            {data.title}
+          <h1 className="hero-title typewriter">
+            {typedTitle}
+            <span className="typewriter-cursor">|</span>
           </h1>
           
           <p className="hero-subtitle">

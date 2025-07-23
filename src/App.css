@@ -184,11 +184,24 @@ body {
   height: 70px;
 }
 
+@keyframes logoFadeInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
 .logo-text {
   font-family: 'Montserrat', sans-serif;
   font-size: 2rem;
   display: flex;
   align-items: center;
+  opacity: 0;
+  animation: logoFadeInLeft 1s cubic-bezier(0.77, 0, 0.175, 1) 0.2s forwards;
 }
 
 .logo-main {
@@ -1854,4 +1867,21 @@ body {
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
+}
+
+.typewriter {
+  font-family: inherit;
+  white-space: pre;
+  overflow: hidden;
+}
+.typewriter-cursor {
+  display: inline-block;
+  width: 1ch;
+  animation: blink 1s steps(1) infinite;
+  color: var(--accent-green);
+  font-family: 'Fira Mono', 'Consolas', monospace;
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
