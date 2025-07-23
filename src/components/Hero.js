@@ -45,7 +45,6 @@ const Hero = ({ data }) => {
             {displayedFirst}
             {firstLine && typedTitle.length >= firstLine.length && <br />}
             {displayedSecond}
-            {isTyping && <span className="typewriter-cursor">|</span>}
           </h1>
           <p className="hero-subtitle">
             {data.subtitle}
