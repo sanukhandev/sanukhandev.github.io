@@ -204,6 +204,7 @@ body {
 
 .logo-dev {
   font-weight: 400;
+  font-size: .5rem;
   letter-spacing: 1px;
   opacity: 0.7;
 }
