@@ -280,7 +280,7 @@ export const mockData = {
   ],
   
   contact: {
-    location: "Dubai, United Arab Emirates",
+    location: "Dubai,United Arab Emirates",
     email: "khan.sanukhan@outlook.com",
     phone: "+971-563-860-850",
     social: {
