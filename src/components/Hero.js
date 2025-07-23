@@ -8,20 +8,25 @@ const Hero = ({ data = {} }) => {
   const [typedTitle, setTypedTitle] = useState('');
   const [isTyping, setIsTyping] = useState(true);
 
-  useEffect(() => {
-    if (!data.title) return;
+  const fullTitle = data.title || '';
+  const dotIndex = fullTitle.indexOf('.');
+  const firstLine = dotIndex !== -1 ? fullTitle.slice(0, dotIndex + 1) : fullTitle;
+  const secondLine = dotIndex !== -1 ? fullTitle.slice(dotIndex + 1).trim() : '';
 
-    let i = 0;
+  useEffect(() => {
+    if (!fullTitle) return;
+
     setTypedTitle('');
     setIsTyping(true);
 
+    let i = 0;
     let timeoutId;
+
     const typeChar = () => {
-      if (i < data.title.length) {
-        setTypedTitle((prev) => prev + data.title[i]);
+      if (i <= fullTitle.length) {
+        setTypedTitle(fullTitle.slice(0, i));
         i++;
-        const delay = 100 + Math.random() * 80;
-        timeoutId = setTimeout(typeChar, delay);
+        timeoutId = setTimeout(typeChar, 60 + Math.random() * 30);
       } else {
         setIsTyping(false);
       }
@@ -29,12 +34,7 @@ const Hero = ({ data = {} }) => {
 
     typeChar();
     return () => clearTimeout(timeoutId);
-  }, [data.title]);
-
-  const fullTitle = data.title || '';
-  const dotIndex = fullTitle.indexOf('.');
-  const firstLine = dotIndex !== -1 ? fullTitle.slice(0, dotIndex + 1) : fullTitle;
-  const secondLine = dotIndex !== -1 ? fullTitle.slice(dotIndex + 1) : '';
+  }, [fullTitle]);
 
   const displayedFirst = typedTitle.slice(0, firstLine.length);
   const displayedSecond = typedTitle.length > firstLine.length
@@ -55,20 +55,22 @@ const Hero = ({ data = {} }) => {
             {displayedSecond}
           </h1>
           <p className="hero-subtitle">{data.subtitle}</p>
+
           <div className="hero-stats">
             <div className="stat">
-              <span className="stat-number">{data.stats?.experience || 0}</span>
+              <span className="stat-number">{data.stats?.experience || '0'}</span>
               <span className="stat-label">Years Experience</span>
             </div>
             <div className="stat">
-              <span className="stat-number">{data.stats?.projects || 0}</span>
+              <span className="stat-number">{data.stats?.projects || '0'}</span>
               <span className="stat-label">Projects Completed</span>
             </div>
             <div className="stat">
-              <span className="stat-number">{data.stats?.clients || 0}</span>
+              <span className="stat-number">{data.stats?.clients || '0'}</span>
               <span className="stat-label">Happy Clients</span>
             </div>
           </div>
+
           <div className="hero-actions">
             <button className="btn-primary">
               Let's Chat! <ArrowRight size={18} />
@@ -79,12 +81,14 @@ const Hero = ({ data = {} }) => {
             </button>
           </div>
         </div>
+
         <div className="hero-image">
           <div className="image-placeholder">
             <div className="avatar">
               <span>SK</span>
             </div>
           </div>
+
           <div className="floating-icons grid grid-cols-3 gap-4">
             <div className="tech-icon java">
               <SiJava size={28} color="#f89820" title="Java" />
