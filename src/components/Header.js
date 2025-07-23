@@ -22,7 +22,11 @@ const Header = () => {
       <div className="header-container">
         {/* Logo */}
         <div className="logo">
-          <span className="logo-text">Sanu Khan</span>
+          <span className="logo-text">
+            <span className="logo-main">SanuKhan</span>
+            <span className="logo-dot">.</span>
+            <span className="logo-dev">dev</span>
+          </span>
         </div>
 
         {/* Desktop Navigation */}
