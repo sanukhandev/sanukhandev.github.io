@@ -25,7 +25,7 @@ const Header = () => {
           <span className="logo-text">
             <span className="logo-main">SanuKhan</span>
             <span className="logo-dot">.</span>
-            <sup className="logo-dev">dev</sup>
+            <span className="logo-dev">dev</span>
           </span>
         </div>
 
