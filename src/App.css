@@ -207,6 +207,9 @@ body {
   font-size: 1rem;
   letter-spacing: 1px;
   opacity: 0.7;
+  color: #b0b0b0; /* or var(--text-secondary) for a lighter look */
+  vertical-align: baseline; /* ensures it's on the same line */
+  margin-left: 2px;
 }
 
 .desktop-nav {
