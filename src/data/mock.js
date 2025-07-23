@@ -225,12 +225,21 @@ export const mockData = {
   projects: {
     featured: [
       {
-        title: "MusicStream Pro",
-        description: "A comprehensive music and video streaming platform with social features and AI-powered recommendations.",
-        category: "mobile",
-        technologies: ["Flutter", "Dart", "Firebase", "Node.js"],
+        title: "LMS Infinity",
+        description: "An interactive and scalable Learning Management System built for multi-tenant SaaS environments. Features include gamified learning paths, real-time progress tracking, and role-based access.",
+        category: "fullstack",
+        technologies: ["NestJS", "Angular", "PostgreSQL", "Firebase", "Docker"],
         status: "in-progress",
-        year: "2024"
+        year: "2025"
+      },
+      
+      {
+        title: "NeuroCRM AI",
+        description: "An AI-powered, agentic CRM platform designed to automate customer interactions, lead scoring, and sales workflows. Features include an intelligent AI assistant, email summarization, conversation tracking, and dynamic workflow triggers.",
+        category: "fullstack",
+        technologies: ["React", "NestJS", "PostgreSQL", "OpenAI API", "Redis"],
+        status: "in-progress",
+        year: "2025"
       },
       {
         title: "MedLab CRM",
