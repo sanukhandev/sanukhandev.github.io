@@ -83,10 +83,12 @@ const Hero = ({ data = {} }) => {
         </div>
 
         <div className="hero-image">
-          <div className="image-placeholder">
-            <div className="avatar">
-              <span>SK</span>
-            </div>
+          <div className="image-container">
+            <img 
+              src="/assets/images/sanu.png" 
+              alt="Sanu Khan - Full Stack Developer" 
+              className="profile-image"
+            />
           </div>
 
           <div className="floating-icons grid grid-cols-3 gap-4">
