@@ -331,7 +331,7 @@ body {
   min-height: 100vh;
   display: flex;
   align-items: center;
-  padding: 0 2rem;
+  padding: 8rem 2rem 0 2rem;
   background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
   position: relative;
 }
@@ -476,23 +476,21 @@ body {
 }
 
 .image-container {
-  width: 300px;
-  height: 300px;
-  border-radius: 50%;
+  height: 80vh;
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 3px solid var(--accent-green);
-  box-shadow: 0 20px 60px rgba(0, 255, 136, 0.1);
   overflow: hidden;
-  background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-secondary) 100%);
-}
+  z-index: 5;
+  position: relative;
+  }
 
 .profile-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 50%;
+  border-radius: 8px;
   transition: transform 0.3s ease;
 }
 
@@ -504,49 +502,101 @@ body {
   position: absolute;
   width: 100%;
   height: 100%;
+  animation: rotate 20s linear infinite;
 }
 
 .tech-icon {
   position: absolute;
-  width: 60px;
-  height: 60px;
   border-radius: 50%;
   background: var(--bg-card);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.5rem;
   border: 2px solid var(--border-color);
-  animation: float 6s ease-in-out infinite;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
 }
 
-.tech-icon.react {
-  top: 10%;
-  right: 10%;
-  animation-delay: 0s;
+/* Size variations */
+.tech-icon.small {
+  width: 40px;
+  height: 40px;
 }
 
-.tech-icon.node {
-  top: 60%;
-  right: 0%;
-  animation-delay: 1.5s;
+.tech-icon.medium {
+  width: 55px;
+  height: 55px;
 }
 
-.tech-icon.php {
-  bottom: 10%;
-  left: 10%;
-  animation-delay: 3s;
+.tech-icon.large {
+  width: 70px;
+  height: 70px;
 }
 
-.tech-icon.js {
-  top: 30%;
-  left: -10%;
-  animation-delay: 4.5s;
+/* Layer depth effects */
+.tech-icon.back-layer {
+  filter: blur(3px);
+  opacity: 0.4;
+  z-index: 1;
+  animation: floatSlow 8s ease-in-out infinite;
 }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-20px) rotate(180deg); }
+.tech-icon.middle-layer {
+  filter: blur(0.5px);
+  opacity: 0.8;
+  z-index: 6;
+  animation: floatMedium 6s ease-in-out infinite;
+}
+
+.tech-icon.front-layer {
+  filter: blur(0px);
+  opacity: 1;
+  z-index: 7;
+  animation: floatFast 4s ease-in-out infinite;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+/* Individual positioning */
+/* Back layer - behind image, larger spread */
+.tech-icon.java { top: 10%; right: 15%; animation-delay: 0s; }
+.tech-icon.python { bottom: 20%; left: 10%; animation-delay: 1s; }
+.tech-icon.php { top: 60%; left: -10%; animation-delay: 0.5s; }
+.tech-icon.dart { top: 20%; right: -5%; animation-delay: 2.5s; }
+
+/* Front layer - small icons in front of image */
+.tech-icon.js { top: 25%; right: 25%; animation-delay: 1.5s; }
+.tech-icon.cpp { bottom: 35%; left: 30%; animation-delay: 4s; }
+.tech-icon.typescript { top: 45%; left: 20%; animation-delay: 3s; }
+
+/* Floating animations */
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+  25% { transform: translateY(-15px) translateX(10px) rotate(90deg); }
+  50% { transform: translateY(-30px) translateX(0px) rotate(180deg); }
+  75% { transform: translateY(-15px) translateX(-10px) rotate(270deg); }
+}
+
+@keyframes floatMedium {
+  0%, 100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+  33% { transform: translateY(-20px) translateX(15px) rotate(120deg); }
+  66% { transform: translateY(-10px) translateX(-15px) rotate(240deg); }
+}
+
+@keyframes floatFast {
+  0%, 100% { transform: translateY(0px) translateX(0px) rotate(0deg) scale(1); }
+  50% { transform: translateY(-25px) translateX(0px) rotate(180deg) scale(1.1); }
+}
+
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.tech-icon:hover {
+  transform: scale(1.2) !important;
+  z-index: 10 !important;
+  filter: blur(0px) !important;
+  opacity: 1 !important;
 }
 
 /* About Section */
@@ -787,9 +837,6 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(0, 255, 136, 0.1);
-  border-radius: 50%;
-  border: 2px solid rgba(0, 255, 136, 0.2);
   transition: all 0.3s ease;
 }
 

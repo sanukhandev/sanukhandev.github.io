@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ArrowRight, Code, Coffee, Zap, Database, Globe, Smartphone, Server, Terminal } from 'lucide-react';
+import { ArrowRight, Code, Coffee, Database, Globe, Smartphone, Server, Terminal } from 'lucide-react';
 
 const Hero = ({ data = {} }) => {
   const [typedTitle, setTypedTitle] = useState('');
@@ -88,24 +88,30 @@ const Hero = ({ data = {} }) => {
             />
           </div>
 
-          <div className="floating-icons grid grid-cols-3 gap-4">
-            <div className="tech-icon java">
-              <Server size={28} color="#f89820" title="Backend Development" />
+          <div className="floating-icons">
+            {/* Background layer - blurred and behind image */}
+            <div className="tech-icon back-layer large java">
+              <Server size={36} color="#f89820" title="Java" />
             </div>
-            <div className="tech-icon python">
-              <Database size={28} color="#3776ab" title="Data & Analytics" />
+            <div className="tech-icon back-layer large python">
+              <Database size={36} color="#3776ab" title="Python" />
             </div>
-            <div className="tech-icon php">
-              <Globe size={28} color="#777bb3" title="Web Development" />
+            <div className="tech-icon back-layer medium php">
+              <Globe size={32} color="#777bb3" title="PHP" />
             </div>
-            <div className="tech-icon js">
-              <Code size={28} color="#f7df1e" title="JavaScript" />
+            <div className="tech-icon back-layer medium dart">
+              <Smartphone size={32} color="#0175c2" title="Dart/Flutter" />
             </div>
-            <div className="tech-icon dart">
-              <Smartphone size={28} color="#0175c2" title="Mobile Development" />
+            
+            {/* Front layer - small and sharp, in front of image */}
+            <div className="tech-icon front-layer small js">
+              <Code size={20} color="#f7df1e" title="JavaScript" />
             </div>
-            <div className="tech-icon cpp">
-              <Terminal size={28} color="#00599c" title="System Programming" />
+            <div className="tech-icon front-layer small cpp">
+              <Terminal size={20} color="#00599c" title="C++" />
+            </div>
+            <div className="tech-icon front-layer small typescript">
+              <Code size={20} color="#3178c6" title="TypeScript" />
             </div>
           </div>
         </div>
