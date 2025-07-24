@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ArrowRight, Code, Coffee } from 'lucide-react';
-import {
-  SiJava, SiPython, SiPhp, SiJavascript, SiDart, SiCplusplus
-} from 'react-icons/si';
+import { ArrowRight, Code, Coffee, Zap, Database, Globe, Smartphone, Server, Terminal } from 'lucide-react';
 
 const Hero = ({ data = {} }) => {
   const [typedTitle, setTypedTitle] = useState('');
@@ -93,22 +90,22 @@ const Hero = ({ data = {} }) => {
 
           <div className="floating-icons grid grid-cols-3 gap-4">
             <div className="tech-icon java">
-              <SiJava size={28} color="#f89820" title="Java" />
+              <Server size={28} color="#f89820" title="Backend Development" />
             </div>
             <div className="tech-icon python">
-              <SiPython size={28} color="#3776ab" title="Python" />
+              <Database size={28} color="#3776ab" title="Data & Analytics" />
             </div>
             <div className="tech-icon php">
-              <SiPhp size={28} color="#777bb3" title="PHP" />
+              <Globe size={28} color="#777bb3" title="Web Development" />
             </div>
             <div className="tech-icon js">
-              <SiJavascript size={28} color="#f7df1e" title="JavaScript" />
+              <Code size={28} color="#f7df1e" title="JavaScript" />
             </div>
             <div className="tech-icon dart">
-              <SiDart size={28} color="#0175c2" title="Dart" />
+              <Smartphone size={28} color="#0175c2" title="Mobile Development" />
             </div>
             <div className="tech-icon cpp">
-              <SiCplusplus size={28} color="#00599c" title="C++" />
+              <Terminal size={28} color="#00599c" title="System Programming" />
             </div>
           </div>
         </div>
