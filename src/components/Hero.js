@@ -68,20 +68,6 @@ const Hero = ({ data = {} }) => {
             <Pin size={16} />
             <span>Dubai, UAE • Available for Opportunities</span>
           </div>
-// Add blinking animation style for the badge
-          const style = document.createElement('style');
-          style.innerHTML = `
-          .blink-badge {
-            animation: blink-badge 1.2s steps(2, start) infinite;
-}
-          @keyframes blink-badge {
-            0 %, 100 % { opacity: 1; }
-  50% {opacity: 0.3; }
-}`;
-          if (typeof document !== 'undefined' && !document.getElementById('blink-badge-style')) {
-            style.id = 'blink-badge-style';
-          document.head.appendChild(style);
-}
           <h1 className="hero-title typewriter">
             {displayedFirst}
             {firstLine && typedTitle.length >= firstLine.length && <br />}
