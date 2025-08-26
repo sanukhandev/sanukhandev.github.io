@@ -1,8 +1,17 @@
 import React, { useEffect, useState } from 'react';
+import {
+  ArrowRight,
+  Code as CodeIcon,
+  Coffee,
+  Database,
+  Globe,
+  Smartphone,
+  Server,
+  Terminal,
+  Pin,
+} from 'lucide-react';
 
 // Blinking badge CSS as a string (single declaration)
-
-// Blinking badge CSS as a string
 const BLINK_BADGE_CSS = `
 .blink-badge {
   animation: blink-badge 1.2s steps(2, start) infinite;
@@ -12,18 +21,19 @@ const BLINK_BADGE_CSS = `
   50% { opacity: 0.3; }
 }
 `;
-// Inject blinking badge style once on mount (browser only)
-useEffect(() => {
-  if (typeof document !== 'undefined' && !document.getElementById('blink-badge-style')) {
-    const style = document.createElement('style');
-    style.id = 'blink-badge-style';
-    style.innerHTML = BLINK_BADGE_CSS;
-    document.head.appendChild(style);
-  }
-}, []);
-import { ArrowRight, Code, Coffee, Database, Globe, Smartphone, Server, Terminal, Pin } from 'lucide-react';
 
 const Hero = ({ data = {} }) => {
+  // Inject blinking badge style once on mount (browser only)
+  useEffect(() => {
+    if (typeof document !== 'undefined' && !document.getElementById('blink-badge-style')) {
+      const style = document.createElement('style');
+      style.id = 'blink-badge-style';
+      style.innerHTML = BLINK_BADGE_CSS;
+      document.head.appendChild(style);
+    }
+  }, []);
+
+  // Typewriter state
   const [typedTitle, setTypedTitle] = useState('');
   const [isTyping, setIsTyping] = useState(true);
 
@@ -56,9 +66,7 @@ const Hero = ({ data = {} }) => {
   }, [fullTitle]);
 
   const displayedFirst = typedTitle.slice(0, firstLine.length);
-  const displayedSecond = typedTitle.length > firstLine.length
-    ? typedTitle.slice(firstLine.length)
-    : '';
+  const displayedSecond = typedTitle.length > firstLine.length ? typedTitle.slice(firstLine.length) : '';
 
   return (
     <section className="hero">
@@ -68,31 +76,33 @@ const Hero = ({ data = {} }) => {
             <Pin size={16} />
             <span>Dubai, UAE • Available for Opportunities</span>
           </div>
+
           <h1 className="hero-title typewriter">
             {displayedFirst}
             {firstLine && typedTitle.length >= firstLine.length && <br />}
             {displayedSecond}
           </h1>
-          <p className="hero-subtitle">{data.subtitle}</p>
+
+          {data.subtitle && <p className="hero-subtitle">{data.subtitle}</p>}
 
           <div className="hero-stats">
             <div className="stat">
-              <span className="stat-number">{data.stats?.experience || '0'}</span>
+              <span className="stat-number">{data.stats?.experience ?? '0'}</span>
               <span className="stat-label">Years Experience</span>
             </div>
             <div className="stat">
-              <span className="stat-number">{data.stats?.projects || '0'}</span>
+              <span className="stat-number">{data.stats?.projects ?? '0'}</span>
               <span className="stat-label">Projects Completed</span>
             </div>
             <div className="stat">
-              <span className="stat-number">{data.stats?.clients || '0'}</span>
+              <span className="stat-number">{data.stats?.clients ?? '0'}</span>
               <span className="stat-label">Happy Clients</span>
             </div>
           </div>
 
           <div className="hero-actions">
             <button className="btn-primary">
-              Let's Chat! <ArrowRight size={18} />
+              Let&apos;s Chat! <ArrowRight size={18} />
             </button>
             <button className="btn-secondary">
               <Coffee size={18} />
@@ -111,29 +121,29 @@ const Hero = ({ data = {} }) => {
           </div>
 
           <div className="floating-icons">
-            {/* Background layer - blurred and behind image */}
+            {/* Back layer - blurred and behind image */}
             <div className="tech-icon back-layer large java">
-              <Server size={36} color="#f89820" title="Java" />
+              <Server size={36} title="Java" />
             </div>
             <div className="tech-icon back-layer large python">
-              <Database size={36} color="#3776ab" title="Python" />
+              <Database size={36} title="Python" />
             </div>
             <div className="tech-icon back-layer medium php">
-              <Globe size={32} color="#777bb3" title="PHP" />
+              <Globe size={32} title="PHP" />
             </div>
             <div className="tech-icon back-layer medium dart">
-              <Smartphone size={32} color="#0175c2" title="Dart/Flutter" />
+              <Smartphone size={32} title="Dart/Flutter" />
             </div>
 
             {/* Front layer - small and sharp, in front of image */}
             <div className="tech-icon front-layer small js">
-              <Code size={20} color="#f7df1e" title="JavaScript" />
+              <CodeIcon size={20} title="JavaScript" />
             </div>
             <div className="tech-icon front-layer small cpp">
-              <Terminal size={20} color="#00599c" title="C++" />
+              <Terminal size={20} title="C/C++" />
             </div>
             <div className="tech-icon front-layer small typescript">
-              <Code size={20} color="#3178c6" title="TypeScript" />
+              <CodeIcon size={20} title="TypeScript" />
             </div>
           </div>
         </div>
