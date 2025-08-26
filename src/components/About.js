@@ -76,7 +76,9 @@ const About = ({ data = {} }) => {
     <section id="about" className="about">
       <div className="about-container">
         <div className="about-header">
-          <span className="section-badge">You’re here for</span>
+          <span className="section-badge">
+            About Me
+          </span>
           <h2 className="section-title typewriter" aria-live="polite">
             {typedText}
             <span className="typewriter-cursor">|</span>
