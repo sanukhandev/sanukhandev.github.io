@@ -72,7 +72,7 @@ const Hero = ({ data = {} }) => {
     <section className="hero">
       <div className="hero-container">
         <div className="hero-content">
-          <div className="hero-badge blink-badge">
+          <div className="hero-badge">
             <Pin size={16} />
             <span>Dubai, UAE • Available for Opportunities</span>
           </div>
