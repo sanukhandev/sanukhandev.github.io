@@ -8,9 +8,9 @@
 export const mockData = {
   // Hero section updated to reflect current tagline and expertise
   hero: {
-    title: "Seasoned Full‑Stack Developer",
+    title: "Hi, I'm Sanu Khan ⚡",
     subtitle:
-      "Java, JavaScript, PHP, Python | Angular, React, Spring Boot, Django, Laravel | Cybersecurity enthusiast & tech writer exploring Ethereum, Solidity & Web3.js",
+      "Tech Lead & full-stack builder shipping secure multi-tenant platforms and AI-powered apps — React/Angular • Node/NestJS • Java/Spring • Laravel/Django • DevOps • Web3. Based in Dubai 🇦🇪.",
     stats: {
       // years of experience reflects freelance work since 2011
       experience: "14+",

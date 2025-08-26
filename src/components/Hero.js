@@ -1,5 +1,27 @@
 import React, { useEffect, useState } from 'react';
-import { ArrowRight, Code, Coffee, Database, Globe, Smartphone, Server, Terminal } from 'lucide-react';
+
+// Blinking badge CSS as a string (single declaration)
+
+// Blinking badge CSS as a string
+const BLINK_BADGE_CSS = `
+.blink-badge {
+  animation: blink-badge 1.2s steps(2, start) infinite;
+}
+@keyframes blink-badge {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+`;
+// Inject blinking badge style once on mount (browser only)
+useEffect(() => {
+  if (typeof document !== 'undefined' && !document.getElementById('blink-badge-style')) {
+    const style = document.createElement('style');
+    style.id = 'blink-badge-style';
+    style.innerHTML = BLINK_BADGE_CSS;
+    document.head.appendChild(style);
+  }
+}, []);
+import { ArrowRight, Code, Coffee, Database, Globe, Smartphone, Server, Terminal, Pin } from 'lucide-react';
 
 const Hero = ({ data = {} }) => {
   const [typedTitle, setTypedTitle] = useState('');
@@ -42,10 +64,24 @@ const Hero = ({ data = {} }) => {
     <section className="hero">
       <div className="hero-container">
         <div className="hero-content">
-          <div className="hero-badge">
-            <Code size={16} />
-            <span>Full Stack Developer</span>
+          <div className="hero-badge blink-badge">
+            <Pin size={16} />
+            <span>Dubai, UAE • Available for Opportunities</span>
           </div>
+// Add blinking animation style for the badge
+          const style = document.createElement('style');
+          style.innerHTML = `
+          .blink-badge {
+            animation: blink-badge 1.2s steps(2, start) infinite;
+}
+          @keyframes blink-badge {
+            0 %, 100 % { opacity: 1; }
+  50% {opacity: 0.3; }
+}`;
+          if (typeof document !== 'undefined' && !document.getElementById('blink-badge-style')) {
+            style.id = 'blink-badge-style';
+          document.head.appendChild(style);
+}
           <h1 className="hero-title typewriter">
             {displayedFirst}
             {firstLine && typedTitle.length >= firstLine.length && <br />}
@@ -81,9 +117,9 @@ const Hero = ({ data = {} }) => {
 
         <div className="hero-image">
           <div className="image-container">
-            <img 
-              src="/assets/images/sanu.png" 
-              alt="Sanu Khan - Full Stack Developer" 
+            <img
+              src="/assets/images/sanu.png"
+              alt="Sanu Khan - Full Stack Developer"
               className="profile-image"
             />
           </div>
@@ -102,7 +138,7 @@ const Hero = ({ data = {} }) => {
             <div className="tech-icon back-layer medium dart">
               <Smartphone size={32} color="#0175c2" title="Dart/Flutter" />
             </div>
-            
+
             {/* Front layer - small and sharp, in front of image */}
             <div className="tech-icon front-layer small js">
               <Code size={20} color="#f7df1e" title="JavaScript" />
