@@ -172,6 +172,47 @@
   100% { background-position: 110% 50%; }
 }
 
+.timeline-year-shimmer {
+  font-size: 16px;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  background: linear-gradient(
+    110deg,
+    rgba(56, 199, 85, 0.28) 0%,
+    rgba(56, 199, 85, 0.96) 35%,
+    rgba(218, 255, 228, 1) 50%,
+    rgba(56, 199, 85, 0.96) 65%,
+    rgba(56, 199, 85, 0.28) 100%
+  );
+  background-size: 240% 100%;
+  background-position: 120% 50%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 7px rgba(56, 199, 85, 0.35));
+  animation: timelineYearShimmer 4s ease-in-out infinite;
+}
+
+.timeline-year-vertical {
+  display: inline-block;
+  transform: rotate(-90deg);
+  transform-origin: left top;
+}
+
+@keyframes timelineYearShimmer {
+  0% {
+    background-position: 120% 50%;
+  }
+  50% {
+    background-position: -20% 50%;
+  }
+  100% {
+    background-position: 120% 50%;
+  }
+}
+
 /* ── Tech Particle Drift ─────────────────────────────────── */
 .tech-particle {
   opacity: 0;
@@ -210,7 +251,8 @@
   .avatar-float,
   .animate-fade-up-stagger > *,
   .tech-particle,
-  .innovation-label {
+  .innovation-label,
+  .timeline-year-shimmer {
     animation: none;
   }
 }
