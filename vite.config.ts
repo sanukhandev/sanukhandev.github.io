@@ -8,7 +8,8 @@ import { mcpGenerativeSupport } from "./src/lib/mcp-generative-support";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 type HistoryMessage = { role: "user" | "assistant"; text: string };
-const conversationMemory = new Map<string, HistoryMessage[]>();
+type SessionEntry = { messages: HistoryMessage[]; siteScope?: string };
+const conversationMemory = new Map<string, SessionEntry>();
 
 const readJsonBody = async (req: import("http").IncomingMessage) => {
   const chunks: Uint8Array[] = [];
@@ -74,15 +75,26 @@ const fallbackReply = (locale: ZaakiyLocale, email: string, question: string) =>
   return exactEnglishFallback;
 };
 
-const getHistory = (sessionId: string) => conversationMemory.get(sessionId) || [];
+const getHistory = (sessionId: string) => conversationMemory.get(sessionId)?.messages || [];
+
+const getSessionScope = (sessionId: string) => (conversationMemory.get(sessionId)?.siteScope || "").trim();
+
+const setSessionScope = (sessionId: string, siteScope: string) => {
+  const entry = conversationMemory.get(sessionId);
+  if (!entry) {
+    conversationMemory.set(sessionId, { messages: [], siteScope });
+    return;
+  }
+  entry.siteScope = siteScope;
+};
 
 const pushHistory = (sessionId: string, role: "user" | "assistant", text: string) => {
-  const history = getHistory(sessionId);
-  history.push({ role, text });
-  if (history.length > 12) {
-    history.splice(0, history.length - 12);
+  const entry = conversationMemory.get(sessionId) || { messages: [] };
+  entry.messages.push({ role, text });
+  if (entry.messages.length > 12) {
+    entry.messages.splice(0, entry.messages.length - 12);
   }
-  conversationMemory.set(sessionId, history);
+  conversationMemory.set(sessionId, entry);
 };
 
 const registerZaakiyApi = (
@@ -137,10 +149,14 @@ const registerZaakiyApi = (
 
       const locale: ZaakiyLocale = body.locale === "ar" ? "ar" : "en";
       const userQuestion = (body.userQuestion || "").trim();
-      const siteScope = (body.siteScope || "").trim();
+      const incomingSiteScope = (body.siteScope || "").trim();
       const email = (body.email || "khan.sanukhan@outlook.com").trim();
       const maxOutputChars = Math.max(120, Math.min(500, Number(body.maxOutputChars || 250)));
       const sessionId = (body.sessionId || "anonymous-session").trim();
+      if (incomingSiteScope) {
+        setSessionScope(sessionId, incomingSiteScope);
+      }
+      const siteScope = incomingSiteScope || getSessionScope(sessionId);
 
       if (!userQuestion || !siteScope) {
         sendJson(res, 400, { error: "Missing required fields" });

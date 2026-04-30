@@ -1,14 +1,22 @@
+import { Suspense, lazy } from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/sections/Hero";
-import Skills from "@/components/sections/Skills";
-import Services from "@/components/sections/Services";
-import Works from "@/components/sections/Works";
-import Articles from "@/components/sections/Articles";
-import Certifications from "@/components/sections/Certifications";
-import Footer from "@/components/sections/Footer";
-import ZaakiyChatWidget from "@/components/ZaakiyChatWidget";
 import LocaleSwitchSkeleton from "@/components/LocaleSwitchSkeleton";
 import { useLocale } from "@/hooks/use-locale";
+
+const Works = lazy(() => import("@/components/sections/Works"));
+const Services = lazy(() => import("@/components/sections/Services"));
+const Skills = lazy(() => import("@/components/sections/Skills"));
+const Certifications = lazy(() => import("@/components/sections/Certifications"));
+const Articles = lazy(() => import("@/components/sections/Articles"));
+const Footer = lazy(() => import("@/components/sections/Footer"));
+const ZaakiyChatWidget = lazy(() => import("@/components/ZaakiyChatWidget"));
+
+const sectionFallback = (
+  <div className="container-narrow section-pad">
+    <div className="h-40 animate-pulse rounded-2xl bg-muted" />
+  </div>
+);
 
 const Index = () => {
   const { isSwitchingLocale } = useLocale();
@@ -22,14 +30,18 @@ const Index = () => {
       <Navbar />
       <main>
         <Hero />
-        <Works />
-        <Services />
-        <Skills />
-        <Certifications />
-        <Articles />
+        <Suspense fallback={sectionFallback}>
+          <Works />
+          <Services />
+          <Skills />
+          <Certifications />
+          <Articles />
+        </Suspense>
       </main>
-      <Footer />
-      <ZaakiyChatWidget />
+      <Suspense fallback={null}>
+        <Footer />
+        <ZaakiyChatWidget />
+      </Suspense>
     </div>
   );
 };

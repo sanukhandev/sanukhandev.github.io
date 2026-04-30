@@ -47,6 +47,7 @@ export default function ZaakiyChatWidget() {
   const content = useSiteContent();
   const scrollRef = useRef<HTMLDivElement>(null);
   const sessionIdRef = useRef(`zaakiy-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`);
+  const scopeSentRef = useRef(false);
 
   const isArabic = locale === "ar";
   const email = content.footer.contact.email;
@@ -125,7 +126,7 @@ export default function ZaakiyChatWidget() {
         body: JSON.stringify({
           locale,
           userQuestion: userText,
-          siteScope,
+          siteScope: scopeSentRef.current ? undefined : siteScope,
           email,
           maxOutputChars: MAX_OUTPUT_CHARS,
           sessionId: sessionIdRef.current,
@@ -143,6 +144,7 @@ export default function ZaakiyChatWidget() {
       }
 
       writeDailyUsage(usage + 1);
+      scopeSentRef.current = true;
       appendMessage("assistant", modelText);
     } catch {
       appendMessage(
