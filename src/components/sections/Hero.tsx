@@ -1,3 +1,4 @@
+import type { ComponentType } from "react";
 import {
   MapPin,
   Briefcase,
@@ -19,7 +20,7 @@ import TechParticles from "@/components/TechParticles";
 
 const metaIcons = [Briefcase, MapPin, CircleDot];
 
-const metricIcons: Record<string, React.ComponentType<{ className?: string }>> = {
+const metricIcons: Record<string, ComponentType<{ className?: string }>> = {
   "Years Experience": Clock,
   "Systems Delivered": Rocket,
   "Markets Served": Globe2,

@@ -1,3 +1,4 @@
+import type { ComponentType } from "react";
 import { useMemo, useState } from "react";
 import { ShoppingCart, Webhook, Boxes, LayoutGrid } from "lucide-react";
 import { type WorkCategory } from "@/data/siteData";
@@ -5,7 +6,7 @@ import { useSiteContent } from "@/data/siteContent";
 import { SectionHeading, TagChip } from "@/components/shared/SectionHeading";
 import { cn } from "@/lib/utils";
 
-const categoryIcons: Record<string, React.ComponentType<{ className?: string }>> = {
+const categoryIcons: Record<string, ComponentType<{ className?: string }>> = {
   Commerce: ShoppingCart,
   Integration: Webhook,
   Platform: Boxes,
@@ -19,7 +20,7 @@ export default function Works() {
   const filtered = useMemo(
     () =>
       active === "All" ? works : works.filter((w) => w.category === active),
-    [active],
+    [active, works],
   );
 
   return (

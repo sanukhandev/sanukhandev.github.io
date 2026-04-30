@@ -1,3 +1,4 @@
+import type { ComponentType } from "react";
 import * as Icons from "lucide-react";
 import { techStack } from "@/data/siteData";
 import { SectionHeading } from "@/components/shared/SectionHeading";
@@ -10,7 +11,7 @@ export default function TechStack() {
 
         <div className="mx-auto grid max-w-3xl grid-cols-3 gap-3 sm:grid-cols-5">
           {techStack.map((t) => {
-            const Icon = (Icons as unknown as Record<string, React.ComponentType<{ className?: string }>>)[t.icon] || Icons.Box;
+            const Icon = (Icons as unknown as Record<string, ComponentType<{ className?: string }>>)[t.icon] || Icons.Box;
             return (
               <div
                 key={t.name}
