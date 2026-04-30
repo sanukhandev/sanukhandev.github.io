@@ -7,6 +7,30 @@ const MAX_SESSIONS = 500;
 
 type SessionEntry = { messages: HistoryMessage[]; lastAccessedAt: number };
 
+type ApiHeaders = Record<string, string | string[] | undefined>;
+
+type ApiRequest = {
+  method?: string;
+  headers?: ApiHeaders;
+  body?: unknown;
+};
+
+type ApiResponse = {
+  req?: ApiRequest;
+  status: (code: number) => ApiResponse;
+  setHeader: (name: string, value: string) => void;
+  json: (data: unknown) => void;
+};
+
+type ChatRequestBody = {
+  locale?: string;
+  userQuestion?: string;
+  siteScope?: string;
+  email?: string;
+  maxOutputChars?: number;
+  sessionId?: string;
+};
+
 const conversationMemory = new Map<string, SessionEntry>();
 
 const evictStaleSessions = () => {
@@ -35,12 +59,13 @@ const allowedOrigins = new Set(
     .filter(Boolean),
 );
 
-const getRequestOrigin = (req: any): string => {
+const getRequestOrigin = (req?: ApiRequest): string => {
   const origin = req?.headers?.origin;
-  return typeof origin === "string" ? origin : "";
+  if (typeof origin === "string") return origin;
+  return Array.isArray(origin) ? origin[0] || "" : "";
 };
 
-const sendJson = (res: any, status: number, data: unknown) => {
+const sendJson = (res: ApiResponse, status: number, data: unknown) => {
   // In Vercel/Express, the request is accessible via res.req
   const origin = getRequestOrigin(res.req);
   res.status(status);
@@ -204,7 +229,7 @@ const buildPrompt = (args: {
   ].join("\n\n");
 };
 
-export default async function handler(req: any, res: any) {
+export default async function handler(req: ApiRequest, res: ApiResponse) {
   if (req.method === "OPTIONS") {
     sendJson(res, 200, { ok: true });
     return;
@@ -233,7 +258,10 @@ export default async function handler(req: any, res: any) {
       return;
     }
 
-    const body = typeof req.body === "string" ? JSON.parse(req.body) : req.body || {};
+    const body: ChatRequestBody =
+      typeof req.body === "string"
+        ? (JSON.parse(req.body) as ChatRequestBody)
+        : ((req.body as ChatRequestBody | undefined) || {});
 
     const locale: ZaakiyLocale = body.locale === "ar" ? "ar" : "en";
     const userQuestion = String(body.userQuestion || "").trim();
