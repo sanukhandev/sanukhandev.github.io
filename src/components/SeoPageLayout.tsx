@@ -33,8 +33,8 @@ export default function SeoPageLayout(props: SeoPageLayoutProps) {
               <section key={section.id} id={section.id}>
                 <h2 className="text-[28px] font-bold text-[#f0f1f4]">{section.title}</h2>
                 <div className="mt-3 space-y-4 text-[15px] leading-7 text-[#8a90a8]">
-                  {section.content.map((paragraph) => (
-                    <p key={paragraph.slice(0, 48)}>{paragraph}</p>
+                  {section.content.map((paragraph, index) => (
+                    <p key={index}>{paragraph}</p>
                   ))}
                 </div>
               </section>

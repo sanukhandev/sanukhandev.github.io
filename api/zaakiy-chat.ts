@@ -278,10 +278,17 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
       return;
     }
 
-    const body: ChatRequestBody =
-      typeof req.body === "string"
-        ? (JSON.parse(req.body) as ChatRequestBody)
-        : ((req.body as ChatRequestBody | undefined) || {});
+    let body: ChatRequestBody;
+    if (typeof req.body === "string") {
+      try {
+        body = JSON.parse(req.body) as ChatRequestBody;
+      } catch {
+        sendJson(res, 400, { error: "Invalid JSON in request body" });
+        return;
+      }
+    } else {
+      body = (req.body as ChatRequestBody | undefined) || {};
+    }
 
     const locale: ZaakiyLocale = body.locale === "ar" ? "ar" : "en";
     const userQuestion = String(body.userQuestion || "").trim();

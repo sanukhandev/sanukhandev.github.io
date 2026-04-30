@@ -67,6 +67,11 @@ export default function SeoMeta({ title, description, canonicalPath, schema, noi
 
     if (schema) {
       upsertSchema(schema);
+    } else {
+      const existing = document.head.querySelector("script[data-seo-schema='true']");
+      if (existing) {
+        existing.remove();
+      }
     }
   }, [title, description, canonicalPath, schema, noindex]);
 

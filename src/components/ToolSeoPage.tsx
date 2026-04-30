@@ -47,16 +47,16 @@ export default function ToolSeoPage(props: ToolSeoPageProps) {
         <article className="container-narrow section-pad">
           <h1 className="text-[38px] font-extrabold leading-[1.1] text-[#f0f1f4]">{h1}</h1>
           <div className="mt-4 space-y-4 text-[15px] leading-7 text-[#8a90a8]">
-            {intro.map((line) => (
-              <p key={line.slice(0, 48)}>{line}</p>
+            {intro.map((line, index) => (
+              <p key={index}>{line}</p>
             ))}
           </div>
 
           <section className="mt-8">
             <h2 className="text-[26px] font-bold text-[#f0f1f4]">How to Use</h2>
             <ol className="mt-3 list-decimal space-y-2 pl-5 text-[15px] text-[#8a90a8]">
-              {howTo.map((step) => (
-                <li key={step}>{step}</li>
+              {howTo.map((step, index) => (
+                <li key={index}>{step}</li>
               ))}
             </ol>
           </section>
