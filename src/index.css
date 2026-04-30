@@ -402,6 +402,36 @@ html.light .timeline-year-shimmer {
   animation: timelineYearPulseLight 3.4s ease-in-out infinite;
 }
 
+html.light .zaakiy-chat > div {
+  background-color: rgba(255, 255, 255, 0.98) !important;
+  border-color: #cfd8dd !important;
+  box-shadow: 0 16px 40px -20px rgba(20, 29, 40, 0.24) !important;
+}
+
+html.light .zaakiy-chat .text-\[\#d7ffe2\] {
+  color: #145a34 !important;
+}
+
+html.light .zaakiy-chat .bg-\[\#38c755\]\/10 {
+  background-color: rgba(31, 159, 69, 0.14) !important;
+}
+
+html.light .zaakiy-chat .border-\[\#38c755\]\/35 {
+  border-color: rgba(31, 159, 69, 0.38) !important;
+}
+
+html.light .zaakiy-chat .bg-\[\#20222b\] {
+  background-color: #edf4ef !important;
+}
+
+html.light .zaakiy-chat .text-\[\#8a90a8\] {
+  color: #465462 !important;
+}
+
+html.light .zaakiy-chat .placeholder\:text-\[\#8a90a8\]::placeholder {
+  color: #5b6874 !important;
+}
+
 @keyframes timelineYearPulseDark {
   0% {
     color: #8de3a3;
