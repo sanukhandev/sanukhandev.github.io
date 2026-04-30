@@ -189,7 +189,8 @@ export const works: Array<{
 export const articles = [
   {
     category: "Architecture",
-    title: "API Gateway: The Bouncer Your Microservices Didn't Know They Needed",
+    title:
+      "API Gateway: The Bouncer Your Microservices Didn't Know They Needed",
     excerpt:
       "How API Gateways act as the single entry point for microservices — handling auth, rate limiting, routing, and observability so your services don't have to.",
     tags: ["API Gateway", "DevOps", "Microservices"],
@@ -205,7 +206,8 @@ export const articles = [
   },
   {
     category: "JavaScript",
-    title: "JavaScript Proxy Explained: Powerful Tips for Dynamic Object Handling",
+    title:
+      "JavaScript Proxy Explained: Powerful Tips for Dynamic Object Handling",
     excerpt:
       "How to use JavaScript's Proxy object to intercept and control object behaviour — covering validation, logging, access control, and Vue 3 reactivity internals.",
     tags: ["JavaScript", "Web Dev", "Frontend"],
@@ -213,7 +215,8 @@ export const articles = [
   },
   {
     category: "Algorithms",
-    title: "Creating a Merge Sort Array Prototype for Nested Objects, Strings and Numbers in JavaScript",
+    title:
+      "Creating a Merge Sort Array Prototype for Nested Objects, Strings and Numbers in JavaScript",
     excerpt:
       "Build a custom non-mutating mergeSortBy() on Array.prototype that handles primitives, nested object keys, and custom comparator functions.",
     tags: ["JavaScript", "Algorithms", "Tutorial"],
@@ -221,7 +224,8 @@ export const articles = [
   },
   {
     category: "DSA",
-    title: "Why Project Euler Might Be the Most Powerful DSA Trainer You're Not Using Yet",
+    title:
+      "Why Project Euler Might Be the Most Powerful DSA Trainer You're Not Using Yet",
     excerpt:
       "How Project Euler's math-driven puzzles train you to think algorithmically, optimise solutions, and build real DSA skills that ace interviews.",
     tags: ["DSA", "Python", "Problem Solving"],
@@ -229,7 +233,8 @@ export const articles = [
   },
   {
     category: "DevTools",
-    title: "How Warp Terminal Saved Me from a Git Disaster With Just One Prompt",
+    title:
+      "How Warp Terminal Saved Me from a Git Disaster With Just One Prompt",
     excerpt:
       "When a rebase went catastrophically wrong, one natural-language prompt in Warp Terminal produced the exact safe steps needed to recover — instantly.",
     tags: ["Git", "Terminal", "Productivity"],
@@ -237,7 +242,8 @@ export const articles = [
   },
   {
     category: "Architecture",
-    title: "Building a Cost-Effective Full-Stack SaaS Platform: A Practical Guide for Small to Mid-Size IT",
+    title:
+      "Building a Cost-Effective Full-Stack SaaS Platform: A Practical Guide for Small to Mid-Size IT",
     excerpt:
       "A pragmatic full-stack architecture using Laravel, Next.js, MySQL, Headless WordPress, and cPanel hosting — built to balance cost, scalability, and maintainability.",
     tags: ["SaaS", "Full Stack", "Architecture"],
@@ -245,7 +251,8 @@ export const articles = [
   },
   {
     category: "Computer Science",
-    title: "Unravelling P vs NP: How This Unsolved Problem Influences the Future of AI with Quantum Computing",
+    title:
+      "Unravelling P vs NP: How This Unsolved Problem Influences the Future of AI with Quantum Computing",
     excerpt:
       "Exploring how the P vs NP problem sits at the heart of AI research, and why quantum computing may offer new pathways toward resolving this millennium-prize puzzle.",
     tags: ["AI", "Computer Science", "Quantum Computing"],
@@ -261,7 +268,8 @@ export const articles = [
   },
   {
     category: "Algorithms",
-    title: "A Comprehensive Guide to Big O Notation and Efficient Coding Practices with Examples",
+    title:
+      "A Comprehensive Guide to Big O Notation and Efficient Coding Practices with Examples",
     excerpt:
       "Time and space complexity explained with real JavaScript examples — from O(1) to O(n²) — and why mastering Big O is essential for interviews and production code.",
     tags: ["JavaScript", "Algorithms", "Big O"],
@@ -269,7 +277,8 @@ export const articles = [
   },
   {
     category: "Algorithms",
-    title: "The Sliding Window Technique: A Powerful Algorithm for JavaScript Developers",
+    title:
+      "The Sliding Window Technique: A Powerful Algorithm for JavaScript Developers",
     excerpt:
       "Master the sliding window pattern for arrays and strings — with practical JavaScript examples covering max subarray sums, real-time data streaming, and more.",
     tags: ["JavaScript", "Algorithms", "Web Dev"],
