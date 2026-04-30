@@ -29,8 +29,13 @@ export default function Certifications() {
               <h3 className="text-[15px] font-semibold leading-snug text-[#f0f1f4]">
                 {c.title}
               </h3>
+              {c.issued && (
+                <p className="mt-1 text-xs text-[#8a90a8]">Issued {c.issued}</p>
+              )}
               <a
                 href={c.url}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-tea-green-400 hover:text-tea-green-300"
               >
                 View Certificate <ExternalLink className="h-3 w-3" />

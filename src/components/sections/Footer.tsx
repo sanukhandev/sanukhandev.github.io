@@ -1,4 +1,5 @@
 import * as Icons from "lucide-react";
+import { Mail, Phone, MapPin } from "lucide-react";
 import { footer } from "@/data/siteData";
 
 export default function Footer() {
@@ -40,8 +41,30 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-8 border-t border-[#2b2f3b] pt-5 text-xs text-[#8a90a8]">
-          {footer.copyright}
+        <div className="mt-8 border-t border-[#2b2f3b] pt-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between text-xs text-[#8a90a8]">
+          <div className="flex flex-wrap gap-4">
+            <a
+              href={`mailto:${footer.contact.email}`}
+              className="inline-flex items-center gap-1 hover:text-[#f0f1f4] transition-colors"
+            >
+              <Mail className="h-3 w-3" />
+              {footer.contact.email}
+            </a>
+            {footer.contact.phone && (
+              <a
+                href={`tel:${footer.contact.phone}`}
+                className="inline-flex items-center gap-1 hover:text-[#f0f1f4] transition-colors"
+              >
+                <Phone className="h-3 w-3" />
+                {footer.contact.phone}
+              </a>
+            )}
+            <span className="inline-flex items-center gap-1">
+              <MapPin className="h-3 w-3" />
+              {footer.contact.location}
+            </span>
+          </div>
+          <span>{footer.copyright}</span>
         </div>
       </div>
     </footer>
