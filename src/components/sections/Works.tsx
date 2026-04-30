@@ -55,7 +55,6 @@ export default function Works() {
               key={w.title}
               className="premium-card flex flex-col p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[#38c755]/40"
             >
-              {/* Icon + scope row */}
               <div className="mb-3 flex items-center justify-between">
                 <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#38c755]/10 ring-1 ring-[#38c755]/25">
                   {(() => {
@@ -66,7 +65,6 @@ export default function Works() {
                 <span className="text-[11px] font-medium uppercase tracking-wide text-[#8a90a8]">{w.scope}</span>
               </div>
 
-              {/* Title on its own line */}
               <h3 className="mb-4 text-[17px] font-semibold leading-snug text-[#f0f1f4]">
                 {w.title}
               </h3>
