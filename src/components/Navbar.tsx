@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
-import { Menu, X, Coffee } from "lucide-react";
+import { Menu, X, Coffee, Moon, Sun } from "lucide-react";
 import { nav } from "@/data/siteData";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { useTheme } from "@/hooks/use-theme";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeHref, setActiveHref] = useState("#works");
+  const { theme, toggleTheme } = useTheme();
+  const isLight = theme === "light";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -43,8 +46,12 @@ export default function Navbar() {
       className={cn(
         "fixed inset-x-0 top-0 z-50 border-b transition-all duration-300",
         scrolled
-          ? "border-[#2b2f3b] bg-[#0f1015]/90 backdrop-blur-xl"
-          : "border-transparent bg-[#0f1015]/75",
+          ? isLight
+            ? "border-[#d4dde1] bg-[#f4f8f5]/90 backdrop-blur-xl"
+            : "border-[#2b2f3b] bg-[#0f1015]/90 backdrop-blur-xl"
+          : isLight
+            ? "border-transparent bg-[#f4f8f5]/75"
+            : "border-transparent bg-[#0f1015]/75",
       )}
     >
       <div className="container-narrow flex h-16 items-center justify-between">
@@ -58,10 +65,10 @@ export default function Navbar() {
           >
             <defs>
               <linearGradient id="logo-grad" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%"   stopColor="#38c755" />
-                <stop offset="40%"  stopColor="#a8ffbc" />
-                <stop offset="60%"  stopColor="#ffffff" />
-                <stop offset="100%" stopColor="#38c755" />
+                <stop offset="0%"   stopColor={isLight ? "#1f9f45" : "#38c755"} />
+                <stop offset="40%"  stopColor={isLight ? "#5cc97a" : "#a8ffbc"} />
+                <stop offset="60%"  stopColor={isLight ? "#153625" : "#ffffff"} />
+                <stop offset="100%" stopColor={isLight ? "#1f9f45" : "#38c755"} />
                 <animateTransform
                   attributeName="gradientTransform"
                   type="translate"
@@ -72,12 +79,12 @@ export default function Navbar() {
                 />
               </linearGradient>
               <linearGradient id="logo-grad-move" x1="-100%" y1="0%" x2="200%" y2="0%" gradientUnits="userSpaceOnUse">
-                <stop offset="0%"   stopColor="#38c755" />
-                <stop offset="35%"  stopColor="#38c755" />
-                <stop offset="50%"  stopColor="#b4ffca" />
-                <stop offset="65%"  stopColor="#ffffff" />
-                <stop offset="80%"  stopColor="#38c755" />
-                <stop offset="100%" stopColor="#38c755" />
+                <stop offset="0%"   stopColor={isLight ? "#1f9f45" : "#38c755"} />
+                <stop offset="35%"  stopColor={isLight ? "#1f9f45" : "#38c755"} />
+                <stop offset="50%"  stopColor={isLight ? "#6ed18a" : "#b4ffca"} />
+                <stop offset="65%"  stopColor={isLight ? "#153625" : "#ffffff"} />
+                <stop offset="80%"  stopColor={isLight ? "#1f9f45" : "#38c755"} />
+                <stop offset="100%" stopColor={isLight ? "#1f9f45" : "#38c755"} />
                 <animateTransform
                   attributeName="gradientTransform"
                   type="translate"
@@ -116,8 +123,8 @@ export default function Navbar() {
               fontFamily="Montserrat, ui-sans-serif, sans-serif"
               fontSize="18"
               fontWeight="500"
-              fill="#38c755"
-              opacity="0.75"
+              fill={isLight ? "#1f9f45" : "#38c755"}
+              opacity={isLight ? 0.85 : 0.75}
             >
               .dev
             </text>
@@ -132,8 +139,12 @@ export default function Navbar() {
               className={cn(
                 "relative text-[15px] transition-all duration-300 hover:scale-[1.02]",
                 activeHref === l.href
-                  ? "text-[#f0f1f4]"
-                  : "text-[#8a90a8] hover:text-[#f0f1f4]",
+                  ? isLight
+                    ? "text-[#0f1015]"
+                    : "text-[#f0f1f4]"
+                  : isLight
+                    ? "text-[#4d5a66] hover:text-[#0f1015]"
+                    : "text-[#8a90a8] hover:text-[#f0f1f4]",
               )}
             >
               {l.label}
@@ -150,25 +161,52 @@ export default function Navbar() {
         </nav>
 
         <div className="hidden md:flex items-center gap-2">
+          <button
+            type="button"
+            aria-label={isLight ? "Switch to dark theme" : "Switch to light theme"}
+            onClick={toggleTheme}
+            className={cn(
+              "inline-flex h-9 w-9 items-center justify-center rounded-lg border transition-all duration-300 hover:scale-[1.03]",
+              isLight
+                ? "border-[#cfd8dd] bg-white text-[#1a232e] hover:bg-[#eef4f0]"
+                : "border-[#2b2f3b] bg-[#16171d] text-[#f0f1f4] hover:bg-[#20222b]",
+            )}
+          >
+            {isLight ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
+          </button>
+
           <a
             href="https://ko-fi.com/sanukhan"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex h-9 items-center gap-1.5 rounded-lg border border-[#38c755]/50 bg-[#38c755]/10 px-3 text-[13px] font-semibold text-[#38c755] transition-all duration-300 hover:scale-[1.02] hover:bg-[#38c755]/20 hover:border-[#38c755]"
+            className={cn(
+              "inline-flex h-9 items-center gap-1.5 rounded-lg border px-3 text-[13px] font-semibold transition-all duration-300 hover:scale-[1.02]",
+              isLight
+                ? "border-[#1f9f45]/45 bg-[#1f9f45]/10 text-[#1f9f45] hover:border-[#1f9f45] hover:bg-[#1f9f45]/18"
+                : "border-[#38c755]/50 bg-[#38c755]/10 text-[#38c755] hover:border-[#38c755] hover:bg-[#38c755]/20",
+            )}
           >
             <Coffee className="h-3.5 w-3.5" />
             Buy me a coffee
           </a>
           <Button
             asChild
-            className="h-9 rounded-lg bg-[#38c755] px-4 text-[#0f1015] hover:scale-[1.02] hover:bg-[#4fd16a]"
+            className={cn(
+              "h-9 rounded-lg px-4 hover:scale-[1.02]",
+              isLight
+                ? "bg-[#1f9f45] text-white hover:bg-[#2caf54]"
+                : "bg-[#38c755] text-[#0f1015] hover:bg-[#4fd16a]",
+            )}
           >
             <a href={nav.cta.href}>{nav.cta.label}</a>
           </Button>
         </div>
 
         <button
-          className="grid h-9 w-9 place-items-center rounded-md border border-border md:hidden"
+          className={cn(
+            "grid h-9 w-9 place-items-center rounded-md border md:hidden",
+            isLight ? "border-[#cfd8dd] bg-white text-[#1a232e]" : "border-border",
+          )}
           aria-label="Toggle menu"
           onClick={() => setOpen((v) => !v)}
         >
@@ -177,14 +215,33 @@ export default function Navbar() {
       </div>
 
       {open && (
-        <div className="border-t border-[#2b2f3b] bg-[#16171d] md:hidden">
+        <div className={cn("border-t md:hidden", isLight ? "border-[#d4dde1] bg-[#f6faf7]" : "border-[#2b2f3b] bg-[#16171d]")}>
           <div className="container-narrow flex flex-col gap-1 py-3">
+            <button
+              type="button"
+              onClick={toggleTheme}
+              className={cn(
+                "mb-1 inline-flex items-center gap-2 rounded-md px-3 py-2 text-sm font-semibold transition-all",
+                isLight
+                  ? "border border-[#cfd8dd] bg-white text-[#1a232e]"
+                  : "border border-[#2b2f3b] bg-[#20222b] text-[#f0f1f4]",
+              )}
+            >
+              {isLight ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
+              {isLight ? "Switch to dark" : "Switch to light"}
+            </button>
+
             {nav.links.map((l) => (
               <a
                 key={l.href}
                 href={l.href}
                 onClick={() => setOpen(false)}
-                className="rounded-md px-3 py-2 text-sm text-[#8a90a8] transition-all duration-300 hover:bg-[#20222b] hover:text-[#f0f1f4]"
+                className={cn(
+                  "rounded-md px-3 py-2 text-sm transition-all duration-300",
+                  isLight
+                    ? "text-[#4d5a66] hover:bg-[#e8f0ec] hover:text-[#0f1015]"
+                    : "text-[#8a90a8] hover:bg-[#20222b] hover:text-[#f0f1f4]",
+                )}
               >
                 {l.label}
               </a>
@@ -194,14 +251,24 @@ export default function Navbar() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setOpen(false)}
-                className="mt-1 inline-flex items-center gap-2 rounded-md border border-[#38c755]/50 bg-[#38c755]/10 px-3 py-2 text-sm font-semibold text-[#38c755] transition-all hover:bg-[#38c755]/20"
+                className={cn(
+                  "mt-1 inline-flex items-center gap-2 rounded-md border px-3 py-2 text-sm font-semibold transition-all",
+                  isLight
+                    ? "border-[#1f9f45]/45 bg-[#1f9f45]/10 text-[#1f9f45] hover:bg-[#1f9f45]/18"
+                    : "border-[#38c755]/50 bg-[#38c755]/10 text-[#38c755] hover:bg-[#38c755]/20",
+                )}
               >
                 <Coffee className="h-4 w-4" />
                 Buy me a coffee
               </a>
             <Button
               asChild
-              className="mt-2 rounded-lg bg-[#38c755] text-[#0f1015] hover:bg-[#4fd16a]"
+              className={cn(
+                "mt-2 rounded-lg",
+                isLight
+                  ? "bg-[#1f9f45] text-white hover:bg-[#2caf54]"
+                  : "bg-[#38c755] text-[#0f1015] hover:bg-[#4fd16a]",
+              )}
               onClick={() => setOpen(false)}
             >
               <a href={nav.cta.href}>{nav.cta.label}</a>

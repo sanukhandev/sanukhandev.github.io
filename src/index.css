@@ -33,6 +33,76 @@
     --ring: 132 56% 50%;
 
     --radius: 0.875rem;
+
+    --site-bg: #0f1015;
+    --site-fg: #f0f1f4;
+    --site-muted: #8a90a8;
+    --site-surface: #16171d;
+    --site-border-strong: #2b2f3b;
+  }
+
+  html.light {
+    --background: 146 34% 97%;
+    --foreground: 222 23% 13%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 23% 13%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 23% 13%;
+
+    --primary: 135 64% 37%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 160 15% 91%;
+    --secondary-foreground: 222 23% 13%;
+
+    --muted: 160 13% 92%;
+    --muted-foreground: 212 15% 38%;
+
+    --accent: 338 78% 44%;
+    --accent-foreground: 0 0% 100%;
+
+    --border: 203 18% 84%;
+    --input: 203 18% 84%;
+    --ring: 135 64% 37%;
+
+    --site-bg: #f4f8f5;
+    --site-fg: #121722;
+    --site-muted: #4d5a66;
+    --site-surface: #ffffff;
+    --site-border-strong: #cfd8dd;
+  }
+
+  /* Light-mode compatibility for components that still use hardcoded dark utility colors */
+  html.light [class*="text-[#f0f1f4]"] {
+    color: #121722 !important;
+  }
+
+  html.light [class*="text-[#8a90a8]"] {
+    color: #4d5a66 !important;
+  }
+
+  html.light [class*="bg-[#0f1015]"] {
+    background-color: #eef3f0 !important;
+  }
+
+  html.light [class*="bg-[#16171d]"] {
+    background-color: #ffffff !important;
+  }
+
+  html.light [class*="bg-[#20222b]"] {
+    background-color: #e7efea !important;
+  }
+
+  html.light [class*="border-[#2b2f3b]"] {
+    border-color: #cfd8dd !important;
+  }
+
+  html.light .premium-card {
+    background: rgba(255, 255, 255, 0.92);
+    border-color: #d6dee2;
+    box-shadow: 0 8px 24px -22px rgba(20, 29, 40, 0.24);
   }
 
   html {
@@ -46,8 +116,8 @@
 
   body {
     margin: 0;
-    background: #0f1015;
-    color: #f0f1f4;
+    background: var(--site-bg);
+    color: var(--site-fg);
     font-family: "Montserrat", ui-sans-serif, system-ui, sans-serif;
     font-size: 15px;
     line-height: 1.55;
@@ -125,21 +195,32 @@
     letter-spacing: 0.12em;
     line-height: 1.15;
     text-align: center;
-    /* shimmer gradient text */
-    background: linear-gradient(
-      110deg,
-      rgba(56, 199, 85, 0.08) 0%,
-      rgba(56, 199, 85, 0.55) 38%,
-      rgba(180, 255, 210, 0.75) 50%,
-      rgba(56, 199, 85, 0.55) 62%,
-      rgba(56, 199, 85, 0.08) 100%
-    );
-    background-size: 250% 100%;
-    background-position: 110% 50%;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: innovationShimmer 6s ease-in-out infinite;
+    color: rgba(56, 199, 85, 0.88);
+  }
+
+  .innovation-label > span {
+    display: block;
+    color: rgba(56, 199, 85, 0.88);
+  }
+
+  @supports (-webkit-background-clip: text) {
+    .innovation-label > span {
+      background: linear-gradient(
+        110deg,
+        rgba(56, 199, 85, 0.08) 0%,
+        rgba(56, 199, 85, 0.55) 38%,
+        rgba(180, 255, 210, 0.75) 50%,
+        rgba(56, 199, 85, 0.55) 62%,
+        rgba(56, 199, 85, 0.08) 100%
+      );
+      background-size: 250% 100%;
+      background-position: 110% 50%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+      animation: innovationShimmer 6s ease-in-out infinite;
+    }
   }
 
   .animate-fade-up-stagger > * {
@@ -199,6 +280,45 @@
   display: inline-block;
   transform: rotate(-90deg);
   transform-origin: left top;
+}
+
+html.light .innovation-label {
+  color: rgba(18, 38, 28, 0.9);
+}
+
+html.light .innovation-label > span {
+  background: none !important;
+  -webkit-text-fill-color: currentColor !important;
+  color: #173626 !important;
+  text-shadow: 0 0 1px rgba(31, 159, 69, 0.25);
+  animation: innovationLightPulse 3.8s ease-in-out infinite;
+}
+
+@keyframes innovationLightPulse {
+  0% {
+    color: #173626;
+    text-shadow: 0 0 1px rgba(31, 159, 69, 0.22);
+  }
+  50% {
+    color: #249a48;
+    text-shadow: 0 0 9px rgba(31, 159, 69, 0.2);
+  }
+  100% {
+    color: #173626;
+    text-shadow: 0 0 1px rgba(31, 159, 69, 0.22);
+  }
+}
+
+html.light .timeline-year-shimmer {
+  background: linear-gradient(
+    110deg,
+    rgba(31, 159, 69, 0.2) 0%,
+    rgba(31, 159, 69, 0.9) 35%,
+    rgba(18, 38, 28, 0.96) 50%,
+    rgba(31, 159, 69, 0.9) 65%,
+    rgba(31, 159, 69, 0.2) 100%
+  );
+  filter: drop-shadow(0 0 5px rgba(31, 159, 69, 0.22));
 }
 
 @keyframes timelineYearShimmer {

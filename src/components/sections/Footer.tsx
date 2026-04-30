@@ -2,10 +2,20 @@ import * as Icons from "lucide-react";
 import { Mail, Phone, MapPin } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { footer } from "@/data/siteData";
+import { useTheme } from "@/hooks/use-theme";
 
 export default function Footer() {
+  const { theme } = useTheme();
+  const isLight = theme === "light";
+
   return (
-    <footer id="contact" className="border-t border-[#2b2f3b] bg-[#16171d]/60">
+    <footer
+      id="contact"
+      className={cn(
+        "border-t",
+        isLight ? "border-[#d4dde1] bg-[#edf4ef]/80" : "border-[#2b2f3b] bg-[#16171d]/60",
+      )}
+    >
       <div className="container-narrow py-12">
         <div className="flex flex-col items-start justify-between gap-5 sm:flex-row sm:items-center">
           <div>
@@ -19,12 +29,12 @@ export default function Footer() {
               >
                 <defs>
                   <linearGradient id="footer-logo-grad" x1="-100%" y1="0%" x2="200%" y2="0%" gradientUnits="userSpaceOnUse">
-                    <stop offset="0%"   stopColor="#38c755" />
-                    <stop offset="35%"  stopColor="#38c755" />
-                    <stop offset="50%"  stopColor="#b4ffca" />
-                    <stop offset="65%"  stopColor="#ffffff" />
-                    <stop offset="80%"  stopColor="#38c755" />
-                    <stop offset="100%" stopColor="#38c755" />
+                    <stop offset="0%"   stopColor={isLight ? "#1f9f45" : "#38c755"} />
+                    <stop offset="35%"  stopColor={isLight ? "#1f9f45" : "#38c755"} />
+                    <stop offset="50%"  stopColor={isLight ? "#6ed18a" : "#b4ffca"} />
+                    <stop offset="65%"  stopColor={isLight ? "#153625" : "#ffffff"} />
+                    <stop offset="80%"  stopColor={isLight ? "#1f9f45" : "#38c755"} />
+                    <stop offset="100%" stopColor={isLight ? "#1f9f45" : "#38c755"} />
                     <animateTransform
                       attributeName="gradientTransform"
                       type="translate"
@@ -60,14 +70,14 @@ export default function Footer() {
                   fontFamily="Montserrat, ui-sans-serif, sans-serif"
                   fontSize="18"
                   fontWeight="500"
-                  fill="#38c755"
-                  opacity="0.75"
+                  fill={isLight ? "#1f9f45" : "#38c755"}
+                  opacity={isLight ? 0.85 : 0.75}
                 >
                   .dev
                 </text>
               </svg>
             </a>
-            <p className="mt-1 text-[15px] text-[#8a90a8]">{footer.blurb}</p>
+            <p className={cn("mt-1 text-[15px]", isLight ? "text-[#4d5a66]" : "text-[#8a90a8]")}>{footer.blurb}</p>
           </div>
 
           <div className="flex gap-4">
@@ -89,8 +99,12 @@ export default function Footer() {
                   className={cn(
                     "inline-flex items-center gap-2 rounded-md border px-3 py-2 text-sm transition-all duration-300 hover:scale-[1.02]",
                     s.label === "Buy me a coffee"
-                      ? "border-[#38c755]/50 bg-[#38c755]/10 font-semibold text-[#38c755] hover:border-[#38c755] hover:bg-[#38c755]/20"
-                      : "border-[#2b2f3b] bg-[#0f1015] text-[#8a90a8] hover:border-[#38c755]/40 hover:text-[#f0f1f4]",
+                      ? isLight
+                        ? "border-[#1f9f45]/45 bg-[#1f9f45]/10 font-semibold text-[#1f9f45] hover:border-[#1f9f45] hover:bg-[#1f9f45]/18"
+                        : "border-[#38c755]/50 bg-[#38c755]/10 font-semibold text-[#38c755] hover:border-[#38c755] hover:bg-[#38c755]/20"
+                      : isLight
+                        ? "border-[#d4dde1] bg-white text-[#4d5a66] hover:border-[#1f9f45]/35 hover:text-[#121722]"
+                        : "border-[#2b2f3b] bg-[#0f1015] text-[#8a90a8] hover:border-[#38c755]/40 hover:text-[#f0f1f4]",
                   )}
                 >
                   <Icon className="h-4 w-4" />
@@ -101,11 +115,19 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-8 border-t border-[#2b2f3b] pt-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between text-xs text-[#8a90a8]">
+        <div
+          className={cn(
+            "mt-8 border-t pt-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between text-xs",
+            isLight ? "border-[#d4dde1] text-[#4d5a66]" : "border-[#2b2f3b] text-[#8a90a8]",
+          )}
+        >
           <div className="flex flex-wrap gap-4">
             <a
               href={`mailto:${footer.contact.email}`}
-              className="inline-flex items-center gap-1 hover:text-[#f0f1f4] transition-colors"
+              className={cn(
+                "inline-flex items-center gap-1 transition-colors",
+                isLight ? "hover:text-[#121722]" : "hover:text-[#f0f1f4]",
+              )}
             >
               <Mail className="h-3 w-3" />
               {footer.contact.email}
@@ -113,7 +135,10 @@ export default function Footer() {
             {footer.contact.phone && (
               <a
                 href={`tel:${footer.contact.phone}`}
-                className="inline-flex items-center gap-1 hover:text-[#f0f1f4] transition-colors"
+                className={cn(
+                  "inline-flex items-center gap-1 transition-colors",
+                  isLight ? "hover:text-[#121722]" : "hover:text-[#f0f1f4]",
+                )}
               >
                 <Phone className="h-3 w-3" />
                 {footer.contact.phone}
