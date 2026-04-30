@@ -7,7 +7,7 @@ const metaIcons = [Briefcase, MapPin, CircleDot];
 
 export default function Hero() {
   return (
-    <section id="home" className="relative overflow-hidden pt-24 sm:pt-28">
+    <section id="home" className="relative overflow-hidden pt-16 sm:pt-20">
       {/* Subtle radial glow */}
       <div
         aria-hidden
@@ -21,7 +21,7 @@ export default function Hero() {
       {/* Floating tech icon particles */}
       <TechParticles count={24} />
 
-      <div className="container-narrow grid items-center gap-8 pb-16 lg:grid-cols-[1.2fr_1fr]">
+      <div className="container-narrow grid items-center gap-6 pb-12 lg:grid-cols-[1.2fr_1fr]">
         <div className="animate-fade-up-stagger">
           <span className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#2b2f3b] bg-[#16171d] px-3 py-1 text-xs font-semibold text-[#38c755]">
             <span className="h-1.5 w-1.5 rounded-full bg-tea-green-400" />
@@ -93,17 +93,22 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="relative mx-auto w-full max-w-sm">
-          <div className="avatar-halo" />
-          <img
-            src={profile.avatarUrl}
-            alt={`${profile.name} portrait`}
-            className="relative z-10 w-full object-contain avatar-float"
-            loading="lazy"
-            decoding="async"
-          />
-          <div className="mt-3 text-center text-xs font-semibold text-[#8a90a8] sm:text-sm">
-            Building Innovations since 2011
+        <div className="mx-auto w-full max-w-sm">
+          <div className="relative">
+            <div className="avatar-halo" />
+            <img
+              src={profile.avatarUrl}
+              alt={`${profile.name} portrait`}
+              className="relative z-10 w-full object-contain"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+
+          <div aria-hidden className="innovation-label">
+            <span>Building</span>
+            <span>Innovations</span>
+            <span>since 2011</span>
           </div>
         </div>
       </div>
