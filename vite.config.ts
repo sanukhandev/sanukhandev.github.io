@@ -7,7 +7,7 @@ import { mcpGenerativeSupport } from "./src/lib/mcp-generative-support";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-type HistoryMessage = { role: "user" | "assistant"; text: string; at: string };
+type HistoryMessage = { role: "user" | "assistant"; text: string };
 const conversationMemory = new Map<string, HistoryMessage[]>();
 
 const readJsonBody = async (req: import("http").IncomingMessage) => {
@@ -78,125 +78,135 @@ const getHistory = (sessionId: string) => conversationMemory.get(sessionId) || [
 
 const pushHistory = (sessionId: string, role: "user" | "assistant", text: string) => {
   const history = getHistory(sessionId);
-  history.push({ role, text, at: new Date().toISOString() });
+  history.push({ role, text });
   if (history.length > 12) {
     history.splice(0, history.length - 12);
   }
   conversationMemory.set(sessionId, history);
 };
 
+const registerZaakiyApi = (
+  middlewares: import("connect").ServerStack,
+  env: Record<string, string>,
+) => {
+  middlewares.use("/api/zaakiy-chat", async (req, res) => {
+    if (req.method === "OPTIONS") {
+      sendJson(res, 200, { ok: true });
+      return;
+    }
+
+    if (req.method === "GET") {
+      sendJson(res, 200, {
+        ok: true,
+        message: "Zaakiy wrapper is running",
+        model: env.GOOGLE_GENAI_MODEL || "gemini-2.5-flash-lite",
+      });
+      return;
+    }
+
+    if (req.method !== "POST") {
+      sendJson(res, 405, { error: "Method not allowed" });
+      return;
+    }
+
+    try {
+      const apiKey = env.GOOGLE_GENAI_API_KEY;
+      const model = env.GOOGLE_GENAI_MODEL || "gemini-2.5-flash-lite";
+
+      if (!apiKey) {
+        sendJson(res, 503, { error: "Missing GOOGLE_GENAI_API_KEY on server" });
+        return;
+      }
+
+      const body = (await readJsonBody(req)) as {
+        locale?: "en" | "ar";
+        userQuestion?: string;
+        siteScope?: string;
+        email?: string;
+        maxOutputChars?: number;
+        sessionId?: string;
+      };
+
+      const locale: ZaakiyLocale = body.locale === "ar" ? "ar" : "en";
+      const userQuestion = (body.userQuestion || "").trim();
+      const siteScope = (body.siteScope || "").trim();
+      const email = (body.email || "khan.sanukhan@outlook.com").trim();
+      const maxOutputChars = Math.max(120, Math.min(500, Number(body.maxOutputChars || 250)));
+      const sessionId = (body.sessionId || "anonymous-session").trim();
+
+      if (!userQuestion || !siteScope) {
+        sendJson(res, 400, { error: "Missing required fields" });
+        return;
+      }
+
+      const scopedContext = mcpProcessor.getEnhancedContext(siteScope, locale);
+      const queryContext = mcpProcessor.getQueryContext(scopedContext, userQuestion, 14);
+      const history = getHistory(sessionId);
+      pushHistory(sessionId, "user", userQuestion);
+
+      const mergedPrompt = mcpGenerativeSupport.buildScopedPrompt({
+        context: scopedContext,
+        queryContext,
+        userQuestion,
+        email,
+        maxChars: maxOutputChars,
+        conversationHistory: history.map((h) => ({ role: h.role, text: h.text })),
+      });
+
+      const googleResp = await fetch(
+        `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            contents: [{ role: "user", parts: [{ text: mergedPrompt }] }],
+            generationConfig: {
+              temperature: 0.6,
+              topP: 0.9,
+              maxOutputTokens: 220,
+            },
+          }),
+        },
+      );
+
+      if (!googleResp.ok) {
+        const detail = await googleResp.text();
+        sendJson(res, googleResp.status, { error: "Upstream GenAI error", detail });
+        return;
+      }
+
+      const payload = await googleResp.json();
+      const text = extractModelText(payload);
+      if (!text) {
+        sendJson(res, 502, { error: "Empty model response" });
+        return;
+      }
+
+      const sanitized = sanitizeModelText(text);
+      const safeText = looksLeakyOrInvalid(sanitized)
+        ? fallbackReply(locale, email, userQuestion)
+        : sanitized;
+
+      const clipped = clipText(safeText, maxOutputChars);
+      pushHistory(sessionId, "assistant", clipped);
+
+      sendJson(res, 200, { text: clipped });
+    } catch (error) {
+      sendJson(res, 500, {
+        error: "Zaakiy wrapper failed",
+        detail: error instanceof Error ? error.message : "unknown",
+      });
+    }
+  });
+};
+
 const createZaakiyApiWrapper = (env: Record<string, string>) => ({
   name: "zaakiy-api-wrapper",
   configureServer(server: import("vite").ViteDevServer) {
-    server.middlewares.use("/api/zaakiy-chat", async (req, res) => {
-      if (req.method === "OPTIONS") {
-        sendJson(res, 200, { ok: true });
-        return;
-      }
-
-      if (req.method === "GET") {
-        sendJson(res, 200, {
-          ok: true,
-          message: "Zaakiy wrapper is running",
-          model: env.GOOGLE_GENAI_MODEL || "gemini-2.5-flash-lite",
-        });
-        return;
-      }
-
-      if (req.method !== "POST") {
-        sendJson(res, 405, { error: "Method not allowed" });
-        return;
-      }
-
-      try {
-        const apiKey = env.GOOGLE_GENAI_API_KEY;
-        const model = env.GOOGLE_GENAI_MODEL || "gemini-2.5-flash-lite";
-
-        if (!apiKey) {
-          sendJson(res, 503, { error: "Missing GOOGLE_GENAI_API_KEY on server" });
-          return;
-        }
-
-        const body = (await readJsonBody(req)) as {
-          locale?: "en" | "ar";
-          userQuestion?: string;
-          siteScope?: string;
-          email?: string;
-          maxOutputChars?: number;
-          sessionId?: string;
-        };
-
-        const locale: ZaakiyLocale = body.locale === "ar" ? "ar" : "en";
-        const userQuestion = (body.userQuestion || "").trim();
-        const siteScope = (body.siteScope || "").trim();
-        const email = (body.email || "khan.sanukhan@outlook.com").trim();
-        const maxOutputChars = Math.max(120, Math.min(500, Number(body.maxOutputChars || 250)));
-        const sessionId = (body.sessionId || "anonymous-session").trim();
-
-        if (!userQuestion || !siteScope) {
-          sendJson(res, 400, { error: "Missing required fields" });
-          return;
-        }
-
-        const scopedContext = mcpProcessor.getEnhancedContext(siteScope, locale);
-        const queryContext = mcpProcessor.getQueryContext(scopedContext, userQuestion, 14);
-        const history = getHistory(sessionId);
-        pushHistory(sessionId, "user", userQuestion);
-
-        const mergedPrompt = mcpGenerativeSupport.buildScopedPrompt({
-          context: scopedContext,
-          queryContext,
-          userQuestion,
-          email,
-          maxChars: maxOutputChars,
-          conversationHistory: history.map((h) => ({ role: h.role, text: h.text })),
-        });
-
-        const googleResp = await fetch(
-          `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`,
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              contents: [{ role: "user", parts: [{ text: mergedPrompt }] }],
-              generationConfig: {
-                temperature: 0.6,
-                topP: 0.9,
-                maxOutputTokens: 220,
-              },
-            }),
-          },
-        );
-
-        if (!googleResp.ok) {
-          const detail = await googleResp.text();
-          sendJson(res, googleResp.status, { error: "Upstream GenAI error", detail });
-          return;
-        }
-
-        const payload = await googleResp.json();
-        const text = extractModelText(payload);
-        if (!text) {
-          sendJson(res, 502, { error: "Empty model response" });
-          return;
-        }
-
-        const sanitized = sanitizeModelText(text);
-        const safeText = looksLeakyOrInvalid(sanitized)
-          ? fallbackReply(locale, email, userQuestion)
-          : sanitized;
-
-        const clipped = clipText(safeText, maxOutputChars);
-        pushHistory(sessionId, "assistant", clipped);
-
-        sendJson(res, 200, { text: clipped });
-      } catch (error) {
-        sendJson(res, 500, {
-          error: "Zaakiy wrapper failed",
-          detail: error instanceof Error ? error.message : "unknown",
-        });
-      }
-    });
+    registerZaakiyApi(server.middlewares, env);
+  },
+  configurePreviewServer(server: import("vite").PreviewServer) {
+    registerZaakiyApi(server.middlewares, env);
   },
 });
 

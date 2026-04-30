@@ -22,11 +22,7 @@ export type QueryContext = {
 
 export type McpContext = {
   locale: ZaakiyLocale;
-  scope: string;
-  facts: string[];
   dataset: ScopeDataset;
-  summary: string;
-  refreshedAt: string;
 };
 
 const scopeCache = new Map<string, McpContext>();
@@ -207,14 +203,9 @@ export const mcpProcessor = {
 
     const facts = toFacts(scope);
     const dataset = toDataset(facts);
-    const summary = dataset.all.slice(0, 12).join(" | ");
     const context: McpContext = {
       locale,
-      scope,
-      facts,
       dataset,
-      summary,
-      refreshedAt: new Date().toISOString(),
     };
 
     scopeCache.set(key, context);

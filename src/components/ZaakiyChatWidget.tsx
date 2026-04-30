@@ -14,6 +14,7 @@ type ChatMessage = {
 
 const MAX_OUTPUT_CHARS = Number(import.meta.env.VITE_ZAAKIY_MAX_OUTPUT_CHARS || 250);
 const DAILY_QUOTA = Number(import.meta.env.VITE_ZAAKIY_DAILY_QUOTA || 200);
+const CHAT_API_URL = import.meta.env.VITE_ZAAKIY_API_URL || "/api/zaakiy-chat";
 
 const dailyQuotaKey = () => {
   const day = new Date().toISOString().slice(0, 10);
@@ -118,7 +119,7 @@ export default function ZaakiyChatWidget() {
 
     setLoading(true);
     try {
-      const response = await fetch("/api/zaakiy-chat", {
+      const response = await fetch(CHAT_API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
