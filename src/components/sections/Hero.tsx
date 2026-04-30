@@ -47,7 +47,6 @@ export default function Hero() {
 
   return (
     <section id="home" className="relative overflow-hidden pt-16 sm:pt-20">
-      {/* Subtle radial glow */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 -z-10 opacity-60"
@@ -57,7 +56,6 @@ export default function Hero() {
         }}
       />
 
-      {/* Floating tech icon particles */}
       <TechParticles count={24} />
 
       <div className="container-narrow grid items-center gap-6 pb-12 lg:grid-cols-[1.2fr_1fr]">
@@ -156,7 +154,6 @@ export default function Hero() {
           <div className="relative">
             <div className="avatar-halo" />
 
-            {/* Floating icon badges */}
             {floatingBadgesLocalized.map((b) => {
               const Icon = b.icon;
               return (

@@ -5,7 +5,31 @@ type HistoryMessage = { role: "user" | "assistant"; text: string };
 const SESSION_TTL_MS = 30 * 60 * 1000; // 30 minutes
 const MAX_SESSIONS = 500;
 
-type SessionEntry = { messages: HistoryMessage[]; lastAccessedAt: number };
+type SessionEntry = { messages: HistoryMessage[]; lastAccessedAt: number; siteScope?: string };
+
+type ApiHeaders = Record<string, string | string[] | undefined>;
+
+type ApiRequest = {
+  method?: string;
+  headers?: ApiHeaders;
+  body?: unknown;
+};
+
+type ApiResponse = {
+  req?: ApiRequest;
+  status: (code: number) => ApiResponse;
+  setHeader: (name: string, value: string) => void;
+  json: (data: unknown) => void;
+};
+
+type ChatRequestBody = {
+  locale?: string;
+  userQuestion?: string;
+  siteScope?: string;
+  email?: string;
+  maxOutputChars?: number;
+  sessionId?: string;
+};
 
 const conversationMemory = new Map<string, SessionEntry>();
 
@@ -35,12 +59,13 @@ const allowedOrigins = new Set(
     .filter(Boolean),
 );
 
-const getRequestOrigin = (req: any): string => {
+const getRequestOrigin = (req?: ApiRequest): string => {
   const origin = req?.headers?.origin;
-  return typeof origin === "string" ? origin : "";
+  if (typeof origin === "string") return origin;
+  return Array.isArray(origin) ? origin[0] || "" : "";
 };
 
-const sendJson = (res: any, status: number, data: unknown) => {
+const sendJson = (res: ApiResponse, status: number, data: unknown) => {
   // In Vercel/Express, the request is accessible via res.req
   const origin = getRequestOrigin(res.req);
   res.status(status);
@@ -110,6 +135,26 @@ const getHistory = (sessionId: string): HistoryMessage[] => {
   if (!entry) return [];
   entry.lastAccessedAt = Date.now();
   return entry.messages;
+};
+
+const getSessionScope = (sessionId: string): string => {
+  const entry = conversationMemory.get(sessionId);
+  if (!entry) return "";
+  entry.lastAccessedAt = Date.now();
+  return (entry.siteScope || "").trim();
+};
+
+const setSessionScope = (sessionId: string, siteScope: string) => {
+  const now = Date.now();
+  let entry = conversationMemory.get(sessionId);
+  if (!entry) {
+    entry = { messages: [], lastAccessedAt: now, siteScope };
+    conversationMemory.set(sessionId, entry);
+    evictStaleSessions();
+    return;
+  }
+  entry.siteScope = siteScope;
+  entry.lastAccessedAt = now;
 };
 
 const pushHistory = (sessionId: string, role: "user" | "assistant", text: string) => {
@@ -204,7 +249,7 @@ const buildPrompt = (args: {
   ].join("\n\n");
 };
 
-export default async function handler(req: any, res: any) {
+export default async function handler(req: ApiRequest, res: ApiResponse) {
   if (req.method === "OPTIONS") {
     sendJson(res, 200, { ok: true });
     return;
@@ -233,24 +278,34 @@ export default async function handler(req: any, res: any) {
       return;
     }
 
-    const body = typeof req.body === "string" ? JSON.parse(req.body) : req.body || {};
+    let body: ChatRequestBody;
+    if (typeof req.body === "string") {
+      try {
+        body = JSON.parse(req.body) as ChatRequestBody;
+      } catch {
+        sendJson(res, 400, { error: "Invalid JSON in request body" });
+        return;
+      }
+    } else {
+      body = (req.body as ChatRequestBody | undefined) || {};
+    }
 
     const locale: ZaakiyLocale = body.locale === "ar" ? "ar" : "en";
     const userQuestion = String(body.userQuestion || "").trim();
-    const siteScope = String(body.siteScope || "").trim();
+    const incomingSiteScope = String(body.siteScope || "").trim();
     const email = String(body.email || "khan.sanukhan@outlook.com").trim();
     const maxOutputChars = Math.max(120, Math.min(500, Number(body.maxOutputChars || 250)));
-    // Disable per-session memory when no sessionId is provided to prevent
-    // different users from sharing the same history bucket.
     const sessionId: string | null = String(body.sessionId || "").trim() || null;
+    if (sessionId && incomingSiteScope) {
+      setSessionScope(sessionId, incomingSiteScope);
+    }
+    const siteScope = incomingSiteScope || (sessionId ? getSessionScope(sessionId) : "");
 
     if (!userQuestion || !siteScope) {
       sendJson(res, 400, { error: "Missing required fields" });
       return;
     }
 
-    // Capture an immutable snapshot of history BEFORE adding the new user
-    // message so the prompt does not include the current turn twice.
     const historySnapshot = sessionId ? getHistory(sessionId).slice() : [];
     if (sessionId) {
       pushHistory(sessionId, "user", userQuestion);

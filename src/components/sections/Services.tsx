@@ -29,9 +29,7 @@ export default function Services() {
           <span className="rounded-full border border-[#38c755]/40 bg-[#38c755]/10 px-3 py-1 text-[#38c755]">{ui.experience.stats[3]}</span>
         </div>
 
-        {/* Timeline */}
         <div className="relative">
-          {/* Vertical spine */}
           <div className="absolute left-[19px] top-2 bottom-2 w-px bg-gradient-to-b from-[#38c755] via-[#2b2f3b] to-transparent" />
 
           <div className="space-y-5">
@@ -46,7 +44,6 @@ export default function Services() {
                     </span>
                   )}
 
-                  {/* Timeline node */}
                   <div
                     className={[
                       "absolute left-0 top-5 flex h-10 w-10 items-center justify-center rounded-full border-2 transition-all duration-300 group-hover:scale-110",
@@ -62,14 +59,12 @@ export default function Services() {
                     />
                   </div>
 
-                  {/* Card */}
                   <div
                     className={[
                       "premium-card p-5 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:border-[#38c755]/30",
                       item.current ? "border-[#38c755]/25" : "",
                     ].join(" ")}
                   >
-                    {/* Header row */}
                     <div className="flex flex-col gap-1.5 sm:flex-row sm:items-start sm:justify-between">
                       <div>
                         <div className="flex flex-wrap items-center gap-2">
@@ -97,7 +92,6 @@ export default function Services() {
                       </div>
                     </div>
 
-                    {/* Impact bullets */}
                     <ul className="mt-4 space-y-2">
                       {item.impact.map((point) => (
                         <li key={point} className="flex gap-2 text-[14px] text-[#8a90a8]">
@@ -107,7 +101,6 @@ export default function Services() {
                       ))}
                     </ul>
 
-                    {/* Stack tags */}
                     <div className="mt-4 flex flex-wrap gap-1.5">
                       {item.stack.map((t) => (
                         <TagChip key={t} label={t} className="bg-[#0f1015] text-[#8a90a8]" />

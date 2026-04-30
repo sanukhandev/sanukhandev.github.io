@@ -63,7 +63,7 @@ export default function Navbar() {
           <svg
             viewBox={isArabic ? "0 0 300 36" : "0 0 180 32"}
             height="32"
-            width={isArabic ? "250" : "180"}
+            className={cn("h-8", isArabic ? "w-[198px] sm:w-[250px]" : "w-[150px] sm:w-[180px]")}
             xmlns="http://www.w3.org/2000/svg"
             aria-hidden
           >

@@ -1,9 +1,3 @@
-// =============================================================
-// Sanu Khan — Portfolio Source Data
-// Edit any value below to update the site. This is the single
-// source of truth for all visible content.
-// =============================================================
-
 export const nav = {
   brand: "SanuKhan.dev",
   links: [
@@ -91,19 +85,6 @@ export const skills = {
     },
   ],
 };
-
-export const techStack = [
-  { name: "React", icon: "Atom" },
-  { name: "TypeScript", icon: "FileCode2" },
-  { name: "Node.js", icon: "Server" },
-  { name: "Tailwind", icon: "Wind" },
-  { name: "Postgres", icon: "Database" },
-  { name: "AWS", icon: "Cloud" },
-  { name: "Docker", icon: "Container" },
-  { name: "Git", icon: "GitBranch" },
-  { name: "Figma", icon: "Figma" },
-  { name: "Vite", icon: "Zap" },
-];
 
 export const services = [
   {
@@ -400,30 +381,6 @@ export const certifications = [
     credentialId: "UC-119237dc-9851-489c-8f06-313fca17fdc1",
     category: "Advanced Frontend",
     url: "https://www.udemy.com/certificate/UC-119237dc-9851-489c-8f06-313fca17fdc1/",
-  },
-];
-
-export const testimonials = [
-  {
-    quote:
-      "Sanu delivered our platform ahead of schedule with quality that exceeded expectations. A true professional.",
-    name: "Aisha Verma",
-    role: "Product Lead, Linear Pay",
-    avatarUrl: "/assets/images/sanu.png",
-  },
-  {
-    quote:
-      "Reliable, communicative and deeply technical. Sanu became a core part of our engineering team within a week.",
-    name: "Marcus Chen",
-    role: "CTO, Habitly",
-    avatarUrl: "/assets/images/sanu.png",
-  },
-  {
-    quote:
-      "Outstanding work on our headless commerce stack. Performance and DX both improved dramatically.",
-    name: "Priya Sharma",
-    role: "Founder, NorthStore",
-    avatarUrl: "/assets/images/sanu.png",
   },
 ];
 

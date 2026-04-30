@@ -8,15 +8,21 @@ import { mcpGenerativeSupport } from "./src/lib/mcp-generative-support";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 type HistoryMessage = { role: "user" | "assistant"; text: string };
-const conversationMemory = new Map<string, HistoryMessage[]>();
+type SessionEntry = { messages: HistoryMessage[]; siteScope?: string };
+const conversationMemory = new Map<string, SessionEntry>();
 
-const readJsonBody = async (req: import("http").IncomingMessage) => {
+const readJsonBody = async (req: import("http").IncomingMessage): Promise<{ ok: true; data: unknown } | { ok: false }> => {
   const chunks: Uint8Array[] = [];
   for await (const chunk of req) {
     chunks.push(typeof chunk === "string" ? Buffer.from(chunk) : chunk);
   }
   const raw = Buffer.concat(chunks).toString("utf8");
-  return raw ? JSON.parse(raw) : {};
+  if (!raw) return { ok: true, data: {} };
+  try {
+    return { ok: true, data: JSON.parse(raw) };
+  } catch {
+    return { ok: false };
+  }
 };
 
 const sendJson = (res: import("http").ServerResponse, status: number, data: unknown) => {
@@ -42,7 +48,10 @@ const extractModelText = (payload: unknown) => {
   return parts.map((p) => p.text || "").join(" ").trim();
 };
 
+// Global regex used only with .replace() – safe to reuse with lastIndex mutation.
 const leakPattern = /(SITE_SCOPE|USER_QUESTION|LOCALE|CONVERSATION)\s*:?/gi;
+// Non-global regex for .test() – deterministic, no lastIndex side-effects.
+const leakPatternTest = /(SITE_SCOPE|USER_QUESTION|LOCALE|CONVERSATION)\s*:?/i;
 
 const sanitizeModelText = (raw: string) =>
   raw
@@ -53,7 +62,7 @@ const sanitizeModelText = (raw: string) =>
 
 const looksLeakyOrInvalid = (text: string) => {
   if (!text) return true;
-  if (leakPattern.test(text)) return true;
+  if (leakPatternTest.test(text)) return true;
   const lowered = text.toLowerCase();
   return lowered.startsWith("name:") || lowered.startsWith("role:") || lowered.includes("contextsummary");
 };
@@ -74,15 +83,26 @@ const fallbackReply = (locale: ZaakiyLocale, email: string, question: string) =>
   return exactEnglishFallback;
 };
 
-const getHistory = (sessionId: string) => conversationMemory.get(sessionId) || [];
+const getHistory = (sessionId: string) => conversationMemory.get(sessionId)?.messages || [];
+
+const getSessionScope = (sessionId: string) => (conversationMemory.get(sessionId)?.siteScope || "").trim();
+
+const setSessionScope = (sessionId: string, siteScope: string) => {
+  const entry = conversationMemory.get(sessionId);
+  if (!entry) {
+    conversationMemory.set(sessionId, { messages: [], siteScope });
+    return;
+  }
+  entry.siteScope = siteScope;
+};
 
 const pushHistory = (sessionId: string, role: "user" | "assistant", text: string) => {
-  const history = getHistory(sessionId);
-  history.push({ role, text });
-  if (history.length > 12) {
-    history.splice(0, history.length - 12);
+  const entry = conversationMemory.get(sessionId) || { messages: [] };
+  entry.messages.push({ role, text });
+  if (entry.messages.length > 12) {
+    entry.messages.splice(0, entry.messages.length - 12);
   }
-  conversationMemory.set(sessionId, history);
+  conversationMemory.set(sessionId, entry);
 };
 
 const registerZaakiyApi = (
@@ -126,7 +146,13 @@ const registerZaakiyApi = (
         return;
       }
 
-      const body = (await readJsonBody(req)) as {
+      const parseResult = await readJsonBody(req);
+      if (!parseResult.ok) {
+        sendJson(res, 400, { error: "Invalid JSON in request body" });
+        return;
+      }
+
+      const body = parseResult.data as {
         locale?: "en" | "ar";
         userQuestion?: string;
         siteScope?: string;
@@ -137,10 +163,14 @@ const registerZaakiyApi = (
 
       const locale: ZaakiyLocale = body.locale === "ar" ? "ar" : "en";
       const userQuestion = (body.userQuestion || "").trim();
-      const siteScope = (body.siteScope || "").trim();
+      const incomingSiteScope = (body.siteScope || "").trim();
       const email = (body.email || "khan.sanukhan@outlook.com").trim();
       const maxOutputChars = Math.max(120, Math.min(500, Number(body.maxOutputChars || 250)));
       const sessionId = (body.sessionId || "anonymous-session").trim();
+      if (incomingSiteScope) {
+        setSessionScope(sessionId, incomingSiteScope);
+      }
+      const siteScope = incomingSiteScope || getSessionScope(sessionId);
 
       if (!userQuestion || !siteScope) {
         sendJson(res, 400, { error: "Missing required fields" });
@@ -149,7 +179,7 @@ const registerZaakiyApi = (
 
       const scopedContext = mcpProcessor.getEnhancedContext(siteScope, locale);
       const queryContext = mcpProcessor.getQueryContext(scopedContext, userQuestion, 14);
-      const history = getHistory(sessionId);
+      const historySnapshot = getHistory(sessionId).slice();
       pushHistory(sessionId, "user", userQuestion);
 
       const mergedPrompt = mcpGenerativeSupport.buildScopedPrompt({
@@ -158,7 +188,7 @@ const registerZaakiyApi = (
         userQuestion,
         email,
         maxChars: maxOutputChars,
-        conversationHistory: history.map((h) => ({ role: h.role, text: h.text })),
+        conversationHistory: historySnapshot.map((h) => ({ role: h.role, text: h.text })),
       });
 
       const googleResp = await fetch(
