@@ -1,9 +1,37 @@
-import { MapPin, Briefcase, CircleDot, Download } from "lucide-react";
+import {
+  MapPin,
+  Briefcase,
+  CircleDot,
+  Download,
+  Clock,
+  Award,
+  Globe2,
+  Layers,
+  CalendarCheck,
+  Rocket,
+  TrendingUp,
+  Users,
+} from "lucide-react";
 import { profile } from "@/data/siteData";
 import { Button } from "@/components/ui/button";
 import TechParticles from "@/components/TechParticles";
 
 const metaIcons = [Briefcase, MapPin, CircleDot];
+
+const metricIcons: Record<string, React.ComponentType<{ className?: string }>> = {
+  "Years Experience": Clock,
+  "Systems Delivered": Rocket,
+  "Markets Served": Globe2,
+  "Product Scale Systems": TrendingUp,
+};
+
+const floatingBadges = [
+  { icon: Layers,       label: "Microservices",  top: "8%",  left: "-14%" },
+  { icon: Globe2,       label: "MENA & Global",  top: "30%", right: "-14%" },
+  { icon: Award,        label: "13+ Yrs",         bottom: "30%", left: "-14%" },
+  { icon: CalendarCheck,label: "Since 2011",      bottom: "10%", right: "-10%" },
+  { icon: Users,        label: "100+ Clients",   top: "58%", left: "-12%" },
+];
 
 export default function Hero() {
   return (
@@ -55,16 +83,20 @@ export default function Hero() {
           </ul>
 
           <div className="mt-8 grid max-w-2xl grid-cols-2 gap-3 lg:grid-cols-4">
-            {profile.impactMetrics.map((s) => (
-              <div key={s.label} className="premium-card px-3 py-4 text-center">
-                <div className="text-[28px] font-extrabold text-[#38c755]">
-                  {s.value}
+            {profile.impactMetrics.map((s) => {
+              const Icon = metricIcons[s.label] ?? TrendingUp;
+              return (
+                <div key={s.label} className="premium-card flex flex-col items-center px-3 py-4 text-center">
+                  <Icon className="mb-1.5 h-4 w-4 text-[#38c755]/70" />
+                  <div className="text-[28px] font-extrabold text-[#38c755]">
+                    {s.value}
+                  </div>
+                  <div className="mt-1 text-[11px] uppercase tracking-wide text-[#8a90a8]">
+                    {s.label}
+                  </div>
                 </div>
-                <div className="mt-1 text-[11px] uppercase tracking-wide text-[#8a90a8]">
-                  {s.label}
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
 
           <div className="mt-8 flex flex-wrap gap-3">
@@ -96,6 +128,28 @@ export default function Hero() {
         <div className="mx-auto w-full max-w-sm">
           <div className="relative">
             <div className="avatar-halo" />
+
+            {/* Floating icon badges */}
+            {floatingBadges.map((b) => {
+              const Icon = b.icon;
+              return (
+                <div
+                  key={b.label}
+                  aria-hidden
+                  className="absolute z-20 hidden lg:flex items-center gap-1.5 rounded-full border border-[#2b2f3b] bg-[#16171d]/90 px-2.5 py-1 text-[11px] font-semibold text-[#8a90a8] shadow-lg backdrop-blur-sm"
+                  style={{
+                    top: b.top,
+                    bottom: b.bottom,
+                    left: b.left,
+                    right: b.right,
+                  }}
+                >
+                  <Icon className="h-3 w-3 text-[#38c755]" />
+                  {b.label}
+                </div>
+              );
+            })}
+
             <img
               src={profile.avatarUrl}
               alt={`${profile.name} portrait`}

@@ -1,7 +1,15 @@
 import { useMemo, useState } from "react";
+import { ShoppingCart, Webhook, Boxes, LayoutGrid } from "lucide-react";
 import { works, workCategories, type WorkCategory } from "@/data/siteData";
 import { SectionHeading, TagChip } from "@/components/shared/SectionHeading";
 import { cn } from "@/lib/utils";
+
+const categoryIcons: Record<string, React.ComponentType<{ className?: string }>> = {
+  Commerce: ShoppingCart,
+  Integration: Webhook,
+  Platform: Boxes,
+  All: LayoutGrid,
+};
 
 export default function Works() {
   const [active, setActive] = useState<WorkCategory>("All");
@@ -45,11 +53,21 @@ export default function Works() {
               key={w.title}
               className="premium-card flex flex-col p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[#38c755]/40"
             >
-              <div className="mb-4 flex items-center justify-between gap-4">
-                <h3 className="text-[18px] font-semibold text-[#f0f1f4]">
-                  {w.title}
-                </h3>
-                <span className="text-xs text-[#8a90a8]">{w.scope}</span>
+              <div className="mb-4 flex items-start justify-between gap-4">
+                <div className="flex items-center gap-2.5">
+                  {(() => {
+                    const Icon = categoryIcons[w.category] ?? Boxes;
+                    return (
+                      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[#38c755]/10 ring-1 ring-[#38c755]/25">
+                        <Icon className="h-4 w-4 text-[#38c755]" />
+                      </span>
+                    );
+                  })()}
+                  <h3 className="text-[18px] font-semibold text-[#f0f1f4]">
+                    {w.title}
+                  </h3>
+                </div>
+                <span className="shrink-0 text-xs text-[#8a90a8]">{w.scope}</span>
               </div>
               <div className="space-y-3 text-[15px] text-[#8a90a8]">
                 <p>
