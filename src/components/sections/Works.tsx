@@ -1,14 +1,7 @@
 import { useMemo, useState } from "react";
 import { works, workCategories, type WorkCategory } from "@/data/siteData";
 import { SectionHeading, TagChip } from "@/components/shared/SectionHeading";
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-
-const statusTone: Record<string, string> = {
-  Live: "bg-tea-green-500/15 text-tea-green-300 border-tea-green-500/30",
-  "In Progress": "bg-beige-500/15 text-beige-300 border-beige-500/30",
-  Concept: "bg-magenta-bloom-500/15 text-magenta-bloom-300 border-magenta-bloom-500/30",
-};
 
 export default function Works() {
   const [active, setActive] = useState<WorkCategory>("All");
@@ -21,9 +14,14 @@ export default function Works() {
   return (
     <section id="works" className="section-pad">
       <div className="container-narrow">
-        <SectionHeading title="Latest Works" subtitle="A selection of recent projects." />
+        <SectionHeading
+          eyebrow="Work"
+          title="Case Studies"
+          subtitle="Impact-led delivery across distributed commerce and enterprise integration landscapes."
+          align="left"
+        />
 
-        <div className="mb-8 flex flex-wrap justify-center gap-2">
+        <div className="mb-8 flex flex-wrap gap-2">
           {workCategories.map((c) => (
             <button
               key={c}
@@ -31,8 +29,8 @@ export default function Works() {
               className={cn(
                 "rounded-full border px-4 py-1.5 text-xs font-semibold transition-colors",
                 active === c
-                  ? "border-tea-green-500 bg-tea-green-500 text-jet-black-950"
-                  : "border-border bg-card text-muted-foreground hover:text-foreground",
+                  ? "border-[#38c755] bg-[#38c755] text-[#0f1015]"
+                  : "border-[#2b2f3b] bg-[#16171d] text-[#8a90a8] hover:text-[#f0f1f4]",
               )}
             >
               {c}
@@ -44,38 +42,30 @@ export default function Works() {
           {filtered.map((w) => (
             <article
               key={w.title}
-              className="flex flex-col rounded-2xl border border-border bg-card p-6 transition-all hover:-translate-y-0.5 hover:border-tea-green-500/40"
+              className="premium-card flex flex-col p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[#38c755]/40"
             >
-              <div className="mb-4 flex items-center justify-between">
-                <span
-                  className={cn(
-                    "inline-flex items-center rounded-full border px-2.5 py-0.5 text-[11px] font-semibold",
-                    statusTone[w.status],
-                  )}
-                >
-                  {w.status}
-                </span>
-                <span className="text-xs text-muted-foreground">{w.year}</span>
+              <div className="mb-4 flex items-center justify-between gap-4">
+                <h3 className="text-[18px] font-semibold text-[#f0f1f4]">{w.title}</h3>
+                <span className="text-xs text-[#8a90a8]">{w.scope}</span>
               </div>
-              <h3 className="text-lg font-semibold">{w.title}</h3>
-              <p className="mt-2 flex-1 text-sm text-muted-foreground">{w.description}</p>
+              <div className="space-y-3 text-[15px] text-[#8a90a8]">
+                <p>
+                  <span className="font-semibold text-[#f0f1f4]">Problem:</span> {w.problem}
+                </p>
+                <p>
+                  <span className="font-semibold text-[#f0f1f4]">Solution:</span> {w.solution}
+                </p>
+                <p>
+                  <span className="font-semibold text-[#38c755]">Outcome:</span> {w.outcome}
+                </p>
+              </div>
               <div className="mt-4 flex flex-wrap gap-1.5">
                 {w.tags.map((t) => (
-                  <TagChip key={t} label={t} />
+                  <TagChip key={t} label={t} className="bg-[#16171d] text-[#8a90a8]" />
                 ))}
               </div>
             </article>
           ))}
-        </div>
-
-        <div className="mt-10 flex justify-center">
-          <Button
-            asChild
-            variant="outline"
-            className="border-tea-green-500/40 bg-transparent text-tea-green-300 hover:bg-tea-green-500/10"
-          >
-            <a href="#works">View All Works</a>
-          </Button>
         </div>
       </div>
     </section>

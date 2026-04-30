@@ -1,38 +1,43 @@
-import * as Icons from "lucide-react";
 import { services } from "@/data/siteData";
 import { SectionHeading } from "@/components/shared/SectionHeading";
 import { TagChip } from "@/components/shared/SectionHeading";
 
 export default function Services() {
   return (
-    <section id="services" className="section-pad">
+    <section id="experience" className="section-pad bg-[#16171d]/45">
       <div className="container-narrow">
         <SectionHeading
-          title="Services & Expertise"
-          subtitle="End-to-end product engineering, from idea to launch."
+          title="Experience"
+          subtitle="Leadership across enterprise integrations, distributed platforms, and commerce architecture."
+          align="left"
         />
 
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {services.map((s) => {
-            const Icon = (Icons as unknown as Record<string, React.ComponentType<{ className?: string }>>)[s.icon] || Icons.Sparkles;
-            return (
-              <div
-                key={s.title}
-                className="group rounded-2xl border border-border bg-card p-6 transition-all hover:-translate-y-0.5 hover:border-tea-green-500/40"
-              >
-                <span className="mb-4 inline-grid h-10 w-10 place-items-center rounded-xl bg-tea-green-500/15 text-tea-green-400">
-                  <Icon className="h-5 w-5" />
-                </span>
-                <h3 className="text-lg font-semibold">{s.title}</h3>
-                <p className="mt-2 text-sm text-muted-foreground">{s.description}</p>
-                <div className="mt-4 flex flex-wrap gap-1.5">
-                  {s.tags.map((t) => (
-                    <TagChip key={t} label={t} />
-                  ))}
-                </div>
+        <div className="relative space-y-6 border-l border-[#2b2f3b] pl-6">
+          {services.map((item, index) => (
+            <article key={item.company} className="premium-card relative p-6">
+              <span className="absolute -left-[33px] top-7 h-3 w-3 rounded-full bg-[#38c755]" />
+              <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
+                <h3 className="text-[20px] font-semibold text-[#f0f1f4]">{item.company}</h3>
+                <span className="text-[12px] text-[#8a90a8]">Role {index + 1}</span>
               </div>
-            );
-          })}
+              <p className="mt-1 text-[14px] font-medium text-[#8a90a8]">{item.role}</p>
+
+              <ul className="mt-4 space-y-2 text-[15px] text-[#8a90a8]">
+                {item.impact.map((point) => (
+                  <li key={point} className="flex gap-2">
+                    <span className="mt-2 h-1.5 w-1.5 rounded-full bg-[#38c755]" />
+                    <span>{point}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <div className="mt-4 flex flex-wrap gap-1.5">
+                {item.stack.map((t) => (
+                  <TagChip key={t} label={t} className="bg-[#16171d] text-[#8a90a8]" />
+                ))}
+              </div>
+            </article>
+          ))}
         </div>
       </div>
     </section>

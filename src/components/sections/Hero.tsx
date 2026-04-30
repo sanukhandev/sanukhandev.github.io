@@ -1,18 +1,12 @@
-import { Zap, MapPin, Briefcase, CircleDot, Download } from "lucide-react";
-import { motion } from "framer-motion";
+import { MapPin, Briefcase, CircleDot, Download } from "lucide-react";
 import { profile } from "@/data/siteData";
 import { Button } from "@/components/ui/button";
 
 const metaIcons = [Briefcase, MapPin, CircleDot];
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0 },
-};
-
 export default function Hero() {
   return (
-    <section id="home" className="relative overflow-hidden pt-28 sm:pt-32">
+    <section id="home" className="relative overflow-hidden pt-24 sm:pt-28">
       {/* Subtle radial glow */}
       <div
         aria-hidden
@@ -23,45 +17,24 @@ export default function Hero() {
         }}
       />
 
-      <motion.div
-        className="container-narrow grid items-center gap-10 pb-20 lg:grid-cols-[1.2fr_1fr]"
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, amount: 0.35 }}
-        transition={{ staggerChildren: 0.08 }}
-      >
-        <motion.div>
-          <motion.span
-            variants={fadeUp}
-            transition={{ duration: 0.4, ease: "easeOut" }}
-            className="mb-5 inline-flex items-center gap-2 rounded-full border border-tea-green-500/40 bg-tea-green-500/10 px-3 py-1 text-xs font-semibold text-tea-green-300"
-          >
+      <div className="container-narrow grid items-center gap-8 pb-16 lg:grid-cols-[1.2fr_1fr]">
+        <div className="animate-fade-up-stagger">
+          <span className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#2b2f3b] bg-[#16171d] px-3 py-1 text-xs font-semibold text-[#38c755]">
             <span className="h-1.5 w-1.5 rounded-full bg-tea-green-400" />
-            Available for new projects
-          </motion.span>
+            13+ Years of Engineering Leadership
+          </span>
 
-          <motion.h1
-            variants={fadeUp}
-            transition={{ duration: 0.45, ease: "easeOut" }}
-            className="flex flex-wrap items-center gap-3 text-4xl font-extrabold leading-tight sm:text-5xl lg:text-6xl"
-          >
-            {profile.greeting}
-            <Zap className="h-8 w-8 text-tea-green-400 sm:h-10 sm:w-10" />
-          </motion.h1>
+          <p className="text-[14px] font-semibold uppercase tracking-[0.08em] text-[#8a90a8]">
+            {profile.role}
+          </p>
+          <h1 className="mt-3 text-[42px] font-extrabold leading-[1.06] text-[#f0f1f4] sm:text-[48px]">
+            {profile.name}
+          </h1>
 
-          <motion.p
-            variants={fadeUp}
-            transition={{ duration: 0.45, ease: "easeOut" }}
-            className="mt-5 max-w-xl text-base text-muted-foreground sm:text-lg"
-          >
-            {profile.tagline}
-          </motion.p>
+          <p className="mt-4 max-w-2xl text-[16px] text-[#f0f1f4]">{profile.subtitle}</p>
+          <p className="mt-2 max-w-2xl text-[15px] text-[#8a90a8]">{profile.statement}</p>
 
-          <motion.ul
-            variants={fadeUp}
-            transition={{ duration: 0.45, ease: "easeOut" }}
-            className="mt-6 space-y-2 text-sm text-muted-foreground"
-          >
+          <ul className="mt-6 space-y-2 text-sm text-[#8a90a8]">
             {profile.meta.map((m, i) => {
               const Icon = metaIcons[i % metaIcons.length];
               return (
@@ -71,39 +44,27 @@ export default function Hero() {
                 </li>
               );
             })}
-          </motion.ul>
+          </ul>
 
-          <motion.div
-            variants={fadeUp}
-            transition={{ duration: 0.45, ease: "easeOut" }}
-            className="mt-8 grid max-w-md grid-cols-3 gap-3"
-          >
-            {profile.stats.map((s) => (
+          <div className="mt-8 grid max-w-2xl grid-cols-2 gap-3 lg:grid-cols-4">
+            {profile.impactMetrics.map((s) => (
               <div
                 key={s.label}
-                className="rounded-xl border border-border bg-card px-3 py-4 text-center"
+                className="premium-card px-3 py-4 text-center"
               >
-                <div className="text-2xl font-bold text-tea-green-400">
-                  {s.value}
-                </div>
-                <div className="mt-1 text-[11px] uppercase tracking-wide text-muted-foreground">
-                  {s.label}
-                </div>
+                <div className="text-[28px] font-extrabold text-[#38c755]">{s.value}</div>
+                <div className="mt-1 text-[11px] uppercase tracking-wide text-[#8a90a8]">{s.label}</div>
               </div>
             ))}
-          </motion.div>
+          </div>
 
-          <motion.div
-            variants={fadeUp}
-            transition={{ duration: 0.45, ease: "easeOut" }}
-            className="mt-8 flex flex-wrap gap-3"
-          >
+          <div className="mt-8 flex flex-wrap gap-3">
             {profile.ctas.map((c) =>
               c.variant === "primary" ? (
                 <Button
                   key={c.label}
                   asChild
-                  className="bg-tea-green-500 text-jet-black-950 hover:bg-tea-green-400"
+                  className="h-10 rounded-lg bg-[#38c755] px-5 text-[#0f1015] hover:scale-[1.02] hover:bg-[#4fd16a]"
                 >
                   <a href={c.href}>{c.label}</a>
                 </Button>
@@ -112,7 +73,7 @@ export default function Hero() {
                   key={c.label}
                   asChild
                   variant="outline"
-                  className="border-border bg-transparent text-foreground hover:bg-secondary"
+                  className="h-10 rounded-lg border-[#2b2f3b] bg-[#16171d] text-[#f0f1f4] hover:scale-[1.02] hover:bg-[#20222b]"
                 >
                   <a href={c.href} className="inline-flex items-center gap-2">
                     <Download className="h-4 w-4" /> {c.label}
@@ -120,24 +81,23 @@ export default function Hero() {
                 </Button>
               ),
             )}
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
 
-        <motion.div
-          variants={fadeUp}
-          transition={{ duration: 0.5, ease: "easeOut" }}
-          className="mx-auto w-full max-w-sm"
-        >
+        <div className="relative mx-auto w-full max-w-sm">
+          <div className="avatar-halo" />
           <img
             src={profile.avatarUrl}
             alt={`${profile.name} portrait`}
-            className="w-full object-contain"
+            className="relative z-10 w-full object-contain avatar-float"
+            loading="lazy"
+            decoding="async"
           />
-          <div className="mt-3 text-center text-xs font-semibold text-tea-green-300 sm:text-sm">
+          <div className="mt-3 text-center text-xs font-semibold text-[#8a90a8] sm:text-sm">
             Building Innovations since 2011
           </div>
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
     </section>
   );
 }

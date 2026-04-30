@@ -5,61 +5,67 @@
 // =============================================================
 
 export const nav = {
-  brand: "SanuKhan",
+  brand: "SanuKhan.dev",
   links: [
-    { label: "Home", href: "#home" },
-    { label: "About", href: "#about" },
-    { label: "Services", href: "#services" },
-    { label: "Works", href: "#works" },
-    { label: "Articles", href: "#articles" },
+    { label: "Work", href: "#works" },
+    { label: "Experience", href: "#experience" },
+    { label: "Stack", href: "#stack" },
     { label: "Contact", href: "#contact" },
   ],
-  cta: { label: "Hire Me", href: "#contact" },
+  cta: { label: "Connect", href: "#contact" },
 };
 
 export const profile = {
   name: "Sanu Khan",
-  greeting: "Hi, I'm Sanu Khan",
-  tagline:
-    "Full Stack Developer crafting fast, scalable, and beautiful digital products for the modern web.",
+  role: "Tech Lead • Cloud & Microservices Architect",
+  subtitle:
+    "Designing scalable distributed systems, enterprise integrations, and high-performance platforms across global markets.",
+  statement:
+    "Leading architecture and platform engineering for event-driven commerce, enterprise integration, and multi-region cloud delivery.",
   meta: [
-    "Role: Full Stack Developer",
-    "Location: Remote · India",
-    "Status: Available for new projects",
+    "13+ years building distributed systems",
+    "Event-driven architecture specialist",
+    "Azure • AWS • Kubernetes delivery",
   ],
-  stats: [
-    { value: "14+", label: "Years Experience" },
-    { value: "150+", label: "Projects Shipped" },
-    { value: "50+", label: "Happy Clients" },
+  impactMetrics: [
+    { value: "13+", label: "Years Experience" },
+    { value: "100+", label: "Systems Delivered" },
+    { value: "9", label: "Markets Served" },
+    { value: "800K+", label: "Product Scale Systems" },
   ],
   ctas: [
-    { label: "Hire Me", href: "#contact", variant: "primary" as const },
-    { label: "Download CV", href: "#", variant: "outline" as const },
+    { label: "View Work", href: "#works", variant: "primary" as const },
+    { label: "Architecture Highlights", href: "#experience", variant: "outline" as const },
   ],
-  // Replace this with your photo when ready.
   avatarUrl: "/assets/images/sanu.png",
 };
 
 export const skills = {
-  eyebrow: "Web",
-  title: "Full Stack Web Engineering",
+  eyebrow: "Stack",
+  title: "Engineering Expertise Clusters",
   intro:
-    "I design and build production web applications end-to-end — from pixel-perfect interfaces to robust APIs and cloud infrastructure.",
-  bullets: [
-    "Modern React & TypeScript front-ends",
-    "Node.js, REST & GraphQL APIs",
-    "Databases, caching & performance",
-    "Cloud deployment & DevOps",
-  ],
-  list: [
-    { name: "React / Next.js", percent: 95 },
-    { name: "TypeScript", percent: 92 },
-    { name: "Node.js", percent: 90 },
-    { name: "TailwindCSS", percent: 96 },
-    { name: "PostgreSQL", percent: 85 },
-    { name: "AWS / Vercel", percent: 80 },
-    { name: "Docker", percent: 78 },
-    { name: "Testing (Vitest / Jest)", percent: 82 },
+    "Architecture-first execution across cloud, integrations, and platform engineering with production-grade delivery discipline.",
+  clusters: [
+    {
+      title: "Cloud & Architecture",
+      tags: ["Azure", "AWS", "GCP", "Serverless", "Event-driven", "Microservices"],
+    },
+    {
+      title: "Backend Systems",
+      tags: ["Java", "Spring Boot", "Node.js", "NestJS", "GraphQL", "PostgreSQL"],
+    },
+    {
+      title: "Frontend Systems",
+      tags: ["React", "Next.js", "TypeScript", "Design Systems", "Performance"],
+    },
+    {
+      title: "DevOps & Infra",
+      tags: ["Kubernetes", "Docker", "CI/CD", "Terraform", "Observability"],
+    },
+    {
+      title: "Enterprise Integrations",
+      tags: ["SAP", "Shopify", "Kibo", "REST", "Kafka", "Azure Event Hubs"],
+    },
   ],
 };
 
@@ -78,171 +84,107 @@ export const techStack = [
 
 export const services = [
   {
-    icon: "Code2",
-    title: "Web Development",
-    description:
-      "Production-grade web apps with React, Next.js and TypeScript — fast, accessible and maintainable.",
-    tags: ["React", "Next.js", "TypeScript"],
+    company: "TechCarrot (Current)",
+    role: "Tech Lead • Cloud & Integration Architecture",
+    impact: [
+      "Built Azure Functions-based PIM integrations for high-throughput catalog and pricing workflows",
+      "Engineered event-driven retail platforms using Kafka and Event Hubs for real-time sync",
+      "Delivered SAP, Shopify, and Kibo integrations across distributed commerce estates",
+      "Led architecture for multi-tenant SaaS systems with secure tenant isolation",
+    ],
+    stack: ["Azure Functions", "Kafka", "Event Hubs", "SAP", "Shopify", "Kibo"],
   },
   {
-    icon: "Smartphone",
-    title: "Mobile Development",
-    description:
-      "Cross-platform mobile apps with React Native — one codebase, native feel on iOS and Android.",
-    tags: ["React Native", "Expo", "iOS", "Android"],
-  },
-  {
-    icon: "Server",
-    title: "Backend & APIs",
-    description:
-      "Scalable backends, REST and GraphQL APIs, authentication, payments and real-time features.",
-    tags: ["Node.js", "PostgreSQL", "GraphQL"],
-  },
-  {
-    icon: "PenTool",
-    title: "UI / UX Design",
-    description:
-      "Clean, conversion-focused interfaces designed in Figma and shipped pixel-perfect to production.",
-    tags: ["Figma", "Design Systems"],
-  },
-  {
-    icon: "Cloud",
-    title: "DevOps & Cloud",
-    description:
-      "CI/CD pipelines, containerization and cloud infrastructure on AWS, Vercel and Cloudflare.",
-    tags: ["AWS", "Docker", "CI/CD"],
+    company: "Previous Roles",
+    role: "Senior Engineer • Platform Systems",
+    impact: [
+      "Architected airline marketplace workflows with resilient booking and settlement boundaries",
+      "Delivered enterprise ERP platforms integrating finance, operations, and supply chain modules",
+      "Built real-time video conferencing systems with scalable media signaling services",
+      "Shipped 100+ client systems across web, backend, and integration-heavy domains",
+    ],
+    stack: ["Distributed Systems", "Enterprise APIs", "Realtime", "ERP", "Commerce"],
   },
 ];
 
 export const workCategories = [
   "All",
-  "Web",
-  "Mobile",
-  "Backend",
-  "Design",
+  "Commerce",
+  "Integration",
+  "Platform",
 ] as const;
 export type WorkCategory = (typeof workCategories)[number];
 
 export const works: Array<{
   title: string;
-  description: string;
+  problem: string;
+  solution: string;
+  outcome: string;
   tags: string[];
-  year: string;
-  status: "Live" | "In Progress" | "Concept";
+  scope: string;
   category: Exclude<WorkCategory, "All">;
 }> = [
   {
-    title: "Linear Pay",
-    description:
-      "Modern payment dashboard with real-time analytics, subscriptions and invoicing.",
-    tags: ["React", "Stripe", "Postgres"],
-    year: "2025",
-    status: "Live",
-    category: "Web",
+    title: "Retail Event-Driven Platform",
+    problem:
+      "Pricing, inventory, and catalog updates were fragmented across regions, creating latency and inconsistent product states.",
+    solution:
+      "Designed event-driven pipelines with Kafka/Event Hubs and integration services to synchronize product and pricing signals.",
+    outcome:
+      "Enabled near real-time multi-market consistency across systems supporting 800K+ catalog scale.",
+    tags: ["Kafka", "Event Hubs", "Azure", "Microservices"],
+    scope: "Multi-region commerce",
+    category: "Commerce",
   },
   {
-    title: "Habitly",
-    description:
-      "Mobile habit tracker with streaks, reminders and beautiful data visualizations.",
-    tags: ["React Native", "Expo"],
-    year: "2025",
-    status: "Live",
-    category: "Mobile",
+    title: "Enterprise PIM Integration Suite",
+    problem:
+      "Product information flows between PIM and downstream commerce systems were brittle and difficult to audit.",
+    solution:
+      "Built serverless integration orchestrations using Azure Functions with contract-driven payload validation.",
+    outcome:
+      "Improved data integrity and reduced operational interventions for large catalog publication cycles.",
+    tags: ["Azure Functions", "PIM", "Serverless", "Integration"],
+    scope: "Enterprise integration",
+    category: "Integration",
   },
   {
-    title: "NodeKit API",
-    description:
-      "Open-source TypeScript starter kit for building scalable REST and GraphQL APIs.",
-    tags: ["Node.js", "TypeScript", "GraphQL"],
-    year: "2024",
-    status: "Live",
-    category: "Backend",
-  },
-  {
-    title: "E-Commerce Platform",
-    description:
-      "Headless commerce build with custom checkout, CMS and admin dashboard.",
-    tags: ["Next.js", "Stripe", "Sanity"],
-    year: "2024",
-    status: "Live",
-    category: "Web",
-  },
-  {
-    title: "Realtime CRM",
-    description:
-      "Sales CRM with live collaboration, pipeline boards and AI-assisted insights.",
-    tags: ["React", "WebSockets"],
-    year: "2024",
-    status: "In Progress",
-    category: "Web",
-  },
-  {
-    title: "Sound Wave App",
-    description:
-      "Music streaming UI concept with offline mode and spatial audio support.",
-    tags: ["React Native", "Audio"],
-    year: "2023",
-    status: "Concept",
-    category: "Mobile",
-  },
-  {
-    title: "Crypto Tracker Pro",
-    description:
-      "Multi-exchange portfolio tracker with alerts, charts and tax reporting.",
-    tags: ["React", "Charts", "WebSockets"],
-    year: "2023",
-    status: "Live",
-    category: "Web",
+    title: "Multi-Tenant SaaS Platform Core",
+    problem:
+      "Tenant-level customization and scaling were constrained by a monolithic operational model.",
+    solution:
+      "Refactored platform boundaries into microservices with tenancy-aware data and deployment contracts.",
+    outcome:
+      "Increased release velocity and platform scalability while preserving tenant isolation controls.",
+    tags: ["Kubernetes", "Microservices", "SaaS", "Observability"],
+    scope: "Global platform engineering",
+    category: "Platform",
   },
 ];
 
 export const articles = [
   {
-    category: "React",
-    title: "Building Resilient React Apps with Suspense and Error Boundaries",
+    category: "Architecture",
+    title: "Designing Event-Driven Integrations for Enterprise Commerce",
     excerpt:
-      "A practical guide to gracefully handling async state and failures in modern React.",
-    tags: ["React", "Patterns"],
+      "Patterns for decoupled integration pipelines, replay safety, and observability at scale.",
+    tags: ["Event-Driven", "Architecture"],
     url: "#",
   },
   {
-    category: "TypeScript",
-    title: "Advanced TypeScript Patterns for Large-Scale Codebases",
+    category: "Platform",
+    title: "Multi-Tenant SaaS Boundaries That Scale",
     excerpt:
-      "Generics, conditional types and template literal types that scale with your team.",
-    tags: ["TypeScript", "Architecture"],
+      "A practical architecture model for tenancy isolation, scaling, and operational safety.",
+    tags: ["SaaS", "Platform"],
     url: "#",
   },
   {
-    category: "Performance",
-    title: "Shipping Faster Web Apps: A Practical Performance Playbook",
+    category: "Leadership",
+    title: "Tech Lead Playbook for Distributed Engineering Teams",
     excerpt:
-      "Concrete techniques to cut TTI, reduce bundle size and ace your Core Web Vitals.",
-    tags: ["Performance", "Web Vitals"],
-    url: "#",
-  },
-  {
-    category: "Backend",
-    title: "Designing PostgreSQL Schemas That Don't Break in Production",
-    excerpt:
-      "Indexing strategies, migrations and query patterns from real-world systems.",
-    tags: ["Postgres", "Backend"],
-    url: "#",
-  },
-  {
-    category: "DevOps",
-    title: "From Zero to CI/CD with GitHub Actions and Docker",
-    excerpt:
-      "A step-by-step pipeline that ships your app safely to production.",
-    tags: ["CI/CD", "DevOps"],
-    url: "#",
-  },
-  {
-    category: "Career",
-    title: "Lessons Learned After 14 Years as a Full Stack Developer",
-    excerpt:
-      "What actually compounds over a long engineering career — and what doesn't.",
-    tags: ["Career", "Lessons"],
+      "Engineering governance, release strategy, and architecture communication for scale.",
+    tags: ["Tech Lead", "Distributed Teams"],
     url: "#",
   },
 ];
@@ -308,31 +250,23 @@ export const testimonials = [
 ];
 
 export const footer = {
-  brand: "SanuKhan",
-  blurb:
-    "Full Stack Developer building fast, scalable products for startups and teams worldwide.",
+  brand: "SanuKhan.dev",
+  blurb: "Tech Lead • Cloud Architect",
   socials: [
-    { label: "GitHub", icon: "Github", href: "https://github.com" },
-    { label: "LinkedIn", icon: "Linkedin", href: "https://linkedin.com" },
-    { label: "Twitter", icon: "Twitter", href: "https://twitter.com" },
-    { label: "Email", icon: "Mail", href: "mailto:hello@example.com" },
+    { label: "GitHub", icon: "Github", href: "https://github.com/sanukhandev" },
+    { label: "LinkedIn", icon: "Linkedin", href: "https://linkedin.com/in/sanukhandev" },
   ],
   quickLinks: [
-    { label: "Home", href: "#home" },
-    { label: "About", href: "#about" },
-    { label: "Works", href: "#works" },
-    { label: "Articles", href: "#articles" },
+    { label: "Work", href: "#works" },
+    { label: "Experience", href: "#experience" },
+    { label: "Stack", href: "#stack" },
+    { label: "Contact", href: "#contact" },
   ],
-  servicesLinks: [
-    { label: "Web Development", href: "#services" },
-    { label: "Mobile Development", href: "#services" },
-    { label: "Backend & APIs", href: "#services" },
-    { label: "UI / UX Design", href: "#services" },
-  ],
+  servicesLinks: [],
   contact: {
     email: "hello@sanukhan.dev",
-    location: "Remote · India",
-    cta: { label: "Hire Me", href: "#contact" },
+    location: "Global",
+    cta: { label: "Connect", href: "#contact" },
   },
   copyright: `© ${new Date().getFullYear()} Sanu Khan. All rights reserved.`,
 };

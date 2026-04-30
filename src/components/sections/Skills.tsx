@@ -1,44 +1,26 @@
-import { Check } from "lucide-react";
 import { skills } from "@/data/siteData";
-import { SectionHeading } from "@/components/shared/SectionHeading";
+import { SectionHeading, TagChip } from "@/components/shared/SectionHeading";
 
 export default function Skills() {
   return (
-    <section id="about" className="section-pad">
+    <section id="stack" className="section-pad">
       <div className="container-narrow">
-        <SectionHeading eyebrow={skills.eyebrow} title={skills.title} />
+        <SectionHeading eyebrow={skills.eyebrow} title={skills.title} subtitle={skills.intro} />
 
-        <div className="grid gap-10 rounded-2xl border border-border bg-card p-6 sm:p-10 lg:grid-cols-2">
-          <div>
-            <p className="text-muted-foreground">{skills.intro}</p>
-            <ul className="mt-6 space-y-3">
-              {skills.bullets.map((b) => (
-                <li key={b} className="flex items-start gap-3 text-sm">
-                  <span className="mt-0.5 grid h-5 w-5 place-items-center rounded-full bg-tea-green-500/15 text-tea-green-400">
-                    <Check className="h-3 w-3" />
-                  </span>
-                  {b}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="space-y-4">
-            {skills.list.map((s) => (
-              <div key={s.name}>
-                <div className="mb-1.5 flex items-center justify-between text-xs">
-                  <span className="font-medium text-foreground">{s.name}</span>
-                  <span className="text-muted-foreground">{s.percent}%</span>
-                </div>
-                <div className="h-2 w-full overflow-hidden rounded-full bg-secondary">
-                  <div
-                    className="h-full rounded-full bg-tea-green-500 transition-all"
-                    style={{ width: `${s.percent}%` }}
-                  />
-                </div>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {skills.clusters.map((cluster) => (
+            <article
+              key={cluster.title}
+              className="premium-card group min-h-[170px] p-5 transition-all duration-300 hover:-translate-y-1 hover:border-[#38c755]/40"
+            >
+              <h3 className="text-[16px] font-semibold text-[#f0f1f4]">{cluster.title}</h3>
+              <div className="mt-4 flex flex-wrap gap-1.5">
+                {cluster.tags.map((tag) => (
+                  <TagChip key={tag} label={tag} className="bg-[#16171d] text-[#8a90a8]" />
+                ))}
               </div>
-            ))}
-          </div>
+            </article>
+          ))}
         </div>
       </div>
     </section>

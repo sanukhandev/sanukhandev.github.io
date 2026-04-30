@@ -2,38 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Sanu Khan Portfolio Design System
-   All colors MUST be HSL.
-   Palette: jet-black (bg), tea-green (primary accent),
-   magenta-bloom, vibrant-coral, beige (secondary accents).
-*/
-
 @layer base {
   :root {
-    /* Surfaces — jet-black palette */
-    --background: 230 18% 7%;          /* #0f1015 */
-    --foreground: 225 18% 95%;         /* #f0f1f4 */
+    --background: 230 18% 7%;
+    --foreground: 225 18% 95%;
 
-    --card: 228 16% 10%;               /* #16171d */
+    --card: 230 13% 10%;
     --card-foreground: 225 18% 95%;
 
-    --popover: 228 16% 10%;
+    --popover: 230 13% 10%;
     --popover-foreground: 225 18% 95%;
 
-    /* Primary — tea green */
-    --primary: 132 56% 50%;            /* #38c755 */
+    --primary: 132 56% 50%;
     --primary-foreground: 230 18% 7%;
 
-    --secondary: 226 16% 20%;          /* #2b2f3b */
+    --secondary: 226 16% 20%;
     --secondary-foreground: 225 18% 95%;
 
-    --muted: 226 16% 14%;
-    --muted-foreground: 226 17% 70%;   /* #a7acbe */
+    --muted: 226 16% 16%;
+    --muted-foreground: 227 12% 60%;
 
-    --accent: 132 56% 50%;
-    --accent-foreground: 230 18% 7%;
+    --accent: 338 78% 50%;
+    --accent-foreground: 225 18% 95%;
 
-    --destructive: 4 99% 50%;          /* vibrant coral */
+    --destructive: 4 99% 50%;
     --destructive-foreground: 0 0% 100%;
 
     --border: 226 16% 20%;
@@ -41,43 +33,47 @@
     --ring: 132 56% 50%;
 
     --radius: 0.875rem;
-
-    --sidebar-background: 228 16% 10%;
-    --sidebar-foreground: 225 18% 95%;
-    --sidebar-primary: 132 56% 50%;
-    --sidebar-primary-foreground: 230 18% 7%;
-    --sidebar-accent: 226 16% 14%;
-    --sidebar-accent-foreground: 225 18% 95%;
-    --sidebar-border: 226 16% 20%;
-    --sidebar-ring: 132 56% 50%;
   }
 
-  /* Force dark theme — portfolio is always dark */
   html {
     color-scheme: dark;
     scroll-behavior: smooth;
   }
-}
 
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-}
-
-@layer base {
   * {
     @apply border-border;
   }
 
   body {
-    @apply bg-background text-foreground font-sans antialiased;
-    font-family: 'Montserrat', ui-sans-serif, system-ui, sans-serif;
+    margin: 0;
+    background: #0f1015;
+    color: #f0f1f4;
+    font-family: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+    font-size: 15px;
+    line-height: 1.55;
+    font-weight: 500;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    font-family: 'Montserrat', ui-sans-serif, system-ui, sans-serif;
-    @apply tracking-tight;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+    letter-spacing: -0.02em;
+  }
+
+  h1 {
+    font-size: clamp(42px, 5vw, 48px);
+    line-height: 1.06;
+  }
+
+  h2 {
+    font-size: 28px;
+    line-height: 1.15;
   }
 }
 
@@ -85,10 +81,88 @@
   .container-narrow {
     @apply mx-auto w-full max-w-[1180px] px-5 sm:px-8;
   }
+
   .section-pad {
-    @apply py-20 sm:py-24;
+    @apply py-16 sm:py-20;
   }
-  .glow-green {
-    box-shadow: 0 0 0 1px hsl(var(--primary) / 0.15), 0 8px 32px -8px hsl(var(--primary) / 0.35);
+
+  .premium-card {
+    border: 1px solid #2b2f3b;
+    background: rgba(22, 23, 29, 0.68);
+    backdrop-filter: blur(8px);
+    border-radius: 16px;
+    transition: transform 300ms ease, border-color 300ms ease, box-shadow 300ms ease;
+  }
+
+  .premium-card:hover {
+    transform: translateY(-4px) scale(1.01);
+    border-color: rgba(56, 199, 85, 0.42);
+    box-shadow: 0 14px 30px -18px rgba(56, 199, 85, 0.55);
+  }
+
+  .avatar-halo {
+    position: absolute;
+    inset: 12% 15% auto;
+    height: 68%;
+    border-radius: 999px;
+    background: radial-gradient(circle, rgba(56, 199, 85, 0.2) 0%, rgba(56, 199, 85, 0.04) 62%, transparent 100%);
+    filter: blur(26px);
+    z-index: 0;
+  }
+
+  .avatar-float {
+    animation: avatarFloat 4s ease-in-out infinite;
+  }
+
+  .animate-fade-up-stagger > * {
+    animation: fadeUp 500ms ease both;
+  }
+
+  .animate-fade-up-stagger > *:nth-child(1) { animation-delay: 0ms; }
+  .animate-fade-up-stagger > *:nth-child(2) { animation-delay: 70ms; }
+  .animate-fade-up-stagger > *:nth-child(3) { animation-delay: 140ms; }
+  .animate-fade-up-stagger > *:nth-child(4) { animation-delay: 210ms; }
+  .animate-fade-up-stagger > *:nth-child(5) { animation-delay: 280ms; }
+  .animate-fade-up-stagger > *:nth-child(6) { animation-delay: 350ms; }
+  .animate-fade-up-stagger > *:nth-child(7) { animation-delay: 420ms; }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes avatarFloat {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .premium-card,
+  .premium-card:hover {
+    transition: none;
+    transform: none;
+  }
+
+  .avatar-float,
+  .animate-fade-up-stagger > * {
+    animation: none;
   }
 }
