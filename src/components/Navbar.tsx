@@ -48,7 +48,10 @@ export default function Navbar() {
       )}
     >
       <div className="container-narrow flex h-16 items-center justify-between">
-        <a href="#home" className="text-[18px] font-bold tracking-tight text-[#f0f1f4]">
+        <a
+          href="#home"
+          className="text-[18px] font-bold tracking-tight text-[#f0f1f4]"
+        >
           {nav.brand}
         </a>
 
@@ -59,14 +62,18 @@ export default function Navbar() {
               href={l.href}
               className={cn(
                 "relative text-[15px] transition-all duration-300 hover:scale-[1.02]",
-                activeHref === l.href ? "text-[#f0f1f4]" : "text-[#8a90a8] hover:text-[#f0f1f4]",
+                activeHref === l.href
+                  ? "text-[#f0f1f4]"
+                  : "text-[#8a90a8] hover:text-[#f0f1f4]",
               )}
             >
               {l.label}
               <span
                 className={cn(
                   "absolute -bottom-1.5 left-0 h-[2px] bg-[#38c755] transition-all duration-300",
-                  activeHref === l.href ? "w-full opacity-100" : "w-0 opacity-0",
+                  activeHref === l.href
+                    ? "w-full opacity-100"
+                    : "w-0 opacity-0",
                 )}
               />
             </a>

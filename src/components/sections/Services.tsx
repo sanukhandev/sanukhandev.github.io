@@ -17,10 +17,16 @@ export default function Services() {
             <article key={item.company} className="premium-card relative p-6">
               <span className="absolute -left-[33px] top-7 h-3 w-3 rounded-full bg-[#38c755]" />
               <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
-                <h3 className="text-[20px] font-semibold text-[#f0f1f4]">{item.company}</h3>
-                <span className="text-[12px] text-[#8a90a8]">Role {index + 1}</span>
+                <h3 className="text-[20px] font-semibold text-[#f0f1f4]">
+                  {item.company}
+                </h3>
+                <span className="text-[12px] text-[#8a90a8]">
+                  Role {index + 1}
+                </span>
               </div>
-              <p className="mt-1 text-[14px] font-medium text-[#8a90a8]">{item.role}</p>
+              <p className="mt-1 text-[14px] font-medium text-[#8a90a8]">
+                {item.role}
+              </p>
 
               <ul className="mt-4 space-y-2 text-[15px] text-[#8a90a8]">
                 {item.impact.map((point) => (
@@ -33,7 +39,11 @@ export default function Services() {
 
               <div className="mt-4 flex flex-wrap gap-1.5">
                 {item.stack.map((t) => (
-                  <TagChip key={t} label={t} className="bg-[#16171d] text-[#8a90a8]" />
+                  <TagChip
+                    key={t}
+                    label={t}
+                    className="bg-[#16171d] text-[#8a90a8]"
+                  />
                 ))}
               </div>
             </article>

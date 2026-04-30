@@ -7,7 +7,10 @@ export default function Footer() {
       <div className="container-narrow py-12">
         <div className="flex flex-col items-start justify-between gap-5 sm:flex-row sm:items-center">
           <div>
-            <a href="#home" className="text-[20px] font-bold tracking-tight text-[#f0f1f4]">
+            <a
+              href="#home"
+              className="text-[20px] font-bold tracking-tight text-[#f0f1f4]"
+            >
               {footer.brand}
             </a>
             <p className="mt-1 text-[15px] text-[#8a90a8]">{footer.blurb}</p>
@@ -16,8 +19,12 @@ export default function Footer() {
           <div className="flex gap-4">
             {footer.socials.map((s) => {
               const Icon =
-                (Icons as unknown as Record<string, React.ComponentType<{ className?: string }>>)[s.icon] ||
-                Icons.Link;
+                (
+                  Icons as unknown as Record<
+                    string,
+                    React.ComponentType<{ className?: string }>
+                  >
+                )[s.icon] || Icons.Link;
               return (
                 <a
                   key={s.label}

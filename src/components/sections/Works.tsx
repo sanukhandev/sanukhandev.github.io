@@ -7,7 +7,8 @@ export default function Works() {
   const [active, setActive] = useState<WorkCategory>("All");
 
   const filtered = useMemo(
-    () => (active === "All" ? works : works.filter((w) => w.category === active)),
+    () =>
+      active === "All" ? works : works.filter((w) => w.category === active),
     [active],
   );
 
@@ -45,23 +46,34 @@ export default function Works() {
               className="premium-card flex flex-col p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[#38c755]/40"
             >
               <div className="mb-4 flex items-center justify-between gap-4">
-                <h3 className="text-[18px] font-semibold text-[#f0f1f4]">{w.title}</h3>
+                <h3 className="text-[18px] font-semibold text-[#f0f1f4]">
+                  {w.title}
+                </h3>
                 <span className="text-xs text-[#8a90a8]">{w.scope}</span>
               </div>
               <div className="space-y-3 text-[15px] text-[#8a90a8]">
                 <p>
-                  <span className="font-semibold text-[#f0f1f4]">Problem:</span> {w.problem}
+                  <span className="font-semibold text-[#f0f1f4]">Problem:</span>{" "}
+                  {w.problem}
                 </p>
                 <p>
-                  <span className="font-semibold text-[#f0f1f4]">Solution:</span> {w.solution}
+                  <span className="font-semibold text-[#f0f1f4]">
+                    Solution:
+                  </span>{" "}
+                  {w.solution}
                 </p>
                 <p>
-                  <span className="font-semibold text-[#38c755]">Outcome:</span> {w.outcome}
+                  <span className="font-semibold text-[#38c755]">Outcome:</span>{" "}
+                  {w.outcome}
                 </p>
               </div>
               <div className="mt-4 flex flex-wrap gap-1.5">
                 {w.tags.map((t) => (
-                  <TagChip key={t} label={t} className="bg-[#16171d] text-[#8a90a8]" />
+                  <TagChip
+                    key={t}
+                    label={t}
+                    className="bg-[#16171d] text-[#8a90a8]"
+                  />
                 ))}
               </div>
             </article>

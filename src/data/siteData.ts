@@ -35,7 +35,11 @@ export const profile = {
   ],
   ctas: [
     { label: "View Work", href: "#works", variant: "primary" as const },
-    { label: "Architecture Highlights", href: "#experience", variant: "outline" as const },
+    {
+      label: "Architecture Highlights",
+      href: "#experience",
+      variant: "outline" as const,
+    },
   ],
   avatarUrl: "/assets/images/sanu.png",
 };
@@ -48,11 +52,25 @@ export const skills = {
   clusters: [
     {
       title: "Cloud & Architecture",
-      tags: ["Azure", "AWS", "GCP", "Serverless", "Event-driven", "Microservices"],
+      tags: [
+        "Azure",
+        "AWS",
+        "GCP",
+        "Serverless",
+        "Event-driven",
+        "Microservices",
+      ],
     },
     {
       title: "Backend Systems",
-      tags: ["Java", "Spring Boot", "Node.js", "NestJS", "GraphQL", "PostgreSQL"],
+      tags: [
+        "Java",
+        "Spring Boot",
+        "Node.js",
+        "NestJS",
+        "GraphQL",
+        "PostgreSQL",
+      ],
     },
     {
       title: "Frontend Systems",
@@ -103,7 +121,13 @@ export const services = [
       "Built real-time video conferencing systems with scalable media signaling services",
       "Shipped 100+ client systems across web, backend, and integration-heavy domains",
     ],
-    stack: ["Distributed Systems", "Enterprise APIs", "Realtime", "ERP", "Commerce"],
+    stack: [
+      "Distributed Systems",
+      "Enterprise APIs",
+      "Realtime",
+      "ERP",
+      "Commerce",
+    ],
   },
 ];
 
@@ -254,7 +278,11 @@ export const footer = {
   blurb: "Tech Lead • Cloud Architect",
   socials: [
     { label: "GitHub", icon: "Github", href: "https://github.com/sanukhandev" },
-    { label: "LinkedIn", icon: "Linkedin", href: "https://linkedin.com/in/sanukhandev" },
+    {
+      label: "LinkedIn",
+      icon: "Linkedin",
+      href: "https://linkedin.com/in/sanukhandev",
+    },
   ],
   quickLinks: [
     { label: "Work", href: "#works" },

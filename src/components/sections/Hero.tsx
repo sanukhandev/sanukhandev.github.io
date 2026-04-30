@@ -31,8 +31,12 @@ export default function Hero() {
             {profile.name}
           </h1>
 
-          <p className="mt-4 max-w-2xl text-[16px] text-[#f0f1f4]">{profile.subtitle}</p>
-          <p className="mt-2 max-w-2xl text-[15px] text-[#8a90a8]">{profile.statement}</p>
+          <p className="mt-4 max-w-2xl text-[16px] text-[#f0f1f4]">
+            {profile.subtitle}
+          </p>
+          <p className="mt-2 max-w-2xl text-[15px] text-[#8a90a8]">
+            {profile.statement}
+          </p>
 
           <ul className="mt-6 space-y-2 text-sm text-[#8a90a8]">
             {profile.meta.map((m, i) => {
@@ -48,12 +52,13 @@ export default function Hero() {
 
           <div className="mt-8 grid max-w-2xl grid-cols-2 gap-3 lg:grid-cols-4">
             {profile.impactMetrics.map((s) => (
-              <div
-                key={s.label}
-                className="premium-card px-3 py-4 text-center"
-              >
-                <div className="text-[28px] font-extrabold text-[#38c755]">{s.value}</div>
-                <div className="mt-1 text-[11px] uppercase tracking-wide text-[#8a90a8]">{s.label}</div>
+              <div key={s.label} className="premium-card px-3 py-4 text-center">
+                <div className="text-[28px] font-extrabold text-[#38c755]">
+                  {s.value}
+                </div>
+                <div className="mt-1 text-[11px] uppercase tracking-wide text-[#8a90a8]">
+                  {s.label}
+                </div>
               </div>
             ))}
           </div>
