@@ -1,0 +1,70 @@
+import { Link } from "react-router-dom";
+import SeoMeta from "@/components/SeoMeta";
+
+type LinkItem = { label: string; href: string };
+
+type SeoPageLayoutProps = {
+  title: string;
+  description: string;
+  canonicalPath: string;
+  h1: string;
+  intro: string;
+  sections: Array<{ id: string; title: string; content: string[] }>;
+  cta: { text: string; action: string; href: string };
+  links: LinkItem[];
+  schema?: Record<string, unknown> | Array<Record<string, unknown>>;
+};
+
+export default function SeoPageLayout(props: SeoPageLayoutProps) {
+  const { title, description, canonicalPath, h1, intro, sections, cta, links, schema } = props;
+
+  return (
+    <>
+      <SeoMeta title={title} description={description} canonicalPath={canonicalPath} schema={schema} />
+      <main className="min-h-screen bg-background pt-20 text-foreground">
+        <article className="container-narrow section-pad">
+          <header>
+            <h1 className="text-[40px] font-extrabold leading-[1.1] text-[#f0f1f4]">{h1}</h1>
+            <p className="mt-4 max-w-4xl text-[16px] text-[#8a90a8]">{intro}</p>
+          </header>
+
+          <div className="mt-8 space-y-8">
+            {sections.map((section) => (
+              <section key={section.id} id={section.id}>
+                <h2 className="text-[28px] font-bold text-[#f0f1f4]">{section.title}</h2>
+                <div className="mt-3 space-y-4 text-[15px] leading-7 text-[#8a90a8]">
+                  {section.content.map((paragraph) => (
+                    <p key={paragraph.slice(0, 48)}>{paragraph}</p>
+                  ))}
+                </div>
+              </section>
+            ))}
+          </div>
+
+          <section className="mt-10 rounded-2xl border border-[#2b2f3b] bg-[#16171d] p-6">
+            <h2 className="text-[24px] font-bold text-[#f0f1f4]">{cta.text}</h2>
+            <a
+              className="mt-3 inline-flex rounded-lg bg-[#38c755] px-4 py-2 text-[14px] font-semibold text-[#0f1015]"
+              href={cta.href}
+            >
+              {cta.action}
+            </a>
+          </section>
+
+          <nav className="mt-10" aria-label="Internal links">
+            <h2 className="text-[22px] font-bold text-[#f0f1f4]">Related Resources</h2>
+            <ul className="mt-3 flex flex-wrap gap-3">
+              {links.map((item) => (
+                <li key={item.href}>
+                  <Link className="text-[14px] font-semibold text-[#38c755] hover:underline" to={item.href}>
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </article>
+      </main>
+    </>
+  );
+}

@@ -2,6 +2,9 @@ import { Suspense, lazy } from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/sections/Hero";
 import LocaleSwitchSkeleton from "@/components/LocaleSwitchSkeleton";
+import SeoMeta from "@/components/SeoMeta";
+import ToolsPreview from "@/components/sections/ToolsPreview";
+import BlogPreview from "@/components/sections/BlogPreview";
 import { useLocale } from "@/hooks/use-locale";
 
 const Works = lazy(() => import("@/components/sections/Works"));
@@ -27,13 +30,20 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <SeoMeta
+        title="Full Stack Developer UAE | Sanu Khan"
+        description="Tech lead portfolio Dubai for cloud, microservices, and integration engineering. Full stack developer UAE profile with projects, services, and tools."
+        canonicalPath="/"
+      />
       <Navbar />
       <main>
         <Hero />
         <Suspense fallback={sectionFallback}>
-          <Works />
-          <Services />
           <Skills />
+          <Services />
+          <Works />
+          <ToolsPreview />
+          <BlogPreview />
           <Certifications />
           <Articles />
         </Suspense>
