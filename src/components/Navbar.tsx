@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Coffee } from "lucide-react";
 import { nav } from "@/data/siteData";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -80,7 +80,16 @@ export default function Navbar() {
           ))}
         </nav>
 
-        <div className="hidden md:block">
+        <div className="hidden md:flex items-center gap-2">
+          <a
+            href="https://ko-fi.com/sanukhan"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex h-9 items-center gap-1.5 rounded-lg border border-[#38c755]/50 bg-[#38c755]/10 px-3 text-[13px] font-semibold text-[#38c755] transition-all duration-300 hover:scale-[1.02] hover:bg-[#38c755]/20 hover:border-[#38c755]"
+          >
+            <Coffee className="h-3.5 w-3.5" />
+            Buy me a coffee
+          </a>
           <Button
             asChild
             className="h-9 rounded-lg bg-[#38c755] px-4 text-[#0f1015] hover:scale-[1.02] hover:bg-[#4fd16a]"
@@ -111,6 +120,16 @@ export default function Navbar() {
                 {l.label}
               </a>
             ))}
+            <a
+                href="https://ko-fi.com/sanukhan"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setOpen(false)}
+                className="mt-1 inline-flex items-center gap-2 rounded-md border border-[#38c755]/50 bg-[#38c755]/10 px-3 py-2 text-sm font-semibold text-[#38c755] transition-all hover:bg-[#38c755]/20"
+              >
+                <Coffee className="h-4 w-4" />
+                Buy me a coffee
+              </a>
             <Button
               asChild
               className="mt-2 rounded-lg bg-[#38c755] text-[#0f1015] hover:bg-[#4fd16a]"

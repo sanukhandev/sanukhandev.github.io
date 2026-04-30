@@ -53,22 +53,23 @@ export default function Works() {
               key={w.title}
               className="premium-card flex flex-col p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[#38c755]/40"
             >
-              <div className="mb-4 flex items-start justify-between gap-4">
-                <div className="flex items-center gap-2.5">
-                  {(() => {
-                    const Icon = categoryIcons[w.category] ?? Boxes;
-                    return (
-                      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[#38c755]/10 ring-1 ring-[#38c755]/25">
-                        <Icon className="h-4 w-4 text-[#38c755]" />
-                      </span>
-                    );
-                  })()}
-                  <h3 className="text-[18px] font-semibold text-[#f0f1f4]">
-                    {w.title}
-                  </h3>
-                </div>
-                <span className="shrink-0 text-xs text-[#8a90a8]">{w.scope}</span>
+              {/* Icon + scope row */}
+              <div className="mb-3 flex items-center justify-between">
+                {(() => {
+                  const Icon = categoryIcons[w.category] ?? Boxes;
+                  return (
+                    <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#38c755]/10 ring-1 ring-[#38c755]/25">
+                      <Icon className="h-4.5 w-4.5 h-[18px] w-[18px] text-[#38c755]" />
+                    </span>
+                  );
+                })()}
+                <span className="text-[11px] font-medium uppercase tracking-wide text-[#8a90a8]">{w.scope}</span>
               </div>
+
+              {/* Title on its own line */}
+              <h3 className="mb-4 text-[17px] font-semibold leading-snug text-[#f0f1f4]">
+                {w.title}
+              </h3>
               <div className="space-y-3 text-[15px] text-[#8a90a8]">
                 <p>
                   <span className="font-semibold text-[#f0f1f4]">Problem:</span>{" "}

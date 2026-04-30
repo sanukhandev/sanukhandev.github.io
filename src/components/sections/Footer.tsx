@@ -1,5 +1,6 @@
 import * as Icons from "lucide-react";
 import { Mail, Phone, MapPin } from "lucide-react";
+import { cn } from "@/lib/utils";
 import { footer } from "@/data/siteData";
 
 export default function Footer() {
@@ -30,8 +31,15 @@ export default function Footer() {
                 <a
                   key={s.label}
                   href={s.href}
+                  target={s.href.startsWith('http') ? '_blank' : undefined}
+                  rel={s.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                   aria-label={s.label}
-                  className="inline-flex items-center gap-2 rounded-md border border-[#2b2f3b] bg-[#0f1015] px-3 py-2 text-sm text-[#8a90a8] transition-all duration-300 hover:scale-[1.02] hover:border-[#38c755]/40 hover:text-[#f0f1f4]"
+                  className={cn(
+                    "inline-flex items-center gap-2 rounded-md border px-3 py-2 text-sm transition-all duration-300 hover:scale-[1.02]",
+                    s.label === "Buy me a coffee"
+                      ? "border-[#38c755]/50 bg-[#38c755]/10 font-semibold text-[#38c755] hover:border-[#38c755] hover:bg-[#38c755]/20"
+                      : "border-[#2b2f3b] bg-[#0f1015] text-[#8a90a8] hover:border-[#38c755]/40 hover:text-[#f0f1f4]",
+                  )}
                 >
                   <Icon className="h-4 w-4" />
                   {s.label}

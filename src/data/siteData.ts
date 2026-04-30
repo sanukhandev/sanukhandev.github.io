@@ -40,6 +40,11 @@ export const profile = {
       href: "#experience",
       variant: "outline" as const,
     },
+    {
+      label: "Hire Me",
+      href: "mailto:khan.sanukhan@outlook.com?subject=Hire%20Inquiry%20–%20SanuKhan.dev",
+      variant: "hire" as const,
+    },
   ],
   avatarUrl: "/assets/images/sanu.png",
 };
@@ -370,6 +375,11 @@ export const footer = {
       label: "LinkedIn",
       icon: "Linkedin",
       href: "https://www.linkedin.com/in/sanu-khan-dev/",
+    },
+    {
+      label: "Buy me a coffee",
+      icon: "Coffee",
+      href: "https://ko-fi.com/sanukhan",
     },
   ],
   quickLinks: [

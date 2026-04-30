@@ -109,6 +109,16 @@ export default function Hero() {
                 >
                   <a href={c.href}>{c.label}</a>
                 </Button>
+              ) : c.variant === "hire" ? (
+                <Button
+                  key={c.label}
+                  asChild
+                  className="h-10 rounded-lg border border-[#38c755]/60 bg-[#38c755]/10 px-5 text-[#38c755] hover:scale-[1.02] hover:bg-[#38c755]/20"
+                >
+                  <a href={c.href} className="inline-flex items-center gap-2">
+                    <Briefcase className="h-4 w-4" /> {c.label}
+                  </a>
+                </Button>
               ) : (
                 <Button
                   key={c.label}
