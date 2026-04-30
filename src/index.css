@@ -201,26 +201,16 @@
   .innovation-label > span {
     display: block;
     color: rgba(56, 199, 85, 0.88);
+    text-shadow: 0 0 2px rgba(56, 199, 85, 0.25);
+    animation: innovationPulseDark 4.8s ease-in-out infinite;
   }
 
-  @supports (-webkit-background-clip: text) {
-    .innovation-label > span {
-      background: linear-gradient(
-        110deg,
-        rgba(56, 199, 85, 0.08) 0%,
-        rgba(56, 199, 85, 0.55) 38%,
-        rgba(180, 255, 210, 0.75) 50%,
-        rgba(56, 199, 85, 0.55) 62%,
-        rgba(56, 199, 85, 0.08) 100%
-      );
-      background-size: 250% 100%;
-      background-position: 110% 50%;
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      color: transparent;
-      animation: innovationShimmer 6s ease-in-out infinite;
-    }
+  .innovation-label > span:nth-child(2) {
+    animation-delay: 240ms;
+  }
+
+  .innovation-label > span:nth-child(3) {
+    animation-delay: 480ms;
   }
 
   .animate-fade-up-stagger > * {
@@ -247,10 +237,22 @@
   }
 }
 
-@keyframes innovationShimmer {
-  0%   { background-position: 110% 50%; }
-  50%  { background-position: -10% 50%; }
-  100% { background-position: 110% 50%; }
+@keyframes innovationPulseDark {
+  0% {
+    color: rgba(122, 228, 148, 0.86);
+    text-shadow: 0 0 2px rgba(56, 199, 85, 0.2);
+    transform: translateX(0);
+  }
+  50% {
+    color: rgba(224, 255, 234, 0.98);
+    text-shadow: 0 0 14px rgba(56, 199, 85, 0.34);
+    transform: translateX(2px);
+  }
+  100% {
+    color: rgba(122, 228, 148, 0.86);
+    text-shadow: 0 0 2px rgba(56, 199, 85, 0.2);
+    transform: translateX(0);
+  }
 }
 
 .timeline-year-shimmer {
@@ -259,21 +261,9 @@
   letter-spacing: 0.05em;
   line-height: 1;
   font-variant-numeric: tabular-nums;
-  background: linear-gradient(
-    110deg,
-    rgba(56, 199, 85, 0.28) 0%,
-    rgba(56, 199, 85, 0.96) 35%,
-    rgba(218, 255, 228, 1) 50%,
-    rgba(56, 199, 85, 0.96) 65%,
-    rgba(56, 199, 85, 0.28) 100%
-  );
-  background-size: 240% 100%;
-  background-position: 120% 50%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #8de3a3;
   filter: drop-shadow(0 0 7px rgba(56, 199, 85, 0.35));
-  animation: timelineYearShimmer 4s ease-in-out infinite;
+  animation: timelineYearPulseDark 3.4s ease-in-out infinite;
 }
 
 .timeline-year-vertical {
@@ -287,49 +277,62 @@ html.light .innovation-label {
 }
 
 html.light .innovation-label > span {
-  background: none !important;
-  -webkit-text-fill-color: currentColor !important;
   color: #173626 !important;
-  text-shadow: 0 0 1px rgba(31, 159, 69, 0.25);
-  animation: innovationLightPulse 3.8s ease-in-out infinite;
+  text-shadow: 0 0 1px rgba(31, 159, 69, 0.22);
+  animation: innovationPulseLight 4.4s ease-in-out infinite;
 }
 
-@keyframes innovationLightPulse {
+@keyframes innovationPulseLight {
   0% {
     color: #173626;
     text-shadow: 0 0 1px rgba(31, 159, 69, 0.22);
+    transform: translateX(0);
   }
   50% {
     color: #249a48;
-    text-shadow: 0 0 9px rgba(31, 159, 69, 0.2);
+    text-shadow: 0 0 8px rgba(31, 159, 69, 0.2);
+    transform: translateX(1px);
   }
   100% {
     color: #173626;
     text-shadow: 0 0 1px rgba(31, 159, 69, 0.22);
+    transform: translateX(0);
   }
 }
 
 html.light .timeline-year-shimmer {
-  background: linear-gradient(
-    110deg,
-    rgba(31, 159, 69, 0.2) 0%,
-    rgba(31, 159, 69, 0.9) 35%,
-    rgba(18, 38, 28, 0.96) 50%,
-    rgba(31, 159, 69, 0.9) 65%,
-    rgba(31, 159, 69, 0.2) 100%
-  );
+  color: #1e8040;
   filter: drop-shadow(0 0 5px rgba(31, 159, 69, 0.22));
+  animation: timelineYearPulseLight 3.4s ease-in-out infinite;
 }
 
-@keyframes timelineYearShimmer {
+@keyframes timelineYearPulseDark {
   0% {
-    background-position: 120% 50%;
+    color: #8de3a3;
+    filter: drop-shadow(0 0 4px rgba(56, 199, 85, 0.22));
   }
   50% {
-    background-position: -20% 50%;
+    color: #e3ffe8;
+    filter: drop-shadow(0 0 10px rgba(56, 199, 85, 0.4));
   }
   100% {
-    background-position: 120% 50%;
+    color: #8de3a3;
+    filter: drop-shadow(0 0 4px rgba(56, 199, 85, 0.22));
+  }
+}
+
+@keyframes timelineYearPulseLight {
+  0% {
+    color: #1e8040;
+    filter: drop-shadow(0 0 1px rgba(31, 159, 69, 0.16));
+  }
+  50% {
+    color: #2aa451;
+    filter: drop-shadow(0 0 8px rgba(31, 159, 69, 0.24));
+  }
+  100% {
+    color: #1e8040;
+    filter: drop-shadow(0 0 1px rgba(31, 159, 69, 0.16));
   }
 }
 
@@ -372,6 +375,7 @@ html.light .timeline-year-shimmer {
   .animate-fade-up-stagger > *,
   .tech-particle,
   .innovation-label,
+  .innovation-label > span,
   .timeline-year-shimmer {
     animation: none;
   }
