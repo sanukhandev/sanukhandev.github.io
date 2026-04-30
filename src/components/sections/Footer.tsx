@@ -25,9 +25,9 @@ export default function Footer() {
           <div>
             <a href="#home" aria-label={isArabic ? "الصفحة الرئيسية" : "SanuKhan.dev home"}>
               <svg
-                viewBox={isArabic ? "0 0 220 32" : "0 0 180 32"}
+                viewBox={isArabic ? "0 0 300 36" : "0 0 180 32"}
                 height="32"
-                width={isArabic ? "220" : "180"}
+                width={isArabic ? "250" : "180"}
                 xmlns="http://www.w3.org/2000/svg"
                 aria-hidden
               >
@@ -52,36 +52,36 @@ export default function Footer() {
                 {isArabic ? (
                   <>
                     <text
-                      x="148"
-                      y="24"
+                      x="210"
+                      y="25"
                       fontFamily="Mirza, serif"
-                      fontSize="24"
+                      fontSize="26"
                       fontWeight="700"
                       textAnchor="end"
-                      fill={isLight ? "#174f2e" : "#b6ffd0"}
-                      stroke={isLight ? "#edf4ef" : "#0f1015"}
-                      strokeWidth="0.6"
+                      fill={isLight ? "#145a34" : "#bfffd3"}
+                      stroke={isLight ? "#edf4ef" : "#0b0c10"}
+                      strokeWidth="0.85"
                       paintOrder="stroke"
                     >
                       سانو خان
                       <animate
                         attributeName="fill"
-                        values={isLight ? "#174f2e;#2aa451;#174f2e" : "#9af3bb;#e8fff1;#9af3bb"}
+                        values={isLight ? "#145a34;#239f4a;#145a34" : "#bfffd3;#ffffff;#bfffd3"}
                         dur="3.8s"
                         repeatCount="indefinite"
                       />
                     </text>
                     <text
-                      x="214"
-                      y="24"
+                      x="292"
+                      y="25"
                       fontFamily="Mirza, serif"
-                      fontSize="18"
+                      fontSize="20"
                       fontWeight="500"
                       textAnchor="end"
                       fill={isLight ? "#1f9f45" : "#38c755"}
                       opacity={isLight ? 0.95 : 0.9}
-                      stroke={isLight ? "#edf4ef" : "#0f1015"}
-                      strokeWidth="0.45"
+                      stroke={isLight ? "#edf4ef" : "#0b0c10"}
+                      strokeWidth="0.7"
                       paintOrder="stroke"
                     >
                       .ديف

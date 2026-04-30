@@ -6,6 +6,7 @@ import Works from "@/components/sections/Works";
 import Articles from "@/components/sections/Articles";
 import Certifications from "@/components/sections/Certifications";
 import Footer from "@/components/sections/Footer";
+import ZaakiyChatWidget from "@/components/ZaakiyChatWidget";
 
 const Index = () => {
   return (
@@ -20,6 +21,7 @@ const Index = () => {
         <Articles />
       </main>
       <Footer />
+      <ZaakiyChatWidget />
     </div>
   );
 };
