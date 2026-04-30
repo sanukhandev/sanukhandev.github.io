@@ -86,7 +86,15 @@ const pushHistory = (sessionId: string, role: "user" | "assistant", text: string
 };
 
 const registerZaakiyApi = (
-  middlewares: import("connect").ServerStack,
+  middlewares: {
+    use: (
+      path: string,
+      handler: (
+        req: import("http").IncomingMessage,
+        res: import("http").ServerResponse,
+      ) => void | Promise<void>,
+    ) => void;
+  },
   env: Record<string, string>,
 ) => {
   middlewares.use("/api/zaakiy-chat", async (req, res) => {
