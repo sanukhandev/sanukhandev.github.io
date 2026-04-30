@@ -1,6 +1,7 @@
 import { MapPin, Briefcase, CircleDot, Download } from "lucide-react";
 import { profile } from "@/data/siteData";
 import { Button } from "@/components/ui/button";
+import TechParticles from "@/components/TechParticles";
 
 const metaIcons = [Briefcase, MapPin, CircleDot];
 
@@ -16,6 +17,9 @@ export default function Hero() {
             "radial-gradient(60% 50% at 50% 0%, hsl(var(--primary) / 0.12), transparent 70%)",
         }}
       />
+
+      {/* Floating tech icon particles */}
+      <TechParticles count={24} />
 
       <div className="container-narrow grid items-center gap-8 pb-16 lg:grid-cols-[1.2fr_1fr]">
         <div className="animate-fade-up-stagger">

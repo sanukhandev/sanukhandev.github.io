@@ -150,6 +150,30 @@
   }
 }
 
+/* ── Tech Particle Drift ─────────────────────────────────── */
+.tech-particle {
+  opacity: 0;
+  will-change: transform, opacity;
+  animation: techParticleFloat var(--p-dur, 28s) ease-in var(--p-delay, 0s) infinite;
+}
+
+@keyframes techParticleFloat {
+  0% {
+    transform: translateY(0px) translateX(0px);
+    opacity: 0;
+  }
+  8% {
+    opacity: var(--p-op, 0.12);
+  }
+  92% {
+    opacity: var(--p-op, 0.12);
+  }
+  100% {
+    transform: translateY(-110vh) translateX(var(--p-drift, 0px));
+    opacity: 0;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -162,7 +186,8 @@
   }
 
   .avatar-float,
-  .animate-fade-up-stagger > * {
+  .animate-fade-up-stagger > *,
+  .tech-particle {
     animation: none;
   }
 }
