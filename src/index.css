@@ -144,8 +144,8 @@
   html.locale-ar body {
     direction: rtl;
     text-align: right;
-    font-size: 16px;
-    line-height: 1.85;
+    font-size: 17px;
+    line-height: 1.95;
     font-weight: 500;
     text-rendering: optimizeLegibility;
   }
@@ -161,7 +161,7 @@
   html.locale-ar h5,
   html.locale-ar h6 {
     letter-spacing: 0;
-    line-height: 1.4;
+    line-height: 1.5;
     font-weight: 700;
   }
 
@@ -174,7 +174,7 @@
   html.locale-ar textarea,
   html.locale-ar label {
     letter-spacing: 0;
-    line-height: 1.8;
+    line-height: 1.9;
   }
 
   /* Arabic copy should not inherit aggressive uppercase/tracking styles from EN UI */
@@ -188,28 +188,36 @@
 
   /* Small EN-oriented text sizes look cramped in Arabic script */
   html.locale-ar [class*="text-[11px]"] {
-    font-size: 13px !important;
+    font-size: 14px !important;
   }
 
   html.locale-ar [class*="text-[12px]"] {
-    font-size: 14px !important;
-  }
-
-  html.locale-ar [class*="text-xs"] {
-    font-size: 14px !important;
-  }
-
-  html.locale-ar [class*="text-sm"] {
     font-size: 15px !important;
   }
 
+  html.locale-ar [class*="text-xs"] {
+    font-size: 15px !important;
+  }
+
+  html.locale-ar [class*="text-sm"] {
+    font-size: 16px !important;
+  }
+
+  html.locale-ar [class*="text-base"] {
+    font-size: 17px !important;
+  }
+
+  html.locale-ar [class*="text-lg"] {
+    font-size: 19px !important;
+  }
+
   html.locale-ar .innovation-label {
-    line-height: 1.35;
+    line-height: 1.45;
     letter-spacing: 0;
   }
 
   html.locale-ar .timeline-year-shimmer {
-    font-size: 18px;
+    font-size: 20px;
     letter-spacing: 0;
     font-weight: 700;
   }
@@ -394,6 +402,36 @@ html.light .timeline-year-shimmer {
   animation: timelineYearPulseLight 3.4s ease-in-out infinite;
 }
 
+html.light .zaakiy-chat > div {
+  background-color: rgba(255, 255, 255, 0.98) !important;
+  border-color: #cfd8dd !important;
+  box-shadow: 0 16px 40px -20px rgba(20, 29, 40, 0.24) !important;
+}
+
+html.light .zaakiy-chat .text-\[\#d7ffe2\] {
+  color: #145a34 !important;
+}
+
+html.light .zaakiy-chat .bg-\[\#38c755\]\/10 {
+  background-color: rgba(31, 159, 69, 0.14) !important;
+}
+
+html.light .zaakiy-chat .border-\[\#38c755\]\/35 {
+  border-color: rgba(31, 159, 69, 0.38) !important;
+}
+
+html.light .zaakiy-chat .bg-\[\#20222b\] {
+  background-color: #edf4ef !important;
+}
+
+html.light .zaakiy-chat .text-\[\#8a90a8\] {
+  color: #465462 !important;
+}
+
+html.light .zaakiy-chat .placeholder\:text-\[\#8a90a8\]::placeholder {
+  color: #5b6874 !important;
+}
+
 @keyframes timelineYearPulseDark {
   0% {
     color: #8de3a3;
@@ -448,6 +486,133 @@ html.light .timeline-year-shimmer {
   }
 }
 
+.preloader-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background:
+    radial-gradient(120% 80% at 50% 0%, hsl(var(--primary) / 0.15) 0%, transparent 58%),
+    radial-gradient(90% 75% at 100% 100%, hsl(var(--accent) / 0.12) 0%, transparent 65%),
+    hsl(var(--background));
+}
+
+.preloader-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, hsl(var(--foreground) / 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, hsl(var(--foreground) / 0.04) 1px, transparent 1px);
+  background-size: 34px 34px;
+  mask-image: radial-gradient(circle at 50% 45%, black 35%, transparent 78%);
+}
+
+.preloader-particles {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.preloader-particle {
+  position: absolute;
+  border-radius: 999px;
+  background: hsl(var(--primary) / 0.7);
+  box-shadow: 0 0 12px hsl(var(--primary) / 0.35);
+}
+
+.preloader-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  width: min(90vw, 760px);
+  flex-direction: column;
+  align-items: center;
+  gap: 0.85rem;
+  text-align: center;
+  animation: preloaderContentIn 520ms ease both;
+}
+
+.preloader-logo-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.2rem;
+  border: 1px solid hsl(var(--border));
+  border-radius: 999px;
+  padding: 0.45rem 0.95rem 0.55rem;
+  background: hsl(var(--card) / 0.68);
+  backdrop-filter: blur(10px);
+}
+
+.preloader-logo-accent {
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(90deg, hsl(var(--primary) / 0.15), hsl(var(--accent) / 0.15), hsl(var(--primary) / 0.15));
+  filter: blur(8px);
+  z-index: -1;
+}
+
+.preloader-logo-main {
+  font-family: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+  font-size: clamp(30px, 6vw, 54px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: hsl(var(--foreground));
+  animation: preloaderLogoPulse 1.9s ease-in-out infinite;
+}
+
+.preloader-logo-dot {
+  font-family: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+  font-size: clamp(18px, 3.4vw, 30px);
+  font-weight: 600;
+  color: hsl(var(--primary));
+}
+
+.preloader-message {
+  margin: 0;
+  font-size: clamp(14px, 2.15vw, 20px);
+  font-weight: 600;
+  color: hsl(var(--foreground));
+}
+
+.preloader-submessage {
+  margin: 0;
+  font-size: clamp(12px, 1.65vw, 15px);
+  font-weight: 500;
+  color: hsl(var(--muted-foreground));
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+@keyframes preloaderLogoPulse {
+  0% {
+    text-shadow: 0 0 0 hsl(var(--primary) / 0);
+    transform: translateY(0px);
+  }
+  50% {
+    text-shadow: 0 0 24px hsl(var(--primary) / 0.35);
+    transform: translateY(-1px);
+  }
+  100% {
+    text-shadow: 0 0 0 hsl(var(--primary) / 0);
+    transform: translateY(0px);
+  }
+}
+
+@keyframes preloaderContentIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -462,6 +627,8 @@ html.light .timeline-year-shimmer {
   .avatar-float,
   .animate-fade-up-stagger > *,
   .tech-particle,
+  .preloader-logo-main,
+  .preloader-content,
   .innovation-label,
   .innovation-label > span,
   .timeline-year-shimmer {

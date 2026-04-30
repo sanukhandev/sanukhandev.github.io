@@ -169,7 +169,7 @@ export default function ZaakiyChatWidget() {
   };
 
   return (
-    <div className="fixed bottom-5 right-5 z-[70]">
+    <div className="zaakiy-chat fixed bottom-5 right-5 z-[70]">
       {open && (
         <div className="mb-3 w-[340px] overflow-hidden rounded-2xl border border-[#2b2f3b] bg-[#16171d]/95 shadow-[0_16px_40px_-20px_rgba(0,0,0,0.75)] backdrop-blur-xl">
           <div className="flex items-center justify-between border-b border-[#2b2f3b] px-4 py-3">

@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
 
 export type Locale = "en" | "ar";
 
@@ -6,6 +6,7 @@ type LocaleContextValue = {
   locale: Locale;
   setLocale: (locale: Locale) => void;
   toggleLocale: () => void;
+  isSwitchingLocale: boolean;
 };
 
 const LOCALE_STORAGE_KEY = "sanukhan-locale";
@@ -19,7 +20,37 @@ const getInitialLocale = (): Locale => {
 };
 
 export function LocaleProvider({ children }: { children: React.ReactNode }) {
-  const [locale, setLocale] = useState<Locale>(getInitialLocale);
+  const [locale, setLocaleState] = useState<Locale>(getInitialLocale);
+  const [isSwitchingLocale, setIsSwitchingLocale] = useState(false);
+  const switchTimerRef = useRef<number | null>(null);
+
+  const setLocale = useCallback(
+    (nextLocale: Locale) => {
+      if (nextLocale === locale) return;
+
+      if (switchTimerRef.current) {
+        window.clearTimeout(switchTimerRef.current);
+      }
+
+      setIsSwitchingLocale(true);
+      setLocaleState(nextLocale);
+
+      switchTimerRef.current = window.setTimeout(() => {
+        setIsSwitchingLocale(false);
+        switchTimerRef.current = null;
+      }, 1500);
+    },
+    [locale],
+  );
+
+  useEffect(
+    () => () => {
+      if (switchTimerRef.current) {
+        window.clearTimeout(switchTimerRef.current);
+      }
+    },
+    [],
+  );
 
   useEffect(() => {
     const root = document.documentElement;
@@ -33,9 +64,10 @@ export function LocaleProvider({ children }: { children: React.ReactNode }) {
     () => ({
       locale,
       setLocale,
-      toggleLocale: () => setLocale((prev) => (prev === "en" ? "ar" : "en")),
+      toggleLocale: () => setLocale(locale === "en" ? "ar" : "en"),
+      isSwitchingLocale,
     }),
-    [locale],
+    [locale, isSwitchingLocale, setLocale],
   );
 
   return <LocaleContext.Provider value={value}>{children}</LocaleContext.Provider>;
