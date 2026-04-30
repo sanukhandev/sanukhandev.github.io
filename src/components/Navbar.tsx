@@ -48,11 +48,80 @@ export default function Navbar() {
       )}
     >
       <div className="container-narrow flex h-16 items-center justify-between">
-        <a
-          href="#home"
-          className="text-[18px] font-bold tracking-tight text-[#f0f1f4]"
-        >
-          {nav.brand}
+        <a href="#home" className="group shrink-0" aria-label="SanuKhan.dev home">
+          <svg
+            viewBox="0 0 180 32"
+            height="32"
+            width="180"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden
+          >
+            <defs>
+              <linearGradient id="logo-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%"   stopColor="#38c755" />
+                <stop offset="40%"  stopColor="#a8ffbc" />
+                <stop offset="60%"  stopColor="#ffffff" />
+                <stop offset="100%" stopColor="#38c755" />
+                <animateTransform
+                  attributeName="gradientTransform"
+                  type="translate"
+                  from="-1 0"
+                  to="1 0"
+                  dur="3s"
+                  repeatCount="indefinite"
+                />
+              </linearGradient>
+              <linearGradient id="logo-grad-move" x1="-100%" y1="0%" x2="200%" y2="0%" gradientUnits="userSpaceOnUse">
+                <stop offset="0%"   stopColor="#38c755" />
+                <stop offset="35%"  stopColor="#38c755" />
+                <stop offset="50%"  stopColor="#b4ffca" />
+                <stop offset="65%"  stopColor="#ffffff" />
+                <stop offset="80%"  stopColor="#38c755" />
+                <stop offset="100%" stopColor="#38c755" />
+                <animateTransform
+                  attributeName="gradientTransform"
+                  type="translate"
+                  values="-180 0; 180 0; -180 0"
+                  keyTimes="0; 0.5; 1"
+                  dur="4s"
+                  repeatCount="indefinite"
+                />
+              </linearGradient>
+            </defs>
+            {/* "Sanu" — bold weight */}
+            <text
+              x="0" y="24"
+              fontFamily="Montserrat, ui-sans-serif, sans-serif"
+              fontSize="22"
+              fontWeight="800"
+              letterSpacing="-0.5"
+              fill="url(#logo-grad-move)"
+            >
+              Sanu
+            </text>
+            {/* "Khan" — slightly lighter */}
+            <text
+              x="57" y="24"
+              fontFamily="Montserrat, ui-sans-serif, sans-serif"
+              fontSize="22"
+              fontWeight="600"
+              letterSpacing="-0.5"
+              fill="url(#logo-grad-move)"
+            >
+              Khan
+            </text>
+            {/* ".dev" — muted accent */}
+            <text
+              x="116" y="24"
+              fontFamily="Montserrat, ui-sans-serif, sans-serif"
+              fontSize="18"
+              fontWeight="500"
+              fill="#38c755"
+              opacity="0.75"
+            >
+              .dev
+            </text>
+          </svg>
         </a>
 
         <nav className="hidden items-center gap-7 md:flex">

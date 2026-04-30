@@ -9,11 +9,63 @@ export default function Footer() {
       <div className="container-narrow py-12">
         <div className="flex flex-col items-start justify-between gap-5 sm:flex-row sm:items-center">
           <div>
-            <a
-              href="#home"
-              className="text-[20px] font-bold tracking-tight text-[#f0f1f4]"
-            >
-              {footer.brand}
+            <a href="#home" aria-label="SanuKhan.dev home">
+              <svg
+                viewBox="0 0 180 32"
+                height="32"
+                width="180"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden
+              >
+                <defs>
+                  <linearGradient id="footer-logo-grad" x1="-100%" y1="0%" x2="200%" y2="0%" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%"   stopColor="#38c755" />
+                    <stop offset="35%"  stopColor="#38c755" />
+                    <stop offset="50%"  stopColor="#b4ffca" />
+                    <stop offset="65%"  stopColor="#ffffff" />
+                    <stop offset="80%"  stopColor="#38c755" />
+                    <stop offset="100%" stopColor="#38c755" />
+                    <animateTransform
+                      attributeName="gradientTransform"
+                      type="translate"
+                      values="-180 0; 180 0; -180 0"
+                      keyTimes="0; 0.5; 1"
+                      dur="4s"
+                      repeatCount="indefinite"
+                    />
+                  </linearGradient>
+                </defs>
+                <text
+                  x="0" y="24"
+                  fontFamily="Montserrat, ui-sans-serif, sans-serif"
+                  fontSize="22"
+                  fontWeight="800"
+                  letterSpacing="-0.5"
+                  fill="url(#footer-logo-grad)"
+                >
+                  Sanu
+                </text>
+                <text
+                  x="57" y="24"
+                  fontFamily="Montserrat, ui-sans-serif, sans-serif"
+                  fontSize="22"
+                  fontWeight="600"
+                  letterSpacing="-0.5"
+                  fill="url(#footer-logo-grad)"
+                >
+                  Khan
+                </text>
+                <text
+                  x="116" y="24"
+                  fontFamily="Montserrat, ui-sans-serif, sans-serif"
+                  fontSize="18"
+                  fontWeight="500"
+                  fill="#38c755"
+                  opacity="0.75"
+                >
+                  .dev
+                </text>
+              </svg>
             </a>
             <p className="mt-1 text-[15px] text-[#8a90a8]">{footer.blurb}</p>
           </div>
