@@ -1,3 +1,3 @@
-# Welcome to your Lovable project
+# sanukhan.dev
 
-TODO: Document your project here
+Personal portfolio website for Sanu Khan.

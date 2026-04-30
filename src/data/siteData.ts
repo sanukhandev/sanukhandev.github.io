@@ -37,7 +37,7 @@ export const profile = {
     { label: "Download CV", href: "#", variant: "outline" as const },
   ],
   // Replace this with your photo when ready.
-  avatarUrl: "/placeholder.svg",
+  avatarUrl: "/assets/images/sanu.png",
 };
 
 export const skills = {
@@ -114,7 +114,13 @@ export const services = [
   },
 ];
 
-export const workCategories = ["All", "Web", "Mobile", "Backend", "Design"] as const;
+export const workCategories = [
+  "All",
+  "Web",
+  "Mobile",
+  "Backend",
+  "Design",
+] as const;
 export type WorkCategory = (typeof workCategories)[number];
 
 export const works: Array<{
@@ -127,7 +133,8 @@ export const works: Array<{
 }> = [
   {
     title: "Linear Pay",
-    description: "Modern payment dashboard with real-time analytics, subscriptions and invoicing.",
+    description:
+      "Modern payment dashboard with real-time analytics, subscriptions and invoicing.",
     tags: ["React", "Stripe", "Postgres"],
     year: "2025",
     status: "Live",
@@ -135,7 +142,8 @@ export const works: Array<{
   },
   {
     title: "Habitly",
-    description: "Mobile habit tracker with streaks, reminders and beautiful data visualizations.",
+    description:
+      "Mobile habit tracker with streaks, reminders and beautiful data visualizations.",
     tags: ["React Native", "Expo"],
     year: "2025",
     status: "Live",
@@ -143,7 +151,8 @@ export const works: Array<{
   },
   {
     title: "NodeKit API",
-    description: "Open-source TypeScript starter kit for building scalable REST and GraphQL APIs.",
+    description:
+      "Open-source TypeScript starter kit for building scalable REST and GraphQL APIs.",
     tags: ["Node.js", "TypeScript", "GraphQL"],
     year: "2024",
     status: "Live",
@@ -151,7 +160,8 @@ export const works: Array<{
   },
   {
     title: "E-Commerce Platform",
-    description: "Headless commerce build with custom checkout, CMS and admin dashboard.",
+    description:
+      "Headless commerce build with custom checkout, CMS and admin dashboard.",
     tags: ["Next.js", "Stripe", "Sanity"],
     year: "2024",
     status: "Live",
@@ -159,7 +169,8 @@ export const works: Array<{
   },
   {
     title: "Realtime CRM",
-    description: "Sales CRM with live collaboration, pipeline boards and AI-assisted insights.",
+    description:
+      "Sales CRM with live collaboration, pipeline boards and AI-assisted insights.",
     tags: ["React", "WebSockets"],
     year: "2024",
     status: "In Progress",
@@ -167,7 +178,8 @@ export const works: Array<{
   },
   {
     title: "Sound Wave App",
-    description: "Music streaming UI concept with offline mode and spatial audio support.",
+    description:
+      "Music streaming UI concept with offline mode and spatial audio support.",
     tags: ["React Native", "Audio"],
     year: "2023",
     status: "Concept",
@@ -175,7 +187,8 @@ export const works: Array<{
   },
   {
     title: "Crypto Tracker Pro",
-    description: "Multi-exchange portfolio tracker with alerts, charts and tax reporting.",
+    description:
+      "Multi-exchange portfolio tracker with alerts, charts and tax reporting.",
     tags: ["React", "Charts", "WebSockets"],
     year: "2023",
     status: "Live",
@@ -187,55 +200,85 @@ export const articles = [
   {
     category: "React",
     title: "Building Resilient React Apps with Suspense and Error Boundaries",
-    excerpt: "A practical guide to gracefully handling async state and failures in modern React.",
+    excerpt:
+      "A practical guide to gracefully handling async state and failures in modern React.",
     tags: ["React", "Patterns"],
     url: "#",
   },
   {
     category: "TypeScript",
     title: "Advanced TypeScript Patterns for Large-Scale Codebases",
-    excerpt: "Generics, conditional types and template literal types that scale with your team.",
+    excerpt:
+      "Generics, conditional types and template literal types that scale with your team.",
     tags: ["TypeScript", "Architecture"],
     url: "#",
   },
   {
     category: "Performance",
     title: "Shipping Faster Web Apps: A Practical Performance Playbook",
-    excerpt: "Concrete techniques to cut TTI, reduce bundle size and ace your Core Web Vitals.",
+    excerpt:
+      "Concrete techniques to cut TTI, reduce bundle size and ace your Core Web Vitals.",
     tags: ["Performance", "Web Vitals"],
     url: "#",
   },
   {
     category: "Backend",
     title: "Designing PostgreSQL Schemas That Don't Break in Production",
-    excerpt: "Indexing strategies, migrations and query patterns from real-world systems.",
+    excerpt:
+      "Indexing strategies, migrations and query patterns from real-world systems.",
     tags: ["Postgres", "Backend"],
     url: "#",
   },
   {
     category: "DevOps",
     title: "From Zero to CI/CD with GitHub Actions and Docker",
-    excerpt: "A step-by-step pipeline that ships your app safely to production.",
+    excerpt:
+      "A step-by-step pipeline that ships your app safely to production.",
     tags: ["CI/CD", "DevOps"],
     url: "#",
   },
   {
     category: "Career",
     title: "Lessons Learned After 14 Years as a Full Stack Developer",
-    excerpt: "What actually compounds over a long engineering career — and what doesn't.",
+    excerpt:
+      "What actually compounds over a long engineering career — and what doesn't.",
     tags: ["Career", "Lessons"],
     url: "#",
   },
 ];
 
 export const certifications = [
-  { issuer: "AWS", title: "AWS Certified Solutions Architect — Associate", url: "#" },
+  {
+    issuer: "AWS",
+    title: "AWS Certified Solutions Architect — Associate",
+    url: "#",
+  },
   { issuer: "Meta", title: "Meta Front-End Developer Professional", url: "#" },
-  { issuer: "Google", title: "Google UX Design Professional Certificate", url: "#" },
-  { issuer: "Microsoft", title: "Microsoft Azure Fundamentals (AZ-900)", url: "#" },
-  { issuer: "MongoDB", title: "MongoDB Certified Developer Associate", url: "#" },
-  { issuer: "Stripe", title: "Stripe Certified Professional Developer", url: "#" },
-  { issuer: "HashiCorp", title: "HashiCorp Certified: Terraform Associate", url: "#" },
+  {
+    issuer: "Google",
+    title: "Google UX Design Professional Certificate",
+    url: "#",
+  },
+  {
+    issuer: "Microsoft",
+    title: "Microsoft Azure Fundamentals (AZ-900)",
+    url: "#",
+  },
+  {
+    issuer: "MongoDB",
+    title: "MongoDB Certified Developer Associate",
+    url: "#",
+  },
+  {
+    issuer: "Stripe",
+    title: "Stripe Certified Professional Developer",
+    url: "#",
+  },
+  {
+    issuer: "HashiCorp",
+    title: "HashiCorp Certified: Terraform Associate",
+    url: "#",
+  },
   { issuer: "Docker", title: "Docker Certified Associate", url: "#" },
   { issuer: "GitHub", title: "GitHub Actions Certified", url: "#" },
 ];
@@ -246,21 +289,21 @@ export const testimonials = [
       "Sanu delivered our platform ahead of schedule with quality that exceeded expectations. A true professional.",
     name: "Aisha Verma",
     role: "Product Lead, Linear Pay",
-    avatarUrl: "/placeholder.svg",
+    avatarUrl: "/assets/images/sanu.png",
   },
   {
     quote:
       "Reliable, communicative and deeply technical. Sanu became a core part of our engineering team within a week.",
     name: "Marcus Chen",
     role: "CTO, Habitly",
-    avatarUrl: "/placeholder.svg",
+    avatarUrl: "/assets/images/sanu.png",
   },
   {
     quote:
       "Outstanding work on our headless commerce stack. Performance and DX both improved dramatically.",
     name: "Priya Sharma",
     role: "Founder, NorthStore",
-    avatarUrl: "/placeholder.svg",
+    avatarUrl: "/assets/images/sanu.png",
   },
 ];
 
