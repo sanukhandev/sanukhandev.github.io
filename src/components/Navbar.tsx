@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
 import { nav } from "@/data/siteData";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -16,7 +17,10 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header
+    <motion.header
+      initial={{ y: -24, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.45, ease: "easeOut" }}
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-all",
         scrolled
@@ -45,14 +49,17 @@ export default function Navbar() {
         </a>
 
         <nav className="hidden items-center gap-7 md:flex">
-          {nav.links.map((l) => (
-            <a
+          {nav.links.map((l, index) => (
+            <motion.a
               key={l.href}
               href={l.href}
               className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.15 + index * 0.06, duration: 0.3 }}
             >
               {l.label}
-            </a>
+            </motion.a>
           ))}
         </nav>
 
@@ -74,29 +81,40 @@ export default function Navbar() {
         </button>
       </div>
 
-      {open && (
-        <div className="border-t border-border bg-card md:hidden">
-          <div className="container-narrow flex flex-col gap-1 py-3">
-            {nav.links.map((l) => (
-              <a
-                key={l.href}
-                href={l.href}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.25, ease: "easeInOut" }}
+            className="border-t border-border bg-card md:hidden"
+          >
+            <div className="container-narrow flex flex-col gap-1 py-3">
+              {nav.links.map((l, index) => (
+                <motion.a
+                  key={l.href}
+                  href={l.href}
+                  onClick={() => setOpen(false)}
+                  className="rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-secondary hover:text-foreground"
+                  initial={{ opacity: 0, x: -8 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.05, duration: 0.22 }}
+                >
+                  {l.label}
+                </motion.a>
+              ))}
+              <Button
+                asChild
+                className="mt-2 bg-tea-green-500 text-jet-black-950 hover:bg-tea-green-400"
                 onClick={() => setOpen(false)}
-                className="rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-secondary hover:text-foreground"
               >
-                {l.label}
-              </a>
-            ))}
-            <Button
-              asChild
-              className="mt-2 bg-tea-green-500 text-jet-black-950 hover:bg-tea-green-400"
-              onClick={() => setOpen(false)}
-            >
-              <a href={nav.cta.href}>{nav.cta.label}</a>
-            </Button>
-          </div>
-        </div>
-      )}
-    </header>
+                <a href={nav.cta.href}>{nav.cta.label}</a>
+              </Button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.header>
   );
 }
