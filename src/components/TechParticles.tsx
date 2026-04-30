@@ -1,3 +1,4 @@
+import type { ComponentType, CSSProperties } from "react";
 import { useRef } from "react";
 import * as Icons from "lucide-react";
 
@@ -76,11 +77,11 @@ export default function TechParticles({ count = 24 }: { count?: number }) {
         const Icon = (
           Icons as unknown as Record<
             string,
-            React.ComponentType<{
+            ComponentType<{
               width?: number;
               height?: number;
               strokeWidth?: number;
-              style?: React.CSSProperties;
+              style?: CSSProperties;
             }>
           >
         )[p.iconName] ?? Icons.Code2;
@@ -98,7 +99,7 @@ export default function TechParticles({ count = 24 }: { count?: number }) {
                 "--p-dur": `${p.duration}s`,
                 "--p-delay": `${p.delay}s`,
                 color: "#38c755",
-              } as React.CSSProperties
+              } as CSSProperties
             }
           >
             <Icon width={p.size} height={p.size} strokeWidth={1.2} />

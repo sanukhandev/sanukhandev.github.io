@@ -1,8 +1,9 @@
+import type { ComponentType } from "react";
 import { Cloud, Server, Monitor, Container, Network } from "lucide-react";
 import { useSiteContent } from "@/data/siteContent";
 import { SectionHeading, TagChip } from "@/components/shared/SectionHeading";
 
-const clusterIcons: Record<string, React.ComponentType<{ className?: string }>> = {
+const clusterIcons: Record<string, ComponentType<{ className?: string }>> = {
   "Cloud & Architecture": Cloud,
   "Backend Systems": Server,
   "Frontend Systems": Monitor,

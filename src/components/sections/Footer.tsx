@@ -1,3 +1,4 @@
+import type { ComponentType } from "react";
 import * as Icons from "lucide-react";
 import { Mail, Phone, MapPin } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -138,7 +139,7 @@ export default function Footer() {
                 (
                   Icons as unknown as Record<
                     string,
-                    React.ComponentType<{ className?: string }>
+                    ComponentType<{ className?: string }>
                   >
                 )[s.icon] || Icons.Link;
               return (
