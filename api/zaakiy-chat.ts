@@ -2,10 +2,52 @@ type ZaakiyLocale = "en" | "ar";
 
 type HistoryMessage = { role: "user" | "assistant"; text: string };
 
-const conversationMemory = new Map<string, HistoryMessage[]>();
+const SESSION_TTL_MS = 30 * 60 * 1000; // 30 minutes
+const MAX_SESSIONS = 500;
+
+type SessionEntry = { messages: HistoryMessage[]; lastAccessedAt: number };
+
+const conversationMemory = new Map<string, SessionEntry>();
+
+const evictStaleSessions = () => {
+  const now = Date.now();
+  for (const [id, entry] of conversationMemory) {
+    if (now - entry.lastAccessedAt > SESSION_TTL_MS) {
+      conversationMemory.delete(id);
+    }
+  }
+  // If still over limit, evict oldest entries
+  if (conversationMemory.size > MAX_SESSIONS) {
+    const sorted = [...conversationMemory.entries()].sort(
+      (a, b) => a[1].lastAccessedAt - b[1].lastAccessedAt,
+    );
+    const toDelete = sorted.slice(0, conversationMemory.size - MAX_SESSIONS);
+    for (const [id] of toDelete) {
+      conversationMemory.delete(id);
+    }
+  }
+};
+
+const allowedOrigins = new Set(
+  (process.env.ALLOWED_ORIGINS || "")
+    .split(",")
+    .map((origin) => origin.trim())
+    .filter(Boolean),
+);
+
+const getRequestOrigin = (req: any): string => {
+  const origin = req?.headers?.origin;
+  return typeof origin === "string" ? origin : "";
+};
 
 const sendJson = (res: any, status: number, data: unknown) => {
-  res.status(status).setHeader("Access-Control-Allow-Origin", "*");
+  // In Vercel/Express, the request is accessible via res.req
+  const origin = getRequestOrigin(res.req);
+  res.status(status);
+  res.setHeader("Vary", "Origin");
+  if (origin && allowedOrigins.has(origin)) {
+    res.setHeader("Access-Control-Allow-Origin", origin);
+  }
   res.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
   res.json(data);
@@ -25,18 +67,21 @@ const extractModelText = (payload: unknown) => {
   return parts.map((p) => p.text || "").join(" ").trim();
 };
 
-const leakPattern = /(SITE_SCOPE|USER_QUESTION|LOCALE|CONVERSATION)\s*:?/gi;
+// Global regex used only with .replace() – safe to reuse with lastIndex mutation.
+const leakPatternGlobal = /(SITE_SCOPE|USER_QUESTION|LOCALE|CONVERSATION)\s*:?/gi;
+// Non-global regex for .test() – deterministic, no lastIndex side-effects.
+const leakPatternTest = /(SITE_SCOPE|USER_QUESTION|LOCALE|CONVERSATION)\s*:?/i;
 
 const sanitizeModelText = (raw: string) =>
   raw
-    .replace(leakPattern, "")
+    .replace(leakPatternGlobal, "")
     .replace(/\s*\|\s*/g, " ")
     .replace(/\s+/g, " ")
     .trim();
 
 const looksLeakyOrInvalid = (text: string) => {
   if (!text) return true;
-  if (leakPattern.test(text)) return true;
+  if (leakPatternTest.test(text)) return true;
   const lowered = text.toLowerCase();
   return lowered.startsWith("name:") || lowered.startsWith("role:") || lowered.includes("contextsummary");
 };
@@ -60,15 +105,26 @@ const fallbackReply = (locale: ZaakiyLocale, email: string, question: string) =>
   return exactEnglishFallback;
 };
 
-const getHistory = (sessionId: string) => conversationMemory.get(sessionId) || [];
+const getHistory = (sessionId: string): HistoryMessage[] => {
+  const entry = conversationMemory.get(sessionId);
+  if (!entry) return [];
+  entry.lastAccessedAt = Date.now();
+  return entry.messages;
+};
 
 const pushHistory = (sessionId: string, role: "user" | "assistant", text: string) => {
-  const history = getHistory(sessionId);
-  history.push({ role, text });
-  if (history.length > 12) {
-    history.splice(0, history.length - 12);
+  const now = Date.now();
+  let entry = conversationMemory.get(sessionId);
+  if (!entry) {
+    entry = { messages: [], lastAccessedAt: now };
+    conversationMemory.set(sessionId, entry);
+    evictStaleSessions();
   }
-  conversationMemory.set(sessionId, history);
+  entry.messages.push({ role, text });
+  entry.lastAccessedAt = now;
+  if (entry.messages.length > 12) {
+    entry.messages.splice(0, entry.messages.length - 12);
+  }
 };
 
 const tokenize = (text: string) =>
@@ -184,15 +240,21 @@ export default async function handler(req: any, res: any) {
     const siteScope = String(body.siteScope || "").trim();
     const email = String(body.email || "khan.sanukhan@outlook.com").trim();
     const maxOutputChars = Math.max(120, Math.min(500, Number(body.maxOutputChars || 250)));
-    const sessionId = String(body.sessionId || "anonymous-session").trim();
+    // Disable per-session memory when no sessionId is provided to prevent
+    // different users from sharing the same history bucket.
+    const sessionId: string | null = String(body.sessionId || "").trim() || null;
 
     if (!userQuestion || !siteScope) {
       sendJson(res, 400, { error: "Missing required fields" });
       return;
     }
 
-    const history = getHistory(sessionId);
-    pushHistory(sessionId, "user", userQuestion);
+    // Capture an immutable snapshot of history BEFORE adding the new user
+    // message so the prompt does not include the current turn twice.
+    const historySnapshot = sessionId ? getHistory(sessionId).slice() : [];
+    if (sessionId) {
+      pushHistory(sessionId, "user", userQuestion);
+    }
 
     const mergedPrompt = buildPrompt({
       locale,
@@ -200,7 +262,7 @@ export default async function handler(req: any, res: any) {
       siteScope,
       email,
       maxChars: maxOutputChars,
-      conversationHistory: history.map((h) => ({ role: h.role, text: h.text })),
+      conversationHistory: historySnapshot,
     });
 
     const googleResp = await fetch(
@@ -239,7 +301,9 @@ export default async function handler(req: any, res: any) {
       : sanitized;
 
     const clipped = clipText(safeText, maxOutputChars);
-    pushHistory(sessionId, "assistant", clipped);
+    if (sessionId) {
+      pushHistory(sessionId, "assistant", clipped);
+    }
 
     sendJson(res, 200, { text: clipped });
   } catch (error) {

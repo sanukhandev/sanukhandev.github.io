@@ -27,8 +27,10 @@ export default function IntroPreloader() {
   const { locale } = useLocale();
   const isArabic = locale === "ar";
 
+  const loadingIntroLabel = isArabic ? "جارٍ تحميل المقدمة" : "Loading intro";
+
   return (
-    <div className="preloader-screen" role="status" aria-live="polite" aria-label="Loading intro">
+    <div className="preloader-screen" role="status" aria-live="polite" aria-label={loadingIntroLabel}>
       <div className="preloader-grid" aria-hidden />
 
       <div className="preloader-particles" aria-hidden>
