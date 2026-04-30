@@ -22,11 +22,19 @@ const Header = () => {
       <div className="header-container">
         {/* Logo */}
         <div className="logo">
-          <span className="logo-text">
-            <span className="logo-main">SanuKhan</span>
-            <span className="logo-dot">.</span>
-            <span className="logo-dev">dev</span>
-          </span>
+          <svg
+            className="logo-svg"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 520 90"
+            role="img"
+            aria-label="SanuKhan.dev Logo"
+          >
+            <title>SanuKhan.dev</title>
+            <style>{`.text { font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-weight: 600; letter-spacing: 1px; }`}</style>
+            <text x="0" y="60" className="text" fontSize="48" fill="#ffffff">
+              SanuKhan<tspan fill="#14b8a6">.</tspan>dev
+            </text>
+          </svg>
         </div>
 
         {/* Desktop Navigation */}

@@ -195,34 +195,17 @@ body {
   }
 }
 
-.logo-text {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 2rem;
+.logo {
   display: flex;
   align-items: center;
   opacity: 0;
   animation: logoFadeInLeft 1s cubic-bezier(0.77, 0, 0.175, 1) 0.2s forwards;
 }
 
-.logo-main {
-  font-weight: 700;
-  letter-spacing: 0.5px;
-}
-
-.logo-dot {
-  font-weight: 700;
-  color: var(--accent-green);
-  margin: 0 2px;
-}
-
-.logo-dev {
-  font-weight: 400;
-  font-size: 1rem;
-  letter-spacing: 1px;
-  opacity: 0.7;
-  color: #b0b0b0; /* or var(--text-secondary) for a lighter look */
-  vertical-align: baseline; /* ensures it's on the same line */
-  margin-left: 2px;
+.logo-svg {
+  display: block;
+  width: clamp(180px, 24vw, 260px);
+  height: auto;
 }
 
 .desktop-nav {
