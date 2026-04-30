@@ -36,10 +36,10 @@ export default function Navbar() {
             aria-label="SANUKHAN.DEV"
             className="h-8 w-[190px] sm:w-[220px]"
           >
-            <title>SANUKHAN.DEV</title>
+            <title>SanuKhan.dev</title>
             <style>{`.text { font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-weight: 600; letter-spacing: 1px; }`}</style>
             <text x="0" y="60" className="text" fontSize="48" fill="#ffffff">
-              SANUKHAN<tspan fill="#14b8a6">.</tspan>DEV
+              SanuKhan<tspan fill="#14b8a6">.</tspan>dev
             </text>
           </svg>
         </a>

@@ -85,16 +85,14 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="relative mx-auto w-full max-w-sm">
-          <div className="relative aspect-square rounded-3xl border border-border bg-card p-3 glow-green">
-            <img
-              src={profile.avatarUrl}
-              alt={`${profile.name} portrait`}
-              className="h-full w-full rounded-2xl object-cover"
-            />
-          </div>
-          <div className="absolute -bottom-3 -right-3 rounded-xl border border-tea-green-500/40 bg-tea-green-500/10 px-3 py-1.5 text-xs font-semibold text-tea-green-300 backdrop-blur">
-            ⚡ Building since 2011
+        <div className="mx-auto w-full max-w-sm">
+          <img
+            src={profile.avatarUrl}
+            alt={`${profile.name} portrait`}
+            className="w-full object-contain"
+          />
+          <div className="mt-3 text-center text-xs font-semibold text-tea-green-300 sm:text-sm">
+            Building Innovations since 2011
           </div>
         </div>
       </div>
