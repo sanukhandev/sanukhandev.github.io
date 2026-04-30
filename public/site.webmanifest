@@ -1,1 +1,24 @@
-{"name":"","short_name":"","icons":[{"src":"/android-chrome-192x192.png","sizes":"192x192","type":"image/png"},{"src":"/android-chrome-512x512.png","sizes":"512x512","type":"image/png"}],"theme_color":"#ffffff","background_color":"#ffffff","display":"standalone"}
+{
+	"name": "Sanu Khan | Tech Lead & Cloud Architect",
+	"short_name": "SanuKhan.dev",
+	"description": "Portfolio of Sanu Khan, Tech Lead and Cloud & Microservices Architect in Dubai, UAE.",
+	"start_url": "/",
+	"scope": "/",
+	"lang": "en",
+	"display": "standalone",
+	"orientation": "portrait-primary",
+	"theme_color": "#0f1015",
+	"background_color": "#0f1015",
+	"icons": [
+		{
+			"src": "/android-chrome-192x192.png",
+			"sizes": "192x192",
+			"type": "image/png"
+		},
+		{
+			"src": "/android-chrome-512x512.png",
+			"sizes": "512x512",
+			"type": "image/png"
+		}
+	]
+}
