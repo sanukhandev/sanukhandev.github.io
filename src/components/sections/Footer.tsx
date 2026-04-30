@@ -28,7 +28,7 @@ export default function Footer() {
               <svg
                 viewBox={isArabic ? "0 0 300 36" : "0 0 180 32"}
                 height="32"
-                width={isArabic ? "250" : "180"}
+                className={cn("h-8", isArabic ? "w-[198px] sm:w-[250px]" : "w-[150px] sm:w-[180px]")}
                 xmlns="http://www.w3.org/2000/svg"
                 aria-hidden
               >
@@ -133,7 +133,7 @@ export default function Footer() {
             <p className={cn("mt-1 text-[15px]", isLight ? "text-[#4d5a66]" : "text-[#8a90a8]")}>{footer.blurb}</p>
           </div>
 
-          <div className="flex gap-4">
+          <div className="flex w-full flex-wrap gap-2 sm:w-auto sm:gap-4">
             {footer.socials.map((s) => {
               const Icon =
                 (
