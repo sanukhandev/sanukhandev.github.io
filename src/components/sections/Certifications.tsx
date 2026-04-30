@@ -1,14 +1,16 @@
 import { Award, ExternalLink } from "lucide-react";
-import { certifications } from "@/data/siteData";
+import { useSiteContent } from "@/data/siteContent";
 import { SectionHeading } from "@/components/shared/SectionHeading";
 
 export default function Certifications() {
+  const { certifications, ui } = useSiteContent();
+
   return (
     <section className="section-pad">
       <div className="container-narrow">
         <SectionHeading
-          title="Certifications"
-          subtitle="Compact verification of continuous upskilling."
+          title={ui.certifications.title}
+          subtitle={ui.certifications.subtitle}
           align="left"
         />
 
@@ -30,7 +32,7 @@ export default function Certifications() {
                 {c.title}
               </h3>
               {c.issued && (
-                <p className="mt-1 text-xs text-[#8a90a8]">Issued {c.issued}</p>
+                <p className="mt-1 text-xs text-[#8a90a8]">{ui.certifications.issued} {c.issued}</p>
               )}
               <a
                 href={c.url}
@@ -38,7 +40,7 @@ export default function Certifications() {
                 rel="noopener noreferrer"
                 className="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-tea-green-400 hover:text-tea-green-300"
               >
-                View Certificate <ExternalLink className="h-3 w-3" />
+                {ui.certifications.view} <ExternalLink className="h-3 w-3" />
               </a>
             </div>
           ))}

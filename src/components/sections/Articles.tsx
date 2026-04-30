@@ -1,14 +1,16 @@
 import { ArrowUpRight } from "lucide-react";
-import { articles } from "@/data/siteData";
+import { useSiteContent } from "@/data/siteContent";
 import { SectionHeading, TagChip } from "@/components/shared/SectionHeading";
 
 export default function Articles() {
+  const { articles, ui } = useSiteContent();
+
   return (
     <section id="articles" className="section-pad">
       <div className="container-narrow">
         <SectionHeading
-          title="Insights"
-          subtitle="Selected architecture notes."
+          title={ui.articles.title}
+          subtitle={ui.articles.subtitle}
           align="left"
         />
 
@@ -38,7 +40,7 @@ export default function Articles() {
                 ))}
               </div>
               <span className="mt-5 inline-flex items-center gap-1 text-xs font-semibold text-tea-green-400 transition-transform group-hover:translate-x-0.5">
-                Read Article <ArrowUpRight className="h-3.5 w-3.5" />
+                {ui.articles.read} <ArrowUpRight className="h-3.5 w-3.5" />
               </span>
             </a>
           ))}

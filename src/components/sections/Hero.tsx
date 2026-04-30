@@ -12,7 +12,8 @@ import {
   TrendingUp,
   Users,
 } from "lucide-react";
-import { profile } from "@/data/siteData";
+import { useSiteContent } from "@/data/siteContent";
+import { useLocale } from "@/hooks/use-locale";
 import { Button } from "@/components/ui/button";
 import TechParticles from "@/components/TechParticles";
 
@@ -34,6 +35,15 @@ const floatingBadges = [
 ];
 
 export default function Hero() {
+  const { profile, ui } = useSiteContent();
+  const { locale } = useLocale();
+  const isArabic = locale === "ar";
+
+  const floatingBadgesLocalized = floatingBadges.map((badge, index) => ({
+    ...badge,
+    label: ui.hero.floatingBadges[index] ?? badge.label,
+  }));
+
   return (
     <section id="home" className="relative overflow-hidden pt-16 sm:pt-20">
       {/* Subtle radial glow */}
@@ -53,7 +63,7 @@ export default function Hero() {
         <div className="animate-fade-up-stagger">
           <span className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#2b2f3b] bg-[#16171d] px-3 py-1 text-xs font-semibold text-[#38c755]">
             <span className="h-1.5 w-1.5 rounded-full bg-tea-green-400" />
-            13+ Years of Engineering Leadership
+            {ui.hero.leadershipBadge}
           </span>
 
           <p className="text-[14px] font-semibold uppercase tracking-[0.08em] text-[#8a90a8]">
@@ -83,8 +93,14 @@ export default function Hero() {
           </ul>
 
           <div className="mt-8 grid max-w-2xl grid-cols-2 gap-3 lg:grid-cols-4">
-            {profile.impactMetrics.map((s) => {
-              const Icon = metricIcons[s.label] ?? TrendingUp;
+            {profile.impactMetrics.map((s, index) => {
+              const iconKey = [
+                "Years Experience",
+                "Systems Delivered",
+                "Markets Served",
+                "Product Scale Systems",
+              ][index];
+              const Icon = metricIcons[iconKey] ?? TrendingUp;
               return (
                 <div key={s.label} className="premium-card flex flex-col items-center px-3 py-4 text-center">
                   <Icon className="mb-1.5 h-4 w-4 text-[#38c755]/70" />
@@ -140,7 +156,7 @@ export default function Hero() {
             <div className="avatar-halo" />
 
             {/* Floating icon badges */}
-            {floatingBadges.map((b) => {
+            {floatingBadgesLocalized.map((b) => {
               const Icon = b.icon;
               return (
                 <div
@@ -170,9 +186,9 @@ export default function Hero() {
           </div>
 
           <div aria-hidden className="innovation-label">
-            <span>Building</span>
-            <span>Innovations</span>
-            <span>since 2011</span>
+            <span>{ui.hero.innovationLines[0]}</span>
+            <span>{ui.hero.innovationLines[1]}</span>
+            <span>{ui.hero.innovationLines[2]}</span>
           </div>
         </div>
       </div>

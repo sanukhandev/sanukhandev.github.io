@@ -1,12 +1,16 @@
 import * as Icons from "lucide-react";
 import { Mail, Phone, MapPin } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { footer } from "@/data/siteData";
+import { useSiteContent } from "@/data/siteContent";
 import { useTheme } from "@/hooks/use-theme";
+import { useLocale } from "@/hooks/use-locale";
 
 export default function Footer() {
   const { theme } = useTheme();
+  const { locale } = useLocale();
+  const { footer } = useSiteContent();
   const isLight = theme === "light";
+  const isArabic = locale === "ar";
 
   return (
     <footer
@@ -19,11 +23,11 @@ export default function Footer() {
       <div className="container-narrow py-12">
         <div className="flex flex-col items-start justify-between gap-5 sm:flex-row sm:items-center">
           <div>
-            <a href="#home" aria-label="SanuKhan.dev home">
+            <a href="#home" aria-label={isArabic ? "الصفحة الرئيسية" : "SanuKhan.dev home"}>
               <svg
-                viewBox="0 0 180 32"
+                viewBox={isArabic ? "0 0 220 32" : "0 0 180 32"}
                 height="32"
-                width="180"
+                width={isArabic ? "220" : "180"}
                 xmlns="http://www.w3.org/2000/svg"
                 aria-hidden
               >
@@ -38,43 +42,91 @@ export default function Footer() {
                     <animateTransform
                       attributeName="gradientTransform"
                       type="translate"
-                      values="-180 0; 180 0; -180 0"
+                      values={isArabic ? "-240 0; 240 0; -240 0" : "-180 0; 180 0; -180 0"}
                       keyTimes="0; 0.5; 1"
                       dur="4s"
                       repeatCount="indefinite"
                     />
                   </linearGradient>
                 </defs>
-                <text
-                  x="0" y="24"
-                  fontFamily="Montserrat, ui-sans-serif, sans-serif"
-                  fontSize="22"
-                  fontWeight="800"
-                  letterSpacing="-0.5"
-                  fill="url(#footer-logo-grad)"
-                >
-                  Sanu
-                </text>
-                <text
-                  x="57" y="24"
-                  fontFamily="Montserrat, ui-sans-serif, sans-serif"
-                  fontSize="22"
-                  fontWeight="600"
-                  letterSpacing="-0.5"
-                  fill="url(#footer-logo-grad)"
-                >
-                  Khan
-                </text>
-                <text
-                  x="116" y="24"
-                  fontFamily="Montserrat, ui-sans-serif, sans-serif"
-                  fontSize="18"
-                  fontWeight="500"
-                  fill={isLight ? "#1f9f45" : "#38c755"}
-                  opacity={isLight ? 0.85 : 0.75}
-                >
-                  .dev
-                </text>
+                {isArabic ? (
+                  <>
+                    <text
+                      x="148"
+                      y="24"
+                      fontFamily="Mirza, serif"
+                      fontSize="24"
+                      fontWeight="700"
+                      textAnchor="end"
+                      fill={isLight ? "#174f2e" : "#b6ffd0"}
+                      stroke={isLight ? "#edf4ef" : "#0f1015"}
+                      strokeWidth="0.6"
+                      paintOrder="stroke"
+                    >
+                      سانو خان
+                      <animate
+                        attributeName="fill"
+                        values={isLight ? "#174f2e;#2aa451;#174f2e" : "#9af3bb;#e8fff1;#9af3bb"}
+                        dur="3.8s"
+                        repeatCount="indefinite"
+                      />
+                    </text>
+                    <text
+                      x="214"
+                      y="24"
+                      fontFamily="Mirza, serif"
+                      fontSize="18"
+                      fontWeight="500"
+                      textAnchor="end"
+                      fill={isLight ? "#1f9f45" : "#38c755"}
+                      opacity={isLight ? 0.95 : 0.9}
+                      stroke={isLight ? "#edf4ef" : "#0f1015"}
+                      strokeWidth="0.45"
+                      paintOrder="stroke"
+                    >
+                      .ديف
+                      <animate
+                        attributeName="opacity"
+                        values="0.85;1;0.85"
+                        dur="2.8s"
+                        repeatCount="indefinite"
+                      />
+                    </text>
+                  </>
+                ) : (
+                  <>
+                    <text
+                      x="0" y="24"
+                      fontFamily="Montserrat, ui-sans-serif, sans-serif"
+                      fontSize="22"
+                      fontWeight="800"
+                      letterSpacing="-0.5"
+                      fill="url(#footer-logo-grad)"
+                    >
+                      Sanu
+                    </text>
+                    <text
+                      x="57" y="24"
+                      fontFamily="Montserrat, ui-sans-serif, sans-serif"
+                      fontSize="22"
+                      fontWeight="600"
+                      letterSpacing="-0.5"
+                      fill="url(#footer-logo-grad)"
+                    >
+                      Khan
+                    </text>
+                    <text
+                      x="116" y="24"
+                      fontFamily="Montserrat, ui-sans-serif, sans-serif"
+                      fontSize="18"
+                      fontWeight="500"
+                      fill={isLight ? "#1f9f45" : "#38c755"}
+                      opacity={isLight ? 0.85 : 0.75}
+                    >
+                      .dev
+                    </text>
+                  </>
+                )}
               </svg>
             </a>
             <p className={cn("mt-1 text-[15px]", isLight ? "text-[#4d5a66]" : "text-[#8a90a8]")}>{footer.blurb}</p>
@@ -98,7 +150,7 @@ export default function Footer() {
                   aria-label={s.label}
                   className={cn(
                     "inline-flex items-center gap-2 rounded-md border px-3 py-2 text-sm transition-all duration-300 hover:scale-[1.02]",
-                    s.label === "Buy me a coffee"
+                    s.href.includes("ko-fi.com")
                       ? isLight
                         ? "border-[#1f9f45]/45 bg-[#1f9f45]/10 font-semibold text-[#1f9f45] hover:border-[#1f9f45] hover:bg-[#1f9f45]/18"
                         : "border-[#38c755]/50 bg-[#38c755]/10 font-semibold text-[#38c755] hover:border-[#38c755] hover:bg-[#38c755]/20"

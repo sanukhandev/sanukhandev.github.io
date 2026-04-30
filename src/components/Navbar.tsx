@@ -1,16 +1,20 @@
 import { useEffect, useState } from "react";
 import { Menu, X, Coffee, Moon, Sun } from "lucide-react";
-import { nav } from "@/data/siteData";
+import { useSiteContent } from "@/data/siteContent";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useTheme } from "@/hooks/use-theme";
+import { useLocale } from "@/hooks/use-locale";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeHref, setActiveHref] = useState("#works");
   const { theme, toggleTheme } = useTheme();
+  const { locale, setLocale } = useLocale();
+  const { nav, ui } = useSiteContent();
   const isLight = theme === "light";
+  const isArabic = locale === "ar";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -55,29 +59,15 @@ export default function Navbar() {
       )}
     >
       <div className="container-narrow flex h-16 items-center justify-between">
-        <a href="#home" className="group shrink-0" aria-label="SanuKhan.dev home">
+        <a href="#home" className="group shrink-0" aria-label={isArabic ? "الصفحة الرئيسية" : "SanuKhan.dev home"}>
           <svg
-            viewBox="0 0 180 32"
+            viewBox={isArabic ? "0 0 220 32" : "0 0 180 32"}
             height="32"
-            width="180"
+            width={isArabic ? "220" : "180"}
             xmlns="http://www.w3.org/2000/svg"
             aria-hidden
           >
             <defs>
-              <linearGradient id="logo-grad" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%"   stopColor={isLight ? "#1f9f45" : "#38c755"} />
-                <stop offset="40%"  stopColor={isLight ? "#5cc97a" : "#a8ffbc"} />
-                <stop offset="60%"  stopColor={isLight ? "#153625" : "#ffffff"} />
-                <stop offset="100%" stopColor={isLight ? "#1f9f45" : "#38c755"} />
-                <animateTransform
-                  attributeName="gradientTransform"
-                  type="translate"
-                  from="-1 0"
-                  to="1 0"
-                  dur="3s"
-                  repeatCount="indefinite"
-                />
-              </linearGradient>
               <linearGradient id="logo-grad-move" x1="-100%" y1="0%" x2="200%" y2="0%" gradientUnits="userSpaceOnUse">
                 <stop offset="0%"   stopColor={isLight ? "#1f9f45" : "#38c755"} />
                 <stop offset="35%"  stopColor={isLight ? "#1f9f45" : "#38c755"} />
@@ -88,46 +78,91 @@ export default function Navbar() {
                 <animateTransform
                   attributeName="gradientTransform"
                   type="translate"
-                  values="-180 0; 180 0; -180 0"
+                  values={isArabic ? "-240 0; 240 0; -240 0" : "-180 0; 180 0; -180 0"}
                   keyTimes="0; 0.5; 1"
                   dur="4s"
                   repeatCount="indefinite"
                 />
               </linearGradient>
             </defs>
-            {/* "Sanu" — bold weight */}
-            <text
-              x="0" y="24"
-              fontFamily="Montserrat, ui-sans-serif, sans-serif"
-              fontSize="22"
-              fontWeight="800"
-              letterSpacing="-0.5"
-              fill="url(#logo-grad-move)"
-            >
-              Sanu
-            </text>
-            {/* "Khan" — slightly lighter */}
-            <text
-              x="57" y="24"
-              fontFamily="Montserrat, ui-sans-serif, sans-serif"
-              fontSize="22"
-              fontWeight="600"
-              letterSpacing="-0.5"
-              fill="url(#logo-grad-move)"
-            >
-              Khan
-            </text>
-            {/* ".dev" — muted accent */}
-            <text
-              x="116" y="24"
-              fontFamily="Montserrat, ui-sans-serif, sans-serif"
-              fontSize="18"
-              fontWeight="500"
-              fill={isLight ? "#1f9f45" : "#38c755"}
-              opacity={isLight ? 0.85 : 0.75}
-            >
-              .dev
-            </text>
+            {isArabic ? (
+              <>
+                <text
+                  x="148"
+                  y="24"
+                  fontFamily="Mirza, serif"
+                  fontSize="24"
+                  fontWeight="700"
+                  textAnchor="end"
+                  fill={isLight ? "#174f2e" : "#b6ffd0"}
+                  stroke={isLight ? "#f4f8f5" : "#0f1015"}
+                  strokeWidth="0.6"
+                  paintOrder="stroke"
+                >
+                  سانو خان
+                  <animate
+                    attributeName="fill"
+                    values={isLight ? "#174f2e;#2aa451;#174f2e" : "#9af3bb;#e8fff1;#9af3bb"}
+                    dur="3.8s"
+                    repeatCount="indefinite"
+                  />
+                </text>
+                <text
+                  x="214"
+                  y="24"
+                  fontFamily="Mirza, serif"
+                  fontSize="18"
+                  fontWeight="500"
+                  textAnchor="end"
+                  fill={isLight ? "#1f9f45" : "#38c755"}
+                  opacity={isLight ? 0.95 : 0.9}
+                  stroke={isLight ? "#f4f8f5" : "#0f1015"}
+                  strokeWidth="0.45"
+                  paintOrder="stroke"
+                >
+                  .ديف
+                  <animate
+                    attributeName="opacity"
+                    values="0.85;1;0.85"
+                    dur="2.8s"
+                    repeatCount="indefinite"
+                  />
+                </text>
+              </>
+            ) : (
+              <>
+                <text
+                  x="0" y="24"
+                  fontFamily="Montserrat, ui-sans-serif, sans-serif"
+                  fontSize="22"
+                  fontWeight="800"
+                  letterSpacing="-0.5"
+                  fill="url(#logo-grad-move)"
+                >
+                  Sanu
+                </text>
+                <text
+                  x="57" y="24"
+                  fontFamily="Montserrat, ui-sans-serif, sans-serif"
+                  fontSize="22"
+                  fontWeight="600"
+                  letterSpacing="-0.5"
+                  fill="url(#logo-grad-move)"
+                >
+                  Khan
+                </text>
+                <text
+                  x="116" y="24"
+                  fontFamily="Montserrat, ui-sans-serif, sans-serif"
+                  fontSize="18"
+                  fontWeight="500"
+                  fill={isLight ? "#1f9f45" : "#38c755"}
+                  opacity={isLight ? 0.85 : 0.75}
+                >
+                  .dev
+                </text>
+              </>
+            )}
           </svg>
         </a>
 
@@ -187,7 +222,7 @@ export default function Navbar() {
             )}
           >
             <Coffee className="h-3.5 w-3.5" />
-            Buy me a coffee
+            {isArabic ? "ادعمني بقهوة" : "Buy me a coffee"}
           </a>
           <Button
             asChild
@@ -200,6 +235,37 @@ export default function Navbar() {
           >
             <a href={nav.cta.href}>{nav.cta.label}</a>
           </Button>
+
+          <div className="ml-1 inline-flex items-center rounded-lg border border-[#2b2f3b] bg-[#16171d]/80 p-0.5">
+            <button
+              type="button"
+              onClick={() => setLocale("en")}
+              className={cn(
+                "rounded-md px-2 py-1 text-[11px] font-semibold transition-colors",
+                locale === "en"
+                  ? "bg-[#38c755] text-[#0f1015]"
+                  : isLight
+                    ? "text-[#4d5a66] hover:text-[#121722]"
+                    : "text-[#8a90a8] hover:text-[#f0f1f4]",
+              )}
+            >
+              EN
+            </button>
+            <button
+              type="button"
+              onClick={() => setLocale("ar")}
+              className={cn(
+                "rounded-md px-2 py-1 text-[11px] font-semibold transition-colors",
+                locale === "ar"
+                  ? "bg-[#38c755] text-[#0f1015]"
+                  : isLight
+                    ? "text-[#4d5a66] hover:text-[#121722]"
+                    : "text-[#8a90a8] hover:text-[#f0f1f4]",
+              )}
+            >
+              {ui.localeSwitch.ar}
+            </button>
+          </div>
         </div>
 
         <button
@@ -217,6 +283,37 @@ export default function Navbar() {
       {open && (
         <div className={cn("border-t md:hidden", isLight ? "border-[#d4dde1] bg-[#f6faf7]" : "border-[#2b2f3b] bg-[#16171d]")}>
           <div className="container-narrow flex flex-col gap-1 py-3">
+            <div className="mb-1 inline-flex w-fit items-center rounded-md border border-[#2b2f3b] bg-[#16171d]/80 p-0.5">
+              <button
+                type="button"
+                onClick={() => setLocale("en")}
+                className={cn(
+                  "rounded-md px-2 py-1 text-[11px] font-semibold transition-colors",
+                  locale === "en"
+                    ? "bg-[#38c755] text-[#0f1015]"
+                    : isLight
+                      ? "text-[#4d5a66] hover:text-[#121722]"
+                      : "text-[#8a90a8] hover:text-[#f0f1f4]",
+                )}
+              >
+                EN
+              </button>
+              <button
+                type="button"
+                onClick={() => setLocale("ar")}
+                className={cn(
+                  "rounded-md px-2 py-1 text-[11px] font-semibold transition-colors",
+                  locale === "ar"
+                    ? "bg-[#38c755] text-[#0f1015]"
+                    : isLight
+                      ? "text-[#4d5a66] hover:text-[#121722]"
+                      : "text-[#8a90a8] hover:text-[#f0f1f4]",
+                )}
+              >
+                {ui.localeSwitch.ar}
+              </button>
+            </div>
+
             <button
               type="button"
               onClick={toggleTheme}
@@ -228,7 +325,7 @@ export default function Navbar() {
               )}
             >
               {isLight ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
-              {isLight ? "Switch to dark" : "Switch to light"}
+              {isArabic ? (isLight ? "تبديل إلى الداكن" : "تبديل إلى الفاتح") : isLight ? "Switch to dark" : "Switch to light"}
             </button>
 
             {nav.links.map((l) => (
@@ -259,7 +356,7 @@ export default function Navbar() {
                 )}
               >
                 <Coffee className="h-4 w-4" />
-                Buy me a coffee
+                {isArabic ? "ادعمني بقهوة" : "Buy me a coffee"}
               </a>
             <Button
               asChild

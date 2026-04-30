@@ -126,6 +126,94 @@
     -webkit-font-smoothing: antialiased;
   }
 
+  html.locale-ar body,
+  html.locale-ar h1,
+  html.locale-ar h2,
+  html.locale-ar h3,
+  html.locale-ar h4,
+  html.locale-ar h5,
+  html.locale-ar h6,
+  html.locale-ar button,
+  html.locale-ar a,
+  html.locale-ar input,
+  html.locale-ar textarea,
+  html.locale-ar select {
+    font-family: "Mirza", "Noto Naskh Arabic", serif;
+  }
+
+  html.locale-ar body {
+    direction: rtl;
+    text-align: right;
+    font-size: 16px;
+    line-height: 1.85;
+    font-weight: 500;
+    text-rendering: optimizeLegibility;
+  }
+
+  html.locale-ar .container-narrow {
+    direction: rtl;
+  }
+
+  html.locale-ar h1,
+  html.locale-ar h2,
+  html.locale-ar h3,
+  html.locale-ar h4,
+  html.locale-ar h5,
+  html.locale-ar h6 {
+    letter-spacing: 0;
+    line-height: 1.4;
+    font-weight: 700;
+  }
+
+  html.locale-ar p,
+  html.locale-ar li,
+  html.locale-ar a,
+  html.locale-ar button,
+  html.locale-ar span,
+  html.locale-ar input,
+  html.locale-ar textarea,
+  html.locale-ar label {
+    letter-spacing: 0;
+    line-height: 1.8;
+  }
+
+  /* Arabic copy should not inherit aggressive uppercase/tracking styles from EN UI */
+  html.locale-ar [class*="uppercase"] {
+    text-transform: none !important;
+  }
+
+  html.locale-ar [class*="tracking-"] {
+    letter-spacing: 0 !important;
+  }
+
+  /* Small EN-oriented text sizes look cramped in Arabic script */
+  html.locale-ar [class*="text-[11px]"] {
+    font-size: 13px !important;
+  }
+
+  html.locale-ar [class*="text-[12px]"] {
+    font-size: 14px !important;
+  }
+
+  html.locale-ar [class*="text-xs"] {
+    font-size: 14px !important;
+  }
+
+  html.locale-ar [class*="text-sm"] {
+    font-size: 15px !important;
+  }
+
+  html.locale-ar .innovation-label {
+    line-height: 1.35;
+    letter-spacing: 0;
+  }
+
+  html.locale-ar .timeline-year-shimmer {
+    font-size: 18px;
+    letter-spacing: 0;
+    font-weight: 700;
+  }
+
   h1,
   h2,
   h3,

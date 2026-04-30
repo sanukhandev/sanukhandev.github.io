@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { ShoppingCart, Webhook, Boxes, LayoutGrid } from "lucide-react";
-import { works, workCategories, type WorkCategory } from "@/data/siteData";
+import { type WorkCategory } from "@/data/siteData";
+import { useSiteContent } from "@/data/siteContent";
 import { SectionHeading, TagChip } from "@/components/shared/SectionHeading";
 import { cn } from "@/lib/utils";
 
@@ -12,6 +13,7 @@ const categoryIcons: Record<string, React.ComponentType<{ className?: string }>>
 };
 
 export default function Works() {
+  const { works, workCategories, ui } = useSiteContent();
   const [active, setActive] = useState<WorkCategory>("All");
 
   const filtered = useMemo(
@@ -24,9 +26,9 @@ export default function Works() {
     <section id="works" className="section-pad">
       <div className="container-narrow">
         <SectionHeading
-          eyebrow="Work"
-          title="Case Studies"
-          subtitle="Impact-led delivery across distributed commerce and enterprise integration landscapes."
+          eyebrow={ui.works.eyebrow}
+          title={ui.works.title}
+          subtitle={ui.works.subtitle}
           align="left"
         />
 
@@ -42,7 +44,7 @@ export default function Works() {
                   : "border-[#2b2f3b] bg-[#16171d] text-[#8a90a8] hover:text-[#f0f1f4]",
               )}
             >
-              {c}
+              {ui.works.categoryLabels[c]}
             </button>
           ))}
         </div>
@@ -72,17 +74,15 @@ export default function Works() {
               </h3>
               <div className="space-y-3 text-[15px] text-[#8a90a8]">
                 <p>
-                  <span className="font-semibold text-[#f0f1f4]">Problem:</span>{" "}
+                  <span className="font-semibold text-[#f0f1f4]">{ui.works.problem}:</span>{" "}
                   {w.problem}
                 </p>
                 <p>
-                  <span className="font-semibold text-[#f0f1f4]">
-                    Solution:
-                  </span>{" "}
+                  <span className="font-semibold text-[#f0f1f4]">{ui.works.solution}:</span>{" "}
                   {w.solution}
                 </p>
                 <p>
-                  <span className="font-semibold text-[#38c755]">Outcome:</span>{" "}
+                  <span className="font-semibold text-[#38c755]">{ui.works.outcome}:</span>{" "}
                   {w.outcome}
                 </p>
               </div>

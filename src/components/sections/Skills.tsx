@@ -1,5 +1,5 @@
 import { Cloud, Server, Monitor, Container, Network } from "lucide-react";
-import { skills } from "@/data/siteData";
+import { useSiteContent } from "@/data/siteContent";
 import { SectionHeading, TagChip } from "@/components/shared/SectionHeading";
 
 const clusterIcons: Record<string, React.ComponentType<{ className?: string }>> = {
@@ -8,9 +8,16 @@ const clusterIcons: Record<string, React.ComponentType<{ className?: string }>> 
   "Frontend Systems": Monitor,
   "DevOps & Infra": Container,
   "Enterprise Integrations": Network,
+  "السحابة والعمارة": Cloud,
+  "أنظمة الخلفية": Server,
+  "أنظمة الواجهة": Monitor,
+  "DevOps والبنية التحتية": Container,
+  "تكاملات المؤسسات": Network,
 };
 
 export default function Skills() {
+  const { skills } = useSiteContent();
+
   return (
     <section id="stack" className="section-pad">
       <div className="container-narrow">

@@ -1,5 +1,5 @@
 import { Briefcase, History, Building2, Cpu, Globe, Network, CheckCircle2 } from "lucide-react";
-import { services } from "@/data/siteData";
+import { useSiteContent } from "@/data/siteContent";
 import { SectionHeading, TagChip } from "@/components/shared/SectionHeading";
 
 const roleIcons = [Briefcase, Building2, Network, Cpu, Globe, History];
@@ -10,21 +10,23 @@ const getStartYear = (duration: string) => {
 };
 
 export default function Services() {
+  const { services, ui } = useSiteContent();
+
   return (
     <section id="experience" className="section-pad bg-[#16171d]/45">
       <div className="container-narrow">
         <SectionHeading
-          title="Experience"
-          subtitle="Engineer → System Builder → Architect → Tech Lead"
+          title={ui.experience.title}
+          subtitle={ui.experience.subtitle}
           align="left"
         />
 
         {/* Career stat pills */}
         <div className="mb-8 flex flex-wrap gap-2 text-[11px] font-semibold uppercase tracking-widest text-[#8a90a8]">
-          <span className="rounded-full border border-[#2b2f3b] px-3 py-1">13+ Years</span>
-          <span className="rounded-full border border-[#2b2f3b] px-3 py-1">6 Roles</span>
-          <span className="rounded-full border border-[#2b2f3b] px-3 py-1">3 Countries</span>
-          <span className="rounded-full border border-[#38c755]/40 bg-[#38c755]/10 px-3 py-1 text-[#38c755]">Currently Available</span>
+          <span className="rounded-full border border-[#2b2f3b] px-3 py-1">{ui.experience.stats[0]}</span>
+          <span className="rounded-full border border-[#2b2f3b] px-3 py-1">{ui.experience.stats[1]}</span>
+          <span className="rounded-full border border-[#2b2f3b] px-3 py-1">{ui.experience.stats[2]}</span>
+          <span className="rounded-full border border-[#38c755]/40 bg-[#38c755]/10 px-3 py-1 text-[#38c755]">{ui.experience.stats[3]}</span>
         </div>
 
         {/* Timeline */}
@@ -80,7 +82,7 @@ export default function Services() {
                           {item.current && (
                             <span className="inline-flex items-center gap-1 rounded-full border border-[#38c755]/40 bg-[#38c755]/10 px-2 py-0.5 text-[11px] font-semibold text-[#38c755]">
                               <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#38c755]" />
-                              Current
+                              {ui.experience.current}
                             </span>
                           )}
                         </div>
