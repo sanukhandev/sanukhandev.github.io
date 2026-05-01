@@ -2,11 +2,12 @@ import { defineConfig, loadEnv } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { fileURLToPath } from "url";
-import vitePrerender from "vite-plugin-prerender";
+import { createRequire } from "module";
 import { mcpProcessor, type ZaakiyLocale } from "./src/lib/mcp-processor";
 import { mcpGenerativeSupport } from "./src/lib/mcp-generative-support";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const require = createRequire(import.meta.url);
 
 type HistoryMessage = { role: "user" | "assistant"; text: string };
 type SessionEntry = { messages: HistoryMessage[]; siteScope?: string };
@@ -252,6 +253,37 @@ const createZaakiyApiWrapper = (env: Record<string, string>) => ({
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
+  const plugins = [react(), createZaakiyApiWrapper(env)];
+
+  // vite-plugin-prerender has ESM/CJS interop issues in dev config loading.
+  // Load it only for production builds via CommonJS require.
+  if (mode === "production") {
+    const vitePrerender = require("vite-plugin-prerender");
+    plugins.push(
+      vitePrerender({
+        staticDir: path.join(__dirname, "dist"),
+        routes: [
+          "/",
+          "/tools",
+          "/tools/json-formatter-online",
+          "/tools/api-client-tool",
+          "/tools/curl-to-json-converter",
+          "/blog",
+          "/blog/javascript-algorithms",
+          "/blog/nodejs-api-best-practices",
+          "/nodejs-developer-uae",
+          "/react-developer-dubai",
+          "/api-integration-services",
+          "/full-stack-consultant-uae",
+        ],
+        renderer: new vitePrerender.PuppeteerRenderer({
+          // Wait for intro preloader (1900ms) + SeoMeta useEffect to run
+          renderAfterTime: 3500,
+          headless: true,
+        }),
+      }),
+    );
+  }
 
   return {
     server: {
@@ -261,36 +293,7 @@ export default defineConfig(({ mode }) => {
         overlay: false,
       },
     },
-    plugins: [
-      react(),
-      createZaakiyApiWrapper(env),
-      ...(mode === "production"
-        ? [
-            vitePrerender({
-              staticDir: path.join(__dirname, "dist"),
-              routes: [
-                "/",
-                "/tools",
-                "/tools/json-formatter-online",
-                "/tools/api-client-tool",
-                "/tools/curl-to-json-converter",
-                "/blog",
-                "/blog/javascript-algorithms",
-                "/blog/nodejs-api-best-practices",
-                "/nodejs-developer-uae",
-                "/react-developer-dubai",
-                "/api-integration-services",
-                "/full-stack-consultant-uae",
-              ],
-              renderer: new vitePrerender.PuppeteerRenderer({
-                // Wait for intro preloader (1900ms) + SeoMeta useEffect to run
-                renderAfterTime: 3500,
-                headless: true,
-              }),
-            }),
-          ]
-        : []),
-    ],
+    plugins,
     resolve: {
       alias: {
         "@": path.resolve(__dirname, "./src"),
