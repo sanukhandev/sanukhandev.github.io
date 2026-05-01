@@ -251,13 +251,13 @@ const createZaakiyApiWrapper = (env: Record<string, string>) => ({
 });
 
 // https://vitejs.dev/config/
-export default defineConfig(({ mode }) => {
+export default defineConfig(({ command, mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
   const plugins = [react(), createZaakiyApiWrapper(env)];
 
   // vite-plugin-prerender has ESM/CJS interop issues in dev config loading.
   // Load it only for production builds via CommonJS require.
-  if (mode === "production") {
+  if (command === "build" && mode === "production") {
     const vitePrerender = require("vite-plugin-prerender");
     plugins.push(
       vitePrerender({

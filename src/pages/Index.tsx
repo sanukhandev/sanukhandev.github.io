@@ -31,7 +31,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SeoMeta
-        title="Sanu Khan | Tech Lead &amp; Cloud Architect UAE"
+        title="Sanu Khan | Tech Lead & Cloud Architect UAE"
         description="Tech Lead and Cloud Architect in Dubai UAE. 13+ years delivering distributed systems, event-driven platforms, and enterprise integrations across MENA and global markets."
         canonicalPath="/"
       />
