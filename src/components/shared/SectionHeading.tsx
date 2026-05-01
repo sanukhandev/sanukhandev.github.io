@@ -1,4 +1,81 @@
+import type { ComponentType, CSSProperties } from "react";
+import { Cloud, Server } from "lucide-react";
+import {
+  SiGooglecloud,
+  SiServerless,
+  SiSpringboot,
+  SiNodedotjs,
+  SiNestjs,
+  SiGraphql,
+  SiPostgresql,
+  SiReact,
+  SiNextdotjs,
+  SiTypescript,
+  SiKubernetes,
+  SiDocker,
+  SiTerraform,
+  SiShopify,
+  SiApachekafka,
+  SiSap,
+  SiRabbitmq,
+  SiAngular,
+  SiLaravel,
+  SiPhp,
+  SiMysql,
+  SiDjango,
+  SiAndroid,
+} from "react-icons/si";
 import { cn } from "@/lib/utils";
+
+type SiIconType = ComponentType<{ className?: string; style?: CSSProperties }>;
+
+const tagIconMap: Record<string, { icon: SiIconType; color: string }> = {
+  // Cloud
+  Azure: { icon: Cloud as SiIconType, color: "#0078D4" },
+  "Azure Functions": { icon: Cloud as SiIconType, color: "#0078D4" },
+  "Azure Event Hubs": { icon: Cloud as SiIconType, color: "#0078D4" },
+  "Event Hubs": { icon: Cloud as SiIconType, color: "#0078D4" },
+  AWS: { icon: Server as SiIconType, color: "#FF9900" },
+  GCP: { icon: SiGooglecloud, color: "#4285F4" },
+  Serverless: { icon: SiServerless, color: "#FD5750" },
+  // Backend
+  "Spring Boot": { icon: SiSpringboot, color: "#6DB33F" },
+  "Node.js": { icon: SiNodedotjs, color: "#339933" },
+  NestJS: { icon: SiNestjs, color: "#E0234E" },
+  GraphQL: { icon: SiGraphql, color: "#E10098" },
+  PostgreSQL: { icon: SiPostgresql, color: "#4169E1" },
+  Django: { icon: SiDjango, color: "#092E20" },
+  Laravel: { icon: SiLaravel, color: "#FF2D20" },
+  PHP: { icon: SiPhp, color: "#777BB4" },
+  MySQL: { icon: SiMysql, color: "#4479A1" },
+  // Frontend
+  React: { icon: SiReact, color: "#61DAFB" },
+  "Next.js": { icon: SiNextdotjs, color: "#ffffff" },
+  TypeScript: { icon: SiTypescript, color: "#3178C6" },
+  Angular: { icon: SiAngular, color: "#DD0031" },
+  Android: { icon: SiAndroid, color: "#3DDC84" },
+  // DevOps
+  Kubernetes: { icon: SiKubernetes, color: "#326CE5" },
+  Docker: { icon: SiDocker, color: "#2496ED" },
+  Terraform: { icon: SiTerraform, color: "#7B42BC" },
+  // Integrations
+  Kafka: { icon: SiApachekafka, color: "#a0a0a0" },
+  RabbitMQ: { icon: SiRabbitmq, color: "#FF6600" },
+  SAP: { icon: SiSap, color: "#0FAAFF" },
+  Shopify: { icon: SiShopify, color: "#96BF48" },
+};
+
+export function TechTag({ label }: { label: string }) {
+  const entry = tagIconMap[label];
+  return (
+    <span className="inline-flex items-center gap-1.5 rounded-md border border-[#2e3140] bg-[#1c1e28] px-2.5 py-1 text-xs font-medium text-[#c8cdde] transition-colors hover:border-[#38c755]/40 hover:text-[#f0f1f4]">
+      {entry ? (
+        <entry.icon className="h-3.5 w-3.5 shrink-0" style={{ color: entry.color }} />
+      ) : null}
+      {label}
+    </span>
+  );
+}
 
 const tones = [
   "bg-tea-green-500/10 text-tea-green-300 border-tea-green-500/30",

@@ -1,6 +1,6 @@
 import { Briefcase, History, Building2, Cpu, Globe, Network, CheckCircle2 } from "lucide-react";
 import { useSiteContent } from "@/data/siteContent";
-import { SectionHeading, TagChip } from "@/components/shared/SectionHeading";
+import { SectionHeading, TechTag } from "@/components/shared/SectionHeading";
 
 const roleIcons = [Briefcase, Building2, Network, Cpu, Globe, History];
 
@@ -103,7 +103,7 @@ export default function Services() {
 
                     <div className="mt-4 flex flex-wrap gap-1.5">
                       {item.stack.map((t) => (
-                        <TagChip key={t} label={t} className="bg-[#0f1015] text-[#8a90a8]" />
+                        <TechTag key={t} label={t} />
                       ))}
                     </div>
                   </div>
