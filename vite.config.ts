@@ -2,6 +2,7 @@ import { defineConfig, loadEnv } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { fileURLToPath } from "url";
+import vitePrerender from "vite-plugin-prerender";
 import { mcpProcessor, type ZaakiyLocale } from "./src/lib/mcp-processor";
 import { mcpGenerativeSupport } from "./src/lib/mcp-generative-support";
 
@@ -260,7 +261,36 @@ export default defineConfig(({ mode }) => {
         overlay: false,
       },
     },
-    plugins: [react(), createZaakiyApiWrapper(env)],
+    plugins: [
+      react(),
+      createZaakiyApiWrapper(env),
+      ...(mode === "production"
+        ? [
+            vitePrerender({
+              staticDir: path.join(__dirname, "dist"),
+              routes: [
+                "/",
+                "/tools",
+                "/tools/json-formatter-online",
+                "/tools/api-client-tool",
+                "/tools/curl-to-json-converter",
+                "/blog",
+                "/blog/javascript-algorithms",
+                "/blog/nodejs-api-best-practices",
+                "/nodejs-developer-uae",
+                "/react-developer-dubai",
+                "/api-integration-services",
+                "/full-stack-consultant-uae",
+              ],
+              renderer: new vitePrerender.PuppeteerRenderer({
+                // Wait for intro preloader (1900ms) + SeoMeta useEffect to run
+                renderAfterTime: 3500,
+                headless: true,
+              }),
+            }),
+          ]
+        : []),
+    ],
     resolve: {
       alias: {
         "@": path.resolve(__dirname, "./src"),

@@ -6,9 +6,11 @@ type SeoMetaProps = {
   canonicalPath: string;
   schema?: Record<string, unknown> | Array<Record<string, unknown>>;
   noindex?: boolean;
+  ogImage?: string;
 };
 
 const SITE_URL = "https://www.sanukhan.dev";
+const DEFAULT_OG_IMAGE = `${SITE_URL}/assets/images/sanu.png`;
 
 const upsertMeta = (name: string, content: string, attr: "name" | "property" = "name") => {
   let node = document.head.querySelector(`meta[${attr}="${name}"]`) as HTMLMetaElement | null;
@@ -41,7 +43,7 @@ const upsertSchema = (schema: Record<string, unknown> | Array<Record<string, unk
   node.textContent = JSON.stringify(schema);
 };
 
-export default function SeoMeta({ title, description, canonicalPath, schema, noindex = false }: SeoMetaProps) {
+export default function SeoMeta({ title, description, canonicalPath, schema, noindex = false, ogImage }: SeoMetaProps) {
   useEffect(() => {
     document.title = title;
 
@@ -59,9 +61,12 @@ export default function SeoMeta({ title, description, canonicalPath, schema, noi
     upsertMeta("og:description", description, "property");
     upsertMeta("og:url", canonical, "property");
     upsertMeta("og:type", "website", "property");
+    upsertMeta("og:image", ogImage ?? DEFAULT_OG_IMAGE, "property");
 
+    upsertMeta("twitter:card", "summary_large_image");
     upsertMeta("twitter:title", title);
     upsertMeta("twitter:description", description);
+    upsertMeta("twitter:image", ogImage ?? DEFAULT_OG_IMAGE);
 
     upsertLink("canonical", canonical);
 

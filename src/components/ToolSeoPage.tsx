@@ -40,6 +40,7 @@ export default function ToolSeoPage(props: ToolSeoPageProps) {
           name: schemaName,
           applicationCategory: "DeveloperTool",
           operatingSystem: "Web",
+          inLanguage: "en",
           url: `https://www.sanukhan.dev${canonicalPath}`,
         }}
       />

@@ -31,8 +31,8 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SeoMeta
-        title="Full Stack Developer UAE | Sanu Khan"
-        description="Tech lead portfolio Dubai for cloud, microservices, and integration engineering. Full stack developer UAE profile with projects, services, and tools."
+        title="Sanu Khan | Tech Lead &amp; Cloud Architect UAE"
+        description="Tech Lead and Cloud Architect in Dubai UAE. 13+ years delivering distributed systems, event-driven platforms, and enterprise integrations across MENA and global markets."
         canonicalPath="/"
       />
       <Navbar />
