@@ -99,6 +99,18 @@
     border-color: #cfd8dd !important;
   }
 
+  html.light [class*="bg-[#1c1e28]"] {
+    background-color: #eef3f0 !important;
+  }
+
+  html.light [class*="border-[#2e3140]"] {
+    border-color: #cfd8dd !important;
+  }
+
+  html.light [class*="text-[#c8cdde]"] {
+    color: #2d3748 !important;
+  }
+
   html.light .premium-card {
     background: rgba(255, 255, 255, 0.92);
     border-color: #d6dee2;
