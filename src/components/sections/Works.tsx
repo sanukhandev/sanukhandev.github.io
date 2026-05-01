@@ -3,7 +3,7 @@ import { useMemo, useState } from "react";
 import { ShoppingCart, Webhook, Boxes } from "lucide-react";
 import { type WorkCategory } from "@/data/siteData";
 import { useSiteContent } from "@/data/siteContent";
-import { SectionHeading, TagChip } from "@/components/shared/SectionHeading";
+import { SectionHeading, TechTag } from "@/components/shared/SectionHeading";
 import { cn } from "@/lib/utils";
 
 const categoryIcons: Record<string, ComponentType<{ className?: string }>> = {
@@ -84,11 +84,7 @@ export default function Works() {
               </div>
               <div className="mt-4 flex flex-wrap gap-1.5">
                 {w.tags.map((t) => (
-                  <TagChip
-                    key={t}
-                    label={t}
-                    className="bg-[#16171d] text-[#8a90a8]"
-                  />
+                  <TechTag key={t} label={t} />
                 ))}
               </div>
             </article>

@@ -18,9 +18,24 @@ type SeoPageLayoutProps = {
 export default function SeoPageLayout(props: SeoPageLayoutProps) {
   const { title, description, canonicalPath, h1, intro, sections, cta, links, schema } = props;
 
+  const serviceSchema = schema ?? {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: h1,
+    description,
+    inLanguage: "en",
+    url: `https://www.sanukhan.dev${canonicalPath}`,
+    provider: {
+      "@type": "Person",
+      name: "Sanu Khan",
+      url: "https://www.sanukhan.dev/",
+    },
+    areaServed: { "@type": "Country", name: "United Arab Emirates" },
+  };
+
   return (
     <>
-      <SeoMeta title={title} description={description} canonicalPath={canonicalPath} schema={schema} />
+      <SeoMeta title={title} description={description} canonicalPath={canonicalPath} schema={serviceSchema} />
       <main className="min-h-screen bg-background pt-20 text-foreground">
         <article className="container-narrow section-pad">
           <header>

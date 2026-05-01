@@ -31,9 +31,10 @@ export default function BlogSeoPage(props: BlogSeoPageProps) {
         canonicalPath={canonicalPath}
         schema={{
           "@context": "https://schema.org",
-          "@type": "Article",
+          "@type": "BlogPosting",
           headline: h1,
-          author: "Sanu Khan",
+          inLanguage: "en",
+          author: { "@type": "Person", name: "Sanu Khan", url: "https://www.sanukhan.dev/" },
           url: `https://www.sanukhan.dev${canonicalPath}`,
           description,
         }}
