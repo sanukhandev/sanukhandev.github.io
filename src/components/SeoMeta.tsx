@@ -78,7 +78,7 @@ export default function SeoMeta({ title, description, canonicalPath, schema, noi
         existing.remove();
       }
     }
-  }, [title, description, canonicalPath, schema, noindex]);
+  }, [title, description, canonicalPath, schema, noindex, ogImage]);
 
   return null;
 }
