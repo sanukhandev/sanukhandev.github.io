@@ -254,10 +254,13 @@ const createZaakiyApiWrapper = (env: Record<string, string>) => ({
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
   const plugins = [react(), createZaakiyApiWrapper(env)];
+  const isCiBuild = process.env.CI === "true" || process.env.VERCEL === "1";
+  const shouldPrerender = mode === "production" && !isCiBuild;
 
   // vite-plugin-prerender has ESM/CJS interop issues in dev config loading.
-  // Load it only for production builds via CommonJS require.
-  if (mode === "production") {
+  // Also skip it in CI/Vercel because Puppeteer requires system libs
+  // (e.g. libnss3) that are not available in the default build image.
+  if (shouldPrerender) {
     const vitePrerender = require("vite-plugin-prerender");
     plugins.push(
       vitePrerender({
