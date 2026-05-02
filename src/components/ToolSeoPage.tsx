@@ -41,7 +41,7 @@ export default function ToolSeoPage(props: ToolSeoPageProps) {
           applicationCategory: "DeveloperTool",
           operatingSystem: "Web",
           inLanguage: "en",
-          url: `https://www.sanukhan.dev${canonicalPath}`,
+          url: `https://sanukhan.dev${canonicalPath}`,
         }}
       />
       <main className="min-h-screen bg-background pt-20 text-foreground">

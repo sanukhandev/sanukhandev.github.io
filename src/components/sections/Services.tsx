@@ -111,6 +111,21 @@ export default function Services() {
               );
             })}
           </div>
+
+          <nav className="mt-8 flex flex-wrap gap-3" aria-label="Experience section internal navigation">
+            <a
+              href="#works"
+              className="text-[14px] font-semibold text-[#38c755] underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#38c755]/70"
+            >
+              View architecture and integration projects
+            </a>
+            <a
+              href="#contact"
+              className="text-[14px] font-semibold text-[#38c755] underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#38c755]/70"
+            >
+              Contact Sanu Khan for solution design
+            </a>
+          </nav>
         </div>
       </div>
     </section>

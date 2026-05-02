@@ -1,4 +1,5 @@
-import { useEffect } from "react";
+import { Helmet } from "react-helmet-async";
+import { useLocation } from "react-router-dom";
 
 type SeoMetaProps = {
   title: string;
@@ -7,78 +8,86 @@ type SeoMetaProps = {
   schema?: Record<string, unknown> | Array<Record<string, unknown>>;
   noindex?: boolean;
   ogImage?: string;
+  keywords?: string;
 };
 
-const SITE_URL = "https://www.sanukhan.dev";
+const SITE_URL = "https://sanukhan.dev";
 const DEFAULT_OG_IMAGE = `${SITE_URL}/assets/images/sanu.png`;
+const DEFAULT_DESCRIPTION =
+  "Sanu Khan is a Tech Lead and Full Stack Engineer building scalable cloud-native platforms, enterprise integrations, and resilient product systems.";
 
-const upsertMeta = (name: string, content: string, attr: "name" | "property" = "name") => {
-  let node = document.head.querySelector(`meta[${attr}="${name}"]`) as HTMLMetaElement | null;
-  if (!node) {
-    node = document.createElement("meta");
-    node.setAttribute(attr, name);
-    document.head.appendChild(node);
+const normalizePath = (path: string) => {
+  if (!path) {
+    return "/";
   }
-  node.content = content;
+
+  const withLeadingSlash = path.startsWith("/") ? path : `/${path}`;
+  if (withLeadingSlash === "/") {
+    return withLeadingSlash;
+  }
+
+  return withLeadingSlash.replace(/\/+$/, "");
 };
 
-const upsertLink = (rel: string, href: string) => {
-  let node = document.head.querySelector(`link[rel="${rel}"]`) as HTMLLinkElement | null;
-  if (!node) {
-    node = document.createElement("link");
-    node.rel = rel;
-    document.head.appendChild(node);
-  }
-  node.href = href;
+const normalizeUrl = (rawUrl: string) => {
+  const url = new URL(rawUrl, SITE_URL);
+  url.pathname = normalizePath(url.pathname);
+  return url.toString();
 };
 
-const upsertSchema = (schema: Record<string, unknown> | Array<Record<string, unknown>>) => {
-  let node = document.head.querySelector("script[data-seo-schema='true']") as HTMLScriptElement | null;
-  if (!node) {
-    node = document.createElement("script");
-    node.type = "application/ld+json";
-    node.setAttribute("data-seo-schema", "true");
-    document.head.appendChild(node);
+const withBrandTitle = (title: string) => {
+  const trimmed = title.trim();
+  if (!trimmed) {
+    return "Sanu Khan";
   }
-  node.textContent = JSON.stringify(schema);
+
+  return /sanu khan/i.test(trimmed) ? trimmed : `${trimmed} | Sanu Khan`;
 };
 
-export default function SeoMeta({ title, description, canonicalPath, schema, noindex = false, ogImage }: SeoMetaProps) {
-  useEffect(() => {
-    document.title = title;
+export default function SeoMeta({
+  title,
+  description,
+  canonicalPath,
+  schema,
+  noindex = false,
+  ogImage,
+  keywords,
+}: SeoMetaProps) {
+  const location = useLocation();
+  const safeDescription = description.trim() || DEFAULT_DESCRIPTION;
+  const safeTitle = withBrandTitle(title);
 
-    const canonical = `${SITE_URL}${canonicalPath}`;
+  const canonicalUrl =
+    typeof window !== "undefined"
+      ? normalizeUrl(window.location.href)
+      : normalizeUrl(`${SITE_URL}${normalizePath(canonicalPath || location.pathname)}`);
+  const socialImage = ogImage ?? DEFAULT_OG_IMAGE;
 
-    upsertMeta("description", description);
-    upsertMeta(
-      "robots",
-      noindex
-        ? "noindex, nofollow"
-        : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-    );
+  const robotsContent = noindex
+    ? "noindex, nofollow"
+    : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1";
 
-    upsertMeta("og:title", title, "property");
-    upsertMeta("og:description", description, "property");
-    upsertMeta("og:url", canonical, "property");
-    upsertMeta("og:type", "website", "property");
-    upsertMeta("og:image", ogImage ?? DEFAULT_OG_IMAGE, "property");
+  const schemaPayload = schema ? JSON.stringify(schema) : "";
 
-    upsertMeta("twitter:card", "summary_large_image");
-    upsertMeta("twitter:title", title);
-    upsertMeta("twitter:description", description);
-    upsertMeta("twitter:image", ogImage ?? DEFAULT_OG_IMAGE);
-
-    upsertLink("canonical", canonical);
-
-    if (schema) {
-      upsertSchema(schema);
-    } else {
-      const existing = document.head.querySelector("script[data-seo-schema='true']");
-      if (existing) {
-        existing.remove();
-      }
-    }
-  }, [title, description, canonicalPath, schema, noindex, ogImage]);
-
-  return null;
+  return (
+    <Helmet prioritizeSeoTags>
+      <title>{safeTitle}</title>
+      <meta name="description" content={safeDescription} />
+      {keywords ? <meta name="keywords" content={keywords} /> : null}
+      <meta name="robots" content={robotsContent} />
+      <meta property="og:title" content={safeTitle} />
+      <meta property="og:description" content={safeDescription} />
+      <meta property="og:url" content={canonicalUrl} />
+      <meta property="og:type" content="website" />
+      <meta property="og:image" content={socialImage} />
+      <meta property="og:site_name" content="sanukhan.dev" />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={safeTitle} />
+      <meta name="twitter:description" content={safeDescription} />
+      <meta name="twitter:image" content={socialImage} />
+      <meta name="twitter:creator" content="@sanukandev" />
+      <link rel="canonical" href={canonicalUrl} />
+      {schemaPayload ? <script type="application/ld+json">{schemaPayload}</script> : null}
+    </Helmet>
+  );
 }

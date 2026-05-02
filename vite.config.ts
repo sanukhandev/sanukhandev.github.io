@@ -267,6 +267,7 @@ export default defineConfig(({ command, mode }) => {
         staticDir: path.join(__dirname, "dist"),
         routes: [
           "/",
+          "/faq",
           "/tools",
           "/tools/json-formatter-online",
           "/tools/api-client-tool",
@@ -278,6 +279,10 @@ export default defineConfig(({ command, mode }) => {
           "/react-developer-dubai",
           "/api-integration-services",
           "/full-stack-consultant-uae",
+          "/services/nodejs-backend-engineer",
+          "/services/react-developer-dubai",
+          "/services/azure-cloud-architect",
+          "/services/full-stack-developer-uae",
         ],
         renderer: new vitePrerender.PuppeteerRenderer({
           // Wait for intro preloader (1900ms) + SeoMeta useEffect to run
@@ -309,6 +314,42 @@ export default defineConfig(({ command, mode }) => {
         "@tanstack/react-query",
         "@tanstack/query-core",
       ],
+    },
+    build: {
+      cssCodeSplit: true,
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            if (!id.includes("node_modules")) {
+              return;
+            }
+
+            if (id.includes("react-dom") || id.includes("react/jsx-runtime") || id.includes("/react/")) {
+              return "vendor-react";
+            }
+
+            if (id.includes("react-router") || id.includes("@tanstack")) {
+              return "vendor-routing-data";
+            }
+
+            if (id.includes("@radix-ui") || id.includes("class-variance-authority") || id.includes("tailwind-merge")) {
+              return "vendor-ui";
+            }
+
+            if (id.includes("lucide-react") || id.includes("react-icons")) {
+              return "vendor-icons";
+            }
+
+            if (id.includes("recharts")) {
+              return "vendor-charts";
+            }
+
+            if (id.includes("react-hook-form") || id.includes("zod") || id.includes("@hookform")) {
+              return "vendor-forms";
+            }
+          },
+        },
+      },
     },
   };
 });

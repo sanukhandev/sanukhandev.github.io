@@ -26,6 +26,7 @@ export default function ToolsIndex() {
         title="Developer Tools Platform | Sanu Khan"
         description="Developer tools platform with JSON formatter online, API client tool, and curl to JSON converter for faster backend and integration workflows."
         canonicalPath="/tools"
+        keywords="developer tools, json formatter online, api client tool, curl to json converter"
       />
       <main className="min-h-screen bg-background pt-20 text-foreground">
         <section className="container-narrow section-pad">

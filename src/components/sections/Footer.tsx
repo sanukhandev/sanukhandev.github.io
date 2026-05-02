@@ -1,10 +1,16 @@
 import type { ComponentType } from "react";
-import * as Icons from "lucide-react";
-import { Mail, Phone, MapPin } from "lucide-react";
+import { Coffee, Github, Link as LinkIcon, Linkedin, Mail, MapPin, Phone } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useSiteContent } from "@/data/siteContent";
 import { useTheme } from "@/hooks/use-theme";
 import { useLocale } from "@/hooks/use-locale";
+import { trackEvent } from "@/utils/analytics";
+
+const socialIcons: Record<string, ComponentType<{ className?: string }>> = {
+  Github,
+  Linkedin,
+  Coffee,
+};
 
 export default function Footer() {
   const { theme } = useTheme();
@@ -135,19 +141,22 @@ export default function Footer() {
 
           <div className="flex w-full flex-wrap gap-2 sm:w-auto sm:gap-4">
             {footer.socials.map((s) => {
-              const Icon =
-                (
-                  Icons as unknown as Record<
-                    string,
-                    ComponentType<{ className?: string }>
-                  >
-                )[s.icon] || Icons.Link;
+              const Icon = socialIcons[s.icon] || LinkIcon;
               return (
                 <a
                   key={s.label}
                   href={s.href}
                   target={s.href.startsWith('http') ? '_blank' : undefined}
                   rel={s.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                  onClick={() => {
+                    const normalizedLabel = s.label.toLowerCase();
+                    if (normalizedLabel.includes("github")) {
+                      trackEvent("github_click");
+                    }
+                    if (normalizedLabel.includes("linkedin")) {
+                      trackEvent("linkedin_click");
+                    }
+                  }}
                   aria-label={s.label}
                   className={cn(
                     "inline-flex items-center gap-2 rounded-md border px-3 py-2 text-sm transition-all duration-300 hover:scale-[1.02]",
@@ -177,6 +186,7 @@ export default function Footer() {
           <div className="flex flex-wrap gap-4">
             <a
               href={`mailto:${footer.contact.email}`}
+              onClick={() => trackEvent("contact_click", { cta_type: "contact" })}
               className={cn(
                 "inline-flex items-center gap-1 transition-colors",
                 isLight ? "hover:text-[#121722]" : "hover:text-[#f0f1f4]",
@@ -188,6 +198,7 @@ export default function Footer() {
             {footer.contact.phone && (
               <a
                 href={`tel:${footer.contact.phone}`}
+                onClick={() => trackEvent("contact_click", { cta_type: "contact" })}
                 className={cn(
                   "inline-flex items-center gap-1 transition-colors",
                   isLight ? "hover:text-[#121722]" : "hover:text-[#f0f1f4]",

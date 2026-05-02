@@ -17,6 +17,7 @@ import { useSiteContent } from "@/data/siteContent";
 import { useLocale } from "@/hooks/use-locale";
 import { Button } from "@/components/ui/button";
 import TechParticles from "@/components/TechParticles";
+import { trackEvent } from "@/utils/analytics";
 
 const metaIcons = [Briefcase, MapPin, CircleDot];
 
@@ -46,7 +47,7 @@ export default function Hero() {
   }));
 
   return (
-    <section id="home" className="relative overflow-hidden pt-16 sm:pt-20">
+    <header id="home" className="relative overflow-hidden pt-16 sm:pt-20">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 -z-10 opacity-60"
@@ -122,7 +123,12 @@ export default function Hero() {
                   asChild
                   className="h-10 rounded-lg bg-[#38c755] px-5 text-[#0f1015] hover:scale-[1.02] hover:bg-[#4fd16a]"
                 >
-                  <a href={c.href}>{c.label}</a>
+                  <a
+                    href={c.href}
+                    onClick={() => trackEvent("cta_click", { cta_type: "primary", cta_label: c.label })}
+                  >
+                    {c.label}
+                  </a>
                 </Button>
               ) : c.variant === "hire" ? (
                 <Button
@@ -130,7 +136,14 @@ export default function Hero() {
                   asChild
                   className="h-10 rounded-lg border border-[#38c755]/60 bg-[#38c755]/10 px-5 text-[#38c755] hover:scale-[1.02] hover:bg-[#38c755]/20"
                 >
-                  <a href={c.href} className="inline-flex items-center gap-2">
+                  <a
+                    href={c.href}
+                    className="inline-flex items-center gap-2"
+                    onClick={() => {
+                      trackEvent("hire_me_click", { cta_type: "hire" });
+                      trackEvent("cta_click", { cta_type: "hire", cta_label: c.label });
+                    }}
+                  >
                     <Briefcase className="h-4 w-4" /> {c.label}
                   </a>
                 </Button>
@@ -141,7 +154,14 @@ export default function Hero() {
                   variant="outline"
                   className="h-10 rounded-lg border-[#2b2f3b] bg-[#16171d] text-[#f0f1f4] hover:scale-[1.02] hover:bg-[#20222b]"
                 >
-                  <a href={c.href} className="inline-flex items-center gap-2">
+                  <a
+                    href={c.href}
+                    className="inline-flex items-center gap-2"
+                    onClick={() => {
+                      trackEvent("resume_view", { cta_type: "resume" });
+                      trackEvent("cta_click", { cta_type: "resume", cta_label: c.label });
+                    }}
+                  >
                     <Download className="h-4 w-4" /> {c.label}
                   </a>
                 </Button>
@@ -180,6 +200,8 @@ export default function Hero() {
               className="relative z-10 w-full object-contain"
               loading="lazy"
               decoding="async"
+              width={640}
+              height={640}
             />
           </div>
 
@@ -190,6 +212,6 @@ export default function Hero() {
           </div>
         </div>
       </div>
-    </section>
+    </header>
   );
 }

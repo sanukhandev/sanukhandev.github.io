@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useTheme } from "@/hooks/use-theme";
 import { useLocale } from "@/hooks/use-locale";
+import { trackEvent } from "@/utils/analytics";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -233,7 +234,15 @@ export default function Navbar() {
                 : "bg-[#38c755] text-[#0f1015] hover:bg-[#4fd16a]",
             )}
           >
-            <a href={nav.cta.href}>{nav.cta.label}</a>
+            <a
+              href={nav.cta.href}
+              onClick={() => {
+                trackEvent("contact_click", { cta_type: "contact" });
+                trackEvent("cta_click", { cta_type: "contact", cta_label: nav.cta.label });
+              }}
+            >
+              {nav.cta.label}
+            </a>
           </Button>
 
           <div className="ml-1 inline-flex items-center rounded-lg border border-[#2b2f3b] bg-[#16171d]/80 p-0.5">
@@ -366,9 +375,17 @@ export default function Navbar() {
                   ? "bg-[#1f9f45] text-white hover:bg-[#2caf54]"
                   : "bg-[#38c755] text-[#0f1015] hover:bg-[#4fd16a]",
               )}
-              onClick={() => setOpen(false)}
             >
-              <a href={nav.cta.href}>{nav.cta.label}</a>
+              <a
+                href={nav.cta.href}
+                onClick={() => {
+                  setOpen(false);
+                  trackEvent("contact_click", { cta_type: "contact" });
+                  trackEvent("cta_click", { cta_type: "contact", cta_label: nav.cta.label });
+                }}
+              >
+                {nav.cta.label}
+              </a>
             </Button>
           </div>
         </div>

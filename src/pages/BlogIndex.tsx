@@ -21,6 +21,7 @@ export default function BlogIndex() {
         title="Engineering Blog | Sanu Khan"
         description="Engineering blog with deep-dive guides on javascript algorithms and nodejs api best practices for scalable software teams."
         canonicalPath="/blog"
+        keywords="engineering blog, javascript algorithms, nodejs api best practices, software architecture"
       />
       <main className="min-h-screen bg-background pt-20 text-foreground">
         <section className="container-narrow section-pad">
