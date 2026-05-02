@@ -34,8 +34,8 @@ export default function BlogSeoPage(props: BlogSeoPageProps) {
           "@type": "BlogPosting",
           headline: h1,
           inLanguage: "en",
-          author: { "@type": "Person", name: "Sanu Khan", url: "https://www.sanukhan.dev/" },
-          url: `https://www.sanukhan.dev${canonicalPath}`,
+          author: { "@type": "Person", name: "Sanu Khan", url: "https://sanukhan.dev" },
+          url: `https://sanukhan.dev${canonicalPath}`,
           description,
         }}
       />

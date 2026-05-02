@@ -267,6 +267,7 @@ export default defineConfig(({ command, mode }) => {
         staticDir: path.join(__dirname, "dist"),
         routes: [
           "/",
+          "/faq",
           "/tools",
           "/tools/json-formatter-online",
           "/tools/api-client-tool",
@@ -278,6 +279,10 @@ export default defineConfig(({ command, mode }) => {
           "/react-developer-dubai",
           "/api-integration-services",
           "/full-stack-consultant-uae",
+          "/services/nodejs-backend-engineer",
+          "/services/react-developer-dubai",
+          "/services/azure-cloud-architect",
+          "/services/full-stack-developer-uae",
         ],
         renderer: new vitePrerender.PuppeteerRenderer({
           // Wait for intro preloader (1900ms) + SeoMeta useEffect to run

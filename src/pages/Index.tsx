@@ -50,6 +50,7 @@ const Index = () => {
 
           trackedSections.add(sectionName);
           trackEvent("section_view", { section_name: sectionName });
+          trackEvent("section_engagement", { section_name: sectionName });
           observer.unobserve(entry.target);
         });
       },

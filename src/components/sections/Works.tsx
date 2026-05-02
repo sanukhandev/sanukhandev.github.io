@@ -1,5 +1,6 @@
 import type { ComponentType } from "react";
 import { useEffect, useMemo, useState } from "react";
+import { Link } from "react-router-dom";
 import { ShoppingCart, Webhook, Boxes } from "lucide-react";
 import { type WorkCategory } from "@/data/siteData";
 import { useSiteContent } from "@/data/siteContent";
@@ -129,6 +130,21 @@ export default function Works() {
             </article>
           ))}
         </div>
+
+        <nav className="mt-8 flex flex-wrap gap-3" aria-label="Projects section internal navigation">
+          <Link
+            to="/api-integration-services"
+            className="text-[14px] font-semibold text-[#38c755] underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#38c755]/70"
+          >
+            View Azure integration project delivery approach
+          </Link>
+          <a
+            href="#contact"
+            className="text-[14px] font-semibold text-[#38c755] underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#38c755]/70"
+          >
+            Contact for project architecture review
+          </a>
+        </nav>
       </div>
     </section>
   );

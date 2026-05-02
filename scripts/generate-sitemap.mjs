@@ -1,11 +1,12 @@
 import { writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 
-const SITE = "https://www.sanukhan.dev";
+const SITE = "https://sanukhan.dev";
 const LASTMOD = new Date().toISOString().slice(0, 10);
 
 const routes = [
   "/",
+  "/faq",
   "/tools",
   "/tools/json-formatter-online",
   "/tools/api-client-tool",
@@ -17,6 +18,10 @@ const routes = [
   "/react-developer-dubai",
   "/api-integration-services",
   "/full-stack-consultant-uae",
+  "/services/nodejs-backend-engineer",
+  "/services/react-developer-dubai",
+  "/services/azure-cloud-architect",
+  "/services/full-stack-developer-uae",
 ];
 
 const priorityFor = (route) => {

@@ -236,7 +236,10 @@ export default function Navbar() {
           >
             <a
               href={nav.cta.href}
-              onClick={() => trackEvent("contact_click", { cta_type: "contact" })}
+              onClick={() => {
+                trackEvent("contact_click", { cta_type: "contact" });
+                trackEvent("cta_click", { cta_type: "contact", cta_label: nav.cta.label });
+              }}
             >
               {nav.cta.label}
             </a>
@@ -378,6 +381,7 @@ export default function Navbar() {
                 onClick={() => {
                   setOpen(false);
                   trackEvent("contact_click", { cta_type: "contact" });
+                  trackEvent("cta_click", { cta_type: "contact", cta_label: nav.cta.label });
                 }}
               >
                 {nav.cta.label}

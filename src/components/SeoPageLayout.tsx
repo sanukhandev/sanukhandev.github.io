@@ -24,11 +24,11 @@ export default function SeoPageLayout(props: SeoPageLayoutProps) {
     name: h1,
     description,
     inLanguage: "en",
-    url: `https://www.sanukhan.dev${canonicalPath}`,
+    url: `https://sanukhan.dev${canonicalPath}`,
     provider: {
       "@type": "Person",
       name: "Sanu Khan",
-      url: "https://www.sanukhan.dev/",
+      url: "https://sanukhan.dev",
     },
     areaServed: { "@type": "Country", name: "United Arab Emirates" },
   };

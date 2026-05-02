@@ -114,6 +114,10 @@ const AppShell = () => {
             <Route path="/react-developer-dubai" element={<ReactDeveloperDubaiPage />} />
             <Route path="/api-integration-services" element={<ApiIntegrationServicesPage />} />
             <Route path="/full-stack-consultant-uae" element={<FullStackConsultantUaePage />} />
+            <Route path="/services/nodejs-backend-engineer" element={<NodejsDeveloperUaePage />} />
+            <Route path="/services/react-developer-dubai" element={<ReactDeveloperDubaiPage />} />
+            <Route path="/services/azure-cloud-architect" element={<ApiIntegrationServicesPage />} />
+            <Route path="/services/full-stack-developer-uae" element={<FullStackConsultantUaePage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
