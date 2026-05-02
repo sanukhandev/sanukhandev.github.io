@@ -315,5 +315,41 @@ export default defineConfig(({ command, mode }) => {
         "@tanstack/query-core",
       ],
     },
+    build: {
+      cssCodeSplit: true,
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            if (!id.includes("node_modules")) {
+              return;
+            }
+
+            if (id.includes("react-dom") || id.includes("react/jsx-runtime") || id.includes("/react/")) {
+              return "vendor-react";
+            }
+
+            if (id.includes("react-router") || id.includes("@tanstack")) {
+              return "vendor-routing-data";
+            }
+
+            if (id.includes("@radix-ui") || id.includes("class-variance-authority") || id.includes("tailwind-merge")) {
+              return "vendor-ui";
+            }
+
+            if (id.includes("lucide-react") || id.includes("react-icons")) {
+              return "vendor-icons";
+            }
+
+            if (id.includes("recharts")) {
+              return "vendor-charts";
+            }
+
+            if (id.includes("react-hook-form") || id.includes("zod") || id.includes("@hookform")) {
+              return "vendor-forms";
+            }
+          },
+        },
+      },
+    },
   };
 });

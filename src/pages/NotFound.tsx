@@ -15,6 +15,7 @@ const NotFound = () => {
         title="Page Not Found | Sanu Khan"
         description="The requested page could not be found. Explore Sanu Khan portfolio, services, developer tools, and technical blog content."
         canonicalPath="/404"
+        keywords="404, page not found, sanu khan portfolio"
         noindex
       />
       <div className="flex min-h-screen items-center justify-center bg-muted">

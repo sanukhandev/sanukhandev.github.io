@@ -1,11 +1,16 @@
 import type { ComponentType } from "react";
-import * as Icons from "lucide-react";
-import { Mail, Phone, MapPin } from "lucide-react";
+import { Coffee, Github, Link as LinkIcon, Linkedin, Mail, MapPin, Phone } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useSiteContent } from "@/data/siteContent";
 import { useTheme } from "@/hooks/use-theme";
 import { useLocale } from "@/hooks/use-locale";
 import { trackEvent } from "@/utils/analytics";
+
+const socialIcons: Record<string, ComponentType<{ className?: string }>> = {
+  Github,
+  Linkedin,
+  Coffee,
+};
 
 export default function Footer() {
   const { theme } = useTheme();
@@ -136,13 +141,7 @@ export default function Footer() {
 
           <div className="flex w-full flex-wrap gap-2 sm:w-auto sm:gap-4">
             {footer.socials.map((s) => {
-              const Icon =
-                (
-                  Icons as unknown as Record<
-                    string,
-                    ComponentType<{ className?: string }>
-                  >
-                )[s.icon] || Icons.Link;
+              const Icon = socialIcons[s.icon] || LinkIcon;
               return (
                 <a
                   key={s.label}

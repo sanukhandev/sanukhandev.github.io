@@ -74,6 +74,7 @@ const Index = () => {
         title="Sanu Khan | Tech Lead & Cloud Architect UAE"
         description="Tech Lead and Cloud Architect in Dubai UAE. 13+ years delivering distributed systems, event-driven platforms, and enterprise integrations across MENA and global markets."
         canonicalPath="/"
+        keywords="sanu khan, tech lead dubai, cloud architect uae, full stack engineer, distributed systems"
       />
       <Navbar />
       <main>

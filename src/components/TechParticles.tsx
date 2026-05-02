@@ -1,6 +1,32 @@
 import type { ComponentType, CSSProperties } from "react";
 import { useRef } from "react";
-import * as Icons from "lucide-react";
+import {
+  Activity,
+  BarChart3,
+  Boxes,
+  BrainCircuit,
+  Cloud,
+  Code2,
+  Cpu,
+  Database,
+  Figma,
+  FileCode2,
+  Flame,
+  Gauge,
+  GitBranch,
+  Globe,
+  HardDrive,
+  Layers,
+  Lock,
+  Network,
+  Server,
+  Settings2,
+  Shield,
+  Terminal,
+  Webhook,
+  Wind,
+  Zap,
+} from "lucide-react";
 
 // Lucide icon names that map to recognisable tech concepts
 const ICON_NAMES = [
@@ -43,6 +69,34 @@ type Particle = {
   drift: number;
 };
 
+const ICON_MAP: Record<string, ComponentType<{ width?: number; height?: number; strokeWidth?: number; style?: CSSProperties }>> = {
+  FileCode2,
+  Server,
+  Database,
+  Cloud,
+  GitBranch,
+  Zap,
+  Wind,
+  Layers,
+  Cpu,
+  Network,
+  Code2,
+  Terminal,
+  Globe,
+  Boxes,
+  Shield,
+  Activity,
+  Figma,
+  BarChart3,
+  HardDrive,
+  Webhook,
+  BrainCircuit,
+  Gauge,
+  Flame,
+  Settings2,
+  Lock,
+};
+
 function rand(min: number, max: number) {
   return Math.random() * (max - min) + min;
 }
@@ -74,17 +128,7 @@ export default function TechParticles({ count = 24 }: { count?: number }) {
       className="pointer-events-none absolute inset-0 overflow-hidden"
     >
       {particles.map((p) => {
-        const Icon = (
-          Icons as unknown as Record<
-            string,
-            ComponentType<{
-              width?: number;
-              height?: number;
-              strokeWidth?: number;
-              style?: CSSProperties;
-            }>
-          >
-        )[p.iconName] ?? Icons.Code2;
+        const Icon = ICON_MAP[p.iconName] ?? Code2;
 
         return (
           <div

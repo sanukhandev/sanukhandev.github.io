@@ -45,6 +45,7 @@ export default function FaqPage() {
         description="Frequently asked questions about services, architecture consulting, delivery model, and how to work with Sanu Khan."
         canonicalPath="/faq"
         schema={faqSchema}
+        keywords="sanu khan faq, technical consulting faq, full stack architect faq"
       />
       <main className="min-h-screen bg-background pt-20 text-foreground">
         <section className="container-narrow section-pad">
