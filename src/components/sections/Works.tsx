@@ -1,10 +1,11 @@
 import type { ComponentType } from "react";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { ShoppingCart, Webhook, Boxes } from "lucide-react";
 import { type WorkCategory } from "@/data/siteData";
 import { useSiteContent } from "@/data/siteContent";
 import { SectionHeading, TechTag } from "@/components/shared/SectionHeading";
 import { cn } from "@/lib/utils";
+import { trackEvent } from "@/utils/analytics";
 
 const categoryIcons: Record<string, ComponentType<{ className?: string }>> = {
   Commerce: ShoppingCart,
@@ -21,6 +22,43 @@ export default function Works() {
       active === "All" ? works : works.filter((w) => w.category === active),
     [active, works],
   );
+
+  useEffect(() => {
+    if (!("IntersectionObserver" in window)) {
+      return;
+    }
+
+    const trackedProjects = new Set<string>();
+    const cards = Array.from(
+      document.querySelectorAll<HTMLElement>("#works [data-project-name]"),
+    );
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            return;
+          }
+
+          const projectName = entry.target.getAttribute("data-project-name") || "";
+          if (!projectName || trackedProjects.has(projectName)) {
+            return;
+          }
+
+          trackedProjects.add(projectName);
+          trackEvent("project_view", { project_name: projectName });
+          observer.unobserve(entry.target);
+        });
+      },
+      {
+        threshold: 0.6,
+      },
+    );
+
+    cards.forEach((card) => observer.observe(card));
+
+    return () => observer.disconnect();
+  }, [filtered]);
 
   return (
     <section id="works" className="section-pad">
@@ -53,6 +91,7 @@ export default function Works() {
           {filtered.map((w) => (
             <article
               key={w.title}
+              data-project-name={w.title.toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "")}
               className="premium-card flex flex-col p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[#38c755]/40"
             >
               <div className="mb-3 flex items-center justify-between">

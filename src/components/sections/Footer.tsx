@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { useSiteContent } from "@/data/siteContent";
 import { useTheme } from "@/hooks/use-theme";
 import { useLocale } from "@/hooks/use-locale";
+import { trackEvent } from "@/utils/analytics";
 
 export default function Footer() {
   const { theme } = useTheme();
@@ -148,6 +149,15 @@ export default function Footer() {
                   href={s.href}
                   target={s.href.startsWith('http') ? '_blank' : undefined}
                   rel={s.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                  onClick={() => {
+                    const normalizedLabel = s.label.toLowerCase();
+                    if (normalizedLabel.includes("github")) {
+                      trackEvent("github_click");
+                    }
+                    if (normalizedLabel.includes("linkedin")) {
+                      trackEvent("linkedin_click");
+                    }
+                  }}
                   aria-label={s.label}
                   className={cn(
                     "inline-flex items-center gap-2 rounded-md border px-3 py-2 text-sm transition-all duration-300 hover:scale-[1.02]",
@@ -177,6 +187,7 @@ export default function Footer() {
           <div className="flex flex-wrap gap-4">
             <a
               href={`mailto:${footer.contact.email}`}
+              onClick={() => trackEvent("contact_click", { cta_type: "contact" })}
               className={cn(
                 "inline-flex items-center gap-1 transition-colors",
                 isLight ? "hover:text-[#121722]" : "hover:text-[#f0f1f4]",
@@ -188,6 +199,7 @@ export default function Footer() {
             {footer.contact.phone && (
               <a
                 href={`tel:${footer.contact.phone}`}
+                onClick={() => trackEvent("contact_click", { cta_type: "contact" })}
                 className={cn(
                   "inline-flex items-center gap-1 transition-colors",
                   isLight ? "hover:text-[#121722]" : "hover:text-[#f0f1f4]",

@@ -30,7 +30,7 @@
     <!-- Twitter / X Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image:alt" content="Sanu Khan – Tech Lead &amp; Cloud Architect, Dubai UAE" />
-    <meta name="twitter:creator" content="@sanukhandev" />
+    <meta name="twitter:creator" content="@sanukandev" />
 
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
@@ -38,8 +38,8 @@
       "@context": "https://schema.org",
       "@type": "Person",
       "name": "Sanu Khan",
-      "url": "https://www.sanukhan.dev/",
-      "image": "https://www.sanukhan.dev/assets/images/sanu.png",
+      "url": "https://sanukhan.dev/",
+      "image": "https://sanukhan.dev/assets/images/sanu.png",
       "jobTitle": "Tech Lead, Cloud & Microservices Architect",
       "worksFor": {
         "@type": "Organization",
@@ -52,9 +52,9 @@
       },
       "alumniOf": "Al-Futtaim Enterprise IT",
       "sameAs": [
-        "https://github.com/sanukhandev",
-        "https://linkedin.com/in/sanukhandev",
-        "https://dev.to/sanukhandev"
+        "https://github.com/sanukandev",
+        "https://linkedin.com/in/sanukandev",
+        "https://dev.to/sanukandev"
       ],
       "address": {
         "@type": "PostalAddress",
@@ -83,7 +83,7 @@
             "@type": "Country",
             "name": "United Arab Emirates"
           }
-        },
+        }
       }
     }
     </script>
@@ -103,13 +103,20 @@
     </script>
 
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8GCL4BQLCT"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=%VITE_GA_ID%"></script>
     <script>
+      window.__gaInitialized = false;
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+      window.gtag = window.gtag || gtag;
 
-      gtag('config', 'G-8GCL4BQLCT');
+      if ("%VITE_GA_ID%") {
+        gtag('js', new Date());
+        gtag('config', '%VITE_GA_ID%', {
+          send_page_view: false
+        });
+        window.__gaInitialized = true;
+      }
     </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
