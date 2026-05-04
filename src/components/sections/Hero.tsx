@@ -72,26 +72,26 @@ function Hero() {
 
       <div className="container-narrow grid items-center gap-6 pb-12 lg:grid-cols-[1.2fr_1fr]">
         <div className="animate-fade-up-stagger">
-          <span className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#2b2f3b] bg-[#16171d] px-3 py-1 text-xs font-semibold text-[#38c755]">
+          <span className="mb-5 inline-flex items-center gap-2 rounded-full border border-default bg-secondary px-3 py-1 text-xs font-semibold text-accent">
             <span className="h-1.5 w-1.5 rounded-full bg-tea-green-400" />
             {ui.hero.leadershipBadge}
           </span>
 
-          <p className="text-[14px] font-semibold uppercase tracking-[0.08em] text-[#8a90a8]">
+          <p className="text-[14px] font-semibold uppercase tracking-[0.08em] text-secondary">
             {profile.role}
           </p>
-          <h1 className="mt-3 text-[42px] font-extrabold leading-[1.06] text-[#f0f1f4] sm:text-[48px]">
+          <h1 className="mt-3 text-[42px] font-extrabold leading-[1.06] text-primary sm:text-[48px]">
             {profile.name}
           </h1>
 
-          <p className="mt-4 max-w-2xl text-[16px] text-[#f0f1f4]">
+          <p className="mt-4 max-w-2xl text-[16px] text-primary">
             {profile.subtitle}
           </p>
-          <p className="mt-2 max-w-2xl text-[15px] text-[#8a90a8]">
+          <p className="mt-2 max-w-2xl text-[15px] text-secondary">
             {profile.statement}
           </p>
 
-          <ul className="mt-6 space-y-2 text-sm text-[#8a90a8]">
+          <ul className="mt-6 space-y-2 text-sm text-secondary">
             {profile.meta.map((m, i) => {
               const Icon = metaIcons[i % metaIcons.length];
               return (
@@ -117,11 +117,11 @@ function Hero() {
                   key={s.label}
                   className="premium-card flex flex-col items-center px-3 py-4 text-center"
                 >
-                  <Icon className="mb-1.5 h-4 w-4 text-[#38c755]/70" />
-                  <div className="text-[28px] font-extrabold text-[#38c755]">
+                  <Icon className="mb-1.5 h-4 w-4 text-accent/70" />
+                  <div className="text-[28px] font-extrabold text-accent">
                     {s.value}
                   </div>
-                  <div className="mt-1 text-[11px] uppercase tracking-wide text-[#8a90a8]">
+                  <div className="mt-1 text-[11px] uppercase tracking-wide text-secondary">
                     {s.label}
                   </div>
                 </div>
@@ -135,7 +135,7 @@ function Hero() {
                 <Button
                   key={c.label}
                   asChild
-                  className="h-10 rounded-lg bg-[#38c755] px-5 text-[#0f1015] hover:scale-[1.02] hover:bg-[#4fd16a]"
+                  className="h-10 rounded-lg bg-accent px-5 text-on-accent hover:scale-[1.02] hover:bg-[#4ade80]"
                 >
                   <a
                     href={c.href}
@@ -153,7 +153,7 @@ function Hero() {
                 <Button
                   key={c.label}
                   asChild
-                  className="h-10 rounded-lg border border-[#38c755]/60 bg-[#38c755]/10 px-5 text-[#38c755] hover:scale-[1.02] hover:bg-[#38c755]/20"
+                  className="h-10 rounded-lg border border-accent-soft bg-accent-soft px-5 text-accent hover:scale-[1.02] hover:bg-accent-soft"
                 >
                   <a
                     href={c.href}
@@ -174,7 +174,7 @@ function Hero() {
                   key={c.label}
                   asChild
                   variant="outline"
-                  className="h-10 rounded-lg border-[#2b2f3b] bg-[#16171d] text-[#f0f1f4] hover:scale-[1.02] hover:bg-[#20222b]"
+                  className="h-10 rounded-lg border-default bg-secondary text-primary hover:scale-[1.02] hover:bg-secondary"
                 >
                   <a
                     href={c.href}
@@ -205,7 +205,7 @@ function Hero() {
                 <div
                   key={b.label}
                   aria-hidden
-                  className="absolute z-20 hidden lg:flex items-center gap-1.5 rounded-full border border-[#2b2f3b] bg-[#16171d]/90 px-2.5 py-1 text-[11px] font-semibold text-[#8a90a8] shadow-lg backdrop-blur-sm"
+                  className="absolute z-20 hidden lg:flex items-center gap-1.5 rounded-full border border-default bg-secondary/90 px-2.5 py-1 text-[11px] font-semibold text-secondary shadow-lg backdrop-blur-sm"
                   style={{
                     top: b.top,
                     bottom: b.bottom,
@@ -213,7 +213,7 @@ function Hero() {
                     right: b.right,
                   }}
                 >
-                  <Icon className="h-3 w-3 text-[#38c755]" />
+                  <Icon className="h-3 w-3 text-accent" />
                   {b.label}
                 </div>
               );

@@ -39,7 +39,7 @@ export default function Footer() {
         "border-t",
         isLight
           ? "border-[#d4dde1] bg-[#edf4ef]/80"
-          : "border-[#2b2f3b] bg-[#16171d]/60",
+          : "border-default bg-secondary/60",
       )}
     >
       <div className="container-narrow py-12">
@@ -198,7 +198,7 @@ export default function Footer() {
             <p
               className={cn(
                 "mt-1 text-[15px]",
-                isLight ? "text-[#4d5a66]" : "text-[#8a90a8]",
+                isLight ? "text-[#4d5a66]" : "text-secondary",
               )}
             >
               {footer.blurb}
@@ -233,7 +233,7 @@ export default function Footer() {
                     "inline-flex items-center gap-2 rounded-md border px-3 py-2 text-sm transition-all duration-300 hover:scale-[1.02]",
                     isLight
                       ? "border-[#d4dde1] bg-white text-[#4d5a66] hover:border-[#1f9f45]/35 hover:text-[#121722]"
-                      : "border-[#2b2f3b] bg-[#0f1015] text-[#8a90a8] hover:border-[#38c755]/40 hover:text-[#f0f1f4]",
+                      : "border-default bg-primary text-secondary hover:border-accent-soft hover:text-primary",
                   )}
                 >
                   <Icon className="h-4 w-4" />
@@ -249,7 +249,7 @@ export default function Footer() {
             "mt-8 border-t pt-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between text-xs",
             isLight
               ? "border-[#d4dde1] text-[#4d5a66]"
-              : "border-[#2b2f3b] text-[#8a90a8]",
+              : "border-default text-secondary",
           )}
         >
           <div className="flex flex-wrap gap-4">
@@ -260,7 +260,7 @@ export default function Footer() {
               }
               className={cn(
                 "inline-flex items-center gap-1 transition-colors",
-                isLight ? "hover:text-[#121722]" : "hover:text-[#f0f1f4]",
+                isLight ? "hover:text-[#121722]" : "hover:text-primary",
               )}
             >
               <Mail className="h-3 w-3" />
@@ -274,7 +274,7 @@ export default function Footer() {
                 }
                 className={cn(
                   "inline-flex items-center gap-1 transition-colors",
-                  isLight ? "hover:text-[#121722]" : "hover:text-[#f0f1f4]",
+                  isLight ? "hover:text-[#121722]" : "hover:text-primary",
                 )}
               >
                 <Phone className="h-3 w-3" />

@@ -16,7 +16,6 @@ const clusterIcons: Record<string, ComponentType<{ className?: string }>> = {
   "تكاملات المؤسسات": Network,
 };
 
-
 export default function Skills() {
   const { skills } = useSiteContent();
 
@@ -35,13 +34,13 @@ export default function Skills() {
             return (
               <article
                 key={cluster.title}
-                className="premium-card group min-h-[170px] p-5 transition-all duration-300 hover:-translate-y-1 hover:border-[#38c755]/40"
+                className="premium-card group min-h-[170px] p-5 transition-all duration-300 hover:-translate-y-1 hover:border-accent-soft"
               >
                 <div className="mb-4 flex items-center gap-2.5">
-                  <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#38c755]/10 ring-1 ring-[#38c755]/25">
-                    <Icon className="h-4 w-4 text-[#38c755]" />
+                  <span className="ring-accent-soft flex h-8 w-8 items-center justify-center rounded-lg bg-accent-soft ring-1">
+                    <Icon className="h-4 w-4 text-accent" />
                   </span>
-                  <h3 className="text-[15px] font-semibold tracking-wide text-[#f0f1f4]">
+                  <h3 className="text-[15px] font-semibold tracking-wide text-primary">
                     {cluster.title}
                   </h3>
                 </div>

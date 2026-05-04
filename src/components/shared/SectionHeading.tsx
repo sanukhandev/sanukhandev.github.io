@@ -68,9 +68,12 @@ const tagIconMap: Record<string, { icon: SiIconType; color: string }> = {
 export function TechTag({ label }: { label: string }) {
   const entry = tagIconMap[label];
   return (
-    <span className="inline-flex items-center gap-1.5 rounded-md border border-[#2e3140] bg-[#1c1e28] px-2.5 py-1 text-xs font-medium text-[#c8cdde] transition-colors hover:border-[#38c755]/40 hover:text-[#f0f1f4]">
+    <span className="inline-flex items-center gap-1.5 rounded-md border border-default bg-secondary px-2.5 py-1 text-xs font-medium text-secondary transition-colors hover:border-accent-soft hover:text-primary">
       {entry ? (
-        <entry.icon className="h-3.5 w-3.5 shrink-0" style={{ color: entry.color }} />
+        <entry.icon
+          className="h-3.5 w-3.5 shrink-0"
+          style={{ color: entry.color }}
+        />
       ) : null}
       {label}
     </span>
@@ -101,7 +104,7 @@ export function TagChip({ label, className, tone }: TagChipProps) {
   return (
     <span
       className={cn(
-        "inline-flex items-center rounded-full border border-[#2b2f3b] px-2.5 py-0.5 text-xs font-medium",
+        "inline-flex items-center rounded-full border border-default px-2.5 py-0.5 text-xs font-medium",
         toneClass,
         className,
       )}
@@ -132,7 +135,7 @@ export function SectionHeading({
       )}
     >
       {eyebrow && (
-        <span className="mb-3 inline-flex items-center rounded-full border border-[#2b2f3b] bg-[#16171d] px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-tea-green-300">
+        <span className="mb-3 inline-flex items-center rounded-full border border-default bg-secondary px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-tea-green-300">
           {eyebrow}
         </span>
       )}

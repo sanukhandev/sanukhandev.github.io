@@ -59,11 +59,11 @@ function Navbar() {
         "fixed inset-x-0 top-0 z-50 border-b transition-all duration-300",
         scrolled
           ? isLight
-            ? "border-[#d4dde1] bg-[#f4f8f5]/90 backdrop-blur-xl"
-            : "border-[#2b2f3b] bg-[#0f1015]/90 backdrop-blur-xl"
+            ? "border-[#d4dde1] bg-primary-glass backdrop-blur-xl"
+            : "border-default bg-primary-glass backdrop-blur-xl"
           : isLight
-            ? "border-transparent bg-[#f4f8f5]/75"
-            : "border-transparent bg-[#0f1015]/75",
+            ? "border-transparent bg-primary-glass"
+            : "border-transparent bg-primary-glass",
       )}
     >
       <div className="container-narrow flex h-16 items-center justify-between">
@@ -221,17 +221,17 @@ function Navbar() {
                 "relative text-[15px] transition-all duration-300 hover:scale-[1.02]",
                 activeHref === l.href
                   ? isLight
-                    ? "text-[#0f1015]"
-                    : "text-[#f0f1f4]"
+                    ? "text-[#0f1015] font-semibold"
+                    : "text-[#f5f7fa] font-semibold"
                   : isLight
                     ? "text-[#4d5a66] hover:text-[#0f1015]"
-                    : "text-[#8a90a8] hover:text-[#f0f1f4]",
+                    : "text-[#c9ced6] hover:text-[#38c755]",
               )}
             >
               {l.label}
               <span
                 className={cn(
-                  "absolute -bottom-1.5 left-0 h-[2px] bg-[#38c755] transition-all duration-300",
+                  "absolute -bottom-1.5 left-0 h-[2px] bg-accent transition-all duration-300",
                   activeHref === l.href
                     ? "w-full opacity-100"
                     : "w-0 opacity-0",
@@ -252,7 +252,7 @@ function Navbar() {
               "inline-flex h-9 w-9 items-center justify-center rounded-lg border transition-all duration-300 hover:scale-[1.03]",
               isLight
                 ? "border-[#cfd8dd] bg-white text-[#1a232e] hover:bg-[#eef4f0]"
-                : "border-[#2b2f3b] bg-[#16171d] text-[#f0f1f4] hover:bg-[#20222b]",
+                : "border-[#2b2f3b] bg-[#16171d] text-[#f5f7fa] hover:bg-[#20222b]",
             )}
           >
             {isLight ? (
@@ -270,7 +270,7 @@ function Navbar() {
               "inline-flex h-9 items-center gap-1.5 rounded-lg border px-3 text-[13px] font-semibold transition-all duration-300 hover:scale-[1.02]",
               isLight
                 ? "border-[#1f9f45]/45 bg-[#1f9f45]/10 text-[#1f9f45] hover:border-[#1f9f45] hover:bg-[#1f9f45]/18"
-                : "border-[#38c755]/50 bg-[#38c755]/10 text-[#38c755] hover:border-[#38c755] hover:bg-[#38c755]/20",
+                : "border-[#38c755]/40 bg-[#38c755]/15 text-[#38c755] hover:border-[#38c755]/70 hover:bg-[#38c755]/20",
             )}
           >
             <Coffee className="h-3.5 w-3.5" />
@@ -282,7 +282,7 @@ function Navbar() {
               "h-9 rounded-lg px-4 hover:scale-[1.02]",
               isLight
                 ? "bg-[#1f9f45] text-white hover:bg-[#2caf54]"
-                : "bg-[#38c755] text-[#0f1015] hover:bg-[#4fd16a]",
+                : "bg-accent text-on-accent hover:bg-[#4ade80]",
             )}
           >
             <a
@@ -299,7 +299,7 @@ function Navbar() {
             </a>
           </Button>
 
-          <div className="ml-1 inline-flex items-center rounded-lg border border-[#2b2f3b] bg-[#16171d]/80 p-0.5">
+          <div className="ml-1 inline-flex items-center rounded-lg border border-[#2b2f3b] bg-secondary-glass p-0.5">
             <button
               type="button"
               onClick={() => setLocale("en")}
@@ -309,7 +309,7 @@ function Navbar() {
                   ? "bg-[#38c755] text-[#0f1015]"
                   : isLight
                     ? "text-[#4d5a66] hover:text-[#121722]"
-                    : "text-[#8a90a8] hover:text-[#f0f1f4]",
+                    : "text-[#c9ced6] hover:text-[#38c755]",
               )}
             >
               EN
@@ -323,7 +323,7 @@ function Navbar() {
                   ? "bg-[#38c755] text-[#0f1015]"
                   : isLight
                     ? "text-[#4d5a66] hover:text-[#121722]"
-                    : "text-[#8a90a8] hover:text-[#f0f1f4]",
+                    : "text-[#c9ced6] hover:text-[#38c755]",
               )}
             >
               {ui.localeSwitch.ar}
@@ -336,7 +336,7 @@ function Navbar() {
             "grid h-9 w-9 place-items-center rounded-md border md:hidden",
             isLight
               ? "border-[#cfd8dd] bg-white text-[#1a232e]"
-              : "border-border",
+              : "border-[#2b2f3b] bg-[#16171d] text-[#f5f7fa]",
           )}
           aria-label="Toggle menu"
           onClick={() => setOpen((v) => !v)}
@@ -351,11 +351,11 @@ function Navbar() {
             "border-t md:hidden",
             isLight
               ? "border-[#d4dde1] bg-[#f6faf7]"
-              : "border-[#2b2f3b] bg-[#16171d]",
+              : "border-default bg-secondary",
           )}
         >
           <div className="container-narrow flex flex-col gap-1 py-3">
-            <div className="mb-1 inline-flex w-fit items-center rounded-md border border-[#2b2f3b] bg-[#16171d]/80 p-0.5">
+            <div className="mb-1 inline-flex w-fit items-center rounded-md border border-[#2b2f3b] bg-[#16171d] p-0.5">
               <button
                 type="button"
                 onClick={() => setLocale("en")}
@@ -365,7 +365,7 @@ function Navbar() {
                     ? "bg-[#38c755] text-[#0f1015]"
                     : isLight
                       ? "text-[#4d5a66] hover:text-[#121722]"
-                      : "text-[#8a90a8] hover:text-[#f0f1f4]",
+                      : "text-[#c9ced6] hover:text-[#38c755]",
                 )}
               >
                 EN
@@ -379,7 +379,7 @@ function Navbar() {
                     ? "bg-[#38c755] text-[#0f1015]"
                     : isLight
                       ? "text-[#4d5a66] hover:text-[#121722]"
-                      : "text-[#8a90a8] hover:text-[#f0f1f4]",
+                      : "text-[#c9ced6] hover:text-[#38c755]",
                 )}
               >
                 {ui.localeSwitch.ar}
@@ -393,7 +393,7 @@ function Navbar() {
                 "mb-1 inline-flex items-center gap-2 rounded-md px-3 py-2 text-sm font-semibold transition-all",
                 isLight
                   ? "border border-[#cfd8dd] bg-white text-[#1a232e]"
-                  : "border border-[#2b2f3b] bg-[#20222b] text-[#f0f1f4]",
+                  : "border border-[#2b2f3b] bg-[#16171d] text-[#f5f7fa]",
               )}
             >
               {isLight ? (
@@ -419,7 +419,7 @@ function Navbar() {
                   "rounded-md px-3 py-2 text-sm transition-all duration-300",
                   isLight
                     ? "text-[#4d5a66] hover:bg-[#e8f0ec] hover:text-[#0f1015]"
-                    : "text-[#8a90a8] hover:bg-[#20222b] hover:text-[#f0f1f4]",
+                    : "text-[#c9ced6] hover:bg-[#1e2028] hover:text-[#38c755]",
                 )}
               >
                 {l.label}
@@ -434,7 +434,7 @@ function Navbar() {
                 "mt-1 inline-flex items-center gap-2 rounded-md border px-3 py-2 text-sm font-semibold transition-all",
                 isLight
                   ? "border-[#1f9f45]/45 bg-[#1f9f45]/10 text-[#1f9f45] hover:bg-[#1f9f45]/18"
-                  : "border-[#38c755]/50 bg-[#38c755]/10 text-[#38c755] hover:bg-[#38c755]/20",
+                  : "border-[#38c755]/40 bg-[#38c755]/15 text-[#38c755] hover:bg-[#38c755]/22",
               )}
             >
               <Coffee className="h-4 w-4" />
@@ -446,7 +446,7 @@ function Navbar() {
                 "mt-2 rounded-lg",
                 isLight
                   ? "bg-[#1f9f45] text-white hover:bg-[#2caf54]"
-                  : "bg-[#38c755] text-[#0f1015] hover:bg-[#4fd16a]",
+                  : "bg-accent text-on-accent hover:bg-[#4ade80]",
               )}
             >
               <a

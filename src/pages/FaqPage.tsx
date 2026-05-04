@@ -49,25 +49,25 @@ export default function FaqPage() {
       />
       <main className="min-h-screen bg-background pt-20 text-foreground">
         <section className="container-narrow section-pad">
-          <h1 className="text-[38px] font-extrabold text-[#f0f1f4]">Frequently Asked Questions</h1>
-          <p className="mt-4 max-w-3xl text-[15px] text-[#8a90a8]">
+          <h1 className="text-[38px] font-extrabold text-primary">Frequently Asked Questions</h1>
+          <p className="mt-4 max-w-3xl text-[15px] text-secondary">
             Answers about technical consulting, platform delivery, and engagement style.
           </p>
 
           <div className="mt-8 space-y-4">
             {faqs.map((faq) => (
               <article key={faq.question} className="premium-card p-5">
-                <h2 className="text-[20px] font-bold text-[#f0f1f4]">{faq.question}</h2>
-                <p className="mt-2 text-[14px] text-[#8a90a8]">{faq.answer}</p>
+                <h2 className="text-[20px] font-bold text-primary">{faq.question}</h2>
+                <p className="mt-2 text-[14px] text-secondary">{faq.answer}</p>
               </article>
             ))}
           </div>
 
           <div className="mt-8 flex flex-wrap gap-3">
-            <Link className="text-[14px] font-semibold text-[#38c755] hover:underline" to="/">
+            <Link className="text-[14px] font-semibold text-accent hover:underline" to="/">
               Back to Portfolio
             </Link>
-            <Link className="text-[14px] font-semibold text-[#38c755] hover:underline" to="/blog">
+            <Link className="text-[14px] font-semibold text-accent hover:underline" to="/blog">
               Explore Blog Articles
             </Link>
           </div>

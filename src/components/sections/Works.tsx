@@ -41,7 +41,8 @@ export default function Works() {
             return;
           }
 
-          const projectName = entry.target.getAttribute("data-project-name") || "";
+          const projectName =
+            entry.target.getAttribute("data-project-name") || "";
           if (!projectName || trackedProjects.has(projectName)) {
             return;
           }
@@ -79,8 +80,8 @@ export default function Works() {
               className={cn(
                 "rounded-full border px-4 py-1.5 text-xs font-semibold transition-colors",
                 active === c
-                  ? "border-[#38c755] bg-[#38c755] text-[#0f1015]"
-                  : "border-[#2b2f3b] bg-[#16171d] text-[#8a90a8] hover:text-[#f0f1f4]",
+                  ? "border-accent bg-accent text-on-accent"
+                  : "border-default bg-secondary text-secondary hover:text-primary",
               )}
             >
               {ui.works.categoryLabels[c]}
@@ -92,33 +93,44 @@ export default function Works() {
           {filtered.map((w) => (
             <article
               key={w.title}
-              data-project-name={w.title.toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "")}
-              className="premium-card flex flex-col p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[#38c755]/40"
+              data-project-name={w.title
+                .toLowerCase()
+                .replace(/[^a-z0-9]+/g, "_")
+                .replace(/^_+|_+$/g, "")}
+              className="premium-card flex flex-col p-6 transition-all duration-300 hover:-translate-y-1 hover:border-accent-soft"
             >
               <div className="mb-3 flex items-center justify-between">
-                <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#38c755]/10 ring-1 ring-[#38c755]/25">
+                <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent-soft ring-1 ring-accent/30">
                   {(() => {
                     const Icon = categoryIcons[w.category] ?? Boxes;
-                    return <Icon className="h-[18px] w-[18px] text-[#38c755]" />;
+                    return <Icon className="h-[18px] w-[18px] text-accent" />;
                   })()}
                 </span>
-                <span className="text-[11px] font-medium uppercase tracking-wide text-[#8a90a8]">{w.scope}</span>
+                <span className="text-[11px] font-medium uppercase tracking-wide text-secondary">
+                  {w.scope}
+                </span>
               </div>
 
-              <h3 className="mb-4 text-[17px] font-semibold leading-snug text-[#f0f1f4]">
+              <h3 className="mb-4 text-[17px] font-semibold leading-snug text-primary">
                 {w.title}
               </h3>
-              <div className="space-y-3 text-[15px] text-[#8a90a8]">
+              <div className="space-y-3 text-[15px] text-secondary">
                 <p>
-                  <span className="font-semibold text-[#f0f1f4]">{ui.works.problem}:</span>{" "}
+                  <span className="font-semibold text-primary">
+                    {ui.works.problem}:
+                  </span>{" "}
                   {w.problem}
                 </p>
                 <p>
-                  <span className="font-semibold text-[#f0f1f4]">{ui.works.solution}:</span>{" "}
+                  <span className="font-semibold text-primary">
+                    {ui.works.solution}:
+                  </span>{" "}
                   {w.solution}
                 </p>
                 <p>
-                  <span className="font-semibold text-[#38c755]">{ui.works.outcome}:</span>{" "}
+                  <span className="font-semibold text-accent">
+                    {ui.works.outcome}:
+                  </span>{" "}
                   {w.outcome}
                 </p>
               </div>
@@ -131,16 +143,19 @@ export default function Works() {
           ))}
         </div>
 
-        <nav className="mt-8 flex flex-wrap gap-3" aria-label="Projects section internal navigation">
+        <nav
+          className="mt-8 flex flex-wrap gap-3"
+          aria-label="Projects section internal navigation"
+        >
           <Link
             to="/api-integration-services"
-            className="text-[14px] font-semibold text-[#38c755] underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#38c755]/70"
+            className="link-accent text-[14px] font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
           >
             View Azure integration project delivery approach
           </Link>
           <a
             href="#contact"
-            className="text-[14px] font-semibold text-[#38c755] underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#38c755]/70"
+            className="link-accent text-[14px] font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
           >
             Contact for project architecture review
           </a>
