@@ -1,10 +1,9 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { lazy, Suspense, useEffect, useRef, useState } from "react";
+import { lazy, Suspense, useEffect, useRef } from "react";
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import IntroPreloader from "@/components/IntroPreloader";
 import { ThemeProvider } from "@/hooks/use-theme";
 import { LocaleProvider } from "@/hooks/use-locale";
 import { trackEvent, trackPageView } from "@/utils/analytics";
@@ -25,7 +24,6 @@ const NodejsApiBestPracticesPage = lazy(() => import("./pages/blog/NodejsApiBest
 const FaqPage = lazy(() => import("./pages/FaqPage.tsx"));
 
 const queryClient = new QueryClient();
-const INTRO_PRELOADER_MS = 1900;
 
 function AnalyticsTracker() {
   const location = useLocation();
@@ -79,20 +77,6 @@ function AnalyticsTracker() {
 }
 
 const AppShell = () => {
-  const [showIntro, setShowIntro] = useState(true);
-
-  useEffect(() => {
-    const timer = window.setTimeout(() => {
-      setShowIntro(false);
-    }, INTRO_PRELOADER_MS);
-
-    return () => window.clearTimeout(timer);
-  }, []);
-
-  if (showIntro) {
-    return <IntroPreloader />;
-  }
-
   return (
     <TooltipProvider>
       <Toaster />

@@ -40,7 +40,7 @@ export const profile = {
       variant: "hire" as const,
     },
   ],
-  avatarUrl: "/assets/images/sanu.png",
+  avatarUrl: "/assets/images/sanu.avif",
 };
 
 export const skills = {

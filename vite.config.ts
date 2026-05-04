@@ -1,5 +1,6 @@
 import { defineConfig, loadEnv } from "vite";
 import react from "@vitejs/plugin-react-swc";
+import viteCompression from "vite-plugin-compression";
 import path from "path";
 import { fileURLToPath } from "url";
 import { createRequire } from "module";
@@ -253,7 +254,12 @@ const createZaakiyApiWrapper = (env: Record<string, string>) => ({
 // https://vitejs.dev/config/
 export default defineConfig(({ command, mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
-  const plugins = [react(), createZaakiyApiWrapper(env)];
+  const plugins = [
+    react(),
+    createZaakiyApiWrapper(env),
+    viteCompression({ algorithm: "gzip", ext: ".gz", deleteOriginFile: false }),
+    viteCompression({ algorithm: "brotliCompress", ext: ".br", deleteOriginFile: false }),
+  ];
   const isCiBuild = process.env.CI === "true" || process.env.VERCEL === "1";
   const shouldPrerender = mode === "production" && !isCiBuild;
 
@@ -317,36 +323,17 @@ export default defineConfig(({ command, mode }) => {
     },
     build: {
       cssCodeSplit: true,
+      minify: "esbuild",
       rollupOptions: {
         output: {
-          manualChunks(id) {
-            if (!id.includes("node_modules")) {
-              return;
-            }
-
-            if (id.includes("react-dom") || id.includes("react/jsx-runtime") || id.includes("/react/")) {
-              return "vendor-react";
-            }
-
-            if (id.includes("react-router") || id.includes("@tanstack")) {
-              return "vendor-routing-data";
-            }
-
-            if (id.includes("@radix-ui") || id.includes("class-variance-authority") || id.includes("tailwind-merge")) {
-              return "vendor-ui";
-            }
-
-            if (id.includes("lucide-react") || id.includes("react-icons")) {
-              return "vendor-icons";
-            }
-
-            if (id.includes("recharts")) {
-              return "vendor-charts";
-            }
-
-            if (id.includes("react-hook-form") || id.includes("zod") || id.includes("@hookform")) {
-              return "vendor-forms";
-            }
+          entryFileNames: "assets/index.js",
+          chunkFileNames: "assets/[name]-[hash].js",
+          assetFileNames: (assetInfo) =>
+            assetInfo.name?.endsWith(".css") ? "assets/index.css" : "assets/[name]-[hash][extname]",
+          manualChunks: {
+            vendor: ["react", "react-dom"],
+            routingData: ["react-router-dom", "@tanstack/react-query"],
+            ui: ["@radix-ui/react-dialog", "@radix-ui/react-dropdown-menu", "lucide-react"],
           },
         },
       },

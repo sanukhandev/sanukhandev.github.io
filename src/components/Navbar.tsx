@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { Menu, X, Coffee, Moon, Sun } from "lucide-react";
 import { useSiteContent } from "@/data/siteContent";
 import { Button } from "@/components/ui/button";
@@ -7,7 +7,7 @@ import { useTheme } from "@/hooks/use-theme";
 import { useLocale } from "@/hooks/use-locale";
 import { trackEvent } from "@/utils/analytics";
 
-export default function Navbar() {
+function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeHref, setActiveHref] = useState("#works");
@@ -30,20 +30,27 @@ export default function Navbar() {
       .map((id) => document.getElementById(id))
       .filter((el): el is HTMLElement => Boolean(el));
 
-    const onScroll = () => {
-      const checkpoint = window.scrollY + 140;
-      let current = "#works";
-      for (const section of sections) {
-        if (checkpoint >= section.offsetTop) {
-          current = `#${section.id}`;
-        }
-      }
-      setActiveHref(current);
-    };
+    if (!sections.length || !("IntersectionObserver" in window)) {
+      return;
+    }
 
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            setActiveHref(`#${entry.target.id}`);
+          }
+        }
+      },
+      {
+        rootMargin: "-120px 0px -55% 0px",
+        threshold: [0, 0.2, 0.5],
+      },
+    );
+
+    sections.forEach((section) => observer.observe(section));
+
+    return () => observer.disconnect();
   }, []);
 
   return (
@@ -393,3 +400,5 @@ export default function Navbar() {
     </header>
   );
 }
+
+export default memo(Navbar);

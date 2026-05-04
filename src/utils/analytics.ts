@@ -14,11 +14,80 @@ declare global {
       (command: "event", eventName: string, params?: Record<string, any>): void;
     };
     __gaInitialized?: boolean;
+    __gaScriptRequested?: boolean;
+    requestIdleCallback?: (callback: () => void, opts?: { timeout: number }) => number;
+  }
+}
+
+type GtagCommand =
+  | ["event", string, Record<string, any>]
+  | ["config", string, GtagConfig]
+  | ["js", Date];
+
+const pendingCommands: GtagCommand[] = [];
+
+function flushQueuedCommands() {
+  if (typeof window === "undefined" || typeof window.gtag !== "function") {
+    return;
+  }
+
+  while (pendingCommands.length > 0) {
+    const command = pendingCommands.shift();
+    if (!command) {
+      break;
+    }
+
+    if (command[0] === "js") {
+      window.gtag("js", command[1]);
+      continue;
+    }
+
+    if (command[0] === "config") {
+      window.gtag("config", command[1], command[2]);
+      continue;
+    }
+
+    window.gtag("event", command[1], command[2]);
+  }
+}
+
+function loadAnalyticsScript() {
+  if (!GA_ID || typeof window === "undefined" || window.__gaScriptRequested) {
+    return;
+  }
+
+  window.__gaScriptRequested = true;
+  const injectScript = () => {
+    const script = document.createElement("script");
+    script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
+    script.async = true;
+    script.onload = () => {
+      if (typeof window.gtag !== "function") {
+        return;
+      }
+      window.gtag("js", new Date());
+      window.gtag("config", GA_ID, { send_page_view: false });
+      window.__gaInitialized = true;
+      flushQueuedCommands();
+    };
+    document.body.appendChild(script);
+  };
+
+  if (typeof window.requestIdleCallback === "function") {
+    window.requestIdleCallback(injectScript, { timeout: 2000 });
+  } else {
+    window.setTimeout(injectScript, 1200);
   }
 }
 
 function ensureAnalyticsReady() {
-  if (!GA_ID || typeof window === "undefined" || typeof window.gtag !== "function") {
+  if (!GA_ID || typeof window === "undefined") {
+    return false;
+  }
+
+  loadAnalyticsScript();
+
+  if (typeof window.gtag !== "function") {
     return false;
   }
 
@@ -28,13 +97,26 @@ function ensureAnalyticsReady() {
       send_page_view: false,
     });
     window.__gaInitialized = true;
+    flushQueuedCommands();
   }
 
   return true;
 }
 
 export function trackPageView(url: string) {
-  if (!url || !ensureAnalyticsReady()) {
+  if (!url || !GA_ID || typeof window === "undefined") {
+    return;
+  }
+
+  if (!ensureAnalyticsReady()) {
+    pendingCommands.push([
+      "event",
+      "page_view",
+      {
+        page_path: url,
+        page_location: window.location.href,
+      },
+    ]);
     return;
   }
 
@@ -45,7 +127,12 @@ export function trackPageView(url: string) {
 }
 
 export function trackEvent(name: string, params: Record<string, any> = {}) {
-  if (!name || !ensureAnalyticsReady()) {
+  if (!name || !GA_ID || typeof window === "undefined") {
+    return;
+  }
+
+  if (!ensureAnalyticsReady()) {
+    pendingCommands.push(["event", name, params]);
     return;
   }
 

@@ -12,7 +12,7 @@ type SeoMetaProps = {
 };
 
 const SITE_URL = "https://sanukhan.dev";
-const DEFAULT_OG_IMAGE = `${SITE_URL}/assets/images/sanu.png`;
+const DEFAULT_OG_IMAGE = `${SITE_URL}/assets/images/sanu.avif`;
 const DEFAULT_DESCRIPTION =
   "Sanu Khan is a Tech Lead and Full Stack Engineer building scalable cloud-native platforms, enterprise integrations, and resilient product systems.";
 
@@ -60,7 +60,9 @@ export default function SeoMeta({
   const canonicalUrl =
     typeof window !== "undefined"
       ? normalizeUrl(window.location.href)
-      : normalizeUrl(`${SITE_URL}${normalizePath(canonicalPath || location.pathname)}`);
+      : normalizeUrl(
+          `${SITE_URL}${normalizePath(canonicalPath || location.pathname)}`,
+        );
   const socialImage = ogImage ?? DEFAULT_OG_IMAGE;
 
   const robotsContent = noindex
@@ -87,7 +89,9 @@ export default function SeoMeta({
       <meta name="twitter:image" content={socialImage} />
       <meta name="twitter:creator" content="@sanukandev" />
       <link rel="canonical" href={canonicalUrl} />
-      {schemaPayload ? <script type="application/ld+json">{schemaPayload}</script> : null}
+      {schemaPayload ? (
+        <script type="application/ld+json">{schemaPayload}</script>
+      ) : null}
     </Helmet>
   );
 }

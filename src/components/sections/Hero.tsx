@@ -1,3 +1,4 @@
+import { Suspense, lazy, memo, useMemo } from "react";
 import type { ComponentType } from "react";
 import {
   MapPin,
@@ -16,8 +17,9 @@ import {
 import { useSiteContent } from "@/data/siteContent";
 import { useLocale } from "@/hooks/use-locale";
 import { Button } from "@/components/ui/button";
-import TechParticles from "@/components/TechParticles";
 import { trackEvent } from "@/utils/analytics";
+
+const TechParticles = lazy(() => import("@/components/TechParticles"));
 
 const metaIcons = [Briefcase, MapPin, CircleDot];
 
@@ -36,15 +38,22 @@ const floatingBadges = [
   { icon: Users,        label: "100+ Clients",   top: "58%", left: "-12%" },
 ];
 
-export default function Hero() {
+function Hero() {
   const { profile, ui } = useSiteContent();
   const { locale } = useLocale();
   const isArabic = locale === "ar";
+  const webpAvatarUrl = profile.avatarUrl.endsWith(".avif")
+    ? profile.avatarUrl.replace(/\.avif$/i, ".webp")
+    : profile.avatarUrl;
 
-  const floatingBadgesLocalized = floatingBadges.map((badge, index) => ({
-    ...badge,
-    label: ui.hero.floatingBadges[index] ?? badge.label,
-  }));
+  const floatingBadgesLocalized = useMemo(
+    () =>
+      floatingBadges.map((badge, index) => ({
+        ...badge,
+        label: ui.hero.floatingBadges[index] ?? badge.label,
+      })),
+    [ui.hero.floatingBadges],
+  );
 
   return (
     <header id="home" className="relative overflow-hidden pt-16 sm:pt-20">
@@ -57,7 +66,9 @@ export default function Hero() {
         }}
       />
 
-      <TechParticles count={24} />
+      <Suspense fallback={null}>
+        <TechParticles count={24} />
+      </Suspense>
 
       <div className="container-narrow grid items-center gap-6 pb-12 lg:grid-cols-[1.2fr_1fr]">
         <div className="animate-fade-up-stagger">
@@ -194,15 +205,19 @@ export default function Hero() {
               );
             })}
 
-            <img
-              src={profile.avatarUrl}
-              alt={`${profile.name} portrait`}
-              className="relative z-10 w-full object-contain"
-              loading="lazy"
-              decoding="async"
-              width={640}
-              height={640}
-            />
+            <picture>
+              <source type="image/avif" srcSet={profile.avatarUrl} />
+              <source type="image/webp" srcSet={webpAvatarUrl} />
+              <img
+                src={profile.avatarUrl}
+                alt={`${profile.name} portrait`}
+                className="relative z-10 w-full object-contain"
+                fetchPriority="high"
+                decoding="async"
+                width={640}
+                height={640}
+              />
+            </picture>
           </div>
 
           <div aria-hidden className="innovation-label">
@@ -215,3 +230,5 @@ export default function Hero() {
     </header>
   );
 }
+
+export default memo(Hero);
