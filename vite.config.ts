@@ -290,10 +290,7 @@ const createZaakiyApiWrapper = (env: Record<string, string>) => ({
 // https://vitejs.dev/config/
 export default defineConfig(({ command, mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
-  const plugins = [
-    react(),
-    createZaakiyApiWrapper(env),
-  ];
+  const plugins = [react(), createZaakiyApiWrapper(env)];
   const isCiBuild = process.env.CI === "true" || process.env.VERCEL === "1";
   const shouldPrerender = mode === "production" && !isCiBuild;
 
@@ -303,7 +300,11 @@ export default defineConfig(({ command, mode }) => {
   // application/octet-stream instead of application/javascript).
   if (!isCiBuild) {
     plugins.push(
-      viteCompression({ algorithm: "gzip", ext: ".gz", deleteOriginFile: false }),
+      viteCompression({
+        algorithm: "gzip",
+        ext: ".gz",
+        deleteOriginFile: false,
+      }),
       viteCompression({
         algorithm: "brotliCompress",
         ext: ".br",
