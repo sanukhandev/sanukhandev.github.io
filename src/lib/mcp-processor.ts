@@ -1,6 +1,13 @@
 export type ZaakiyLocale = "en" | "ar";
 
-type Intent = "profile" | "experience" | "skills" | "works" | "contact" | "coffee" | "general";
+type Intent =
+  | "profile"
+  | "experience"
+  | "skills"
+  | "works"
+  | "contact"
+  | "coffee"
+  | "general";
 
 type ScopeDataset = {
   profile: string[];
@@ -13,9 +20,19 @@ type ScopeDataset = {
   all: string[];
 };
 
+type FactSource = Exclude<keyof ScopeDataset, "all">;
+
+type RankedFact = {
+  fact: string;
+  source: FactSource;
+  overlap: number;
+};
+
 export type QueryContext = {
   intent: Intent;
   relevantFacts: string[];
+  sourceTaggedFacts: RankedFact[];
+  sourceDigest: string;
   conciseContext: string;
   confidence: number;
 };
@@ -27,7 +44,8 @@ export type McpContext = {
 
 const scopeCache = new Map<string, McpContext>();
 
-const makeCacheKey = (scope: string, locale: ZaakiyLocale) => `${locale}:${scope}`;
+const makeCacheKey = (scope: string, locale: ZaakiyLocale) =>
+  `${locale}:${scope}`;
 
 const toFacts = (scope: string) =>
   scope
@@ -48,6 +66,16 @@ const tokenize = (text: string) =>
     .replace(/[^\p{L}\p{N}\s]/gu, " ")
     .split(/\s+/)
     .filter((w) => w.length > 1);
+
+const sourcePriority: Record<FactSource, number> = {
+  profile: 6,
+  experience: 5,
+  skills: 5,
+  works: 4,
+  contact: 3,
+  coffee: 2,
+  misc: 1,
+};
 
 const toDataset = (facts: string[]): ScopeDataset => {
   const dataset: ScopeDataset = {
@@ -72,7 +100,12 @@ const toDataset = (facts: string[]): ScopeDataset => {
 
     if (["name", "role", "subtitle", "statement", "meta"].includes(key)) {
       if (key === "meta") {
-        dataset.profile.push(...value.split(";").map((v) => v.trim()).filter(Boolean));
+        dataset.profile.push(
+          ...value
+            .split(";")
+            .map((v) => v.trim())
+            .filter(Boolean),
+        );
       } else {
         dataset.profile.push(`${rawKey.trim()}: ${value}`);
       }
@@ -99,7 +132,11 @@ const toDataset = (facts: string[]): ScopeDataset => {
       continue;
     }
 
-    if (key.includes("coffee") || key.includes("kofi") || key.includes("ko-fi")) {
+    if (
+      key.includes("coffee") ||
+      key.includes("kofi") ||
+      key.includes("ko-fi")
+    ) {
       dataset.coffee.push(value);
       continue;
     }
@@ -144,7 +181,10 @@ const getIntentKeywords = (locale: ZaakiyLocale): Record<Intent, string[]> => {
   };
 };
 
-const detectIntent = (question: string, locale: ZaakiyLocale): { intent: Intent; confidence: number } => {
+const detectIntent = (
+  question: string,
+  locale: ZaakiyLocale,
+): { intent: Intent; confidence: number } => {
   const keywords = getIntentKeywords(locale);
   const q = question.toLowerCase();
   let best: Intent = "general";
@@ -152,7 +192,10 @@ const detectIntent = (question: string, locale: ZaakiyLocale): { intent: Intent;
 
   (Object.keys(keywords) as Intent[]).forEach((intent) => {
     if (intent === "general") return;
-    const score = keywords[intent].reduce((acc, word) => (q.includes(word) ? acc + 1 : acc), 0);
+    const score = keywords[intent].reduce(
+      (acc, word) => (q.includes(word) ? acc + 1 : acc),
+      0,
+    );
     if (score > bestScore) {
       bestScore = score;
       best = intent;
@@ -181,16 +224,84 @@ const byIntent = (dataset: ScopeDataset, intent: Intent) => {
   }
 };
 
-const rankFacts = (facts: string[], question: string) => {
+const sourceLabel = (source: FactSource, locale: ZaakiyLocale) => {
+  if (locale === "ar") {
+    switch (source) {
+      case "profile":
+        return "الملف";
+      case "experience":
+        return "الخبرة";
+      case "skills":
+        return "المهارات";
+      case "works":
+        return "الأعمال";
+      case "contact":
+        return "التواصل";
+      case "coffee":
+        return "الدعم";
+      default:
+        return "عام";
+    }
+  }
+
+  return source;
+};
+
+const buildSourceDigest = (facts: RankedFact[], locale: ZaakiyLocale) => {
+  if (!facts.length) {
+    return locale === "ar"
+      ? "لا توجد مصادر مطابقة."
+      : "No matching sources found.";
+  }
+
+  const counts = new Map<FactSource, number>();
+  for (const item of facts) {
+    counts.set(item.source, (counts.get(item.source) || 0) + 1);
+  }
+
+  return [...counts.entries()]
+    .sort((a, b) => b[1] - a[1])
+    .map(([source, count]) => `${sourceLabel(source, locale)}:${count}`)
+    .join(" | ");
+};
+
+const rankFacts = (
+  facts: string[],
+  question: string,
+  source: FactSource,
+  intentBonus = 0,
+): RankedFact[] => {
   const qTokens = new Set(tokenize(question));
   return facts
     .map((fact) => {
       const fTokens = tokenize(fact);
-      const overlap = fTokens.reduce((acc, token) => (qTokens.has(token) ? acc + 1 : acc), 0);
-      return { fact, overlap };
+      const overlap = fTokens.reduce(
+        (acc, token) => (qTokens.has(token) ? acc + 1 : acc),
+        0,
+      );
+      const weightedOverlap = overlap + intentBonus + sourcePriority[source];
+      return { fact, source, overlap: weightedOverlap };
     })
-    .sort((a, b) => b.overlap - a.overlap)
-    .map((item) => item.fact);
+    .sort((a, b) => b.overlap - a.overlap || b.fact.length - a.fact.length);
+};
+
+const collectAllSourceFacts = (dataset: ScopeDataset): RankedFact[] => {
+  const all: RankedFact[] = [];
+  const sources: FactSource[] = [
+    "profile",
+    "experience",
+    "skills",
+    "works",
+    "contact",
+    "coffee",
+    "misc",
+  ];
+
+  for (const source of sources) {
+    all.push(...dataset[source].map((fact) => ({ fact, source, overlap: 0 })));
+  }
+
+  return all;
 };
 
 export const mcpProcessor = {
@@ -212,21 +323,68 @@ export const mcpProcessor = {
     return context;
   },
 
-  getQueryContext(context: McpContext, userQuestion: string, maxFacts = 14): QueryContext {
+  getQueryContext(
+    context: McpContext,
+    userQuestion: string,
+    maxFacts = 14,
+  ): QueryContext {
     const { intent, confidence } = detectIntent(userQuestion, context.locale);
     const intentFacts = byIntent(context.dataset, intent);
-    const rankedIntentFacts = rankFacts(intentFacts, userQuestion);
-    const rankedGlobalFacts = rankFacts(context.dataset.all, userQuestion);
+    const fallbackFacts = collectAllSourceFacts(context.dataset);
 
-    const relevantFacts = Array.from(new Set([...rankedIntentFacts, ...rankedGlobalFacts]))
+    const intentSource: FactSource =
+      intent === "general"
+        ? "misc"
+        : intent === "profile"
+          ? "profile"
+          : intent === "experience"
+            ? "experience"
+            : intent === "skills"
+              ? "skills"
+              : intent === "works"
+                ? "works"
+                : intent === "contact"
+                  ? "contact"
+                  : "coffee";
+
+    const rankedIntentFacts = rankFacts(
+      intentFacts,
+      userQuestion,
+      intentSource,
+      5,
+    );
+    const rankedGlobalFacts = fallbackFacts
+      .map((item) => rankFacts([item.fact], userQuestion, item.source)[0])
       .filter(Boolean)
-      .slice(0, Math.max(6, Math.min(24, maxFacts)));
+      .sort((a, b) => b.overlap - a.overlap || b.fact.length - a.fact.length);
+
+    const cap = Math.max(6, Math.min(24, maxFacts));
+    const dedup = new Map<string, RankedFact>();
+
+    for (const item of [...rankedIntentFacts, ...rankedGlobalFacts]) {
+      if (!item || !item.fact) continue;
+      if (!dedup.has(item.fact)) {
+        dedup.set(item.fact, item);
+      }
+      if (dedup.size >= cap) break;
+    }
+
+    const sourceTaggedFacts = [...dedup.values()];
+    const relevantFacts = sourceTaggedFacts.map((item) => item.fact);
+    const conciseContext = sourceTaggedFacts
+      .map(
+        (item) =>
+          `- [${sourceLabel(item.source, context.locale)}] ${item.fact}`,
+      )
+      .join("\n");
 
     return {
       intent,
       confidence,
       relevantFacts,
-      conciseContext: relevantFacts.join("\n"),
+      sourceTaggedFacts,
+      sourceDigest: buildSourceDigest(sourceTaggedFacts, context.locale),
+      conciseContext,
     };
   },
 };
