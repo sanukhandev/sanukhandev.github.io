@@ -1,3 +1,4 @@
+import { Suspense, lazy, memo, useMemo } from "react";
 import type { ComponentType } from "react";
 import {
   MapPin,
@@ -16,8 +17,9 @@ import {
 import { useSiteContent } from "@/data/siteContent";
 import { useLocale } from "@/hooks/use-locale";
 import { Button } from "@/components/ui/button";
-import TechParticles from "@/components/TechParticles";
 import { trackEvent } from "@/utils/analytics";
+
+const TechParticles = lazy(() => import("@/components/TechParticles"));
 
 const metaIcons = [Briefcase, MapPin, CircleDot];
 
@@ -29,22 +31,29 @@ const metricIcons: Record<string, ComponentType<{ className?: string }>> = {
 };
 
 const floatingBadges = [
-  { icon: Layers,       label: "Microservices",  top: "8%",  left: "-14%" },
-  { icon: Globe2,       label: "MENA & Global",  top: "30%", right: "-14%" },
-  { icon: Award,        label: "13+ Yrs",         bottom: "30%", left: "-14%" },
-  { icon: CalendarCheck,label: "Since 2011",      bottom: "10%", right: "-10%" },
-  { icon: Users,        label: "100+ Clients",   top: "58%", left: "-12%" },
+  { icon: Layers, label: "Microservices", top: "8%", left: "-14%" },
+  { icon: Globe2, label: "MENA & Global", top: "30%", right: "-14%" },
+  { icon: Award, label: "13+ Yrs", bottom: "30%", left: "-14%" },
+  { icon: CalendarCheck, label: "Since 2011", bottom: "10%", right: "-10%" },
+  { icon: Users, label: "100+ Clients", top: "58%", left: "-12%" },
 ];
 
-export default function Hero() {
+function Hero() {
   const { profile, ui } = useSiteContent();
   const { locale } = useLocale();
   const isArabic = locale === "ar";
+  const webpAvatarUrl = profile.avatarUrl.endsWith(".avif")
+    ? profile.avatarUrl.replace(/\.avif$/i, ".webp")
+    : profile.avatarUrl;
 
-  const floatingBadgesLocalized = floatingBadges.map((badge, index) => ({
-    ...badge,
-    label: ui.hero.floatingBadges[index] ?? badge.label,
-  }));
+  const floatingBadgesLocalized = useMemo(
+    () =>
+      floatingBadges.map((badge, index) => ({
+        ...badge,
+        label: ui.hero.floatingBadges[index] ?? badge.label,
+      })),
+    [ui.hero.floatingBadges],
+  );
 
   return (
     <header id="home" className="relative overflow-hidden pt-16 sm:pt-20">
@@ -57,7 +66,9 @@ export default function Hero() {
         }}
       />
 
-      <TechParticles count={24} />
+      <Suspense fallback={null}>
+        <TechParticles count={24} />
+      </Suspense>
 
       <div className="container-narrow grid items-center gap-6 pb-12 lg:grid-cols-[1.2fr_1fr]">
         <div className="animate-fade-up-stagger">
@@ -102,7 +113,10 @@ export default function Hero() {
               ][index];
               const Icon = metricIcons[iconKey] ?? TrendingUp;
               return (
-                <div key={s.label} className="premium-card flex flex-col items-center px-3 py-4 text-center">
+                <div
+                  key={s.label}
+                  className="premium-card flex flex-col items-center px-3 py-4 text-center"
+                >
                   <Icon className="mb-1.5 h-4 w-4 text-[#38c755]/70" />
                   <div className="text-[28px] font-extrabold text-[#38c755]">
                     {s.value}
@@ -125,7 +139,12 @@ export default function Hero() {
                 >
                   <a
                     href={c.href}
-                    onClick={() => trackEvent("cta_click", { cta_type: "primary", cta_label: c.label })}
+                    onClick={() =>
+                      trackEvent("cta_click", {
+                        cta_type: "primary",
+                        cta_label: c.label,
+                      })
+                    }
                   >
                     {c.label}
                   </a>
@@ -141,7 +160,10 @@ export default function Hero() {
                     className="inline-flex items-center gap-2"
                     onClick={() => {
                       trackEvent("hire_me_click", { cta_type: "hire" });
-                      trackEvent("cta_click", { cta_type: "hire", cta_label: c.label });
+                      trackEvent("cta_click", {
+                        cta_type: "hire",
+                        cta_label: c.label,
+                      });
                     }}
                   >
                     <Briefcase className="h-4 w-4" /> {c.label}
@@ -159,7 +181,10 @@ export default function Hero() {
                     className="inline-flex items-center gap-2"
                     onClick={() => {
                       trackEvent("resume_view", { cta_type: "resume" });
-                      trackEvent("cta_click", { cta_type: "resume", cta_label: c.label });
+                      trackEvent("cta_click", {
+                        cta_type: "resume",
+                        cta_label: c.label,
+                      });
                     }}
                   >
                     <Download className="h-4 w-4" /> {c.label}
@@ -194,15 +219,19 @@ export default function Hero() {
               );
             })}
 
-            <img
-              src={profile.avatarUrl}
-              alt={`${profile.name} portrait`}
-              className="relative z-10 w-full object-contain"
-              loading="lazy"
-              decoding="async"
-              width={640}
-              height={640}
-            />
+            <picture>
+              <source type="image/avif" srcSet={profile.avatarUrl} />
+              <source type="image/webp" srcSet={webpAvatarUrl} />
+              <img
+                src={profile.avatarUrl}
+                alt={`${profile.name} portrait`}
+                className="relative z-10 w-full object-contain"
+                fetchPriority="high"
+                decoding="async"
+                width={640}
+                height={640}
+              />
+            </picture>
           </div>
 
           <div aria-hidden className="innovation-label">
@@ -215,3 +244,5 @@ export default function Hero() {
     </header>
   );
 }
+
+export default memo(Hero);

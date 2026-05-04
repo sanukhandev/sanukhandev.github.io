@@ -11,6 +11,44 @@
     <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <meta name="theme-color" content="#0f1015" />
     <link rel="manifest" href="/site.webmanifest" />
+    <style>
+      :root {
+        --background: 230 18% 7%;
+        --foreground: 225 18% 95%;
+      }
+      html {
+        color-scheme: dark;
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        background: hsl(var(--background));
+        color: hsl(var(--foreground));
+        font-family: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+        font-size: 15px;
+        line-height: 1.55;
+        font-weight: 500;
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+      }
+      #root {
+        min-height: 100vh;
+      }
+      .container-narrow {
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+        max-width: 1180px;
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+      }
+      @media (min-width: 640px) {
+        .container-narrow {
+          padding-left: 2rem;
+          padding-right: 2rem;
+        }
+      }
+    </style>
 
     <!-- UAE / Dubai geo signals -->
     <meta name="geo.region" content="AE-DU" />
@@ -20,7 +58,7 @@
 
     <!-- Open Graph (og:title/description/url/canonical injected per-page by SeoMeta) -->
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://sanukhan.dev/assets/images/sanu.png" />
+    <meta property="og:image" content="https://sanukhan.dev/assets/images/sanu.avif" />
     <meta property="og:image:alt" content="Sanu Khan – Tech Lead &amp; Cloud Architect, Dubai UAE" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -30,7 +68,7 @@
     <!-- Twitter / X Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image:alt" content="Sanu Khan – Tech Lead &amp; Cloud Architect, Dubai UAE" />
-    <meta name="twitter:creator" content="@sanukandev" />
+    <meta name="twitter:creator" content="@sanukhandev" />
 
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
@@ -39,7 +77,7 @@
       "@type": "Person",
       "name": "Sanu Khan",
       "url": "https://sanukhan.dev",
-      "image": "https://sanukhan.dev/assets/images/sanu.png",
+      "image": "https://sanukhan.dev/assets/images/sanu.avif",
       "jobTitle": "Tech Lead / Full Stack Engineer",
       "worksFor": {
         "@type": "Organization",
@@ -54,7 +92,15 @@
       "sameAs": [
         "https://github.com/sanukandev",
         "https://linkedin.com/in/sanukandev",
-        "https://dev.to/sanukandev"
+        "https://dev.to/sanukhandev",
+        "https://www.facebook.com/sanuxq-facebook",
+        "https://www.instagram.com/t_r_i_x_t_r/",
+        "https://www.threads.com/@t_r_i_x_t_r",
+        "https://stackoverflow.com/users/8219738/sanu-khan",
+        "https://medium.com/@sanukhandev",
+        "https://x.com/sanukhandev",
+        "https://www.youtube.com/@sanukhan2653",
+        "https://www.reddit.com/user/T_R__I__X_T_R/"
       ],
       "address": {
         "@type": "PostalAddress",
@@ -102,27 +148,21 @@
     }
     </script>
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=%VITE_GA_ID%"></script>
     <script>
-      window.__gaInitialized = false;
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       window.gtag = window.gtag || gtag;
-
-      if ("%VITE_GA_ID%") {
-        gtag('js', new Date());
-        gtag('config', '%VITE_GA_ID%', {
-          send_page_view: false
-        });
-        window.__gaInitialized = true;
-      }
+      window.__gaInitialized = false;
     </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Mirza:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap" />
     <link href="https://fonts.googleapis.com/css2?family=Mirza:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="preload" href="/assets/index.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="/assets/index.css" /></noscript>
+    <link rel="preload" href="/assets/index.js" as="script" />
+    <link rel="modulepreload" href="/src/main.tsx" />
   </head>
 
   <body>

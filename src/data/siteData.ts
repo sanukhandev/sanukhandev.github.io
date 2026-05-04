@@ -40,7 +40,7 @@ export const profile = {
       variant: "hire" as const,
     },
   ],
-  avatarUrl: "/assets/images/sanu.png",
+  avatarUrl: "/assets/images/sanu.avif",
 };
 
 export const skills = {
@@ -102,7 +102,18 @@ export const services = [
       "Architected multi-tenant SaaS systems with strict tenant isolation, scalable deployments, and contract-driven APIs",
       "Led cloud-native delivery on Azure and Kubernetes — mentored engineering teams and owned architectural decisions",
     ],
-    stack: ["Azure Functions", "Kafka", "Event Hubs", "RabbitMQ", "Node.js", "Kubernetes", "SAP", "Shopify", "Kibo", "Microservices"],
+    stack: [
+      "Azure Functions",
+      "Kafka",
+      "Event Hubs",
+      "RabbitMQ",
+      "Node.js",
+      "Kubernetes",
+      "SAP",
+      "Shopify",
+      "Kibo",
+      "Microservices",
+    ],
   },
   {
     company: "28 Light Bulbs",
@@ -161,7 +172,15 @@ export const services = [
       "Designed and launched SaaS platforms with multi-tenant models and subscription billing",
       "Built AI-assisted tools and LMS systems for mid-market and enterprise clients",
     ],
-    stack: ["Full Stack", "SaaS", "ERP", "LMS", "AI Chatbots", "Integrations", "Cloud"],
+    stack: [
+      "Full Stack",
+      "SaaS",
+      "ERP",
+      "LMS",
+      "AI Chatbots",
+      "Integrations",
+      "Cloud",
+    ],
   },
   {
     company: "Early Career",
@@ -388,16 +407,36 @@ export const footer = {
   brand: "SanuKhan.dev",
   blurb: "Tech Lead • Cloud Architect",
   socials: [
-    { label: "GitHub", icon: "Github", href: "https://github.com/sanukandev" },
+    { label: "GitHub", icon: "GitHub", href: "https://github.com/sanukandev" },
     {
       label: "LinkedIn",
-      icon: "Linkedin",
+      icon: "LinkedIn",
       href: "https://www.linkedin.com/in/sanukandev/",
     },
     {
-      label: "Buy me a coffee",
-      icon: "Coffee",
-      href: "https://ko-fi.com/sanukhan",
+      label: "Dev.to",
+      icon: "DevTo",
+      href: "https://dev.to/sanukhandev",
+    },
+    {
+      label: "Stack Overflow",
+      icon: "StackOverflow",
+      href: "https://stackoverflow.com/users/8219738/sanu-khan",
+    },
+    {
+      label: "Medium",
+      icon: "Medium",
+      href: "https://medium.com/@sanukhandev",
+    },
+    {
+      label: "X",
+      icon: "X",
+      href: "https://x.com/sanukhandev",
+    },
+    {
+      label: "YouTube",
+      icon: "YouTube",
+      href: "https://www.youtube.com/@sanukhan2653",
     },
   ],
   quickLinks: [

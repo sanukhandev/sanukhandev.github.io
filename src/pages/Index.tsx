@@ -1,17 +1,19 @@
-import { Suspense, lazy, useEffect } from "react";
+import { Suspense, lazy, memo, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/sections/Hero";
 import LocaleSwitchSkeleton from "@/components/LocaleSwitchSkeleton";
 import SeoMeta from "@/components/SeoMeta";
-import ToolsPreview from "@/components/sections/ToolsPreview";
-import BlogPreview from "@/components/sections/BlogPreview";
 import { useLocale } from "@/hooks/use-locale";
 import { trackEvent } from "@/utils/analytics";
 
 const Works = lazy(() => import("@/components/sections/Works"));
 const Services = lazy(() => import("@/components/sections/Services"));
 const Skills = lazy(() => import("@/components/sections/Skills"));
-const Certifications = lazy(() => import("@/components/sections/Certifications"));
+const ToolsPreview = lazy(() => import("@/components/sections/ToolsPreview"));
+const BlogPreview = lazy(() => import("@/components/sections/BlogPreview"));
+const Certifications = lazy(
+  () => import("@/components/sections/Certifications"),
+);
 const Articles = lazy(() => import("@/components/sections/Articles"));
 const Footer = lazy(() => import("@/components/sections/Footer"));
 const ZaakiyChatWidget = lazy(() => import("@/components/ZaakiyChatWidget"));
@@ -31,7 +33,16 @@ const Index = () => {
     }
 
     const trackedSections = new Set<string>();
-    const sectionIds = ["home", "works", "experience", "stack", "tools", "blog", "articles", "contact"];
+    const sectionIds = [
+      "home",
+      "works",
+      "experience",
+      "stack",
+      "tools",
+      "blog",
+      "articles",
+      "contact",
+    ];
     const sections = sectionIds
       .map((id) => document.getElementById(id))
       .filter((section): section is HTMLElement => Boolean(section));
@@ -97,4 +108,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default memo(Index);

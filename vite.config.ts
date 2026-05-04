@@ -1,5 +1,6 @@
 import { defineConfig, loadEnv } from "vite";
 import react from "@vitejs/plugin-react-swc";
+import viteCompression from "vite-plugin-compression";
 import path from "path";
 import { fileURLToPath } from "url";
 import { createRequire } from "module";
@@ -13,7 +14,9 @@ type HistoryMessage = { role: "user" | "assistant"; text: string };
 type SessionEntry = { messages: HistoryMessage[]; siteScope?: string };
 const conversationMemory = new Map<string, SessionEntry>();
 
-const readJsonBody = async (req: import("http").IncomingMessage): Promise<{ ok: true; data: unknown } | { ok: false }> => {
+const readJsonBody = async (
+  req: import("http").IncomingMessage,
+): Promise<{ ok: true; data: unknown } | { ok: false }> => {
   const chunks: Uint8Array[] = [];
   for await (const chunk of req) {
     chunks.push(typeof chunk === "string" ? Buffer.from(chunk) : chunk);
@@ -27,7 +30,11 @@ const readJsonBody = async (req: import("http").IncomingMessage): Promise<{ ok: 
   }
 };
 
-const sendJson = (res: import("http").ServerResponse, status: number, data: unknown) => {
+const sendJson = (
+  res: import("http").ServerResponse,
+  status: number,
+  data: unknown,
+) => {
   res.statusCode = status;
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
@@ -47,7 +54,10 @@ const extractModelText = (payload: unknown) => {
     candidates?: Array<{ content?: { parts?: Array<{ text?: string }> } }>;
   };
   const parts = data.candidates?.[0]?.content?.parts || [];
-  return parts.map((p) => p.text || "").join(" ").trim();
+  return parts
+    .map((p) => p.text || "")
+    .join(" ")
+    .trim();
 };
 
 // Global regex used only with .replace() – safe to reuse with lastIndex mutation.
@@ -66,10 +76,18 @@ const looksLeakyOrInvalid = (text: string) => {
   if (!text) return true;
   if (leakPatternTest.test(text)) return true;
   const lowered = text.toLowerCase();
-  return lowered.startsWith("name:") || lowered.startsWith("role:") || lowered.includes("contextsummary");
+  return (
+    lowered.startsWith("name:") ||
+    lowered.startsWith("role:") ||
+    lowered.includes("contextsummary")
+  );
 };
 
-const fallbackReply = (locale: ZaakiyLocale, email: string, question: string) => {
+const fallbackReply = (
+  locale: ZaakiyLocale,
+  email: string,
+  question: string,
+) => {
   const q = question.trim().toLowerCase();
   const isGreeting = /^(hi|hello|hey|hola|مرحبا|السلام عليكم)/i.test(q);
   const exactEnglishFallback = `Please connect on email ${email}`;
@@ -85,9 +103,11 @@ const fallbackReply = (locale: ZaakiyLocale, email: string, question: string) =>
   return exactEnglishFallback;
 };
 
-const getHistory = (sessionId: string) => conversationMemory.get(sessionId)?.messages || [];
+const getHistory = (sessionId: string) =>
+  conversationMemory.get(sessionId)?.messages || [];
 
-const getSessionScope = (sessionId: string) => (conversationMemory.get(sessionId)?.siteScope || "").trim();
+const getSessionScope = (sessionId: string) =>
+  (conversationMemory.get(sessionId)?.siteScope || "").trim();
 
 const setSessionScope = (sessionId: string, siteScope: string) => {
   const entry = conversationMemory.get(sessionId);
@@ -98,7 +118,11 @@ const setSessionScope = (sessionId: string, siteScope: string) => {
   entry.siteScope = siteScope;
 };
 
-const pushHistory = (sessionId: string, role: "user" | "assistant", text: string) => {
+const pushHistory = (
+  sessionId: string,
+  role: "user" | "assistant",
+  text: string,
+) => {
   const entry = conversationMemory.get(sessionId) || { messages: [] };
   entry.messages.push({ role, text });
   if (entry.messages.length > 12) {
@@ -167,7 +191,10 @@ const registerZaakiyApi = (
       const userQuestion = (body.userQuestion || "").trim();
       const incomingSiteScope = (body.siteScope || "").trim();
       const email = (body.email || "khan.sanukhan@outlook.com").trim();
-      const maxOutputChars = Math.max(120, Math.min(500, Number(body.maxOutputChars || 250)));
+      const maxOutputChars = Math.max(
+        120,
+        Math.min(500, Number(body.maxOutputChars || 250)),
+      );
       const sessionId = (body.sessionId || "anonymous-session").trim();
       if (incomingSiteScope) {
         setSessionScope(sessionId, incomingSiteScope);
@@ -180,7 +207,11 @@ const registerZaakiyApi = (
       }
 
       const scopedContext = mcpProcessor.getEnhancedContext(siteScope, locale);
-      const queryContext = mcpProcessor.getQueryContext(scopedContext, userQuestion, 14);
+      const queryContext = mcpProcessor.getQueryContext(
+        scopedContext,
+        userQuestion,
+        14,
+      );
       const historySnapshot = getHistory(sessionId).slice();
       pushHistory(sessionId, "user", userQuestion);
 
@@ -190,7 +221,10 @@ const registerZaakiyApi = (
         userQuestion,
         email,
         maxChars: maxOutputChars,
-        conversationHistory: historySnapshot.map((h) => ({ role: h.role, text: h.text })),
+        conversationHistory: historySnapshot.map((h) => ({
+          role: h.role,
+          text: h.text,
+        })),
       });
 
       const googleResp = await fetch(
@@ -211,7 +245,10 @@ const registerZaakiyApi = (
 
       if (!googleResp.ok) {
         const detail = await googleResp.text();
-        sendJson(res, googleResp.status, { error: "Upstream GenAI error", detail });
+        sendJson(res, googleResp.status, {
+          error: "Upstream GenAI error",
+          detail,
+        });
         return;
       }
 
@@ -253,7 +290,16 @@ const createZaakiyApiWrapper = (env: Record<string, string>) => ({
 // https://vitejs.dev/config/
 export default defineConfig(({ command, mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
-  const plugins = [react(), createZaakiyApiWrapper(env)];
+  const plugins = [
+    react(),
+    createZaakiyApiWrapper(env),
+    viteCompression({ algorithm: "gzip", ext: ".gz", deleteOriginFile: false }),
+    viteCompression({
+      algorithm: "brotliCompress",
+      ext: ".br",
+      deleteOriginFile: false,
+    }),
+  ];
   const isCiBuild = process.env.CI === "true" || process.env.VERCEL === "1";
   const shouldPrerender = mode === "production" && !isCiBuild;
 
@@ -317,35 +363,34 @@ export default defineConfig(({ command, mode }) => {
     },
     build: {
       cssCodeSplit: true,
+      minify: "esbuild",
       rollupOptions: {
         output: {
+          entryFileNames: "assets/index.js",
+          chunkFileNames: "assets/[name]-[hash].js",
+          assetFileNames: (assetInfo) =>
+            assetInfo.name?.endsWith(".css")
+              ? "assets/index.css"
+              : "assets/[name]-[hash][extname]",
           manualChunks(id) {
-            if (!id.includes("node_modules")) {
-              return;
+            if (
+              id.includes("node_modules/react/") ||
+              id.includes("node_modules/react-dom/") ||
+              id.includes("node_modules/scheduler/")
+            ) {
+              return "vendor";
             }
-
-            if (id.includes("react-dom") || id.includes("react/jsx-runtime") || id.includes("/react/")) {
-              return "vendor-react";
+            if (
+              id.includes("node_modules/react-router") ||
+              id.includes("node_modules/@tanstack/")
+            ) {
+              return "routingData";
             }
-
-            if (id.includes("react-router") || id.includes("@tanstack")) {
-              return "vendor-routing-data";
-            }
-
-            if (id.includes("@radix-ui") || id.includes("class-variance-authority") || id.includes("tailwind-merge")) {
-              return "vendor-ui";
-            }
-
-            if (id.includes("lucide-react") || id.includes("react-icons")) {
-              return "vendor-icons";
-            }
-
-            if (id.includes("recharts")) {
-              return "vendor-charts";
-            }
-
-            if (id.includes("react-hook-form") || id.includes("zod") || id.includes("@hookform")) {
-              return "vendor-forms";
+            if (
+              id.includes("node_modules/@radix-ui/") ||
+              id.includes("node_modules/lucide-react/")
+            ) {
+              return "ui";
             }
           },
         },
