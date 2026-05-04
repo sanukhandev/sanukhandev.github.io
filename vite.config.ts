@@ -372,14 +372,26 @@ export default defineConfig(({ command, mode }) => {
             assetInfo.name?.endsWith(".css")
               ? "assets/index.css"
               : "assets/[name]-[hash][extname]",
-          manualChunks: {
-            vendor: ["react", "react-dom"],
-            routingData: ["react-router-dom", "@tanstack/react-query"],
-            ui: [
-              "@radix-ui/react-dialog",
-              "@radix-ui/react-dropdown-menu",
-              "lucide-react",
-            ],
+          manualChunks(id) {
+            if (
+              id.includes("node_modules/react/") ||
+              id.includes("node_modules/react-dom/") ||
+              id.includes("node_modules/scheduler/")
+            ) {
+              return "vendor";
+            }
+            if (
+              id.includes("node_modules/react-router") ||
+              id.includes("node_modules/@tanstack/")
+            ) {
+              return "routingData";
+            }
+            if (
+              id.includes("node_modules/@radix-ui/") ||
+              id.includes("node_modules/lucide-react/")
+            ) {
+              return "ui";
+            }
           },
         },
       },
