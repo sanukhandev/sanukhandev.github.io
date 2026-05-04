@@ -407,61 +407,36 @@ export const footer = {
   brand: "SanuKhan.dev",
   blurb: "Tech Lead • Cloud Architect",
   socials: [
-    { label: "GitHub", icon: "Github", href: "https://github.com/sanukandev" },
+    { label: "GitHub", icon: "GitHub", href: "https://github.com/sanukandev" },
     {
       label: "LinkedIn",
-      icon: "Linkedin",
+      icon: "LinkedIn",
       href: "https://www.linkedin.com/in/sanukandev/",
     },
     {
       label: "Dev.to",
-      icon: "Link",
+      icon: "DevTo",
       href: "https://dev.to/sanukhandev",
     },
     {
-      label: "Facebook",
-      icon: "Link",
-      href: "https://www.facebook.com/sanuxq-facebook",
-    },
-    {
-      label: "Instagram",
-      icon: "Link",
-      href: "https://www.instagram.com/t_r_i_x_t_r/",
-    },
-    {
-      label: "Threads",
-      icon: "Link",
-      href: "https://www.threads.com/@t_r_i_x_t_r",
-    },
-    {
       label: "Stack Overflow",
-      icon: "Link",
+      icon: "StackOverflow",
       href: "https://stackoverflow.com/users/8219738/sanu-khan",
     },
     {
       label: "Medium",
-      icon: "Link",
+      icon: "Medium",
       href: "https://medium.com/@sanukhandev",
     },
     {
       label: "X",
-      icon: "Link",
+      icon: "X",
       href: "https://x.com/sanukhandev",
     },
     {
       label: "YouTube",
-      icon: "Link",
+      icon: "YouTube",
       href: "https://www.youtube.com/@sanukhan2653",
-    },
-    {
-      label: "Reddit",
-      icon: "Link",
-      href: "https://www.reddit.com/user/T_R__I__X_T_R/",
-    },
-    {
-      label: "Buy me a coffee",
-      icon: "Coffee",
-      href: "https://ko-fi.com/sanukhan",
     },
   ],
   quickLinks: [

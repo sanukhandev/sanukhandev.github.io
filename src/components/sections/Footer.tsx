@@ -1,13 +1,14 @@
 import type { ComponentType } from "react";
+import { Mail, MapPin, Phone } from "lucide-react";
 import {
-  Coffee,
-  Github,
-  Link as LinkIcon,
-  Linkedin,
-  Mail,
-  MapPin,
-  Phone,
-} from "lucide-react";
+  FaDev,
+  FaGithub,
+  FaLinkedin,
+  FaMedium,
+  FaStackOverflow,
+  FaYoutube,
+} from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 import { cn } from "@/lib/utils";
 import { useSiteContent } from "@/data/siteContent";
 import { useTheme } from "@/hooks/use-theme";
@@ -15,9 +16,13 @@ import { useLocale } from "@/hooks/use-locale";
 import { trackEvent } from "@/utils/analytics";
 
 const socialIcons: Record<string, ComponentType<{ className?: string }>> = {
-  Github,
-  Linkedin,
-  Coffee,
+  GitHub: FaGithub,
+  LinkedIn: FaLinkedin,
+  DevTo: FaDev,
+  StackOverflow: FaStackOverflow,
+  Medium: FaMedium,
+  X: FaXTwitter,
+  YouTube: FaYoutube,
 };
 
 export default function Footer() {
@@ -202,7 +207,7 @@ export default function Footer() {
 
           <div className="flex w-full flex-wrap gap-2 sm:w-auto sm:gap-4">
             {footer.socials.map((s) => {
-              const Icon = socialIcons[s.icon] || LinkIcon;
+              const Icon = socialIcons[s.icon];
               return (
                 <a
                   key={s.label}
@@ -226,13 +231,9 @@ export default function Footer() {
                   aria-label={s.label}
                   className={cn(
                     "inline-flex items-center gap-2 rounded-md border px-3 py-2 text-sm transition-all duration-300 hover:scale-[1.02]",
-                    s.href.includes("ko-fi.com")
-                      ? isLight
-                        ? "border-[#1f9f45]/45 bg-[#1f9f45]/10 font-semibold text-[#1f9f45] hover:border-[#1f9f45] hover:bg-[#1f9f45]/18"
-                        : "border-[#38c755]/50 bg-[#38c755]/10 font-semibold text-[#38c755] hover:border-[#38c755] hover:bg-[#38c755]/20"
-                      : isLight
-                        ? "border-[#d4dde1] bg-white text-[#4d5a66] hover:border-[#1f9f45]/35 hover:text-[#121722]"
-                        : "border-[#2b2f3b] bg-[#0f1015] text-[#8a90a8] hover:border-[#38c755]/40 hover:text-[#f0f1f4]",
+                    isLight
+                      ? "border-[#d4dde1] bg-white text-[#4d5a66] hover:border-[#1f9f45]/35 hover:text-[#121722]"
+                      : "border-[#2b2f3b] bg-[#0f1015] text-[#8a90a8] hover:border-[#38c755]/40 hover:text-[#f0f1f4]",
                   )}
                 >
                   <Icon className="h-4 w-4" />
