@@ -19,15 +19,15 @@ export default function Articles() {
             <a
               key={a.title}
               href={a.url}
-              className="premium-card group flex flex-col p-5 transition-all duration-300 hover:-translate-y-1 hover:border-[#38c755]/40"
+              className="premium-card group flex flex-col p-5 transition-all duration-300 hover:-translate-y-1 hover:border-accent-soft"
             >
-              <span className="mb-3 inline-flex w-fit items-center rounded-full border border-[#2b2f3b] bg-[#16171d] px-2.5 py-0.5 text-[11px] font-semibold text-tea-green-300">
+              <span className="mb-3 inline-flex w-fit items-center rounded-full border border-default bg-secondary px-2.5 py-0.5 text-[11px] font-semibold text-tea-green-300">
                 {a.category}
               </span>
-              <h3 className="text-[16px] font-semibold leading-snug text-[#f0f1f4]">
+              <h3 className="text-[16px] font-semibold leading-snug text-primary">
                 {a.title}
               </h3>
-              <p className="mt-2 flex-1 text-[15px] text-[#8a90a8]">
+              <p className="mt-2 flex-1 text-[15px] text-secondary">
                 {a.excerpt}
               </p>
               <div className="mt-4 flex flex-wrap gap-1.5">
@@ -35,7 +35,7 @@ export default function Articles() {
                   <TagChip
                     key={t}
                     label={t}
-                    className="bg-[#16171d] text-[#8a90a8]"
+                    className="bg-secondary text-secondary"
                   />
                 ))}
               </div>

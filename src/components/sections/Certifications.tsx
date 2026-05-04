@@ -18,21 +18,21 @@ export default function Certifications() {
           {certifications.map((c) => (
             <div
               key={c.title}
-              className="premium-card p-5 transition-all duration-300 hover:-translate-y-1 hover:border-[#38c755]/40"
+              className="premium-card p-5 transition-all duration-300 hover:-translate-y-1 hover:border-accent-soft"
             >
               <div className="mb-3 flex items-center gap-2">
                 <span className="grid h-9 w-9 place-items-center rounded-lg bg-tea-green-500/15 text-tea-green-400">
                   <Award className="h-4 w-4" />
                 </span>
-                <span className="text-xs font-semibold text-[#8a90a8]">
+                <span className="text-xs font-semibold text-secondary">
                   {c.issuer}
                 </span>
               </div>
-              <h3 className="text-[15px] font-semibold leading-snug text-[#f0f1f4]">
+              <h3 className="text-[15px] font-semibold leading-snug text-primary">
                 {c.title}
               </h3>
               {c.issued && (
-                <p className="mt-1 text-xs text-[#8a90a8]">{ui.certifications.issued} {c.issued}</p>
+                <p className="mt-1 text-xs text-secondary">{ui.certifications.issued} {c.issued}</p>
               )}
               <a
                 href={c.url}

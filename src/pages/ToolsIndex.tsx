@@ -30,29 +30,29 @@ export default function ToolsIndex() {
       />
       <main className="min-h-screen bg-background pt-20 text-foreground">
         <section className="container-narrow section-pad">
-          <h1 className="text-[38px] font-extrabold text-[#f0f1f4]">Developer Tools Platform</h1>
-          <p className="mt-4 max-w-3xl text-[15px] text-[#8a90a8]">
+          <h1 className="text-[38px] font-extrabold text-primary">Developer Tools Platform</h1>
+          <p className="mt-4 max-w-3xl text-[15px] text-secondary">
             Practical tools for API engineering, integration debugging, and request transformation.
           </p>
           <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {tools.map((tool) => (
               <article key={tool.href} className="premium-card p-5">
-                <h2 className="text-[20px] font-bold text-[#f0f1f4]">{tool.title}</h2>
-                <p className="mt-2 text-[14px] text-[#8a90a8]">{tool.description}</p>
-                <Link className="mt-3 inline-flex text-[14px] font-semibold text-[#38c755] hover:underline" to={tool.href}>
+                <h2 className="text-[20px] font-bold text-primary">{tool.title}</h2>
+                <p className="mt-2 text-[14px] text-secondary">{tool.description}</p>
+                <Link className="mt-3 inline-flex text-[14px] font-semibold text-accent hover:underline" to={tool.href}>
                   Open {tool.title}
                 </Link>
               </article>
             ))}
           </div>
           <div className="mt-8 flex flex-wrap gap-3">
-            <Link className="text-[14px] font-semibold text-[#38c755] hover:underline" to="/blog">
+            <Link className="text-[14px] font-semibold text-accent hover:underline" to="/blog">
               Explore Blog Articles
             </Link>
-            <Link className="text-[14px] font-semibold text-[#38c755] hover:underline" to="/api-integration-services">
+            <Link className="text-[14px] font-semibold text-accent hover:underline" to="/api-integration-services">
               API Integration Services
             </Link>
-            <Link className="text-[14px] font-semibold text-[#38c755] hover:underline" to="/">
+            <Link className="text-[14px] font-semibold text-accent hover:underline" to="/">
               Portfolio Homepage
             </Link>
           </div>

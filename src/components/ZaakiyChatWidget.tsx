@@ -12,7 +12,9 @@ type ChatMessage = {
   text: string;
 };
 
-const MAX_OUTPUT_CHARS = Number(import.meta.env.VITE_ZAAKIY_MAX_OUTPUT_CHARS || 250);
+const MAX_OUTPUT_CHARS = Number(
+  import.meta.env.VITE_ZAAKIY_MAX_OUTPUT_CHARS || 250,
+);
 const DAILY_QUOTA = Number(import.meta.env.VITE_ZAAKIY_DAILY_QUOTA || 200);
 const CHAT_API_URL = import.meta.env.VITE_ZAAKIY_API_URL || "/api/zaakiy-chat";
 
@@ -46,7 +48,9 @@ export default function ZaakiyChatWidget() {
   const { locale } = useLocale();
   const content = useSiteContent();
   const scrollRef = useRef<HTMLDivElement>(null);
-  const sessionIdRef = useRef(`zaakiy-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`);
+  const sessionIdRef = useRef(
+    `zaakiy-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`,
+  );
   const scopeSentRef = useRef(false);
 
   const isArabic = locale === "ar";
@@ -91,7 +95,11 @@ export default function ZaakiyChatWidget() {
   const appendMessage = (role: ChatRole, text: string) => {
     setMessages((prev) => [
       ...prev,
-      { id: `${role}-${Date.now()}-${Math.random().toString(16).slice(2, 8)}`, role, text: clipText(text) },
+      {
+        id: `${role}-${Date.now()}-${Math.random().toString(16).slice(2, 8)}`,
+        role,
+        text: clipText(text),
+      },
     ]);
     setTimeout(() => {
       if (scrollRef.current) {
@@ -173,17 +181,19 @@ export default function ZaakiyChatWidget() {
   return (
     <div className="zaakiy-chat fixed bottom-3 right-3 z-[70] sm:bottom-5 sm:right-5">
       {open && (
-        <div className="mb-3 w-[calc(100vw-1.5rem)] max-w-[340px] overflow-hidden rounded-2xl border border-[#2b2f3b] bg-[#16171d]/95 shadow-[0_16px_40px_-20px_rgba(0,0,0,0.75)] backdrop-blur-xl">
-          <div className="flex items-center justify-between border-b border-[#2b2f3b] px-4 py-3">
+        <div className="mb-3 w-[calc(100vw-1.5rem)] max-w-[340px] overflow-hidden rounded-2xl border border-default bg-secondary/95 shadow-[0_16px_40px_-20px_rgba(0,0,0,0.75)] backdrop-blur-xl">
+          <div className="flex items-center justify-between border-b border-default px-4 py-3">
             <div>
-              <h3 className="text-[15px] font-semibold text-[#f0f1f4]">Zaakiy AI</h3>
-              <p className="text-[11px] text-[#8a90a8]">Powered by Zaakiy AI</p>
+              <h3 className="text-[15px] font-semibold text-primary">
+                Zaakiy AI
+              </h3>
+              <p className="text-[11px] text-secondary">Powered by Zaakiy AI</p>
             </div>
             <button
               type="button"
               onClick={() => setOpen(false)}
               aria-label="Close chat"
-              className="rounded-md p-1.5 text-[#8a90a8] transition-colors hover:bg-[#20222b] hover:text-[#f0f1f4]"
+              className="rounded-md p-1.5 text-secondary transition-colors hover:bg-[#20222b] hover:text-primary"
             >
               <X className="h-4 w-4" />
             </button>
@@ -202,21 +212,21 @@ export default function ZaakiyChatWidget() {
                 className={cn(
                   "max-w-[90%] rounded-xl px-3 py-2 text-[13px] leading-relaxed",
                   m.role === "assistant"
-                    ? "border border-[#38c755]/35 bg-[#38c755]/10 text-[#d7ffe2]"
-                    : "ml-auto border border-[#2b2f3b] bg-[#20222b] text-[#f0f1f4]",
+                    ? "border border-accent-soft bg-accent-soft text-[#d7ffe2]"
+                    : "ml-auto border border-default bg-[#20222b] text-primary",
                 )}
               >
                 {m.text}
               </div>
             ))}
             {loading && (
-              <div className="w-fit rounded-xl border border-[#2b2f3b] bg-[#20222b] px-3 py-2 text-[12px] text-[#8a90a8]">
+              <div className="w-fit rounded-xl border border-default bg-[#20222b] px-3 py-2 text-[12px] text-secondary">
                 {isArabic ? "Zaakiy AI يكتب..." : "Zaakiy AI is typing..."}
               </div>
             )}
           </div>
 
-          <form onSubmit={onSubmit} className="border-t border-[#2b2f3b] p-3">
+          <form onSubmit={onSubmit} className="border-t border-default p-3">
             <div className="flex items-end gap-2">
               <textarea
                 value={input}
@@ -224,20 +234,24 @@ export default function ZaakiyChatWidget() {
                 onKeyDown={onKeyDown}
                 rows={1}
                 maxLength={400}
-                placeholder={isArabic ? "اكتب سؤالك..." : "Type your question..."}
-                className="min-h-[40px] flex-1 resize-none rounded-lg border border-[#2b2f3b] bg-[#20222b] px-3 py-2 text-[13px] text-[#f0f1f4] outline-none placeholder:text-[#8a90a8] focus:border-[#38c755]/55"
+                placeholder={
+                  isArabic ? "اكتب سؤالك..." : "Type your question..."
+                }
+                className="min-h-[40px] flex-1 resize-none rounded-lg border border-default bg-secondary px-3 py-2 text-[13px] text-primary outline-none placeholder:text-secondary focus:border-accent-soft"
               />
               <button
                 type="submit"
                 disabled={loading || !input.trim()}
-                className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-[#38c755] text-[#0f1015] transition-opacity disabled:cursor-not-allowed disabled:opacity-55"
+                className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-accent text-on-accent transition-opacity disabled:cursor-not-allowed disabled:opacity-55"
                 aria-label={isArabic ? "إرسال" : "Send"}
               >
                 <Send className="h-4 w-4" />
               </button>
             </div>
-            <p className="mt-1 text-[10px] text-[#8a90a8]">
-              {isArabic ? "ردود قصيرة وضمن بيانات الموقع فقط" : "Short replies, site-data scope only"}
+            <p className="mt-1 text-[10px] text-secondary">
+              {isArabic
+                ? "ردود قصيرة وضمن بيانات الموقع فقط"
+                : "Short replies, site-data scope only"}
             </p>
           </form>
         </div>
@@ -249,8 +263,8 @@ export default function ZaakiyChatWidget() {
         className={cn(
           "inline-flex h-12 items-center gap-2 rounded-full border px-4 text-sm font-semibold transition-all duration-300",
           open
-            ? "border-[#38c755] bg-[#38c755] text-[#0f1015]"
-            : "border-[#38c755]/45 bg-[#38c755]/10 text-[#38c755] hover:bg-[#38c755]/20",
+            ? "border-accent bg-accent text-on-accent"
+            : "border-accent-soft bg-accent-soft text-accent hover:bg-accent-soft",
         )}
         aria-label="Toggle Zaakiy AI chat"
       >

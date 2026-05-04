@@ -4,6 +4,22 @@
 
 @layer base {
   :root {
+    --bg-primary: #0f1015;
+    --bg-secondary: #16171d;
+    --text-primary: #f5f7fa;
+    --text-secondary: #c9ced6;
+    --text-muted: #8a90a8;
+
+    --accent: #38c755;
+    --accent-soft: #38c755cc;
+    --accent-bg: rgba(56, 199, 85, 0.12);
+
+    --border: #2b2f3b;
+
+    /* Glass/translucent surface variants */
+    --bg-primary-glass: rgba(15, 16, 21, 0.92);
+    --bg-secondary-glass: rgba(22, 23, 29, 0.88);
+
     --background: 230 18% 7%;
     --foreground: 225 18% 95%;
 
@@ -22,26 +38,43 @@
     --muted: 226 16% 16%;
     --muted-foreground: 227 12% 60%;
 
-    --accent: 338 78% 50%;
-    --accent-foreground: 225 18% 95%;
+    --accent-hsl: 132 56% 50%;
+    --accent-foreground-hsl: 225 18% 95%;
 
     --destructive: 4 99% 50%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 226 16% 20%;
-    --input: 226 16% 20%;
+    --border-hsl: 226 16% 20%;
+    --input-hsl: 226 16% 20%;
     --ring: 132 56% 50%;
 
     --radius: 0.875rem;
 
-    --site-bg: #0f1015;
-    --site-fg: #f0f1f4;
-    --site-muted: #8a90a8;
-    --site-surface: #16171d;
-    --site-border-strong: #2b2f3b;
+    --site-bg: var(--bg-primary);
+    --site-fg: var(--text-primary);
+    --site-muted: var(--text-muted);
+    --site-surface: var(--bg-secondary);
+    --site-border-strong: var(--border);
   }
 
   html.light {
+    --bg-primary: #f4f8f5;
+    --bg-secondary: #ffffff;
+    --text-primary: #121722;
+    --text-secondary: #2f3a46;
+    --text-muted: #4d5a66;
+
+    /* Darker accessible accent for light surfaces */
+    --accent: #187a34;
+    --accent-soft: #187a34cc;
+    --accent-bg: rgba(24, 122, 52, 0.14);
+
+    --border: #cfd8dd;
+
+    /* Glass/translucent surface variants */
+    --bg-primary-glass: rgba(244, 248, 245, 0.92);
+    --bg-secondary-glass: rgba(255, 255, 255, 0.88);
+
     --background: 146 34% 97%;
     --foreground: 222 23% 13%;
 
@@ -60,11 +93,11 @@
     --muted: 160 13% 92%;
     --muted-foreground: 212 15% 38%;
 
-    --accent: 338 78% 44%;
-    --accent-foreground: 0 0% 100%;
+    --accent-hsl: 135 64% 37%;
+    --accent-foreground-hsl: 0 0% 100%;
 
-    --border: 203 18% 84%;
-    --input: 203 18% 84%;
+    --border-hsl: 203 18% 84%;
+    --input-hsl: 203 18% 84%;
     --ring: 135 64% 37%;
 
     --site-bg: #f4f8f5;
@@ -74,29 +107,9 @@
     --site-border-strong: #cfd8dd;
   }
 
-  /* Light-mode compatibility for components that still use hardcoded dark utility colors */
-  html.light [class*="text-[#f0f1f4]"] {
-    color: #121722 !important;
-  }
-
-  html.light [class*="text-[#8a90a8]"] {
-    color: #4d5a66 !important;
-  }
-
-  html.light [class*="bg-[#0f1015]"] {
-    background-color: #eef3f0 !important;
-  }
-
-  html.light [class*="bg-[#16171d]"] {
-    background-color: #ffffff !important;
-  }
-
+  /* Light-mode compatibility for remaining hardcoded utility colors */
   html.light [class*="bg-[#20222b]"] {
     background-color: #e7efea !important;
-  }
-
-  html.light [class*="border-[#2b2f3b]"] {
-    border-color: #cfd8dd !important;
   }
 
   html.light [class*="bg-[#1c1e28]"] {
@@ -122,14 +135,18 @@
     scroll-behavior: smooth;
   }
 
+  html.light {
+    color-scheme: light;
+  }
+
   * {
     @apply border-border;
   }
 
   body {
     margin: 0;
-    background: var(--site-bg);
-    color: var(--site-fg);
+    background: var(--bg-primary);
+    color: var(--text-primary);
     font-family: "Montserrat", ui-sans-serif, system-ui, sans-serif;
     font-size: 15px;
     line-height: 1.55;
@@ -256,6 +273,81 @@
 }
 
 @layer utilities {
+  .text-primary {
+    color: var(--text-primary);
+  }
+
+  .text-secondary {
+    color: var(--text-secondary);
+  }
+
+  .text-muted {
+    color: var(--text-muted);
+  }
+
+  .text-accent {
+    color: var(--accent);
+  }
+
+  .text-on-accent {
+    color: var(--bg-primary);
+  }
+
+  .text-accent-strong {
+    color: #4ade80;
+  }
+
+  .bg-primary {
+    background-color: var(--bg-primary);
+  }
+
+  .bg-secondary {
+    background-color: var(--bg-secondary);
+  }
+
+  .bg-accent-soft {
+    background: rgba(56, 199, 85, 0.15);
+  }
+
+  .bg-accent {
+    background-color: var(--accent);
+  }
+
+  .bg-primary-glass {
+    background-color: var(--bg-primary-glass);
+  }
+
+  .bg-secondary-glass {
+    background-color: var(--bg-secondary-glass);
+  }
+
+  .border-default {
+    border-color: var(--border);
+  }
+
+  .border-accent-soft {
+    border-color: color-mix(in srgb, var(--accent) 45%, transparent);
+  }
+
+  .border-accent {
+    border-color: var(--accent);
+  }
+
+  .ring-accent-soft {
+    --tw-ring-color: color-mix(in srgb, var(--accent) 35%, transparent);
+  }
+
+  .link-accent {
+    color: var(--accent);
+    text-decoration-color: color-mix(in srgb, var(--accent) 65%, transparent);
+    text-underline-offset: 4px;
+  }
+
+  .link-accent:hover {
+    color: #4ade80;
+    text-decoration: underline;
+  }
+
   .container-narrow {
     @apply mx-auto w-full max-w-[1180px] px-5 sm:px-8;
   }
@@ -265,7 +357,7 @@
   }
 
   .premium-card {
-    border: 1px solid #2b2f3b;
+    border: 1px solid var(--border);
     background: rgba(22, 23, 29, 0.68);
     backdrop-filter: blur(8px);
     border-radius: 16px;

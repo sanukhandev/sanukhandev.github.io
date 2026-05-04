@@ -46,16 +46,16 @@ export default function ToolSeoPage(props: ToolSeoPageProps) {
       />
       <main className="min-h-screen bg-background pt-20 text-foreground">
         <article className="container-narrow section-pad">
-          <h1 className="text-[38px] font-extrabold leading-[1.1] text-[#f0f1f4]">{h1}</h1>
-          <div className="mt-4 space-y-4 text-[15px] leading-7 text-[#8a90a8]">
+          <h1 className="text-[38px] font-extrabold leading-[1.1] text-primary">{h1}</h1>
+          <div className="mt-4 space-y-4 text-[15px] leading-7 text-secondary">
             {intro.map((line, index) => (
               <p key={index}>{line}</p>
             ))}
           </div>
 
           <section className="mt-8">
-            <h2 className="text-[26px] font-bold text-[#f0f1f4]">How to Use</h2>
-            <ol className="mt-3 list-decimal space-y-2 pl-5 text-[15px] text-[#8a90a8]">
+            <h2 className="text-[26px] font-bold text-primary">How to Use</h2>
+            <ol className="mt-3 list-decimal space-y-2 pl-5 text-[15px] text-secondary">
               {howTo.map((step, index) => (
                 <li key={index}>{step}</li>
               ))}
@@ -63,22 +63,22 @@ export default function ToolSeoPage(props: ToolSeoPageProps) {
           </section>
 
           <section className="mt-8 grid gap-4 lg:grid-cols-2">
-            <div className="rounded-xl border border-[#2b2f3b] bg-[#16171d] p-4">
-              <h2 className="text-[18px] font-semibold text-[#f0f1f4]">Example Input</h2>
-              <pre className="mt-3 overflow-x-auto text-[13px] text-[#8a90a8]">{exampleInput}</pre>
+            <div className="rounded-xl border border-default bg-secondary p-4">
+              <h2 className="text-[18px] font-semibold text-primary">Example Input</h2>
+              <pre className="mt-3 overflow-x-auto text-[13px] text-secondary">{exampleInput}</pre>
             </div>
-            <div className="rounded-xl border border-[#2b2f3b] bg-[#16171d] p-4">
-              <h2 className="text-[18px] font-semibold text-[#f0f1f4]">Example Output</h2>
-              <pre className="mt-3 overflow-x-auto text-[13px] text-[#8a90a8]">{exampleOutput}</pre>
+            <div className="rounded-xl border border-default bg-secondary p-4">
+              <h2 className="text-[18px] font-semibold text-primary">Example Output</h2>
+              <pre className="mt-3 overflow-x-auto text-[13px] text-secondary">{exampleOutput}</pre>
             </div>
           </section>
 
           <nav className="mt-10" aria-label="Internal links">
-            <h2 className="text-[22px] font-bold text-[#f0f1f4]">Internal Links</h2>
+            <h2 className="text-[22px] font-bold text-primary">Internal Links</h2>
             <ul className="mt-3 flex flex-wrap gap-3">
               {links.map((link) => (
                 <li key={link.href}>
-                  <Link className="text-[14px] font-semibold text-[#38c755] hover:underline" to={link.href}>
+                  <Link className="text-[14px] font-semibold text-accent hover:underline" to={link.href}>
                     {link.label}
                   </Link>
                 </li>
