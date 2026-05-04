@@ -87,7 +87,7 @@ export default function SeoMeta({
       <meta name="twitter:title" content={safeTitle} />
       <meta name="twitter:description" content={safeDescription} />
       <meta name="twitter:image" content={socialImage} />
-      <meta name="twitter:creator" content="@sanukandev" />
+      <meta name="twitter:creator" content="@sanukhandev" />
       <link rel="canonical" href={canonicalUrl} />
       {schemaPayload ? (
         <script type="application/ld+json">{schemaPayload}</script>

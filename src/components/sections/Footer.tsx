@@ -1,5 +1,13 @@
 import type { ComponentType } from "react";
-import { Coffee, Github, Link as LinkIcon, Linkedin, Mail, MapPin, Phone } from "lucide-react";
+import {
+  Coffee,
+  Github,
+  Link as LinkIcon,
+  Linkedin,
+  Mail,
+  MapPin,
+  Phone,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useSiteContent } from "@/data/siteContent";
 import { useTheme } from "@/hooks/use-theme";
@@ -24,32 +32,71 @@ export default function Footer() {
       id="contact"
       className={cn(
         "border-t",
-        isLight ? "border-[#d4dde1] bg-[#edf4ef]/80" : "border-[#2b2f3b] bg-[#16171d]/60",
+        isLight
+          ? "border-[#d4dde1] bg-[#edf4ef]/80"
+          : "border-[#2b2f3b] bg-[#16171d]/60",
       )}
     >
       <div className="container-narrow py-12">
         <div className="flex flex-col items-start justify-between gap-5 sm:flex-row sm:items-center">
           <div>
-            <a href="#home" aria-label={isArabic ? "الصفحة الرئيسية" : "SanuKhan.dev home"}>
+            <a
+              href="#home"
+              aria-label={isArabic ? "الصفحة الرئيسية" : "SanuKhan.dev home"}
+            >
               <svg
                 viewBox={isArabic ? "0 0 300 36" : "0 0 180 32"}
                 height="32"
-                className={cn("h-8", isArabic ? "w-[198px] sm:w-[250px]" : "w-[150px] sm:w-[180px]")}
+                className={cn(
+                  "h-8",
+                  isArabic
+                    ? "w-[198px] sm:w-[250px]"
+                    : "w-[150px] sm:w-[180px]",
+                )}
                 xmlns="http://www.w3.org/2000/svg"
                 aria-hidden
               >
                 <defs>
-                  <linearGradient id="footer-logo-grad" x1="-100%" y1="0%" x2="200%" y2="0%" gradientUnits="userSpaceOnUse">
-                    <stop offset="0%"   stopColor={isLight ? "#1f9f45" : "#38c755"} />
-                    <stop offset="35%"  stopColor={isLight ? "#1f9f45" : "#38c755"} />
-                    <stop offset="50%"  stopColor={isLight ? "#6ed18a" : "#b4ffca"} />
-                    <stop offset="65%"  stopColor={isLight ? "#153625" : "#ffffff"} />
-                    <stop offset="80%"  stopColor={isLight ? "#1f9f45" : "#38c755"} />
-                    <stop offset="100%" stopColor={isLight ? "#1f9f45" : "#38c755"} />
+                  <linearGradient
+                    id="footer-logo-grad"
+                    x1="-100%"
+                    y1="0%"
+                    x2="200%"
+                    y2="0%"
+                    gradientUnits="userSpaceOnUse"
+                  >
+                    <stop
+                      offset="0%"
+                      stopColor={isLight ? "#1f9f45" : "#38c755"}
+                    />
+                    <stop
+                      offset="35%"
+                      stopColor={isLight ? "#1f9f45" : "#38c755"}
+                    />
+                    <stop
+                      offset="50%"
+                      stopColor={isLight ? "#6ed18a" : "#b4ffca"}
+                    />
+                    <stop
+                      offset="65%"
+                      stopColor={isLight ? "#153625" : "#ffffff"}
+                    />
+                    <stop
+                      offset="80%"
+                      stopColor={isLight ? "#1f9f45" : "#38c755"}
+                    />
+                    <stop
+                      offset="100%"
+                      stopColor={isLight ? "#1f9f45" : "#38c755"}
+                    />
                     <animateTransform
                       attributeName="gradientTransform"
                       type="translate"
-                      values={isArabic ? "-240 0; 240 0; -240 0" : "-180 0; 180 0; -180 0"}
+                      values={
+                        isArabic
+                          ? "-240 0; 240 0; -240 0"
+                          : "-180 0; 180 0; -180 0"
+                      }
                       keyTimes="0; 0.5; 1"
                       dur="4s"
                       repeatCount="indefinite"
@@ -73,7 +120,11 @@ export default function Footer() {
                       سانو خان
                       <animate
                         attributeName="fill"
-                        values={isLight ? "#145a34;#239f4a;#145a34" : "#bfffd3;#ffffff;#bfffd3"}
+                        values={
+                          isLight
+                            ? "#145a34;#239f4a;#145a34"
+                            : "#bfffd3;#ffffff;#bfffd3"
+                        }
                         dur="3.8s"
                         repeatCount="indefinite"
                       />
@@ -103,7 +154,8 @@ export default function Footer() {
                 ) : (
                   <>
                     <text
-                      x="0" y="24"
+                      x="0"
+                      y="24"
                       fontFamily="Montserrat, ui-sans-serif, sans-serif"
                       fontSize="22"
                       fontWeight="800"
@@ -113,7 +165,8 @@ export default function Footer() {
                       Sanu
                     </text>
                     <text
-                      x="57" y="24"
+                      x="57"
+                      y="24"
                       fontFamily="Montserrat, ui-sans-serif, sans-serif"
                       fontSize="22"
                       fontWeight="600"
@@ -123,7 +176,8 @@ export default function Footer() {
                       Khan
                     </text>
                     <text
-                      x="116" y="24"
+                      x="116"
+                      y="24"
                       fontFamily="Montserrat, ui-sans-serif, sans-serif"
                       fontSize="18"
                       fontWeight="500"
@@ -136,7 +190,14 @@ export default function Footer() {
                 )}
               </svg>
             </a>
-            <p className={cn("mt-1 text-[15px]", isLight ? "text-[#4d5a66]" : "text-[#8a90a8]")}>{footer.blurb}</p>
+            <p
+              className={cn(
+                "mt-1 text-[15px]",
+                isLight ? "text-[#4d5a66]" : "text-[#8a90a8]",
+              )}
+            >
+              {footer.blurb}
+            </p>
           </div>
 
           <div className="flex w-full flex-wrap gap-2 sm:w-auto sm:gap-4">
@@ -146,10 +207,15 @@ export default function Footer() {
                 <a
                   key={s.label}
                   href={s.href}
-                  target={s.href.startsWith('http') ? '_blank' : undefined}
-                  rel={s.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                  target={s.href.startsWith("http") ? "_blank" : undefined}
+                  rel={
+                    s.href.startsWith("http")
+                      ? "noopener noreferrer"
+                      : undefined
+                  }
                   onClick={() => {
                     const normalizedLabel = s.label.toLowerCase();
+                    trackEvent("social_click", { platform: normalizedLabel });
                     if (normalizedLabel.includes("github")) {
                       trackEvent("github_click");
                     }
@@ -180,13 +246,17 @@ export default function Footer() {
         <div
           className={cn(
             "mt-8 border-t pt-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between text-xs",
-            isLight ? "border-[#d4dde1] text-[#4d5a66]" : "border-[#2b2f3b] text-[#8a90a8]",
+            isLight
+              ? "border-[#d4dde1] text-[#4d5a66]"
+              : "border-[#2b2f3b] text-[#8a90a8]",
           )}
         >
           <div className="flex flex-wrap gap-4">
             <a
               href={`mailto:${footer.contact.email}`}
-              onClick={() => trackEvent("contact_click", { cta_type: "contact" })}
+              onClick={() =>
+                trackEvent("contact_click", { cta_type: "contact" })
+              }
               className={cn(
                 "inline-flex items-center gap-1 transition-colors",
                 isLight ? "hover:text-[#121722]" : "hover:text-[#f0f1f4]",
@@ -198,7 +268,9 @@ export default function Footer() {
             {footer.contact.phone && (
               <a
                 href={`tel:${footer.contact.phone}`}
-                onClick={() => trackEvent("contact_click", { cta_type: "contact" })}
+                onClick={() =>
+                  trackEvent("contact_click", { cta_type: "contact" })
+                }
                 className={cn(
                   "inline-flex items-center gap-1 transition-colors",
                   isLight ? "hover:text-[#121722]" : "hover:text-[#f0f1f4]",

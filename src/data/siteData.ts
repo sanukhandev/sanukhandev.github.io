@@ -102,7 +102,18 @@ export const services = [
       "Architected multi-tenant SaaS systems with strict tenant isolation, scalable deployments, and contract-driven APIs",
       "Led cloud-native delivery on Azure and Kubernetes — mentored engineering teams and owned architectural decisions",
     ],
-    stack: ["Azure Functions", "Kafka", "Event Hubs", "RabbitMQ", "Node.js", "Kubernetes", "SAP", "Shopify", "Kibo", "Microservices"],
+    stack: [
+      "Azure Functions",
+      "Kafka",
+      "Event Hubs",
+      "RabbitMQ",
+      "Node.js",
+      "Kubernetes",
+      "SAP",
+      "Shopify",
+      "Kibo",
+      "Microservices",
+    ],
   },
   {
     company: "28 Light Bulbs",
@@ -161,7 +172,15 @@ export const services = [
       "Designed and launched SaaS platforms with multi-tenant models and subscription billing",
       "Built AI-assisted tools and LMS systems for mid-market and enterprise clients",
     ],
-    stack: ["Full Stack", "SaaS", "ERP", "LMS", "AI Chatbots", "Integrations", "Cloud"],
+    stack: [
+      "Full Stack",
+      "SaaS",
+      "ERP",
+      "LMS",
+      "AI Chatbots",
+      "Integrations",
+      "Cloud",
+    ],
   },
   {
     company: "Early Career",
@@ -393,6 +412,51 @@ export const footer = {
       label: "LinkedIn",
       icon: "Linkedin",
       href: "https://www.linkedin.com/in/sanukandev/",
+    },
+    {
+      label: "Dev.to",
+      icon: "Link",
+      href: "https://dev.to/sanukhandev",
+    },
+    {
+      label: "Facebook",
+      icon: "Link",
+      href: "https://www.facebook.com/sanuxq-facebook",
+    },
+    {
+      label: "Instagram",
+      icon: "Link",
+      href: "https://www.instagram.com/t_r_i_x_t_r/",
+    },
+    {
+      label: "Threads",
+      icon: "Link",
+      href: "https://www.threads.com/@t_r_i_x_t_r",
+    },
+    {
+      label: "Stack Overflow",
+      icon: "Link",
+      href: "https://stackoverflow.com/users/8219738/sanu-khan",
+    },
+    {
+      label: "Medium",
+      icon: "Link",
+      href: "https://medium.com/@sanukhandev",
+    },
+    {
+      label: "X",
+      icon: "Link",
+      href: "https://x.com/sanukhandev",
+    },
+    {
+      label: "YouTube",
+      icon: "Link",
+      href: "https://www.youtube.com/@sanukhan2653",
+    },
+    {
+      label: "Reddit",
+      icon: "Link",
+      href: "https://www.reddit.com/user/T_R__I__X_T_R/",
     },
     {
       label: "Buy me a coffee",
