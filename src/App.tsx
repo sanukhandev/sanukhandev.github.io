@@ -12,15 +12,33 @@ import NotFound from "./pages/NotFound.tsx";
 
 const ToolsIndex = lazy(() => import("./pages/ToolsIndex.tsx"));
 const BlogIndex = lazy(() => import("./pages/BlogIndex.tsx"));
-const JsonFormatterToolPage = lazy(() => import("./pages/tools/JsonFormatterToolPage.tsx"));
-const ApiClientToolPage = lazy(() => import("./pages/tools/ApiClientToolPage.tsx"));
-const CurlToJsonToolPage = lazy(() => import("./pages/tools/CurlToJsonToolPage.tsx"));
-const NodejsDeveloperUaePage = lazy(() => import("./pages/services/NodejsDeveloperUaePage.tsx"));
-const ReactDeveloperDubaiPage = lazy(() => import("./pages/services/ReactDeveloperDubaiPage.tsx"));
-const ApiIntegrationServicesPage = lazy(() => import("./pages/services/ApiIntegrationServicesPage.tsx"));
-const FullStackConsultantUaePage = lazy(() => import("./pages/services/FullStackConsultantUaePage.tsx"));
-const JavascriptAlgorithmsPage = lazy(() => import("./pages/blog/JavascriptAlgorithmsPage.tsx"));
-const NodejsApiBestPracticesPage = lazy(() => import("./pages/blog/NodejsApiBestPracticesPage.tsx"));
+const JsonFormatterToolPage = lazy(
+  () => import("./pages/tools/JsonFormatterToolPage.tsx"),
+);
+const ApiClientToolPage = lazy(
+  () => import("./pages/tools/ApiClientToolPage.tsx"),
+);
+const CurlToJsonToolPage = lazy(
+  () => import("./pages/tools/CurlToJsonToolPage.tsx"),
+);
+const NodejsDeveloperUaePage = lazy(
+  () => import("./pages/services/NodejsDeveloperUaePage.tsx"),
+);
+const ReactDeveloperDubaiPage = lazy(
+  () => import("./pages/services/ReactDeveloperDubaiPage.tsx"),
+);
+const ApiIntegrationServicesPage = lazy(
+  () => import("./pages/services/ApiIntegrationServicesPage.tsx"),
+);
+const FullStackConsultantUaePage = lazy(
+  () => import("./pages/services/FullStackConsultantUaePage.tsx"),
+);
+const JavascriptAlgorithmsPage = lazy(
+  () => import("./pages/blog/JavascriptAlgorithmsPage.tsx"),
+);
+const NodejsApiBestPracticesPage = lazy(
+  () => import("./pages/blog/NodejsApiBestPracticesPage.tsx"),
+);
 const FaqPage = lazy(() => import("./pages/FaqPage.tsx"));
 
 const queryClient = new QueryClient();
@@ -88,20 +106,59 @@ const AppShell = () => {
             <Route path="/" element={<Index />} />
             <Route path="/tools" element={<ToolsIndex />} />
             <Route path="/faq" element={<FaqPage />} />
-            <Route path="/tools/json-formatter-online" element={<JsonFormatterToolPage />} />
-            <Route path="/tools/api-client-tool" element={<ApiClientToolPage />} />
-            <Route path="/tools/curl-to-json-converter" element={<CurlToJsonToolPage />} />
+            <Route
+              path="/tools/json-formatter-online"
+              element={<JsonFormatterToolPage />}
+            />
+            <Route
+              path="/tools/api-client-tool"
+              element={<ApiClientToolPage />}
+            />
+            <Route
+              path="/tools/curl-to-json-converter"
+              element={<CurlToJsonToolPage />}
+            />
             <Route path="/blog" element={<BlogIndex />} />
-            <Route path="/blog/javascript-algorithms" element={<JavascriptAlgorithmsPage />} />
-            <Route path="/blog/nodejs-api-best-practices" element={<NodejsApiBestPracticesPage />} />
-            <Route path="/nodejs-developer-uae" element={<NodejsDeveloperUaePage />} />
-            <Route path="/react-developer-dubai" element={<ReactDeveloperDubaiPage />} />
-            <Route path="/api-integration-services" element={<ApiIntegrationServicesPage />} />
-            <Route path="/full-stack-consultant-uae" element={<FullStackConsultantUaePage />} />
-            <Route path="/services/nodejs-backend-engineer" element={<NodejsDeveloperUaePage />} />
-            <Route path="/services/react-developer-dubai" element={<ReactDeveloperDubaiPage />} />
-            <Route path="/services/azure-cloud-architect" element={<ApiIntegrationServicesPage />} />
-            <Route path="/services/full-stack-developer-uae" element={<FullStackConsultantUaePage />} />
+            <Route
+              path="/blog/javascript-algorithms"
+              element={<JavascriptAlgorithmsPage />}
+            />
+            <Route
+              path="/blog/nodejs-api-best-practices"
+              element={<NodejsApiBestPracticesPage />}
+            />
+            <Route
+              path="/nodejs-developer-uae"
+              element={<NodejsDeveloperUaePage />}
+            />
+            <Route
+              path="/react-developer-dubai"
+              element={<ReactDeveloperDubaiPage />}
+            />
+            <Route
+              path="/api-integration-services"
+              element={<ApiIntegrationServicesPage />}
+            />
+            <Route
+              path="/full-stack-consultant-uae"
+              element={<FullStackConsultantUaePage />}
+            />
+            <Route
+              path="/services/nodejs-backend-engineer"
+              element={<NodejsDeveloperUaePage />}
+            />
+            <Route
+              path="/services/react-developer-dubai"
+              element={<ReactDeveloperDubaiPage />}
+            />
+            <Route
+              path="/services/azure-cloud-architect"
+              element={<ApiIntegrationServicesPage />}
+            />
+            <Route
+              path="/services/full-stack-developer-uae"
+              element={<FullStackConsultantUaePage />}
+            />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>

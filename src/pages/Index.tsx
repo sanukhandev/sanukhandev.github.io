@@ -11,7 +11,9 @@ const Services = lazy(() => import("@/components/sections/Services"));
 const Skills = lazy(() => import("@/components/sections/Skills"));
 const ToolsPreview = lazy(() => import("@/components/sections/ToolsPreview"));
 const BlogPreview = lazy(() => import("@/components/sections/BlogPreview"));
-const Certifications = lazy(() => import("@/components/sections/Certifications"));
+const Certifications = lazy(
+  () => import("@/components/sections/Certifications"),
+);
 const Articles = lazy(() => import("@/components/sections/Articles"));
 const Footer = lazy(() => import("@/components/sections/Footer"));
 const ZaakiyChatWidget = lazy(() => import("@/components/ZaakiyChatWidget"));
@@ -31,7 +33,16 @@ const Index = () => {
     }
 
     const trackedSections = new Set<string>();
-    const sectionIds = ["home", "works", "experience", "stack", "tools", "blog", "articles", "contact"];
+    const sectionIds = [
+      "home",
+      "works",
+      "experience",
+      "stack",
+      "tools",
+      "blog",
+      "articles",
+      "contact",
+    ];
     const sections = sectionIds
       .map((id) => document.getElementById(id))
       .filter((section): section is HTMLElement => Boolean(section));

@@ -14,7 +14,9 @@ type HistoryMessage = { role: "user" | "assistant"; text: string };
 type SessionEntry = { messages: HistoryMessage[]; siteScope?: string };
 const conversationMemory = new Map<string, SessionEntry>();
 
-const readJsonBody = async (req: import("http").IncomingMessage): Promise<{ ok: true; data: unknown } | { ok: false }> => {
+const readJsonBody = async (
+  req: import("http").IncomingMessage,
+): Promise<{ ok: true; data: unknown } | { ok: false }> => {
   const chunks: Uint8Array[] = [];
   for await (const chunk of req) {
     chunks.push(typeof chunk === "string" ? Buffer.from(chunk) : chunk);
@@ -28,7 +30,11 @@ const readJsonBody = async (req: import("http").IncomingMessage): Promise<{ ok: 
   }
 };
 
-const sendJson = (res: import("http").ServerResponse, status: number, data: unknown) => {
+const sendJson = (
+  res: import("http").ServerResponse,
+  status: number,
+  data: unknown,
+) => {
   res.statusCode = status;
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
@@ -48,7 +54,10 @@ const extractModelText = (payload: unknown) => {
     candidates?: Array<{ content?: { parts?: Array<{ text?: string }> } }>;
   };
   const parts = data.candidates?.[0]?.content?.parts || [];
-  return parts.map((p) => p.text || "").join(" ").trim();
+  return parts
+    .map((p) => p.text || "")
+    .join(" ")
+    .trim();
 };
 
 // Global regex used only with .replace() – safe to reuse with lastIndex mutation.
@@ -67,10 +76,18 @@ const looksLeakyOrInvalid = (text: string) => {
   if (!text) return true;
   if (leakPatternTest.test(text)) return true;
   const lowered = text.toLowerCase();
-  return lowered.startsWith("name:") || lowered.startsWith("role:") || lowered.includes("contextsummary");
+  return (
+    lowered.startsWith("name:") ||
+    lowered.startsWith("role:") ||
+    lowered.includes("contextsummary")
+  );
 };
 
-const fallbackReply = (locale: ZaakiyLocale, email: string, question: string) => {
+const fallbackReply = (
+  locale: ZaakiyLocale,
+  email: string,
+  question: string,
+) => {
   const q = question.trim().toLowerCase();
   const isGreeting = /^(hi|hello|hey|hola|مرحبا|السلام عليكم)/i.test(q);
   const exactEnglishFallback = `Please connect on email ${email}`;
@@ -86,9 +103,11 @@ const fallbackReply = (locale: ZaakiyLocale, email: string, question: string) =>
   return exactEnglishFallback;
 };
 
-const getHistory = (sessionId: string) => conversationMemory.get(sessionId)?.messages || [];
+const getHistory = (sessionId: string) =>
+  conversationMemory.get(sessionId)?.messages || [];
 
-const getSessionScope = (sessionId: string) => (conversationMemory.get(sessionId)?.siteScope || "").trim();
+const getSessionScope = (sessionId: string) =>
+  (conversationMemory.get(sessionId)?.siteScope || "").trim();
 
 const setSessionScope = (sessionId: string, siteScope: string) => {
   const entry = conversationMemory.get(sessionId);
@@ -99,7 +118,11 @@ const setSessionScope = (sessionId: string, siteScope: string) => {
   entry.siteScope = siteScope;
 };
 
-const pushHistory = (sessionId: string, role: "user" | "assistant", text: string) => {
+const pushHistory = (
+  sessionId: string,
+  role: "user" | "assistant",
+  text: string,
+) => {
   const entry = conversationMemory.get(sessionId) || { messages: [] };
   entry.messages.push({ role, text });
   if (entry.messages.length > 12) {
@@ -168,7 +191,10 @@ const registerZaakiyApi = (
       const userQuestion = (body.userQuestion || "").trim();
       const incomingSiteScope = (body.siteScope || "").trim();
       const email = (body.email || "khan.sanukhan@outlook.com").trim();
-      const maxOutputChars = Math.max(120, Math.min(500, Number(body.maxOutputChars || 250)));
+      const maxOutputChars = Math.max(
+        120,
+        Math.min(500, Number(body.maxOutputChars || 250)),
+      );
       const sessionId = (body.sessionId || "anonymous-session").trim();
       if (incomingSiteScope) {
         setSessionScope(sessionId, incomingSiteScope);
@@ -181,7 +207,11 @@ const registerZaakiyApi = (
       }
 
       const scopedContext = mcpProcessor.getEnhancedContext(siteScope, locale);
-      const queryContext = mcpProcessor.getQueryContext(scopedContext, userQuestion, 14);
+      const queryContext = mcpProcessor.getQueryContext(
+        scopedContext,
+        userQuestion,
+        14,
+      );
       const historySnapshot = getHistory(sessionId).slice();
       pushHistory(sessionId, "user", userQuestion);
 
@@ -191,7 +221,10 @@ const registerZaakiyApi = (
         userQuestion,
         email,
         maxChars: maxOutputChars,
-        conversationHistory: historySnapshot.map((h) => ({ role: h.role, text: h.text })),
+        conversationHistory: historySnapshot.map((h) => ({
+          role: h.role,
+          text: h.text,
+        })),
       });
 
       const googleResp = await fetch(
@@ -212,7 +245,10 @@ const registerZaakiyApi = (
 
       if (!googleResp.ok) {
         const detail = await googleResp.text();
-        sendJson(res, googleResp.status, { error: "Upstream GenAI error", detail });
+        sendJson(res, googleResp.status, {
+          error: "Upstream GenAI error",
+          detail,
+        });
         return;
       }
 
@@ -258,7 +294,11 @@ export default defineConfig(({ command, mode }) => {
     react(),
     createZaakiyApiWrapper(env),
     viteCompression({ algorithm: "gzip", ext: ".gz", deleteOriginFile: false }),
-    viteCompression({ algorithm: "brotliCompress", ext: ".br", deleteOriginFile: false }),
+    viteCompression({
+      algorithm: "brotliCompress",
+      ext: ".br",
+      deleteOriginFile: false,
+    }),
   ];
   const isCiBuild = process.env.CI === "true" || process.env.VERCEL === "1";
   const shouldPrerender = mode === "production" && !isCiBuild;
@@ -329,11 +369,17 @@ export default defineConfig(({ command, mode }) => {
           entryFileNames: "assets/index.js",
           chunkFileNames: "assets/[name]-[hash].js",
           assetFileNames: (assetInfo) =>
-            assetInfo.name?.endsWith(".css") ? "assets/index.css" : "assets/[name]-[hash][extname]",
+            assetInfo.name?.endsWith(".css")
+              ? "assets/index.css"
+              : "assets/[name]-[hash][extname]",
           manualChunks: {
             vendor: ["react", "react-dom"],
             routingData: ["react-router-dom", "@tanstack/react-query"],
-            ui: ["@radix-ui/react-dialog", "@radix-ui/react-dropdown-menu", "lucide-react"],
+            ui: [
+              "@radix-ui/react-dialog",
+              "@radix-ui/react-dropdown-menu",
+              "lucide-react",
+            ],
           },
         },
       },

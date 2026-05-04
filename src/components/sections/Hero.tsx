@@ -31,11 +31,11 @@ const metricIcons: Record<string, ComponentType<{ className?: string }>> = {
 };
 
 const floatingBadges = [
-  { icon: Layers,       label: "Microservices",  top: "8%",  left: "-14%" },
-  { icon: Globe2,       label: "MENA & Global",  top: "30%", right: "-14%" },
-  { icon: Award,        label: "13+ Yrs",         bottom: "30%", left: "-14%" },
-  { icon: CalendarCheck,label: "Since 2011",      bottom: "10%", right: "-10%" },
-  { icon: Users,        label: "100+ Clients",   top: "58%", left: "-12%" },
+  { icon: Layers, label: "Microservices", top: "8%", left: "-14%" },
+  { icon: Globe2, label: "MENA & Global", top: "30%", right: "-14%" },
+  { icon: Award, label: "13+ Yrs", bottom: "30%", left: "-14%" },
+  { icon: CalendarCheck, label: "Since 2011", bottom: "10%", right: "-10%" },
+  { icon: Users, label: "100+ Clients", top: "58%", left: "-12%" },
 ];
 
 function Hero() {
@@ -113,7 +113,10 @@ function Hero() {
               ][index];
               const Icon = metricIcons[iconKey] ?? TrendingUp;
               return (
-                <div key={s.label} className="premium-card flex flex-col items-center px-3 py-4 text-center">
+                <div
+                  key={s.label}
+                  className="premium-card flex flex-col items-center px-3 py-4 text-center"
+                >
                   <Icon className="mb-1.5 h-4 w-4 text-[#38c755]/70" />
                   <div className="text-[28px] font-extrabold text-[#38c755]">
                     {s.value}
@@ -136,7 +139,12 @@ function Hero() {
                 >
                   <a
                     href={c.href}
-                    onClick={() => trackEvent("cta_click", { cta_type: "primary", cta_label: c.label })}
+                    onClick={() =>
+                      trackEvent("cta_click", {
+                        cta_type: "primary",
+                        cta_label: c.label,
+                      })
+                    }
                   >
                     {c.label}
                   </a>
@@ -152,7 +160,10 @@ function Hero() {
                     className="inline-flex items-center gap-2"
                     onClick={() => {
                       trackEvent("hire_me_click", { cta_type: "hire" });
-                      trackEvent("cta_click", { cta_type: "hire", cta_label: c.label });
+                      trackEvent("cta_click", {
+                        cta_type: "hire",
+                        cta_label: c.label,
+                      });
                     }}
                   >
                     <Briefcase className="h-4 w-4" /> {c.label}
@@ -170,7 +181,10 @@ function Hero() {
                     className="inline-flex items-center gap-2"
                     onClick={() => {
                       trackEvent("resume_view", { cta_type: "resume" });
-                      trackEvent("cta_click", { cta_type: "resume", cta_label: c.label });
+                      trackEvent("cta_click", {
+                        cta_type: "resume",
+                        cta_label: c.label,
+                      });
                     }}
                   >
                     <Download className="h-4 w-4" /> {c.label}
