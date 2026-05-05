@@ -1,6 +1,13 @@
 import { Link, useParams } from "react-router-dom";
 import { useMemo } from "react";
-import { Calendar, Tag, ArrowLeft, ExternalLink, BookOpen, Hash } from "lucide-react";
+import {
+  Calendar,
+  Tag,
+  ArrowLeft,
+  ExternalLink,
+  BookOpen,
+  Hash,
+} from "lucide-react";
 import SeoMeta from "@/components/SeoMeta";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/sections/Footer";
@@ -41,7 +48,11 @@ export default function DevToBlogPage() {
   const chatContext = useMemo(() => {
     if (!article) return undefined;
     const bodyText = article.body_html
-      ? article.body_html.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim().slice(0, 1200)
+      ? article.body_html
+          .replace(/<[^>]+>/g, " ")
+          .replace(/\s+/g, " ")
+          .trim()
+          .slice(0, 1200)
       : article.description;
     return [
       `Blog title: ${article.title}`,
@@ -80,12 +91,16 @@ export default function DevToBlogPage() {
         <Navbar />
         <main className="min-h-screen bg-[var(--bg-primary)] pt-20 text-[var(--text-primary)]">
           <div className="mx-auto max-w-[1400px] px-4 py-8">
-            <Link to="/blog" className="inline-flex items-center gap-1.5 text-[13px] text-[var(--accent)] hover:underline">
+            <Link
+              to="/blog"
+              className="inline-flex items-center gap-1.5 text-[13px] text-[var(--accent)] hover:underline"
+            >
               <ArrowLeft className="h-3.5 w-3.5" /> Back to Blog
             </Link>
             <h1 className="mt-6 text-4xl font-extrabold">Post Not Found</h1>
             <p className="mt-3 text-[15px] text-[var(--text-secondary)]">
-              This post is unavailable. Browse all posts or visit Dev.to directly.
+              This post is unavailable. Browse all posts or visit Dev.to
+              directly.
             </p>
           </div>
         </main>
@@ -96,7 +111,11 @@ export default function DevToBlogPage() {
   }
 
   const published = article.publishedAt
-    ? new Date(article.publishedAt).toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" })
+    ? new Date(article.publishedAt).toLocaleDateString(undefined, {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      })
     : "";
 
   return (
@@ -114,8 +133,16 @@ export default function DevToBlogPage() {
           inLanguage: "en",
           url: `https://sanukhan.dev${article.localPath}`,
           datePublished: article.publishedAt || undefined,
-          author: { "@type": "Person", name: "Sanu Khan", url: "https://sanukhan.dev" },
-          publisher: { "@type": "Organization", name: "SanuKhan.dev", url: "https://sanukhan.dev" },
+          author: {
+            "@type": "Person",
+            name: "Sanu Khan",
+            url: "https://sanukhan.dev",
+          },
+          publisher: {
+            "@type": "Organization",
+            name: "SanuKhan.dev",
+            url: "https://sanukhan.dev",
+          },
           mainEntityOfPage: article.url,
         }}
       />
@@ -124,15 +151,16 @@ export default function DevToBlogPage() {
 
       <main className="min-h-screen bg-[var(--bg-primary)] pt-20 text-[var(--text-primary)]">
         <div className="mx-auto max-w-[1400px] px-4 py-8">
-
           {/* Back nav */}
-          <Link to="/blog" className="inline-flex items-center gap-1.5 text-[13px] text-[var(--accent)] hover:underline">
+          <Link
+            to="/blog"
+            className="inline-flex items-center gap-1.5 text-[13px] text-[var(--accent)] hover:underline"
+          >
             <ArrowLeft className="h-3.5 w-3.5" /> All Posts
           </Link>
 
           {/* ── 3-column grid ── */}
           <div className="mt-5 flex gap-6 lg:items-start">
-
             {/* ── LEFT SIDEBAR: Table of Contents ── */}
             <aside className="hidden w-[220px] shrink-0 xl:block">
               <div className="sticky top-22 flex max-h-[calc(100vh-6rem)] flex-col overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--bg-secondary)]">
@@ -150,7 +178,9 @@ export default function DevToBlogPage() {
                           <a
                             href={`#${item.id}`}
                             className="block rounded-lg px-2 py-1.5 text-[12px] leading-snug text-[var(--text-secondary)] transition-colors hover:bg-[var(--bg-primary)] hover:text-[var(--accent)]"
-                            style={{ paddingLeft: `${(item.level - 2) * 10 + 8}px` }}
+                            style={{
+                              paddingLeft: `${(item.level - 2) * 10 + 8}px`,
+                            }}
                           >
                             {item.text}
                           </a>
@@ -160,7 +190,9 @@ export default function DevToBlogPage() {
                   </nav>
                 ) : (
                   <div className="px-4 py-3">
-                    <p className="text-[11px] text-[var(--text-secondary)]">No headings found.</p>
+                    <p className="text-[11px] text-[var(--text-secondary)]">
+                      No headings found.
+                    </p>
                   </div>
                 )}
                 {/* Tags section below TOC */}
@@ -168,7 +200,9 @@ export default function DevToBlogPage() {
                   <div className="border-t border-[var(--border)] px-4 py-3">
                     <div className="mb-2 flex items-center gap-1.5">
                       <Hash className="h-3 w-3 text-[var(--accent)]" />
-                      <span className="text-[11px] font-semibold uppercase tracking-widest text-[var(--text-secondary)]">Tags</span>
+                      <span className="text-[11px] font-semibold uppercase tracking-widest text-[var(--text-secondary)]">
+                        Tags
+                      </span>
                     </div>
                     <div className="flex flex-wrap gap-1.5">
                       {article.tags.map((tag) => (
@@ -267,7 +301,9 @@ export default function DevToBlogPage() {
                 />
               ) : (
                 <div className="mt-7 rounded-xl border border-[var(--border)] bg-[var(--bg-secondary)] p-6 text-center">
-                  <p className="text-[15px] text-[var(--text-secondary)]">Full article is on Dev.to.</p>
+                  <p className="text-[15px] text-[var(--text-secondary)]">
+                    Full article is on Dev.to.
+                  </p>
                   <a
                     href={article.url}
                     target="_blank"
@@ -304,7 +340,6 @@ export default function DevToBlogPage() {
             {/* ── RIGHT SIDEBAR: Recent posts + author card ── */}
             <aside className="hidden w-[260px] shrink-0 lg:block">
               <div className="sticky top-22 flex max-h-[calc(100vh-6rem)] flex-col gap-4 overflow-hidden">
-
                 {/* Author card */}
                 <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-secondary)] px-4 py-4">
                   <div className="flex items-center gap-3">
@@ -314,12 +349,17 @@ export default function DevToBlogPage() {
                       className="h-10 w-10 rounded-full border border-[var(--border)] object-cover"
                     />
                     <div>
-                      <p className="text-[13px] font-bold text-[var(--text-primary)]">Sanu Khan</p>
-                      <p className="text-[11px] text-[var(--text-secondary)]">Tech Lead · Cloud Architect</p>
+                      <p className="text-[13px] font-bold text-[var(--text-primary)]">
+                        Sanu Khan
+                      </p>
+                      <p className="text-[11px] text-[var(--text-secondary)]">
+                        Tech Lead · Cloud Architect
+                      </p>
                     </div>
                   </div>
                   <p className="mt-3 text-[12px] leading-5 text-[var(--text-secondary)]">
-                    13+ years building distributed systems. Writing about architecture, cloud, and engineering.
+                    13+ years building distributed systems. Writing about
+                    architecture, cloud, and engineering.
                   </p>
                   <div className="mt-3 flex gap-2">
                     <a
@@ -371,7 +411,9 @@ export default function DevToBlogPage() {
                               </p>
                               {post.publishedAt && (
                                 <p className="mt-0.5 text-[10px] text-[var(--text-secondary)]">
-                                  {new Date(post.publishedAt).toLocaleDateString(undefined, {
+                                  {new Date(
+                                    post.publishedAt,
+                                  ).toLocaleDateString(undefined, {
                                     month: "short",
                                     day: "numeric",
                                     year: "numeric",
@@ -384,16 +426,17 @@ export default function DevToBlogPage() {
                       ))}
                     </ul>
                     <div className="border-t border-[var(--border)] px-4 py-2.5">
-                      <Link to="/blog" className="text-[11px] font-semibold text-[var(--accent)] hover:underline">
+                      <Link
+                        to="/blog"
+                        className="text-[11px] font-semibold text-[var(--accent)] hover:underline"
+                      >
                         View all posts →
                       </Link>
                     </div>
                   </div>
                 )}
-
               </div>
             </aside>
-
           </div>
         </div>
       </main>
@@ -403,7 +446,6 @@ export default function DevToBlogPage() {
     </>
   );
 }
-
 
 export default function DevToBlogPage() {
   const { slug } = useParams<{ slug: string }>();
