@@ -105,7 +105,8 @@ export default function DevToBlogPage() {
             </Link>
             <h1 className="mt-6 text-4xl font-extrabold">Post Not Found</h1>
             <p className="mt-3 text-[15px] text-[var(--text-secondary)]">
-              This post is unavailable. Browse all posts or visit Dev.to directly.
+              This post is unavailable. Browse all posts or visit Dev.to
+              directly.
             </p>
           </div>
         </main>
@@ -181,7 +182,9 @@ export default function DevToBlogPage() {
                           <a
                             href={`#${item.id}`}
                             className="block rounded-lg px-2 py-1.5 text-[12px] leading-snug text-[var(--text-secondary)] hover:bg-[var(--bg-primary)] hover:text-[var(--accent)]"
-                            style={{ paddingLeft: `${(item.level - 2) * 10 + 8}px` }}
+                            style={{
+                              paddingLeft: `${(item.level - 2) * 10 + 8}px`,
+                            }}
                           >
                             {item.text}
                           </a>
@@ -234,7 +237,8 @@ export default function DevToBlogPage() {
                 )}
                 {article.tags.length > 0 && (
                   <span className="inline-flex items-center gap-1.5">
-                    <Tag className="h-3.5 w-3.5" /> {article.tags.slice(0, 3).join(", ")}
+                    <Tag className="h-3.5 w-3.5" />{" "}
+                    {article.tags.slice(0, 3).join(", ")}
                   </span>
                 )}
                 <a
@@ -319,15 +323,17 @@ export default function DevToBlogPage() {
                       className="h-10 w-10 rounded-full border border-[var(--border)] object-cover"
                     />
                     <div>
-                      <p className="text-[13px] font-bold text-[var(--text-primary)]">Sanu Khan</p>
+                      <p className="text-[13px] font-bold text-[var(--text-primary)]">
+                        Sanu Khan
+                      </p>
                       <p className="text-[11px] text-[var(--text-secondary)]">
                         Tech Lead · Cloud Architect
                       </p>
                     </div>
                   </div>
                   <p className="mt-3 text-[12px] leading-5 text-[var(--text-secondary)]">
-                    13+ years building distributed systems. Writing about architecture,
-                    cloud, and engineering.
+                    13+ years building distributed systems. Writing about
+                    architecture, cloud, and engineering.
                   </p>
                   <a
                     href="https://dev.to/sanukhandev"
@@ -370,7 +376,9 @@ export default function DevToBlogPage() {
                               </p>
                               {post.publishedAt && (
                                 <p className="mt-0.5 text-[10px] text-[var(--text-secondary)]">
-                                  {new Date(post.publishedAt).toLocaleDateString(undefined, {
+                                  {new Date(
+                                    post.publishedAt,
+                                  ).toLocaleDateString(undefined, {
                                     month: "short",
                                     day: "numeric",
                                     year: "numeric",
