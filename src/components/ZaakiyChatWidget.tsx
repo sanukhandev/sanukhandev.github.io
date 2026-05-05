@@ -84,11 +84,15 @@ export default function ZaakiyChatWidget({
       .map((c) => `${c.title}: ${c.tags.join(", ")}`)
       .join(" | ");
 
-    const blogs = articles && articles.length > 0
-      ? articles
-          .map((a) => `"${a.title}" (${a.tags.slice(0, 3).join(", ")}) → https://sanukhan.dev${a.localPath}`)
-          .join(" | ")
-      : "";
+    const blogs =
+      articles && articles.length > 0
+        ? articles
+            .map(
+              (a) =>
+                `"${a.title}" (${a.tags.slice(0, 3).join(", ")}) → https://sanukhan.dev${a.localPath}`,
+            )
+            .join(" | ")
+        : "";
 
     return [
       `Name: ${profile.name}`,
@@ -171,7 +175,10 @@ export default function ZaakiyChatWidget({
       if (!response.ok) {
         let errDetail = `HTTP ${response.status}`;
         try {
-          const errBody = (await response.json()) as { error?: string; detail?: string };
+          const errBody = (await response.json()) as {
+            error?: string;
+            detail?: string;
+          };
           if (errBody.detail) errDetail += `: ${errBody.detail}`;
           else if (errBody.error) errDetail += `: ${errBody.error}`;
         } catch {
@@ -191,12 +198,7 @@ export default function ZaakiyChatWidget({
       appendMessage("assistant", modelText);
     } catch (err) {
       const msg = err instanceof Error ? err.message : String(err);
-      appendMessage(
-        "assistant",
-        isArabic
-          ? `خطأ: ${msg}`
-          : `Error: ${msg}`,
-      );
+      appendMessage("assistant", isArabic ? `خطأ: ${msg}` : `Error: ${msg}`);
     } finally {
       setLoading(false);
     }
