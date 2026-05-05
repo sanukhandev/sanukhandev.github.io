@@ -1,4 +1,5 @@
 import { memo, useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Coffee, Moon, Sun } from "lucide-react";
 import { useSiteContent } from "@/data/siteContent";
 import { Button } from "@/components/ui/button";
@@ -8,6 +9,7 @@ import { useLocale } from "@/hooks/use-locale";
 import { trackEvent } from "@/utils/analytics";
 
 function Navbar() {
+  const location = useLocation();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeHref, setActiveHref] = useState("#works");
@@ -16,6 +18,12 @@ function Navbar() {
   const { nav, ui } = useSiteContent();
   const isLight = theme === "light";
   const isArabic = locale === "ar";
+  const isHomePage = location.pathname === "/";
+  const isBlogPage = location.pathname.startsWith("/blog");
+  const ctaHref =
+    !isHomePage && nav.cta.href.startsWith("#")
+      ? `/${nav.cta.href}`
+      : nav.cta.href;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -68,7 +76,7 @@ function Navbar() {
     >
       <div className="container-narrow flex h-16 items-center justify-between">
         <a
-          href="#home"
+          href={isHomePage ? "#home" : "/#home"}
           className="group shrink-0"
           aria-label={isArabic ? "الصفحة الرئيسية" : "SanuKhan.dev home"}
         >
@@ -213,13 +221,35 @@ function Navbar() {
         </a>
 
         <nav className="hidden items-center gap-7 md:flex">
+          <Link
+            to="/blog"
+            className={cn(
+              "relative text-[15px] transition-all duration-300 hover:scale-[1.02]",
+              isBlogPage
+                ? isLight
+                  ? "text-[#0f1015] font-semibold"
+                  : "text-[#f5f7fa] font-semibold"
+                : isLight
+                  ? "text-[#4d5a66] hover:text-[#0f1015]"
+                  : "text-[#c9ced6] hover:text-[#38c755]",
+            )}
+          >
+            Blog
+            <span
+              className={cn(
+                "absolute -bottom-1.5 left-0 h-[2px] bg-accent transition-all duration-300",
+                isBlogPage ? "w-full opacity-100" : "w-0 opacity-0",
+              )}
+            />
+          </Link>
+
           {nav.links.map((l) => (
             <a
               key={l.href}
-              href={l.href}
+              href={isHomePage ? l.href : `/${l.href}`}
               className={cn(
                 "relative text-[15px] transition-all duration-300 hover:scale-[1.02]",
-                activeHref === l.href
+                isHomePage && activeHref === l.href
                   ? isLight
                     ? "text-[#0f1015] font-semibold"
                     : "text-[#f5f7fa] font-semibold"
@@ -232,7 +262,7 @@ function Navbar() {
               <span
                 className={cn(
                   "absolute -bottom-1.5 left-0 h-[2px] bg-accent transition-all duration-300",
-                  activeHref === l.href
+                  isHomePage && activeHref === l.href
                     ? "w-full opacity-100"
                     : "w-0 opacity-0",
                 )}
@@ -286,7 +316,7 @@ function Navbar() {
             )}
           >
             <a
-              href={nav.cta.href}
+              href={ctaHref}
               onClick={() => {
                 trackEvent("contact_click", { cta_type: "contact" });
                 trackEvent("cta_click", {
@@ -413,7 +443,7 @@ function Navbar() {
             {nav.links.map((l) => (
               <a
                 key={l.href}
-                href={l.href}
+                href={isHomePage ? l.href : `/${l.href}`}
                 onClick={() => setOpen(false)}
                 className={cn(
                   "rounded-md px-3 py-2 text-sm transition-all duration-300",
@@ -425,6 +455,18 @@ function Navbar() {
                 {l.label}
               </a>
             ))}
+            <Link
+              to="/blog"
+              onClick={() => setOpen(false)}
+              className={cn(
+                "rounded-md px-3 py-2 text-sm transition-all duration-300",
+                isLight
+                  ? "text-[#4d5a66] hover:bg-[#e8f0ec] hover:text-[#0f1015]"
+                  : "text-[#c9ced6] hover:bg-[#1e2028] hover:text-[#38c755]",
+              )}
+            >
+              Blog
+            </Link>
             <a
               href="https://ko-fi.com/sanukhan"
               target="_blank"
@@ -450,7 +492,7 @@ function Navbar() {
               )}
             >
               <a
-                href={nav.cta.href}
+                href={ctaHref}
                 onClick={() => {
                   setOpen(false);
                   trackEvent("contact_click", { cta_type: "contact" });
