@@ -356,6 +356,104 @@
     @apply py-16 sm:py-20;
   }
 
+  /* ── Dev.to article body renderer ── */
+  .devto-content {
+    color: var(--text-secondary);
+    font-size: 15px;
+    line-height: 1.8;
+  }
+  .devto-content h1,
+  .devto-content h2,
+  .devto-content h3,
+  .devto-content h4,
+  .devto-content h5 {
+    color: var(--text-primary);
+    font-weight: 700;
+    line-height: 1.25;
+    margin-top: 1.6em;
+    margin-bottom: 0.5em;
+  }
+  .devto-content h2 { font-size: 1.45rem; }
+  .devto-content h3 { font-size: 1.2rem; }
+  .devto-content h4 { font-size: 1.05rem; }
+  .devto-content p { margin-bottom: 1em; }
+  .devto-content a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .devto-content a:hover { opacity: 0.8; }
+  .devto-content pre {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    overflow-x: auto;
+    margin: 1.2em 0;
+    font-size: 13px;
+  }
+  .devto-content code {
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, monospace;
+    font-size: 0.875em;
+  }
+  .devto-content :not(pre) > code {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 0.15em 0.45em;
+    color: var(--accent);
+    font-size: 0.875em;
+  }
+  .devto-content blockquote {
+    border-left: 3px solid var(--accent);
+    padding-left: 1rem;
+    margin: 1.2em 0;
+    color: var(--text-secondary);
+    font-style: italic;
+    opacity: 0.85;
+  }
+  .devto-content ul,
+  .devto-content ol {
+    padding-left: 1.5rem;
+    margin-bottom: 1em;
+  }
+  .devto-content ul { list-style: disc; }
+  .devto-content ol { list-style: decimal; }
+  .devto-content li { margin-bottom: 0.35em; }
+  .devto-content img {
+    max-width: 100%;
+    border-radius: 10px;
+    margin: 1.2em auto;
+    display: block;
+    border: 1px solid var(--border);
+  }
+  .devto-content hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 2em 0;
+  }
+  .devto-content strong {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+  .devto-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.2em 0;
+    font-size: 14px;
+  }
+  .devto-content th,
+  .devto-content td {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--border);
+    text-align: left;
+  }
+  .devto-content th {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
   .premium-card {
     border: 1px solid var(--border);
     background: rgba(22, 23, 29, 0.68);

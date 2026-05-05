@@ -3,6 +3,7 @@ import { FormEvent, KeyboardEvent, useMemo, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { useLocale } from "@/hooks/use-locale";
 import { useSiteContent } from "@/data/siteContent";
+import { useDevToArticles } from "@/hooks/use-devto-articles";
 
 type ChatRole = "user" | "assistant";
 
@@ -41,12 +42,17 @@ const clipText = (text: string, max = MAX_OUTPUT_CHARS) => {
   return `${clean.slice(0, Math.max(0, max - 1)).trim()}…`;
 };
 
-export default function ZaakiyChatWidget() {
+export default function ZaakiyChatWidget({
+  extraContext,
+}: {
+  extraContext?: string;
+} = {}) {
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const { locale } = useLocale();
   const content = useSiteContent();
+  const { data: articles } = useDevToArticles(20);
   const scrollRef = useRef<HTMLDivElement>(null);
   const sessionIdRef = useRef(
     `zaakiy-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`,
@@ -78,6 +84,12 @@ export default function ZaakiyChatWidget() {
       .map((c) => `${c.title}: ${c.tags.join(", ")}`)
       .join(" | ");
 
+    const blogs = articles && articles.length > 0
+      ? articles
+          .map((a) => `"${a.title}" (${a.tags.slice(0, 3).join(", ")}) → https://sanukhan.dev${a.localPath}`)
+          .join(" | ")
+      : "";
+
     return [
       `Name: ${profile.name}`,
       `Role: ${profile.role}`,
@@ -87,6 +99,18 @@ export default function ZaakiyChatWidget() {
       `Experience: ${services}`,
       `Skills: ${skills}`,
       `Works: ${works}`,
+      ...(blogs ? [`Blogs: ${blogs}`] : []),
+      `Contact email: ${email}`,
+      `Coffee link: ${koFi}`,
+    ].join("\n");
+  }, [content, email, articles]);
+
+  /** Minimal scope sent on every subsequent message to keep payloads small */
+  const slimScope = useMemo(() => {
+    const profile = content.profile;
+    return [
+      `Name: ${profile.name}`,
+      `Role: ${profile.role}`,
       `Contact email: ${email}`,
       `Coffee link: ${koFi}`,
     ].join("\n");
@@ -134,7 +158,10 @@ export default function ZaakiyChatWidget() {
         body: JSON.stringify({
           locale,
           userQuestion: userText,
-          siteScope: scopeSentRef.current ? undefined : siteScope,
+          // Full scope on first message to prime server session; slim scope
+          // on subsequent messages to keep payload small (~100 chars vs ~2KB).
+          siteScope: scopeSentRef.current ? slimScope : siteScope,
+          extraContext: extraContext || undefined,
           email,
           maxOutputChars: MAX_OUTPUT_CHARS,
           sessionId: sessionIdRef.current,
@@ -142,7 +169,15 @@ export default function ZaakiyChatWidget() {
       });
 
       if (!response.ok) {
-        throw new Error(`GenAI request failed: ${response.status}`);
+        let errDetail = `HTTP ${response.status}`;
+        try {
+          const errBody = (await response.json()) as { error?: string; detail?: string };
+          if (errBody.detail) errDetail += `: ${errBody.detail}`;
+          else if (errBody.error) errDetail += `: ${errBody.error}`;
+        } catch {
+          // ignore json parse failure
+        }
+        throw new Error(errDetail);
       }
 
       const payload = (await response.json()) as { text?: string };
@@ -154,12 +189,13 @@ export default function ZaakiyChatWidget() {
       writeDailyUsage(usage + 1);
       scopeSentRef.current = true;
       appendMessage("assistant", modelText);
-    } catch {
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err);
       appendMessage(
         "assistant",
         isArabic
-          ? `عذراً، الخدمة غير متاحة الآن. تواصل عبر البريد: ${email}`
-          : `Sorry, service is unavailable right now. Please connect on email: ${email}`,
+          ? `خطأ: ${msg}`
+          : `Error: ${msg}`,
       );
     } finally {
       setLoading(false);

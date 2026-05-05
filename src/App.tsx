@@ -33,12 +33,7 @@ const ApiIntegrationServicesPage = lazy(
 const FullStackConsultantUaePage = lazy(
   () => import("./pages/services/FullStackConsultantUaePage.tsx"),
 );
-const JavascriptAlgorithmsPage = lazy(
-  () => import("./pages/blog/JavascriptAlgorithmsPage.tsx"),
-);
-const NodejsApiBestPracticesPage = lazy(
-  () => import("./pages/blog/NodejsApiBestPracticesPage.tsx"),
-);
+const DevToBlogPage = lazy(() => import("./pages/blog/DevToBlogPage.tsx"));
 const FaqPage = lazy(() => import("./pages/FaqPage.tsx"));
 
 const queryClient = new QueryClient();
@@ -119,14 +114,7 @@ const AppShell = () => {
               element={<CurlToJsonToolPage />}
             />
             <Route path="/blog" element={<BlogIndex />} />
-            <Route
-              path="/blog/javascript-algorithms"
-              element={<JavascriptAlgorithmsPage />}
-            />
-            <Route
-              path="/blog/nodejs-api-best-practices"
-              element={<NodejsApiBestPracticesPage />}
-            />
+            <Route path="/blog/:slug" element={<DevToBlogPage />} />
             <Route
               path="/nodejs-developer-uae"
               element={<NodejsDeveloperUaePage />}

@@ -39,6 +39,7 @@ type ChatRequestBody = {
   locale?: string;
   userQuestion?: string;
   siteScope?: string;
+  extraContext?: string;
   email?: string;
   maxOutputChars?: number;
   sessionId?: string;
@@ -331,6 +332,7 @@ const buildPrompt = (args: {
   locale: ZaakiyLocale;
   userQuestion: string;
   siteScope: string;
+  extraContext?: string;
   email: string;
   maxChars: number;
   conversationHistory: Array<{ role: "user" | "assistant"; text: string }>;
@@ -339,6 +341,7 @@ const buildPrompt = (args: {
     locale,
     userQuestion,
     siteScope,
+    extraContext,
     email,
     maxChars,
     conversationHistory,
@@ -387,6 +390,12 @@ const buildPrompt = (args: {
     instruction,
     "Reference facts (source tagged, highest relevance first):",
     references || "No relevant facts found.",
+    ...(extraContext
+      ? [
+          "Article context (current blog post the user is reading):",
+          extraContext.slice(0, 1200),
+        ]
+      : []),
     `Detected intent: ${intent}`,
     intentStyleGuide,
     "Recent conversation:",
@@ -448,13 +457,16 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
     );
     const sessionId: string | null =
       String(body.sessionId || "").trim() || null;
+    const incomingExtraContext = String(body.extraContext || "")
+      .trim()
+      .slice(0, 1500);
     if (sessionId && incomingSiteScope) {
       setSessionScope(sessionId, incomingSiteScope);
     }
     const siteScope =
       incomingSiteScope || (sessionId ? getSessionScope(sessionId) : "");
 
-    if (!userQuestion || !siteScope) {
+    if (!userQuestion) {
       sendJson(res, 400, { error: "Missing required fields" });
       return;
     }
@@ -468,6 +480,7 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
       locale,
       userQuestion,
       siteScope,
+      extraContext: incomingExtraContext || undefined,
       email,
       maxChars: maxOutputChars,
       conversationHistory: historySnapshot,

@@ -14,7 +14,6 @@ const BlogPreview = lazy(() => import("@/components/sections/BlogPreview"));
 const Certifications = lazy(
   () => import("@/components/sections/Certifications"),
 );
-const Articles = lazy(() => import("@/components/sections/Articles"));
 const Footer = lazy(() => import("@/components/sections/Footer"));
 const ZaakiyChatWidget = lazy(() => import("@/components/ZaakiyChatWidget"));
 
@@ -97,7 +96,6 @@ const Index = () => {
           <ToolsPreview />
           <BlogPreview />
           <Certifications />
-          <Articles />
         </Suspense>
       </main>
       <Suspense fallback={null}>

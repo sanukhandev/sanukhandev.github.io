@@ -12,8 +12,6 @@ const routes = [
   "/tools/api-client-tool",
   "/tools/curl-to-json-converter",
   "/blog",
-  "/blog/javascript-algorithms",
-  "/blog/nodejs-api-best-practices",
   "/nodejs-developer-uae",
   "/react-developer-dubai",
   "/api-integration-services",
