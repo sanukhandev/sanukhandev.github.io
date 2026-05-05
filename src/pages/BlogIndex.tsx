@@ -62,7 +62,8 @@ export default function BlogIndex() {
   const filteredPosts = useMemo(() => {
     const needle = query.trim().toLowerCase();
     return posts.filter((post) => {
-      const matchesTag = selectedTag === "all" || post.tags.includes(selectedTag);
+      const matchesTag =
+        selectedTag === "all" || post.tags.includes(selectedTag);
       const matchesQuery =
         !needle ||
         post.title.toLowerCase().includes(needle) ||
@@ -152,7 +153,8 @@ export default function BlogIndex() {
               Engineering Blog
             </h1>
             <p className="mt-3 max-w-3xl text-[15px] text-[var(--text-secondary)]">
-              Deep dives on architecture, backend patterns, cloud systems, and practical engineering execution.
+              Deep dives on architecture, backend patterns, cloud systems, and
+              practical engineering execution.
             </p>
 
             <div className="mt-5 xl:hidden">
@@ -185,18 +187,28 @@ export default function BlogIndex() {
 
             <div className="mt-5 grid gap-4 sm:grid-cols-2">
               {paginatedPosts.map((post) => (
-                <article key={post.href} className="rounded-2xl border border-[var(--border)] bg-[var(--bg-secondary)] p-5">
-                  <h2 className="text-[20px] font-bold text-[var(--text-primary)]">{post.title}</h2>
-                  <p className="mt-2 line-clamp-3 text-[14px] text-[var(--text-secondary)]">{post.description}</p>
+                <article
+                  key={post.href}
+                  className="rounded-2xl border border-[var(--border)] bg-[var(--bg-secondary)] p-5"
+                >
+                  <h2 className="text-[20px] font-bold text-[var(--text-primary)]">
+                    {post.title}
+                  </h2>
+                  <p className="mt-2 line-clamp-3 text-[14px] text-[var(--text-secondary)]">
+                    {post.description}
+                  </p>
                   <div className="mt-3 flex items-center gap-2 text-[11px] text-[var(--text-secondary)]">
                     {post.publishedAt && (
                       <span className="inline-flex items-center gap-1">
                         <Calendar className="h-3.5 w-3.5" />
-                        {new Date(post.publishedAt).toLocaleDateString(undefined, {
-                          year: "numeric",
-                          month: "short",
-                          day: "numeric",
-                        })}
+                        {new Date(post.publishedAt).toLocaleDateString(
+                          undefined,
+                          {
+                            year: "numeric",
+                            month: "short",
+                            day: "numeric",
+                          },
+                        )}
                       </span>
                     )}
                   </div>
@@ -221,7 +233,9 @@ export default function BlogIndex() {
 
               {!paginatedPosts.length && (
                 <article className="rounded-2xl border border-[var(--border)] bg-[var(--bg-secondary)] p-5 sm:col-span-2">
-                  <h2 className="text-[20px] font-bold text-[var(--text-primary)]">No posts found</h2>
+                  <h2 className="text-[20px] font-bold text-[var(--text-primary)]">
+                    No posts found
+                  </h2>
                   <p className="mt-2 text-[14px] text-[var(--text-secondary)]">
                     Try changing your search or selected tag.
                   </p>
@@ -276,7 +290,10 @@ export default function BlogIndex() {
                   <Link className="text-[var(--accent)] hover:underline" to="/">
                     Back to portfolio
                   </Link>
-                  <Link className="text-[var(--accent)] hover:underline" to="/tools">
+                  <Link
+                    className="text-[var(--accent)] hover:underline"
+                    to="/tools"
+                  >
                     Explore tools
                   </Link>
                 </div>
