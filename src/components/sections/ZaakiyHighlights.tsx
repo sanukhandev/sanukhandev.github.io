@@ -157,7 +157,10 @@ export default function ZaakiyHighlights() {
           <div
             aria-hidden
             className="hidden lg:block w-px self-stretch"
-            style={{ background: "linear-gradient(to bottom, transparent, var(--border) 20%, var(--border) 80%, transparent)" }}
+            style={{
+              background:
+                "linear-gradient(to bottom, transparent, var(--border) 20%, var(--border) 80%, transparent)",
+            }}
           />
 
           {/* ── RIGHT: Stacked product cards ── */}
