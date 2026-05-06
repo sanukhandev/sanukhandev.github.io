@@ -12,7 +12,7 @@ const Skills = lazy(() => import("@/components/sections/Skills"));
 const ZaakiyHighlights = lazy(
   () => import("@/components/sections/ZaakiyHighlights"),
 );
-const ToolsPreview = lazy(() => import("@/components/sections/ToolsPreview"));
+const AruvixSection = lazy(() => import("@/components/sections/AruvixSection"));
 const BlogPreview = lazy(() => import("@/components/sections/BlogPreview"));
 const Certifications = lazy(
   () => import("@/components/sections/Certifications"),
@@ -97,9 +97,9 @@ const Index = () => {
           <Skills />
           <Services />
           <Works />
-          <ToolsPreview />
           <BlogPreview />
           <ZaakiyHighlights />
+          <AruvixSection />
           <Certifications />
         </Suspense>
       </main>
