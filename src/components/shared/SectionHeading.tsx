@@ -119,6 +119,7 @@ interface SectionHeadingProps {
   title: string;
   subtitle?: string;
   align?: "center" | "left";
+  accentMark?: boolean;
 }
 
 export function SectionHeading({
@@ -126,24 +127,37 @@ export function SectionHeading({
   title,
   subtitle,
   align = "center",
+  accentMark = false,
 }: SectionHeadingProps) {
   return (
     <div
       className={cn(
-        "mb-12 max-w-2xl",
+        "mb-10 max-w-2xl",
         align === "center" ? "mx-auto text-center" : "text-left",
       )}
     >
+      {accentMark && align === "left" && (
+        <span className="section-accent-mark" aria-hidden />
+      )}
       {eyebrow && (
         <span className="mb-3 inline-flex items-center rounded-full border border-default bg-secondary px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-tea-green-300">
           {eyebrow}
         </span>
       )}
-      <h2 className="text-[28px] font-bold leading-tight tracking-tight">
+      <h2
+        className={cn(
+          "font-extrabold leading-[1.08] tracking-[-0.035em] text-primary",
+          align === "center"
+            ? "text-[clamp(1.5rem,2.8vw,2rem)]"
+            : "text-[clamp(1.6rem,3vw,2.1rem)]",
+        )}
+      >
         {title}
       </h2>
       {subtitle && (
-        <p className="mt-3 text-[15px] text-muted-foreground">{subtitle}</p>
+        <p className="mt-3 text-[14px] leading-relaxed text-secondary">
+          {subtitle}
+        </p>
       )}
     </div>
   );

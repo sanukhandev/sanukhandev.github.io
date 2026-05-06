@@ -55,6 +55,10 @@
     --site-muted: var(--text-muted);
     --site-surface: var(--bg-secondary);
     --site-border-strong: var(--border);
+
+    /* ── Surface layer system ── */
+    --surface-2-bg: #11141c;
+    --surface-anchor-bg: #080c13;
   }
 
   html.light {
@@ -105,6 +109,9 @@
     --site-muted: #4d5a66;
     --site-surface: #ffffff;
     --site-border-strong: #cfd8dd;
+
+    /* ── Surface layer system (light mode) ── */
+    --surface-2-bg: #eef5f0;
   }
 
   /* Light-mode compatibility for remaining hardcoded utility colors */
@@ -267,8 +274,8 @@
   }
 
   h2 {
-    font-size: 28px;
-    line-height: 1.15;
+    font-size: clamp(1.45rem, 2.5vw, 1.85rem);
+    line-height: 1.12;
   }
 }
 
@@ -353,7 +360,117 @@
   }
 
   .section-pad {
-    @apply py-16 sm:py-20;
+    @apply py-12 sm:py-14;
+  }
+
+  /* ─────────────────────────────────────────────
+     SURFACE LAYER SYSTEM
+     Layer 1 → default bg (Hero, Works, open sections)
+     Layer 2 → ultra-subtle tint (Skills, Services, Blog, Certs)
+     Anchor  → editorial dark anchor (Zaakiy, Aruvix)
+  ───────────────────────────────────────────── */
+  .surface-1 {
+    background-color: var(--bg-primary);
+  }
+
+  .surface-2 {
+    background-color: var(--surface-2-bg);
+  }
+
+  .surface-anchor {
+    background-color: #0b1220;
+    /* Keep this section readable in both themes */
+    --text-primary: #eef2f7;
+    --text-secondary: #b0bacb;
+    --text-muted: #7a8394;
+    --border: #1c2436;
+    --bg-primary: #080c13;
+    --bg-secondary: #0f1521;
+    --accent: #38c755;
+    --accent-soft: rgba(56, 199, 85, 0.8);
+    --accent-bg: rgba(56, 199, 85, 0.09);
+  }
+
+  /* Section accent mark — announces a new narrative chapter */
+  .section-accent-mark {
+    display: block;
+    width: 2.5rem;
+    height: 3px;
+    border-radius: 9999px;
+    background-color: var(--accent);
+    margin-bottom: 1.25rem;
+    flex-shrink: 0;
+  }
+
+  /* Big editorial section title class */
+  .section-h2 {
+    font-size: clamp(1.9rem, 3.8vw, 2.8rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1.04;
+  }
+
+  /* Breathing space chapter break — before major anchor sections */
+  .section-chapter-break {
+    display: block;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, var(--border) 30%, var(--accent) 50%, var(--border) 70%, transparent 100%);
+    opacity: 0.35;
+    margin: 0;
+  }
+
+  /* ─────────────────────────────────────────────
+     ANCHOR SECTION CARD OVERRIDES
+     Cards on dark editorial surfaces get translucent treatment
+  ───────────────────────────────────────────── */
+  .surface-anchor .premium-card {
+    background: rgba(255, 255, 255, 0.02);
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .surface-anchor .premium-card:hover {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(56, 199, 85, 0.32);
+    box-shadow: 0 10px 24px -18px rgba(56, 199, 85, 0.3);
+  }
+
+  /* ─────────────────────────────────────────────
+     SURFACE-2 SECTION CARD OVERRIDES
+     On tinted surfaces, remove border — use shadow only
+  ───────────────────────────────────────────── */
+  .surface-2 .premium-card {
+    border-color: transparent;
+    box-shadow: 0 4px 20px rgba(15, 23, 42, 0.08);
+  }
+
+  .surface-2 .premium-card:hover {
+    border-color: color-mix(in srgb, var(--accent) 28%, transparent);
+    box-shadow: 0 8px 28px rgba(15, 23, 42, 0.12);
+  }
+
+  html.light .surface-2 .premium-card {
+    background: rgba(255, 255, 255, 0.85);
+    box-shadow: 0 2px 16px rgba(15, 50, 25, 0.06);
+  }
+
+  html.light .surface-2 .premium-card:hover {
+    box-shadow: 0 6px 24px rgba(15, 50, 25, 0.1);
+  }
+
+  /* Architecture indicator chip — used in Works case studies */
+  .arch-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    border-radius: 4px;
+    padding: 0.15rem 0.55rem;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border: 1px solid color-mix(in srgb, var(--accent) 22%, transparent);
+    background: color-mix(in srgb, var(--accent) 7%, transparent);
+    color: var(--accent);
   }
 
   /* ── Dev.to article body renderer ── */

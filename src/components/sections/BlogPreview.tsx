@@ -23,7 +23,7 @@ export default function BlogPreview() {
   const blogs = devtoBlogs.length ? devtoBlogs : fallbackBlogs;
 
   return (
-    <section className="section-pad" id="blog">
+    <section className="section-pad surface-2" id="blog">
       <div className="container-narrow">
         <h2 className="text-[28px] font-bold leading-tight tracking-tight text-primary">
           Blog

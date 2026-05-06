@@ -74,40 +74,23 @@ export default function ZaakiyHighlights() {
   const pills = isArabic ? metaPillsAr : metaPills;
 
   return (
-    <section id="zaakiy" className="section-pad relative overflow-hidden">
-      {/* Subtle dot-grid background */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10 opacity-[0.025]"
-        style={{
-          backgroundImage:
-            "radial-gradient(circle, currentColor 1px, transparent 1px)",
-          backgroundSize: "28px 28px",
-        }}
-      />
-      {/* Soft radial vignette */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10"
-        style={{
-          background:
-            "radial-gradient(ellipse 80% 60% at 50% 0%, var(--accent-bg) 0%, transparent 70%)",
-        }}
-      />
-
+    <section
+      id="zaakiy"
+      className="surface-2 section-pad relative overflow-hidden"
+    >
       <div className="container-narrow">
-        <div className="grid gap-12 lg:grid-cols-[1fr_1px_1fr] lg:gap-0">
+        <div className="grid gap-8 lg:grid-cols-[1fr_1px_1fr] lg:gap-0">
           {/* ── LEFT: Founder narrative ── */}
           <div className="flex flex-col justify-center lg:pr-12 xl:pr-16">
             {/* Eyebrow */}
-            <p className="mb-4 text-[11px] font-bold uppercase tracking-[0.16em] text-accent">
+            <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.16em] text-accent">
               {isArabic ? "منظومة Zaakiy" : "Zaakiy Ecosystem"}
             </p>
 
             {/* Headline */}
             <h2
-              className="text-[clamp(1.75rem,3.2vw,2.5rem)] font-extrabold leading-[1.1] tracking-tight text-primary"
-              style={{ maxWidth: "20ch" }}
+              className="text-[clamp(1.7rem,3.2vw,2.35rem)] font-extrabold leading-[1.1] tracking-tight text-primary"
+              style={{ maxWidth: "21ch" }}
             >
               {isArabic ? (
                 <>
@@ -119,7 +102,9 @@ export default function ZaakiyHighlights() {
                 <>
                   Engineering an Ecosystem:
                   <br />
-                  The Zaakiy Legacy
+                  <span className="text-accent opacity-90">
+                    The Zaakiy Legacy
+                  </span>
                 </>
               )}
             </h2>
@@ -132,7 +117,7 @@ export default function ZaakiyHighlights() {
             </p>
 
             {/* Meta pills */}
-            <div className="mt-6 flex flex-wrap gap-2">
+            <div className="mt-5 flex flex-wrap gap-2">
               {pills.map((pill) => (
                 <span
                   key={pill}
@@ -145,7 +130,7 @@ export default function ZaakiyHighlights() {
             </div>
 
             {/* Founder mark */}
-            <div className="mt-8 flex items-center gap-3">
+            <div className="mt-4 flex items-center gap-3">
               <div className="h-px w-8 bg-accent opacity-40" />
               <p className="text-[11px] font-semibold text-secondary opacity-60">
                 {isArabic ? "بقلم سانو خان" : "By Sanu Khan"}
@@ -168,11 +153,11 @@ export default function ZaakiyHighlights() {
             {featureCards.map((card, i) => (
               <article
                 key={i}
-                className="group relative flex gap-4 border-b border-default py-5 last:border-b-0 transition-all duration-200 ease-out"
+                className="group relative flex gap-4 border-b border-default py-4 last:border-b-0 transition-all duration-200 ease-out"
               >
                 {/* Number index */}
                 <div className="flex w-8 shrink-0 flex-col items-center pt-0.5">
-                  <span className="text-[11px] font-bold tabular-nums text-accent opacity-50 group-hover:opacity-100 transition-opacity duration-200">
+                  <span className="text-[11px] font-bold tabular-nums text-accent opacity-75 transition-opacity duration-200">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   {i < featureCards.length - 1 && (
@@ -203,12 +188,6 @@ export default function ZaakiyHighlights() {
                     {card.description}
                   </p>
                 </div>
-
-                {/* Hover left accent */}
-                <div
-                  aria-hidden
-                  className="pointer-events-none absolute -left-[1px] top-0 h-full w-0.5 rounded-full bg-accent opacity-0 transition-opacity duration-200 group-hover:opacity-60 lg:block hidden"
-                />
               </article>
             ))}
           </div>

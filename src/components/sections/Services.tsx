@@ -21,7 +21,7 @@ export default function Services() {
   const { services, ui } = useSiteContent();
 
   return (
-    <section id="experience" className="section-pad bg-secondary/45">
+    <section id="experience" className="section-pad surface-2">
       <div className="container-narrow">
         <SectionHeading
           title={ui.experience.title}
