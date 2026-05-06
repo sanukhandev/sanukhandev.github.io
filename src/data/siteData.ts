@@ -15,10 +15,11 @@ export const profile = {
   subtitle:
     "Designing scalable distributed systems, enterprise integrations, and high-performance platforms across global markets.",
   statement:
-    "Leading architecture and platform engineering for event-driven commerce, enterprise integration, and multi-region cloud delivery.",
+    "Leading architecture and platform engineering for event-driven commerce, enterprise integration, and multi-region cloud delivery. Creator of Zaakiy AI.",
   meta: [
     "13+ years building distributed systems",
     "Event-driven architecture specialist",
+    "Creator of Zaakiy AI",
     "Azure • AWS • Kubernetes delivery",
   ],
   impactMetrics: [

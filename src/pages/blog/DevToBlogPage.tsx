@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router-dom";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import {
   ArrowLeft,
   BookOpen,
@@ -33,20 +33,35 @@ function buildTocAndHtml(html: string): {
   const toc: TocItem[] = [];
 
   const contentHtml = html.replace(
-    /<h([234])([^>]*)>(.*?)<\/h[234]>/gi,
+    /<h([1234])([^>]*?)>([\s\S]*?)<\/h[1234]>/gi,
     (_full, levelStr: string, attrs: string, rawText: string) => {
       const level = Number(levelStr);
-      const idMatch = attrs.match(/\sid="([^"]+)"/i);
-      const cleanText = rawText.replace(/<[^>]+>/g, "").trim();
+      // id= on the h element itself (some renderers)
+      const idMatch = attrs.match(/\bid="([^"]+)"/i);
+      // Dev.to puts the anchor as <a name="..."> child inside the heading
+      const nameMatch = rawText.match(/<a[^>]+\bname="([^"]+)"/i);
+      const rawClean = rawText.replace(/<[^>]+>/g, "").trim();
+      // Strip emojis and trim
+      const cleanText = rawClean
+        .replace(
+          /[\u{1F000}-\u{1FFFF}\u{2600}-\u{27FF}\u{FE00}-\u{FEFF}\u{1F900}-\u{1F9FF}]/gu,
+          "",
+        )
+        .trim();
       const base =
-        idMatch?.[1] || slugify(cleanText) || `section-${toc.length + 1}`;
+        idMatch?.[1] ||
+        nameMatch?.[1] ||
+        slugify(rawClean) ||
+        `section-${toc.length + 1}`;
       const count = seen.get(base) || 0;
       seen.set(base, count + 1);
       const id = count ? `${base}-${count + 1}` : base;
 
-      toc.push({ id, text: cleanText || `Section ${toc.length + 1}`, level });
+      // Only include h2 and h3 in the TOC
+      if (cleanText && level >= 2 && level <= 3)
+        toc.push({ id, text: cleanText, level });
 
-      const attrsWithoutId = attrs.replace(/\sid="[^"]*"/i, "");
+      const attrsWithoutId = attrs.replace(/\bid="[^"]*"/i, "");
       return `<h${level}${attrsWithoutId} id="${id}">${rawText}</h${level}>`;
     },
   );
@@ -71,6 +86,40 @@ export default function DevToBlogPage() {
 
     return buildTocAndHtml(article.body_html);
   }, [article]);
+
+  useEffect(() => {
+    if (!contentHtml) return;
+    const blocks = document.querySelectorAll<HTMLElement>(
+      ".devto-content .highlight.js-code-highlight",
+    );
+    blocks.forEach((block) => {
+      // Remove Dev.to's fullscreen panel
+      block.querySelector(".highlight__panel")?.remove();
+      // Don't add twice
+      if (block.querySelector(".devto-copy-btn")) return;
+      const pre = block.querySelector("pre");
+      if (!pre) return;
+      const btn = document.createElement("button");
+      btn.className = "devto-copy-btn";
+      btn.textContent = "Copy";
+      btn.setAttribute("aria-label", "Copy code");
+      btn.addEventListener("click", () => {
+        const text = pre.textContent ?? "";
+        navigator.clipboard
+          .writeText(text)
+          .then(() => {
+            btn.textContent = "✓ Copied";
+            setTimeout(() => {
+              btn.textContent = "Copy";
+            }, 2000);
+          })
+          .catch(() => {
+            btn.textContent = "Error";
+          });
+      });
+      block.appendChild(btn);
+    });
+  }, [contentHtml]);
 
   const chatContext = useMemo(() => {
     if (!article) return undefined;
@@ -208,7 +257,16 @@ export default function DevToBlogPage() {
                           href={`#${item.id}`}
                           className="block rounded-lg px-2 py-1.5 text-[12px] leading-snug text-[var(--text-secondary)] hover:bg-[var(--bg-primary)] hover:text-[var(--accent)]"
                           style={{
-                            paddingLeft: `${(item.level - 2) * 10 + 8}px`,
+                            paddingLeft: `${(item.level - 2) * 12 + 8}px`,
+                          }}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            document
+                              .getElementById(item.id)
+                              ?.scrollIntoView({
+                                behavior: "smooth",
+                                block: "start",
+                              });
                           }}
                         >
                           {item.text}

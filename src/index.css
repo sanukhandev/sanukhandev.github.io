@@ -383,7 +383,17 @@
     text-underline-offset: 3px;
   }
   .devto-content a:hover { opacity: 0.8; }
-  .devto-content pre {
+  .devto-content h2 > a:first-child,
+  .devto-content h3 > a:first-child,
+  .devto-content h4 > a:first-child {
+    display: none;
+  }
+  .devto-content .highlight {
+    position: relative;
+    margin: 1.2em 0;
+  }
+  .devto-content pre,
+  .devto-content .highlight pre {
     background: var(--bg-secondary);
     border: 1px solid var(--border);
     border-radius: 10px;
@@ -391,6 +401,35 @@
     overflow-x: auto;
     margin: 1.2em 0;
     font-size: 13px;
+  }
+  .devto-content .highlight pre {
+    margin: 0;
+    padding-right: 3.75rem;
+  }
+  .devto-content .highlight__panel {
+    display: none;
+  }
+  .devto-copy-btn {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    z-index: 3;
+    background: color-mix(in srgb, var(--bg-primary) 80%, transparent);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text-secondary);
+    font-size: 11px;
+    font-weight: 600;
+    font-family: inherit;
+    padding: 0.2rem 0.55rem;
+    cursor: pointer;
+    opacity: 0.65;
+    transition: opacity 0.15s, color 0.15s;
+    line-height: 1.6;
+  }
+  .devto-copy-btn:hover {
+    opacity: 1;
+    color: var(--accent);
   }
   .devto-content code {
     font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, monospace;

@@ -9,6 +9,9 @@ import { trackEvent } from "@/utils/analytics";
 const Works = lazy(() => import("@/components/sections/Works"));
 const Services = lazy(() => import("@/components/sections/Services"));
 const Skills = lazy(() => import("@/components/sections/Skills"));
+const ZaakiyHighlights = lazy(
+  () => import("@/components/sections/ZaakiyHighlights"),
+);
 const ToolsPreview = lazy(() => import("@/components/sections/ToolsPreview"));
 const BlogPreview = lazy(() => import("@/components/sections/BlogPreview"));
 const Certifications = lazy(
@@ -37,6 +40,7 @@ const Index = () => {
       "works",
       "experience",
       "stack",
+      "zaakiy",
       "tools",
       "blog",
       "articles",
@@ -95,12 +99,13 @@ const Index = () => {
           <Works />
           <ToolsPreview />
           <BlogPreview />
+          <ZaakiyHighlights />
           <Certifications />
         </Suspense>
       </main>
       <Suspense fallback={null}>
         <Footer />
-        <ZaakiyChatWidget />
+        <ZaakiyChatWidget extraContext="Page: Sanu Khan portfolio homepage.\nZaakiy Ecosystem: A suite of AI-driven platforms built by Sanu Khan.\n- Zaakiy AI: Multilingual AI chat support platform (10K+ conversations, English & Arabic).\n- Zaakiy CRM: CRM solution for SMEs, content creators, and social media influencers.\n- Zaakiy ERP: ERP solutions including a real estate platform.\n- Zaakiy GO: Food delivery app in Dubai.\nSanu is the founder and Solution Architect behind this ecosystem." />
       </Suspense>
     </div>
   );

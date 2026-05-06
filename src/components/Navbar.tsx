@@ -221,28 +221,6 @@ function Navbar() {
         </a>
 
         <nav className="hidden items-center gap-7 md:flex">
-          <Link
-            to="/blog"
-            className={cn(
-              "relative text-[15px] transition-all duration-300 hover:scale-[1.02]",
-              isBlogPage
-                ? isLight
-                  ? "text-[#0f1015] font-semibold"
-                  : "text-[#f5f7fa] font-semibold"
-                : isLight
-                  ? "text-[#4d5a66] hover:text-[#0f1015]"
-                  : "text-[#c9ced6] hover:text-[#38c755]",
-            )}
-          >
-            Blog
-            <span
-              className={cn(
-                "absolute -bottom-1.5 left-0 h-[2px] bg-accent transition-all duration-300",
-                isBlogPage ? "w-full opacity-100" : "w-0 opacity-0",
-              )}
-            />
-          </Link>
-
           {nav.links.map((l) => (
             <a
               key={l.href}
@@ -269,6 +247,27 @@ function Navbar() {
               />
             </a>
           ))}
+          <Link
+            to="/blog"
+            className={cn(
+              "relative text-[15px] transition-all duration-300 hover:scale-[1.02]",
+              isBlogPage
+                ? isLight
+                  ? "text-[#0f1015] font-semibold"
+                  : "text-[#f5f7fa] font-semibold"
+                : isLight
+                  ? "text-[#4d5a66] hover:text-[#0f1015]"
+                  : "text-[#c9ced6] hover:text-[#38c755]",
+            )}
+          >
+            Blog
+            <span
+              className={cn(
+                "absolute -bottom-1.5 left-0 h-[2px] bg-accent transition-all duration-300",
+                isBlogPage ? "w-full opacity-100" : "w-0 opacity-0",
+              )}
+            />
+          </Link>
         </nav>
 
         <div className="hidden md:flex items-center gap-2">
