@@ -15,7 +15,7 @@ export const profile = {
   subRole:
     "Tech Lead • Cloud & MS Architect • Enterprise Integrations Specialist",
   subtitle:
-    " \n Designing scalable distributed systems, enterprise integrations, and high-performance platforms across global markets.",
+    "Designing scalable distributed systems, enterprise integrations, and high-performance platforms across global markets.",
   statement:
     "Leading architecture and platform engineering for event-driven commerce, enterprise integration, and multi-region cloud delivery. Creator of Zaakiy Ecosystem.",
   meta: [

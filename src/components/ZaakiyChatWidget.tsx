@@ -109,17 +109,6 @@ export default function ZaakiyChatWidget({
     ].join("\n");
   }, [content, email, articles]);
 
-  /** Minimal scope sent on every subsequent message to keep payloads small */
-  const slimScope = useMemo(() => {
-    const profile = content.profile;
-    return [
-      `Name: ${profile.name}`,
-      `Role: ${profile.role}`,
-      `Contact email: ${email}`,
-      `Coffee link: ${koFi}`,
-    ].join("\n");
-  }, [content, email]);
-
   const appendMessage = (role: ChatRole, text: string) => {
     setMessages((prev) => [
       ...prev,
@@ -162,9 +151,10 @@ export default function ZaakiyChatWidget({
         body: JSON.stringify({
           locale,
           userQuestion: userText,
-          // Full scope on first message to prime server session; slim scope
-          // on subsequent messages to keep payload small (~100 chars vs ~2KB).
-          siteScope: scopeSentRef.current ? slimScope : siteScope,
+          // Send full siteScope on the first message to prime the server
+          // session; omit on subsequent messages so the stored scope is used
+          // and never accidentally overwritten with a partial payload.
+          siteScope: scopeSentRef.current ? undefined : siteScope,
           extraContext: extraContext || undefined,
           email,
           maxOutputChars: MAX_OUTPUT_CHARS,
@@ -184,7 +174,9 @@ export default function ZaakiyChatWidget({
         } catch {
           // ignore json parse failure
         }
-        throw new Error(errDetail);
+        // Log full detail for debugging; throw a generic error for the UI
+        console.error("[ZaakiyChat]", errDetail);
+        throw new Error("service_error");
       }
 
       const payload = (await response.json()) as { text?: string };
@@ -197,8 +189,16 @@ export default function ZaakiyChatWidget({
       scopeSentRef.current = true;
       appendMessage("assistant", modelText);
     } catch (err) {
-      const msg = err instanceof Error ? err.message : String(err);
-      appendMessage("assistant", isArabic ? `خطأ: ${msg}` : `Error: ${msg}`);
+      // Log unexpected errors; show a friendly message to the user
+      if (!(err instanceof Error && err.message === "service_error")) {
+        console.error("[ZaakiyChat]", err);
+      }
+      appendMessage(
+        "assistant",
+        isArabic
+          ? "عذراً، حدث خطأ. يُرجى المحاولة مجدداً."
+          : "Sorry, something went wrong. Please try again.",
+      );
     } finally {
       setLoading(false);
     }

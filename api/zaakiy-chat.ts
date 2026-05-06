@@ -460,11 +460,14 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
     const incomingExtraContext = String(body.extraContext || "")
       .trim()
       .slice(0, 1500);
-    if (sessionId && incomingSiteScope) {
+    // Only persist the incoming scope if the session doesn't already have one
+    // stored (i.e. first message only), so later messages cannot accidentally
+    // overwrite the full scope with a smaller/partial one.
+    if (sessionId && incomingSiteScope && !getSessionScope(sessionId)) {
       setSessionScope(sessionId, incomingSiteScope);
     }
     const siteScope =
-      incomingSiteScope || (sessionId ? getSessionScope(sessionId) : "");
+      (sessionId ? getSessionScope(sessionId) : "") || incomingSiteScope;
 
     if (!userQuestion) {
       sendJson(res, 400, { error: "Missing required fields" });
