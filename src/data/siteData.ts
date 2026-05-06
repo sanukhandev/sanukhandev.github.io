@@ -11,15 +11,17 @@ export const nav = {
 
 export const profile = {
   name: "Sanu Khan",
-  role: "Tech Lead • Cloud & Microservices Architect",
+  role: "Creator of Zaakiy Ecosystem",
+  subRole:
+    "Tech Lead • Cloud & MS Architect • Enterprise Integrations Specialist",
   subtitle:
-    "Designing scalable distributed systems, enterprise integrations, and high-performance platforms across global markets.",
+    " \n Designing scalable distributed systems, enterprise integrations, and high-performance platforms across global markets.",
   statement:
-    "Leading architecture and platform engineering for event-driven commerce, enterprise integration, and multi-region cloud delivery. Creator of Zaakiy AI.",
+    "Leading architecture and platform engineering for event-driven commerce, enterprise integration, and multi-region cloud delivery. Creator of Zaakiy Ecosystem.",
   meta: [
     "13+ years building distributed systems",
     "Event-driven architecture specialist",
-    "Creator of Zaakiy AI",
+    "Creator of Zaakiy Ecosystem",
     "Azure • AWS • Kubernetes delivery",
   ],
   impactMetrics: [

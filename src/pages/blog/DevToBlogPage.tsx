@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router-dom";
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   ArrowLeft,
   BookOpen,
@@ -120,6 +120,28 @@ export default function DevToBlogPage() {
       block.appendChild(btn);
     });
   }, [contentHtml]);
+
+  const articleRef = useRef<HTMLElement>(null);
+  const [activeId, setActiveId] = useState<string>("");
+
+  useEffect(() => {
+    if (!toc.length || !articleRef.current) return;
+    const root = articleRef.current;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+        if (visible.length > 0) setActiveId(visible[0].target.id);
+      },
+      { root, rootMargin: "-80px 0px -55% 0px", threshold: 0 },
+    );
+    toc.forEach(({ id }) => {
+      const el = root.querySelector<HTMLElement>(`#${CSS.escape(id)}`);
+      if (el) observer.observe(el);
+    });
+    return () => observer.disconnect();
+  }, [toc, contentHtml]);
 
   const chatContext = useMemo(() => {
     if (!article) return undefined;
@@ -248,38 +270,51 @@ export default function DevToBlogPage() {
                 On this page
               </p>
 
-              <div className="max-h-[calc(100vh-20rem)] overflow-y-auto pr-1">
-                {toc.length > 0 ? (
-                  <ul className="space-y-1">
-                    {toc.map((item) => (
+              {toc.length > 0 ? (
+                <ul className="space-y-0.5">
+                  {toc.map((item) => {
+                    const isActive = activeId === item.id;
+                    return (
                       <li key={item.id}>
                         <a
                           href={`#${item.id}`}
-                          className="block rounded-lg px-2 py-1.5 text-[12px] leading-snug text-[var(--text-secondary)] hover:bg-[var(--bg-primary)] hover:text-[var(--accent)]"
+                          className={[
+                            "block rounded-md py-1.5 text-[12px] leading-snug transition-colors",
+                            isActive
+                              ? "bg-[var(--accent)]/10 font-semibold text-[var(--accent)]"
+                              : "text-[var(--text-secondary)] hover:bg-[var(--bg-primary)] hover:text-[var(--accent)]",
+                          ].join(" ")}
                           style={{
                             paddingLeft: `${(item.level - 2) * 12 + 8}px`,
+                            paddingRight: "8px",
                           }}
                           onClick={(e) => {
                             e.preventDefault();
-                            document
-                              .getElementById(item.id)
-                              ?.scrollIntoView({
-                                behavior: "smooth",
-                                block: "start",
-                              });
+                            const el =
+                              articleRef.current?.querySelector<HTMLElement>(
+                                `#${CSS.escape(item.id)}`,
+                              );
+                            el?.scrollIntoView({
+                              behavior: "smooth",
+                              block: "start",
+                            });
+                            setActiveId(item.id);
                           }}
                         >
+                          {isActive && (
+                            <span className="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-[var(--accent)] align-middle" />
+                          )}
                           {item.text}
                         </a>
                       </li>
-                    ))}
-                  </ul>
-                ) : (
-                  <p className="text-[12px] text-[var(--text-secondary)]">
-                    No headings found.
-                  </p>
-                )}
-              </div>
+                    );
+                  })}
+                </ul>
+              ) : (
+                <p className="text-[12px] text-[var(--text-secondary)]">
+                  No headings found.
+                </p>
+              )}
 
               {article.tags.length > 0 && (
                 <div className="mt-4 border-t border-[var(--border)] pt-3">
@@ -354,7 +389,7 @@ export default function DevToBlogPage() {
             </div>
           </aside>
 
-          <article className="min-h-0 overflow-y-auto pr-1">
+          <article ref={articleRef} className="min-h-0 overflow-y-auto pr-1">
             <Link
               to="/blog"
               className="inline-flex items-center gap-1.5 text-[13px] text-[var(--accent)] hover:underline"

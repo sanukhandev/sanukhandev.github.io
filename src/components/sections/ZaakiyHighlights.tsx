@@ -74,10 +74,7 @@ export default function ZaakiyHighlights() {
   const pills = isArabic ? metaPillsAr : metaPills;
 
   return (
-    <section
-      id="zaakiy"
-      className="surface-2 section-pad relative overflow-hidden"
-    >
+    <section id="zaakiy" className="section-pad relative overflow-hidden">
       <div className="container-narrow">
         <div className="grid gap-8 lg:grid-cols-[1fr_1px_1fr] lg:gap-0">
           {/* ── LEFT: Founder narrative ── */}

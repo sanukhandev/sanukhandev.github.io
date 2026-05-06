@@ -6,7 +6,7 @@ export default function Certifications() {
   const { certifications, ui } = useSiteContent();
 
   return (
-    <section className="section-pad surface-2">
+    <section className="section-pad">
       <div className="container-narrow">
         <SectionHeading
           title={ui.certifications.title}

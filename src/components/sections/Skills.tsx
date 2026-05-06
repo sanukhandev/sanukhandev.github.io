@@ -20,7 +20,7 @@ export default function Skills() {
   const { skills } = useSiteContent();
 
   return (
-    <section id="stack" className="section-pad surface-2">
+    <section id="stack" className="section-pad">
       <div className="container-narrow">
         <SectionHeading
           eyebrow={skills.eyebrow}

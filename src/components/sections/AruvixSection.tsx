@@ -274,7 +274,7 @@ export default function AruvixSection() {
   const sectionTrustPills = isArabic ? trustPillsAr : trustPills;
 
   return (
-    <section id="aruvix" className="surface-2 relative overflow-hidden">
+    <section id="aruvix" className="relative overflow-hidden">
       {/* Subtle dot-grid background */}
       <div
         aria-hidden
