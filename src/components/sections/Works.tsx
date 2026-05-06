@@ -52,9 +52,7 @@ export default function Works() {
           observer.unobserve(entry.target);
         });
       },
-      {
-        threshold: 0.6,
-      },
+      { threshold: 0.6 },
     );
 
     cards.forEach((card) => observer.observe(card));

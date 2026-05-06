@@ -55,6 +55,10 @@
     --site-muted: var(--text-muted);
     --site-surface: var(--bg-secondary);
     --site-border-strong: var(--border);
+
+    /* ── Surface layer system ── */
+    --surface-2-bg: #11141c;
+    --surface-anchor-bg: #080c13;
   }
 
   html.light {
@@ -105,6 +109,9 @@
     --site-muted: #4d5a66;
     --site-surface: #ffffff;
     --site-border-strong: #cfd8dd;
+
+    /* ── Surface layer system (light mode) ── */
+    --surface-2-bg: #eef5f0;
   }
 
   /* Light-mode compatibility for remaining hardcoded utility colors */
@@ -267,8 +274,8 @@
   }
 
   h2 {
-    font-size: 28px;
-    line-height: 1.15;
+    font-size: clamp(1.45rem, 2.5vw, 1.85rem);
+    line-height: 1.12;
   }
 }
 
@@ -353,7 +360,254 @@
   }
 
   .section-pad {
-    @apply py-16 sm:py-20;
+    @apply py-12 sm:py-14;
+  }
+
+  /* ─────────────────────────────────────────────
+     SURFACE LAYER SYSTEM
+     Layer 1 → default bg (Hero, Works, open sections)
+     Layer 2 → ultra-subtle tint (Skills, Services, Blog, Certs)
+     Anchor  → editorial dark anchor (Zaakiy, Aruvix)
+  ───────────────────────────────────────────── */
+  .surface-1 {
+    background-color: var(--bg-primary);
+  }
+
+  .surface-2 {
+    background-color: var(--surface-2-bg);
+  }
+
+  .surface-anchor {
+    background-color: #0b1220;
+    /* Keep this section readable in both themes */
+    --text-primary: #eef2f7;
+    --text-secondary: #b0bacb;
+    --text-muted: #7a8394;
+    --border: #1c2436;
+    --bg-primary: #080c13;
+    --bg-secondary: #0f1521;
+    --accent: #38c755;
+    --accent-soft: rgba(56, 199, 85, 0.8);
+    --accent-bg: rgba(56, 199, 85, 0.09);
+  }
+
+  /* Section accent mark — announces a new narrative chapter */
+  .section-accent-mark {
+    display: block;
+    width: 2.5rem;
+    height: 3px;
+    border-radius: 9999px;
+    background-color: var(--accent);
+    margin-bottom: 1.25rem;
+    flex-shrink: 0;
+  }
+
+  /* Big editorial section title class */
+  .section-h2 {
+    font-size: clamp(1.9rem, 3.8vw, 2.8rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1.04;
+  }
+
+  /* Breathing space chapter break — before major anchor sections */
+  .section-chapter-break {
+    display: block;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, var(--border) 30%, var(--accent) 50%, var(--border) 70%, transparent 100%);
+    opacity: 0.35;
+    margin: 0;
+  }
+
+  /* ─────────────────────────────────────────────
+     ANCHOR SECTION CARD OVERRIDES
+     Cards on dark editorial surfaces get translucent treatment
+  ───────────────────────────────────────────── */
+  .surface-anchor .premium-card {
+    background: rgba(255, 255, 255, 0.02);
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .surface-anchor .premium-card:hover {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(56, 199, 85, 0.32);
+    box-shadow: 0 10px 24px -18px rgba(56, 199, 85, 0.3);
+  }
+
+  /* ─────────────────────────────────────────────
+     SURFACE-2 SECTION CARD OVERRIDES
+     On tinted surfaces, remove border — use shadow only
+  ───────────────────────────────────────────── */
+  .surface-2 .premium-card {
+    border-color: transparent;
+    box-shadow: 0 4px 20px rgba(15, 23, 42, 0.08);
+  }
+
+  .surface-2 .premium-card:hover {
+    border-color: color-mix(in srgb, var(--accent) 28%, transparent);
+    box-shadow: 0 8px 28px rgba(15, 23, 42, 0.12);
+  }
+
+  html.light .surface-2 .premium-card {
+    background: rgba(255, 255, 255, 0.85);
+    box-shadow: 0 2px 16px rgba(15, 50, 25, 0.06);
+  }
+
+  html.light .surface-2 .premium-card:hover {
+    box-shadow: 0 6px 24px rgba(15, 50, 25, 0.1);
+  }
+
+  /* Architecture indicator chip — used in Works case studies */
+  .arch-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    border-radius: 4px;
+    padding: 0.15rem 0.55rem;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border: 1px solid color-mix(in srgb, var(--accent) 22%, transparent);
+    background: color-mix(in srgb, var(--accent) 7%, transparent);
+    color: var(--accent);
+  }
+
+  /* ── Dev.to article body renderer ── */
+  .devto-content {
+    color: var(--text-secondary);
+    font-size: 15px;
+    line-height: 1.8;
+  }
+  .devto-content h1,
+  .devto-content h2,
+  .devto-content h3,
+  .devto-content h4,
+  .devto-content h5 {
+    color: var(--text-primary);
+    font-weight: 700;
+    line-height: 1.25;
+    margin-top: 1.6em;
+    margin-bottom: 0.5em;
+  }
+  .devto-content h2 { font-size: 1.45rem; }
+  .devto-content h3 { font-size: 1.2rem; }
+  .devto-content h4 { font-size: 1.05rem; }
+  .devto-content p { margin-bottom: 1em; }
+  .devto-content a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .devto-content a:hover { opacity: 0.8; }
+  .devto-content h2 > a:first-child,
+  .devto-content h3 > a:first-child,
+  .devto-content h4 > a:first-child {
+    display: none;
+  }
+  .devto-content .highlight {
+    position: relative;
+    margin: 1.2em 0;
+  }
+  .devto-content pre,
+  .devto-content .highlight pre {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    overflow-x: auto;
+    margin: 1.2em 0;
+    font-size: 13px;
+  }
+  .devto-content .highlight pre {
+    margin: 0;
+    padding-right: 3.75rem;
+  }
+  .devto-content .highlight__panel {
+    display: none;
+  }
+  .devto-copy-btn {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    z-index: 3;
+    background: color-mix(in srgb, var(--bg-primary) 80%, transparent);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text-secondary);
+    font-size: 11px;
+    font-weight: 600;
+    font-family: inherit;
+    padding: 0.2rem 0.55rem;
+    cursor: pointer;
+    opacity: 0.65;
+    transition: opacity 0.15s, color 0.15s;
+    line-height: 1.6;
+  }
+  .devto-copy-btn:hover {
+    opacity: 1;
+    color: var(--accent);
+  }
+  .devto-content code {
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, monospace;
+    font-size: 0.875em;
+  }
+  .devto-content :not(pre) > code {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 0.15em 0.45em;
+    color: var(--accent);
+    font-size: 0.875em;
+  }
+  .devto-content blockquote {
+    border-left: 3px solid var(--accent);
+    padding-left: 1rem;
+    margin: 1.2em 0;
+    color: var(--text-secondary);
+    font-style: italic;
+    opacity: 0.85;
+  }
+  .devto-content ul,
+  .devto-content ol {
+    padding-left: 1.5rem;
+    margin-bottom: 1em;
+  }
+  .devto-content ul { list-style: disc; }
+  .devto-content ol { list-style: decimal; }
+  .devto-content li { margin-bottom: 0.35em; }
+  .devto-content img {
+    max-width: 100%;
+    border-radius: 10px;
+    margin: 1.2em auto;
+    display: block;
+    border: 1px solid var(--border);
+  }
+  .devto-content hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 2em 0;
+  }
+  .devto-content strong {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+  .devto-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.2em 0;
+    font-size: 14px;
+  }
+  .devto-content th,
+  .devto-content td {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--border);
+    text-align: left;
+  }
+  .devto-content th {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    font-weight: 600;
   }
 
   .premium-card {

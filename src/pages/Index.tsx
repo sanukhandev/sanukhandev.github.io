@@ -1,5 +1,6 @@
 import { Suspense, lazy, memo, useEffect } from "react";
 import Navbar from "@/components/Navbar";
+import TechParticles from "@/components/TechParticles";
 import Hero from "@/components/sections/Hero";
 import LocaleSwitchSkeleton from "@/components/LocaleSwitchSkeleton";
 import SeoMeta from "@/components/SeoMeta";
@@ -9,12 +10,14 @@ import { trackEvent } from "@/utils/analytics";
 const Works = lazy(() => import("@/components/sections/Works"));
 const Services = lazy(() => import("@/components/sections/Services"));
 const Skills = lazy(() => import("@/components/sections/Skills"));
-const ToolsPreview = lazy(() => import("@/components/sections/ToolsPreview"));
+const ZaakiyHighlights = lazy(
+  () => import("@/components/sections/ZaakiyHighlights"),
+);
+const AruvixSection = lazy(() => import("@/components/sections/AruvixSection"));
 const BlogPreview = lazy(() => import("@/components/sections/BlogPreview"));
 const Certifications = lazy(
   () => import("@/components/sections/Certifications"),
 );
-const Articles = lazy(() => import("@/components/sections/Articles"));
 const Footer = lazy(() => import("@/components/sections/Footer"));
 const ZaakiyChatWidget = lazy(() => import("@/components/ZaakiyChatWidget"));
 
@@ -38,6 +41,7 @@ const Index = () => {
       "works",
       "experience",
       "stack",
+      "zaakiy",
       "tools",
       "blog",
       "articles",
@@ -80,30 +84,36 @@ const Index = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      <SeoMeta
-        title="Sanu Khan | Tech Lead & Cloud Architect UAE"
-        description="Tech Lead and Cloud Architect in Dubai UAE. 13+ years delivering distributed systems, event-driven platforms, and enterprise integrations across MENA and global markets."
-        canonicalPath="/"
-        keywords="sanu khan, tech lead dubai, cloud architect uae, full stack engineer, distributed systems"
-      />
-      <Navbar />
-      <main>
-        <Hero />
-        <Suspense fallback={sectionFallback}>
-          <Skills />
-          <Services />
-          <Works />
-          <ToolsPreview />
-          <BlogPreview />
-          <Certifications />
-          <Articles />
+    <div className="relative min-h-screen bg-background text-foreground">
+      <div className="pointer-events-none fixed inset-0 z-0 opacity-90">
+        <TechParticles count={30} fullPage />
+      </div>
+
+      <div className="relative z-10">
+        <SeoMeta
+          title="Sanu Khan | Tech Lead & Cloud Architect UAE"
+          description="Tech Lead and Cloud Architect in Dubai UAE. 13+ years delivering distributed systems, event-driven platforms, and enterprise integrations across MENA and global markets."
+          canonicalPath="/"
+          keywords="sanu khan, tech lead dubai, cloud architect uae, full stack engineer, distributed systems"
+        />
+        <Navbar />
+        <main>
+          <Hero />
+          <Suspense fallback={sectionFallback}>
+            <Skills />
+            <Services />
+            <Works />
+            <BlogPreview />
+            <ZaakiyHighlights />
+            <AruvixSection />
+            <Certifications />
+          </Suspense>
+        </main>
+        <Suspense fallback={null}>
+          <Footer />
+          <ZaakiyChatWidget extraContext="Page: Sanu Khan portfolio homepage.\nZaakiy Ecosystem: A suite of AI-driven platforms built by Sanu Khan.\n- Zaakiy AI: Multilingual AI chat support platform (10K+ conversations, English & Arabic).\n- Zaakiy CRM: CRM solution for SMEs, content creators, and social media influencers.\n- Zaakiy ERP: ERP solutions including a real estate platform.\n- Zaakiy GO: Food delivery app in Dubai.\nSanu is the founder and Solution Architect behind this ecosystem." />
         </Suspense>
-      </main>
-      <Suspense fallback={null}>
-        <Footer />
-        <ZaakiyChatWidget />
-      </Suspense>
+      </div>
     </div>
   );
 };

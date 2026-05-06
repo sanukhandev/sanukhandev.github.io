@@ -1,5 +1,7 @@
 import { memo, useEffect, useState } from "react";
-import { Menu, X, Coffee, Moon, Sun } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
+import { Menu, X, Coffee, Moon, Sun, ArrowUpRight, Globe } from "lucide-react";
+import { motion, useReducedMotion } from "framer-motion";
 import { useSiteContent } from "@/data/siteContent";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -7,7 +9,56 @@ import { useTheme } from "@/hooks/use-theme";
 import { useLocale } from "@/hooks/use-locale";
 import { trackEvent } from "@/utils/analytics";
 
+function CoffeeIconAnimated({ className }: { className?: string }) {
+  const reduced = useReducedMotion();
+  return (
+    <span className="relative inline-flex items-center justify-center">
+      {!reduced && (
+        <>
+          <motion.span
+            className="pointer-events-none absolute -top-3 left-[18%] w-[2px] rounded-full bg-current"
+            style={{ height: 5 }}
+            animate={{ y: [0, -8], opacity: [0, 0.6, 0] }}
+            transition={{
+              duration: 1.6,
+              repeat: Infinity,
+              ease: "easeOut",
+              delay: 0.1,
+            }}
+          />
+          <motion.span
+            className="pointer-events-none absolute -top-3 left-[52%] w-[2px] rounded-full bg-current"
+            style={{ height: 5 }}
+            animate={{ y: [0, -8], opacity: [0, 0.45, 0] }}
+            transition={{
+              duration: 1.6,
+              repeat: Infinity,
+              ease: "easeOut",
+              delay: 0.7,
+            }}
+          />
+        </>
+      )}
+      <motion.span
+        className="inline-flex"
+        whileHover={
+          reduced
+            ? {}
+            : {
+                scale: 1.22,
+                rotate: [-6, 6, -6, 6, 0],
+                transition: { duration: 0.38, ease: "easeInOut" },
+              }
+        }
+      >
+        <Coffee className={className} />
+      </motion.span>
+    </span>
+  );
+}
+
 function Navbar() {
+  const location = useLocation();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeHref, setActiveHref] = useState("#works");
@@ -16,6 +67,12 @@ function Navbar() {
   const { nav, ui } = useSiteContent();
   const isLight = theme === "light";
   const isArabic = locale === "ar";
+  const isHomePage = location.pathname === "/";
+  const isBlogPage = location.pathname.startsWith("/blog");
+  const ctaHref =
+    !isHomePage && nav.cta.href.startsWith("#")
+      ? `/${nav.cta.href}`
+      : nav.cta.href;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -68,7 +125,7 @@ function Navbar() {
     >
       <div className="container-narrow flex h-16 items-center justify-between">
         <a
-          href="#home"
+          href={isHomePage ? "#home" : "/#home"}
           className="group shrink-0"
           aria-label={isArabic ? "الصفحة الرئيسية" : "SanuKhan.dev home"}
         >
@@ -216,10 +273,10 @@ function Navbar() {
           {nav.links.map((l) => (
             <a
               key={l.href}
-              href={l.href}
+              href={isHomePage ? l.href : `/${l.href}`}
               className={cn(
                 "relative text-[15px] transition-all duration-300 hover:scale-[1.02]",
-                activeHref === l.href
+                isHomePage && activeHref === l.href
                   ? isLight
                     ? "text-[#0f1015] font-semibold"
                     : "text-[#f5f7fa] font-semibold"
@@ -232,16 +289,38 @@ function Navbar() {
               <span
                 className={cn(
                   "absolute -bottom-1.5 left-0 h-[2px] bg-accent transition-all duration-300",
-                  activeHref === l.href
+                  isHomePage && activeHref === l.href
                     ? "w-full opacity-100"
                     : "w-0 opacity-0",
                 )}
               />
             </a>
           ))}
+          <Link
+            to="/blog"
+            className={cn(
+              "relative text-[15px] transition-all duration-300 hover:scale-[1.02]",
+              isBlogPage
+                ? isLight
+                  ? "text-[#0f1015] font-semibold"
+                  : "text-[#f5f7fa] font-semibold"
+                : isLight
+                  ? "text-[#4d5a66] hover:text-[#0f1015]"
+                  : "text-[#c9ced6] hover:text-[#38c755]",
+            )}
+          >
+            Blog
+            <span
+              className={cn(
+                "absolute -bottom-1.5 left-0 h-[2px] bg-accent transition-all duration-300",
+                isBlogPage ? "w-full opacity-100" : "w-0 opacity-0",
+              )}
+            />
+          </Link>
         </nav>
 
-        <div className="hidden md:flex items-center gap-2">
+        <div className="hidden md:flex items-center gap-1.5">
+          {/* Theme */}
           <button
             type="button"
             aria-label={
@@ -249,7 +328,7 @@ function Navbar() {
             }
             onClick={toggleTheme}
             className={cn(
-              "inline-flex h-9 w-9 items-center justify-center rounded-lg border transition-all duration-300 hover:scale-[1.03]",
+              "inline-flex h-9 w-9 items-center justify-center rounded-lg border transition-all duration-200 hover:scale-[1.06]",
               isLight
                 ? "border-[#cfd8dd] bg-white text-[#1a232e] hover:bg-[#eef4f0]"
                 : "border-[#2b2f3b] bg-[#16171d] text-[#f5f7fa] hover:bg-[#20222b]",
@@ -262,31 +341,59 @@ function Navbar() {
             )}
           </button>
 
+          {/* Locale — single toggle */}
+          <button
+            type="button"
+            aria-label={
+              locale === "en" ? "Switch to Arabic" : "Switch to English"
+            }
+            title={locale === "en" ? "Switch to Arabic" : "Switch to English"}
+            onClick={() => setLocale(locale === "en" ? "ar" : "en")}
+            className={cn(
+              "inline-flex h-9 w-9 items-center justify-center rounded-lg border text-[11px] font-bold transition-all duration-200 hover:scale-[1.06]",
+              isLight
+                ? "border-[#cfd8dd] bg-white text-[#1a232e] hover:bg-[#eef4f0]"
+                : "border-[#2b2f3b] bg-[#16171d] text-[#f5f7fa] hover:bg-[#20222b]",
+            )}
+          >
+            {locale === "en" ? (
+              <span className="text-[12px]">ع</span>
+            ) : (
+              <span>EN</span>
+            )}
+          </button>
+
+          <div className="mx-0.5 h-5 w-px shrink-0 rounded-full opacity-30 bg-current" />
+
+          {/* Coffee — icon only */}
           <a
             href="https://ko-fi.com/sanukhan"
             target="_blank"
             rel="noopener noreferrer"
+            title={isArabic ? "ادعمني بقهوة" : "Buy me a coffee"}
+            aria-label={isArabic ? "ادعمني بقهوة" : "Buy me a coffee"}
             className={cn(
-              "inline-flex h-9 items-center gap-1.5 rounded-lg border px-3 text-[13px] font-semibold transition-all duration-300 hover:scale-[1.02]",
+              "inline-flex h-9 w-9 items-center justify-center rounded-lg border transition-all duration-200 hover:scale-[1.06]",
               isLight
-                ? "border-[#1f9f45]/45 bg-[#1f9f45]/10 text-[#1f9f45] hover:border-[#1f9f45] hover:bg-[#1f9f45]/18"
-                : "border-[#38c755]/40 bg-[#38c755]/15 text-[#38c755] hover:border-[#38c755]/70 hover:bg-[#38c755]/20",
+                ? "border-[#1f9f45]/45 bg-[#1f9f45]/8 text-[#1f9f45] hover:border-[#1f9f45] hover:bg-[#1f9f45]/16"
+                : "border-[#38c755]/40 bg-[#38c755]/10 text-[#38c755] hover:border-[#38c755]/70 hover:bg-[#38c755]/18",
             )}
           >
-            <Coffee className="h-3.5 w-3.5" />
-            {isArabic ? "ادعمني بقهوة" : "Buy me a coffee"}
+            <CoffeeIconAnimated className="h-4 w-4" />
           </a>
+
+          {/* CTA */}
           <Button
             asChild
             className={cn(
-              "h-9 rounded-lg px-4 hover:scale-[1.02]",
+              "h-9 rounded-lg px-4 hover:scale-[1.02] gap-1",
               isLight
                 ? "bg-[#1f9f45] text-white hover:bg-[#2caf54]"
                 : "bg-accent text-on-accent hover:bg-[#4ade80]",
             )}
           >
             <a
-              href={nav.cta.href}
+              href={ctaHref}
               onClick={() => {
                 trackEvent("contact_click", { cta_type: "contact" });
                 trackEvent("cta_click", {
@@ -296,39 +403,9 @@ function Navbar() {
               }}
             >
               {nav.cta.label}
+              <ArrowUpRight className="h-3.5 w-3.5" />
             </a>
           </Button>
-
-          <div className="ml-1 inline-flex items-center rounded-lg border border-[#2b2f3b] bg-secondary-glass p-0.5">
-            <button
-              type="button"
-              onClick={() => setLocale("en")}
-              className={cn(
-                "rounded-md px-2 py-1 text-[11px] font-semibold transition-colors",
-                locale === "en"
-                  ? "bg-[#38c755] text-[#0f1015]"
-                  : isLight
-                    ? "text-[#4d5a66] hover:text-[#121722]"
-                    : "text-[#c9ced6] hover:text-[#38c755]",
-              )}
-            >
-              EN
-            </button>
-            <button
-              type="button"
-              onClick={() => setLocale("ar")}
-              className={cn(
-                "rounded-md px-2 py-1 text-[11px] font-semibold transition-colors",
-                locale === "ar"
-                  ? "bg-[#38c755] text-[#0f1015]"
-                  : isLight
-                    ? "text-[#4d5a66] hover:text-[#121722]"
-                    : "text-[#c9ced6] hover:text-[#38c755]",
-              )}
-            >
-              {ui.localeSwitch.ar}
-            </button>
-          </div>
         </div>
 
         <button
@@ -355,65 +432,65 @@ function Navbar() {
           )}
         >
           <div className="container-narrow flex flex-col gap-1 py-3">
-            <div className="mb-1 inline-flex w-fit items-center rounded-md border border-[#2b2f3b] bg-[#16171d] p-0.5">
+            {/* Mobile toolbar: locale + theme + coffee */}
+            <div className="mb-2 flex items-center gap-2">
               <button
                 type="button"
-                onClick={() => setLocale("en")}
+                onClick={() => setLocale(locale === "en" ? "ar" : "en")}
                 className={cn(
-                  "rounded-md px-2 py-1 text-[11px] font-semibold transition-colors",
-                  locale === "en"
-                    ? "bg-[#38c755] text-[#0f1015]"
-                    : isLight
-                      ? "text-[#4d5a66] hover:text-[#121722]"
-                      : "text-[#c9ced6] hover:text-[#38c755]",
+                  "inline-flex h-8 items-center gap-1.5 rounded-md border px-2.5 text-[11px] font-bold transition-colors",
+                  isLight
+                    ? "border-[#cfd8dd] bg-white text-[#1a232e]"
+                    : "border-[#2b2f3b] bg-[#16171d] text-[#f5f7fa]",
                 )}
               >
-                EN
+                <Globe className="h-3 w-3 opacity-60" />
+                {locale === "en" ? "ع" : "EN"}
               </button>
               <button
                 type="button"
-                onClick={() => setLocale("ar")}
+                onClick={toggleTheme}
                 className={cn(
-                  "rounded-md px-2 py-1 text-[11px] font-semibold transition-colors",
-                  locale === "ar"
-                    ? "bg-[#38c755] text-[#0f1015]"
-                    : isLight
-                      ? "text-[#4d5a66] hover:text-[#121722]"
-                      : "text-[#c9ced6] hover:text-[#38c755]",
+                  "inline-flex h-8 items-center gap-1.5 rounded-md border px-2.5 text-[11px] font-semibold transition-colors",
+                  isLight
+                    ? "border-[#cfd8dd] bg-white text-[#1a232e]"
+                    : "border-[#2b2f3b] bg-[#16171d] text-[#f5f7fa]",
                 )}
               >
-                {ui.localeSwitch.ar}
+                {isLight ? (
+                  <Moon className="h-3.5 w-3.5" />
+                ) : (
+                  <Sun className="h-3.5 w-3.5" />
+                )}
+                {isArabic
+                  ? isLight
+                    ? "داكن"
+                    : "فاتح"
+                  : isLight
+                    ? "Dark"
+                    : "Light"}
               </button>
+              <a
+                href="https://ko-fi.com/sanukhan"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setOpen(false)}
+                title={isArabic ? "ادعمني بقهوة" : "Buy me a coffee"}
+                className={cn(
+                  "inline-flex h-8 w-8 items-center justify-center rounded-md border transition-colors",
+                  isLight
+                    ? "border-[#1f9f45]/45 bg-[#1f9f45]/8 text-[#1f9f45]"
+                    : "border-[#38c755]/40 bg-[#38c755]/10 text-[#38c755]",
+                )}
+              >
+                <CoffeeIconAnimated className="h-4 w-4" />
+              </a>
             </div>
-
-            <button
-              type="button"
-              onClick={toggleTheme}
-              className={cn(
-                "mb-1 inline-flex items-center gap-2 rounded-md px-3 py-2 text-sm font-semibold transition-all",
-                isLight
-                  ? "border border-[#cfd8dd] bg-white text-[#1a232e]"
-                  : "border border-[#2b2f3b] bg-[#16171d] text-[#f5f7fa]",
-              )}
-            >
-              {isLight ? (
-                <Moon className="h-4 w-4" />
-              ) : (
-                <Sun className="h-4 w-4" />
-              )}
-              {isArabic
-                ? isLight
-                  ? "تبديل إلى الداكن"
-                  : "تبديل إلى الفاتح"
-                : isLight
-                  ? "Switch to dark"
-                  : "Switch to light"}
-            </button>
 
             {nav.links.map((l) => (
               <a
                 key={l.href}
-                href={l.href}
+                href={isHomePage ? l.href : `/${l.href}`}
                 onClick={() => setOpen(false)}
                 className={cn(
                   "rounded-md px-3 py-2 text-sm transition-all duration-300",
@@ -425,32 +502,29 @@ function Navbar() {
                 {l.label}
               </a>
             ))}
-            <a
-              href="https://ko-fi.com/sanukhan"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              to="/blog"
               onClick={() => setOpen(false)}
               className={cn(
-                "mt-1 inline-flex items-center gap-2 rounded-md border px-3 py-2 text-sm font-semibold transition-all",
+                "rounded-md px-3 py-2 text-sm transition-all duration-300",
                 isLight
-                  ? "border-[#1f9f45]/45 bg-[#1f9f45]/10 text-[#1f9f45] hover:bg-[#1f9f45]/18"
-                  : "border-[#38c755]/40 bg-[#38c755]/15 text-[#38c755] hover:bg-[#38c755]/22",
+                  ? "text-[#4d5a66] hover:bg-[#e8f0ec] hover:text-[#0f1015]"
+                  : "text-[#c9ced6] hover:bg-[#1e2028] hover:text-[#38c755]",
               )}
             >
-              <Coffee className="h-4 w-4" />
-              {isArabic ? "ادعمني بقهوة" : "Buy me a coffee"}
-            </a>
+              Blog
+            </Link>
             <Button
               asChild
               className={cn(
-                "mt-2 rounded-lg",
+                "mt-2 rounded-lg gap-1",
                 isLight
                   ? "bg-[#1f9f45] text-white hover:bg-[#2caf54]"
                   : "bg-accent text-on-accent hover:bg-[#4ade80]",
               )}
             >
               <a
-                href={nav.cta.href}
+                href={ctaHref}
                 onClick={() => {
                   setOpen(false);
                   trackEvent("contact_click", { cta_type: "contact" });
@@ -461,6 +535,7 @@ function Navbar() {
                 }}
               >
                 {nav.cta.label}
+                <ArrowUpRight className="h-3.5 w-3.5" />
               </a>
             </Button>
           </div>

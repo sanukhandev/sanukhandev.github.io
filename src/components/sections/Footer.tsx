@@ -33,15 +33,7 @@ export default function Footer() {
   const isArabic = locale === "ar";
 
   return (
-    <footer
-      id="contact"
-      className={cn(
-        "border-t",
-        isLight
-          ? "border-[#d4dde1] bg-[#edf4ef]/80"
-          : "border-default bg-secondary/60",
-      )}
-    >
+    <footer id="contact" className="border-t border-default bg-primary">
       <div className="container-narrow py-12">
         <div className="flex flex-col items-start justify-between gap-5 sm:flex-row sm:items-center">
           <div>

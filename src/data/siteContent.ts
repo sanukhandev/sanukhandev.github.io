@@ -62,47 +62,60 @@ const arArticleCategoryMap: Record<string, string> = {
 const arArticlesByIndex: Array<{ title: string; excerpt: string }> = [
   {
     title: "بوابة API: الحارس الذي تحتاجه خدماتك المصغرة",
-    excerpt: "كيف تعمل بوابة API كنقطة دخول موحدة للخدمات المصغرة، مع إدارة التوثيق والحد من الطلبات والتوجيه والرصد.",
+    excerpt:
+      "كيف تعمل بوابة API كنقطة دخول موحدة للخدمات المصغرة، مع إدارة التوثيق والحد من الطلبات والتوجيه والرصد.",
   },
   {
     title: "DuckDB: نسخة SQLite لعالم التحليلات",
-    excerpt: "قاعدة OLAP داخلية دون إعدادات مع أداء عمودي سريع ودعم CSV وParquet وJSON للتحليلات المحلية.",
+    excerpt:
+      "قاعدة OLAP داخلية دون إعدادات مع أداء عمودي سريع ودعم CSV وParquet وJSON للتحليلات المحلية.",
   },
   {
     title: "شرح JavaScript Proxy: أساليب قوية للتعامل الديناميكي مع الكائنات",
-    excerpt: "استخدام Proxy لاعتراض سلوك الكائنات للتحقق والتسجيل والتحكم بالوصول وفهم آليات Vue 3.",
+    excerpt:
+      "استخدام Proxy لاعتراض سلوك الكائنات للتحقق والتسجيل والتحكم بالوصول وفهم آليات Vue 3.",
   },
   {
-    title: "بناء Merge Sort مرن للكائنات المتداخلة والنصوص والأرقام في JavaScript",
-    excerpt: "تطوير mergeSortBy() غير متلف على Array.prototype يدعم القيم البسيطة ومفاتيح الكائنات والمقارنات المخصصة.",
+    title:
+      "بناء Merge Sort مرن للكائنات المتداخلة والنصوص والأرقام في JavaScript",
+    excerpt:
+      "تطوير mergeSortBy() غير متلف على Array.prototype يدعم القيم البسيطة ومفاتيح الكائنات والمقارنات المخصصة.",
   },
   {
     title: "لماذا Project Euler قد يكون أقوى مدرب DSA لا تستخدمه حتى الآن؟",
-    excerpt: "كيف تطورك ألغاز Project Euler الرياضية لتفكير خوارزمي أعمق وحلول أكثر كفاءة في المقابلات والعمل.",
+    excerpt:
+      "كيف تطورك ألغاز Project Euler الرياضية لتفكير خوارزمي أعمق وحلول أكثر كفاءة في المقابلات والعمل.",
   },
   {
     title: "كيف أنقذني Warp Terminal من كارثة Git بأمر واحد",
-    excerpt: "قصة عملية عندما تحول rebase إلى فوضى، وكيف قدم Warp خطوات آمنة للاستعادة خلال ثوانٍ.",
+    excerpt:
+      "قصة عملية عندما تحول rebase إلى فوضى، وكيف قدم Warp خطوات آمنة للاستعادة خلال ثوانٍ.",
   },
   {
     title: "دليل عملي لبناء منصة SaaS متكاملة وفعالة من حيث التكلفة",
-    excerpt: "عمارة عملية باستخدام Laravel وNext.js وMySQL وWordPress Headless لاستهداف التوسع والصيانة بتكلفة متوازنة.",
+    excerpt:
+      "عمارة عملية باستخدام Laravel وNext.js وMySQL وWordPress Headless لاستهداف التوسع والصيانة بتكلفة متوازنة.",
   },
   {
-    title: "فك لغز P vs NP: لماذا يؤثر على مستقبل الذكاء الاصطناعي والحوسبة الكمية",
-    excerpt: "استكشاف دور مسألة P vs NP في قلب أبحاث الذكاء الاصطناعي وكيف قد تفتح الحوسبة الكمية مسارات جديدة للحل.",
+    title:
+      "فك لغز P vs NP: لماذا يؤثر على مستقبل الذكاء الاصطناعي والحوسبة الكمية",
+    excerpt:
+      "استكشاف دور مسألة P vs NP في قلب أبحاث الذكاء الاصطناعي وكيف قد تفتح الحوسبة الكمية مسارات جديدة للحل.",
   },
   {
     title: "مسألة P vs NP: أعقد لغز رياضي في علوم الحاسب",
-    excerpt: "شرح مبسط لأشهر مسألة مفتوحة في علوم الحاسب ولماذا لا تزال جائزة المليون دولار بانتظار الحل.",
+    excerpt:
+      "شرح مبسط لأشهر مسألة مفتوحة في علوم الحاسب ولماذا لا تزال جائزة المليون دولار بانتظار الحل.",
   },
   {
     title: "دليل شامل لـ Big O وممارسات كتابة كود أكثر كفاءة",
-    excerpt: "شرح تعقيد الزمن والمساحة بأمثلة JavaScript عملية من O(1) إلى O(n²) ولماذا إتقانه مهم للإنتاج والمقابلات.",
+    excerpt:
+      "شرح تعقيد الزمن والمساحة بأمثلة JavaScript عملية من O(1) إلى O(n²) ولماذا إتقانه مهم للإنتاج والمقابلات.",
   },
   {
     title: "تقنية Sliding Window: خوارزمية قوية لمطوري JavaScript",
-    excerpt: "إتقان نمط Sliding Window للمصفوفات والسلاسل مع أمثلة عملية مثل أعظم مجموع جزئي ومعالجة تدفق البيانات.",
+    excerpt:
+      "إتقان نمط Sliding Window للمصفوفات والسلاسل مع أمثلة عملية مثل أعظم مجموع جزئي ومعالجة تدفق البيانات.",
   },
 ];
 
@@ -121,14 +134,16 @@ const arContent = {
   profile: {
     ...baseProfile,
     name: "سانو خان",
-    role: "قائد تقني • معماري سحابي ومعماري خدمات مصغرة",
+    role: "مؤسس منظومة Zaakiy",
+    subRole: "قائد تقني • معماري سحابي ومعماري MS • متخصص في تكاملات المؤسسات",
     subtitle:
       "أصمم أنظمة موزعة قابلة للتوسع، وتكاملات مؤسسية، ومنصات عالية الأداء لأسواق عالمية وإقليمية.",
     statement:
-      "أقود هندسة المنصات والعمارة التقنية لمنظومات تجارة قائمة على الأحداث وتكاملات مؤسساتية متعددة المناطق.",
+      "أقود هندسة المنصات والعمارة التقنية لمنظومات تجارة قائمة على الأحداث وتكاملات مؤسساتية متعددة المناطق. أنا مؤسس منظومة Zaakiy.",
     meta: [
       "+13 سنة في بناء الأنظمة الموزعة",
       "متخصص في العمارة المعتمدة على الأحداث",
+      "مؤسس منظومة Zaakiy",
       "تنفيذ على Azure و AWS و Kubernetes",
     ],
     impactMetrics: [
@@ -180,7 +195,7 @@ const arContent = {
           : item.location === "Remote / Global"
             ? "عن بُعد / عالمي"
             : item.location,
-        impact: arServiceImpactByIndex[index] ?? item.impact,
+    impact: arServiceImpactByIndex[index] ?? item.impact,
   })),
   works: [
     {
@@ -190,8 +205,7 @@ const arContent = {
         "تحديثات الأسعار والمخزون والكتالوج كانت مجزأة بين المناطق، مما سبب تأخيراً وعدم اتساق في حالة المنتجات.",
       solution:
         "تصميم مسارات قائمة على الأحداث باستخدام Kafka و Event Hubs وخدمات تكامل لمزامنة بيانات المنتجات والأسعار.",
-      outcome:
-        "تحقيق اتساق شبه لحظي عبر أسواق متعددة على نطاق يفوق 800K منتج.",
+      outcome: "تحقيق اتساق شبه لحظي عبر أسواق متعددة على نطاق يفوق 800K منتج.",
       scope: "تجارة متعددة المناطق",
     },
     {
@@ -254,7 +268,7 @@ const arContent = {
   footer: {
     ...baseFooter,
     brand: "سانوخان.ديف",
-    blurb: "قائد تقني • معماري سحابي",
+    blurb: "مؤسس منظومة Zaakiy • قائد تقني • معماري سحابي",
     socials: baseFooter.socials.map((s) =>
       s.label === "Buy me a coffee" ? { ...s, label: "ادعمني بقهوة" } : s,
     ),
@@ -276,7 +290,13 @@ const arContent = {
     hero: {
       leadershipBadge: "+13 سنة من القيادة الهندسية",
       innovationLines: ["نبني", "ابتكارات", "منذ 2011"],
-      floatingBadges: ["خدمات مصغرة", "الشرق الأوسط والعالم", "+13 سنة", "منذ 2011", "+100 عميل"],
+      floatingBadges: [
+        "خدمات مصغرة",
+        "الشرق الأوسط والعالم",
+        "+13 سنة",
+        "منذ 2011",
+        "+100 عميل",
+      ],
     },
     works: {
       eyebrow: "الأعمال",
@@ -327,12 +347,19 @@ const enContent = {
     hero: {
       leadershipBadge: "13+ Years of Engineering Leadership",
       innovationLines: ["Building", "Innovations", "since 2011"],
-      floatingBadges: ["Microservices", "MENA & Global", "13+ Yrs", "Since 2011", "100+ Clients"],
+      floatingBadges: [
+        "Microservices",
+        "MENA & Global",
+        "13+ Yrs",
+        "Since 2011",
+        "100+ Clients",
+      ],
     },
     works: {
       eyebrow: "Work",
       title: "Case Studies",
-      subtitle: "Impact-led delivery across distributed commerce and enterprise integration landscapes.",
+      subtitle:
+        "Impact-led delivery across distributed commerce and enterprise integration landscapes.",
       categoryLabels: {
         All: "All",
         Commerce: "Commerce",

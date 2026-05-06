@@ -32,7 +32,9 @@ export default function Certifications() {
                 {c.title}
               </h3>
               {c.issued && (
-                <p className="mt-1 text-xs text-secondary">{ui.certifications.issued} {c.issued}</p>
+                <p className="mt-1 text-xs text-secondary">
+                  {ui.certifications.issued} {c.issued}
+                </p>
               )}
               <a
                 href={c.url}

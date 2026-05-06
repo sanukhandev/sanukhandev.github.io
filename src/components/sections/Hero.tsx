@@ -1,4 +1,4 @@
-import { Suspense, lazy, memo, useMemo } from "react";
+import { memo, useMemo } from "react";
 import type { ComponentType } from "react";
 import {
   MapPin,
@@ -16,10 +16,9 @@ import {
 } from "lucide-react";
 import { useSiteContent } from "@/data/siteContent";
 import { useLocale } from "@/hooks/use-locale";
+import { useTheme } from "@/hooks/use-theme";
 import { Button } from "@/components/ui/button";
 import { trackEvent } from "@/utils/analytics";
-
-const TechParticles = lazy(() => import("@/components/TechParticles"));
 
 const metaIcons = [Briefcase, MapPin, CircleDot];
 
@@ -42,6 +41,8 @@ function Hero() {
   const { profile, ui } = useSiteContent();
   const { locale } = useLocale();
   const isArabic = locale === "ar";
+  const { theme } = useTheme();
+  const isLight = theme === "light";
   const webpAvatarUrl = profile.avatarUrl.endsWith(".avif")
     ? profile.avatarUrl.replace(/\.avif$/i, ".webp")
     : profile.avatarUrl;
@@ -56,7 +57,7 @@ function Hero() {
   );
 
   return (
-    <header id="home" className="relative overflow-hidden pt-16 sm:pt-20">
+    <header id="home" className="relative overflow-hidden pt-12 sm:pt-16">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 -z-10 opacity-60"
@@ -66,24 +67,166 @@ function Hero() {
         }}
       />
 
-      <Suspense fallback={null}>
-        <TechParticles count={24} />
-      </Suspense>
-
-      <div className="container-narrow grid items-center gap-6 pb-12 lg:grid-cols-[1.2fr_1fr]">
+      <div className="container-narrow grid items-center gap-5 pb-8 sm:pb-10 lg:grid-cols-[1.2fr_1fr]">
         <div className="animate-fade-up-stagger">
           <span className="mb-5 inline-flex items-center gap-2 rounded-full border border-default bg-secondary px-3 py-1 text-xs font-semibold text-accent">
             <span className="h-1.5 w-1.5 rounded-full bg-tea-green-400" />
             {ui.hero.leadershipBadge}
           </span>
 
-          <p className="text-[14px] font-semibold uppercase tracking-[0.08em] text-secondary">
+          <p className="text-[14px] font-semibold uppercase tracking-[0.08em] text-primary/90 opacity-80">
             {profile.role}
           </p>
-          <h1 className="mt-3 text-[42px] font-extrabold leading-[1.06] text-primary sm:text-[48px]">
-            {profile.name}
+
+          <h1 className="mt-3 leading-[1.06]">
+            <svg
+              viewBox={isArabic ? "0 0 300 42" : "0 0 220 48"}
+              height={isArabic ? 42 : 48}
+              className={
+                isArabic ? "w-[260px] sm:w-[300px]" : "w-[180px] sm:w-[220px]"
+              }
+              xmlns="http://www.w3.org/2000/svg"
+              aria-label={profile.name}
+              role="img"
+            >
+              <defs>
+                <linearGradient
+                  id="hero-logo-grad"
+                  x1="-100%"
+                  y1="0%"
+                  x2="200%"
+                  y2="0%"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop
+                    offset="0%"
+                    stopColor={isLight ? "#1f9f45" : "#38c755"}
+                  />
+                  <stop
+                    offset="35%"
+                    stopColor={isLight ? "#1f9f45" : "#38c755"}
+                  />
+                  <stop
+                    offset="50%"
+                    stopColor={isLight ? "#6ed18a" : "#b4ffca"}
+                  />
+                  <stop
+                    offset="65%"
+                    stopColor={isLight ? "#153625" : "#ffffff"}
+                  />
+                  <stop
+                    offset="80%"
+                    stopColor={isLight ? "#1f9f45" : "#38c755"}
+                  />
+                  <stop
+                    offset="100%"
+                    stopColor={isLight ? "#1f9f45" : "#38c755"}
+                  />
+                  <animateTransform
+                    attributeName="gradientTransform"
+                    type="translate"
+                    values={
+                      isArabic
+                        ? "-240 0; 240 0; -240 0"
+                        : "-220 0; 220 0; -220 0"
+                    }
+                    keyTimes="0; 0.5; 1"
+                    dur="4s"
+                    repeatCount="indefinite"
+                  />
+                </linearGradient>
+              </defs>
+              {isArabic ? (
+                <>
+                  <text
+                    x="210"
+                    y="30"
+                    fontFamily="Mirza, serif"
+                    fontSize="30"
+                    fontWeight="700"
+                    textAnchor="end"
+                    fill={isLight ? "#145a34" : "#bfffd3"}
+                    stroke={isLight ? "#f4f8f5" : "#0b0c10"}
+                    strokeWidth="0.85"
+                    paintOrder="stroke"
+                  >
+                    سانو خان
+                    <animate
+                      attributeName="fill"
+                      values={
+                        isLight
+                          ? "#145a34;#239f4a;#145a34"
+                          : "#bfffd3;#ffffff;#bfffd3"
+                      }
+                      dur="3.8s"
+                      repeatCount="indefinite"
+                    />
+                  </text>
+                  <text
+                    x="292"
+                    y="30"
+                    fontFamily="Mirza, serif"
+                    fontSize="22"
+                    fontWeight="500"
+                    textAnchor="end"
+                    fill={isLight ? "#1f9f45" : "#38c755"}
+                    opacity={isLight ? 0.95 : 0.9}
+                    stroke={isLight ? "#f4f8f5" : "#0b0c10"}
+                    strokeWidth="0.7"
+                    paintOrder="stroke"
+                  >
+                    .ديف
+                    <animate
+                      attributeName="opacity"
+                      values="0.85;1;0.85"
+                      dur="2.8s"
+                      repeatCount="indefinite"
+                    />
+                  </text>
+                </>
+              ) : (
+                <>
+                  <text
+                    x="0"
+                    y="36"
+                    fontFamily="Montserrat, ui-sans-serif, sans-serif"
+                    fontSize="32"
+                    fontWeight="800"
+                    letterSpacing="-0.5"
+                    fill="url(#hero-logo-grad)"
+                  >
+                    Sanu
+                  </text>
+                  <text
+                    x="82"
+                    y="36"
+                    fontFamily="Montserrat, ui-sans-serif, sans-serif"
+                    fontSize="32"
+                    fontWeight="600"
+                    letterSpacing="-0.5"
+                    fill="url(#hero-logo-grad)"
+                  >
+                    Khan
+                  </text>
+                  <text
+                    x="166"
+                    y="36"
+                    fontFamily="Montserrat, ui-sans-serif, sans-serif"
+                    fontSize="26"
+                    fontWeight="500"
+                    fill={isLight ? "#1f9f45" : "#38c755"}
+                    opacity={isLight ? 0.85 : 0.75}
+                  >
+                    .dev
+                  </text>
+                </>
+              )}
+            </svg>
           </h1>
 
+          <p className="mt-1 text-[14px] font-medium tracking-wide text-secondary opacity-80">
+            {profile.subRole}
+          </p>
           <p className="mt-4 max-w-2xl text-[16px] text-primary">
             {profile.subtitle}
           </p>
@@ -226,7 +369,7 @@ function Hero() {
                 src={profile.avatarUrl}
                 alt={`${profile.name} portrait`}
                 className="relative z-10 w-full object-contain"
-                fetchpriority="high"
+                fetchPriority="high"
                 decoding="async"
                 width={640}
                 height={640}
