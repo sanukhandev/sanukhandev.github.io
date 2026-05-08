@@ -18,10 +18,6 @@ declare global {
     };
     __gaInitialized?: boolean;
     __gaScriptRequested?: boolean;
-    requestIdleCallback?: (
-      callback: () => void,
-      opts?: { timeout: number },
-    ) => number;
   }
 }
 

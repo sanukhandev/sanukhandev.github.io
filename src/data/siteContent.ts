@@ -152,11 +152,7 @@ const arContent = {
       { value: "9", label: "أسواق مخدومة" },
       { value: "800K+", label: "أنظمة على نطاق منتج" },
     ],
-    ctas: [
-      { ...baseProfile.ctas[0], label: "عرض الأعمال" },
-      { ...baseProfile.ctas[1], label: "ملخص العمارة" },
-      { ...baseProfile.ctas[2], label: "وظفني" },
-    ],
+    ctas: [{ ...baseProfile.ctas[0], label: "وظفني" }],
   },
   skills: {
     ...baseSkills,

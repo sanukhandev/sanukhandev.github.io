@@ -82,88 +82,6 @@ function Hero() {
             {ui.hero.leadershipBadge}
           </span>
 
-          <motion.div
-            className="opacity-95"
-            initial={reducedMotion ? false : { opacity: 0, y: 14 }}
-            animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
-            transition={{ duration: 0.45, ease: "easeOut" }}
-          >
-            {/zaakiy/i.test(profile.role) ? (
-              <div className="flex flex-col items-start gap-2">
-                <motion.span
-                  className="inline-flex rounded-full bg-black px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-white shadow-[0_8px_18px_rgba(0,0,0,0.28)]"
-                  initial={reducedMotion ? false : { opacity: 0, y: 8 }}
-                  animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
-                  transition={{ duration: 0.35, ease: "easeOut" }}
-                >
-                  Creator of
-                </motion.span>
-
-                <motion.div
-                  className="relative overflow-hidden"
-                  initial={
-                    reducedMotion
-                      ? false
-                      : { opacity: 0, y: 18, clipPath: "inset(0 100% 0 0)" }
-                  }
-                  animate={
-                    reducedMotion
-                      ? undefined
-                      : { opacity: 1, y: 0, clipPath: "inset(0 0% 0 0)" }
-                  }
-                  transition={{
-                    duration: 0.9,
-                    delay: 0.12,
-                    ease: [0.16, 1, 0.3, 1],
-                  }}
-                >
-                  <motion.span
-                    aria-hidden
-                    className="pointer-events-none absolute inset-y-0 left-0 w-24"
-                    initial={reducedMotion ? false : { x: "-130%", opacity: 0 }}
-                    animate={
-                      reducedMotion
-                        ? undefined
-                        : { x: ["-130%", "280%"], opacity: [0, 0.5, 0] }
-                    }
-                    transition={{
-                      duration: 1.1,
-                      delay: 0.25,
-                      ease: "easeInOut",
-                    }}
-                    style={{
-                      background:
-                        "linear-gradient(90deg, transparent 0%, color-mix(in srgb, #ffffff 78%, transparent) 50%, transparent 100%)",
-                    }}
-                  />
-                  <motion.span
-                    className="relative inline-block text-[clamp(1.45rem,4vw,2.3rem)] font-normal uppercase leading-none text-accent"
-                    style={{
-                      fontFamily: "'Anta', sans-serif",
-                      textShadow:
-                        "0 0 18px color-mix(in srgb, var(--accent) 28%, transparent)",
-                    }}
-                    initial={
-                      reducedMotion
-                        ? false
-                        : { letterSpacing: "0.32em", filter: "blur(8px)" }
-                    }
-                    animate={
-                      reducedMotion
-                        ? undefined
-                        : { letterSpacing: "0.08em", filter: "blur(0px)" }
-                    }
-                    transition={{ duration: 0.7, delay: 0.18, ease: "easeOut" }}
-                  >
-                    {roleBrand}
-                  </motion.span>
-                </motion.div>
-              </div>
-            ) : (
-              <span className="text-primary/90">{profile.role}</span>
-            )}
-          </motion.div>
-
           <h1 className="mt-3 leading-[1.06]">
             <svg
               viewBox={isArabic ? "0 0 300 42" : "0 0 220 48"}
@@ -319,6 +237,88 @@ function Hero() {
           <p className="mt-2 max-w-2xl text-[15px] text-secondary">
             {profile.statement}
           </p>
+
+          <motion.div
+            className="mt-4 opacity-95"
+            initial={reducedMotion ? false : { opacity: 0, y: 14 }}
+            animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+            transition={{ duration: 0.45, ease: "easeOut" }}
+          >
+            {/zaakiy/i.test(profile.role) ? (
+              <div className="flex flex-col items-start gap-1.5">
+                <motion.span
+                  className="text-[11px] font-semibold uppercase tracking-[0.22em] text-black"
+                  initial={reducedMotion ? false : { opacity: 0, y: 8 }}
+                  animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+                  transition={{ duration: 0.35, ease: "easeOut" }}
+                >
+                  Creator of
+                </motion.span>
+
+                <motion.div
+                  className="relative overflow-hidden"
+                  initial={
+                    reducedMotion
+                      ? false
+                      : { opacity: 0, y: 18, clipPath: "inset(0 100% 0 0)" }
+                  }
+                  animate={
+                    reducedMotion
+                      ? undefined
+                      : { opacity: 1, y: 0, clipPath: "inset(0 0% 0 0)" }
+                  }
+                  transition={{
+                    duration: 0.9,
+                    delay: 0.12,
+                    ease: [0.16, 1, 0.3, 1],
+                  }}
+                >
+                  <motion.span
+                    aria-hidden
+                    className="pointer-events-none absolute inset-y-0 left-0 w-24"
+                    initial={reducedMotion ? false : { x: "-130%", opacity: 0 }}
+                    animate={
+                      reducedMotion
+                        ? undefined
+                        : { x: ["-130%", "280%"], opacity: [0, 0.5, 0] }
+                    }
+                    transition={{
+                      duration: 1.1,
+                      delay: 0.25,
+                      ease: "easeInOut",
+                    }}
+                    style={{
+                      background:
+                        "linear-gradient(90deg, transparent 0%, color-mix(in srgb, #ffffff 78%, transparent) 50%, transparent 100%)",
+                    }}
+                  />
+                  <motion.span
+                    className="relative inline-block text-[clamp(1.2rem,3vw,1.8rem)] font-normal uppercase leading-none text-accent"
+                    style={{
+                      fontFamily: "'Anta', sans-serif",
+                      textShadow:
+                        "0 0 18px color-mix(in srgb, var(--accent) 28%, transparent)",
+                    }}
+                    initial={
+                      reducedMotion
+                        ? false
+                        : { letterSpacing: "0.32em", filter: "blur(8px)" }
+                    }
+                    animate={
+                      reducedMotion
+                        ? undefined
+                        : { letterSpacing: "0.08em", filter: "blur(0px)" }
+                    }
+                    transition={{ duration: 0.7, delay: 0.18, ease: "easeOut" }}
+                  >
+                    {roleBrand}
+                  </motion.span>
+                </motion.div>
+              </div>
+            ) : (
+              <span className="text-primary/90">{profile.role}</span>
+            )}
+          </motion.div>
 
           <ul className="mt-6 space-y-2 text-sm text-secondary">
             {profile.meta.map((m, i) => {

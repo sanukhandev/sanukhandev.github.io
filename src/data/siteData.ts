@@ -6,7 +6,7 @@ export const nav = {
     { label: "Stack", href: "#stack" },
     { label: "Contact", href: "#contact" },
   ],
-  cta: { label: "Connect", href: "#contact" },
+  cta: { label: "Hire Me", href: "#contact" },
 };
 
 export const profile = {
@@ -31,12 +31,6 @@ export const profile = {
     { value: "800K+", label: "Product Scale Systems" },
   ],
   ctas: [
-    { label: "View Work", href: "#works", variant: "primary" as const },
-    {
-      label: "Architecture Highlights",
-      href: "#experience",
-      variant: "outline" as const,
-    },
     {
       label: "Hire Me",
       href: "mailto:khan.sanukhan@outlook.com?subject=Hire%20Inquiry%20–%20SanuKhan.dev",

@@ -85,6 +85,8 @@ export default function DevToBlogPage() {
     const blocks = document.querySelectorAll<HTMLElement>(
       ".devto-content .highlight.js-code-highlight",
     );
+    const createdButtons: HTMLButtonElement[] = [];
+
     blocks.forEach((block) => {
       // Remove Dev.to's fullscreen panel
       block.querySelector(".highlight__panel")?.remove();
@@ -111,7 +113,12 @@ export default function DevToBlogPage() {
           });
       });
       block.appendChild(btn);
+      createdButtons.push(btn);
     });
+
+    return () => {
+      createdButtons.forEach((button) => button.remove());
+    };
   }, [contentHtml]);
 
   const articleRef = useRef<HTMLElement>(null);
