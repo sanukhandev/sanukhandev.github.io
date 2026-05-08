@@ -309,7 +309,7 @@ function Navbar() {
                   : "text-[#c9ced6] hover:text-[#38c755]",
             )}
           >
-            Blog
+            WriteUps
             <span
               className={cn(
                 "absolute -bottom-1.5 left-0 h-[2px] bg-accent transition-all duration-300",
@@ -512,7 +512,7 @@ function Navbar() {
                   : "text-[#c9ced6] hover:bg-[#1e2028] hover:text-[#38c755]",
               )}
             >
-              Blog
+              WriteUps
             </Link>
             <Button
               asChild

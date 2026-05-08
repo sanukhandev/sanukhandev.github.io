@@ -513,11 +513,14 @@
   .devto-content .highlight pre {
     background: var(--bg-secondary);
     border: 1px solid var(--border);
-    border-radius: 10px;
+    border-radius: 14px;
     padding: 1rem 1.25rem;
     overflow-x: auto;
     margin: 1.2em 0;
     font-size: 13px;
+    box-shadow:
+      0 6px 18px color-mix(in srgb, var(--text-primary) 10%, transparent),
+      0 1px 3px color-mix(in srgb, var(--text-primary) 8%, transparent);
   }
   .devto-content .highlight pre {
     margin: 0;
@@ -578,10 +581,13 @@
   .devto-content li { margin-bottom: 0.35em; }
   .devto-content img {
     max-width: 100%;
-    border-radius: 10px;
+    border-radius: 14px;
     margin: 1.2em auto;
     display: block;
     border: 1px solid var(--border);
+    box-shadow:
+      0 6px 18px color-mix(in srgb, var(--text-primary) 10%, transparent),
+      0 1px 3px color-mix(in srgb, var(--text-primary) 8%, transparent);
   }
   .devto-content hr {
     border: none;
