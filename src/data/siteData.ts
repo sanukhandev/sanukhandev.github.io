@@ -11,7 +11,8 @@ export const nav = {
 
 export const profile = {
   name: "Sanu Khan",
-  role: "Creator of ZaaKiyV3RSE",
+  role: "Creator of Zaakiy V3RSE",
+  roleBrand: "Zaakiy V3RSE",
   subRole:
     "Tech Lead • Cloud & MS Architect • Enterprise Integrations Specialist",
   subtitle:

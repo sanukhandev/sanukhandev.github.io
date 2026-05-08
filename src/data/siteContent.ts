@@ -134,7 +134,8 @@ const arContent = {
   profile: {
     ...baseProfile,
     name: "سانو خان",
-    role: "مؤسس ZaaKiyV3RSE",
+    role: "مؤسس Zaakiy V3RSE",
+    roleBrand: "Zaakiy V3RSE",
     subRole: "قائد تقني • معماري سحابي ومعماري MS • متخصص في تكاملات المؤسسات",
     subtitle:
       "أصمم أنظمة موزعة قابلة للتوسع، وتكاملات مؤسسية، ومنصات عالية الأداء لأسواق عالمية وإقليمية.",
@@ -285,6 +286,7 @@ const arContent = {
     localeSwitch: { en: "English", ar: "العربية" },
     hero: {
       leadershipBadge: "+13 سنة من القيادة الهندسية",
+      creatorLabel: "مؤسس",
       innovationLines: ["نبني", "ابتكارات", "منذ 2011"],
       floatingBadges: [
         "خدمات مصغرة",
@@ -342,6 +344,7 @@ const enContent = {
     localeSwitch: { en: "English", ar: "Arabic" },
     hero: {
       leadershipBadge: "13+ Years of Engineering Leadership",
+      creatorLabel: "Creator of",
       innovationLines: ["Building", "Innovations", "since 2011"],
       floatingBadges: [
         "Microservices",

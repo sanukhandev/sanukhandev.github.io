@@ -59,10 +59,17 @@ function Hero() {
     [ui.hero.floatingBadges],
   );
 
-  const roleBrand = useMemo(
-    () => profile.role.replace(/^creator of\s*/i, "").trim(),
-    [profile.role],
-  );
+  const roleBrand = useMemo(() => {
+    const profileWithRoleBrand = profile as typeof profile & { roleBrand?: string };
+    if (profileWithRoleBrand.roleBrand) {
+      return profileWithRoleBrand.roleBrand;
+    }
+
+    return profile.role
+      .replace(/^creator of\s*/i, "")
+      .replace(/^مؤسس\s*/i, "")
+      .trim();
+  }, [profile]);
 
   return (
     <header id="home" className="relative overflow-hidden pt-20 sm:pt-24">
@@ -252,7 +259,7 @@ function Hero() {
                   animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
                   transition={{ duration: 0.35, ease: "easeOut" }}
                 >
-                  Creator of
+                  {ui.hero.creatorLabel}
                 </motion.span>
 
                 <motion.div

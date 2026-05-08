@@ -201,7 +201,7 @@ export default function BlogIndex() {
                 <Link
                   key={post.href}
                   to={post.href}
-                  className="group relative flex flex-col overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--bg-secondary)] p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-[var(--accent)]/40 hover:shadow-[0_0_0_1px_var(--accent)]/10,0_8px_24px_color-mix(in_srgb,var(--accent)_6%,transparent)]"
+                  className="group relative flex flex-col overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--bg-secondary)] p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-[var(--accent)]/40 hover:shadow-[0_0_0_1px_color-mix(in_srgb,var(--accent)_10%,transparent),0_8px_24px_color-mix(in_srgb,var(--accent)_6%,transparent)]"
                 >
                   {/* accent top bar on hover */}
                   <span className="pointer-events-none absolute inset-x-0 top-0 h-[2px] rounded-t-2xl bg-[var(--accent)] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
@@ -236,6 +236,7 @@ export default function BlogIndex() {
                           {
                             year: "numeric",
                             month: "short",
+                            day: "numeric",
                           },
                         )}
                       </span>
