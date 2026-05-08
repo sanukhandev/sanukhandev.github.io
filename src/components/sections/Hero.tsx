@@ -247,7 +247,7 @@ function Hero() {
             {/zaakiy/i.test(profile.role) ? (
               <div className="flex flex-col items-start gap-1.5">
                 <motion.span
-                  className="text-[11px] font-semibold uppercase tracking-[0.22em] text-black"
+                  className={`text-[11px] font-semibold uppercase tracking-[0.22em] ${isLight ? "text-black" : "text-white/90"}`}
                   initial={reducedMotion ? false : { opacity: 0, y: 8 }}
                   animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
                   transition={{ duration: 0.35, ease: "easeOut" }}
@@ -386,7 +386,7 @@ function Hero() {
             <Button
               asChild
               variant="outline"
-              className="h-10 rounded-lg border-accent/35 bg-accent/8 px-4 text-accent hover:scale-[1.02] hover:bg-accent/12"
+              className="h-10 rounded-lg border-accent/35 bg-accent/8 px-4 text-accent hover:scale-[1.02] hover:bg-accent/12 hover:text-accent focus-visible:text-accent"
             >
               <a
                 href="https://ko-fi.com/sanukhan"
