@@ -74,8 +74,53 @@ function Hero() {
             {ui.hero.leadershipBadge}
           </span>
 
-          <p className="text-[14px] font-semibold uppercase tracking-[0.08em] text-primary/90 opacity-80">
-            {profile.role}
+          <p className="text-[14px] font-semibold uppercase tracking-[0.08em] opacity-80">
+            {profile.role.includes("Zaakiy V3RSE") ? (
+              <span className="inline-flex items-center gap-2">
+                <span className="text-primary/90">
+                  {profile.role.replace("Zaakiy V3RSE", "")}
+                </span>
+                <span className="inline-flex items-center gap-1.5 text-accent">
+                  <svg
+                    width="34"
+                    height="24"
+                    viewBox="0 0 34 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                  >
+                    <rect
+                      x="0.5"
+                      y="0.5"
+                      width="33"
+                      height="23"
+                      rx="5"
+                      fill="currentColor"
+                      fillOpacity="0.12"
+                      stroke="currentColor"
+                      strokeOpacity="0.4"
+                      strokeWidth="1"
+                    />
+                    <text
+                      x="17"
+                      y="17"
+                      textAnchor="middle"
+                      fontFamily="'Anta', sans-serif"
+                      fontWeight="700"
+                      fontSize="11"
+                      fill="currentColor"
+                    >
+                      Zv3
+                    </text>
+                  </svg>
+                  <span style={{ fontFamily: "'Anta', sans-serif" }}>
+                    Zaakiy V3RSE
+                  </span>
+                </span>
+              </span>
+            ) : (
+              <span className="text-primary/90">{profile.role}</span>
+            )}
           </p>
 
           <h1 className="mt-3 leading-[1.06]">
