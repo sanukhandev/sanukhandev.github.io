@@ -1,5 +1,6 @@
 import { Link, useParams } from "react-router-dom";
 import { useEffect, useMemo, useRef, useState } from "react";
+import DOMPurify from "dompurify";
 import {
   ArrowLeft,
   BookOpen,
@@ -77,7 +78,13 @@ export default function DevToBlogPage() {
       return { toc: [], contentHtml: "" };
     }
 
-    return buildTocAndHtml(article.body_html);
+    const { toc: builtToc, contentHtml: rawHtml } = buildTocAndHtml(
+      article.body_html,
+    );
+    const sanitizedHtml = DOMPurify.sanitize(rawHtml, {
+      USE_PROFILES: { html: true },
+    });
+    return { toc: builtToc, contentHtml: sanitizedHtml };
   }, [article]);
 
   useEffect(() => {
