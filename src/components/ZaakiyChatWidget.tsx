@@ -222,10 +222,18 @@ export default function ZaakiyChatWidget({
         <div className="mb-3 w-[calc(100vw-1.5rem)] max-w-[340px] overflow-hidden rounded-2xl border border-default bg-secondary/95 shadow-[0_16px_40px_-20px_rgba(0,0,0,0.75)] backdrop-blur-xl">
           <div className="flex items-center justify-between border-b border-default px-4 py-3">
             <div>
-              <h3 className="text-[15px] font-semibold text-primary">
+              <h3
+                className="text-[15px] font-semibold text-primary"
+                style={{ fontFamily: "'Anta', sans-serif" }}
+              >
                 Zaakiy AI
               </h3>
-              <p className="text-[11px] text-secondary">Powered by Zaakiy AI</p>
+              <p className="text-[11px] text-secondary">
+                Powered by{" "}
+                <span style={{ fontFamily: "'Anta', sans-serif" }}>
+                  Zaakiy AI
+                </span>
+              </p>
             </div>
             <button
               type="button"
@@ -307,7 +315,7 @@ export default function ZaakiyChatWidget({
         aria-label="Toggle Zaakiy AI chat"
       >
         <MessageCircle className="h-4 w-4" />
-        Zaakiy AI
+        <span style={{ fontFamily: "'Anta', sans-serif" }}>Zaakiy AI</span>
       </button>
     </div>
   );

@@ -7,7 +7,6 @@ import {
   Calendar,
   ExternalLink,
   Hash,
-  Tag,
 } from "lucide-react";
 import SeoMeta from "@/components/SeoMeta";
 import Navbar from "@/components/Navbar";
@@ -42,13 +41,7 @@ function buildTocAndHtml(html: string): {
       // Dev.to puts the anchor as <a name="..."> child inside the heading
       const nameMatch = rawText.match(/<a[^>]+\bname="([^"]+)"/i);
       const rawClean = rawText.replace(/<[^>]+>/g, "").trim();
-      // Strip emojis and trim
-      const cleanText = rawClean
-        .replace(
-          /[\u{1F000}-\u{1FFFF}\u{2600}-\u{27FF}\u{FE00}-\u{FEFF}\u{1F900}-\u{1F9FF}]/gu,
-          "",
-        )
-        .trim();
+      const cleanText = rawClean;
       const base =
         idMatch?.[1] ||
         nameMatch?.[1] ||
@@ -99,6 +92,8 @@ export default function DevToBlogPage() {
     const blocks = document.querySelectorAll<HTMLElement>(
       ".devto-content .highlight.js-code-highlight",
     );
+    const createdButtons: HTMLButtonElement[] = [];
+
     blocks.forEach((block) => {
       // Remove Dev.to's fullscreen panel
       block.querySelector(".highlight__panel")?.remove();
@@ -125,7 +120,12 @@ export default function DevToBlogPage() {
           });
       });
       block.appendChild(btn);
+      createdButtons.push(btn);
     });
+
+    return () => {
+      createdButtons.forEach((button) => button.remove());
+    };
   }, [contentHtml]);
 
   const articleRef = useRef<HTMLElement>(null);
@@ -404,35 +404,40 @@ export default function DevToBlogPage() {
               <ArrowLeft className="h-3.5 w-3.5" /> All Posts
             </Link>
 
-            <p className="mt-4 text-[11px] font-semibold uppercase tracking-widest text-[var(--accent)]">
-              Engineering Blog
+            <p className="mt-4 text-[11px] font-semibold uppercase tracking-widest text-[var(--accent)] opacity-80">
+              Tech Writing
             </p>
-            <h1 className="mt-2 text-[clamp(1.6rem,3.3vw,2.4rem)] font-extrabold leading-[1.15]">
+            <h1 className="mt-2 text-[clamp(1.8rem,3.5vw,2.6rem)] font-extrabold leading-[1.12] tracking-tight">
               {article.title}
             </h1>
             <p className="mt-3 text-[15px] leading-7 text-[var(--text-secondary)]">
               {article.description}
             </p>
 
-            <div className="mt-4 flex flex-wrap items-center gap-4 text-[12px] text-[var(--text-secondary)]">
+            {/* Clean meta row: Published · read time · author — inspired by reference design */}
+            <div className="mt-5 flex flex-wrap items-center gap-x-2 gap-y-1 text-[13px] text-[var(--text-secondary)]">
               {published && (
                 <span className="inline-flex items-center gap-1.5">
-                  <Calendar className="h-3.5 w-3.5" /> {published}
+                  <Calendar className="h-3.5 w-3.5 text-[var(--accent)]" />
+                  {published}
                 </span>
               )}
-              {article.tags.length > 0 && (
-                <span className="inline-flex items-center gap-1.5">
-                  <Tag className="h-3.5 w-3.5" />{" "}
-                  {article.tags.slice(0, 3).join(", ")}
-                </span>
-              )}
+              {published && <span className="opacity-30">&middot;</span>}
+              <span className="inline-flex items-center gap-1.5">
+                <BookOpen className="h-3.5 w-3.5 text-[var(--accent)]" />
+                {readingMinutes} min read
+              </span>
+              <span className="opacity-30">&middot;</span>
+              <span className="font-semibold text-[var(--text-primary)]">
+                Sanu Khan
+              </span>
               <a
                 href={article.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="ml-auto inline-flex items-center gap-1.5 text-[var(--accent)] hover:underline"
+                className="ml-auto inline-flex items-center gap-1 text-[12px] text-[var(--accent)] opacity-70 hover:opacity-100 hover:underline"
               >
-                <ExternalLink className="h-3.5 w-3.5" /> Dev.to
+                <ExternalLink className="h-3 w-3" /> Dev.to
               </a>
             </div>
 
@@ -440,12 +445,12 @@ export default function DevToBlogPage() {
               <img
                 src={article.coverImage}
                 alt={article.title}
-                className="mt-5 w-full rounded-2xl border border-[var(--border)] object-cover"
+                className="mt-6 w-full rounded-2xl border border-[var(--border)] object-cover"
               />
             )}
 
             {article.tags.length > 0 && (
-              <div className="mt-4 flex flex-wrap gap-1.5 xl:hidden">
+              <div className="mt-4 flex flex-wrap gap-1.5">
                 {article.tags.map((tag) => (
                   <span
                     key={tag}
@@ -460,7 +465,6 @@ export default function DevToBlogPage() {
             {contentHtml ? (
               <div
                 className="devto-content mt-7"
-                // eslint-disable-next-line react/no-danger
                 dangerouslySetInnerHTML={{ __html: contentHtml }}
               />
             ) : (
@@ -496,6 +500,61 @@ export default function DevToBlogPage() {
                 <ArrowLeft className="h-4 w-4" /> Back to Blog Index
               </Link>
             </div>
+
+            {/* KEEP READING — shown inline below article on all viewports */}
+            {recentPosts.length > 0 && (
+              <div className="mt-14 border-t border-[var(--border)] pt-8">
+                <p className="mb-6 text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--text-secondary)]">
+                  Keep Reading
+                </p>
+                <div className="grid gap-4 sm:grid-cols-2">
+                  {recentPosts.slice(0, 4).map((post) => (
+                    <Link
+                      key={post.id}
+                      to={post.localPath}
+                      className="group flex gap-3 rounded-xl border border-[var(--border)] bg-[var(--bg-secondary)] p-3.5 transition-colors hover:border-[var(--accent)]/40 hover:bg-[var(--bg-primary)]"
+                    >
+                      {post.coverImage ? (
+                        <img
+                          src={post.coverImage}
+                          alt=""
+                          className="mt-0.5 h-14 w-20 shrink-0 rounded-lg object-cover"
+                        />
+                      ) : (
+                        <div className="mt-0.5 flex h-14 w-20 shrink-0 items-center justify-center rounded-lg bg-[var(--bg-primary)]">
+                          <BookOpen className="h-5 w-5 text-[var(--text-secondary)]" />
+                        </div>
+                      )}
+                      <div className="min-w-0">
+                        <p className="line-clamp-2 text-[13px] font-semibold leading-snug text-[var(--text-primary)] group-hover:text-[var(--accent)]">
+                          {post.title}
+                        </p>
+                        {post.publishedAt && (
+                          <p className="mt-1 text-[11px] text-[var(--text-secondary)]">
+                            {new Date(post.publishedAt).toLocaleDateString(
+                              undefined,
+                              {
+                                month: "short",
+                                day: "numeric",
+                                year: "numeric",
+                              },
+                            )}
+                          </p>
+                        )}
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+                <div className="mt-5 text-center">
+                  <Link
+                    to="/blog"
+                    className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-[var(--accent)] hover:underline"
+                  >
+                    View all posts <ExternalLink className="h-3.5 w-3.5" />
+                  </Link>
+                </div>
+              </div>
+            )}
           </article>
 
           <aside className="hidden xl:block">
@@ -531,57 +590,39 @@ export default function DevToBlogPage() {
               </div>
 
               {recentPosts.length > 0 && (
-                <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-secondary)]">
-                  <div className="border-b border-[var(--border)] px-4 py-3">
-                    <p className="text-[11px] font-semibold uppercase tracking-widest text-[var(--text-secondary)]">
-                      More Posts
-                    </p>
-                  </div>
-                  <ul className="divide-y divide-[var(--border)]">
-                    {recentPosts.map((post) => (
+                <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-secondary)] px-4 py-4">
+                  <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--text-secondary)]">
+                    More to Read
+                  </p>
+                  <ul className="space-y-3">
+                    {recentPosts.slice(0, 5).map((post) => (
                       <li key={post.id}>
-                        <Link
-                          to={post.localPath}
-                          className="group flex items-start gap-3 px-4 py-3 hover:bg-[var(--bg-primary)]"
-                        >
-                          {post.coverImage ? (
-                            <img
-                              src={post.coverImage}
-                              alt=""
-                              className="mt-0.5 h-12 w-16 shrink-0 rounded-lg object-cover"
-                            />
-                          ) : (
-                            <div className="mt-0.5 flex h-12 w-16 shrink-0 items-center justify-center rounded-lg bg-[var(--bg-primary)]">
-                              <BookOpen className="h-5 w-5 text-[var(--text-secondary)]" />
-                            </div>
-                          )}
-                          <div className="min-w-0">
-                            <p className="line-clamp-2 text-[12px] font-semibold leading-snug text-[var(--text-primary)] group-hover:text-[var(--accent)]">
-                              {post.title}
+                        <Link to={post.localPath} className="group block">
+                          <p className="line-clamp-2 text-[12px] font-semibold leading-snug text-[var(--text-primary)] group-hover:text-[var(--accent)]">
+                            {post.title}
+                          </p>
+                          {post.publishedAt && (
+                            <p className="mt-0.5 text-[10px] text-[var(--text-secondary)]">
+                              {new Date(post.publishedAt).toLocaleDateString(
+                                undefined,
+                                {
+                                  month: "short",
+                                  day: "numeric",
+                                  year: "numeric",
+                                },
+                              )}
                             </p>
-                            {post.publishedAt && (
-                              <p className="mt-0.5 text-[10px] text-[var(--text-secondary)]">
-                                {new Date(post.publishedAt).toLocaleDateString(
-                                  undefined,
-                                  {
-                                    month: "short",
-                                    day: "numeric",
-                                    year: "numeric",
-                                  },
-                                )}
-                              </p>
-                            )}
-                          </div>
+                          )}
                         </Link>
                       </li>
                     ))}
                   </ul>
-                  <div className="border-t border-[var(--border)] px-4 py-2.5">
+                  <div className="mt-4 border-t border-[var(--border)] pt-3">
                     <Link
                       to="/blog"
                       className="text-[11px] font-semibold text-[var(--accent)] hover:underline"
                     >
-                      View all posts {"->"}
+                      View all posts →
                     </Link>
                   </div>
                 </div>

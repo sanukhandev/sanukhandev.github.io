@@ -5,25 +5,24 @@ type GtagConfig = {
   [key: string]: unknown;
 };
 
+type AnalyticsParamValue = string | number | boolean | null | undefined;
+type AnalyticsParams = Record<string, AnalyticsParamValue>;
+
 declare global {
   interface Window {
     dataLayer: unknown[];
     gtag?: {
       (command: "js", date: Date): void;
       (command: "config", measurementId: string, config?: GtagConfig): void;
-      (command: "event", eventName: string, params?: Record<string, any>): void;
+      (command: "event", eventName: string, params?: AnalyticsParams): void;
     };
     __gaInitialized?: boolean;
     __gaScriptRequested?: boolean;
-    requestIdleCallback?: (
-      callback: () => void,
-      opts?: { timeout: number },
-    ) => number;
   }
 }
 
 type GtagCommand =
-  | ["event", string, Record<string, any>]
+  | ["event", string, AnalyticsParams]
   | ["config", string, GtagConfig]
   | ["js", Date];
 
@@ -129,7 +128,7 @@ export function trackPageView(url: string) {
   });
 }
 
-export function trackEvent(name: string, params: Record<string, any> = {}) {
+export function trackEvent(name: string, params: AnalyticsParams = {}) {
   if (!name || !GA_ID || typeof window === "undefined") {
     return;
   }

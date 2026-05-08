@@ -1,5 +1,5 @@
 import type { CSSProperties } from "react";
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo } from "react";
 import {
   motion,
   useMotionValue,
@@ -34,6 +34,7 @@ import {
   Wind,
   Zap,
 } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 // Lucide icon names that map to recognisable tech concepts
 const ICON_NAMES = [
@@ -138,6 +139,7 @@ export default function TechParticles({
   fullPage = false,
 }: TechParticlesProps) {
   const shouldReduceMotion = useReducedMotion();
+  const isMobile = useIsMobile();
   const parallaxX = useMotionValue(0);
   const parallaxY = useMotionValue(0);
   const smoothX = useSpring(parallaxX, {
@@ -152,7 +154,7 @@ export default function TechParticles({
   });
 
   useEffect(() => {
-    if (shouldReduceMotion) {
+    if (shouldReduceMotion || isMobile) {
       return;
     }
 
@@ -175,13 +177,12 @@ export default function TechParticles({
       window.removeEventListener("mousemove", onMove);
       window.removeEventListener("mouseleave", onLeave);
     };
-  }, [parallaxX, parallaxY, shouldReduceMotion]);
+  }, [isMobile, parallaxX, parallaxY, shouldReduceMotion]);
 
-  const particlesRef = useRef<Particle[]>();
-  if (!particlesRef.current) {
-    particlesRef.current = generateParticles(count);
-  }
-  const particles = particlesRef.current;
+  const particles = useMemo(
+    () => generateParticles(isMobile ? Math.min(count, 10) : count),
+    [count, isMobile],
+  );
 
   return (
     <div
@@ -219,12 +220,12 @@ export default function TechParticles({
               key={p.id}
               className="absolute"
               initial={
-                shouldReduceMotion
+                shouldReduceMotion || isMobile
                   ? { opacity: p.opacity }
                   : { opacity: 0, y: 8, scale: 0.8 }
               }
               animate={
-                shouldReduceMotion
+                shouldReduceMotion || isMobile
                   ? { opacity: p.opacity }
                   : {
                       y: [0, -p.float, 0],

@@ -111,7 +111,7 @@ const Index = () => {
         </main>
         <Suspense fallback={null}>
           <Footer />
-          <ZaakiyChatWidget extraContext="Page: Sanu Khan portfolio homepage.\nZaakiy Ecosystem: A suite of AI-driven platforms built by Sanu Khan.\n- Zaakiy AI: Multilingual AI chat support platform (10K+ conversations, English & Arabic).\n- Zaakiy CRM: CRM solution for SMEs, content creators, and social media influencers.\n- Zaakiy ERP: ERP solutions including a real estate platform.\n- Zaakiy GO: Food delivery app in Dubai.\nSanu is the founder and Solution Architect behind this ecosystem." />
+          <ZaakiyChatWidget extraContext="Page: Sanu Khan portfolio homepage.\nZaakiy V3RSE: A suite of AI-driven platforms built by Sanu Khan.\n- Zaakiy AI: Multilingual AI chat support platform (10K+ conversations, English & Arabic).\n- Zaakiy CRM: CRM solution for SMEs, content creators, and social media influencers.\n- Zaakiy ERP: ERP solutions including a real estate platform.\n- Zaakiy GO: Food delivery app in Dubai.\nSanu is the founder and Solution Architect behind Zaakiy V3RSE." />
         </Suspense>
       </div>
     </div>

@@ -6,22 +6,23 @@ export const nav = {
     { label: "Stack", href: "#stack" },
     { label: "Contact", href: "#contact" },
   ],
-  cta: { label: "Connect", href: "#contact" },
+  cta: { label: "Hire Me", href: "#contact" },
 };
 
 export const profile = {
   name: "Sanu Khan",
-  role: "Creator of Zaakiy Ecosystem",
+  role: "Creator of Zaakiy V3RSE",
+  roleBrand: "Zaakiy V3RSE",
   subRole:
     "Tech Lead • Cloud & MS Architect • Enterprise Integrations Specialist",
   subtitle:
     "Designing scalable distributed systems, enterprise integrations, and high-performance platforms across global markets.",
   statement:
-    "Leading architecture and platform engineering for event-driven commerce, enterprise integration, and multi-region cloud delivery. Creator of Zaakiy Ecosystem.",
+    "Leading architecture and platform engineering for event-driven commerce, enterprise integration, and multi-region cloud delivery. Creator of Zaakiy V3RSE.",
   meta: [
     "13+ years building distributed systems",
     "Event-driven architecture specialist",
-    "Creator of Zaakiy Ecosystem",
+    "Creator of Zaakiy V3RSE",
     "Azure • AWS • Kubernetes delivery",
   ],
   impactMetrics: [
@@ -31,12 +32,6 @@ export const profile = {
     { value: "800K+", label: "Product Scale Systems" },
   ],
   ctas: [
-    { label: "View Work", href: "#works", variant: "primary" as const },
-    {
-      label: "Architecture Highlights",
-      href: "#experience",
-      variant: "outline" as const,
-    },
     {
       label: "Hire Me",
       href: "mailto:khan.sanukhan@outlook.com?subject=Hire%20Inquiry%20–%20SanuKhan.dev",

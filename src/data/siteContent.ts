@@ -134,16 +134,17 @@ const arContent = {
   profile: {
     ...baseProfile,
     name: "سانو خان",
-    role: "مؤسس منظومة Zaakiy",
+    role: "مؤسس Zaakiy V3RSE",
+    roleBrand: "Zaakiy V3RSE",
     subRole: "قائد تقني • معماري سحابي ومعماري MS • متخصص في تكاملات المؤسسات",
     subtitle:
       "أصمم أنظمة موزعة قابلة للتوسع، وتكاملات مؤسسية، ومنصات عالية الأداء لأسواق عالمية وإقليمية.",
     statement:
-      "أقود هندسة المنصات والعمارة التقنية لمنظومات تجارة قائمة على الأحداث وتكاملات مؤسساتية متعددة المناطق. أنا مؤسس منظومة Zaakiy.",
+      "أقود هندسة المنصات والعمارة التقنية لمنظومات تجارة قائمة على الأحداث وتكاملات مؤسساتية متعددة المناطق. أنا مؤسس Zaakiy V3RSE.",
     meta: [
       "+13 سنة في بناء الأنظمة الموزعة",
       "متخصص في العمارة المعتمدة على الأحداث",
-      "مؤسس منظومة Zaakiy",
+      "مؤسس Zaakiy V3RSE",
       "تنفيذ على Azure و AWS و Kubernetes",
     ],
     impactMetrics: [
@@ -152,11 +153,7 @@ const arContent = {
       { value: "9", label: "أسواق مخدومة" },
       { value: "800K+", label: "أنظمة على نطاق منتج" },
     ],
-    ctas: [
-      { ...baseProfile.ctas[0], label: "عرض الأعمال" },
-      { ...baseProfile.ctas[1], label: "ملخص العمارة" },
-      { ...baseProfile.ctas[2], label: "وظفني" },
-    ],
+    ctas: [{ ...baseProfile.ctas[0], label: "وظفني" }],
   },
   skills: {
     ...baseSkills,
@@ -268,7 +265,7 @@ const arContent = {
   footer: {
     ...baseFooter,
     brand: "سانوخان.ديف",
-    blurb: "مؤسس منظومة Zaakiy • قائد تقني • معماري سحابي",
+    blurb: "مؤسس Zaakiy V3RSE • قائد تقني • معماري سحابي",
     socials: baseFooter.socials.map((s) =>
       s.label === "Buy me a coffee" ? { ...s, label: "ادعمني بقهوة" } : s,
     ),
@@ -289,6 +286,7 @@ const arContent = {
     localeSwitch: { en: "English", ar: "العربية" },
     hero: {
       leadershipBadge: "+13 سنة من القيادة الهندسية",
+      creatorLabel: "مؤسس",
       innovationLines: ["نبني", "ابتكارات", "منذ 2011"],
       floatingBadges: [
         "خدمات مصغرة",
@@ -346,6 +344,7 @@ const enContent = {
     localeSwitch: { en: "English", ar: "Arabic" },
     hero: {
       leadershipBadge: "13+ Years of Engineering Leadership",
+      creatorLabel: "Creator of",
       innovationLines: ["Building", "Innovations", "since 2011"],
       floatingBadges: [
         "Microservices",

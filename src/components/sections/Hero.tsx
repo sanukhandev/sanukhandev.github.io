@@ -1,10 +1,10 @@
 import { memo, useMemo } from "react";
 import type { ComponentType } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import {
   MapPin,
   Briefcase,
   CircleDot,
-  Download,
   Clock,
   Award,
   Globe2,
@@ -13,7 +13,9 @@ import {
   Rocket,
   TrendingUp,
   Users,
+  ArrowUpRight,
 } from "lucide-react";
+import CoffeeIconAnimated from "@/components/CoffeeIconAnimated";
 import { useSiteContent } from "@/data/siteContent";
 import { useLocale } from "@/hooks/use-locale";
 import { useTheme } from "@/hooks/use-theme";
@@ -42,6 +44,7 @@ function Hero() {
   const { locale } = useLocale();
   const isArabic = locale === "ar";
   const { theme } = useTheme();
+  const reducedMotion = useReducedMotion();
   const isLight = theme === "light";
   const webpAvatarUrl = profile.avatarUrl.endsWith(".avif")
     ? profile.avatarUrl.replace(/\.avif$/i, ".webp")
@@ -56,8 +59,20 @@ function Hero() {
     [ui.hero.floatingBadges],
   );
 
+  const roleBrand = useMemo(() => {
+    const profileWithRoleBrand = profile as typeof profile & { roleBrand?: string };
+    if (profileWithRoleBrand.roleBrand) {
+      return profileWithRoleBrand.roleBrand;
+    }
+
+    return profile.role
+      .replace(/^creator of\s*/i, "")
+      .replace(/^مؤسس\s*/i, "")
+      .trim();
+  }, [profile]);
+
   return (
-    <header id="home" className="relative overflow-hidden pt-12 sm:pt-16">
+    <header id="home" className="relative overflow-hidden pt-20 sm:pt-24">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 -z-10 opacity-60"
@@ -73,10 +88,6 @@ function Hero() {
             <span className="h-1.5 w-1.5 rounded-full bg-tea-green-400" />
             {ui.hero.leadershipBadge}
           </span>
-
-          <p className="text-[14px] font-semibold uppercase tracking-[0.08em] text-primary/90 opacity-80">
-            {profile.role}
-          </p>
 
           <h1 className="mt-3 leading-[1.06]">
             <svg
@@ -234,6 +245,88 @@ function Hero() {
             {profile.statement}
           </p>
 
+          <motion.div
+            className="mt-4 opacity-95"
+            initial={reducedMotion ? false : { opacity: 0, y: 14 }}
+            animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+            transition={{ duration: 0.45, ease: "easeOut" }}
+          >
+            {/zaakiy/i.test(profile.role) ? (
+              <div className="flex flex-col items-start gap-1.5">
+                <motion.span
+                  className={`text-[11px] font-semibold uppercase tracking-[0.22em] ${isLight ? "text-black" : "text-white/90"}`}
+                  initial={reducedMotion ? false : { opacity: 0, y: 8 }}
+                  animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+                  transition={{ duration: 0.35, ease: "easeOut" }}
+                >
+                  {ui.hero.creatorLabel}
+                </motion.span>
+
+                <motion.div
+                  className="relative overflow-hidden"
+                  initial={
+                    reducedMotion
+                      ? false
+                      : { opacity: 0, y: 18, clipPath: "inset(0 100% 0 0)" }
+                  }
+                  animate={
+                    reducedMotion
+                      ? undefined
+                      : { opacity: 1, y: 0, clipPath: "inset(0 0% 0 0)" }
+                  }
+                  transition={{
+                    duration: 0.9,
+                    delay: 0.12,
+                    ease: [0.16, 1, 0.3, 1],
+                  }}
+                >
+                  <motion.span
+                    aria-hidden
+                    className="pointer-events-none absolute inset-y-0 left-0 w-24"
+                    initial={reducedMotion ? false : { x: "-130%", opacity: 0 }}
+                    animate={
+                      reducedMotion
+                        ? undefined
+                        : { x: ["-130%", "280%"], opacity: [0, 0.5, 0] }
+                    }
+                    transition={{
+                      duration: 1.1,
+                      delay: 0.25,
+                      ease: "easeInOut",
+                    }}
+                    style={{
+                      background:
+                        "linear-gradient(90deg, transparent 0%, color-mix(in srgb, #ffffff 78%, transparent) 50%, transparent 100%)",
+                    }}
+                  />
+                  <motion.span
+                    className="relative inline-block text-[clamp(1.2rem,3vw,1.8rem)] font-normal uppercase leading-none text-accent"
+                    style={{
+                      fontFamily: "'Anta', sans-serif",
+                      textShadow:
+                        "0 0 18px color-mix(in srgb, var(--accent) 28%, transparent)",
+                    }}
+                    initial={
+                      reducedMotion
+                        ? false
+                        : { letterSpacing: "0.32em", filter: "blur(8px)" }
+                    }
+                    animate={
+                      reducedMotion
+                        ? undefined
+                        : { letterSpacing: "0.08em", filter: "blur(0px)" }
+                    }
+                    transition={{ duration: 0.7, delay: 0.18, ease: "easeOut" }}
+                  >
+                    {roleBrand}
+                  </motion.span>
+                </motion.div>
+              </div>
+            ) : (
+              <span className="text-primary/90">{profile.role}</span>
+            )}
+          </motion.div>
+
           <ul className="mt-6 space-y-2 text-sm text-secondary">
             {profile.meta.map((m, i) => {
               const Icon = metaIcons[i % metaIcons.length];
@@ -273,26 +366,9 @@ function Hero() {
           </div>
 
           <div className="mt-8 flex flex-wrap gap-3">
-            {profile.ctas.map((c) =>
-              c.variant === "primary" ? (
-                <Button
-                  key={c.label}
-                  asChild
-                  className="h-10 rounded-lg bg-accent px-5 text-on-accent hover:scale-[1.02] hover:bg-[#4ade80]"
-                >
-                  <a
-                    href={c.href}
-                    onClick={() =>
-                      trackEvent("cta_click", {
-                        cta_type: "primary",
-                        cta_label: c.label,
-                      })
-                    }
-                  >
-                    {c.label}
-                  </a>
-                </Button>
-              ) : c.variant === "hire" ? (
+            {profile.ctas
+              .filter((cta) => cta.variant === "hire")
+              .map((c) => (
                 <Button
                   key={c.label}
                   asChild
@@ -312,29 +388,31 @@ function Hero() {
                     <Briefcase className="h-4 w-4" /> {c.label}
                   </a>
                 </Button>
-              ) : (
-                <Button
-                  key={c.label}
-                  asChild
-                  variant="outline"
-                  className="h-10 rounded-lg border-default bg-secondary text-primary hover:scale-[1.02] hover:bg-secondary"
-                >
-                  <a
-                    href={c.href}
-                    className="inline-flex items-center gap-2"
-                    onClick={() => {
-                      trackEvent("resume_view", { cta_type: "resume" });
-                      trackEvent("cta_click", {
-                        cta_type: "resume",
-                        cta_label: c.label,
-                      });
-                    }}
-                  >
-                    <Download className="h-4 w-4" /> {c.label}
-                  </a>
-                </Button>
-              ),
-            )}
+              ))}
+
+            <Button
+              asChild
+              variant="outline"
+              className="h-10 rounded-lg border-accent/35 bg-accent/8 px-4 text-accent hover:scale-[1.02] hover:bg-accent/12 hover:text-accent focus-visible:text-accent"
+            >
+              <a
+                href="https://ko-fi.com/sanukhan"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2"
+                onClick={() => {
+                  trackEvent("coffee_click", { cta_type: "hero_coffee" });
+                  trackEvent("cta_click", {
+                    cta_type: "hero_coffee",
+                    cta_label: "Buy me a coffee",
+                  });
+                }}
+              >
+                <CoffeeIconAnimated className="h-4 w-4" />
+                <span>Buy me a coffee</span>
+                <ArrowUpRight className="h-3.5 w-3.5" />
+              </a>
+            </Button>
           </div>
         </div>
 

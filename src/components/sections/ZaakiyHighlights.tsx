@@ -1,6 +1,23 @@
 import { Bot, Building2, MapPin } from "lucide-react";
 import { useLocale } from "@/hooks/use-locale";
 
+function brandify(text: string) {
+  const parts = text.split(/(Zaakiy\s+\w+)/g);
+  return parts.map((part, i) =>
+    /^Zaakiy\s+\w+$/.test(part) ? (
+      <span
+        key={i}
+        style={{ fontFamily: "'Anta', sans-serif" }}
+        className="font-semibold text-accent/90"
+      >
+        {part}
+      </span>
+    ) : (
+      part
+    ),
+  );
+}
+
 const metaPills = [
   "Solution Architect",
   "AI Platforms",
@@ -79,11 +96,6 @@ export default function ZaakiyHighlights() {
         <div className="grid gap-8 lg:grid-cols-[1fr_1px_1fr] lg:gap-0">
           {/* ── LEFT: Founder narrative ── */}
           <div className="flex flex-col justify-center lg:pr-12 xl:pr-16">
-            {/* Eyebrow */}
-            <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.16em] text-accent">
-              {isArabic ? "منظومة Zaakiy" : "Zaakiy Ecosystem"}
-            </p>
-
             {/* Headline */}
             <h2
               className="text-[clamp(1.7rem,3.2vw,2.35rem)] font-extrabold leading-[1.1] tracking-tight text-primary"
@@ -91,16 +103,24 @@ export default function ZaakiyHighlights() {
             >
               {isArabic ? (
                 <>
-                  بناء منظومة:
+                  بُني من الشغف:
                   <br />
-                  إرث Zaakiy
+                  <span
+                    style={{ fontFamily: "'Anta', sans-serif" }}
+                    className="text-accent opacity-90"
+                  >
+                    Zaakiy V3RSE
+                  </span>
                 </>
               ) : (
                 <>
-                  Engineering an Ecosystem:
+                  Built from Purpose:
                   <br />
-                  <span className="text-accent opacity-90">
-                    The Zaakiy Legacy
+                  <span
+                    style={{ fontFamily: "'Anta', sans-serif" }}
+                    className="text-accent opacity-90"
+                  >
+                    Zaakiy V3RSE
                   </span>
                 </>
               )}
@@ -169,7 +189,14 @@ export default function ZaakiyHighlights() {
                       <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md border border-default bg-secondary/80 text-accent transition-colors duration-200 group-hover:border-accent-soft">
                         {card.icon}
                       </span>
-                      <h3 className="text-[14px] font-semibold text-primary">
+                      <h3
+                        className="text-[14px] font-semibold text-primary"
+                        style={
+                          card.title.startsWith("Zaakiy")
+                            ? { fontFamily: "'Anta', sans-serif" }
+                            : undefined
+                        }
+                      >
                         {card.title}
                       </h3>
                     </div>
@@ -182,7 +209,7 @@ export default function ZaakiyHighlights() {
                   </div>
 
                   <p className="text-[13px] leading-[1.7] text-secondary">
-                    {card.description}
+                    {brandify(card.description)}
                   </p>
                 </div>
               </article>

@@ -7,8 +7,9 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/hooks/use-theme";
 import { LocaleProvider } from "@/hooks/use-locale";
 import { trackEvent, trackPageView } from "@/utils/analytics";
-import Index from "./pages/Index.tsx";
-import NotFound from "./pages/NotFound.tsx";
+
+const Index = lazy(() => import("./pages/Index.tsx"));
+const NotFound = lazy(() => import("./pages/NotFound.tsx"));
 
 const ToolsIndex = lazy(() => import("./pages/ToolsIndex.tsx"));
 const BlogIndex = lazy(() => import("./pages/BlogIndex.tsx"));
@@ -37,6 +38,15 @@ const DevToBlogPage = lazy(() => import("./pages/blog/DevToBlogPage.tsx"));
 const FaqPage = lazy(() => import("./pages/FaqPage.tsx"));
 
 const queryClient = new QueryClient();
+
+const routeFallback = (
+  <div
+    className="min-h-screen bg-background"
+    role="status"
+    aria-live="polite"
+    aria-label="Loading page"
+  />
+);
 
 function AnalyticsTracker() {
   const location = useLocation();
@@ -96,7 +106,7 @@ const AppShell = () => {
       <Sonner />
       <BrowserRouter>
         <AnalyticsTracker />
-        <Suspense fallback={<div className="min-h-screen bg-background" />}>
+        <Suspense fallback={routeFallback}>
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/tools" element={<ToolsIndex />} />

@@ -100,10 +100,10 @@ export default function BlogIndex() {
   return (
     <>
       <SeoMeta
-        title="Engineering Blog | Sanu Khan"
-        description="Engineering blog with deep-dive guides on architecture, backend systems, JavaScript, cloud, and practical software execution."
+        title="WriteUps | Sanu Khan"
+        description="WriteUps — deep-dive guides on architecture, backend systems, JavaScript, cloud, and practical software execution."
         canonicalPath="/blog"
-        keywords="engineering blog, software architecture, nodejs, javascript, distributed systems"
+        keywords="writeups, engineering blog, software architecture, nodejs, javascript, distributed systems"
       />
 
       <Navbar />
@@ -113,7 +113,7 @@ export default function BlogIndex() {
           <aside className="hidden xl:block">
             <div className="h-full rounded-2xl border border-[var(--border)] bg-[var(--bg-secondary)] p-4">
               <p className="mb-3 text-[11px] font-semibold uppercase tracking-widest text-[var(--text-secondary)]">
-                Blog Task Bar
+                Filter &amp; Search
               </p>
 
               <label className="mb-2 flex items-center gap-2 rounded-lg border border-[var(--border)] bg-[var(--bg-primary)] px-3 py-2 text-[12px]">
@@ -149,10 +149,21 @@ export default function BlogIndex() {
           </aside>
 
           <section className="min-h-0 overflow-y-auto pr-1">
-            <h1 className="text-[38px] font-extrabold text-[var(--text-primary)]">
-              Engineering Blog
-            </h1>
-            <p className="mt-3 max-w-3xl text-[15px] text-[var(--text-secondary)]">
+            <div className="flex items-end justify-between">
+              <div>
+                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--accent)] opacity-80">
+                  Tech Writing
+                </p>
+                <h1 className="mt-1 text-[clamp(2rem,4vw,2.8rem)] font-extrabold tracking-tight text-[var(--text-primary)]">
+                  WriteUps
+                </h1>
+              </div>
+              <p className="hidden pb-1 text-[13px] text-[var(--text-secondary)] sm:block">
+                {filteredPosts.length} post
+                {filteredPosts.length !== 1 ? "s" : ""}
+              </p>
+            </div>
+            <p className="mt-2 max-w-2xl text-[14px] leading-6 text-[var(--text-secondary)]">
               Deep dives on architecture, backend patterns, cloud systems, and
               practical engineering execution.
             </p>
@@ -187,20 +198,39 @@ export default function BlogIndex() {
 
             <div className="mt-5 grid gap-4 sm:grid-cols-2">
               {paginatedPosts.map((post) => (
-                <article
+                <Link
                   key={post.href}
-                  className="rounded-2xl border border-[var(--border)] bg-[var(--bg-secondary)] p-5"
+                  to={post.href}
+                  className="group relative flex flex-col overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--bg-secondary)] p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-[var(--accent)]/40 hover:shadow-[0_0_0_1px_color-mix(in_srgb,var(--accent)_10%,transparent),0_8px_24px_color-mix(in_srgb,var(--accent)_6%,transparent)]"
                 >
-                  <h2 className="text-[20px] font-bold text-[var(--text-primary)]">
-                    {post.title}
-                  </h2>
-                  <p className="mt-2 line-clamp-3 text-[14px] text-[var(--text-secondary)]">
+                  {/* accent top bar on hover */}
+                  <span className="pointer-events-none absolute inset-x-0 top-0 h-[2px] rounded-t-2xl bg-[var(--accent)] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+
+                  <div className="flex items-start justify-between gap-2">
+                    <h2 className="line-clamp-2 text-[17px] font-bold leading-snug text-[var(--text-primary)] transition-colors group-hover:text-[var(--accent)]">
+                      {post.title}
+                    </h2>
+                    <ArrowRight className="mt-0.5 h-4 w-4 shrink-0 text-[var(--text-secondary)] opacity-0 transition-all duration-200 group-hover:translate-x-0.5 group-hover:opacity-70" />
+                  </div>
+
+                  <p className="mt-2 line-clamp-2 flex-1 text-[13px] leading-6 text-[var(--text-secondary)]">
                     {post.description}
                   </p>
-                  <div className="mt-3 flex items-center gap-2 text-[11px] text-[var(--text-secondary)]">
+
+                  <div className="mt-4 flex items-center justify-between">
+                    <div className="flex flex-wrap gap-1.5">
+                      {post.tags.slice(0, 3).map((tag) => (
+                        <span
+                          key={`${post.href}-${tag}`}
+                          className="rounded-full border border-[var(--border)] bg-[var(--bg-primary)] px-2 py-0.5 text-[10px] font-medium text-[var(--text-secondary)] transition-colors group-hover:border-[var(--accent)]/30"
+                        >
+                          #{tag}
+                        </span>
+                      ))}
+                    </div>
                     {post.publishedAt && (
-                      <span className="inline-flex items-center gap-1">
-                        <Calendar className="h-3.5 w-3.5" />
+                      <span className="flex shrink-0 items-center gap-1 text-[10px] text-[var(--text-secondary)]">
+                        <Calendar className="h-3 w-3" />
                         {new Date(post.publishedAt).toLocaleDateString(
                           undefined,
                           {
@@ -212,34 +242,18 @@ export default function BlogIndex() {
                       </span>
                     )}
                   </div>
-                  <div className="mt-3 flex flex-wrap gap-1.5">
-                    {post.tags.slice(0, 4).map((tag) => (
-                      <span
-                        key={`${post.href}-${tag}`}
-                        className="rounded-full border border-[var(--border)] px-2 py-0.5 text-[10px] text-[var(--text-secondary)]"
-                      >
-                        #{tag}
-                      </span>
-                    ))}
-                  </div>
-                  <Link
-                    className="mt-4 inline-flex text-[14px] font-semibold text-[var(--accent)] hover:underline"
-                    to={post.href}
-                  >
-                    Read article
-                  </Link>
-                </article>
+                </Link>
               ))}
 
               {!paginatedPosts.length && (
-                <article className="rounded-2xl border border-[var(--border)] bg-[var(--bg-secondary)] p-5 sm:col-span-2">
-                  <h2 className="text-[20px] font-bold text-[var(--text-primary)]">
+                <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-secondary)] p-8 text-center sm:col-span-2">
+                  <p className="text-[15px] font-semibold text-[var(--text-primary)]">
                     No posts found
-                  </h2>
-                  <p className="mt-2 text-[14px] text-[var(--text-secondary)]">
+                  </p>
+                  <p className="mt-1 text-[13px] text-[var(--text-secondary)]">
                     Try changing your search or selected tag.
                   </p>
-                </article>
+                </div>
               )}
             </div>
 
@@ -274,7 +288,7 @@ export default function BlogIndex() {
           <aside className="hidden xl:block">
             <div className="h-full rounded-2xl border border-[var(--border)] bg-[var(--bg-secondary)] p-4">
               <p className="text-[11px] font-semibold uppercase tracking-widest text-[var(--text-secondary)]">
-                Blog Overview
+                Overview
               </p>
               <div className="mt-3 space-y-2 text-[13px] text-[var(--text-secondary)]">
                 <p>Total posts: {posts.length}</p>
