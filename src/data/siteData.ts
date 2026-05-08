@@ -29,12 +29,12 @@ export const profile = {
     { value: "13+", label: "Years Experience" },
     { value: "100+", label: "Systems Delivered" },
     { value: "9", label: "Markets Served" },
-    { value: "800K+", label: "Product Scale Systems" },
+    { value: "1M+", label: "Product Scale Systems" },
   ],
   ctas: [
     {
       label: "Hire Me",
-      href: "mailto:khan.sanukhan@outlook.com?subject=Hire%20Inquiry%20–%20SanuKhan.dev",
+      href: "mailto: hello@sanukhan.dev?subject=Hire%20Inquiry%20–%20SanuKhan.dev",
       variant: "hire" as const,
     },
   ],
@@ -445,7 +445,7 @@ export const footer = {
   ],
   servicesLinks: [],
   contact: {
-    email: "khan.sanukhan@outlook.com",
+    email: " hello@sanukhan.dev",
     phone: "+971563860850",
     location: "Dubai, UAE",
     cta: { label: "Connect", href: "#contact" },

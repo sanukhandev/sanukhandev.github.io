@@ -289,11 +289,11 @@ const arContent = {
       creatorLabel: "مؤسس",
       innovationLines: ["نبني", "ابتكارات", "منذ 2011"],
       floatingBadges: [
-        "خدمات مصغرة",
-        "الشرق الأوسط والعالم",
-        "+13 سنة",
-        "منذ 2011",
-        "+100 عميل",
+        "معمارية الخدمات المصغرة",
+        "تسليم إقليمي وعالمي",
+        "+13 سنة خبرة",
+        "الهندسة منذ 2011",
+        "+100 حل مُسلَّم",
       ],
     },
     works: {
@@ -347,11 +347,11 @@ const enContent = {
       creatorLabel: "Creator of",
       innovationLines: ["Building", "Innovations", "since 2011"],
       floatingBadges: [
-        "Microservices",
-        "MENA & Global",
-        "13+ Yrs",
-        "Since 2011",
-        "100+ Clients",
+        "Microservices Architecture",
+        "Regional & Global Delivery",
+        "13+ Years Experience",
+        "Engineering Since 2011",
+        "100+ Solutions Delivered",
       ],
     },
     works: {
