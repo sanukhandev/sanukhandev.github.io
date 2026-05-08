@@ -1,10 +1,10 @@
 import { memo, useMemo } from "react";
 import type { ComponentType } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import {
   MapPin,
   Briefcase,
   CircleDot,
-  Download,
   Clock,
   Award,
   Globe2,
@@ -13,7 +13,9 @@ import {
   Rocket,
   TrendingUp,
   Users,
+  ArrowUpRight,
 } from "lucide-react";
+import CoffeeIconAnimated from "@/components/CoffeeIconAnimated";
 import { useSiteContent } from "@/data/siteContent";
 import { useLocale } from "@/hooks/use-locale";
 import { useTheme } from "@/hooks/use-theme";
@@ -42,6 +44,7 @@ function Hero() {
   const { locale } = useLocale();
   const isArabic = locale === "ar";
   const { theme } = useTheme();
+  const reducedMotion = useReducedMotion();
   const isLight = theme === "light";
   const webpAvatarUrl = profile.avatarUrl.endsWith(".avif")
     ? profile.avatarUrl.replace(/\.avif$/i, ".webp")
@@ -56,8 +59,13 @@ function Hero() {
     [ui.hero.floatingBadges],
   );
 
+  const roleBrand = useMemo(
+    () => profile.role.replace(/^creator of\s*/i, "").trim(),
+    [profile.role],
+  );
+
   return (
-    <header id="home" className="relative overflow-hidden pt-12 sm:pt-16">
+    <header id="home" className="relative overflow-hidden pt-20 sm:pt-24">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 -z-10 opacity-60"
@@ -74,54 +82,87 @@ function Hero() {
             {ui.hero.leadershipBadge}
           </span>
 
-          <p className="text-[14px] font-semibold uppercase tracking-[0.08em] opacity-80">
-            {profile.role.includes("Zaakiy V3RSE") ? (
-              <span className="inline-flex items-center gap-2">
-                <span className="text-primary/90">
-                  {profile.role.replace("Zaakiy V3RSE", "")}
-                </span>
-                <span className="inline-flex items-center gap-1.5 text-accent">
-                  <svg
-                    width="34"
-                    height="24"
-                    viewBox="0 0 34 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden="true"
+          <motion.div
+            className="opacity-95"
+            initial={reducedMotion ? false : { opacity: 0, y: 14 }}
+            animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+            transition={{ duration: 0.45, ease: "easeOut" }}
+          >
+            {/zaakiy/i.test(profile.role) ? (
+              <div className="flex flex-col items-start gap-2">
+                <motion.span
+                  className="inline-flex rounded-full bg-black px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-white shadow-[0_8px_18px_rgba(0,0,0,0.28)]"
+                  initial={reducedMotion ? false : { opacity: 0, y: 8 }}
+                  animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+                  transition={{ duration: 0.35, ease: "easeOut" }}
+                >
+                  Creator of
+                </motion.span>
+
+                <motion.div
+                  className="relative overflow-hidden"
+                  initial={
+                    reducedMotion
+                      ? false
+                      : { opacity: 0, y: 18, clipPath: "inset(0 100% 0 0)" }
+                  }
+                  animate={
+                    reducedMotion
+                      ? undefined
+                      : { opacity: 1, y: 0, clipPath: "inset(0 0% 0 0)" }
+                  }
+                  transition={{
+                    duration: 0.9,
+                    delay: 0.12,
+                    ease: [0.16, 1, 0.3, 1],
+                  }}
+                >
+                  <motion.span
+                    aria-hidden
+                    className="pointer-events-none absolute inset-y-0 left-0 w-24"
+                    initial={reducedMotion ? false : { x: "-130%", opacity: 0 }}
+                    animate={
+                      reducedMotion
+                        ? undefined
+                        : { x: ["-130%", "280%"], opacity: [0, 0.5, 0] }
+                    }
+                    transition={{
+                      duration: 1.1,
+                      delay: 0.25,
+                      ease: "easeInOut",
+                    }}
+                    style={{
+                      background:
+                        "linear-gradient(90deg, transparent 0%, color-mix(in srgb, #ffffff 78%, transparent) 50%, transparent 100%)",
+                    }}
+                  />
+                  <motion.span
+                    className="relative inline-block text-[clamp(1.45rem,4vw,2.3rem)] font-normal uppercase leading-none text-accent"
+                    style={{
+                      fontFamily: "'Anta', sans-serif",
+                      textShadow:
+                        "0 0 18px color-mix(in srgb, var(--accent) 28%, transparent)",
+                    }}
+                    initial={
+                      reducedMotion
+                        ? false
+                        : { letterSpacing: "0.32em", filter: "blur(8px)" }
+                    }
+                    animate={
+                      reducedMotion
+                        ? undefined
+                        : { letterSpacing: "0.08em", filter: "blur(0px)" }
+                    }
+                    transition={{ duration: 0.7, delay: 0.18, ease: "easeOut" }}
                   >
-                    <rect
-                      x="0.5"
-                      y="0.5"
-                      width="33"
-                      height="23"
-                      rx="5"
-                      fill="currentColor"
-                      fillOpacity="0.12"
-                      stroke="currentColor"
-                      strokeOpacity="0.4"
-                      strokeWidth="1"
-                    />
-                    <text
-                      x="17"
-                      y="17"
-                      textAnchor="middle"
-                      fontFamily="'Anta', sans-serif"
-                      fontWeight="700"
-                      fontSize="11"
-                      fill="currentColor"
-                    >
-                      Zv3
-                    </text>
-                  </svg>
-                  <span style={{ fontFamily: "'Anta', sans-serif" }}>
-                    Zaakiy V3RSE
-                  </span>
-                </span>
-              </span>
+                    {roleBrand}
+                  </motion.span>
+                </motion.div>
+              </div>
             ) : (
               <span className="text-primary/90">{profile.role}</span>
             )}
-          </p>
+          </motion.div>
 
           <h1 className="mt-3 leading-[1.06]">
             <svg
@@ -318,26 +359,9 @@ function Hero() {
           </div>
 
           <div className="mt-8 flex flex-wrap gap-3">
-            {profile.ctas.map((c) =>
-              c.variant === "primary" ? (
-                <Button
-                  key={c.label}
-                  asChild
-                  className="h-10 rounded-lg bg-accent px-5 text-on-accent hover:scale-[1.02] hover:bg-[#4ade80]"
-                >
-                  <a
-                    href={c.href}
-                    onClick={() =>
-                      trackEvent("cta_click", {
-                        cta_type: "primary",
-                        cta_label: c.label,
-                      })
-                    }
-                  >
-                    {c.label}
-                  </a>
-                </Button>
-              ) : c.variant === "hire" ? (
+            {profile.ctas
+              .filter((cta) => cta.variant === "hire")
+              .map((c) => (
                 <Button
                   key={c.label}
                   asChild
@@ -357,29 +381,31 @@ function Hero() {
                     <Briefcase className="h-4 w-4" /> {c.label}
                   </a>
                 </Button>
-              ) : (
-                <Button
-                  key={c.label}
-                  asChild
-                  variant="outline"
-                  className="h-10 rounded-lg border-default bg-secondary text-primary hover:scale-[1.02] hover:bg-secondary"
-                >
-                  <a
-                    href={c.href}
-                    className="inline-flex items-center gap-2"
-                    onClick={() => {
-                      trackEvent("resume_view", { cta_type: "resume" });
-                      trackEvent("cta_click", {
-                        cta_type: "resume",
-                        cta_label: c.label,
-                      });
-                    }}
-                  >
-                    <Download className="h-4 w-4" /> {c.label}
-                  </a>
-                </Button>
-              ),
-            )}
+              ))}
+
+            <Button
+              asChild
+              variant="outline"
+              className="h-10 rounded-lg border-accent/35 bg-accent/8 px-4 text-accent hover:scale-[1.02] hover:bg-accent/12"
+            >
+              <a
+                href="https://ko-fi.com/sanukhan"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2"
+                onClick={() => {
+                  trackEvent("coffee_click", { cta_type: "hero_coffee" });
+                  trackEvent("cta_click", {
+                    cta_type: "hero_coffee",
+                    cta_label: "Buy me a coffee",
+                  });
+                }}
+              >
+                <CoffeeIconAnimated className="h-4 w-4" />
+                <span>Buy me a coffee</span>
+                <ArrowUpRight className="h-3.5 w-3.5" />
+              </a>
+            </Button>
           </div>
         </div>
 
