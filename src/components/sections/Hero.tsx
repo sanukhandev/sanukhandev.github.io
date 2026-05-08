@@ -32,10 +32,25 @@ const metricIcons: Record<string, ComponentType<{ className?: string }>> = {
 };
 
 const floatingBadges = [
-  { icon: Layers, label: "Microservices Architecture", top: "8%", left: "-14%" },
-  { icon: Globe2, label: "Regional & Global Delivery", top: "30%", right: "-14%" },
+  {
+    icon: Layers,
+    label: "Microservices Architecture",
+    top: "8%",
+    left: "-14%",
+  },
+  {
+    icon: Globe2,
+    label: "Regional & Global Delivery",
+    top: "30%",
+    right: "-14%",
+  },
   { icon: Award, label: "13+ Years Experience", bottom: "30%", left: "-14%" },
-  { icon: CalendarCheck, label: "Engineering Since 2011", bottom: "10%", right: "-10%" },
+  {
+    icon: CalendarCheck,
+    label: "Engineering Since 2011",
+    bottom: "10%",
+    right: "-10%",
+  },
   { icon: Users, label: "100+ Solutions Delivered", top: "58%", left: "-12%" },
 ];
 
@@ -60,7 +75,9 @@ function Hero() {
   );
 
   const roleBrand = useMemo(() => {
-    const profileWithRoleBrand = profile as typeof profile & { roleBrand?: string };
+    const profileWithRoleBrand = profile as typeof profile & {
+      roleBrand?: string;
+    };
     if (profileWithRoleBrand.roleBrand) {
       return profileWithRoleBrand.roleBrand;
     }
