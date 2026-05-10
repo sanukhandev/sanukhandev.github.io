@@ -229,10 +229,15 @@ export default function ZaakiyChatWidget({
                 Zaakiy AI
               </h3>
               <p className="text-[11px] text-secondary">
-                Powered by{" "}
-                <span style={{ fontFamily: "'Anta', sans-serif" }}>
-                  Zaakiy AI
-                </span>
+                <a
+                  href="https://zaakiy.io"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-primary transition-colors"
+                  style={{ fontFamily: "'Anta', sans-serif" }}
+                >
+                  Zv3 - ZaakiyV3RSE
+                </a>
               </p>
             </div>
             <button
