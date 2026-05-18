@@ -32,11 +32,26 @@ const metricIcons: Record<string, ComponentType<{ className?: string }>> = {
 };
 
 const floatingBadges = [
-  { icon: Layers, label: "Microservices", top: "8%", left: "-14%" },
-  { icon: Globe2, label: "MENA & Global", top: "30%", right: "-14%" },
-  { icon: Award, label: "13+ Yrs", bottom: "30%", left: "-14%" },
-  { icon: CalendarCheck, label: "Since 2011", bottom: "10%", right: "-10%" },
-  { icon: Users, label: "100+ Clients", top: "58%", left: "-12%" },
+  {
+    icon: Layers,
+    label: "Microservices Architecture",
+    top: "8%",
+    left: "-14%",
+  },
+  {
+    icon: Globe2,
+    label: "Regional & Global Delivery",
+    top: "30%",
+    right: "-14%",
+  },
+  { icon: Award, label: "13+ Years Experience", bottom: "30%", left: "-14%" },
+  {
+    icon: CalendarCheck,
+    label: "Engineering Since 2011",
+    bottom: "10%",
+    right: "-10%",
+  },
+  { icon: Users, label: "100+ Solutions Delivered", top: "58%", left: "-12%" },
 ];
 
 function Hero() {
@@ -60,7 +75,9 @@ function Hero() {
   );
 
   const roleBrand = useMemo(() => {
-    const profileWithRoleBrand = profile as typeof profile & { roleBrand?: string };
+    const profileWithRoleBrand = profile as typeof profile & {
+      roleBrand?: string;
+    };
     if (profileWithRoleBrand.roleBrand) {
       return profileWithRoleBrand.roleBrand;
     }
@@ -84,7 +101,7 @@ function Hero() {
 
       <div className="container-narrow grid items-center gap-5 pb-8 sm:pb-10 lg:grid-cols-[1.2fr_1fr]">
         <div className="animate-fade-up-stagger">
-          <span className="mb-5 inline-flex items-center gap-2 rounded-full border border-default bg-secondary px-3 py-1 text-xs font-semibold text-accent">
+          <span className="glass-pill mb-5 inline-flex items-center gap-2 px-3 py-1 text-xs font-semibold text-accent">
             <span className="h-1.5 w-1.5 rounded-full bg-tea-green-400" />
             {ui.hero.leadershipBadge}
           </span>
@@ -426,7 +443,7 @@ function Hero() {
                 <div
                   key={b.label}
                   aria-hidden
-                  className="absolute z-20 hidden lg:flex items-center gap-1.5 rounded-full border border-default bg-secondary/90 px-2.5 py-1 text-[11px] font-semibold text-secondary shadow-lg backdrop-blur-sm"
+                  className="glass-pill glass-pill--float absolute z-20 hidden lg:flex items-center gap-1.5 px-2.5 py-1 text-[11px] font-semibold text-secondary"
                   style={{
                     top: b.top,
                     bottom: b.bottom,

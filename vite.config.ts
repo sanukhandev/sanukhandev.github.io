@@ -189,7 +189,7 @@ const registerZaakiyApi = (
       const locale: ZaakiyLocale = body.locale === "ar" ? "ar" : "en";
       const userQuestion = (body.userQuestion || "").trim();
       const incomingSiteScope = (body.siteScope || "").trim();
-      const email = (body.email || "khan.sanukhan@outlook.com").trim();
+      const email = (body.email || " hello@sanukhan.dev").trim();
       const maxOutputChars = Math.max(
         120,
         Math.min(500, Number(body.maxOutputChars || 250)),

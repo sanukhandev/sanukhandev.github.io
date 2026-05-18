@@ -450,7 +450,7 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
     const locale: ZaakiyLocale = body.locale === "ar" ? "ar" : "en";
     const userQuestion = String(body.userQuestion || "").trim();
     const incomingSiteScope = String(body.siteScope || "").trim();
-    const email = String(body.email || "khan.sanukhan@outlook.com").trim();
+    const email = String(body.email || " hello@sanukhan.dev").trim();
     const maxOutputChars = Math.max(
       120,
       Math.min(500, Number(body.maxOutputChars || 250)),
