@@ -20,7 +20,7 @@ const faqs = [
   {
     question: "How can I contact you for a project?",
     answer:
-      "Use the contact section on the homepage or send an email to  hello@sanukhan.dev with your scope and timeline.",
+      "Use the contact section on the homepage or send an email to hello@sanukhan.dev with your scope and timeline.",
   },
 ];
 

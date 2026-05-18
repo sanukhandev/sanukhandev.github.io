@@ -41,7 +41,7 @@ export default function ApiIntegrationServicesPage() {
       cta={{
         text: "Need API integration services for mission-critical workflows?",
         action: "Book an Integration Architecture Review",
-        href: "mailto: hello@sanukhan.dev?subject=API%20Integration%20Services",
+        href: "mailto:hello@sanukhan.dev?subject=API%20Integration%20Services",
       }}
       links={[
         { label: "Node.js Developer UAE", href: "/nodejs-developer-uae" },

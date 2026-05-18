@@ -43,7 +43,7 @@ export default function FullStackConsultantUaePage() {
       cta={{
         text: "Need full stack consulting in the UAE with architecture depth?",
         action: "Schedule a Technical Strategy Call",
-        href: "mailto: hello@sanukhan.dev?subject=Full%20Stack%20Consultant%20UAE",
+        href: "mailto:hello@sanukhan.dev?subject=Full%20Stack%20Consultant%20UAE",
       }}
       links={[
         { label: "React Developer Dubai", href: "/react-developer-dubai" },
