@@ -1,9 +1,8 @@
 import { memo, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Moon, Sun, ArrowUpRight, Globe } from "lucide-react";
+import { Menu, X, Moon, Sun, Download } from "lucide-react";
 import { useSiteContent } from "@/data/siteContent";
 import { Button } from "@/components/ui/button";
-import CoffeeIconAnimated from "@/components/CoffeeIconAnimated";
 import { cn } from "@/lib/utils";
 import { useTheme } from "@/hooks/use-theme";
 import { useLocale } from "@/hooks/use-locale";
@@ -16,7 +15,7 @@ function Navbar() {
   const [activeHref, setActiveHref] = useState("#works");
   const { theme, toggleTheme } = useTheme();
   const { locale, setLocale } = useLocale();
-  const { nav, ui } = useSiteContent();
+  const { nav, profile } = useSiteContent();
   const isLight = theme === "light";
   const isArabic = locale === "ar";
   const isHomePage = location.pathname === "/";
@@ -25,6 +24,9 @@ function Navbar() {
     !isHomePage && nav.cta.href.startsWith("#")
       ? `/${nav.cta.href}`
       : nav.cta.href;
+  const resumeLabel =
+    profile.ctas.find((cta) => cta.variant === "resume")?.label ||
+    (isArabic ? "تحميل السيرة الذاتية" : "Download Resume");
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -317,45 +319,32 @@ function Navbar() {
 
           <div className="mx-0.5 h-5 w-px shrink-0 rounded-full opacity-30 bg-current" />
 
-          {/* Coffee — icon only */}
-          <a
-            href="https://ko-fi.com/sanukhan"
-            target="_blank"
-            rel="noopener noreferrer"
-            title={isArabic ? "ادعمني بقهوة" : "Buy me a coffee"}
-            aria-label={isArabic ? "ادعمني بقهوة" : "Buy me a coffee"}
-            className={cn(
-              "inline-flex h-9 w-9 items-center justify-center rounded-lg border transition-all duration-200 hover:scale-[1.06]",
-              isLight
-                ? "border-[#1f9f45]/45 bg-[#1f9f45]/8 text-[#1f9f45] hover:border-[#1f9f45] hover:bg-[#1f9f45]/16"
-                : "border-[#38c755]/40 bg-[#38c755]/10 text-[#38c755] hover:border-[#38c755]/70 hover:bg-[#38c755]/18",
-            )}
-          >
-            <CoffeeIconAnimated className="h-4 w-4" />
-          </a>
-
-          {/* CTA */}
+          {/* Download Resume CTA */}
           <Button
             asChild
             className={cn(
-              "h-9 rounded-lg px-4 hover:scale-[1.02] gap-1",
+              "h-9 rounded-lg px-4 hover:scale-[1.02] gap-1 transition-all duration-200",
               isLight
                 ? "bg-[#1f9f45] text-white hover:bg-[#2caf54]"
                 : "bg-accent text-on-accent hover:bg-[#4ade80]",
             )}
           >
             <a
-              href={ctaHref}
+              href="/Sanu Khan - Resume.pdf"
+              download
               onClick={() => {
-                trackEvent("contact_click", { cta_type: "contact" });
+                trackEvent("download_resume_click", {
+                  cta_type: "download",
+                  source: "navbar",
+                });
                 trackEvent("cta_click", {
-                  cta_type: "contact",
-                  cta_label: nav.cta.label,
+                  cta_type: "download",
+                  cta_label: resumeLabel,
                 });
               }}
             >
-              {nav.cta.label}
-              <ArrowUpRight className="h-3.5 w-3.5" />
+              <Download className="h-3.5 w-3.5 animate-bounce" />
+              {resumeLabel}
             </a>
           </Button>
         </div>

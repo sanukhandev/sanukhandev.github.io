@@ -383,53 +383,65 @@ function Hero() {
           </div>
 
           <div className="mt-8 flex flex-wrap gap-3">
-            {profile.ctas
-              .filter((cta) => cta.variant === "hire")
-              .map((c) => (
-                <Button
-                  key={c.label}
-                  asChild
-                  className="h-10 rounded-lg border border-accent-soft bg-accent-soft px-5 text-accent hover:scale-[1.02] hover:bg-accent-soft"
-                >
-                  <a
-                    href={c.href}
-                    className="inline-flex items-center gap-2"
-                    onClick={() => {
-                      trackEvent("hire_me_click", { cta_type: "hire" });
-                      trackEvent("cta_click", {
-                        cta_type: "hire",
-                        cta_label: c.label,
-                      });
-                    }}
-                  >
-                    <Briefcase className="h-4 w-4" /> {c.label}
-                  </a>
-                </Button>
-              ))}
-
-            <Button
-              asChild
-              variant="outline"
-              className="h-10 rounded-lg border-accent/35 bg-accent/8 px-4 text-accent hover:scale-[1.02] hover:bg-accent/12 hover:text-accent focus-visible:text-accent"
+            {/* Let's Chat Button with animation */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
             >
-              <a
-                href="https://ko-fi.com/sanukhan"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2"
-                onClick={() => {
-                  trackEvent("coffee_click", { cta_type: "hero_coffee" });
-                  trackEvent("cta_click", {
-                    cta_type: "hero_coffee",
-                    cta_label: "Buy me a coffee",
-                  });
-                }}
+              {profile.ctas
+                .filter((cta) => cta.variant === "hire")
+                .map((c) => (
+                  <Button
+                    key={c.label}
+                    asChild
+                    className="h-10 rounded-lg border border-accent/50 bg-transparent px-5 text-accent hover:text-white hover:scale-110 hover:-translate-y-1 transition-all duration-300 ease-out"
+                  >
+                    <a
+                      href={c.href}
+                      className="inline-flex items-center gap-2"
+                      onClick={() => {
+                        trackEvent("lets_chat_click", { cta_type: "contact" });
+                        trackEvent("cta_click", {
+                          cta_type: "contact",
+                          cta_label: c.label,
+                        });
+                      }}
+                    >
+                      <Briefcase className="h-4 w-4" /> {c.label}
+                    </a>
+                  </Button>
+                ))}
+            </motion.div>
+
+            {/* Buy me a coffee Button with animation */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.35 }}
+            >
+              <Button
+                asChild
+                className="h-10 rounded-lg border border-accent/50 bg-transparent px-5 text-accent hover:text-white hover:scale-110 hover:-translate-y-1 transition-all duration-300 ease-out"
               >
-                <CoffeeIconAnimated className="h-4 w-4" />
-                <span>Buy me a coffee</span>
-                <ArrowUpRight className="h-3.5 w-3.5" />
-              </a>
-            </Button>
+                <a
+                  href="https://ko-fi.com/sanukhan"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2"
+                  onClick={() => {
+                    trackEvent("coffee_click", { cta_type: "hero_coffee" });
+                    trackEvent("cta_click", {
+                      cta_type: "hero_coffee",
+                      cta_label: ui.hero.coffeeCta,
+                    });
+                  }}
+                >
+                  <CoffeeIconAnimated className="h-4 w-4" />
+                  <span>{ui.hero.coffeeCta}</span>
+                </a>
+              </Button>
+            </motion.div>
           </div>
         </div>
 
