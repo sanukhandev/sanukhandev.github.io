@@ -153,7 +153,11 @@ const arContent = {
       { value: "9", label: "أسواق مخدومة" },
       { value: "800K+", label: "أنظمة على نطاق منتج" },
     ],
-    ctas: [{ ...baseProfile.ctas[0], label: "وظفني" }],
+    ctas: [
+      { ...baseProfile.ctas[0], label: "دعني أتحدث" },
+      { ...baseProfile.ctas[1], label: "تحميل السيرة الذاتية" },
+      { ...baseProfile.ctas[2], label: "LinkedIn" },
+    ],
   },
   skills: {
     ...baseSkills,
@@ -285,6 +289,7 @@ const arContent = {
   ui: {
     localeSwitch: { en: "English", ar: "العربية" },
     hero: {
+      coffeeCta: "ادعمني بقهوة",
       leadershipBadge: "+13 سنة من القيادة الهندسية",
       creatorLabel: "مؤسس",
       innovationLines: ["نبني", "ابتكارات", "منذ 2011"],
@@ -327,6 +332,17 @@ const arContent = {
       issued: "تاريخ الإصدار",
       view: "عرض الشهادة",
     },
+    zaakiychat: {
+      greeting: (koFiLink: string) =>
+        `مرحباً، أنا Zaakiy AI مساعد سانو خان. اسألني عن الموقع. ادعمني بقهوة: ${koFiLink}`,
+      dailyLimitReached: (email: string) =>
+        `وصلنا حد اليوم. تواصل عبر البريد: ${email}`,
+      aiTyping: "Zaakiy AI يكتب...",
+      placeholder: "اكتب سؤالك...",
+      sendButtonLabel: "إرسال",
+      errorOccurred: "عذراً، حدث خطأ. يُرجى المحاولة مجدداً.",
+      scopeDisclaimer: "ردود قصيرة وضمن بيانات الموقع فقط",
+    },
   },
 };
 
@@ -342,7 +358,9 @@ const enContent = {
   footer: baseFooter,
   ui: {
     localeSwitch: { en: "English", ar: "Arabic" },
+    coffeeCta: "Buy me a coffee",
     hero: {
+      coffeeCta: "Buy me a coffee",
       leadershipBadge: "13+ Years of Engineering Leadership",
       creatorLabel: "Creator of",
       innovationLines: ["Building", "Innovations", "since 2011"],
@@ -385,6 +403,17 @@ const enContent = {
       subtitle: "Compact verification of continuous upskilling.",
       issued: "Issued",
       view: "View Certificate",
+    },
+    zaakiychat: {
+      greeting: (koFiLink: string) =>
+        `Hi, I am Zaakiy AI, Sanu Khan's personal assistant. Ask about this site. Buy me a coffee: ${koFiLink}`,
+      dailyLimitReached: (email: string) =>
+        `Daily chat limit reached. Please connect on email: ${email}`,
+      aiTyping: "Zaakiy AI is typing...",
+      placeholder: "Type your question...",
+      sendButtonLabel: "Send",
+      errorOccurred: "Sorry, something went wrong. Please try again.",
+      scopeDisclaimer: "Short replies, site-data scope only",
     },
   },
 };

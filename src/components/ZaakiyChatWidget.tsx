@@ -63,9 +63,7 @@ export default function ZaakiyChatWidget({
   const email = content.footer.contact.email;
   const koFi = "https://ko-fi.com/sanukhan";
 
-  const greeting = isArabic
-    ? `مرحباً، أنا Zaakiy AI مساعد سانو خان. اسألني عن الموقع. ادعمني بقهوة: ${koFi}`
-    : `Hi, I am Zaakiy AI, Sanu Khan's personal assistant. Ask about this site. Buy me a coffee: ${koFi}`;
+  const greeting = content.ui.zaakiychat.greeting(koFi);
 
   const [messages, setMessages] = useState<ChatMessage[]>([
     { id: "greeting", role: "assistant", text: clipText(greeting) },
@@ -136,9 +134,7 @@ export default function ZaakiyChatWidget({
     if (usage >= DAILY_QUOTA) {
       appendMessage(
         "assistant",
-        isArabic
-          ? `وصلنا حد اليوم. تواصل عبر البريد: ${email}`
-          : `Daily chat limit reached. Please connect on email: ${email}`,
+        content.ui.zaakiychat.dailyLimitReached(email),
       );
       return;
     }
@@ -193,12 +189,7 @@ export default function ZaakiyChatWidget({
       if (!(err instanceof Error && err.message === "service_error")) {
         console.error("[ZaakiyChat]", err);
       }
-      appendMessage(
-        "assistant",
-        isArabic
-          ? "عذراً، حدث خطأ. يُرجى المحاولة مجدداً."
-          : "Sorry, something went wrong. Please try again.",
-      );
+      appendMessage("assistant", content.ui.zaakiychat.errorOccurred);
     } finally {
       setLoading(false);
     }
@@ -272,7 +263,7 @@ export default function ZaakiyChatWidget({
             ))}
             {loading && (
               <div className="w-fit rounded-xl border border-default bg-[#20222b] px-3 py-2 text-[12px] text-secondary">
-                {isArabic ? "Zaakiy AI يكتب..." : "Zaakiy AI is typing..."}
+                {content.ui.zaakiychat.aiTyping}
               </div>
             )}
           </div>
@@ -285,24 +276,20 @@ export default function ZaakiyChatWidget({
                 onKeyDown={onKeyDown}
                 rows={1}
                 maxLength={400}
-                placeholder={
-                  isArabic ? "اكتب سؤالك..." : "Type your question..."
-                }
+                placeholder={content.ui.zaakiychat.placeholder}
                 className="min-h-[40px] flex-1 resize-none rounded-lg border border-default bg-secondary px-3 py-2 text-[13px] text-primary outline-none placeholder:text-secondary focus:border-accent-soft"
               />
               <button
                 type="submit"
                 disabled={loading || !input.trim()}
                 className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-accent text-on-accent transition-opacity disabled:cursor-not-allowed disabled:opacity-55"
-                aria-label={isArabic ? "إرسال" : "Send"}
+                aria-label={content.ui.zaakiychat.sendButtonLabel}
               >
                 <Send className="h-4 w-4" />
               </button>
             </div>
             <p className="mt-1 text-[10px] text-secondary">
-              {isArabic
-                ? "ردود قصيرة وضمن بيانات الموقع فقط"
-                : "Short replies, site-data scope only"}
+              {content.ui.zaakiychat.scopeDisclaimer}
             </p>
           </form>
         </div>

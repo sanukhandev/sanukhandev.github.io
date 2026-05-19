@@ -37,6 +37,16 @@ export const profile = {
       href: "mailto:hello@sanukhan.dev?subject=Hire%20Inquiry%20–%20SanuKhan.dev",
       variant: "hire" as const,
     },
+    {
+      label: "Download Resume",
+      href: "/Sanu Khan - Resume.pdf",
+      variant: "download" as const,
+    },
+    {
+      label: "LinkedIn",
+      href: "https://www.linkedin.com/in/sanukhan/",
+      variant: "social" as const,
+    },
   ],
   avatarUrl: "/assets/images/sanu.avif",
 };
