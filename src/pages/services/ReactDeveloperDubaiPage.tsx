@@ -41,7 +41,7 @@ export default function ReactDeveloperDubaiPage() {
       cta={{
         text: "Need a React developer Dubai teams trust for scale?",
         action: "Start a Frontend Architecture Conversation",
-        href: "mailto: hello@sanukhan.dev?subject=React%20Developer%20Dubai",
+        href: "mailto:hello@sanukhan.dev?subject=React%20Developer%20Dubai",
       }}
       links={[
         {

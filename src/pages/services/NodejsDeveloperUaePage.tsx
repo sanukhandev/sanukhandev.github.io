@@ -41,7 +41,7 @@ export default function NodejsDeveloperUaePage() {
       cta={{
         text: "Need a Node.js developer UAE teams can scale with?",
         action: "Discuss Your Backend Roadmap",
-        href: "mailto: hello@sanukhan.dev?subject=Node.js%20Developer%20UAE",
+        href: "mailto:hello@sanukhan.dev?subject=Node.js%20Developer%20UAE",
       }}
       links={[
         {

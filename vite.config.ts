@@ -1,6 +1,5 @@
 import { defineConfig, loadEnv, type PluginOption } from "vite";
 import react from "@vitejs/plugin-react-swc";
-import viteCompression from "vite-plugin-compression";
 import path from "path";
 import { fileURLToPath } from "url";
 import { createRequire } from "module";
@@ -293,25 +292,6 @@ export default defineConfig(({ command, mode }) => {
   const plugins: PluginOption[] = [react(), createZaakiyApiWrapper(env)];
   const isCiBuild = process.env.CI === "true" || process.env.VERCEL === "1";
   const shouldPrerender = mode === "production" && !isCiBuild;
-
-  // Skip pre-compressed asset generation on Vercel — Vercel's edge handles
-  // brotli/gzip compression automatically and serving .br/.gz companion files
-  // from the deploy directory causes MIME-type ambiguity (Content-Type:
-  // application/octet-stream instead of application/javascript).
-  if (!isCiBuild) {
-    plugins.push(
-      viteCompression({
-        algorithm: "gzip",
-        ext: ".gz",
-        deleteOriginFile: false,
-      }),
-      viteCompression({
-        algorithm: "brotliCompress",
-        ext: ".br",
-        deleteOriginFile: false,
-      }),
-    );
-  }
 
   // vite-plugin-prerender has ESM/CJS interop issues in dev config loading.
   // Also skip it in CI/Vercel because Puppeteer requires system libs

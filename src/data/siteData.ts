@@ -34,7 +34,7 @@ export const profile = {
   ctas: [
     {
       label: "Hire Me",
-      href: "mailto: hello@sanukhan.dev?subject=Hire%20Inquiry%20–%20SanuKhan.dev",
+      href: "mailto:hello@sanukhan.dev?subject=Hire%20Inquiry%20–%20SanuKhan.dev",
       variant: "hire" as const,
     },
     {
@@ -455,7 +455,7 @@ export const footer = {
   ],
   servicesLinks: [],
   contact: {
-    email: " hello@sanukhan.dev",
+    email: "hello@sanukhan.dev",
     phone: "+971563860850",
     location: "Dubai, UAE",
     cta: { label: "Connect", href: "#contact" },
