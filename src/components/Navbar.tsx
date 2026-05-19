@@ -1,6 +1,7 @@
 import { memo, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Moon, Sun, Download } from "lucide-react";
+import { Menu, X, Moon, Sun, Download, Globe, ArrowUpRight } from "lucide-react";
+import CoffeeIconAnimated from "@/components/CoffeeIconAnimated";
 import { useSiteContent } from "@/data/siteContent";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -24,9 +25,11 @@ function Navbar() {
     !isHomePage && nav.cta.href.startsWith("#")
       ? `/${nav.cta.href}`
       : nav.cta.href;
+  const resumeCta = profile.ctas.find((cta) => cta.variant === "download");
   const resumeLabel =
-    profile.ctas.find((cta) => cta.variant === "resume")?.label ||
+    resumeCta?.label ||
     (isArabic ? "تحميل السيرة الذاتية" : "Download Resume");
+  const resumeHref = resumeCta?.href || "/Sanu Khan - Resume.pdf";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -330,7 +333,7 @@ function Navbar() {
             )}
           >
             <a
-              href="/Sanu Khan - Resume.pdf"
+              href={resumeHref}
               download
               onClick={() => {
                 trackEvent("download_resume_click", {

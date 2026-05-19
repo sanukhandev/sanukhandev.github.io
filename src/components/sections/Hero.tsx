@@ -385,8 +385,8 @@ function Hero() {
           <div className="mt-8 flex flex-wrap gap-3">
             {/* Let's Chat Button with animation */}
             <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={reducedMotion ? undefined : { opacity: 0, y: 10 }}
+              animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
               {profile.ctas
@@ -395,7 +395,9 @@ function Hero() {
                   <Button
                     key={c.label}
                     asChild
-                    className="h-10 rounded-lg border border-accent/50 bg-transparent px-5 text-accent hover:text-white hover:scale-110 hover:-translate-y-1 transition-all duration-300 ease-out"
+                    className={`h-10 rounded-lg border border-accent/50 bg-transparent px-5 text-accent hover:text-white transition-all duration-300 ease-out ${
+                      reducedMotion ? "" : "hover:scale-110 hover:-translate-y-1"
+                    }`}
                   >
                     <a
                       href={c.href}
@@ -416,13 +418,15 @@ function Hero() {
 
             {/* Buy me a coffee Button with animation */}
             <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={reducedMotion ? undefined : { opacity: 0, y: 10 }}
+              animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.35 }}
             >
               <Button
                 asChild
-                className="h-10 rounded-lg border border-accent/50 bg-transparent px-5 text-accent hover:text-white hover:scale-110 hover:-translate-y-1 transition-all duration-300 ease-out"
+                className={`h-10 rounded-lg border border-accent/50 bg-transparent px-5 text-accent hover:text-white transition-all duration-300 ease-out ${
+                  reducedMotion ? "" : "hover:scale-110 hover:-translate-y-1"
+                }`}
               >
                 <a
                   href="https://ko-fi.com/sanukhan"
