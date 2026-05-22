@@ -1,4 +1,4 @@
-import { ArrowUpRight, Braces, FlaskConical, Globe, Shield } from "lucide-react";
+import { ArrowUpRight, Braces, FlaskConical, Globe } from "lucide-react";
 import { useLocale } from "@/hooks/use-locale";
 
 interface UtilityCard {
@@ -50,23 +50,10 @@ const utilityCardsAr: UtilityCard[] = [
   },
 ];
 
-const trustPills = [
-  "Browser-Local Processing",
-  "Privacy First",
-  "Developer Focused",
-];
-
-const trustPillsAr = [
-  "معالجة محلية داخل المتصفح",
-  "الخصوصية أولاً",
-  "موجّه للمطور",
-];
-
 export default function AruvixSection() {
   const { locale } = useLocale();
   const isArabic = locale === "ar";
   const sectionUtilityCards = isArabic ? utilityCardsAr : utilityCards;
-  const sectionTrustPills = isArabic ? trustPillsAr : trustPills;
 
   return (
     <section id="aruvix" className="section-pad relative overflow-hidden">
@@ -104,17 +91,11 @@ export default function AruvixSection() {
               : "Aruvix is a focused toolkit for faster formatting, API inspection, and quality validation across modern engineering workflows."}
           </p>
 
-          <div className="mt-4 flex flex-wrap gap-2">
-            {sectionTrustPills.map((pill) => (
-              <span
-                key={pill}
-                className="inline-flex items-center gap-1.5 rounded-full border border-default bg-secondary/50 px-3 py-1 text-[11px] font-medium text-secondary"
-              >
-                <Shield className="h-3 w-3 text-accent opacity-70" />
-                {pill}
-              </span>
-            ))}
-          </div>
+          <p className="mt-2 text-[12px] leading-relaxed text-secondary/75">
+            {isArabic
+              ? "منصة مركّزة على السرعة، الجودة، وتقليل الاحتكاك اليومي في سير عمل المطورين."
+              : "A compact toolkit built for speed, quality, and lower day-to-day engineering friction."}
+          </p>
         </div>
 
         <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">

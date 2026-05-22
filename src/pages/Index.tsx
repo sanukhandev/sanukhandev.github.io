@@ -100,13 +100,13 @@ const Index = () => {
         <main>
           <Hero />
           <Suspense fallback={sectionFallback}>
-            <Skills />
             <Services />
-            <Works />
-            <BlogPreview />
+            <Certifications />
+            <Skills />
             <ZaakiyHighlights />
             <AruvixSection />
-            <Certifications />
+            <Works />
+            <BlogPreview />
           </Suspense>
         </main>
         <Suspense fallback={null}>

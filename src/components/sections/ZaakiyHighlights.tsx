@@ -240,6 +240,54 @@ const stackPoints = {
   ],
 };
 
+const outcomes = {
+  en: {
+    reduces: [
+      "Operational latency",
+      "Manual overhead",
+      "Workflow friction",
+      "Infrastructure cost leakage",
+    ],
+    improves: [
+      "Response speed",
+      "Deterministic operations",
+      "Enterprise scalability",
+      "Operational transparency",
+    ],
+  },
+  ar: {
+    reduces: [
+      "الكمون التشغيلي",
+      "الأعمال اليدوية",
+      "احتكاك سير العمل",
+      "هدر تكلفة البنية التحتية",
+    ],
+    improves: [
+      "سرعة الاستجابة",
+      "عمليات أكثر حتمية",
+      "قابلية توسع مؤسسية",
+      "شفافية تشغيلية أعلى",
+    ],
+  },
+};
+
+const longTermVision = {
+  en: [
+    "Understand business operations contextually",
+    "Assist teams with role-aware intelligence",
+    "Orchestrate workflows autonomously",
+    "Monitor infrastructure intelligently",
+    "Generate enterprise intelligence in realtime",
+  ],
+  ar: [
+    "فهم العمليات التجارية سياقياً",
+    "مساندة الفرق بذكاء واعٍ بالأدوار",
+    "تنسيق سير العمل بشكل ذاتي",
+    "مراقبة البنية التحتية بذكاء",
+    "توليد ذكاء مؤسسي لحظياً",
+  ],
+};
+
 export default function ZaakiyHighlights() {
   const { locale } = useLocale();
   const isArabic = locale === "ar";
@@ -250,6 +298,8 @@ export default function ZaakiyHighlights() {
   const blocks = isArabic ? capabilityBlocks.ar : capabilityBlocks.en;
   const architecture = isArabic ? architecturePoints.ar : architecturePoints.en;
   const stack = isArabic ? stackPoints.ar : stackPoints.en;
+  const impact = isArabic ? outcomes.ar : outcomes.en;
+  const visionFuture = isArabic ? longTermVision.ar : longTermVision.en;
 
   return (
     <section id="zaakiy" className="section-pad relative overflow-hidden">
@@ -429,6 +479,56 @@ export default function ZaakiyHighlights() {
             </p>
             <ul className="space-y-1.5 text-[12px] text-secondary">
               {stack.map((item) => (
+                <li key={item} className="flex items-start gap-1.5">
+                  <span className="mt-1.5 h-1 w-1 rounded-full bg-accent" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </article>
+        </div>
+
+        <div className="mt-6 grid gap-4 lg:grid-cols-2">
+          <article className="rounded-[16px] border border-default bg-secondary/30 p-4">
+            <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-secondary opacity-70">
+              {isArabic ? "الأثر التشغيلي" : "Operational Impact"}
+            </p>
+            <div className="grid gap-3 sm:grid-cols-2">
+              <div>
+                <p className="mb-1.5 text-[11px] font-semibold text-secondary opacity-70">
+                  {isArabic ? "تقليل" : "Reduces"}
+                </p>
+                <ul className="space-y-1.5 text-[12px] text-secondary">
+                  {impact.reduces.map((item) => (
+                    <li key={item} className="flex items-start gap-1.5">
+                      <span className="mt-1.5 h-1 w-1 rounded-full bg-border" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <p className="mb-1.5 text-[11px] font-semibold text-accent">
+                  {isArabic ? "تحسين" : "Improves"}
+                </p>
+                <ul className="space-y-1.5 text-[12px] text-secondary">
+                  {impact.improves.map((item) => (
+                    <li key={item} className="flex items-start gap-1.5">
+                      <span className="mt-1.5 h-1 w-1 rounded-full bg-accent" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </article>
+
+          <article className="rounded-[16px] border border-accent-soft bg-accent/5 p-4">
+            <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-accent">
+              {isArabic ? "الرؤية طويلة المدى" : "Long-Term Vision"}
+            </p>
+            <ul className="space-y-1.5 text-[12px] text-secondary">
+              {visionFuture.map((item) => (
                 <li key={item} className="flex items-start gap-1.5">
                   <span className="mt-1.5 h-1 w-1 rounded-full bg-accent" />
                   <span>{item}</span>
