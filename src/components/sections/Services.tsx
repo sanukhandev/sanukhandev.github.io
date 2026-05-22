@@ -7,8 +7,10 @@ import {
   Network,
   CheckCircle2,
 } from "lucide-react";
+import { motion } from "framer-motion";
 import { useSiteContent } from "@/data/siteContent";
 import { SectionHeading, TechTag } from "@/components/shared/SectionHeading";
+import { staggerContainer, staggerItem } from "@/lib/animations";
 
 const roleIcons = [Briefcase, Building2, Network, Cpu, Globe, History];
 
@@ -19,14 +21,18 @@ const getStartYear = (duration: string) => {
 
 export default function Services() {
   const { services, ui } = useSiteContent();
+  const years = services
+    .map((item) => getStartYear(item.duration))
+    .filter(Boolean);
 
   return (
-    <section id="experience" className="section-pad">
+    <section id="experience" className="section-pad surface-1 relative overflow-hidden">
       <div className="container-narrow">
         <SectionHeading
           title={ui.experience.title}
           subtitle={ui.experience.subtitle}
           align="left"
+          accentMark
         />
 
         {/* Career stat pills */}
@@ -45,15 +51,36 @@ export default function Services() {
           </span>
         </div>
 
-        <div className="relative">
-          <div className="absolute left-[19px] top-2 bottom-2 w-px bg-gradient-to-b from-accent via-jet-black-800 to-transparent" />
+        <div className="relative grid gap-8 lg:grid-cols-[170px_1fr]">
+          <aside className="hidden lg:block">
+            <div className="sticky top-24 space-y-3">
+              <p className="micro-label text-secondary/70">Timeline</p>
+              {years.map((year) => (
+                <div key={year} className="font-display text-[32px] font-extrabold leading-none tracking-[-0.04em] text-primary/18">
+                  {year}
+                </div>
+              ))}
+            </div>
+          </aside>
 
-          <div className="space-y-5">
+          <motion.div
+            className="space-y-5"
+            variants={staggerContainer(0.1)}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+          >
+          <div className="absolute left-[19px] top-2 bottom-2 w-px bg-gradient-to-b from-accent via-jet-black-800 to-transparent" />
             {services.map((item, index) => {
               const Icon = roleIcons[index % roleIcons.length];
               const startYear = getStartYear(item.duration);
               return (
-                <article key={item.company} className="group relative pl-14">
+                <motion.article
+                  key={item.company}
+                  variants={staggerItem}
+                  className="group relative pl-14"
+                  whileHover={{ y: -4, scale: 1.004 }}
+                >
                   {startYear && (
                     <span className="timeline-year-shimmer timeline-year-vertical absolute -left-[58px] top-8 hidden origin-left whitespace-nowrap sm:block">
                       {startYear}
@@ -79,7 +106,7 @@ export default function Services() {
 
                   <div
                     className={[
-                      "premium-card p-5 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:border-[#38c755]/30",
+                      "glass-card p-5 transition-all duration-300 group-hover:border-[#38c755]/30",
                       item.current ? "border-accent-soft" : "",
                     ].join(" ")}
                   >
@@ -134,13 +161,13 @@ export default function Services() {
                       ))}
                     </div>
                   </div>
-                </article>
+                </motion.article>
               );
             })}
-          </div>
+          </motion.div>
 
           <nav
-            className="mt-8 flex flex-wrap gap-3"
+            className="mt-8 flex flex-wrap gap-3 lg:col-start-2"
             aria-label="Experience section internal navigation"
           >
             <a

@@ -13,6 +13,9 @@ const Skills = lazy(() => import("@/components/sections/Skills"));
 const ZaakiyHighlights = lazy(
   () => import("@/components/sections/ZaakiyHighlights"),
 );
+const EngineeringSystemMap = lazy(
+  () => import("@/components/sections/EngineeringSystemMap"),
+);
 const AruvixSection = lazy(() => import("@/components/sections/AruvixSection"));
 const BlogPreview = lazy(() => import("@/components/sections/BlogPreview"));
 const Certifications = lazy(
@@ -98,15 +101,36 @@ const Index = () => {
         />
         <Navbar />
         <main>
-          <Hero />
+          <div className="surface-1">
+            <Hero />
+          </div>
+          <span className="gradient-sep block" aria-hidden />
           <Suspense fallback={sectionFallback}>
-            <Skills />
-            <Services />
-            <Works />
-            <BlogPreview />
-            <ZaakiyHighlights />
-            <AruvixSection />
-            <Certifications />
+            <div className="surface-2">
+              <Skills />
+            </div>
+            <div className="surface-1">
+              <Services />
+            </div>
+            <span className="gradient-sep block" aria-hidden />
+            <div className="surface-1">
+              <Works />
+            </div>
+            <div className="surface-1">
+              <EngineeringSystemMap />
+            </div>
+            <div className="surface-2">
+              <BlogPreview />
+            </div>
+            <div className="surface-2">
+              <ZaakiyHighlights />
+            </div>
+            <div className="surface-1">
+              <AruvixSection />
+            </div>
+            <div className="surface-2">
+              <Certifications />
+            </div>
           </Suspense>
         </main>
         <Suspense fallback={null}>
