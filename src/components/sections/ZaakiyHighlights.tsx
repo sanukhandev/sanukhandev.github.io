@@ -1,542 +1,234 @@
-import {
-  Activity,
-  Bot,
-  Building2,
-  MessageSquareText,
-  Shield,
-  Workflow,
-} from "lucide-react";
+import { Activity, ArrowUpRight, MessageSquareText, ShieldCheck, Workflow } from "lucide-react";
+import { motion, useReducedMotion } from "framer-motion";
 import { useLocale } from "@/hooks/use-locale";
+import { useSiteContent } from "@/data/siteContent";
 
-const metaPills = [
-  "AI-Native Ops Layer",
-  "Realtime Enterprise Orchestration",
-  "Autonomous Monitoring",
-  "Workflow Intelligence",
-  "Enterprise Governance",
-];
-
-const metaPillsAr = [
-  "طبقة عمليات مدعومة بالذكاء الاصطناعي",
-  "تنسيق مؤسسي لحظي",
-  "مراقبة ذاتية",
-  "ذكاء سير العمل",
-  "حوكمة مؤسسية",
-];
-
-interface FeatureCard {
+interface Pillar {
   icon: React.ReactNode;
   title: string;
-  description: string;
+  detail: string;
 }
 
-interface CapabilityBlock {
-  title: string;
-  points: string[];
-}
+const uspEn = [
+  "AI-assisted operations",
+  "Realtime visibility",
+  "Workflow automation",
+  "Branch-aware governance",
+];
 
-const cards: { en: FeatureCard[]; ar: FeatureCard[] } = {
-  en: [
-    {
-      icon: <Bot className="h-4 w-4" />,
-      title: "AI-Native Operational Platform",
-      description:
-        "An embedded intelligence layer that understands organizational context, workflow states, permissions, and realtime business events.",
-    },
-    {
-      icon: <MessageSquareText className="h-4 w-4" />,
-      title: "Conversational Enterprise Operations",
-      description:
-        "Natural operational interactions for queries, approvals, summaries, reporting, and guided execution across systems.",
-    },
-    {
-      icon: <Activity className="h-4 w-4" />,
-      title: "Realtime Operational Intelligence",
-      description:
-        "Live dashboards, event-driven notifications, and streaming responses for low-latency visibility and faster operational decisions.",
-    },
-    {
-      icon: <Workflow className="h-4 w-4" />,
-      title: "Autonomous Ops Intelligence",
-      description:
-        "Continuous observation of system health, failures, anomalies, and infrastructure events with AI-assisted escalation and analysis.",
-    },
-    {
-      icon: <Building2 className="h-4 w-4" />,
-      title: "Multi-Branch Enterprise Intelligence",
-      description:
-        "Branch-aware governance, role-aware visibility, centralized intelligence, and contextual responses for enterprise-scale ecosystems.",
-    },
-  ],
-  ar: [
-    {
-      icon: <Bot className="h-4 w-4" />,
-      title: "منصة عمليات مدعومة بالذكاء الاصطناعي",
-      description:
-        "طبقة ذكاء مدمجة تفهم سياق المؤسسة، وحالات سير العمل، والصلاحيات، والأحداث اللحظية لتنسيق العمليات.",
-    },
-    {
-      icon: <MessageSquareText className="h-4 w-4" />,
-      title: "عمليات مؤسسية محادثية",
-      description:
-        "تفاعل تشغيلي طبيعي للاستعلامات والاعتمادات والملخصات والتقارير وتنفيذ المهام عبر الأنظمة.",
-    },
-    {
-      icon: <Activity className="h-4 w-4" />,
-      title: "ذكاء تشغيلي لحظي",
-      description:
-        "لوحات حية وإشعارات مدفوعة بالأحداث واستجابات متدفقة لرؤية تشغيلية منخفضة الكمون.",
-    },
-    {
-      icon: <Workflow className="h-4 w-4" />,
-      title: "ذكاء عمليات ذاتي",
-      description:
-        "مراقبة مستمرة لصحة النظام والأعطال والشذوذات مع دعم تحليل الحوادث والتصعيد الذكي.",
-    },
-    {
-      icon: <Building2 className="h-4 w-4" />,
-      title: "ذكاء مؤسسي متعدد الفروع",
-      description:
-        "حوكمة واعية للفروع، ورؤية حسب الأدوار، وذكاء مركزي، واستجابات سياقية لمؤسسات واسعة النطاق.",
-    },
-  ],
-};
+const uspAr = [
+  "عمليات مدعومة بالذكاء الاصطناعي",
+  "رؤية لحظية",
+  "أتمتة سير العمل",
+  "حوكمة واعية للفروع",
+];
 
-const coreVision = {
-  en: {
-    from: [
-      "Static record management",
-      "Disconnected workflows",
-      "Manual operations",
-      "Reactive monitoring",
-    ],
-    to: [
-      "AI-assisted operations",
-      "Realtime enterprise orchestration",
-      "Intelligent workflow automation",
-      "Predictive operational intelligence",
-      "Autonomous monitoring ecosystems",
-    ],
+const pillarsEn: Pillar[] = [
+  {
+    icon: <MessageSquareText className="h-4 w-4" />,
+    title: "Natural Operational Interaction",
+    detail:
+      "Teams can ask, approve, summarize, and trigger workflows in plain language without jumping across heavy screens.",
   },
-  ar: {
-    from: [
-      "إدارة سجلات ثابتة",
-      "سير عمل منفصل",
-      "عمليات يدوية",
-      "مراقبة تفاعلية بعد الحدث",
-    ],
-    to: [
-      "عمليات مدعومة بالذكاء الاصطناعي",
-      "تنسيق مؤسسي لحظي",
-      "أتمتة ذكية لسير العمل",
-      "ذكاء تشغيلي تنبؤي",
-      "منظومة مراقبة ذاتية",
-    ],
+  {
+    icon: <Activity className="h-4 w-4" />,
+    title: "Live Operational Context",
+    detail:
+      "Realtime signals from workflows, alerts, and events help teams see what matters now and act earlier.",
   },
-};
-
-const capabilityBlocks: { en: CapabilityBlock[]; ar: CapabilityBlock[] } = {
-  en: [
-    {
-      title: "Operational Intelligence",
-      points: [
-        "AI-generated insights",
-        "Predictive operational analysis",
-        "Workflow anomaly detection",
-      ],
-    },
-    {
-      title: "Realtime Infrastructure",
-      points: [
-        "Live operational updates",
-        "Event-driven architecture",
-        "Streaming AI interfaces",
-      ],
-    },
-    {
-      title: "Enterprise Governance",
-      points: [
-        "RBAC-aware intelligence",
-        "Workflow traceability",
-        "Operational compliance",
-      ],
-    },
-    {
-      title: "Autonomous Monitoring",
-      points: [
-        "AI-assisted incident handling",
-        "Deployment intelligence",
-        "Self-reporting operational signals",
-      ],
-    },
-  ],
-  ar: [
-    {
-      title: "الذكاء التشغيلي",
-      points: [
-        "رؤى مولدة بالذكاء الاصطناعي",
-        "تحليل تشغيلي تنبؤي",
-        "اكتشاف شذوذات سير العمل",
-      ],
-    },
-    {
-      title: "البنية التحتية اللحظية",
-      points: [
-        "تحديثات تشغيلية مباشرة",
-        "عمارة مدفوعة بالأحداث",
-        "واجهات AI متدفقة",
-      ],
-    },
-    {
-      title: "الحوكمة المؤسسية",
-      points: [
-        "ذكاء واعٍ بالصلاحيات",
-        "تتبّع سير العمل",
-        "امتثال تشغيلي",
-      ],
-    },
-    {
-      title: "المراقبة الذاتية",
-      points: [
-        "معالجة حوادث مدعومة بالذكاء الاصطناعي",
-        "ذكاء النشر",
-        "إشارات تشغيلية ذاتية التقرير",
-      ],
-    },
-  ],
-};
-
-const architecturePoints = {
-  en: [
-    "GraphQL-first operational querying",
-    "Realtime infrastructure and event awareness",
-    "Modular enterprise services",
-    "Low-latency operational UX",
-    "Scalable branch-aware governance",
-  ],
-  ar: [
-    "استعلامات تشغيلية تعتمد GraphQL أولاً",
-    "بنية لحظية ووعي بالأحداث",
-    "خدمات مؤسسية معيارية",
-    "تجربة تشغيل منخفضة الكمون",
-    "حوكمة قابلة للتوسع وواعية للفروع",
-  ],
-};
-
-const stackPoints = {
-  en: [
-    "Contextual AI reasoning",
-    "Skill-based operational execution",
-    "Workflow automation orchestration",
-    "Predictive intelligence",
-    "Realtime streaming interactions",
-  ],
-  ar: [
-    "استدلال AI سياقي",
-    "تنفيذ تشغيلي قائم على المهارات",
-    "تنسيق أتمتة سير العمل",
-    "ذكاء تنبؤي",
-    "تفاعلات متدفقة لحظياً",
-  ],
-};
-
-const outcomes = {
-  en: {
-    reduces: [
-      "Operational latency",
-      "Manual overhead",
-      "Workflow friction",
-      "Infrastructure cost leakage",
-    ],
-    improves: [
-      "Response speed",
-      "Deterministic operations",
-      "Enterprise scalability",
-      "Operational transparency",
-    ],
+  {
+    icon: <Workflow className="h-4 w-4" />,
+    title: "Calm Automation Layer",
+    detail:
+      "Routine coordination, escalations, and checks run in the background so teams can focus on real decisions.",
   },
-  ar: {
-    reduces: [
-      "الكمون التشغيلي",
-      "الأعمال اليدوية",
-      "احتكاك سير العمل",
-      "هدر تكلفة البنية التحتية",
-    ],
-    improves: [
-      "سرعة الاستجابة",
-      "عمليات أكثر حتمية",
-      "قابلية توسع مؤسسية",
-      "شفافية تشغيلية أعلى",
-    ],
+];
+
+const pillarsAr: Pillar[] = [
+  {
+    icon: <MessageSquareText className="h-4 w-4" />,
+    title: "تفاعل تشغيلي طبيعي",
+    detail:
+      "يمكن للفرق الاستعلام والاعتماد والتلخيص وتنفيذ سير العمل دون التنقل بين واجهات معقدة.",
   },
+  {
+    icon: <Activity className="h-4 w-4" />,
+    title: "سياق تشغيلي مباشر",
+    detail:
+      "إشارات لحظية من الأحداث والتنبيهات وحالات سير العمل تساعد الفرق على اتخاذ القرار أسرع.",
+  },
+  {
+    icon: <Workflow className="h-4 w-4" />,
+    title: "أتمتة هادئة",
+    detail:
+      "التنسيق الروتيني والتصعيدات والتحققات تعمل في الخلفية ليبقى تركيز الفرق على القرارات الأهم.",
+  },
+];
+
+const trustEn = [
+  "Role-aware visibility",
+  "Branch-aware governance",
+  "Audit-ready workflows",
+];
+
+const trustAr = [
+  "رؤية حسب الدور",
+  "حوكمة واعية للفروع",
+  "تدفق قابل للتدقيق",
+];
+
+const container = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { staggerChildren: 0.08 } },
 };
 
-const longTermVision = {
-  en: [
-    "Understand business operations contextually",
-    "Assist teams with role-aware intelligence",
-    "Orchestrate workflows autonomously",
-    "Monitor infrastructure intelligently",
-    "Generate enterprise intelligence in realtime",
-  ],
-  ar: [
-    "فهم العمليات التجارية سياقياً",
-    "مساندة الفرق بذكاء واعٍ بالأدوار",
-    "تنسيق سير العمل بشكل ذاتي",
-    "مراقبة البنية التحتية بذكاء",
-    "توليد ذكاء مؤسسي لحظياً",
-  ],
+const item = {
+  hidden: { opacity: 0, y: 14 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.45, ease: [0.16, 1, 0.3, 1] },
+  },
 };
 
 export default function ZaakiyHighlights() {
   const { locale } = useLocale();
+  const { profile, ui } = useSiteContent();
   const isArabic = locale === "ar";
+  const reduceMotion = useReducedMotion();
 
-  const featureCards = isArabic ? cards.ar : cards.en;
-  const pills = isArabic ? metaPillsAr : metaPills;
-  const vision = isArabic ? coreVision.ar : coreVision.en;
-  const blocks = isArabic ? capabilityBlocks.ar : capabilityBlocks.en;
-  const architecture = isArabic ? architecturePoints.ar : architecturePoints.en;
-  const stack = isArabic ? stackPoints.ar : stackPoints.en;
-  const impact = isArabic ? outcomes.ar : outcomes.en;
-  const visionFuture = isArabic ? longTermVision.ar : longTermVision.en;
+  const usps = isArabic ? uspAr : uspEn;
+  const pillars = isArabic ? pillarsAr : pillarsEn;
+  const trust = isArabic ? trustAr : trustEn;
+  const roleBrand =
+    (profile as typeof profile & { roleBrand?: string }).roleBrand ??
+    "Zaakiy V3RSE";
 
   return (
     <section id="zaakiy" className="section-pad relative overflow-hidden">
       <div className="container-narrow">
-        <div className="grid gap-8 lg:grid-cols-[1fr_1px_1fr] lg:gap-0">
-          <div className="flex flex-col justify-center lg:pr-12 xl:pr-16">
-            <h2
-              className="text-[clamp(1.7rem,3.2vw,2.35rem)] font-extrabold leading-[1.1] tracking-tight text-primary"
-              style={{ maxWidth: "22ch" }}
-            >
-              {isArabic ? (
-                <>
-                  ما هو
-                  <br />
-                  <span
-                    style={{ fontFamily: "'Anta', sans-serif" }}
-                    className="text-accent opacity-90"
-                  >
-                    Zaakiy V3RSE
-                  </span>
-                  ؟
-                </>
-              ) : (
-                <>
-                  What is
-                  <br />
-                  <span
-                    style={{ fontFamily: "'Anta', sans-serif" }}
-                    className="text-accent opacity-90"
-                  >
-                    Zaakiy V3RSE
-                  </span>
-                  ?
-                </>
-              )}
-            </h2>
-
-            <p className="mt-4 max-w-[520px] text-[14px] leading-[1.85] text-secondary">
-              {isArabic
-                ? "ZaakiyVerse هي طبقة ذكاء تشغيلي للمؤسسات الحديثة، تحول الأنظمة التقليدية إلى بيئة تشغيل لحظية ذاتية مدعومة بالذكاء الاصطناعي."
-                : "ZaakiyVerse is the operational intelligence layer for modern enterprises, transforming traditional systems into AI-assisted, realtime, autonomous operations."}
-            </p>
-
-            <div className="mt-4 rounded-xl border border-accent-soft bg-accent/5 px-3.5 py-3">
-              <p className="text-[12px] leading-relaxed text-secondary">
-                {isArabic
-                  ? "تموضع المنتج: نظام قيادة عملياتي مدعوم بالذكاء الاصطناعي للمؤسسات متعددة الفروع." 
-                  : "Positioning: An AI-native operational command ecosystem built for realtime enterprise orchestration."}
+        <motion.div
+          initial={reduceMotion ? false : "hidden"}
+          whileInView={reduceMotion ? undefined : "visible"}
+          viewport={{ once: true, amount: 0.15 }}
+          variants={container}
+          className="rounded-[28px] border border-default/70 bg-secondary/20 p-6 sm:p-8 lg:p-10"
+        >
+          <div className="grid gap-8 lg:grid-cols-12 lg:items-start">
+            <motion.div variants={item} className="lg:col-span-5">
+              <p className="micro-label mb-3 text-accent">
+                {isArabic ? ui.hero.creatorLabel : "Explore Features"}
               </p>
-            </div>
 
-            <div className="mt-5 flex flex-wrap gap-2">
-              {pills.map((pill) => (
-                <span
-                  key={pill}
-                  className="inline-flex items-center gap-1.5 rounded-full border border-default bg-secondary/60 px-3 py-1 text-[11px] font-medium text-secondary"
-                >
-                  <span className="h-1.5 w-1.5 rounded-full bg-accent opacity-70" />
-                  {pill}
-                </span>
-              ))}
-            </div>
-
-            <div className="mt-5 grid gap-3 sm:grid-cols-2">
-              <div className="rounded-xl border border-default bg-secondary/35 px-3.5 py-3">
-                <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-secondary opacity-70">
-                  {isArabic ? "من" : "From"}
-                </p>
-                <ul className="space-y-1.5 text-[12px] text-secondary">
-                  {vision.from.map((item) => (
-                    <li key={item} className="flex items-start gap-1.5">
-                      <span className="mt-1.5 h-1 w-1 rounded-full bg-border" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="rounded-xl border border-accent-soft bg-accent/5 px-3.5 py-3">
-                <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-accent">
-                  {isArabic ? "إلى" : "To"}
-                </p>
-                <ul className="space-y-1.5 text-[12px] text-secondary">
-                  {vision.to.map((item) => (
-                    <li key={item} className="flex items-start gap-1.5">
-                      <span className="mt-1.5 h-1 w-1 rounded-full bg-accent" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          <div
-            aria-hidden
-            className="hidden lg:block w-px self-stretch"
-            style={{
-              background:
-                "linear-gradient(to bottom, transparent, var(--border) 20%, var(--border) 80%, transparent)",
-            }}
-          />
-
-          <div className="flex flex-col gap-0 lg:pl-12 xl:pl-16">
-            {featureCards.map((card, i) => (
-              <article
-                key={card.title}
-                className="group relative flex gap-4 border-b border-default py-4 last:border-b-0 transition-all duration-200 ease-out"
-              >
-                <div className="flex w-8 shrink-0 flex-col items-center pt-0.5">
-                  <span className="text-[11px] font-bold tabular-nums text-accent opacity-75 transition-opacity duration-200">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  {i < featureCards.length - 1 && (
-                    <div className="mt-2 flex-1 w-px bg-border opacity-30" />
-                  )}
-                </div>
-
-                <div className="flex-1 min-w-0">
-                  <div className="mb-2 flex items-center gap-2">
-                    <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md border border-default bg-secondary/80 text-accent transition-colors duration-200 group-hover:border-accent-soft">
-                      {card.icon}
+              <h2 className="font-display text-[clamp(2rem,4.8vw,3.4rem)] font-semibold leading-[1.03] tracking-[-0.035em] text-primary">
+                {isArabic ? (
+                  <>
+                    شغّل مؤسستك عبر
+                    <br />
+                    منصة عمليات
+                    <span
+                      style={{ fontFamily: "'Anta', sans-serif" }}
+                      className="text-accent"
+                    >
+                      {" "}{roleBrand}
                     </span>
-                    <h3 className="text-[14px] font-semibold text-primary">
-                      {card.title}
-                    </h3>
-                  </div>
+                  </>
+                ) : (
+                  <>
+                    Run enterprise operations
+                    <br />
+                    through
+                    <span
+                      style={{ fontFamily: "'Anta', sans-serif" }}
+                      className="text-accent"
+                    >
+                      {" "}{roleBrand}
+                    </span>
+                  </>
+                )}
+              </h2>
 
-                  <p className="text-[13px] leading-[1.7] text-secondary">
-                    {card.description}
-                  </p>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
+              <p className="mt-4 max-w-[44ch] font-body text-[14px] leading-relaxed text-secondary">
+                {isArabic
+                  ? "بدلاً من العمل عبر أدوات متقطعة، تمنحك المنصة تجربة تشغيل موحدة تجمع الرؤية، التنفيذ، والأتمتة في تدفق عملي واضح."
+                  : "Instead of working across fragmented tools, the platform gives teams one operational flow for visibility, execution, and automation."}
+              </p>
 
-        <div className="mt-9 h-px bg-border opacity-40" />
-
-        <div className="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-          {blocks.map((block) => (
-            <article
-              key={block.title}
-              className="rounded-[16px] border border-default bg-secondary/30 p-4"
-            >
-              <h3 className="text-[14px] font-semibold text-primary">{block.title}</h3>
-              <ul className="mt-2.5 space-y-1.5 text-[12px] text-secondary">
-                {block.points.map((point) => (
-                  <li key={point} className="flex items-start gap-1.5">
-                    <Shield className="mt-0.5 h-3 w-3 shrink-0 text-accent opacity-70" />
-                    <span>{point}</span>
-                  </li>
+              <div className="mt-6 flex flex-wrap gap-2">
+                {usps.map((pill) => (
+                  <span
+                    key={pill}
+                    className="inline-flex items-center gap-1.5 rounded-full border border-default bg-secondary/55 px-3 py-1 text-[11px] font-medium text-secondary"
+                  >
+                    <span className="h-1.5 w-1.5 rounded-full bg-accent opacity-70" />
+                    {pill}
+                  </span>
                 ))}
-              </ul>
-            </article>
-          ))}
-        </div>
-
-        <div className="mt-6 grid gap-4 lg:grid-cols-2">
-          <article className="rounded-[16px] border border-default bg-secondary/30 p-4">
-            <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-secondary opacity-70">
-              {isArabic ? "الفلسفة المعمارية" : "Architectural Philosophy"}
-            </p>
-            <ul className="space-y-1.5 text-[12px] text-secondary">
-              {architecture.map((item) => (
-                <li key={item} className="flex items-start gap-1.5">
-                  <span className="mt-1.5 h-1 w-1 rounded-full bg-accent" />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </article>
-
-          <article className="rounded-[16px] border border-accent-soft bg-accent/5 p-4">
-            <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-accent">
-              {isArabic ? "مجموعة الذكاء" : "Intelligence Stack"}
-            </p>
-            <ul className="space-y-1.5 text-[12px] text-secondary">
-              {stack.map((item) => (
-                <li key={item} className="flex items-start gap-1.5">
-                  <span className="mt-1.5 h-1 w-1 rounded-full bg-accent" />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </article>
-        </div>
-
-        <div className="mt-6 grid gap-4 lg:grid-cols-2">
-          <article className="rounded-[16px] border border-default bg-secondary/30 p-4">
-            <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-secondary opacity-70">
-              {isArabic ? "الأثر التشغيلي" : "Operational Impact"}
-            </p>
-            <div className="grid gap-3 sm:grid-cols-2">
-              <div>
-                <p className="mb-1.5 text-[11px] font-semibold text-secondary opacity-70">
-                  {isArabic ? "تقليل" : "Reduces"}
-                </p>
-                <ul className="space-y-1.5 text-[12px] text-secondary">
-                  {impact.reduces.map((item) => (
-                    <li key={item} className="flex items-start gap-1.5">
-                      <span className="mt-1.5 h-1 w-1 rounded-full bg-border" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
               </div>
-              <div>
-                <p className="mb-1.5 text-[11px] font-semibold text-accent">
-                  {isArabic ? "تحسين" : "Improves"}
-                </p>
-                <ul className="space-y-1.5 text-[12px] text-secondary">
-                  {impact.improves.map((item) => (
-                    <li key={item} className="flex items-start gap-1.5">
-                      <span className="mt-1.5 h-1 w-1 rounded-full bg-accent" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </article>
 
-          <article className="rounded-[16px] border border-accent-soft bg-accent/5 p-4">
-            <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-accent">
-              {isArabic ? "الرؤية طويلة المدى" : "Long-Term Vision"}
-            </p>
-            <ul className="space-y-1.5 text-[12px] text-secondary">
-              {visionFuture.map((item) => (
-                <li key={item} className="flex items-start gap-1.5">
-                  <span className="mt-1.5 h-1 w-1 rounded-full bg-accent" />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </article>
-        </div>
+              <div className="mt-6 flex items-center gap-4">
+                <a
+                  href="#works"
+                  className="inline-flex items-center gap-2 rounded-lg border border-accent-soft bg-accent/10 px-4 py-2 text-[12px] font-semibold text-accent transition-colors hover:bg-accent/20"
+                >
+                  {isArabic ? "استعرض التطبيقات" : "Explore Applications"}
+                  <ArrowUpRight className="h-3.5 w-3.5" />
+                </a>
+                <span className="inline-flex items-center gap-1.5 text-[12px] text-secondary/75">
+                  <ShieldCheck className="h-3.5 w-3.5 text-accent" />
+                  {isArabic ? "جاهز لبيئات المؤسسات" : "Enterprise-ready workflows"}
+                </span>
+              </div>
+            </motion.div>
+
+            <motion.div variants={item} className="lg:col-span-7">
+              <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-6">
+                {pillars.map((pillar, i) => {
+                  const span = i === 1 ? "sm:col-span-2 lg:col-span-2" : "sm:col-span-1 lg:col-span-2";
+                  const offset = i === 0 ? "lg:mt-10" : i === 2 ? "lg:mt-4" : "";
+
+                  return (
+                    <motion.article
+                      key={pillar.title}
+                      className={`glass-card rounded-2xl border border-default/70 p-4 ${span} ${offset}`}
+                      whileHover={reduceMotion ? undefined : { y: -2 }}
+                      transition={{ duration: 0.18 }}
+                    >
+                      <div className="mb-2 flex items-center gap-2">
+                        <span className="flex h-8 w-8 items-center justify-center rounded-md border border-default bg-secondary/80 text-accent">
+                          {pillar.icon}
+                        </span>
+                        <h3 className="font-body text-[13px] font-semibold text-primary">
+                          {pillar.title}
+                        </h3>
+                      </div>
+                      <p className="font-body text-[12px] leading-[1.65] text-secondary">
+                        {pillar.detail}
+                      </p>
+                    </motion.article>
+                  );
+                })}
+              </div>
+
+              <div className="mt-4 rounded-xl border border-default/70 bg-secondary/35 p-3">
+                <p className="micro-label mb-2 text-secondary/80">
+                  {isArabic ? "ثقة تشغيلية" : "Operational Trust"}
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {trust.map((t) => (
+                    <span
+                      key={t}
+                      className="inline-flex items-center gap-1.5 rounded-full border border-default bg-secondary/55 px-2.5 py-1 text-[11px] text-secondary"
+                    >
+                      <span className="h-1.5 w-1.5 rounded-full bg-accent opacity-70" />
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
