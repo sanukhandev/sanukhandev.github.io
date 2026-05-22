@@ -2,13 +2,11 @@ import type { ComponentType } from "react";
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { ShoppingCart, Webhook, Boxes } from "lucide-react";
-import { motion } from "framer-motion";
 import { type WorkCategory } from "@/data/siteData";
 import { useSiteContent } from "@/data/siteContent";
 import { SectionHeading, TechTag } from "@/components/shared/SectionHeading";
 import { cn } from "@/lib/utils";
 import { trackEvent } from "@/utils/analytics";
-import { staggerContainer, staggerItem } from "@/lib/animations";
 
 const categoryIcons: Record<string, ComponentType<{ className?: string }>> = {
   Commerce: ShoppingCart,
@@ -63,14 +61,13 @@ export default function Works() {
   }, [filtered]);
 
   return (
-    <section id="works" className="section-pad surface-1 relative overflow-hidden">
+    <section id="works" className="section-pad">
       <div className="container-narrow">
         <SectionHeading
           eyebrow={ui.works.eyebrow}
           title={ui.works.title}
           subtitle={ui.works.subtitle}
           align="left"
-          accentMark
         />
 
         <div className="mb-8 flex flex-wrap gap-2">
@@ -90,75 +87,59 @@ export default function Works() {
           ))}
         </div>
 
-        <motion.div
-          className="space-y-6"
-          variants={staggerContainer(0.12)}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-        >
-          {filtered.map((w, index) => (
-            <motion.article
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {filtered.map((w) => (
+            <article
               key={w.title}
-              variants={staggerItem}
               data-project-name={w.title
                 .toLowerCase()
                 .replace(/[^a-z0-9]+/g, "_")
                 .replace(/^_+|_+$/g, "")}
-              className={cn(
-                "glass-card grid gap-5 overflow-hidden p-6 lg:grid-cols-2",
-                index % 2 === 1 && "lg:[&>*:first-child]:order-2",
-              )}
-              whileHover={{ y: -4 }}
+              className="premium-card flex flex-col p-6 transition-all duration-300 hover:-translate-y-1 hover:border-accent-soft"
             >
-              <div className="relative overflow-hidden rounded-2xl border border-default/70 bg-secondary p-5">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_10%_20%,rgba(56,199,85,0.15),transparent_50%),radial-gradient(circle_at_80%_70%,rgba(56,199,85,0.08),transparent_45%)]" />
-                <div className="relative flex h-full min-h-[180px] flex-col justify-between">
-                  <span className="micro-label text-secondary/80">Architecture Pattern</span>
-                  <h4 className="font-display text-[26px] font-bold leading-none tracking-[-0.04em] text-primary/85">
-                    {w.category}
-                  </h4>
-                  <p className="micro-label text-accent">{w.scope}</p>
-                </div>
+              <div className="mb-3 flex items-center justify-between">
+                <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent-soft ring-1 ring-accent/30">
+                  {(() => {
+                    const Icon = categoryIcons[w.category] ?? Boxes;
+                    return <Icon className="h-[18px] w-[18px] text-accent" />;
+                  })()}
+                </span>
+                <span className="text-[11px] font-medium uppercase tracking-wide text-secondary">
+                  {w.scope}
+                </span>
               </div>
 
-              <div>
-                <div className="mb-3 flex items-center justify-between">
-                  <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent-soft ring-1 ring-accent/30">
-                    {(() => {
-                      const Icon = categoryIcons[w.category] ?? Boxes;
-                      return <Icon className="h-[18px] w-[18px] text-accent" />;
-                    })()}
-                  </span>
-                  <span className="micro-label text-secondary">{w.scope}</span>
-                </div>
-
-                <h3 className="mb-4 font-display text-[24px] font-semibold leading-tight tracking-[-0.035em] text-primary">
-                  {w.title}
-                </h3>
-                <div className="space-y-3 font-body text-[15px] text-secondary">
-                  <p>
-                    <span className="font-semibold text-primary">{ui.works.problem}:</span>{" "}
-                    {w.problem}
-                  </p>
-                  <p>
-                    <span className="font-semibold text-primary">{ui.works.solution}:</span>{" "}
-                    {w.solution}
-                  </p>
-                  <p>
-                    <span className="font-semibold text-accent">{ui.works.outcome}:</span>{" "}
-                    {w.outcome}
-                  </p>
-                </div>
-                <div className="mt-4 flex flex-wrap gap-1.5">
-                  {w.tags.map((t) => (
-                    <TechTag key={t} label={t} />
-                  ))}
-                </div>
+              <h3 className="mb-4 text-[17px] font-semibold leading-snug text-primary">
+                {w.title}
+              </h3>
+              <div className="space-y-3 text-[15px] text-secondary">
+                <p>
+                  <span className="font-semibold text-primary">
+                    {ui.works.problem}:
+                  </span>{" "}
+                  {w.problem}
+                </p>
+                <p>
+                  <span className="font-semibold text-primary">
+                    {ui.works.solution}:
+                  </span>{" "}
+                  {w.solution}
+                </p>
+                <p>
+                  <span className="font-semibold text-accent">
+                    {ui.works.outcome}:
+                  </span>{" "}
+                  {w.outcome}
+                </p>
               </div>
-            </motion.article>
+              <div className="mt-4 flex flex-wrap gap-1.5">
+                {w.tags.map((t) => (
+                  <TechTag key={t} label={t} />
+                ))}
+              </div>
+            </article>
           ))}
-        </motion.div>
+        </div>
 
         <nav
           className="mt-8 flex flex-wrap gap-3"
