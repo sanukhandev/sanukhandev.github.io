@@ -41,7 +41,10 @@ export function HeroSection04() {
   };
 
   return (
-    <section className="font-body relative min-h-[86vh] overflow-hidden py-12 md:py-14 lg:min-h-screen">
+    <section
+      id="home"
+      className="font-body relative min-h-[86vh] overflow-hidden py-12 md:py-14 lg:min-h-screen"
+    >
       <motion.div
         className="relative z-20 mx-auto max-w-7xl px-6"
         variants={container}
@@ -49,9 +52,6 @@ export function HeroSection04() {
         animate={reduceMotion ? undefined : "visible"}
       >
         <motion.div className="relative" variants={reveal}>
-          <p className="font-body absolute -top-2 left-20 text-sm font-medium tracking-wider">
-            {isArabic ? "منذ 2011 |  13+ سنوات | دبي، الإمارات | مفتوح المصدر | مهندس" : "SINCE 2011 |  13+ YEARS | DUBAI, UAE | OPEN SOURCE | ARCHITECT | TECH LEAD | CONSULTANT | DEVELOPER | TECH ENTREPRENEUR | WRITER"}
-          </p>
           <h1 className="font-display relative z-20 text-center text-7xl font-bold tracking-[-7px] text-primary md:text-9xl md:tracking-[-14px] xl:text-[10rem] xl:tracking-[-1rem] leading-[0.95]">
             {isArabic ? (
               "مهندس"
@@ -59,33 +59,26 @@ export function HeroSection04() {
               "ARCHITECT"
             )}
           </h1>
-          <p className="font-body absolute -bottom-9 right-24 hidden text-4xl font-thin tracking-[6px] xl:block">
-            <span
-              style={{
-                fontFamily: "'Anta', sans-serif",
-                textShadow:
-                  "0 0 18px color-mix(in srgb, var(--accent) 28%, transparent)",
-              }}
-              className="text-accent"
-            >
-              {roleBrand}
-            </span>
+          <p className="font-body mt-3 px-4 text-center text-[11px] font-medium uppercase tracking-[0.14em] text-secondary md:text-xs">
+            {isArabic
+              ? "منذ 2011 | 13+ سنوات | دبي، الإمارات | مفتوح المصدر | مهندس"
+              : "SINCE 2011 | 13+ YEARS | DUBAI, UAE | OPEN SOURCE | ARCHITECT | TECH LEAD | CONSULTANT | DEVELOPER | TECH ENTREPRENEUR | WRITER"}
           </p>
+          
           <p className="font-body absolute -bottom-9 left-24 text-4xl font-thin tracking-[6px] xl:hidden">
             <span
+              className="brand-zaakiy text-accent"
               style={{
-                fontFamily: "'Anta', sans-serif",
                 textShadow:
                   "0 0 18px color-mix(in srgb, var(--accent) 28%, transparent)",
               }}
-              className="text-accent"
             >
               {roleBrand}
             </span>
           </p>
         </motion.div>
 
-        <motion.div className="relative grid grid-cols-1 gap-6 pt-12 md:grid-cols-3 md:items-center md:gap-8 md:pt-14" variants={reveal}>
+        <motion.div className="relative grid grid-cols-1 gap-6 md:grid-cols-3 md:items-center md:gap-8 " variants={reveal}>
           <div className="w-full md:self-center">
             <p className="text-primary font-body ml-auto max-w-xl text-right text-sm font-medium tracking-wide md:text-base">
               {isArabic ? profile.subtitle : profile.subtitle.toUpperCase()}
@@ -97,7 +90,7 @@ export function HeroSection04() {
           </div>
 
           <div className="flex w-full justify-center">
-            <div className="w-full max-w-[17rem] overflow-hidden opacity-90 md:max-w-[19rem]">
+            <div className="w-full max-w-[20rem] overflow-hidden opacity-90 md:max-w-[23rem]">
               <img
                 src={profile.avatarUrl}
                 alt={`${profile.name} portrait`}
@@ -116,22 +109,20 @@ export function HeroSection04() {
         </motion.div>
         <motion.div className="flex flex-wrap justify-center gap-3 pt-4" variants={reveal}>
           {primaryCtas.map((cta, index) => {
-            const isPrimary = index === 0;
             const isExternal = /^https?:\/\//i.test(cta.href);
 
             return (
               <motion.div
                 key={`${cta.label}-${cta.href}`}
-                initial={reduceMotion ? false : { opacity: 0, y: 10 }}
+                initial={reduceMotion ? undefined : { opacity: 0, y: 10 }}
                 animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: 0.08 * index }}
-                whileHover={reduceMotion ? undefined : { y: -2, scale: 1.02 }}
+                transition={{ duration: 0.5, delay: 0.2 + index * 0.15 }}
               >
                 <Button
-                  size="lg"
-                  variant={isPrimary ? "default" : "outline"}
+                  className={`h-10 rounded-lg border border-accent/50 bg-transparent px-5 text-accent hover:text-white transition-all duration-300 ease-out ${
+                    reduceMotion ? "" : "hover:scale-110 hover:-translate-y-1"
+                  }`}
                   asChild
-                  className={isPrimary ? "shadow-[0_10px_24px_-14px_rgba(56,199,85,0.75)]" : ""}
                 >
                   <a
                     href={cta.href}
@@ -146,9 +137,9 @@ export function HeroSection04() {
           })}
         </motion.div>
 
-        <motion.div className="mt-12 items-end justify-between md:mt-14 md:flex" variants={reveal}>
-          <div className="relative">
-            <div className="mb-8 h-36 w-60 overflow-hidden rounded-md border border-default bg-secondary p-4 shadow-lg md:mb-0">
+        <motion.div className="mt-1 flex flex-col gap-8 md:mt-1 md:grid md:grid-cols-[18rem_minmax(0,1fr)] md:items-center md:gap-16" variants={reveal}>
+          <div className="relative h-48 w-[18rem]">
+            <div className="h-36 w-60 overflow-hidden rounded-md border border-default bg-secondary p-4 shadow-lg">
               <p className="font-body text-xs uppercase tracking-wider text-secondary">
                 {showcaseWorks[0]?.scope ?? "Platform"}
               </p>
@@ -156,7 +147,7 @@ export function HeroSection04() {
                 {showcaseWorks[0]?.title ?? "Enterprise Systems"}
               </p>
             </div>
-            <div className="absolute left-6 -top-6 mb-8 h-36 w-60 overflow-hidden rounded-md border border-default bg-secondary p-4 shadow-lg md:mb-0">
+            <div className="absolute left-6 -top-6 h-36 w-60 overflow-hidden rounded-md border border-default bg-secondary p-4 shadow-lg">
               <p className="font-body text-xs uppercase tracking-wider text-secondary">
                 {showcaseWorks[1]?.scope ?? "Integration"}
               </p>
@@ -164,7 +155,7 @@ export function HeroSection04() {
                 {showcaseWorks[1]?.title ?? "Cloud Delivery"}
               </p>
             </div>
-            <div className="absolute left-12 -top-12 mb-8 h-36 w-60 overflow-hidden rounded-md border border-default bg-secondary p-4 shadow-lg md:mb-0">
+            <div className="absolute left-12 -top-12 h-36 w-60 overflow-hidden rounded-md border border-default bg-secondary p-4 shadow-lg">
               <p className="font-body text-xs uppercase tracking-wider text-secondary">
                 {showcaseWorks[2]?.scope ?? "Commerce"}
               </p>
@@ -173,15 +164,15 @@ export function HeroSection04() {
               </p>
             </div>
           </div>
-          <div>
-            <div className="flex items-center gap-2 md:justify-end">
+          <div className="md:self-center">
+            <div className="flex items-center gap-2 md:justify-start">
               <span className="font-body text-lg font-medium tracking-wider">
-                {isArabic ? "أحدث الأعمال" : "RECENT WORK"}
+                {isArabic ? "أحدث الخبرات" : "RECENT EXPERIENCE"}
               </span>
               <ArrowDownRight className="size-6" />
             </div>
 
-            <div className="mt-3 md:text-right">
+            <div className="md:text-left">
               <h2 className="font-display text-5xl uppercase tracking-[-4px]">
                 {isArabic ? "عمارة بلا حدود" : "Architecture without Limits"}
               </h2>

@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import TechParticles from "@/components/TechParticles";
-import Hero from "@/components/sections/Hero";
+import { HeroSection04 } from "@/components/ui/hero-04";
 import LocaleSwitchSkeleton from "@/components/LocaleSwitchSkeleton";
 import SeoMeta from "@/components/SeoMeta";
 import { useLocale } from "@/hooks/use-locale";
@@ -148,7 +148,7 @@ const Index = () => {
           animate={reducedMotion ? undefined : { opacity: 1 }}
           transition={{ duration: 0.65, ease: "easeOut" }}
         >
-          <Hero />
+          <HeroSection04 />
           <Suspense fallback={sectionFallback}>
             <FlowModule index={1} tone="muted">
               <Services />
