@@ -825,22 +825,35 @@
     text-shadow: 0 0 2px rgba(56, 199, 85, 0.2);
     transform: translateX(0);
   }
+}
 
 @media (max-width: 768px) {
+  .section-pad {
+    padding-top: 1.75rem;
+    padding-bottom: 1.75rem;
+  }
+
+  .section-flow {
+    gap: 0;
+  }
+
   .system-grid {
     background-size: 36px 36px;
     opacity: 0.18;
   }
 
   .system-module {
-    margin: 1rem auto;
+    margin: 0.45rem auto;
     border-radius: 16px;
+  }
+
+  .system-connector {
+    display: none;
   }
 
   .premium-card {
     border-radius: 12px;
   }
-}
 }
 
 .timeline-year-shimmer {
