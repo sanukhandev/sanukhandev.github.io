@@ -28,11 +28,11 @@ export default function BlogPreview() {
       <div className="container-narrow">
         <div className="flex items-end justify-between">
           <div>
-            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-accent opacity-80">
-              Tech Writing
+            <p className="text-[12px] font-semibold uppercase tracking-[0.16em] text-accent opacity-90">
+              Technical Insights
             </p>
-            <h2 className="mt-1 text-[28px] font-bold leading-tight tracking-tight text-primary">
-              WriteUps
+            <h2 className="mt-1 text-[clamp(2.1rem,4.4vw,2.8rem)] font-bold leading-tight tracking-tight text-primary">
+              Architecture Field Notes
             </h2>
           </div>
           <Link
@@ -44,8 +44,7 @@ export default function BlogPreview() {
           </Link>
         </div>
         <p className="mt-2 max-w-2xl text-[14px] leading-6 text-secondary">
-          Latest technical posts from Dev.to on architecture, backend systems,
-          and platform engineering.
+          Engineering analyses on distributed systems, operational telemetry, event-driven design, and enterprise integration strategies.
         </p>
         <div className="mt-6 grid gap-4 sm:grid-cols-2">
           {blogs.map((post) => (

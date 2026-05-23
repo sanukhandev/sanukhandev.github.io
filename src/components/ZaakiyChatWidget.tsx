@@ -214,8 +214,7 @@ export default function ZaakiyChatWidget({
           <div className="flex items-center justify-between border-b border-default px-4 py-3">
             <div>
               <h3
-                className="text-[15px] font-semibold text-primary"
-                style={{ fontFamily: "'Anta', sans-serif" }}
+                className="brand-zaakiy text-[15px] font-semibold text-primary"
               >
                 Zaakiy AI
               </h3>
@@ -224,8 +223,7 @@ export default function ZaakiyChatWidget({
                   href="https://zaakiy.io"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-primary transition-colors"
-                  style={{ fontFamily: "'Anta', sans-serif" }}
+                  className="brand-zaakiy transition-colors hover:text-primary"
                 >
                   Zv3 - ZaakiyV3RSE
                 </a>
@@ -307,7 +305,7 @@ export default function ZaakiyChatWidget({
         aria-label="Toggle Zaakiy AI chat"
       >
         <MessageCircle className="h-4 w-4" />
-        <span style={{ fontFamily: "'Anta', sans-serif" }}>Zaakiy AI</span>
+        <span className="brand-zaakiy">Zaakiy AI</span>
       </button>
     </div>
   );

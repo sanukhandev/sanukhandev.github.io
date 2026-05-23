@@ -1,7 +1,8 @@
 import type { ComponentType } from "react";
 import { Cloud, Server, Monitor, Container, Network } from "lucide-react";
 import { useSiteContent } from "@/data/siteContent";
-import { SectionHeading, TechTag } from "@/components/shared/SectionHeading";
+import { SectionHeading } from "@/components/shared/SectionHeading";
+import { ExpandableSkillTags } from "@/components/ui/expandable-skill-tags";
 
 const clusterIcons: Record<string, ComponentType<{ className?: string }>> = {
   "Cloud & Architecture": Cloud,
@@ -23,9 +24,9 @@ export default function Skills() {
     <section id="stack" className="section-pad">
       <div className="container-narrow">
         <SectionHeading
-          eyebrow={skills.eyebrow}
-          title={skills.title}
-          subtitle={skills.intro}
+          eyebrow="Architecture Expertise"
+          title="Core Capability Domains"
+          subtitle="Cloud-native architectures, distributed backends, and integration systems engineered for operational resilience and scale."
         />
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -40,15 +41,14 @@ export default function Skills() {
                   <span className="ring-accent-soft flex h-8 w-8 items-center justify-center rounded-lg bg-accent-soft ring-1">
                     <Icon className="h-4 w-4 text-accent" />
                   </span>
-                  <h3 className="text-[15px] font-semibold tracking-wide text-primary">
-                    {cluster.title}
-                  </h3>
                 </div>
-                <div className="flex flex-wrap gap-2">
-                  {cluster.tags.map((tag) => (
-                    <TechTag key={tag} label={tag} />
-                  ))}
-                </div>
+                <ExpandableSkillTags
+                  title={cluster.title}
+                  skills={cluster.tags}
+                  initialCount={6}
+                  expandLabel={skills.expandLabel}
+                  collapseLabel={skills.collapseLabel}
+                />
               </article>
             );
           })}
