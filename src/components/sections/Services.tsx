@@ -1,11 +1,3 @@
-import {
-  Briefcase,
-  History,
-  Building2,
-  Cpu,
-  Globe,
-  Network,
-} from "lucide-react";
 import { useMemo } from "react";
 import { useSiteContent } from "@/data/siteContent";
 import { SectionHeading } from "@/components/shared/SectionHeading";
@@ -14,13 +6,6 @@ import {
   type ExperienceItemType,
   type ExperiencePositionIconType,
 } from "@/components/ui/work-experience";
-
-const roleIcons = [Briefcase, Building2, Network, Cpu, Globe, History];
-
-const getStartYear = (duration: string) => {
-  const match = duration.match(/\b(19|20)\d{2}\b/);
-  return match ? match[0] : "";
-};
 
 export default function Services() {
   const { services, ui } = useSiteContent();

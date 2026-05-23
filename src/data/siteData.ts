@@ -38,7 +38,7 @@ export const profile = {
       variant: "hire" as const,
     },{
       label: "Buy Me a Coffee",
-      href: "https://kofii.com/sanukhandev",
+      href: "https://ko-fi.com/sanukhan",
       variant: "buyMeACoffee" as const,
     }
   ],
@@ -328,7 +328,7 @@ export const works: Array<{
     scope: "Enterprise monitoring systems",
     category: "Infrastructure",
   },
-]
+];
 
 export const articles = [
   {

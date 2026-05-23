@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import React from "react";
 import { ArrowDownRight } from "@aliimam/icons";
 import { motion, useReducedMotion } from "framer-motion";
