@@ -1,6 +1,7 @@
 import { memo, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Moon, Sun, Download, Globe, ArrowUpRight } from "lucide-react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import CoffeeIconAnimated from "@/components/CoffeeIconAnimated";
 import { useSiteContent } from "@/data/siteContent";
 import { Button } from "@/components/ui/button";
@@ -19,6 +20,7 @@ function Navbar() {
   const { nav, profile } = useSiteContent();
   const isLight = theme === "light";
   const isArabic = locale === "ar";
+  const reducedMotion = useReducedMotion();
   const isHomePage = location.pathname === "/";
   const isBlogPage = location.pathname.startsWith("/blog");
   const ctaHref =
@@ -32,7 +34,7 @@ function Navbar() {
   const resumeHref = resumeCta?.href || "/Sanu Khan - Resume.pdf";
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
+    const onScroll = () => setScrolled(window.scrollY > 24);
     onScroll();
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
@@ -68,19 +70,38 @@ function Navbar() {
   }, []);
 
   return (
-    <header
-      className={cn(
-        "fixed inset-x-0 top-0 z-50 border-b transition-all duration-300",
-        scrolled
-          ? isLight
-            ? "border-[#d4dde1] bg-primary-glass backdrop-blur-xl"
-            : "border-default bg-primary-glass backdrop-blur-xl"
-          : isLight
-            ? "border-transparent bg-primary-glass"
-            : "border-transparent bg-primary-glass",
-      )}
+    <motion.header
+      className="fixed inset-x-0 top-0 z-50 pt-2 sm:pt-3"
+      initial={reducedMotion ? false : { y: -22, opacity: 0 }}
+      animate={reducedMotion ? undefined : { y: 0, opacity: 1 }}
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
     >
-      <div className="container-narrow flex h-16 items-center justify-between">
+      <motion.div
+        className={cn(
+          "mx-auto w-[min(1180px,calc(100%-1rem))] sm:w-[min(1180px,calc(100%-2rem))]",
+          "transition-colors duration-300",
+          scrolled
+            ? isLight
+              ? "rounded-full border border-[#d4dde1] bg-primary-glass backdrop-blur-xl"
+              : "rounded-full border border-default bg-primary-glass backdrop-blur-xl"
+            : "rounded-2xl border border-transparent bg-transparent",
+        )}
+        animate={
+          reducedMotion
+            ? undefined
+            : {
+                y: scrolled ? 0 : -1,
+                scale: scrolled ? 1 : 0.995,
+                boxShadow: scrolled
+                  ? isLight
+                    ? "0 18px 34px -22px rgba(20, 29, 40, 0.28)"
+                    : "0 18px 34px -20px rgba(0, 0, 0, 0.55)"
+                  : "0 0 0 rgba(0,0,0,0)",
+              }
+        }
+        transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
+      >
+        <div className="flex h-16 items-center justify-between px-4 sm:px-6">
         <a
           href={isHomePage ? "#home" : "/#home"}
           className="group shrink-0"
@@ -143,7 +164,6 @@ function Navbar() {
                 <text
                   x="210"
                   y="25"
-                  fontFamily="Mirza, serif"
                   fontSize="26"
                   fontWeight="700"
                   textAnchor="end"
@@ -167,7 +187,6 @@ function Navbar() {
                 <text
                   x="292"
                   y="25"
-                  fontFamily="Mirza, serif"
                   fontSize="20"
                   fontWeight="500"
                   textAnchor="end"
@@ -191,7 +210,6 @@ function Navbar() {
                 <text
                   x="0"
                   y="24"
-                  fontFamily="Montserrat, ui-sans-serif, sans-serif"
                   fontSize="22"
                   fontWeight="800"
                   letterSpacing="-0.5"
@@ -202,7 +220,6 @@ function Navbar() {
                 <text
                   x="57"
                   y="24"
-                  fontFamily="Montserrat, ui-sans-serif, sans-serif"
                   fontSize="22"
                   fontWeight="600"
                   letterSpacing="-0.5"
@@ -213,7 +230,6 @@ function Navbar() {
                 <text
                   x="116"
                   y="24"
-                  fontFamily="Montserrat, ui-sans-serif, sans-serif"
                   fontSize="18"
                   fontWeight="500"
                   fill={isLight ? "#1f9f45" : "#38c755"}
@@ -364,77 +380,96 @@ function Navbar() {
         >
           {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
         </button>
-      </div>
+        </div>
+      </motion.div>
 
-      {open && (
-        <div
-          className={cn(
-            "border-t md:hidden",
-            isLight
-              ? "border-[#d4dde1] bg-[#f6faf7]"
-              : "border-default bg-secondary",
-          )}
-        >
-          <div className="container-narrow flex flex-col gap-1 py-3">
-            {/* Mobile toolbar: locale + theme + coffee */}
-            <div className="mb-2 flex items-center gap-2">
-              <button
-                type="button"
-                onClick={() => setLocale(locale === "en" ? "ar" : "en")}
-                className={cn(
-                  "inline-flex h-8 items-center gap-1.5 rounded-md border px-2.5 text-[11px] font-bold transition-colors",
-                  isLight
-                    ? "border-[#cfd8dd] bg-white text-[#1a232e]"
-                    : "border-[#2b2f3b] bg-[#16171d] text-[#f5f7fa]",
-                )}
-              >
-                <Globe className="h-3 w-3 opacity-60" />
-                {locale === "en" ? "ع" : "EN"}
-              </button>
-              <button
-                type="button"
-                onClick={toggleTheme}
-                className={cn(
-                  "inline-flex h-8 items-center gap-1.5 rounded-md border px-2.5 text-[11px] font-semibold transition-colors",
-                  isLight
-                    ? "border-[#cfd8dd] bg-white text-[#1a232e]"
-                    : "border-[#2b2f3b] bg-[#16171d] text-[#f5f7fa]",
-                )}
-              >
-                {isLight ? (
-                  <Moon className="h-3.5 w-3.5" />
-                ) : (
-                  <Sun className="h-3.5 w-3.5" />
-                )}
-                {isArabic
-                  ? isLight
-                    ? "داكن"
-                    : "فاتح"
-                  : isLight
-                    ? "Dark"
-                    : "Light"}
-              </button>
-              <a
-                href="https://ko-fi.com/sanukhan"
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => setOpen(false)}
-                title={isArabic ? "ادعمني بقهوة" : "Buy me a coffee"}
-                className={cn(
-                  "inline-flex h-8 w-8 items-center justify-center rounded-md border transition-colors",
-                  isLight
-                    ? "border-[#1f9f45]/45 bg-[#1f9f45]/8 text-[#1f9f45]"
-                    : "border-[#38c755]/40 bg-[#38c755]/10 text-[#38c755]",
-                )}
-              >
-                <CoffeeIconAnimated className="h-4 w-4" />
-              </a>
-            </div>
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            className={cn(
+              "mx-auto mt-2 w-[min(1180px,calc(100%-1rem))] sm:w-[min(1180px,calc(100%-2rem))] overflow-hidden rounded-2xl border-t md:hidden",
+              isLight
+                ? "border-[#d4dde1] bg-[#f6faf7]"
+                : "border-default bg-secondary",
+            )}
+            initial={reducedMotion ? false : { opacity: 0, height: 0 }}
+            animate={reducedMotion ? undefined : { opacity: 1, height: "auto" }}
+            exit={reducedMotion ? undefined : { opacity: 0, height: 0 }}
+            transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <div className="flex flex-col gap-1 px-4 py-3 sm:px-6">
+              {/* Mobile toolbar: locale + theme + coffee */}
+              <div className="mb-2 flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => setLocale(locale === "en" ? "ar" : "en")}
+                  className={cn(
+                    "inline-flex h-8 items-center gap-1.5 rounded-md border px-2.5 text-[11px] font-bold transition-colors",
+                    isLight
+                      ? "border-[#cfd8dd] bg-white text-[#1a232e]"
+                      : "border-[#2b2f3b] bg-[#16171d] text-[#f5f7fa]",
+                  )}
+                >
+                  <Globe className="h-3 w-3 opacity-60" />
+                  {locale === "en" ? "ع" : "EN"}
+                </button>
+                <button
+                  type="button"
+                  onClick={toggleTheme}
+                  className={cn(
+                    "inline-flex h-8 items-center gap-1.5 rounded-md border px-2.5 text-[11px] font-semibold transition-colors",
+                    isLight
+                      ? "border-[#cfd8dd] bg-white text-[#1a232e]"
+                      : "border-[#2b2f3b] bg-[#16171d] text-[#f5f7fa]",
+                  )}
+                >
+                  {isLight ? (
+                    <Moon className="h-3.5 w-3.5" />
+                  ) : (
+                    <Sun className="h-3.5 w-3.5" />
+                  )}
+                  {isArabic
+                    ? isLight
+                      ? "داكن"
+                      : "فاتح"
+                    : isLight
+                      ? "Dark"
+                      : "Light"}
+                </button>
+                <a
+                  href="https://ko-fi.com/sanukhan"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setOpen(false)}
+                  title={isArabic ? "ادعمني بقهوة" : "Buy me a coffee"}
+                  className={cn(
+                    "inline-flex h-8 w-8 items-center justify-center rounded-md border transition-colors",
+                    isLight
+                      ? "border-[#1f9f45]/45 bg-[#1f9f45]/8 text-[#1f9f45]"
+                      : "border-[#38c755]/40 bg-[#38c755]/10 text-[#38c755]",
+                  )}
+                >
+                  <CoffeeIconAnimated className="h-4 w-4" />
+                </a>
+              </div>
 
-            {nav.links.map((l) => (
-              <a
-                key={l.href}
-                href={isHomePage ? l.href : `/${l.href}`}
+              {nav.links.map((l) => (
+                <a
+                  key={l.href}
+                  href={isHomePage ? l.href : `/${l.href}`}
+                  onClick={() => setOpen(false)}
+                  className={cn(
+                    "rounded-md px-3 py-2 text-sm transition-all duration-300",
+                    isLight
+                      ? "text-[#4d5a66] hover:bg-[#e8f0ec] hover:text-[#0f1015]"
+                      : "text-[#c9ced6] hover:bg-[#1e2028] hover:text-[#38c755]",
+                  )}
+                >
+                  {l.label}
+                </a>
+              ))}
+              <Link
+                to="/blog"
                 onClick={() => setOpen(false)}
                 className={cn(
                   "rounded-md px-3 py-2 text-sm transition-all duration-300",
@@ -443,49 +478,37 @@ function Navbar() {
                     : "text-[#c9ced6] hover:bg-[#1e2028] hover:text-[#38c755]",
                 )}
               >
-                {l.label}
-              </a>
-            ))}
-            <Link
-              to="/blog"
-              onClick={() => setOpen(false)}
-              className={cn(
-                "rounded-md px-3 py-2 text-sm transition-all duration-300",
-                isLight
-                  ? "text-[#4d5a66] hover:bg-[#e8f0ec] hover:text-[#0f1015]"
-                  : "text-[#c9ced6] hover:bg-[#1e2028] hover:text-[#38c755]",
-              )}
-            >
-              WriteUps
-            </Link>
-            <Button
-              asChild
-              className={cn(
-                "mt-2 rounded-lg gap-1",
-                isLight
-                  ? "bg-[#1f9f45] text-white hover:bg-[#2caf54]"
-                  : "bg-accent text-on-accent hover:bg-[#4ade80]",
-              )}
-            >
-              <a
-                href={ctaHref}
-                onClick={() => {
-                  setOpen(false);
-                  trackEvent("contact_click", { cta_type: "contact" });
-                  trackEvent("cta_click", {
-                    cta_type: "contact",
-                    cta_label: nav.cta.label,
-                  });
-                }}
+                WriteUps
+              </Link>
+              <Button
+                asChild
+                className={cn(
+                  "mt-2 rounded-lg gap-1",
+                  isLight
+                    ? "bg-[#1f9f45] text-white hover:bg-[#2caf54]"
+                    : "bg-accent text-on-accent hover:bg-[#4ade80]",
+                )}
               >
-                {nav.cta.label}
-                <ArrowUpRight className="h-3.5 w-3.5" />
-              </a>
-            </Button>
-          </div>
-        </div>
-      )}
-    </header>
+                <a
+                  href={ctaHref}
+                  onClick={() => {
+                    setOpen(false);
+                    trackEvent("contact_click", { cta_type: "contact" });
+                    trackEvent("cta_click", {
+                      cta_type: "contact",
+                      cta_label: nav.cta.label,
+                    });
+                  }}
+                >
+                  {nav.cta.label}
+                  <ArrowUpRight className="h-3.5 w-3.5" />
+                </a>
+              </Button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.header>
   );
 }
 

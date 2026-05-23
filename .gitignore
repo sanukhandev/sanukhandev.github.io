@@ -26,3 +26,11 @@ dist-ssr
 .env.local
 .env.*.local
 .github
+# Added by code-review-graph
+.code-review-graph/
+.kiro
+.cursor
+.cursorrules
+.mcp.json
+.opencode.json
+.windsorrules

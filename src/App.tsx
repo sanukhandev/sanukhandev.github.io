@@ -36,6 +36,10 @@ const FullStackConsultantUaePage = lazy(
 );
 const DevToBlogPage = lazy(() => import("./pages/blog/DevToBlogPage.tsx"));
 const FaqPage = lazy(() => import("./pages/FaqPage.tsx"));
+const Hero04DemoPage = lazy(() => import("./components/ui/demo.tsx"));
+const HeroClassicDemoPage = lazy(
+  () => import("./components/ui/demo-hero-classic.tsx"),
+);
 
 const queryClient = new QueryClient();
 
@@ -111,6 +115,11 @@ const AppShell = () => {
             <Route path="/" element={<Index />} />
             <Route path="/tools" element={<ToolsIndex />} />
             <Route path="/faq" element={<FaqPage />} />
+            <Route path="/demo/hero-04" element={<Hero04DemoPage />} />
+            <Route
+              path="/demo/hero-classic"
+              element={<HeroClassicDemoPage />}
+            />
             <Route
               path="/tools/json-formatter-online"
               element={<JsonFormatterToolPage />}
