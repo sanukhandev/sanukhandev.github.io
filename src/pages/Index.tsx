@@ -1,10 +1,13 @@
 import { Suspense, lazy, memo, useEffect } from "react";
+import type { ReactNode } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import TechParticles from "@/components/TechParticles";
 import Hero from "@/components/sections/Hero";
 import LocaleSwitchSkeleton from "@/components/LocaleSwitchSkeleton";
 import SeoMeta from "@/components/SeoMeta";
 import { useLocale } from "@/hooks/use-locale";
+import { cn } from "@/lib/utils";
 import { trackEvent } from "@/utils/analytics";
 
 const Works = lazy(() => import("@/components/sections/Works"));
@@ -27,8 +30,48 @@ const sectionFallback = (
   </div>
 );
 
+type FlowModuleProps = {
+  children: ReactNode;
+  index: number;
+  tone?: "base" | "muted" | "anchor";
+};
+
+function FlowModule({ children, index, tone = "base" }: FlowModuleProps) {
+  const reducedMotion = useReducedMotion();
+
+  return (
+    <motion.div
+      className={cn("system-module", `system-module--${tone}`)}
+      initial={
+        reducedMotion ? false : { opacity: 0, y: 56, scale: 0.985, rotateX: 5 }
+      }
+      whileInView={
+        reducedMotion
+          ? undefined
+          : {
+              opacity: 1,
+              y: 0,
+              scale: 1,
+              rotateX: 0,
+            }
+      }
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{
+        duration: reducedMotion ? 0 : 1.06,
+        delay: reducedMotion ? 0 : index * 0.06,
+        ease: [0.16, 1, 0.3, 1],
+      }}
+      style={{ transformPerspective: 1200 }}
+    >
+      <span className="system-connector" aria-hidden />
+      {children}
+    </motion.div>
+  );
+}
+
 const Index = () => {
   const { isSwitchingLocale } = useLocale();
+  const reducedMotion = useReducedMotion();
 
   useEffect(() => {
     if (!("IntersectionObserver" in window)) {
@@ -84,10 +127,12 @@ const Index = () => {
   }
 
   return (
-    <div className="relative min-h-screen bg-background text-foreground">
-      <div className="pointer-events-none fixed inset-0 z-0 opacity-90">
+    <div className="system-shell relative min-h-screen bg-background text-foreground">
+      <div className="system-backdrop pointer-events-none fixed inset-0 -z-10" />
+      <div className="pointer-events-none fixed inset-0 z-0 opacity-75">
         <TechParticles count={30} fullPage />
       </div>
+      <div className="pointer-events-none fixed inset-0 z-0 system-grid" />
 
       <div className="relative z-10">
         <SeoMeta
@@ -97,18 +142,37 @@ const Index = () => {
           keywords="sanu khan, tech lead dubai, cloud architect uae, full stack engineer, distributed systems"
         />
         <Navbar />
-        <main>
+        <motion.main
+          className="section-flow"
+          initial={reducedMotion ? false : { opacity: 0 }}
+          animate={reducedMotion ? undefined : { opacity: 1 }}
+          transition={{ duration: 0.65, ease: "easeOut" }}
+        >
           <Hero />
           <Suspense fallback={sectionFallback}>
-            <Services />
-            <Certifications />
-            <Skills />
-            <ZaakiyHighlights />
-            <AruvixSection />
-            <Works />
-            <BlogPreview />
+            <FlowModule index={1} tone="muted">
+              <Services />
+            </FlowModule>
+            <FlowModule index={2} tone="muted">
+              <Certifications />
+            </FlowModule>
+            <FlowModule index={3} tone="muted">
+              <Skills />
+            </FlowModule>
+            <FlowModule index={4} tone="anchor">
+              <ZaakiyHighlights />
+            </FlowModule>
+            <FlowModule index={5} tone="anchor">
+              <AruvixSection />
+            </FlowModule>
+            <FlowModule index={6}>
+              <Works />
+            </FlowModule>
+            <FlowModule index={7} tone="muted">
+              <BlogPreview />
+            </FlowModule>
           </Suspense>
-        </main>
+        </motion.main>
         <Suspense fallback={null}>
           <Footer />
           <ZaakiyChatWidget extraContext="Page: Sanu Khan portfolio homepage.\nZaakiy V3RSE: A suite of AI-driven platforms built by Sanu Khan.\n- Zaakiy AI: Multilingual AI chat support platform (10K+ conversations, English & Arabic).\n- Zaakiy CRM: CRM solution for SMEs, content creators, and social media influencers.\n- Zaakiy ERP: ERP solutions including a real estate platform.\n- Zaakiy GO: Food delivery app in Dubai.\nSanu is the founder and Solution Architect behind Zaakiy V3RSE." />

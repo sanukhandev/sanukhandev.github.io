@@ -1,6 +1,7 @@
 import { memo, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Moon, Sun, Download, Globe, ArrowUpRight } from "lucide-react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import CoffeeIconAnimated from "@/components/CoffeeIconAnimated";
 import { useSiteContent } from "@/data/siteContent";
 import { Button } from "@/components/ui/button";
@@ -19,6 +20,7 @@ function Navbar() {
   const { nav, profile } = useSiteContent();
   const isLight = theme === "light";
   const isArabic = locale === "ar";
+  const reducedMotion = useReducedMotion();
   const isHomePage = location.pathname === "/";
   const isBlogPage = location.pathname.startsWith("/blog");
   const ctaHref =
@@ -68,7 +70,7 @@ function Navbar() {
   }, []);
 
   return (
-    <header
+    <motion.header
       className={cn(
         "fixed inset-x-0 top-0 z-50 border-b transition-all duration-300",
         scrolled
@@ -79,6 +81,9 @@ function Navbar() {
             ? "border-transparent bg-primary-glass"
             : "border-transparent bg-primary-glass",
       )}
+      initial={reducedMotion ? false : { y: -22, opacity: 0 }}
+      animate={reducedMotion ? undefined : { y: 0, opacity: 1 }}
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
     >
       <div className="container-narrow flex h-16 items-center justify-between">
         <a
@@ -366,16 +371,21 @@ function Navbar() {
         </button>
       </div>
 
-      {open && (
-        <div
-          className={cn(
-            "border-t md:hidden",
-            isLight
-              ? "border-[#d4dde1] bg-[#f6faf7]"
-              : "border-default bg-secondary",
-          )}
-        >
-          <div className="container-narrow flex flex-col gap-1 py-3">
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            className={cn(
+              "border-t md:hidden overflow-hidden",
+              isLight
+                ? "border-[#d4dde1] bg-[#f6faf7]"
+                : "border-default bg-secondary",
+            )}
+            initial={reducedMotion ? false : { opacity: 0, height: 0 }}
+            animate={reducedMotion ? undefined : { opacity: 1, height: "auto" }}
+            exit={reducedMotion ? undefined : { opacity: 0, height: 0 }}
+            transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <div className="container-narrow flex flex-col gap-1 py-3">
             {/* Mobile toolbar: locale + theme + coffee */}
             <div className="mb-2 flex items-center gap-2">
               <button
@@ -482,10 +492,11 @@ function Navbar() {
                 <ArrowUpRight className="h-3.5 w-3.5" />
               </a>
             </Button>
-          </div>
-        </div>
-      )}
-    </header>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.header>
   );
 }
 
