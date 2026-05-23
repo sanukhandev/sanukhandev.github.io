@@ -88,16 +88,16 @@ export default function Works() {
           align="left"
         />
 
-        <div className="mb-10 rounded-2xl bg-secondary/20 p-4 sm:p-6">
-          <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-2">
+        <div className="mb-8 rounded-2xl bg-secondary/20 p-4 sm:mb-10 sm:p-6">
+          <div className="grid grid-cols-1 items-center gap-6 md:grid-cols-2 md:gap-8">
             <ContainerStagger>
-              <ContainerAnimated className="mb-3 block text-xs font-medium text-accent md:text-sm">
+              <ContainerAnimated className="mb-2 block text-xs font-medium text-accent md:mb-3 md:text-sm">
                 {ui.works.eyebrow}
               </ContainerAnimated>
-              <ContainerAnimated className="text-3xl font-semibold tracking-tight text-primary md:text-4xl">
+              <ContainerAnimated className="text-2xl font-semibold tracking-tight text-primary sm:text-3xl md:text-4xl">
                 Architecture Programs With Measurable Outcomes
               </ContainerAnimated>
-              <ContainerAnimated className="my-4 text-sm text-secondary md:my-5 md:text-base">
+              <ContainerAnimated className="my-3 text-sm text-secondary md:my-5 md:text-base">
                 From platform decomposition to telemetry-informed operations,
                 each system is engineered for throughput, reliability, and enterprise governance.
               </ContainerAnimated>
@@ -108,7 +108,7 @@ export default function Works() {
               </ContainerAnimated>
             </ContainerStagger>
 
-            <GalleryGrid>
+            <GalleryGrid className="mx-auto max-w-[22rem] md:mx-0 md:max-w-none">
               {galleryHighlights.map((item, index) => (
                 <GalleryGridCell
                   index={index}
@@ -137,7 +137,7 @@ export default function Works() {
           </div>
         </div>
 
-        <div className="mb-8 flex flex-wrap gap-2">
+        <div className="mb-6 flex flex-wrap gap-2 sm:mb-8">
           {workCategories.map((c) => (
             <button
               key={c}
@@ -154,7 +154,7 @@ export default function Works() {
           ))}
         </div>
 
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-2">
+        <div className="grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-2">
           {filtered.map((w) => (
             <article
               key={w.title}

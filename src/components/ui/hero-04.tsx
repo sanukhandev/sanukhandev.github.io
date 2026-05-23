@@ -42,23 +42,23 @@ export function HeroSection04() {
   return (
     <section
       id="home"
-      className="font-body relative min-h-[86vh] overflow-hidden py-12 md:py-14 lg:min-h-screen"
+      className="font-body relative min-h-[86vh] overflow-hidden py-10 md:py-14 lg:min-h-screen"
     >
       <motion.div
-        className="relative z-20 mx-auto max-w-7xl px-6"
+        className="relative z-20 mx-auto max-w-7xl px-4 sm:px-6"
         variants={container}
         initial={reduceMotion ? false : "hidden"}
         animate={reduceMotion ? undefined : "visible"}
       >
         <motion.div className="relative" variants={reveal}>
-          <h1 className="font-display relative z-20 text-center text-7xl font-bold tracking-[-7px] text-primary md:text-9xl md:tracking-[-14px] xl:text-[10rem] xl:tracking-[-1rem] leading-[0.95]">
+          <h1 className="font-display relative z-20 text-center text-[clamp(3.2rem,16vw,7.2rem)] font-bold leading-[0.95] tracking-[-0.045em] text-primary md:text-9xl md:tracking-[-14px] xl:text-[10rem] xl:tracking-[-1rem]">
             {ui.hero.title}
           </h1>
-          <p className="font-body mt-3 px-4 text-center text-[11px] font-medium uppercase tracking-[0.14em] text-secondary md:text-xs">
+          <p className="font-body mt-3 px-2 text-center text-xs font-medium uppercase tracking-[0.1em] text-secondary sm:px-4 md:text-sm">
             {ui.hero.metaLine}
           </p>
           
-          <p className="font-body absolute -bottom-9 left-24 text-4xl font-thin tracking-[6px] xl:hidden">
+          <p className="font-body absolute -bottom-8 left-1/2 hidden -translate-x-1/2 text-3xl font-thin tracking-[4px] sm:block xl:hidden">
             <span
               className="brand-zaakiy text-accent"
               style={{
@@ -71,9 +71,9 @@ export function HeroSection04() {
           </p>
         </motion.div>
 
-        <motion.div className="relative grid grid-cols-1 gap-6 md:grid-cols-3 md:items-center md:gap-8 " variants={reveal}>
+        <motion.div className="relative grid grid-cols-1 gap-6 md:grid-cols-3 md:items-center md:gap-8" variants={reveal}>
           <div className="w-full md:self-center">
-            <p className="text-primary font-body ml-auto max-w-xl text-right text-sm font-medium tracking-wide md:text-base">
+            <p className="text-primary font-body mx-auto max-w-xl text-center text-sm font-medium tracking-wide md:ml-auto md:text-right md:text-base">
               {isArabic ? profile.subtitle : profile.subtitle.toUpperCase()}
               <br />
               {isArabic ? profile.statement : profile.statement.toUpperCase()}
@@ -93,14 +93,14 @@ export function HeroSection04() {
           </div>
 
           <div className="w-full text-xl font-bold md:self-center md:text-2xl lg:text-3xl">
-            <div className="font-body relative z-20 text-left text-xl font-semibold">
+            <div className="font-body relative z-20 text-center text-lg font-semibold sm:text-xl md:text-left">
               {primarySkills.map((skill) => (
                 <div key={skill}>/ {skill}</div>
               ))}
             </div>
           </div>
         </motion.div>
-        <motion.div className="flex flex-wrap justify-center gap-3 pt-4" variants={reveal}>
+        <motion.div className="flex flex-wrap justify-center gap-2 pt-4 sm:gap-3" variants={reveal}>
           {primaryCtas.map((cta, index) => {
             const isExternal = /^https?:\/\//i.test(cta.href);
 
@@ -112,7 +112,7 @@ export function HeroSection04() {
                 transition={{ duration: 0.5, delay: 0.2 + index * 0.15 }}
               >
                 <Button
-                  className={`h-10 rounded-lg border border-accent/50 bg-transparent px-5 text-accent hover:text-white transition-all duration-300 ease-out ${
+                  className={`h-10 w-full rounded-lg border border-accent/50 bg-transparent px-4 text-accent transition-all duration-300 ease-out hover:text-white sm:w-auto sm:px-5 ${
                     reduceMotion ? "" : "hover:scale-110 hover:-translate-y-1"
                   }`}
                   asChild
@@ -130,9 +130,9 @@ export function HeroSection04() {
           })}
         </motion.div>
 
-        <motion.div className="mt-1 flex flex-col gap-8 md:mt-1 md:grid md:grid-cols-[18rem_minmax(0,1fr)] md:items-center md:gap-16" variants={reveal}>
-          <div className="relative h-48 w-[18rem]">
-            <div className="h-36 w-60 overflow-hidden rounded-md border border-default bg-secondary p-4 shadow-lg">
+        <motion.div className="mt-6 flex flex-col gap-8 md:mt-8 md:grid md:grid-cols-[18rem_minmax(0,1fr)] md:items-center md:gap-14" variants={reveal}>
+          <div className="relative mx-auto h-44 w-full max-w-[17rem] md:mx-0 md:h-48 md:w-[18rem]">
+            <div className="h-32 w-full overflow-hidden rounded-md border border-default bg-secondary p-3 shadow-lg sm:h-36 sm:w-60 sm:p-4">
               <p className="font-body text-xs uppercase tracking-wider text-secondary">
                 {showcaseWorks[0]?.scope ?? "Platform"}
               </p>
@@ -140,7 +140,7 @@ export function HeroSection04() {
                 {showcaseWorks[0]?.title ?? "Enterprise Systems"}
               </p>
             </div>
-            <div className="absolute left-6 -top-6 h-36 w-60 overflow-hidden rounded-md border border-default bg-secondary p-4 shadow-lg">
+            <div className="absolute left-3 -top-4 h-32 w-[calc(100%-0.75rem)] overflow-hidden rounded-md border border-default bg-secondary p-3 shadow-lg sm:left-6 sm:-top-6 sm:h-36 sm:w-60 sm:p-4">
               <p className="font-body text-xs uppercase tracking-wider text-secondary">
                 {showcaseWorks[1]?.scope ?? "Integration"}
               </p>
@@ -148,7 +148,7 @@ export function HeroSection04() {
                 {showcaseWorks[1]?.title ?? "Cloud Delivery"}
               </p>
             </div>
-            <div className="absolute left-12 -top-12 h-36 w-60 overflow-hidden rounded-md border border-default bg-secondary p-4 shadow-lg">
+            <div className="absolute left-6 -top-8 h-32 w-[calc(100%-1.5rem)] overflow-hidden rounded-md border border-default bg-secondary p-3 shadow-lg sm:left-12 sm:-top-12 sm:h-36 sm:w-60 sm:p-4">
               <p className="font-body text-xs uppercase tracking-wider text-secondary">
                 {showcaseWorks[2]?.scope ?? "Commerce"}
               </p>
@@ -157,16 +157,16 @@ export function HeroSection04() {
               </p>
             </div>
           </div>
-          <div className="md:self-center">
-            <div className="flex items-center gap-2 md:justify-start">
+          <div className="text-center md:self-center md:text-left">
+            <div className="flex items-center justify-center gap-2 md:justify-start">
               <span className="font-body text-lg font-medium tracking-wider">
                 {ui.hero.recentExperienceLabel}
               </span>
               <ArrowDownRight className="size-6" />
             </div>
 
-            <div className="md:text-left">
-              <h2 className="font-display text-5xl uppercase tracking-[-4px]">
+            <div className="mt-2 md:text-left">
+              <h2 className="font-display text-[clamp(2rem,8vw,3.1rem)] uppercase tracking-[-0.03em] md:tracking-[-4px]">
                 {ui.hero.architectureWithoutLimits}
               </h2>
             </div>

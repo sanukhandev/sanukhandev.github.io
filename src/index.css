@@ -142,6 +142,7 @@
   html {
     color-scheme: dark;
     scroll-behavior: smooth;
+    overflow-x: clip;
   }
 
   html.light {
@@ -156,6 +157,7 @@
     margin: 0;
     background: var(--bg-primary);
     color: var(--text-primary);
+    overflow-x: hidden;
     font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
     font-size: 16px;
     line-height: 1.62;
@@ -358,11 +360,11 @@
   }
 
   .container-narrow {
-    @apply mx-auto w-full max-w-[1220px] px-6 sm:px-10;
+    @apply mx-auto w-full max-w-[1220px] px-4 sm:px-8 lg:px-10;
   }
 
   .section-pad {
-    @apply py-16 sm:py-20;
+    @apply py-12 sm:py-16 lg:py-20;
   }
 
   .system-shell {
@@ -814,15 +816,31 @@
     transform: translateX(0);
   }
   50% {
-    color: rgba(224, 255, 234, 0.98);
+    font-size: clamp(48px, 10vw, 96px);
     text-shadow: 0 0 14px rgba(56, 199, 85, 0.34);
     transform: translateX(2px);
   }
   100% {
-    color: rgba(122, 228, 148, 0.86);
+    font-size: clamp(30px, 6vw, 48px);
     text-shadow: 0 0 2px rgba(56, 199, 85, 0.2);
     transform: translateX(0);
   }
+
+@media (max-width: 768px) {
+  .system-grid {
+    background-size: 36px 36px;
+    opacity: 0.18;
+  }
+
+  .system-module {
+    margin: 1rem auto;
+    border-radius: 16px;
+  }
+
+  .premium-card {
+    border-radius: 12px;
+  }
+}
 }
 
 .timeline-year-shimmer {
