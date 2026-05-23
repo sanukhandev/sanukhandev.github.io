@@ -1128,6 +1128,8 @@ html.light .zaakiy-chat .placeholder\:text-\[\#8a90a8\]::placeholder {
 
 .brand-zaakiy {
   font-family: "Anta", ui-sans-serif, system-ui, sans-serif;
+  letter-spacing: 0.02em;
+  font-weight: 600;
 }
 
 .preloader-message {

@@ -2,7 +2,6 @@ import { motion, useReducedMotion } from "framer-motion";
 import { Hero } from "@/components/ui/animated-hero";
 import { useLocale } from "@/hooks/use-locale";
 import { useSiteContent } from "@/data/siteContent";
-import { SectionHeading } from "@/components/shared/SectionHeading";
 
 const container = {
   hidden: { opacity: 0 },
@@ -42,14 +41,22 @@ export default function ZaakiyHighlights() {
     "Zaakiy V3RSE";
 
   return (
-    <section id="zaakiy" className="section-pad relative overflow-hidden">
+    <section id="zaakiy" className="relative overflow-hidden pb-12 pt-4 sm:pb-16 sm:pt-6 lg:pb-20 lg:pt-8">
       <div className="container-narrow">
-        <SectionHeading
-          eyebrow="Operational Intelligence Platform"
-          title="Zaakiy V3RSE Operational Nerve System"
-          subtitle="A platform layer for AI-assisted workflow orchestration, policy-aware automation, and real-time operational visibility."
-          align="left"
-        />
+        <div className="mb-5 max-w-3xl text-left sm:mb-7">
+          <span className="mb-3 inline-flex items-center rounded-full border border-default bg-secondary px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-tea-green-300">
+            Operational Intelligence Platform
+          </span>
+          <h2 className="text-[clamp(2rem,6.2vw,3rem)] font-extrabold leading-[1.08] tracking-[-0.035em] text-primary">
+            <span className="brand-zaakiy bg-gradient-to-r from-[#38c755] via-[#4adf9f] to-[#3dd9ff] bg-clip-text text-transparent">
+              Zaakiy V3RSE
+            </span>{" "}
+            Operational Nerve System
+          </h2>
+          <p className="mt-3 text-[15px] leading-relaxed text-secondary sm:mt-4 sm:text-[16px]">
+            A platform layer for AI-assisted workflow orchestration, policy-aware automation, and real-time operational visibility.
+          </p>
+        </div>
         <motion.div
           initial={reduceMotion ? false : "hidden"}
           whileInView={reduceMotion ? undefined : "visible"}
