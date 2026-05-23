@@ -155,8 +155,16 @@ const arContent = {
     ],
     ctas: [
       { ...baseProfile.ctas[0], label: "دعني أتحدث" },
-      { ...baseProfile.ctas[1], label: "تحميل السيرة الذاتية" },
-      { ...baseProfile.ctas[2], label: "LinkedIn" },
+      {
+        label: "تحميل السيرة الذاتية",
+        href: "/Sanu Khan - Resume.pdf",
+        variant: "download" as const,
+      },
+      {
+        label: "LinkedIn",
+        href: "https://www.linkedin.com/in/sanukhan/",
+        variant: "social" as const,
+      },
     ],
   },
   skills: {
@@ -165,6 +173,8 @@ const arContent = {
     title: "مجموعات الخبرة الهندسية",
     intro:
       "تنفيذ تقني بمنهجية العمارة أولاً عبر السحابة والتكاملات وهندسة المنصات بمعايير إنتاجية عالية.",
+    expandLabel: "عرض كل المهارات",
+    collapseLabel: "عرض مهارات أقل",
     clusters: [
       { ...baseSkills.clusters[0], title: "السحابة والعمارة" },
       { ...baseSkills.clusters[1], title: "أنظمة الخلفية" },
@@ -292,6 +302,11 @@ const arContent = {
       coffeeCta: "ادعمني بقهوة",
       leadershipBadge: "+13 سنة من القيادة الهندسية",
       creatorLabel: "مؤسس",
+      title: "مهندس",
+      metaLine: "منذ 2011 | 13+ سنوات | دبي، الإمارات | مفتوح المصدر | مهندس",
+      impactLine: "هندسة. تكامل. تأثير.",
+      recentExperienceLabel: "أحدث الخبرات",
+      architectureWithoutLimits: "عمارة بلا حدود",
       innovationLines: ["نبني", "ابتكارات", "منذ 2011"],
       floatingBadges: [
         "معمارية الخدمات المصغرة",
@@ -315,7 +330,6 @@ const arContent = {
         "AI": "الذكاء الاصطناعي",
         "Operations": "العمليات",
         "Infrastructure": "البنية التحتية",
-        
       },
       problem: "المشكلة",
       solution: "الحل",
@@ -369,6 +383,12 @@ const enContent = {
       coffeeCta: "Buy me a coffee",
       leadershipBadge: "13+ Years of Engineering Leadership",
       creatorLabel: "Creator of",
+      title: "ARCHITECT",
+      metaLine:
+        "SINCE 2011 | 13+ YEARS | DUBAI, UAE | OPEN SOURCE | ARCHITECT | TECH LEAD | CONSULTANT | DEVELOPER | TECH ENTREPRENEUR | WRITER",
+      impactLine: "ARCHITECTURE. INTEGRATION. IMPACT.",
+      recentExperienceLabel: "RECENT EXPERIENCE",
+      architectureWithoutLimits: "Architecture without Limits",
       innovationLines: ["Building", "Innovations", "since 2011"],
       floatingBadges: [
         "Microservices Architecture",

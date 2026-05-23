@@ -10,6 +10,8 @@ interface ExpandableSkillTagsProps {
   skills: string[];
   initialCount?: number;
   className?: string;
+  expandLabel?: string;
+  collapseLabel?: string;
 }
 
 export const ExpandableSkillTags = ({
@@ -17,6 +19,8 @@ export const ExpandableSkillTags = ({
   skills,
   initialCount = 10,
   className,
+  expandLabel = "View all skills",
+  collapseLabel = "View less skills",
 }: ExpandableSkillTagsProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -79,7 +83,7 @@ export const ExpandableSkillTags = ({
           onClick={toggleExpansion}
           aria-expanded={isExpanded}
         >
-          {isExpanded ? "View less skills" : "View all skills"}
+          {isExpanded ? collapseLabel : expandLabel}
         </Button>
       )}
     </section>

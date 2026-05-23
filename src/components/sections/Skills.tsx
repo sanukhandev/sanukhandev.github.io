@@ -46,6 +46,8 @@ export default function Skills() {
                   title={cluster.title}
                   skills={cluster.tags}
                   initialCount={6}
+                  expandLabel={skills.expandLabel}
+                  collapseLabel={skills.collapseLabel}
                 />
               </article>
             );

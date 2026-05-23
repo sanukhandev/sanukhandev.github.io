@@ -36,11 +36,12 @@ export const profile = {
       label: "Hire Me",
       href: "mailto:hello@sanukhan.dev?subject=Hire%20Inquiry%20–%20SanuKhan.dev",
       variant: "hire" as const,
-    },{
+    },
+    {
       label: "Buy Me a Coffee",
       href: "https://ko-fi.com/sanukhan",
       variant: "buyMeACoffee" as const,
-    }
+    },
   ],
   avatarUrl: "/assets/images/sanu.avif",
 };
@@ -50,6 +51,8 @@ export const skills = {
   title: "Engineering Expertise Clusters",
   intro:
     "Architecture-first execution across cloud, integrations, and platform engineering with production-grade delivery discipline.",
+  expandLabel: "View all skills",
+  collapseLabel: "View less skills",
   clusters: [
     {
       title: "Cloud & Architecture",

@@ -1,13 +1,13 @@
 import React from "react";
-import { ArrowDownRight } from "@aliimam/icons";
 import { motion, useReducedMotion } from "framer-motion";
 import type { Variants } from "framer-motion";
+import { ArrowDownRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useSiteContent } from "@/data/siteContent";
 import { useLocale } from "@/hooks/use-locale";
 
 export function HeroSection04() {
-  const { profile, works, skills } = useSiteContent();
+  const { profile, works, skills, ui } = useSiteContent();
   const { locale } = useLocale();
   const isArabic = locale === "ar";
 
@@ -52,16 +52,10 @@ export function HeroSection04() {
       >
         <motion.div className="relative" variants={reveal}>
           <h1 className="font-display relative z-20 text-center text-7xl font-bold tracking-[-7px] text-primary md:text-9xl md:tracking-[-14px] xl:text-[10rem] xl:tracking-[-1rem] leading-[0.95]">
-            {isArabic ? (
-              "مهندس"
-            ) : (
-              "ARCHITECT"
-            )}
+            {ui.hero.title}
           </h1>
           <p className="font-body mt-3 px-4 text-center text-[11px] font-medium uppercase tracking-[0.14em] text-secondary md:text-xs">
-            {isArabic
-              ? "منذ 2011 | 13+ سنوات | دبي، الإمارات | مفتوح المصدر | مهندس"
-              : "SINCE 2011 | 13+ YEARS | DUBAI, UAE | OPEN SOURCE | ARCHITECT | TECH LEAD | CONSULTANT | DEVELOPER | TECH ENTREPRENEUR | WRITER"}
+            {ui.hero.metaLine}
           </p>
           
           <p className="font-body absolute -bottom-9 left-24 text-4xl font-thin tracking-[6px] xl:hidden">
@@ -84,7 +78,7 @@ export function HeroSection04() {
               <br />
               {isArabic ? profile.statement : profile.statement.toUpperCase()}
               <br />
-              {isArabic ? "هندسة. تكامل. تأثير." : "ARCHITECTURE. INTEGRATION. IMPACT."}
+              {ui.hero.impactLine}
             </p>
           </div>
 
@@ -166,14 +160,14 @@ export function HeroSection04() {
           <div className="md:self-center">
             <div className="flex items-center gap-2 md:justify-start">
               <span className="font-body text-lg font-medium tracking-wider">
-                {isArabic ? "أحدث الخبرات" : "RECENT EXPERIENCE"}
+                {ui.hero.recentExperienceLabel}
               </span>
               <ArrowDownRight className="size-6" />
             </div>
 
             <div className="md:text-left">
               <h2 className="font-display text-5xl uppercase tracking-[-4px]">
-                {isArabic ? "عمارة بلا حدود" : "Architecture without Limits"}
+                {ui.hero.architectureWithoutLimits}
               </h2>
             </div>
           </div>
