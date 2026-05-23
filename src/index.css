@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Anta&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Naskh+Arabic:wght@400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Anta&family=Inter:wght@400;500;600;700;800&family=Raleway:wght@500;600;700;800&family=Noto+Naskh+Arabic:wght@400;500;700&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -6,24 +6,24 @@
 
 @layer base {
   :root {
-    --bg-primary: #0f1015;
-    --bg-secondary: #16171d;
-    --text-primary: #f5f7fa;
-    --text-secondary: #c9ced6;
-    --text-muted: #8a90a8;
+    --bg-primary: #07110d;
+    --bg-secondary: #0b1511;
+    --text-primary: #edf4f1;
+    --text-secondary: #a8b8b2;
+    --text-muted: #7d8e87;
 
-    --accent: #38c755;
+    --accent: #25c06f;
     --accent-soft: #38c755cc;
     --accent-bg: rgba(56, 199, 85, 0.12);
 
-    --border: #2b2f3b;
+    --border: #1b3027;
 
     /* Glass/translucent surface variants */
     --bg-primary-glass: rgba(15, 16, 21, 0.92);
     --bg-secondary-glass: rgba(22, 23, 29, 0.88);
 
-    --background: 230 18% 7%;
-    --foreground: 225 18% 95%;
+    --background: 153 41% 4%;
+    --foreground: 155 20% 95%;
 
     --card: 230 13% 10%;
     --card-foreground: 225 18% 95%;
@@ -31,24 +31,24 @@
     --popover: 230 13% 10%;
     --popover-foreground: 225 18% 95%;
 
-    --primary: 132 56% 50%;
-    --primary-foreground: 230 18% 7%;
+    --primary: 148 67% 45%;
+    --primary-foreground: 153 41% 4%;
 
-    --secondary: 226 16% 20%;
-    --secondary-foreground: 225 18% 95%;
+    --secondary: 154 27% 10%;
+    --secondary-foreground: 155 20% 95%;
 
-    --muted: 226 16% 16%;
-    --muted-foreground: 227 12% 60%;
+    --muted: 154 22% 11%;
+    --muted-foreground: 154 10% 63%;
 
-    --accent-hsl: 132 56% 50%;
-    --accent-foreground-hsl: 225 18% 95%;
+    --accent-hsl: 148 67% 45%;
+    --accent-foreground-hsl: 154 20% 95%;
 
     --destructive: 4 99% 50%;
     --destructive-foreground: 0 0% 100%;
 
-    --border-hsl: 226 16% 20%;
-    --input-hsl: 226 16% 20%;
-    --ring: 132 56% 50%;
+    --border-hsl: 154 27% 17%;
+    --input-hsl: 154 27% 17%;
+    --ring: 148 67% 45%;
 
     --radius: 0.875rem;
 
@@ -59,8 +59,8 @@
     --site-border-strong: var(--border);
 
     /* ── Surface layer system ── */
-    --surface-2-bg: #11141c;
-    --surface-anchor-bg: #080c13;
+    --surface-2-bg: #101915;
+    --surface-anchor-bg: #08120f;
   }
 
   html.light {
@@ -156,9 +156,9 @@
     margin: 0;
     background: var(--bg-primary);
     color: var(--text-primary);
-    font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
-    font-size: 15px;
-    line-height: 1.55;
+    font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.62;
     font-weight: 500;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
@@ -266,18 +266,18 @@
   h4,
   h5,
   h6 {
-    font-family: inherit;
+    font-family: "Raleway", ui-sans-serif, system-ui, sans-serif;
     letter-spacing: -0.02em;
   }
 
   h1 {
-    font-size: clamp(42px, 5vw, 48px);
-    line-height: 1.06;
+    font-size: clamp(72px, 8.2vw, 96px);
+    line-height: 1.02;
   }
 
   h2 {
-    font-size: clamp(1.45rem, 2.5vw, 1.85rem);
-    line-height: 1.12;
+    font-size: clamp(36px, 4.2vw, 48px);
+    line-height: 1.08;
   }
 }
 
@@ -358,11 +358,11 @@
   }
 
   .container-narrow {
-    @apply mx-auto w-full max-w-[1180px] px-5 sm:px-8;
+    @apply mx-auto w-full max-w-[1220px] px-6 sm:px-10;
   }
 
   .section-pad {
-    @apply py-12 sm:py-14;
+    @apply py-16 sm:py-20;
   }
 
   .system-shell {
@@ -371,19 +371,19 @@
 
   .system-backdrop {
     background:
-      radial-gradient(55% 32% at 11% 14%, rgba(255, 255, 255, 0.07), transparent 72%),
-      radial-gradient(45% 30% at 84% 12%, rgba(56, 199, 85, 0.12), transparent 78%),
-      radial-gradient(42% 26% at 50% 88%, rgba(56, 199, 85, 0.08), transparent 80%),
-      linear-gradient(180deg, #050608 0%, #090b10 30%, #0b0f17 65%, #080a10 100%);
+      radial-gradient(44% 36% at 10% 12%, rgba(19, 154, 98, 0.2), transparent 72%),
+      radial-gradient(42% 30% at 87% 8%, rgba(0, 177, 204, 0.12), transparent 72%),
+      radial-gradient(46% 34% at 54% 88%, rgba(18, 119, 88, 0.13), transparent 76%),
+      linear-gradient(180deg, #040b08 0%, #07110d 38%, #0b1511 70%, #0f1915 100%);
   }
 
   .system-grid {
     background-image:
-      linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-    background-size: 56px 56px;
+      linear-gradient(rgba(114, 153, 139, 0.14) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(114, 153, 139, 0.12) 1px, transparent 1px);
+    background-size: 52px 52px;
     mask-image: radial-gradient(circle at 50% 24%, black 32%, transparent 84%);
-    opacity: 0.34;
+    opacity: 0.26;
   }
 
   .section-flow {
@@ -693,25 +693,23 @@
   }
 
   .premium-card {
-    border: 1px solid color-mix(in srgb, var(--border) 78%, rgba(255, 255, 255, 0.25));
+    border: 1px solid color-mix(in srgb, var(--border) 82%, rgba(255, 255, 255, 0.14));
     background:
-      linear-gradient(140deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.02)),
-      rgba(22, 23, 29, 0.58);
-    backdrop-filter: blur(14px) saturate(150%);
-    -webkit-backdrop-filter: blur(14px) saturate(150%);
-    border-radius: 16px;
+      linear-gradient(140deg, rgba(62, 97, 83, 0.25), rgba(8, 19, 15, 0.55)),
+      rgba(10, 20, 16, 0.88);
+    border-radius: 14px;
     box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.14),
-      0 12px 30px -22px rgba(0, 0, 0, 0.7);
+      inset 0 1px 0 rgba(140, 192, 170, 0.1),
+      0 18px 36px -28px rgba(0, 0, 0, 0.72);
     transition: transform 300ms ease, border-color 300ms ease, box-shadow 300ms ease, background-color 300ms ease;
   }
 
   .premium-card:hover {
-    transform: translateY(-4px) scale(1.01);
-    border-color: rgba(56, 199, 85, 0.45);
+    transform: translateY(-3px);
+    border-color: rgba(37, 192, 111, 0.5);
     box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.2),
-      0 16px 38px -20px rgba(56, 199, 85, 0.5);
+      inset 0 1px 0 rgba(140, 192, 170, 0.16),
+      0 20px 34px -22px rgba(22, 145, 102, 0.4);
   }
 
   .glass-pill {

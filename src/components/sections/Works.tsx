@@ -82,9 +82,9 @@ export default function Works() {
     <section id="works" className="section-pad">
       <div className="container-narrow">
         <SectionHeading
-          eyebrow={ui.works.eyebrow}
-          title={ui.works.title}
-          subtitle={ui.works.subtitle}
+          eyebrow="Featured Systems"
+          title="Enterprise Systems Delivered"
+          subtitle="Flagship architecture case studies spanning event-driven commerce, integration orchestration, and platform modernization."
           align="left"
         />
 
@@ -95,15 +95,15 @@ export default function Works() {
                 {ui.works.eyebrow}
               </ContainerAnimated>
               <ContainerAnimated className="text-3xl font-semibold tracking-tight text-primary md:text-4xl">
-                Build Delivery That Ships Outcomes
+                Architecture Programs With Measurable Outcomes
               </ContainerAnimated>
               <ContainerAnimated className="my-4 text-sm text-secondary md:my-5 md:text-base">
-                From architecture to integration and product-scale execution, each
-                engagement is structured for measurable business impact.
+                From platform decomposition to telemetry-informed operations,
+                each system is engineered for throughput, reliability, and enterprise governance.
               </ContainerAnimated>
               <ContainerAnimated>
                 <Button asChild className="bg-accent text-on-accent hover:bg-accent/90">
-                  <a href="#contact">Start a delivery conversation</a>
+                  <a href="#contact">Discuss your architecture roadmap</a>
                 </Button>
               </ContainerAnimated>
             </ContainerStagger>
@@ -154,7 +154,7 @@ export default function Works() {
           ))}
         </div>
 
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-2">
           {filtered.map((w) => (
             <article
               key={w.title}

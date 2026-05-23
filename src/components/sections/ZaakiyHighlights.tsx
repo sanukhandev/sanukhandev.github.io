@@ -2,6 +2,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { Hero } from "@/components/ui/animated-hero";
 import { useLocale } from "@/hooks/use-locale";
 import { useSiteContent } from "@/data/siteContent";
+import { SectionHeading } from "@/components/shared/SectionHeading";
 
 const container = {
   hidden: { opacity: 0 },
@@ -43,6 +44,12 @@ export default function ZaakiyHighlights() {
   return (
     <section id="zaakiy" className="section-pad relative overflow-hidden">
       <div className="container-narrow">
+        <SectionHeading
+          eyebrow="Operational Intelligence Platform"
+          title="Zaakiy V3RSE Operational Nerve System"
+          subtitle="A platform layer for AI-assisted workflow orchestration, policy-aware automation, and real-time operational visibility."
+          align="left"
+        />
         <motion.div
           initial={reduceMotion ? false : "hidden"}
           whileInView={reduceMotion ? undefined : "visible"}

@@ -3,12 +3,14 @@ import type { ReactNode } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import TechParticles from "@/components/TechParticles";
-import { HeroSection04 } from "@/components/ui/hero-04";
+import EnterpriseHero from "@/components/sections/EnterpriseHero";
+import EngineeringPhilosophy from "@/components/sections/EngineeringPhilosophy";
 import LocaleSwitchSkeleton from "@/components/LocaleSwitchSkeleton";
 import SeoMeta from "@/components/SeoMeta";
 import { useLocale } from "@/hooks/use-locale";
 import { cn } from "@/lib/utils";
 import { trackEvent } from "@/utils/analytics";
+import { HeroSection04 } from "@/components/ui/hero-04";
 
 const Works = lazy(() => import("@/components/sections/Works"));
 const Services = lazy(() => import("@/components/sections/Services"));
@@ -16,11 +18,7 @@ const Skills = lazy(() => import("@/components/sections/Skills"));
 const ZaakiyHighlights = lazy(
   () => import("@/components/sections/ZaakiyHighlights"),
 );
-const AruvixSection = lazy(() => import("@/components/sections/AruvixSection"));
 const BlogPreview = lazy(() => import("@/components/sections/BlogPreview"));
-const Certifications = lazy(
-  () => import("@/components/sections/Certifications"),
-);
 const Footer = lazy(() => import("@/components/sections/Footer"));
 const ZaakiyChatWidget = lazy(() => import("@/components/ZaakiyChatWidget"));
 
@@ -81,13 +79,12 @@ const Index = () => {
     const trackedSections = new Set<string>();
     const sectionIds = [
       "home",
-      "works",
-      "experience",
+      "philosophy",
       "stack",
+      "works",
       "zaakiy",
-      "tools",
+      "experience",
       "blog",
-      "articles",
       "contact",
     ];
     const sections = sectionIds
@@ -148,27 +145,23 @@ const Index = () => {
           animate={reducedMotion ? undefined : { opacity: 1 }}
           transition={{ duration: 0.65, ease: "easeOut" }}
         >
-          <HeroSection04 />
+          {/* <EnterpriseHero /> */}
+        <HeroSection04/>
+          <EngineeringPhilosophy />
           <Suspense fallback={sectionFallback}>
             <FlowModule index={1} tone="muted">
-              <Services />
-            </FlowModule>
-            <FlowModule index={2} tone="muted">
-              <Certifications />
-            </FlowModule>
-            <FlowModule index={3} tone="muted">
               <Skills />
             </FlowModule>
-            <FlowModule index={4} tone="anchor">
-              <ZaakiyHighlights />
-            </FlowModule>
-            <FlowModule index={5} tone="anchor">
-              <AruvixSection />
-            </FlowModule>
-            <FlowModule index={6}>
+            <FlowModule index={2} tone="muted">
               <Works />
             </FlowModule>
-            <FlowModule index={7} tone="muted">
+            <FlowModule index={3} tone="anchor">
+              <ZaakiyHighlights />
+            </FlowModule>
+            <FlowModule index={4} tone="muted">
+              <Services />
+            </FlowModule>
+            <FlowModule index={5} tone="muted">
               <BlogPreview />
             </FlowModule>
           </Suspense>

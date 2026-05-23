@@ -37,8 +37,9 @@ export default function Services() {
     <section id="experience" className="section-pad">
       <div className="container-narrow">
         <SectionHeading
-          title={ui.experience.title}
-          subtitle={ui.experience.subtitle}
+          eyebrow="Engineering Timeline"
+          title="Architecture Journey"
+          subtitle="Impact-focused engineering progression across enterprise delivery, platform architecture, and operational intelligence systems." 
           align="left"
         />
 
@@ -71,13 +72,13 @@ export default function Services() {
               href="#works"
               className="link-accent text-[14px] font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
             >
-              View architecture and integration projects
+              Explore flagship systems
             </a>
             <a
               href="#contact"
               className="link-accent text-[14px] font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
             >
-              Contact Sanu Khan for solution design
+              Contact for architecture advisory
             </a>
           </nav>
         </div>

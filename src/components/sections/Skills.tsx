@@ -24,9 +24,9 @@ export default function Skills() {
     <section id="stack" className="section-pad">
       <div className="container-narrow">
         <SectionHeading
-          eyebrow={skills.eyebrow}
-          title={skills.title}
-          subtitle={skills.intro}
+          eyebrow="Architecture Expertise"
+          title="Core Capability Domains"
+          subtitle="Cloud-native architectures, distributed backends, and integration systems engineered for operational resilience and scale."
         />
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

@@ -148,14 +148,14 @@ export function SectionHeading({
         className={cn(
           "font-extrabold leading-[1.08] tracking-[-0.035em] text-primary",
           align === "center"
-            ? "text-[clamp(1.5rem,2.8vw,2rem)]"
-            : "text-[clamp(1.6rem,3vw,2.1rem)]",
+            ? "text-[clamp(2.25rem,4vw,3rem)]"
+            : "text-[clamp(2.35rem,4.2vw,3rem)]",
         )}
       >
         {title}
       </h2>
       {subtitle && (
-        <p className="mt-3 text-[14px] leading-relaxed text-secondary">
+        <p className="mt-4 text-[16px] leading-relaxed text-secondary">
           {subtitle}
         </p>
       )}
