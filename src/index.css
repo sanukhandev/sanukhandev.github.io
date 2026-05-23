@@ -816,12 +816,12 @@
     transform: translateX(0);
   }
   50% {
-    font-size: clamp(48px, 10vw, 96px);
+    color: rgba(56, 199, 85, 0.88);
     text-shadow: 0 0 14px rgba(56, 199, 85, 0.34);
     transform: translateX(2px);
   }
   100% {
-    font-size: clamp(30px, 6vw, 48px);
+    color: rgba(122, 228, 148, 0.86);
     text-shadow: 0 0 2px rgba(56, 199, 85, 0.2);
     transform: translateX(0);
   }
