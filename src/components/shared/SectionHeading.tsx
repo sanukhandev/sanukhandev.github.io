@@ -132,7 +132,7 @@ export function SectionHeading({
   return (
     <div
       className={cn(
-        "mb-10 max-w-2xl",
+        "mb-8 max-w-2xl sm:mb-10",
         align === "center" ? "mx-auto text-center" : "text-left",
       )}
     >
@@ -148,14 +148,14 @@ export function SectionHeading({
         className={cn(
           "font-extrabold leading-[1.08] tracking-[-0.035em] text-primary",
           align === "center"
-            ? "text-[clamp(2.25rem,4vw,3rem)]"
-            : "text-[clamp(2.35rem,4.2vw,3rem)]",
+            ? "text-[clamp(1.9rem,6vw,3rem)]"
+            : "text-[clamp(2rem,6.2vw,3rem)]",
         )}
       >
         {title}
       </h2>
       {subtitle && (
-        <p className="mt-4 text-[16px] leading-relaxed text-secondary">
+        <p className="mt-3 text-[15px] leading-relaxed text-secondary sm:mt-4 sm:text-[16px]">
           {subtitle}
         </p>
       )}
