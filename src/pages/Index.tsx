@@ -3,7 +3,6 @@ import type { ReactNode } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import TechParticles from "@/components/TechParticles";
-import EnterpriseHero from "@/components/sections/EnterpriseHero";
 import EngineeringPhilosophy from "@/components/sections/EngineeringPhilosophy";
 import LocaleSwitchSkeleton from "@/components/LocaleSwitchSkeleton";
 import SeoMeta from "@/components/SeoMeta";
@@ -145,8 +144,7 @@ const Index = () => {
           animate={reducedMotion ? undefined : { opacity: 1 }}
           transition={{ duration: 0.65, ease: "easeOut" }}
         >
-          {/* <EnterpriseHero /> */}
-        <HeroSection04/>
+          <HeroSection04 />
           <EngineeringPhilosophy />
           <Suspense fallback={sectionFallback}>
             <FlowModule index={1} tone="muted">
