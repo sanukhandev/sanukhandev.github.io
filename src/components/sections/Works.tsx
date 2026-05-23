@@ -4,6 +4,13 @@ import { Link } from "react-router-dom";
 import { ShoppingCart, Webhook, Boxes } from "lucide-react";
 import { type WorkCategory } from "@/data/siteData";
 import { useSiteContent } from "@/data/siteContent";
+import { Button } from "@/components/ui/button";
+import {
+  ContainerAnimated,
+  ContainerStagger,
+  GalleryGrid,
+  GalleryGridCell,
+} from "@/components/ui/cta-section-with-gallery";
 import { SectionHeading, TechTag } from "@/components/shared/SectionHeading";
 import { cn } from "@/lib/utils";
 import { trackEvent } from "@/utils/analytics";
@@ -22,6 +29,17 @@ export default function Works() {
     () =>
       active === "All" ? works : works.filter((w) => w.category === active),
     [active, works],
+  );
+
+  const galleryHighlights = useMemo(
+    () =>
+      (filtered.length ? filtered : works).slice(0, 4).map((item) => ({
+        id: item.title,
+        title: item.scope,
+        detail: item.category,
+        summary: item.outcome,
+      })),
+    [filtered, works],
   );
 
   useEffect(() => {
@@ -69,6 +87,55 @@ export default function Works() {
           subtitle={ui.works.subtitle}
           align="left"
         />
+
+        <div className="mb-10 rounded-2xl bg-secondary/20 p-4 sm:p-6">
+          <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-2">
+            <ContainerStagger>
+              <ContainerAnimated className="mb-3 block text-xs font-medium text-accent md:text-sm">
+                {ui.works.eyebrow}
+              </ContainerAnimated>
+              <ContainerAnimated className="text-3xl font-semibold tracking-tight text-primary md:text-4xl">
+                Build Delivery That Ships Outcomes
+              </ContainerAnimated>
+              <ContainerAnimated className="my-4 text-sm text-secondary md:my-5 md:text-base">
+                From architecture to integration and product-scale execution, each
+                engagement is structured for measurable business impact.
+              </ContainerAnimated>
+              <ContainerAnimated>
+                <Button asChild className="bg-accent text-on-accent hover:bg-accent/90">
+                  <a href="#contact">Start a delivery conversation</a>
+                </Button>
+              </ContainerAnimated>
+            </ContainerStagger>
+
+            <GalleryGrid>
+              {galleryHighlights.map((item, index) => (
+                <GalleryGridCell
+                  index={index}
+                  key={item.id}
+                  className={cn(
+                    "border border-default/70 p-4",
+                    index % 2 === 0
+                      ? "bg-gradient-to-br from-secondary via-background to-secondary/60"
+                      : "bg-gradient-to-br from-accent-soft/60 via-background to-secondary/70",
+                  )}
+                >
+                  <div className="flex h-full flex-col justify-end">
+                    <p className="text-xs font-semibold uppercase tracking-wide text-secondary">
+                      {item.detail}
+                    </p>
+                    <p className="mt-1 text-sm font-semibold text-primary sm:text-base">
+                      {item.title}
+                    </p>
+                    <p className="mt-2 line-clamp-3 text-xs text-secondary">
+                      {item.summary}
+                    </p>
+                  </div>
+                </GalleryGridCell>
+              ))}
+            </GalleryGrid>
+          </div>
+        </div>
 
         <div className="mb-8 flex flex-wrap gap-2">
           {workCategories.map((c) => (

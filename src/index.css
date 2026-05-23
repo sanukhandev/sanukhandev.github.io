@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Anta&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Naskh+Arabic:wght@400;500;700&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -154,7 +156,7 @@
     margin: 0;
     background: var(--bg-primary);
     color: var(--text-primary);
-    font-family: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+    font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
     font-size: 15px;
     line-height: 1.55;
     font-weight: 500;
@@ -174,7 +176,7 @@
   html.locale-ar input,
   html.locale-ar textarea,
   html.locale-ar select {
-    font-family: "Mirza", "Noto Naskh Arabic", serif;
+    font-family: "Noto Naskh Arabic", serif;
   }
 
   html.locale-ar body {
@@ -264,7 +266,7 @@
   h4,
   h5,
   h6 {
-    font-family: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+    font-family: inherit;
     letter-spacing: -0.02em;
   }
 
@@ -1093,7 +1095,7 @@ html.light .zaakiy-chat .placeholder\:text-\[\#8a90a8\]::placeholder {
 }
 
 .preloader-logo-main {
-  font-family: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+  font-family: inherit;
   font-size: clamp(30px, 6vw, 54px);
   font-weight: 800;
   letter-spacing: -0.03em;
@@ -1102,10 +1104,14 @@ html.light .zaakiy-chat .placeholder\:text-\[\#8a90a8\]::placeholder {
 }
 
 .preloader-logo-dot {
-  font-family: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+  font-family: inherit;
   font-size: clamp(18px, 3.4vw, 30px);
   font-weight: 600;
   color: hsl(var(--primary));
+}
+
+.brand-zaakiy {
+  font-family: "Anta", ui-sans-serif, system-ui, sans-serif;
 }
 
 .preloader-message {

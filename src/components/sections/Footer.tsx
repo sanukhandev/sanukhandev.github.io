@@ -105,7 +105,6 @@ export default function Footer() {
                     <text
                       x="210"
                       y="25"
-                      fontFamily="Mirza, serif"
                       fontSize="26"
                       fontWeight="700"
                       textAnchor="end"
@@ -129,7 +128,6 @@ export default function Footer() {
                     <text
                       x="292"
                       y="25"
-                      fontFamily="Mirza, serif"
                       fontSize="20"
                       fontWeight="500"
                       textAnchor="end"
@@ -153,7 +151,6 @@ export default function Footer() {
                     <text
                       x="0"
                       y="24"
-                      fontFamily="Montserrat, ui-sans-serif, sans-serif"
                       fontSize="22"
                       fontWeight="800"
                       letterSpacing="-0.5"
@@ -164,7 +161,6 @@ export default function Footer() {
                     <text
                       x="57"
                       y="24"
-                      fontFamily="Montserrat, ui-sans-serif, sans-serif"
                       fontSize="22"
                       fontWeight="600"
                       letterSpacing="-0.5"
@@ -175,7 +171,6 @@ export default function Footer() {
                     <text
                       x="116"
                       y="24"
-                      fontFamily="Montserrat, ui-sans-serif, sans-serif"
                       fontSize="18"
                       fontWeight="500"
                       fill={isLight ? "#1f9f45" : "#38c755"}

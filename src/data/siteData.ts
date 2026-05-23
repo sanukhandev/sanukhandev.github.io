@@ -36,17 +36,11 @@ export const profile = {
       label: "Hire Me",
       href: "mailto:hello@sanukhan.dev?subject=Hire%20Inquiry%20–%20SanuKhan.dev",
       variant: "hire" as const,
-    },
-    {
-      label: "Download Resume",
-      href: "/Sanu Khan - Resume.pdf",
-      variant: "download" as const,
-    },
-    {
-      label: "LinkedIn",
-      href: "https://www.linkedin.com/in/sanukhan/",
-      variant: "social" as const,
-    },
+    },{
+      label: "Buy Me a Coffee",
+      href: "https://ko-fi.com/sanukhan",
+      variant: "buyMeACoffee" as const,
+    }
   ],
   avatarUrl: "/assets/images/sanu.avif",
 };
@@ -210,6 +204,11 @@ export const workCategories = [
   "Commerce",
   "Integration",
   "Platform",
+  "Operations Intelligence",
+  "Automation",
+  "AI",
+  "Operations",
+  "Infrastructure",
 ] as const;
 export type WorkCategory = (typeof workCategories)[number];
 
@@ -223,40 +222,111 @@ export const works: Array<{
   category: Exclude<WorkCategory, "All">;
 }> = [
   {
-    title: "Retail Event-Driven Platform",
+    title: "Operational Intelligence Ecosystem",
     problem:
-      "Pricing, inventory, and catalog updates were fragmented across regions, creating latency and inconsistent product states.",
+      "Enterprise operations were fragmented across disconnected systems, limiting visibility, automation, and coordinated decision making.",
     solution:
-      "Designed event-driven pipelines with Kafka/Event Hubs and integration services to synchronize product and pricing signals.",
+      "Architected an event-driven operational intelligence platform with centralized telemetry, AI-assisted orchestration, and distributed workflow automation layers.",
     outcome:
-      "Enabled near real-time multi-market consistency across systems supporting 800K+ catalog scale.",
-    tags: ["Kafka", "Event Hubs", "Azure", "Microservices"],
-    scope: "Multi-region commerce",
+      "Enabled real-time operational awareness and scalable intelligent automation across multi-domain business environments.",
+    tags: [
+      "Operational Intelligence",
+      "AI Workflows",
+      "Event-Driven",
+      "Telemetry"
+    ],
+    scope: "Enterprise operational ecosystem",
+    category: "Operations",
+  },
+
+  {
+    title: "Retail Event Processing Network",
+    problem:
+      "Catalog, pricing, and inventory events were processed asynchronously across regions with inconsistent propagation timing.",
+    solution:
+      "Designed distributed event streaming pipelines using Kafka and Azure Event Hubs with resilient synchronization services.",
+    outcome:
+      "Improved near real-time consistency and operational throughput for high-scale commerce environments.",
+    tags: [
+      "Kafka",
+      "Azure Event Hubs",
+      "Streaming",
+      "Microservices"
+    ],
+    scope: "Global commerce operations",
     category: "Commerce",
   },
+
   {
-    title: "Enterprise PIM Integration Suite",
+    title: "AI-Assisted Workflow Automation",
     problem:
-      "Product information flows between PIM and downstream commerce systems were brittle and difficult to audit.",
+      "Operational workflows depended heavily on manual coordination and repetitive human intervention.",
     solution:
-      "Built serverless integration orchestrations using Azure Functions with contract-driven payload validation.",
+      "Built AI-assisted orchestration pipelines capable of contextual workflow execution, escalation handling, and intelligent routing.",
     outcome:
-      "Improved data integrity and reduced operational interventions for large catalog publication cycles.",
-    tags: ["Azure Functions", "PIM", "Serverless", "Integration"],
-    scope: "Enterprise integration",
+      "Reduced operational overhead while improving execution efficiency and response coordination.",
+    tags: [
+      "AI Automation",
+      "Workflow Engine",
+      "Orchestration",
+      "Process Intelligence"
+    ],
+    scope: "Operational automation systems",
+    category: "Automation",
+  },
+
+  {
+    title: "Enterprise Integration Fabric",
+    problem:
+      "Cross-platform integrations between enterprise systems lacked observability, resilience, and validation governance.",
+    solution:
+      "Developed serverless integration orchestration layers with contract-driven payload validation and operational monitoring pipelines.",
+    outcome:
+      "Improved integration reliability, traceability, and operational stability across distributed enterprise systems.",
+    tags: [
+      "Azure Functions",
+      "Serverless",
+      "Integration",
+      "Observability"
+    ],
+    scope: "Enterprise integration architecture",
     category: "Integration",
   },
+
   {
-    title: "Multi-Tenant SaaS Platform Core",
+    title: "Multi-Tenant Platform Infrastructure",
     problem:
-      "Tenant-level customization and scaling were constrained by a monolithic operational model.",
+      "Tenant-specific scaling, deployments, and operational boundaries were constrained by tightly coupled platform architecture.",
     solution:
-      "Refactored platform boundaries into microservices with tenancy-aware data and deployment contracts.",
+      "Refactored platform services into tenancy-aware microservice domains with isolated deployment and observability contracts.",
     outcome:
-      "Increased release velocity and platform scalability while preserving tenant isolation controls.",
-    tags: ["Kubernetes", "Microservices", "SaaS", "Observability"],
-    scope: "Global platform engineering",
+      "Improved scalability, deployment agility, and operational isolation across distributed tenant environments.",
+    tags: [
+      "Kubernetes",
+      "Microservices",
+      "SaaS",
+      "Platform Engineering"
+    ],
+    scope: "Multi-tenant platform systems",
     category: "Platform",
+  },
+
+  {
+    title: "Real-Time Observability & Monitoring Layer",
+    problem:
+      "Operational incidents and performance anomalies lacked centralized monitoring and proactive visibility.",
+    solution:
+      "Implemented unified observability pipelines with telemetry aggregation, distributed tracing, and operational intelligence dashboards.",
+    outcome:
+      "Enhanced proactive incident detection, system diagnostics, and operational decision support capabilities.",
+    tags: [
+      "Observability",
+      "Distributed Tracing",
+      "Monitoring",
+      "Telemetry"
+    ],
+    scope: "Enterprise monitoring systems",
+    category: "Infrastructure",
   },
 ];
 

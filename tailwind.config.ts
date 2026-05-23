@@ -87,8 +87,9 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ["Montserrat", "ui-sans-serif", "system-ui", "sans-serif"],
-        display: ["Montserrat", "ui-sans-serif", "system-ui", "sans-serif"],
+        sans: ["Plus Jakarta Sans", "ui-sans-serif", "system-ui", "sans-serif"],
+        display: ["Plus Jakarta Sans", "ui-sans-serif", "system-ui", "sans-serif"],
+        body: ["Plus Jakarta Sans", "ui-sans-serif", "system-ui", "sans-serif"],
       },
       colors: {
         ...palette,

@@ -169,7 +169,6 @@ function Hero() {
                   <text
                     x="210"
                     y="30"
-                    fontFamily="Mirza, serif"
                     fontSize="30"
                     fontWeight="700"
                     textAnchor="end"
@@ -193,7 +192,6 @@ function Hero() {
                   <text
                     x="292"
                     y="30"
-                    fontFamily="Mirza, serif"
                     fontSize="22"
                     fontWeight="500"
                     textAnchor="end"
@@ -217,7 +215,6 @@ function Hero() {
                   <text
                     x="0"
                     y="36"
-                    fontFamily="Montserrat, ui-sans-serif, sans-serif"
                     fontSize="32"
                     fontWeight="800"
                     letterSpacing="-0.5"
@@ -228,7 +225,6 @@ function Hero() {
                   <text
                     x="82"
                     y="36"
-                    fontFamily="Montserrat, ui-sans-serif, sans-serif"
                     fontSize="32"
                     fontWeight="600"
                     letterSpacing="-0.5"
@@ -239,7 +235,6 @@ function Hero() {
                   <text
                     x="166"
                     y="36"
-                    fontFamily="Montserrat, ui-sans-serif, sans-serif"
                     fontSize="26"
                     fontWeight="500"
                     fill={isLight ? "#1f9f45" : "#38c755"}
@@ -317,9 +312,8 @@ function Hero() {
                     }}
                   />
                   <motion.span
-                    className="relative inline-block text-[clamp(1.2rem,3vw,1.8rem)] font-normal uppercase leading-none text-accent"
+                    className="brand-zaakiy relative inline-block text-[clamp(1.2rem,3vw,1.8rem)] font-normal uppercase leading-none text-accent"
                     style={{
-                      fontFamily: "'Anta', sans-serif",
                       textShadow:
                         "0 0 18px color-mix(in srgb, var(--accent) 28%, transparent)",
                     }}
