@@ -404,7 +404,7 @@
 
   .system-module {
     position: relative;
-    margin: clamp(1.4rem, 4vw, 3.2rem) auto;
+    margin: 0 auto;
     border-radius: clamp(18px, 2vw, 26px);
     border: 0;
     background: transparent;

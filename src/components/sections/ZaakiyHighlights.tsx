@@ -23,7 +23,7 @@ const detailPillsAr = [
   "جاهز لتكاملات المؤسسات",
 ];
 const richLinesEn = [
-  " ZaakiyV3RSE unifies branch operations, approvals, and execution signals in a single operational layer.",
+  "ZaakiyV3RSE unifies branch operations, approvals, and execution signals in a single operational layer.",
   "Built for enterprise teams that need policy-aware actions, traceable workflows, and faster operational decisions.",
 ];
 const richLinesAr = [
@@ -38,7 +38,7 @@ export default function ZaakiyHighlights() {
   const reduceMotion = useReducedMotion();
   const roleBrand =
     (profile as typeof profile & { roleBrand?: string }).roleBrand ??
-    " ZaakiyV3RSE";
+    "ZaakiyV3RSE";
 
   return (
     <section id="ops-intelligence" className="section-pad relative overflow-hidden">
@@ -88,7 +88,7 @@ export default function ZaakiyHighlights() {
             description={
               isArabic
                 ? "تمنح ZaakiyV3RSE فرقك رؤية لحظية وسير عمل ذكي وأتمتة عملية داخل تجربة تشغيل واحدة متكاملة."
-                : " ZaakiyV3RSE gives teams one intelligent operating layer for real-time visibility, calm automation, and faster execution."
+                : "ZaakiyV3RSE gives teams one intelligent operating layer for real-time visibility, calm automation, and faster execution."
             }
             detailPills={isArabic ? detailPillsAr : detailPillsEn}
             richTextLines={isArabic ? richLinesAr : richLinesEn}
