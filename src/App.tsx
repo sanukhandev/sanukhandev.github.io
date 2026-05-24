@@ -8,6 +8,20 @@ import { ThemeProvider } from "@/hooks/use-theme";
 import { LocaleProvider } from "@/hooks/use-locale";
 import { trackEvent, trackPageView } from "@/utils/analytics";
 
+const runWhenIdle = (fn: () => void) => {
+  if (typeof window === "undefined") {
+    return () => {};
+  }
+
+  if ("requestIdleCallback" in window) {
+    const id = window.requestIdleCallback(() => fn(), { timeout: 1200 });
+    return () => window.cancelIdleCallback(id);
+  }
+
+  const id = window.setTimeout(fn, 200);
+  return () => window.clearTimeout(id);
+};
+
 const Index = lazy(() => import("./pages/Index.tsx"));
 const NotFound = lazy(() => import("./pages/NotFound.tsx"));
 
@@ -45,7 +59,7 @@ const queryClient = new QueryClient();
 
 const routeFallback = (
   <div
-    className="min-h-screen bg-background"
+    className="min-h-[60vh] bg-background"
     role="status"
     aria-live="polite"
     aria-label="Loading page"
@@ -62,8 +76,12 @@ function AnalyticsTracker() {
       return;
     }
 
-    trackPageView(pagePath);
-    lastTrackedPath.current = pagePath;
+    const cleanup = runWhenIdle(() => {
+      trackPageView(pagePath);
+      lastTrackedPath.current = pagePath;
+    });
+
+    return cleanup;
   }, [pagePath]);
 
   useEffect(() => {
@@ -82,7 +100,7 @@ function AnalyticsTracker() {
 
       if (scrolled / height > 0.75) {
         hasTrackedScroll = true;
-        trackEvent("scroll_75");
+        runWhenIdle(() => trackEvent("scroll_75"));
         window.removeEventListener("scroll", handleScroll);
       }
     };
@@ -94,7 +112,7 @@ function AnalyticsTracker() {
 
   useEffect(() => {
     const timer = window.setTimeout(() => {
-      trackEvent("engaged_60s");
+      runWhenIdle(() => trackEvent("engaged_60s"));
     }, 60000);
 
     return () => window.clearTimeout(timer);

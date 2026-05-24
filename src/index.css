@@ -1,5 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Anta&family=Inter:wght@400;500;600;700;800&family=Raleway:wght@500;600;700;800&family=Noto+Naskh+Arabic:wght@400;500;700&display=swap");
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -158,7 +156,7 @@
     background: var(--bg-primary);
     color: var(--text-primary);
     overflow-x: hidden;
-    font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+    font-family: "Raleway", ui-sans-serif, system-ui, sans-serif;
     font-size: 16px;
     line-height: 1.62;
     font-weight: 500;
@@ -360,11 +358,15 @@
   }
 
   .container-narrow {
-    @apply mx-auto w-full max-w-[1220px] px-4 sm:px-8 lg:px-10;
+    @apply mx-auto w-full max-w-7xl px-5 sm:px-6 md:px-8 lg:px-12;
   }
 
   .section-pad {
-    @apply py-12 sm:py-16 lg:py-20;
+    @apply py-16 md:py-24 lg:py-32;
+  }
+
+  .section-grid-gap {
+    @apply gap-8 md:gap-12 lg:gap-20;
   }
 
   .system-shell {
@@ -386,6 +388,14 @@
     background-size: 52px 52px;
     mask-image: radial-gradient(circle at 50% 24%, black 32%, transparent 84%);
     opacity: 0.26;
+    animation: systemGridDrift 26s linear infinite;
+  }
+
+  .system-noise {
+    opacity: 0.035;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.72) 0.45px, transparent 0.45px);
+    background-size: 4px 4px;
+    animation: noiseFloat 18s linear infinite;
   }
 
   .section-flow {
@@ -394,7 +404,7 @@
 
   .system-module {
     position: relative;
-    margin: clamp(1.4rem, 4vw, 3.2rem) auto;
+    margin: 0 auto;
     border-radius: clamp(18px, 2vw, 26px);
     border: 0;
     background: transparent;
@@ -695,23 +705,19 @@
   }
 
   .premium-card {
-    border: 1px solid color-mix(in srgb, var(--border) 82%, rgba(255, 255, 255, 0.14));
-    background:
-      linear-gradient(140deg, rgba(62, 97, 83, 0.25), rgba(8, 19, 15, 0.55)),
-      rgba(10, 20, 16, 0.88);
-    border-radius: 14px;
-    box-shadow:
-      inset 0 1px 0 rgba(140, 192, 170, 0.1),
-      0 18px 36px -28px rgba(0, 0, 0, 0.72);
-    transition: transform 300ms ease, border-color 300ms ease, box-shadow 300ms ease, background-color 300ms ease;
+    border: 1px solid color-mix(in srgb, var(--border) 72%, rgba(255, 255, 255, 0.16));
+    background: color-mix(in srgb, var(--bg-secondary) 86%, rgba(255, 255, 255, 0.08));
+    border-radius: 1.5rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    transition: all 300ms ease-out;
   }
 
   .premium-card:hover {
-    transform: translateY(-3px);
-    border-color: rgba(37, 192, 111, 0.5);
-    box-shadow:
-      inset 0 1px 0 rgba(140, 192, 170, 0.16),
-      0 20px 34px -22px rgba(22, 145, 102, 0.4);
+    transform: translateY(-2px);
+    border-color: color-mix(in srgb, var(--accent) 32%, var(--border));
+    box-shadow: 0 14px 42px rgba(0, 0, 0, 0.14);
   }
 
   .glass-pill {
@@ -798,6 +804,22 @@
   .animate-fade-up-stagger > *:nth-child(7) { animation-delay: 420ms; }
 }
 
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+
+    .system-grid,
+    .system-noise {
+      animation: none !important;
+    }
+  }
+
 @keyframes fadeUp {
   from {
     opacity: 0;
@@ -806,6 +828,27 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes systemGridDrift {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(0, 24px, 0);
+  }
+}
+
+@keyframes noiseFloat {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(-1%, 1%, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
   }
 }
 

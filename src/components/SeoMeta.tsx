@@ -11,7 +11,7 @@ type SeoMetaProps = {
   keywords?: string;
 };
 
-const SITE_URL = "https://sanukhan.dev";
+const SITE_URL = "https://www.sanukhan.dev";
 const DEFAULT_OG_IMAGE = `${SITE_URL}/assets/images/sanu.avif`;
 const DEFAULT_DESCRIPTION =
   "Sanu Khan is a Tech Lead and Full Stack Engineer building scalable cloud-native platforms, enterprise integrations, and resilient product systems.";

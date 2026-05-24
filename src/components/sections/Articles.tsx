@@ -6,9 +6,10 @@ export default function Articles() {
   const { articles, ui } = useSiteContent();
 
   return (
-    <section id="articles" className="section-pad">
+    <section id="principles" className="section-pad">
       <div className="container-narrow">
         <SectionHeading
+          eyebrow={ui.articles.eyebrow}
           title={ui.articles.title}
           subtitle={ui.articles.subtitle}
           align="left"

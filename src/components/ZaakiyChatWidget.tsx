@@ -223,7 +223,7 @@ export default function ZaakiyChatWidget({
                   href="https://zaakiy.io"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="brand-zaakiy transition-colors hover:text-primary"
+                  className="brand-zaakiy text-accent transition-colors hover:text-primary"
                 >
                   Zv3 - ZaakiyV3RSE
                 </a>

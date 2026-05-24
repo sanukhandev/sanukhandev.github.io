@@ -173,7 +173,7 @@ export default function DevToBlogPage() {
     return (
       <>
         <Navbar />
-        <main className="min-h-screen bg-[var(--bg-primary)] pt-20 text-[var(--text-primary)]">
+        <main className="min-h-[100dvh] bg-[var(--bg-primary)] pt-20 text-[var(--text-primary)]">
           <div className="mx-auto max-w-[1400px] px-4 py-8">
             <div className="animate-pulse space-y-4">
               <div className="h-8 w-2/3 rounded-xl bg-[var(--bg-secondary)]" />
@@ -196,7 +196,7 @@ export default function DevToBlogPage() {
           canonicalPath={`/blog/${slug || ""}`}
         />
         <Navbar />
-        <main className="min-h-screen bg-[var(--bg-primary)] pt-20 text-[var(--text-primary)]">
+        <main className="min-h-[100dvh] bg-[var(--bg-primary)] pt-20 text-[var(--text-primary)]">
           <div className="mx-auto max-w-[1400px] px-4 py-8">
             <Link
               to="/blog"

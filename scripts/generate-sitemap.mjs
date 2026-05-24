@@ -1,10 +1,12 @@
 import { writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 
-const SITE = "https://sanukhan.dev";
+const SITE = "https://www.sanukhan.dev";
+const DEVTO_USERNAME = "sanukhandev";
+const DEVTO_TIMEOUT_MS = 5000;
 const LASTMOD = new Date().toISOString().slice(0, 10);
 
-const routes = [
+const staticRoutes = [
   "/",
   "/faq",
   "/tools",
@@ -22,6 +24,36 @@ const routes = [
   "/services/full-stack-developer-uae",
 ];
 
+const fetchDevToBlogRoutes = async () => {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), DEVTO_TIMEOUT_MS);
+
+  try {
+    const response = await fetch(
+      `https://dev.to/api/articles?username=${DEVTO_USERNAME}&per_page=100`,
+      { signal: controller.signal },
+    );
+
+    if (!response.ok) {
+      return [];
+    }
+
+    const posts = await response.json();
+    if (!Array.isArray(posts)) {
+      return [];
+    }
+
+    return posts
+      .map((post) => (typeof post?.slug === "string" ? post.slug.trim() : ""))
+      .filter(Boolean)
+      .map((slug) => `/blog/${slug}`);
+  } catch {
+    return [];
+  } finally {
+    clearTimeout(timeout);
+  }
+};
+
 const priorityFor = (route) => {
   if (route === "/") return "1.0";
   if (route.startsWith("/tools")) return "0.9";
@@ -36,10 +68,17 @@ const changefreqFor = (route) => {
   return "monthly";
 };
 
-const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${routes
-  .map(
-    (route) => `  <url>\n    <loc>${SITE}${route}</loc>\n    <lastmod>${LASTMOD}</lastmod>\n    <changefreq>${changefreqFor(route)}</changefreq>\n    <priority>${priorityFor(route)}</priority>\n  </url>`,
-  )
-  .join("\n")}\n</urlset>\n`;
+const main = async () => {
+  const devtoBlogRoutes = await fetchDevToBlogRoutes();
+  const routes = Array.from(new Set([...staticRoutes, ...devtoBlogRoutes]));
 
-writeFileSync(resolve(process.cwd(), "public", "sitemap.xml"), xml, "utf8");
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${routes
+    .map(
+      (route) => `  <url>\n    <loc>${SITE}${route}</loc>\n    <lastmod>${LASTMOD}</lastmod>\n    <changefreq>${changefreqFor(route)}</changefreq>\n    <priority>${priorityFor(route)}</priority>\n  </url>`,
+    )
+    .join("\n")}\n</urlset>\n`;
+
+  writeFileSync(resolve(process.cwd(), "public", "sitemap.xml"), xml, "utf8");
+};
+
+await main();

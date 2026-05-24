@@ -123,7 +123,6 @@ function ExperiencePositionItem({
 
   return (
     <motion.article
-      layout
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       className="relative pl-5"
@@ -131,7 +130,6 @@ function ExperiencePositionItem({
       <span className="absolute left-[-3px] top-5 size-1.5 rounded-full bg-accent" aria-hidden />
 
       <motion.div
-        layout
         transition={{ type: "spring", stiffness: 320, damping: 28 }}
         className={cn(
           "rounded-xl border p-3 transition-colors",

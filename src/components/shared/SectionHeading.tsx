@@ -26,6 +26,11 @@ import {
   SiAndroid,
 } from "react-icons/si";
 import { cn } from "@/lib/utils";
+import {
+  labelClass,
+  paragraphClass,
+  sectionHeadingClass,
+} from "@/lib/design-system";
 
 type SiIconType = ComponentType<{ className?: string; style?: CSSProperties }>;
 
@@ -140,22 +145,20 @@ export function SectionHeading({
         <span className="section-accent-mark" aria-hidden />
       )}
       {eyebrow && (
-        <span className="mb-3 inline-flex items-center rounded-full border border-default bg-secondary px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-tea-green-300">
+        <span
+          className={cn(
+            "mb-3 inline-flex items-center rounded-full border border-default bg-secondary px-3 py-1 text-zinc-600 dark:text-zinc-300",
+            labelClass,
+          )}
+        >
           {eyebrow}
         </span>
       )}
-      <h2
-        className={cn(
-          "font-extrabold leading-[1.08] tracking-[-0.035em] text-primary",
-          align === "center"
-            ? "text-[clamp(1.9rem,6vw,3rem)]"
-            : "text-[clamp(2rem,6.2vw,3rem)]",
-        )}
-      >
+      <h2 className={cn("text-primary", sectionHeadingClass)}>
         {title}
       </h2>
       {subtitle && (
-        <p className="mt-3 text-[15px] leading-relaxed text-secondary sm:mt-4 sm:text-[16px]">
+        <p className={cn("mt-3 sm:mt-4", paragraphClass)}>
           {subtitle}
         </p>
       )}

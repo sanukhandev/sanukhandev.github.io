@@ -34,12 +34,12 @@ export default function BlogSeoPage(props: BlogSeoPageProps) {
           "@type": "BlogPosting",
           headline: h1,
           inLanguage: "en",
-          author: { "@type": "Person", name: "Sanu Khan", url: "https://sanukhan.dev" },
-          url: `https://sanukhan.dev${canonicalPath}`,
+          author: { "@type": "Person", name: "Sanu Khan", url: "https://www.sanukhan.dev" },
+          url: `https://www.sanukhan.dev${canonicalPath}`,
           description,
         }}
       />
-      <main className="min-h-screen bg-background pt-20 text-foreground">
+      <main className="min-h-[100dvh] bg-background pt-20 text-foreground">
         <article className="container-narrow section-pad">
           <h1 className="text-[38px] font-extrabold leading-[1.1] text-primary">{h1}</h1>
           <p className="mt-4 text-[16px] leading-7 text-secondary">{keywordLead}</p>

@@ -41,10 +41,10 @@ export default function ToolSeoPage(props: ToolSeoPageProps) {
           applicationCategory: "DeveloperTool",
           operatingSystem: "Web",
           inLanguage: "en",
-          url: `https://sanukhan.dev${canonicalPath}`,
+          url: `https://www.sanukhan.dev${canonicalPath}`,
         }}
       />
-      <main className="min-h-screen bg-background pt-20 text-foreground">
+      <main className="min-h-[100dvh] bg-background pt-20 text-foreground">
         <article className="container-narrow section-pad">
           <h1 className="text-[38px] font-extrabold leading-[1.1] text-primary">{h1}</h1>
           <div className="mt-4 space-y-4 text-[15px] leading-7 text-secondary">
