@@ -1,8 +1,34 @@
-import { useEffect, useMemo, useState } from "react";
+import { type ReactNode, useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { MoveRight, PhoneCall } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+
+const BRAND_TOKEN_REGEX = /(Zaakiy\s*V3RSE|ZaakiyV3RSE)/gi;
+
+function renderBrandedText(text: string): ReactNode {
+  const output: ReactNode[] = [];
+  let cursor = 0;
+
+  for (const match of text.matchAll(BRAND_TOKEN_REGEX)) {
+    const index = match.index ?? 0;
+    if (index > cursor) {
+      output.push(text.slice(cursor, index));
+    }
+    output.push(
+      <span key={`${index}-${match[0]}`} className="brand-zaakiy text-accent">
+        {match[0]}
+      </span>,
+    );
+    cursor = index + match[0].length;
+  }
+
+  if (cursor < text.length) {
+    output.push(text.slice(cursor));
+  }
+
+  return output.length ? output : text;
+}
 
 interface AnimatedHeroProps {
   badgeText: string;
@@ -74,17 +100,17 @@ function Hero({
                 target={badgeTarget}
                 rel={badgeTarget === "_blank" ? "noopener noreferrer" : undefined}
               >
-                {badgeText} <MoveRight className="h-4 w-4" />
+                {renderBrandedText(badgeText)} <MoveRight className="h-4 w-4" />
               </a>
             </Button>
           </div>
 
           <div className="flex flex-col gap-3">
             <h1 className="font-display text-4xl md:text-6xl max-w-3xl tracking-tight text-center font-semibold leading-tight">
-              <span className="text-primary">{titlePrefix}</span>
+              <span className="text-primary">{renderBrandedText(titlePrefix)}</span>
               {brandText ? (
                 <span className="brand-zaakiy mt-2 block text-accent">
-                  {brandText}
+                  {renderBrandedText(brandText)}
                 </span>
               ) : null}
               <span className="relative flex w-full justify-center overflow-hidden text-center min-h-[1.2em] md:pb-2 md:pt-1">
@@ -113,7 +139,7 @@ function Hero({
             </h1>
 
             <p className="mx-auto max-w-2xl text-center text-base leading-relaxed tracking-tight text-secondary md:text-[1.05rem]">
-              {description}
+              {renderBrandedText(description)}
             </p>
 
             {detailPills.length ? (
@@ -171,7 +197,7 @@ function Hero({
             <div className="mx-auto grid max-w-3xl gap-2 rounded-2xl border border-default/70 bg-background/40 p-4 text-sm text-secondary sm:grid-cols-2">
               {richTextLines.map((line) => (
                 <p key={line} className="leading-relaxed">
-                  {line}
+                  {renderBrandedText(line)}
                 </p>
               ))}
             </div>

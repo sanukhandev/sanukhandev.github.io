@@ -23,11 +23,11 @@ const detailPillsAr = [
   "جاهز لتكاملات المؤسسات",
 ];
 const richLinesEn = [
-  "Zaakiy V3RSE unifies branch operations, approvals, and execution signals in a single operational layer.",
+  " ZaakiyV3RSE unifies branch operations, approvals, and execution signals in a single operational layer.",
   "Built for enterprise teams that need policy-aware actions, traceable workflows, and faster operational decisions.",
 ];
 const richLinesAr = [
-  "يوحّد Zaakiy V3RSE عمليات الفروع والاعتمادات وإشارات التنفيذ ضمن طبقة تشغيل واحدة.",
+  "يوحّد ZaakiyV3RSE عمليات الفروع والاعتمادات وإشارات التنفيذ ضمن طبقة تشغيل واحدة.",
   "مصمم لفرق المؤسسات التي تحتاج إجراءات واعية بالسياسات وتدفقات قابلة للتتبع وقرارات تشغيل أسرع.",
 ];
 
@@ -38,7 +38,7 @@ export default function ZaakiyHighlights() {
   const reduceMotion = useReducedMotion();
   const roleBrand =
     (profile as typeof profile & { roleBrand?: string }).roleBrand ??
-    "Zaakiy V3RSE";
+    " ZaakiyV3RSE";
 
   return (
     <section id="ops-intelligence" className="section-pad relative overflow-hidden">
@@ -48,8 +48,8 @@ export default function ZaakiyHighlights() {
             Operational Intelligence Platform
           </span>
           <h2 className="text-[clamp(2rem,6.2vw,3rem)] font-extrabold leading-[1.08] tracking-[-0.035em] text-primary">
-            <span className="brand-zaakiy bg-gradient-to-r from-[#38c755] via-[#4adf9f] to-[#3dd9ff] bg-clip-text text-transparent">
-              Zaakiy V3RSE
+            <span className="brand-zaakiy text-accent">
+              ZaakiyV3RSE
             </span>{" "}
             Operational Nerve System
           </h2>
@@ -87,8 +87,8 @@ export default function ZaakiyHighlights() {
             titleWords={isArabic ? rotatingWordsAr : rotatingWordsEn}
             description={
               isArabic
-                ? "تمنح Zaakiy V3RSE فرقك رؤية لحظية وسير عمل ذكي وأتمتة عملية داخل تجربة تشغيل واحدة متكاملة."
-                : "Zaakiy V3RSE gives teams one intelligent operating layer for real-time visibility, calm automation, and faster execution."
+                ? "تمنح ZaakiyV3RSE فرقك رؤية لحظية وسير عمل ذكي وأتمتة عملية داخل تجربة تشغيل واحدة متكاملة."
+                : " ZaakiyV3RSE gives teams one intelligent operating layer for real-time visibility, calm automation, and faster execution."
             }
             detailPills={isArabic ? detailPillsAr : detailPillsEn}
             richTextLines={isArabic ? richLinesAr : richLinesEn}

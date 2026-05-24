@@ -134,17 +134,17 @@ const arContent = {
   profile: {
     ...baseProfile,
     name: "سانو خان",
-    role: "مؤسس Zaakiy V3RSE",
-    roleBrand: "Zaakiy V3RSE",
+    role: "مؤسس ZaakiyV3RSE",
+    roleBrand: " ZaakiyV3RSE",
     subRole: "قائد تقني • معماري سحابي ومعماري MS • متخصص في تكاملات المؤسسات",
     subtitle:
       "أصمم أنظمة موزعة قابلة للتوسع، وتكاملات مؤسسية، ومنصات عالية الأداء لأسواق عالمية وإقليمية.",
     statement:
-      "أقود هندسة المنصات والعمارة التقنية لمنظومات تجارة قائمة على الأحداث وتكاملات مؤسساتية متعددة المناطق. أنا مؤسس Zaakiy V3RSE.",
+      "أقود هندسة المنصات والعمارة التقنية لمنظومات تجارة قائمة على الأحداث وتكاملات مؤسساتية متعددة المناطق. أنا مؤسس ZaakiyV3RSE.",
     meta: [
       "+13 سنة في بناء الأنظمة الموزعة",
       "متخصص في العمارة المعتمدة على الأحداث",
-      "مؤسس Zaakiy V3RSE",
+      "مؤسس ZaakiyV3RSE",
       "تنفيذ على Azure و AWS و Kubernetes",
     ],
     impactMetrics: [
@@ -279,7 +279,7 @@ const arContent = {
   footer: {
     ...baseFooter,
     brand: "سانوخان.ديف",
-    blurb: "مؤسس Zaakiy V3RSE • قائد تقني • معماري سحابي",
+    blurb: "مؤسس ZaakiyV3RSE • قائد تقني • معماري سحابي",
     socials: baseFooter.socials.map((s) =>
       s.label === "Buy me a coffee" ? { ...s, label: "ادعمني بقهوة" } : s,
     ),

@@ -12,7 +12,7 @@ export function HeroSection04() {
   const isArabic = locale === "ar";
 
   const roleBrand =
-    (profile as typeof profile & { roleBrand?: string }).roleBrand ?? "Zaakiy V3RSE";
+    (profile as typeof profile & { roleBrand?: string }).roleBrand ?? " ZaakiyV3RSE";
   const primarySkills = skills.clusters
     .slice(0, 5)
     .map((cluster) => cluster.title.toUpperCase());
