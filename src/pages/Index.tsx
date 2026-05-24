@@ -1,4 +1,4 @@
-import { Suspense, lazy, memo, useEffect } from "react";
+import { Suspense, lazy, memo, useEffect, useState } from "react";
 import type { ReactNode } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import Navbar from "@/components/Navbar";
@@ -62,6 +62,28 @@ function FlowModule({ children, index, tone = "base" }: FlowModuleProps) {
 const Index = () => {
   const { isSwitchingLocale } = useLocale();
   const reducedMotion = useReducedMotion();
+  const [enableParticles, setEnableParticles] = useState(false);
+
+  useEffect(() => {
+    if (reducedMotion || typeof window === "undefined") {
+      return;
+    }
+
+    if (window.matchMedia("(max-width: 768px)").matches) {
+      return;
+    }
+
+    if ("requestIdleCallback" in window) {
+      const idleId = window.requestIdleCallback(
+        () => setEnableParticles(true),
+        { timeout: 1500 },
+      );
+      return () => window.cancelIdleCallback(idleId);
+    }
+
+    const timer = window.setTimeout(() => setEnableParticles(true), 350);
+    return () => window.clearTimeout(timer);
+  }, [reducedMotion]);
 
   useEffect(() => {
     if (!("IntersectionObserver" in window)) {
@@ -119,9 +141,11 @@ const Index = () => {
   return (
     <div className="system-shell relative bg-background text-foreground">
       <div className="system-backdrop pointer-events-none fixed inset-0 -z-10" />
-      <div className="pointer-events-none fixed inset-0 z-0 opacity-75">
-        <TechParticles count={18} fullPage />
-      </div>
+      {enableParticles ? (
+        <div className="pointer-events-none fixed inset-0 z-0 opacity-75">
+          <TechParticles count={14} fullPage />
+        </div>
+      ) : null}
       <div className="pointer-events-none fixed inset-0 z-0 system-grid" />
       <div className="pointer-events-none fixed inset-0 z-0 system-noise" />
 

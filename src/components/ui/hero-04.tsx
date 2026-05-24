@@ -12,7 +12,7 @@ export function HeroSection04() {
   const isArabic = locale === "ar";
 
   const roleBrand =
-    (profile as typeof profile & { roleBrand?: string }).roleBrand ?? " ZaakiyV3RSE";
+    (profile as typeof profile & { roleBrand?: string }).roleBrand ?? "ZaakiyV3RSE";
   const primarySkills = skills.clusters
     .slice(0, 5)
     .map((cluster) => cluster.title.toUpperCase());
@@ -26,6 +26,7 @@ export function HeroSection04() {
       opacity: 1,
       transition: {
         staggerChildren: 0.1,
+        delayChildren: 0.4,
       },
     },
   };
@@ -42,7 +43,7 @@ export function HeroSection04() {
   return (
     <section
       id="home"
-      className="font-body relative min-h-[86vh] overflow-hidden py-10 md:py-14 lg:min-h-screen"
+      className="font-body relative overflow-hidden py-10 md:py-14"
     >
       <motion.div
         className="relative z-20 mx-auto max-w-7xl px-4 sm:px-6"
@@ -83,12 +84,21 @@ export function HeroSection04() {
           </div>
 
           <div className="flex w-full justify-center">
-            <div className="w-full max-w-[20rem] overflow-hidden opacity-90 md:max-w-[23rem]">
-              <img
-                src={profile.avatarUrl}
-                alt={`${profile.name} portrait`}
-                className="h-auto w-full object-contain"
-              />
+            <div className="w-full max-w-[13.5rem] overflow-hidden opacity-95 sm:max-w-[15rem] md:max-w-[16rem]">
+              <picture>
+                <source srcSet="/assets/images/sanu.avif" type="image/avif" />
+                <source srcSet="/assets/images/sanu.webp" type="image/webp" />
+                <img
+                  src={profile.avatarUrl}
+                  alt={`${profile.name} portrait`}
+                  width={420}
+                  height={520}
+                  sizes="(max-width: 768px) 70vw, 420px"
+                  loading="eager"
+                  fetchPriority="high"
+                  className="h-auto w-full scale-[0.92] object-contain"
+                />
+              </picture>
             </div>
           </div>
 

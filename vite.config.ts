@@ -1,5 +1,6 @@
 import { defineConfig, loadEnv, type PluginOption } from "vite";
 import react from "@vitejs/plugin-react-swc";
+import viteCompression from "vite-plugin-compression";
 import path from "path";
 import { fileURLToPath } from "url";
 import { createRequire } from "module";
@@ -289,7 +290,16 @@ const createZaakiyApiWrapper = (env: Record<string, string>) => ({
 // https://vitejs.dev/config/
 export default defineConfig(({ command, mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
-  const plugins: PluginOption[] = [react(), createZaakiyApiWrapper(env)];
+  const plugins: PluginOption[] = [
+    react(),
+    createZaakiyApiWrapper(env),
+    viteCompression({ algorithm: "gzip", ext: ".gz", threshold: 10240 }),
+    viteCompression({
+      algorithm: "brotliCompress",
+      ext: ".br",
+      threshold: 10240,
+    }),
+  ];
   const isCiBuild = process.env.CI === "true" || process.env.VERCEL === "1";
   const shouldPrerender = mode === "production" && !isCiBuild;
 
@@ -350,6 +360,7 @@ export default defineConfig(({ command, mode }) => {
       ],
     },
     build: {
+      target: "esnext",
       cssCodeSplit: true,
       minify: "esbuild",
       rollupOptions: {
