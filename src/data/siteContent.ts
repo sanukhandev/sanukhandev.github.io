@@ -135,7 +135,7 @@ const arContent = {
     ...baseProfile,
     name: "سانو خان",
     role: "مؤسس ZaakiyV3RSE",
-    roleBrand: " ZaakiyV3RSE",
+    roleBrand: "ZaakiyV3RSE",
     subRole: "قائد تقني • معماري سحابي ومعماري MS • متخصص في تكاملات المؤسسات",
     subtitle:
       "أصمم أنظمة موزعة قابلة للتوسع، وتكاملات مؤسسية، ومنصات عالية الأداء لأسواق عالمية وإقليمية.",
@@ -342,6 +342,7 @@ const arContent = {
       current: "حالي",
     },
     articles: {
+      eyebrow: "رؤى",
       title: "رؤى تقنية",
       subtitle: "ملاحظات مختارة في العمارة التقنية.",
       read: "اقرأ المقال",
@@ -425,6 +426,7 @@ const enContent = {
       current: "Current",
     },
     articles: {
+      eyebrow: "Insights",
       title: "Insights",
       subtitle: "Selected architecture notes.",
       read: "Read Article",

@@ -188,7 +188,7 @@ const Index = () => {
         </motion.main>
         <Suspense fallback={null}>
           <Footer />
-          <ZaakiyChatWidget extraContext="Page: Sanu Khan portfolio homepage.\n ZaakiyV3RSE: A suite of AI-driven platforms built by Sanu Khan.\n- Zaakiy AI: Multilingual AI chat support platform (10K+ conversations, English & Arabic).\n- Zaakiy CRM: CRM solution for SMEs, content creators, and social media influencers.\n- Zaakiy ERP: ERP solutions including a real estate platform.\n- Zaakiy GO: Food delivery app in Dubai.\nSanu is the founder and Solution Architect behind ZaakiyV3RSE." />
+          <ZaakiyChatWidget extraContext="Page: Sanu Khan portfolio homepage.\nZaakiyV3RSE: A suite of AI-driven platforms built by Sanu Khan.\n- Zaakiy AI: Multilingual AI chat support platform (10K+ conversations, English & Arabic).\n- Zaakiy CRM: CRM solution for SMEs, content creators, and social media influencers.\n- Zaakiy ERP: ERP solutions including a real estate platform.\n- Zaakiy GO: Food delivery app in Dubai.\nSanu is the founder and Solution Architect behind ZaakiyV3RSE." />
         </Suspense>
       </div>
     </div>

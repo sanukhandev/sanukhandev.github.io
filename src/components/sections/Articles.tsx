@@ -9,9 +9,9 @@ export default function Articles() {
     <section id="principles" className="section-pad">
       <div className="container-narrow">
         <SectionHeading
-          eyebrow="Engineering Principles"
-          title="Decision Frameworks For Scalable Systems"
-          subtitle="Concise field notes on resilient architecture, operational tradeoffs, and platform engineering heuristics."
+          eyebrow={ui.articles.eyebrow}
+          title={ui.articles.title}
+          subtitle={ui.articles.subtitle}
           align="left"
         />
 

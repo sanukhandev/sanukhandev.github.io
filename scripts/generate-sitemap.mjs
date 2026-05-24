@@ -3,6 +3,7 @@ import { resolve } from "node:path";
 
 const SITE = "https://www.sanukhan.dev";
 const DEVTO_USERNAME = "sanukhandev";
+const DEVTO_TIMEOUT_MS = 5000;
 const LASTMOD = new Date().toISOString().slice(0, 10);
 
 const staticRoutes = [
@@ -24,9 +25,13 @@ const staticRoutes = [
 ];
 
 const fetchDevToBlogRoutes = async () => {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), DEVTO_TIMEOUT_MS);
+
   try {
     const response = await fetch(
       `https://dev.to/api/articles?username=${DEVTO_USERNAME}&per_page=100`,
+      { signal: controller.signal },
     );
 
     if (!response.ok) {
@@ -44,6 +49,8 @@ const fetchDevToBlogRoutes = async () => {
       .map((slug) => `/blog/${slug}`);
   } catch {
     return [];
+  } finally {
+    clearTimeout(timeout);
   }
 };
 
