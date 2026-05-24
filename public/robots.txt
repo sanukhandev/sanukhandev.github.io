@@ -1,4 +1,3 @@
 User-agent: *
 Allow: /
-
-Sitemap: https://www.sanukhan.dev/sitemap.xml
+Sitemap: https://sanukhan.dev/sitemap.xml
