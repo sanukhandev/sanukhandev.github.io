@@ -362,7 +362,7 @@
   }
 
   .section-pad {
-    @apply py-16 md:py-24 lg:py-32;
+    @apply py-16 md:py-24 lg:py-20;
   }
 
   .section-grid-gap {
