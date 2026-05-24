@@ -134,7 +134,7 @@ const Index = () => {
         />
         <Navbar />
         <motion.main
-          className="section-flow"
+          className="section-flow pt-20 sm:pt-24"
           initial={reducedMotion ? false : { opacity: 0 }}
           animate={reducedMotion ? undefined : { opacity: 1 }}
           transition={{ duration: 0.55, ease: "easeOut" }}
