@@ -24,15 +24,15 @@ export default function BlogPreview() {
   const blogs = devtoBlogs.length ? devtoBlogs : fallbackBlogs;
 
   return (
-    <section className="section-pad" id="blog">
+    <section className="section-pad" id="ecosystem">
       <div className="container-narrow">
         <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <p className="text-[12px] font-semibold uppercase tracking-[0.16em] text-accent opacity-90">
-              Technical Insights
+              Ecosystem
             </p>
             <h2 className="mt-1 text-[clamp(1.9rem,7vw,2.8rem)] font-bold leading-tight tracking-tight text-primary">
-              Architecture Field Notes
+              Platform Intelligence Journal
             </h2>
           </div>
           <Link
@@ -51,7 +51,7 @@ export default function BlogPreview() {
             <Link
               key={post.href}
               to={post.href}
-              className="group relative flex flex-col overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--bg-secondary)] p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-[var(--accent)]/40"
+              className="group premium-card relative flex flex-col overflow-hidden p-5 transition-all duration-300 hover:-translate-y-0.5"
             >
               <span className="pointer-events-none absolute inset-x-0 top-0 h-[2px] rounded-t-2xl bg-accent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
               <div className="flex items-start justify-between gap-2">

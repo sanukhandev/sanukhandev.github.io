@@ -39,7 +39,7 @@ export default function BlogSeoPage(props: BlogSeoPageProps) {
           description,
         }}
       />
-      <main className="min-h-screen bg-background pt-20 text-foreground">
+      <main className="min-h-[100dvh] bg-background pt-20 text-foreground">
         <article className="container-narrow section-pad">
           <h1 className="text-[38px] font-extrabold leading-[1.1] text-primary">{h1}</h1>
           <p className="mt-4 text-[16px] leading-7 text-secondary">{keywordLead}</p>

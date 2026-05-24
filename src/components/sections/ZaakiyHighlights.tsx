@@ -41,7 +41,7 @@ export default function ZaakiyHighlights() {
     "Zaakiy V3RSE";
 
   return (
-    <section id="zaakiy" className="relative overflow-hidden pb-12 pt-4 sm:pb-16 sm:pt-6 lg:pb-20 lg:pt-8">
+    <section id="ops-intelligence" className="section-pad relative overflow-hidden">
       <div className="container-narrow">
         <div className="mb-5 max-w-3xl text-left sm:mb-7">
           <span className="mb-3 inline-flex items-center rounded-full border border-default bg-secondary px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-tea-green-300">

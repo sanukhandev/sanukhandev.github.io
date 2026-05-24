@@ -1,6 +1,6 @@
 export default function LocaleSwitchSkeleton() {
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-[100dvh] bg-background text-foreground">
       <div className="sticky top-0 z-40 border-b border-border/70 bg-background/95 backdrop-blur">
         <div className="container-narrow flex h-16 items-center justify-between">
           <div className="h-7 w-40 animate-pulse rounded-md bg-muted" />

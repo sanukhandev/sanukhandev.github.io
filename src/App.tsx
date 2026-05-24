@@ -45,7 +45,7 @@ const queryClient = new QueryClient();
 
 const routeFallback = (
   <div
-    className="min-h-screen bg-background"
+    className="min-h-[60vh] bg-background"
     role="status"
     aria-live="polite"
     aria-label="Loading page"

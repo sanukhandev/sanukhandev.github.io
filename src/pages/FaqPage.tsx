@@ -47,7 +47,7 @@ export default function FaqPage() {
         schema={faqSchema}
         keywords="sanu khan faq, technical consulting faq, full stack architect faq"
       />
-      <main className="min-h-screen bg-background pt-20 text-foreground">
+      <main className="min-h-[100dvh] bg-background pt-20 text-foreground">
         <section className="container-narrow section-pad">
           <h1 className="text-[38px] font-extrabold text-primary">
             Frequently Asked Questions

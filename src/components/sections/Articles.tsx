@@ -6,11 +6,12 @@ export default function Articles() {
   const { articles, ui } = useSiteContent();
 
   return (
-    <section id="articles" className="section-pad">
+    <section id="principles" className="section-pad">
       <div className="container-narrow">
         <SectionHeading
-          title={ui.articles.title}
-          subtitle={ui.articles.subtitle}
+          eyebrow="Engineering Principles"
+          title="Decision Frameworks For Scalable Systems"
+          subtitle="Concise field notes on resilient architecture, operational tradeoffs, and platform engineering heuristics."
           align="left"
         />
 

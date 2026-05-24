@@ -51,7 +51,7 @@ export default function SeoPageLayout(props: SeoPageLayoutProps) {
         canonicalPath={canonicalPath}
         schema={serviceSchema}
       />
-      <main className="min-h-screen bg-background pt-20 text-foreground">
+      <main className="min-h-[100dvh] bg-background pt-20 text-foreground">
         <article className="container-narrow section-pad">
           <header>
             <h1 className="text-[40px] font-extrabold leading-[1.1] text-primary">

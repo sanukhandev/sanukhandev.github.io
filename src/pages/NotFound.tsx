@@ -11,7 +11,7 @@ const NotFound = () => {
         keywords="404, page not found, sanu khan portfolio"
         noindex
       />
-      <main className="flex min-h-screen items-center justify-center bg-muted px-4">
+      <main className="flex min-h-[100dvh] items-center justify-center bg-muted px-4">
         <div className="max-w-md text-center">
           <h1 className="mb-4 text-4xl font-bold">404</h1>
           <p className="mb-4 text-xl text-muted-foreground">

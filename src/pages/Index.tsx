@@ -8,9 +8,11 @@ import LocaleSwitchSkeleton from "@/components/LocaleSwitchSkeleton";
 import SeoMeta from "@/components/SeoMeta";
 import { useLocale } from "@/hooks/use-locale";
 import { cn } from "@/lib/utils";
+import { revealInView } from "@/lib/design-system";
 import { trackEvent } from "@/utils/analytics";
 import { HeroSection04 } from "@/components/ui/hero-04";
 
+const Articles = lazy(() => import("@/components/sections/Articles"));
 const Works = lazy(() => import("@/components/sections/Works"));
 const Services = lazy(() => import("@/components/sections/Services"));
 const Skills = lazy(() => import("@/components/sections/Skills"));
@@ -40,25 +42,16 @@ function FlowModule({ children, index, tone = "base" }: FlowModuleProps) {
     <motion.div
       className={cn("system-module", `system-module--${tone}`)}
       initial={
-        reducedMotion ? false : { opacity: 0, y: 56, scale: 0.985, rotateX: 5 }
+        reducedMotion ? false : revealInView.initial
       }
       whileInView={
-        reducedMotion
-          ? undefined
-          : {
-              opacity: 1,
-              y: 0,
-              scale: 1,
-              rotateX: 0,
-            }
+        reducedMotion ? undefined : revealInView.whileInView
       }
-      viewport={{ once: true, amount: 0.2 }}
+      viewport={{ once: true, amount: 0.18 }}
       transition={{
-        duration: reducedMotion ? 0 : 1.06,
-        delay: reducedMotion ? 0 : index * 0.06,
-        ease: [0.16, 1, 0.3, 1],
+        duration: reducedMotion ? 0 : 0.6,
+        delay: reducedMotion ? 0 : index * 0.05,
       }}
-      style={{ transformPerspective: 1200 }}
     >
       <span className="system-connector" aria-hidden />
       {children}
@@ -81,9 +74,10 @@ const Index = () => {
       "philosophy",
       "stack",
       "works",
-      "zaakiy",
+      "ops-intelligence",
+      "principles",
       "experience",
-      "blog",
+      "ecosystem",
       "contact",
     ];
     const sections = sectionIds
@@ -123,12 +117,13 @@ const Index = () => {
   }
 
   return (
-    <div className="system-shell relative min-h-screen bg-background text-foreground">
+    <div className="system-shell relative bg-background text-foreground">
       <div className="system-backdrop pointer-events-none fixed inset-0 -z-10" />
       <div className="pointer-events-none fixed inset-0 z-0 opacity-75">
-        <TechParticles count={30} fullPage />
+        <TechParticles count={18} fullPage />
       </div>
       <div className="pointer-events-none fixed inset-0 z-0 system-grid" />
+      <div className="pointer-events-none fixed inset-0 z-0 system-noise" />
 
       <div className="relative z-10">
         <SeoMeta
@@ -142,7 +137,7 @@ const Index = () => {
           className="section-flow"
           initial={reducedMotion ? false : { opacity: 0 }}
           animate={reducedMotion ? undefined : { opacity: 1 }}
-          transition={{ duration: 0.65, ease: "easeOut" }}
+          transition={{ duration: 0.55, ease: "easeOut" }}
         >
           <HeroSection04 />
           <EngineeringPhilosophy />
@@ -157,9 +152,12 @@ const Index = () => {
               <ZaakiyHighlights />
             </FlowModule>
             <FlowModule index={4} tone="muted">
-              <Services />
+              <Articles />
             </FlowModule>
             <FlowModule index={5} tone="muted">
+              <Services />
+            </FlowModule>
+            <FlowModule index={6} tone="muted">
               <BlogPreview />
             </FlowModule>
           </Suspense>
