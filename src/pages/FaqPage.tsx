@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import SeoMeta from "@/components/SeoMeta";
+import { pageSeo } from "@/lib/seo";
+import { buildBreadcrumbListSchema, buildFaqSchema } from "@/lib/schema";
 
 const faqs = [
   {
@@ -24,28 +26,28 @@ const faqs = [
   },
 ];
 
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: faqs.map((item) => ({
-    "@type": "Question",
-    name: item.question,
-    acceptedAnswer: {
-      "@type": "Answer",
-      text: item.answer,
-    },
-  })),
-};
+const faqSchema = buildFaqSchema(
+  faqs.map((item) => ({ q: item.question, a: item.answer })),
+);
+
+const faqBreadcrumb = buildBreadcrumbListSchema([
+  { name: "Home", path: "/" },
+  { name: "FAQ", path: "/faq" },
+]);
 
 export default function FaqPage() {
   return (
     <>
       <SeoMeta
-        title="FAQ | Sanu Khan"
-        description="Frequently asked questions about services, architecture consulting, delivery model, and how to work with Sanu Khan."
-        canonicalPath="/faq"
-        schema={faqSchema}
-        keywords="sanu khan faq, technical consulting faq, full stack architect faq"
+        title={pageSeo.faq.title}
+        description={pageSeo.faq.description}
+        canonicalPath={pageSeo.faq.canonicalPath}
+        schema={[faqSchema, faqBreadcrumb]}
+        keywords={[
+          "sanu khan faq",
+          "technical consulting faq",
+          "full stack architect faq",
+        ]}
       />
       <main className="min-h-[100dvh] bg-background pt-20 text-foreground">
         <section className="container-narrow section-pad">

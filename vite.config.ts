@@ -290,6 +290,7 @@ const createZaakiyApiWrapper = (env: Record<string, string>) => ({
 // https://vitejs.dev/config/
 export default defineConfig(({ command, mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
+  const isAnalyze = mode === "analyze";
   const plugins: PluginOption[] = [
     react(),
     createZaakiyApiWrapper(env),
@@ -313,12 +314,17 @@ export default defineConfig(({ command, mode }) => {
         staticDir: path.join(__dirname, "dist"),
         routes: [
           "/",
+          "/about",
+          "/projects",
+          "/contact",
           "/faq",
           "/tools",
           "/tools/json-formatter-online",
           "/tools/api-client-tool",
           "/tools/curl-to-json-converter",
           "/blog",
+          "/blog/javascript-algorithms",
+          "/blog/nodejs-api-best-practices",
           "/nodejs-developer-uae",
           "/react-developer-dubai",
           "/api-integration-services",
@@ -333,6 +339,18 @@ export default defineConfig(({ command, mode }) => {
           renderAfterTime: 3500,
           headless: true,
         }),
+      }),
+    );
+  }
+
+  if (isAnalyze) {
+    const { visualizer } = require("rollup-plugin-visualizer");
+    plugins.push(
+      visualizer({
+        filename: path.resolve(__dirname, "dist", "bundle-analysis.html"),
+        gzipSize: true,
+        brotliSize: true,
+        open: false,
       }),
     );
   }
@@ -363,6 +381,7 @@ export default defineConfig(({ command, mode }) => {
       target: "esnext",
       cssCodeSplit: true,
       minify: "esbuild",
+      sourcemap: isAnalyze,
       rollupOptions: {
         output: {
           entryFileNames: "assets/index.js",
@@ -390,6 +409,15 @@ export default defineConfig(({ command, mode }) => {
               id.includes("node_modules/lucide-react/")
             ) {
               return "ui";
+            }
+            if (id.includes("node_modules/framer-motion/")) {
+              return "motion";
+            }
+            if (
+              id.includes("node_modules/dompurify/") ||
+              id.includes("node_modules/recharts/")
+            ) {
+              return "contentHeavy";
             }
           },
         },

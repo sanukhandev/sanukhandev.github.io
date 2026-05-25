@@ -2,16 +2,18 @@ import { Suspense, lazy, memo, useEffect, useState } from "react";
 import type { ReactNode } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import Navbar from "@/components/Navbar";
-import TechParticles from "@/components/TechParticles";
 import EngineeringPhilosophy from "@/components/sections/EngineeringPhilosophy";
 import LocaleSwitchSkeleton from "@/components/LocaleSwitchSkeleton";
 import SeoMeta from "@/components/SeoMeta";
 import { useLocale } from "@/hooks/use-locale";
 import { cn } from "@/lib/utils";
 import { revealInView } from "@/lib/design-system";
+import { pageSeo } from "@/lib/seo";
+import { buildHomepageSchemas } from "@/lib/schema";
 import { trackEvent } from "@/utils/analytics";
 import { HeroSection04 } from "@/components/ui/hero-04";
 
+const TechParticles = lazy(() => import("@/components/TechParticles"));
 const Articles = lazy(() => import("@/components/sections/Articles"));
 const Works = lazy(() => import("@/components/sections/Works"));
 const Services = lazy(() => import("@/components/sections/Services"));
@@ -142,19 +144,23 @@ const Index = () => {
     <div className="system-shell relative bg-background text-foreground">
       <div className="system-backdrop pointer-events-none fixed inset-0 -z-10" />
       {enableParticles ? (
-        <div className="pointer-events-none fixed inset-0 z-0 opacity-75">
-          <TechParticles count={14} fullPage />
-        </div>
+        <Suspense fallback={null}>
+          <div className="pointer-events-none fixed inset-0 z-0 opacity-75">
+            <TechParticles count={14} fullPage />
+          </div>
+        </Suspense>
       ) : null}
       <div className="pointer-events-none fixed inset-0 z-0 system-grid" />
       <div className="pointer-events-none fixed inset-0 z-0 system-noise" />
 
       <div className="relative z-10">
         <SeoMeta
-          title="Sanu Khan | Tech Lead & Cloud Architect UAE"
-          description="Tech Lead and Cloud Architect in Dubai UAE. 13+ years delivering distributed systems, event-driven platforms, and enterprise integrations across MENA and global markets."
-          canonicalPath="/"
-          keywords="sanu khan, tech lead dubai, cloud architect uae, full stack engineer, distributed systems"
+          title={pageSeo.home.title}
+          description={pageSeo.home.description}
+          canonicalPath={pageSeo.home.canonicalPath}
+          keywords={pageSeo.home.keywords}
+          kind="profile"
+          schema={buildHomepageSchemas()}
         />
         <Navbar />
         <motion.main

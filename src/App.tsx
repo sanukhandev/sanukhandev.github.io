@@ -27,6 +27,9 @@ const NotFound = lazy(() => import("./pages/NotFound.tsx"));
 
 const ToolsIndex = lazy(() => import("./pages/ToolsIndex.tsx"));
 const BlogIndex = lazy(() => import("./pages/BlogIndex.tsx"));
+const AboutPage = lazy(() => import("./pages/AboutPage.tsx"));
+const ProjectsPage = lazy(() => import("./pages/ProjectsPage.tsx"));
+const ContactPage = lazy(() => import("./pages/ContactPage.tsx"));
 const JsonFormatterToolPage = lazy(
   () => import("./pages/tools/JsonFormatterToolPage.tsx"),
 );
@@ -49,6 +52,12 @@ const FullStackConsultantUaePage = lazy(
   () => import("./pages/services/FullStackConsultantUaePage.tsx"),
 );
 const DevToBlogPage = lazy(() => import("./pages/blog/DevToBlogPage.tsx"));
+const JavascriptAlgorithmsPage = lazy(
+  () => import("./pages/blog/JavascriptAlgorithmsPage.tsx"),
+);
+const NodejsApiBestPracticesPage = lazy(
+  () => import("./pages/blog/NodejsApiBestPracticesPage.tsx"),
+);
 const FaqPage = lazy(() => import("./pages/FaqPage.tsx"));
 const Hero04DemoPage = lazy(() => import("./components/ui/demo.tsx"));
 const HeroClassicDemoPage = lazy(
@@ -132,6 +141,9 @@ const AppShell = () => {
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/tools" element={<ToolsIndex />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/projects" element={<ProjectsPage />} />
+            <Route path="/contact" element={<ContactPage />} />
             <Route path="/faq" element={<FaqPage />} />
             <Route path="/demo/hero-04" element={<Hero04DemoPage />} />
             <Route
@@ -151,6 +163,14 @@ const AppShell = () => {
               element={<CurlToJsonToolPage />}
             />
             <Route path="/blog" element={<BlogIndex />} />
+            <Route
+              path="/blog/javascript-algorithms"
+              element={<JavascriptAlgorithmsPage />}
+            />
+            <Route
+              path="/blog/nodejs-api-best-practices"
+              element={<NodejsApiBestPracticesPage />}
+            />
             <Route path="/blog/:slug" element={<DevToBlogPage />} />
             <Route
               path="/nodejs-developer-uae"

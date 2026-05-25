@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import SeoMeta from "@/components/SeoMeta";
+import { buildBreadcrumbListSchema } from "@/lib/schema";
 
 type ToolSeoPageProps = {
   title: string;
@@ -34,15 +35,22 @@ export default function ToolSeoPage(props: ToolSeoPageProps) {
         title={title}
         description={description}
         canonicalPath={canonicalPath}
-        schema={{
-          "@context": "https://schema.org",
-          "@type": "SoftwareApplication",
-          name: schemaName,
-          applicationCategory: "DeveloperTool",
-          operatingSystem: "Web",
-          inLanguage: "en",
-          url: `https://www.sanukhan.dev${canonicalPath}`,
-        }}
+        schema={[
+          {
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            name: schemaName,
+            applicationCategory: "DeveloperTool",
+            operatingSystem: "Web",
+            inLanguage: "en",
+            url: `https://www.sanukhan.dev${canonicalPath}`,
+          },
+          buildBreadcrumbListSchema([
+            { name: "Home", path: "/" },
+            { name: "Tools", path: "/tools" },
+            { name: schemaName, path: canonicalPath },
+          ]),
+        ]}
       />
       <main className="min-h-[100dvh] bg-background pt-20 text-foreground">
         <article className="container-narrow section-pad">

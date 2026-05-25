@@ -8,12 +8,17 @@ const LASTMOD = new Date().toISOString().slice(0, 10);
 
 const staticRoutes = [
   "/",
+  "/about",
+  "/projects",
+  "/contact",
   "/faq",
   "/tools",
   "/tools/json-formatter-online",
   "/tools/api-client-tool",
   "/tools/curl-to-json-converter",
   "/blog",
+  "/blog/javascript-algorithms",
+  "/blog/nodejs-api-best-practices",
   "/nodejs-developer-uae",
   "/react-developer-dubai",
   "/api-integration-services",
@@ -56,6 +61,7 @@ const fetchDevToBlogRoutes = async () => {
 
 const priorityFor = (route) => {
   if (route === "/") return "1.0";
+  if (["/about", "/projects", "/contact"].includes(route)) return "0.92";
   if (route.startsWith("/tools")) return "0.9";
   if (route.startsWith("/blog")) return "0.85";
   return "0.88";

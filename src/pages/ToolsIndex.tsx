@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import SeoMeta from "@/components/SeoMeta";
+import { pageSeo } from "@/lib/seo";
+import { buildBreadcrumbListSchema } from "@/lib/schema";
 
 const tools = [
   {
@@ -23,10 +25,14 @@ export default function ToolsIndex() {
   return (
     <>
       <SeoMeta
-        title="Developer Tools Platform | Sanu Khan"
-        description="Developer tools platform with JSON formatter online, API client tool, and curl to JSON converter for faster backend and integration workflows."
-        canonicalPath="/tools"
-        keywords="developer tools, json formatter online, api client tool, curl to json converter"
+        title={pageSeo.toolsIndex.title}
+        description={pageSeo.toolsIndex.description}
+        canonicalPath={pageSeo.toolsIndex.canonicalPath}
+        keywords={pageSeo.toolsIndex.keywords}
+        schema={buildBreadcrumbListSchema([
+          { name: "Home", path: "/" },
+          { name: "Tools", path: "/tools" },
+        ])}
       />
       <main className="min-h-[100dvh] bg-background pt-20 text-foreground">
         <section className="container-narrow section-pad">
