@@ -523,7 +523,7 @@ export default function DevToBlogPage() {
                       {post.coverImage ? (
                         <img
                           src={post.coverImage}
-                          alt=""
+                          alt={post.title}
                           width={320}
                           height={224}
                           loading="lazy"

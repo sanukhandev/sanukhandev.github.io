@@ -61,7 +61,6 @@ export default function SeoPageLayout(props: SeoPageLayoutProps) {
     }),
     buildBreadcrumbListSchema([
       { name: "Home", path: "/" },
-      { name: "Projects", path: "/projects" },
       { name: h1, path: canonicalPath },
     ]),
     serviceSchema,
