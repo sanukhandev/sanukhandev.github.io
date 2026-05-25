@@ -83,8 +83,8 @@ const Index = () => {
       return () => window.cancelIdleCallback(idleId);
     }
 
-    const timer = window.setTimeout(() => setEnableParticles(true), 350);
-    return () => window.clearTimeout(timer);
+    const timer = setTimeout(() => setEnableParticles(true), 350);
+    return () => clearTimeout(timer);
   }, [reducedMotion]);
 
   useEffect(() => {

@@ -10,7 +10,7 @@ type SeoMetaProps = {
   schema?: Record<string, unknown> | Array<Record<string, unknown>>;
   noindex?: boolean;
   ogImage?: string;
-  keywords?: string | string[];
+  keywords?: string | string[] | readonly string[];
   kind?: "website" | "article" | "profile";
   author?: string;
   publishedTime?: string;

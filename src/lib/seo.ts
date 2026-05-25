@@ -10,7 +10,7 @@ export type BuildSeoInput = {
   title: string;
   description: string;
   canonicalPath: string;
-  keywords?: string | string[];
+  keywords?: string | string[] | readonly string[];
   noindex?: boolean;
   ogImage?: string;
   kind?: SeoKind;
@@ -68,7 +68,9 @@ export const withBrandTitle = (title: string) => {
   return /sanu khan/i.test(trimmed) ? trimmed : `${trimmed} | Sanu Khan`;
 };
 
-const normalizeKeywords = (keywords?: string | string[]) => {
+const normalizeKeywords = (
+  keywords?: string | string[] | readonly string[],
+) => {
   if (!keywords) {
     return undefined;
   }
