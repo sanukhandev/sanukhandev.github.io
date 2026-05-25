@@ -1,5 +1,10 @@
 import { Link } from "react-router-dom";
 import SeoMeta from "@/components/SeoMeta";
+import {
+  buildBreadcrumbListSchema,
+  buildCreativeWorkSchema,
+  buildTechArticleSchema,
+} from "@/lib/schema";
 
 type LinkItem = { label: string; href: string };
 
@@ -43,13 +48,31 @@ export default function SeoPageLayout(props: SeoPageLayoutProps) {
     areaServed: { "@type": "Country", name: "United Arab Emirates" },
   };
 
+  const pageSchemas = [
+    buildCreativeWorkSchema({
+      title: h1,
+      description,
+      path: canonicalPath,
+    }),
+    buildTechArticleSchema({
+      title: h1,
+      description,
+      path: canonicalPath,
+    }),
+    buildBreadcrumbListSchema([
+      { name: "Home", path: "/" },
+      { name: h1, path: canonicalPath },
+    ]),
+    serviceSchema,
+  ];
+
   return (
     <>
       <SeoMeta
         title={title}
         description={description}
         canonicalPath={canonicalPath}
-        schema={serviceSchema}
+        schema={pageSchemas}
       />
       <main className="min-h-[100dvh] bg-background pt-20 text-foreground">
         <article className="container-narrow section-pad">

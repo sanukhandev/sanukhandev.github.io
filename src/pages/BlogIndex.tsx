@@ -6,6 +6,8 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/sections/Footer";
 import { useDevToArticles } from "@/hooks/use-devto-articles";
 import { articles as fallbackArticles } from "@/data/siteData";
+import { pageSeo } from "@/lib/seo";
+import { buildBreadcrumbListSchema } from "@/lib/schema";
 
 type BlogCard = {
   href: string;
@@ -100,10 +102,14 @@ export default function BlogIndex() {
   return (
     <>
       <SeoMeta
-        title="WriteUps | Sanu Khan"
-        description="WriteUps — deep-dive guides on architecture, backend systems, JavaScript, cloud, and practical software execution."
-        canonicalPath="/blog"
-        keywords="writeups, engineering blog, software architecture, nodejs, javascript, distributed systems"
+        title={pageSeo.blogIndex.title}
+        description={pageSeo.blogIndex.description}
+        canonicalPath={pageSeo.blogIndex.canonicalPath}
+        keywords={pageSeo.blogIndex.keywords}
+        schema={buildBreadcrumbListSchema([
+          { name: "Home", path: "/" },
+          { name: "Blog", path: "/blog" },
+        ])}
       />
 
       <Navbar />

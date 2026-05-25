@@ -13,6 +13,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/sections/Footer";
 import ZaakiyChatWidget from "@/components/ZaakiyChatWidget";
 import { useDevToArticle, useDevToArticles } from "@/hooks/use-devto-articles";
+import { buildBlogPostingSchema, buildBreadcrumbListSchema } from "@/lib/schema";
 
 type TocItem = { id: string; text: string; level: number };
 
@@ -244,26 +245,26 @@ export default function DevToBlogPage() {
         description={article.description}
         canonicalPath={article.localPath}
         keywords={article.tags.join(", ")}
-        schema={{
-          "@context": "https://schema.org",
-          "@type": "BlogPosting",
-          headline: article.title,
-          description: article.description,
-          inLanguage: "en",
-          url: `https://sanukhan.dev${article.localPath}`,
-          datePublished: article.publishedAt || undefined,
-          author: {
-            "@type": "Person",
-            name: "Sanu Khan",
-            url: "https://sanukhan.dev",
-          },
-          publisher: {
-            "@type": "Organization",
-            name: "SanuKhan.dev",
-            url: "https://sanukhan.dev",
-          },
-          mainEntityOfPage: article.url,
-        }}
+        kind="article"
+        publishedTime={article.publishedAt || undefined}
+        modifiedTime={article.publishedAt || undefined}
+        ogImage={article.coverImage || undefined}
+        schema={[
+          buildBlogPostingSchema({
+            title: article.title,
+            description: article.description,
+            path: article.localPath,
+            publishedTime: article.publishedAt || undefined,
+            modifiedTime: article.publishedAt || undefined,
+            image: article.coverImage || undefined,
+            tags: article.tags,
+          }),
+          buildBreadcrumbListSchema([
+            { name: "Home", path: "/" },
+            { name: "Blog", path: "/blog" },
+            { name: article.title, path: article.localPath },
+          ]),
+        ]}
       />
 
       <Navbar />
@@ -445,6 +446,11 @@ export default function DevToBlogPage() {
               <img
                 src={article.coverImage}
                 alt={article.title}
+                width={1200}
+                height={630}
+                loading="eager"
+                decoding="async"
+                fetchPriority="high"
                 className="mt-6 w-full rounded-2xl border border-[var(--border)] object-cover"
               />
             )}
@@ -517,7 +523,11 @@ export default function DevToBlogPage() {
                       {post.coverImage ? (
                         <img
                           src={post.coverImage}
-                          alt=""
+                          alt={post.title}
+                          width={320}
+                          height={224}
+                          loading="lazy"
+                          decoding="async"
                           className="mt-0.5 h-14 w-20 shrink-0 rounded-lg object-cover"
                         />
                       ) : (
@@ -564,6 +574,10 @@ export default function DevToBlogPage() {
                   <img
                     src="/assets/images/sanu.avif"
                     alt="Sanu Khan"
+                    width={40}
+                    height={40}
+                    loading="lazy"
+                    decoding="async"
                     className="h-10 w-10 rounded-full border border-[var(--border)] object-cover"
                   />
                   <div>

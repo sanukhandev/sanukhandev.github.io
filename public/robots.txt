@@ -1,3 +1,4 @@
 User-agent: *
 Allow: /
+Disallow: /demo/
 Sitemap: https://www.sanukhan.dev/sitemap.xml

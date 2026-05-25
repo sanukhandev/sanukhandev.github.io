@@ -1,5 +1,10 @@
 import { Link } from "react-router-dom";
 import SeoMeta from "@/components/SeoMeta";
+import {
+  buildBlogPostingSchema,
+  buildBreadcrumbListSchema,
+  buildFaqSchema,
+} from "@/lib/schema";
 
 type Section = {
   id: string;
@@ -22,6 +27,22 @@ type BlogSeoPageProps = {
 
 export default function BlogSeoPage(props: BlogSeoPageProps) {
   const { title, description, canonicalPath, h1, keywordLead, toc, sections, faq, links } = props;
+  const schemas = [
+    buildBlogPostingSchema({
+      title: h1,
+      description,
+      path: canonicalPath,
+    }),
+    buildBreadcrumbListSchema([
+      { name: "Home", path: "/" },
+      { name: "Blog", path: "/blog" },
+      { name: h1, path: canonicalPath },
+    ]),
+  ];
+
+  if (faq.length > 0) {
+    schemas.push(buildFaqSchema(faq));
+  }
 
   return (
     <>
@@ -29,15 +50,8 @@ export default function BlogSeoPage(props: BlogSeoPageProps) {
         title={title}
         description={description}
         canonicalPath={canonicalPath}
-        schema={{
-          "@context": "https://schema.org",
-          "@type": "BlogPosting",
-          headline: h1,
-          inLanguage: "en",
-          author: { "@type": "Person", name: "Sanu Khan", url: "https://www.sanukhan.dev" },
-          url: `https://www.sanukhan.dev${canonicalPath}`,
-          description,
-        }}
+        kind="article"
+        schema={schemas}
       />
       <main className="min-h-[100dvh] bg-background pt-20 text-foreground">
         <article className="container-narrow section-pad">
