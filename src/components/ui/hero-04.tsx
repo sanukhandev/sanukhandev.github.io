@@ -3,6 +3,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import type { Variants } from "framer-motion";
 import { ArrowDownRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { RotateCardStack } from "@/components/ui/rotate-card-stack";
 import { useSiteContent } from "@/data/siteContent";
 import { useLocale } from "@/hooks/use-locale";
 
@@ -141,32 +142,7 @@ export function HeroSection04() {
         </motion.div>
 
         <motion.div className="mt-6 flex flex-col gap-8 md:mt-8 md:grid md:grid-cols-[18rem_minmax(0,1fr)] md:items-center md:gap-14" variants={reveal}>
-          <div className="relative mx-auto h-44 w-full max-w-[17rem] md:mx-0 md:h-48 md:w-[18rem]">
-            <div className="h-32 w-full overflow-hidden rounded-md border border-default bg-secondary p-3 shadow-lg sm:h-36 sm:w-60 sm:p-4">
-              <p className="font-body text-xs uppercase tracking-wider text-secondary">
-                {showcaseWorks[0]?.scope ?? "Platform"}
-              </p>
-              <p className="font-body mt-2 text-sm font-semibold text-primary">
-                {showcaseWorks[0]?.title ?? "Enterprise Systems"}
-              </p>
-            </div>
-            <div className="absolute left-3 -top-4 h-32 w-[calc(100%-0.75rem)] overflow-hidden rounded-md border border-default bg-secondary p-3 shadow-lg sm:left-6 sm:-top-6 sm:h-36 sm:w-60 sm:p-4">
-              <p className="font-body text-xs uppercase tracking-wider text-secondary">
-                {showcaseWorks[1]?.scope ?? "Integration"}
-              </p>
-              <p className="font-body mt-2 text-sm font-semibold text-primary">
-                {showcaseWorks[1]?.title ?? "Cloud Delivery"}
-              </p>
-            </div>
-            <div className="absolute left-6 -top-8 h-32 w-[calc(100%-1.5rem)] overflow-hidden rounded-md border border-default bg-secondary p-3 shadow-lg sm:left-12 sm:-top-12 sm:h-36 sm:w-60 sm:p-4">
-              <p className="font-body text-xs uppercase tracking-wider text-secondary">
-                {showcaseWorks[2]?.scope ?? "Commerce"}
-              </p>
-              <p className="font-body mt-2 text-sm font-semibold text-primary">
-                {showcaseWorks[2]?.title ?? "Distributed Architectures"}
-              </p>
-            </div>
-          </div>
+          <RotateCardStack items={showcaseWorks} />
           <div className="text-center md:self-center md:text-left">
             <div className="flex items-center justify-center gap-2 md:justify-start">
               <span className="font-body text-lg font-medium tracking-wider">
