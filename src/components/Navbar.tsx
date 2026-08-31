@@ -210,9 +210,9 @@ function Navbar() {
                 <text
                   x="57"
                   y="24"
-                  fontSize="22"
-                  fontWeight="600"
-                  fontFamily="'Laren Modern', sans-serif"
+                  fontSize="20"
+                  fontWeight="100"
+                  fontFamily="'Poppins', sans-serif"
                   letterSpacing="-0.5"
                   fill="url(#logo-grad-move)"
                 >
