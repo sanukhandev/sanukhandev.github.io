@@ -53,7 +53,7 @@ export default function Footer() {
               <a
                 href="mailto:hello@sanukhan.dev?subject=Architecture%20Inquiry%20%E2%80%93%20SanuKhan.dev"
                 onClick={() => trackEvent("contact_click", { cta_type: "final_cta_lets_talk" })}
-                className="inline-flex items-center gap-2 rounded-xl bg-accent px-6 py-3 text-sm font-semibold text-primary shadow-md transition-all duration-300 hover:bg-accent/90"
+                className="inline-flex items-center gap-2 rounded-xl bg-accent px-6 py-3 text-sm font-semibold text-white shadow-md transition-all duration-300 hover:bg-accent/90"
               >
                 <span>{isArabic ? "تواصل معي" : "Let's Talk"}</span>
               </a>

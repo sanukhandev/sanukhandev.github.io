@@ -296,17 +296,29 @@ function Navbar() {
             )}
           </button>
 
+          {/* Buy me a coffee */}
+          <a
+            href="https://ko-fi.com/sanukhan"
+            target="_blank"
+            rel="noopener noreferrer"
+            title={isArabic ? "ادعمني بقهوة" : "Buy me a coffee"}
+            onClick={() => trackEvent("coffee_click", { source: "navbar" })}
+            className={cn(
+              "inline-flex h-9 w-9 items-center justify-center rounded-lg border transition-all duration-200 hover:scale-[1.06]",
+              isLight
+                ? "border-[#cfd8dd] bg-white text-[#1f9f45] hover:bg-[#eef4f0]"
+                : "border-[#2b2f3b] bg-[#16171d] text-[#38c755] hover:bg-[#20222b]",
+            )}
+          >
+            <CoffeeIconAnimated className="h-4 w-4" />
+          </a>
+
           <div className="mx-0.5 h-5 w-px shrink-0 rounded-full opacity-30 bg-current" />
 
           {/* Download Resume CTA */}
           <Button
             asChild
-            className={cn(
-              "h-9 rounded-lg px-4 hover:scale-[1.02] gap-1 transition-all duration-200",
-              isLight
-                ? "bg-[#1f9f45] text-white hover:bg-[#2caf54]"
-                : "bg-accent text-on-accent hover:bg-[#4ade80]",
-            )}
+            className="h-9 rounded-lg px-4 hover:scale-[1.02] gap-1 transition-all duration-200 bg-accent text-white hover:bg-accent/90 shadow-sm"
           >
             <a
               href={resumeHref}

@@ -107,7 +107,7 @@ export function HeroSection04() {
                 {/* Primary & Secondary Action CTAs */}
                 <div className="mt-6 flex flex-wrap items-center justify-center md:justify-start gap-3">
                   <Button
-                    className="h-11 rounded-xl bg-accent px-6 font-semibold text-primary transition-all duration-300 hover:bg-accent/90 shadow-md shadow-accent/20"
+                    className="h-11 rounded-xl bg-accent px-6 font-semibold text-white transition-all duration-300 hover:bg-accent/90 shadow-md shadow-accent/20"
                     asChild
                   >
                     <a href="#work">

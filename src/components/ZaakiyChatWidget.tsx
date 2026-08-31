@@ -1,4 +1,4 @@
-import { MessageCircle, Send, X } from "lucide-react";
+import { MessageCircle, Send, X, Bot, Sparkles } from "lucide-react";
 import { FormEvent, KeyboardEvent, useMemo, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { useLocale } from "@/hooks/use-locale";
@@ -14,7 +14,7 @@ type ChatMessage = {
 };
 
 const MAX_OUTPUT_CHARS = Number(
-  import.meta.env.VITE_ZAAKIY_MAX_OUTPUT_CHARS || 250,
+  import.meta.env.VITE_ZAAKIY_MAX_OUTPUT_CHARS || 300,
 );
 const DAILY_QUOTA = Number(import.meta.env.VITE_ZAAKIY_DAILY_QUOTA || 200);
 const CHAT_API_URL = import.meta.env.VITE_ZAAKIY_API_URL || "/api/zaakiy-chat";
@@ -93,17 +93,16 @@ export default function ZaakiyChatWidget({
         : "";
 
     return [
-      `Name: ${profile.name}`,
-      `Role: ${profile.role}`,
-      `Subtitle: ${profile.subtitle}`,
-      `Statement: ${profile.statement}`,
-      `Meta: ${profile.meta.join("; ")}`,
-      `Experience: ${services}`,
-      `Skills: ${skills}`,
-      `Works: ${works}`,
-      ...(blogs ? [`Blogs: ${blogs}`] : []),
+      `Identity: Zaakiy — Sanu Khan's personal AI Assistant. Respond in a friendly, conversational, helpful human voice as Sanu's personal representative.`,
+      `Sanu Khan: Technical Architect & Engineering Lead based in Dubai, UAE with 13+ years experience.`,
+      `Key Systems Built: Marks & Spencer Regional Commerce Platform (9 regional markets PIM integration), Al-Futtaim TradePoint Omnichannel Platform, TPConnects Airline B2B Content Marketplace, Airport Commerce & Duty-Free Platform.`,
+      `Personal R&D: ZaakiyV3RSE — An AI-native operations intelligence platform exploring agent orchestration, context retrieval, and adaptive workflows.`,
+      `Experience History: ${services}`,
+      `Skills & Domains: ${skills}`,
+      `Verified Works: ${works}`,
+      ...(blogs ? [`Blogs & Articles: ${blogs}`] : []),
       `Contact email: ${email}`,
-      `Coffee link: ${koFi}`,
+      `Buy me a coffee link: ${koFi}`,
     ].join("\n");
   }, [content, email, articles]);
 
@@ -147,9 +146,6 @@ export default function ZaakiyChatWidget({
         body: JSON.stringify({
           locale,
           userQuestion: userText,
-          // Send full siteScope on the first message to prime the server
-          // session; omit on subsequent messages so the stored scope is used
-          // and never accidentally overwritten with a partial payload.
           siteScope: scopeSentRef.current ? undefined : siteScope,
           extraContext: extraContext || undefined,
           email,
@@ -168,9 +164,8 @@ export default function ZaakiyChatWidget({
           if (errBody.detail) errDetail += `: ${errBody.detail}`;
           else if (errBody.error) errDetail += `: ${errBody.error}`;
         } catch {
-          // ignore json parse failure
+          // ignore
         }
-        // Log full detail for debugging; throw a generic error for the UI
         console.error("[ZaakiyChat]", errDetail);
         throw new Error("service_error");
       }
@@ -185,7 +180,6 @@ export default function ZaakiyChatWidget({
       scopeSentRef.current = true;
       appendMessage("assistant", modelText);
     } catch (err) {
-      // Log unexpected errors; show a friendly message to the user
       if (!(err instanceof Error && err.message === "service_error")) {
         console.error("[ZaakiyChat]", err);
       }
@@ -208,41 +202,44 @@ export default function ZaakiyChatWidget({
   };
 
   return (
-    <div className="zaakiy-chat fixed bottom-3 right-3 z-[70] max-w-[calc(100vw-1.5rem)] sm:bottom-5 sm:right-5">
+    <div className="zaakiy-chat fixed bottom-4 right-4 z-[70] max-w-[calc(100vw-1.5rem)] sm:bottom-6 sm:right-6">
       {open && (
-        <div className="mb-3 w-[min(340px,calc(100vw-1.5rem))] overflow-hidden rounded-2xl border border-default bg-secondary/95 shadow-[0_16px_40px_-20px_rgba(0,0,0,0.75)] backdrop-blur-xl">
-          <div className="flex items-center justify-between border-b border-default px-4 py-3">
-            <div>
-              <h3
-                className="brand-zaakiy text-[15px] font-semibold text-primary"
-              >
-                Zaakiy AI
-              </h3>
-              <p className="text-[11px] text-secondary">
-                <a
-                  href="https://zaakiy.io"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="brand-zaakiy text-accent transition-colors hover:text-primary"
-                >
-                  Zv3 - ZaakiyV3RSE
-                </a>
-              </p>
+        <div className="mb-3 w-[min(360px,calc(100vw-1.5rem))] overflow-hidden rounded-2xl border border-border bg-background/95 shadow-2xl backdrop-blur-xl transition-all duration-300">
+          {/* Header */}
+          <div className="flex items-center justify-between border-b border-border/60 bg-secondary/30 px-4 py-3">
+            <div className="flex items-center gap-2.5">
+              <div className="relative flex h-8 w-8 items-center justify-center rounded-xl bg-accent/10 border border-accent/30 text-accent">
+                <Bot className="h-4 w-4" />
+                <span className="absolute -top-0.5 -right-0.5 h-2.5 w-2.5 rounded-full bg-accent ring-2 ring-background" />
+              </div>
+              <div>
+                <h3 className="text-sm font-bold text-primary flex items-center gap-1.5">
+                  <span>Zaakiy AI</span>
+                  <span className="rounded-full bg-accent/15 px-2 py-0.5 text-[10px] font-mono text-accent font-semibold">
+                    Assistant
+                  </span>
+                </h3>
+                <p className="text-[10px] text-muted-foreground">
+                  Sanu Khan's Personal AI Representative
+                </p>
+              </div>
             </div>
+
             <button
               type="button"
               onClick={() => setOpen(false)}
               aria-label="Close chat"
-              className="rounded-md p-1.5 text-secondary transition-colors hover:bg-[#20222b] hover:text-primary"
+              className="rounded-lg p-1.5 text-secondary hover:bg-secondary hover:text-primary transition-colors"
             >
               <X className="h-4 w-4" />
             </button>
           </div>
 
+          {/* Messages Feed */}
           <div
             ref={scrollRef}
             className={cn(
-              "max-h-[340px] min-h-[280px] space-y-2 overflow-y-auto px-4 py-3",
+              "max-h-[340px] min-h-[260px] space-y-3 overflow-y-auto px-4 py-3",
               isArabic ? "text-right" : "text-left",
             )}
           >
@@ -250,24 +247,26 @@ export default function ZaakiyChatWidget({
               <div
                 key={m.id}
                 className={cn(
-                  "max-w-[90%] rounded-xl px-3 py-2 text-[13px] leading-relaxed",
+                  "max-w-[88%] rounded-2xl px-3.5 py-2.5 text-[13px] leading-relaxed shadow-sm",
                   m.role === "assistant"
-                    ? "border border-accent-soft bg-accent-soft text-[#d7ffe2]"
-                    : "ml-auto border border-default bg-[#20222b] text-primary",
+                    ? "border border-border bg-secondary/40 text-primary rounded-tl-sm"
+                    : "ml-auto bg-accent text-white font-medium rounded-tr-sm",
                 )}
               >
                 {m.text}
               </div>
             ))}
             {loading && (
-              <div className="w-fit rounded-xl border border-default bg-[#20222b] px-3 py-2 text-[12px] text-secondary">
-                {content.ui.zaakiychat.aiTyping}
+              <div className="flex items-center gap-2 rounded-xl border border-border bg-secondary/30 px-3.5 py-2 text-[12px] text-muted-foreground w-fit">
+                <Sparkles className="h-3.5 w-3.5 text-accent animate-spin" />
+                <span>{content.ui.zaakiychat.aiTyping}</span>
               </div>
             )}
           </div>
 
-          <form onSubmit={onSubmit} className="border-t border-default p-3">
-            <div className="flex items-end gap-2">
+          {/* Input Box */}
+          <form onSubmit={onSubmit} className="border-t border-border/60 bg-secondary/20 p-3">
+            <div className="flex items-center gap-2">
               <textarea
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
@@ -275,37 +274,38 @@ export default function ZaakiyChatWidget({
                 rows={1}
                 maxLength={400}
                 placeholder={content.ui.zaakiychat.placeholder}
-                className="min-h-[40px] flex-1 resize-none rounded-lg border border-default bg-secondary px-3 py-2 text-[13px] text-primary outline-none placeholder:text-secondary focus:border-accent-soft"
+                className="min-h-[40px] flex-1 resize-none rounded-xl border border-border bg-background px-3 py-2 text-[13px] text-primary outline-none placeholder:text-muted-foreground focus:border-accent/50 transition-colors"
               />
               <button
                 type="submit"
                 disabled={loading || !input.trim()}
-                className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-accent text-on-accent transition-opacity disabled:cursor-not-allowed disabled:opacity-55"
+                className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-accent text-white transition-all duration-200 hover:bg-accent/90 disabled:cursor-not-allowed disabled:opacity-40 shadow-sm"
                 aria-label={content.ui.zaakiychat.sendButtonLabel}
               >
                 <Send className="h-4 w-4" />
               </button>
             </div>
-            <p className="mt-1 text-[10px] text-secondary">
+            <p className="mt-1.5 text-center text-[10px] text-muted-foreground">
               {content.ui.zaakiychat.scopeDisclaimer}
             </p>
           </form>
         </div>
       )}
 
+      {/* Floating Toggle Button */}
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
         className={cn(
-          "inline-flex h-12 items-center gap-2 rounded-full border px-4 text-sm font-semibold transition-all duration-300",
+          "inline-flex h-12 items-center gap-2.5 rounded-full px-5 text-sm font-semibold shadow-lg transition-all duration-300 hover:scale-105",
           open
-            ? "border-accent bg-accent text-on-accent"
-            : "border-accent-soft bg-accent-soft text-accent hover:bg-accent-soft",
+            ? "bg-accent text-white ring-2 ring-accent/40"
+            : "border border-accent/40 bg-accent text-white hover:bg-accent/90",
         )}
         aria-label="Toggle Zaakiy AI chat"
       >
-        <MessageCircle className="h-4 w-4" />
-        <span className="brand-zaakiy">Zaakiy AI</span>
+        <MessageCircle className="h-4 w-4 text-white" />
+        <span className="brand-zaakiy font-bold text-white">Zaakiy AI</span>
       </button>
     </div>
   );

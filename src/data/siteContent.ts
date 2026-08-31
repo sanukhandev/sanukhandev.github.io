@@ -355,14 +355,14 @@ const arContent = {
     },
     zaakiychat: {
       greeting: (koFiLink: string) =>
-        `مرحباً، أنا Zaakiy AI مساعد سانو خان. اسألني عن الموقع. ادعمني بقهوة: ${koFiLink}`,
+        `مرحباً! أنا Zaakiy، المساعد الشخصي بالذكاء الاصطناعي لسانو خان. اسألني عن خبرته المعمارية الممتدة لـ 13+ عاماً، أنظمة الإنتاج، المقالات الهندسية، أو كيفية التواصل معه!`,
       dailyLimitReached: (email: string) =>
-        `وصلنا حد اليوم. تواصل عبر البريد: ${email}`,
-      aiTyping: "Zaakiy AI يكتب...",
-      placeholder: "اكتب سؤالك...",
+        `وصلنا إلى الحد اليومي. يرجى التواصل مباشرة عبر البريد الإلكتروني: ${email}`,
+      aiTyping: "Zaakiy يفكر...",
+      placeholder: "اسأل Zaakiy أي شيء عن سانو...",
       sendButtonLabel: "إرسال",
       errorOccurred: "عذراً، حدث خطأ. يُرجى المحاولة مجدداً.",
-      scopeDisclaimer: "ردود قصيرة وضمن بيانات الموقع فقط",
+      scopeDisclaimer: "المساعد الشخصي لسانو خان بالذكاء الاصطناعي",
     },
   },
 };
@@ -439,14 +439,14 @@ const enContent = {
     },
     zaakiychat: {
       greeting: (koFiLink: string) =>
-        `Hi, I am Zaakiy AI, Sanu Khan's personal assistant. Ask about this site. Buy me a coffee: ${koFiLink}`,
+        `Hi! I'm Zaakiy, Sanu Khan's personal AI assistant. Ask me anything about Sanu's 13+ years architecture experience, production systems, blog posts, or how to get in touch!`,
       dailyLimitReached: (email: string) =>
-        `Daily chat limit reached. Please connect on email: ${email}`,
-      aiTyping: "Zaakiy AI is typing...",
-      placeholder: "Type your question...",
+        `Daily chat limit reached. Please connect directly via email: ${email}`,
+      aiTyping: "Zaakiy is thinking...",
+      placeholder: "Ask Zaakiy anything about Sanu...",
       sendButtonLabel: "Send",
       errorOccurred: "Sorry, something went wrong. Please try again.",
-      scopeDisclaimer: "Short replies, site-data scope only",
+      scopeDisclaimer: "Personal AI Assistant for Sanu Khan",
     },
   },
 };
