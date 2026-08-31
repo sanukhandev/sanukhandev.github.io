@@ -41,7 +41,7 @@ function Navbar() {
   }, []);
 
   useEffect(() => {
-    const sectionIds = ["home", "works", "experience", "stack", "contact"];
+    const sectionIds = ["home", "work", "architecture", "capabilities", "philosophy", "zaakiy", "writing", "process", "how-i-work", "leadership", "about", "contact"];
     const sections = sectionIds
       .map((id) => document.getElementById(id))
       .filter((el): el is HTMLElement => Boolean(el));
@@ -208,34 +208,15 @@ function Navbar() {
             ) : (
               <>
                 <text
-                  x="0"
-                  y="24"
-                  fontSize="22"
-                  fontWeight="800"
-                  letterSpacing="-0.5"
-                  fill="url(#logo-grad-move)"
-                >
-                  Sanu
-                </text>
-                <text
                   x="57"
                   y="24"
-                  fontSize="22"
-                  fontWeight="600"
+                  fontSize="20"
+                  fontWeight="100"
+                  fontFamily="'Poppins', sans-serif"
                   letterSpacing="-0.5"
                   fill="url(#logo-grad-move)"
                 >
-                  Khan
-                </text>
-                <text
-                  x="116"
-                  y="24"
-                  fontSize="18"
-                  fontWeight="500"
-                  fill={isLight ? "#1f9f45" : "#38c755"}
-                  opacity={isLight ? 0.85 : 0.75}
-                >
-                  .dev
+                  sanukhan.dev
                 </text>
               </>
             )}
@@ -269,27 +250,6 @@ function Navbar() {
               />
             </a>
           ))}
-          <Link
-            to="/blog"
-            className={cn(
-              "relative text-[15px] transition-all duration-300 hover:scale-[1.02]",
-              isBlogPage
-                ? isLight
-                  ? "text-[#0f1015] font-semibold"
-                  : "text-[#f5f7fa] font-semibold"
-                : isLight
-                  ? "text-[#4d5a66] hover:text-[#0f1015]"
-                  : "text-[#c9ced6] hover:text-[#38c755]",
-            )}
-          >
-            WriteUps
-            <span
-              className={cn(
-                "absolute -bottom-1.5 left-0 h-[2px] bg-accent transition-all duration-300",
-                isBlogPage ? "w-full opacity-100" : "w-0 opacity-0",
-              )}
-            />
-          </Link>
         </nav>
 
         <div className="hidden md:flex items-center gap-1.5">
@@ -336,17 +296,29 @@ function Navbar() {
             )}
           </button>
 
+          {/* Buy me a coffee */}
+          <a
+            href="https://ko-fi.com/sanukhan"
+            target="_blank"
+            rel="noopener noreferrer"
+            title={isArabic ? "ادعمني بقهوة" : "Buy me a coffee"}
+            onClick={() => trackEvent("coffee_click", { source: "navbar" })}
+            className={cn(
+              "inline-flex h-9 w-9 items-center justify-center rounded-lg border transition-all duration-200 hover:scale-[1.06]",
+              isLight
+                ? "border-[#cfd8dd] bg-white text-[#1f9f45] hover:bg-[#eef4f0]"
+                : "border-[#2b2f3b] bg-[#16171d] text-[#38c755] hover:bg-[#20222b]",
+            )}
+          >
+            <CoffeeIconAnimated className="h-4 w-4" />
+          </a>
+
           <div className="mx-0.5 h-5 w-px shrink-0 rounded-full opacity-30 bg-current" />
 
           {/* Download Resume CTA */}
           <Button
             asChild
-            className={cn(
-              "h-9 rounded-lg px-4 hover:scale-[1.02] gap-1 transition-all duration-200",
-              isLight
-                ? "bg-[#1f9f45] text-white hover:bg-[#2caf54]"
-                : "bg-accent text-on-accent hover:bg-[#4ade80]",
-            )}
+            className="h-9 rounded-lg px-4 hover:scale-[1.02] gap-1 transition-all duration-200 bg-accent text-white hover:bg-accent/90 shadow-sm"
           >
             <a
               href={resumeHref}
@@ -468,18 +440,6 @@ function Navbar() {
                   {l.label}
                 </a>
               ))}
-              <Link
-                to="/blog"
-                onClick={() => setOpen(false)}
-                className={cn(
-                  "rounded-md px-3 py-2 text-sm transition-all duration-300",
-                  isLight
-                    ? "text-[#4d5a66] hover:bg-[#e8f0ec] hover:text-[#0f1015]"
-                    : "text-[#c9ced6] hover:bg-[#1e2028] hover:text-[#38c755]",
-                )}
-              >
-                WriteUps
-              </Link>
               <Button
                 asChild
                 className={cn(

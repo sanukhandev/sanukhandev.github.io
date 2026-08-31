@@ -1,46 +1,71 @@
-import type { ComponentType } from "react";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { ShoppingCart, Webhook, Boxes } from "lucide-react";
-import { type WorkCategory } from "@/data/siteData";
-import { useSiteContent } from "@/data/siteContent";
-import { Button } from "@/components/ui/button";
-import {
-  ContainerAnimated,
-  ContainerStagger,
-  GalleryGrid,
-  GalleryGridCell,
-} from "@/components/ui/cta-section-with-gallery";
-import { SectionHeading, TechTag } from "@/components/shared/SectionHeading";
-import { cn } from "@/lib/utils";
+import { useLocale } from "@/hooks/use-locale";
+import { SectionHeading } from "@/components/shared/SectionHeading";
 import { trackEvent } from "@/utils/analytics";
+import { ArrowRight, ShoppingCart, Layers, Globe, Server } from "lucide-react";
 
-const categoryIcons: Record<string, ComponentType<{ className?: string }>> = {
-  Commerce: ShoppingCart,
-  Integration: Webhook,
-  Platform: Boxes,
-};
+interface SystemCard {
+  id: string;
+  industry: string;
+  title: string;
+  description: string;
+  contributions: string[];
+  evidence: string;
+  icon: typeof ShoppingCart;
+  projectUrl: string;
+}
+
+const systemsData: SystemCard[] = [
+  {
+    id: "regional-commerce-platform",
+    industry: "COMMERCE · MULTI-REGION",
+    title: "Regional Enterprise Commerce Platform",
+    description:
+      "Multi-market regional commerce platform synchronizing product catalog, pricing, and inventory across regional markets.",
+    contributions: ["Platform Engineering", "Integration", "Production Delivery"],
+    evidence: "9 regional markets",
+    icon: ShoppingCart,
+    projectUrl: "/projects",
+  },
+  {
+    id: "omnichannel-commerce-fabric",
+    industry: "AUTOMOTIVE & ENTERPRISE COMMERCE",
+    title: "Enterprise Omnichannel Commerce Fabric",
+    description:
+      "Event-driven integration fabric connecting ERP, PIM, and omnichannel storefronts with real-time payload validation.",
+    contributions: ["Solution Architecture", "Event Streaming", "API Governance"],
+    evidence: "Production Enterprise Platform",
+    icon: Layers,
+    projectUrl: "/projects",
+  },
+  {
+    id: "airline-b2b-marketplace",
+    industry: "TRAVEL TECH · AIRLINE AGGREGATION",
+    title: "Airline NDC & Travel B2B Marketplace",
+    description:
+      "High-availability NDC aggregation platform handling multi-supplier airline content, pricing, and B2B booking workflows.",
+    contributions: ["Platform Engineering", "NDC Integration", "B2B Workflows"],
+    evidence: "Multi-Supplier Aggregation",
+    icon: Globe,
+    projectUrl: "/projects",
+  },
+  {
+    id: "airport-commerce-platform",
+    industry: "AIRPORT COMMERCE · TRAVEL RETAIL",
+    title: "Airport Commerce & Travel Retail Platform",
+    description:
+      "Multi-terminal airport commerce system for real-time inventory management, order processing, and payment integrations.",
+    contributions: ["Domain Architecture", "Commerce Core", "Resilient APIs"],
+    evidence: "Multi-Terminal Operations",
+    icon: Server,
+    projectUrl: "/projects",
+  },
+];
 
 export default function Works() {
-  const { works, workCategories, ui } = useSiteContent();
-  const [active, setActive] = useState<WorkCategory>("All");
-
-  const filtered = useMemo(
-    () =>
-      active === "All" ? works : works.filter((w) => w.category === active),
-    [active, works],
-  );
-
-  const galleryHighlights = useMemo(
-    () =>
-      (filtered.length ? filtered : works).slice(0, 4).map((item) => ({
-        id: item.title,
-        title: item.scope,
-        detail: item.category,
-        summary: item.outcome,
-      })),
-    [filtered, works],
-  );
+  const { locale } = useLocale();
+  const isArabic = locale === "ar";
 
   useEffect(() => {
     if (!("IntersectionObserver" in window)) {
@@ -49,7 +74,7 @@ export default function Works() {
 
     const trackedProjects = new Set<string>();
     const cards = Array.from(
-      document.querySelectorAll<HTMLElement>("#works [data-project-name]"),
+      document.querySelectorAll<HTMLElement>("#work [data-project-name]"),
     );
 
     const observer = new IntersectionObserver(
@@ -70,161 +95,91 @@ export default function Works() {
           observer.unobserve(entry.target);
         });
       },
-      { threshold: 0.6 },
+      { threshold: 0.5 },
     );
 
     cards.forEach((card) => observer.observe(card));
-
     return () => observer.disconnect();
-  }, [filtered]);
+  }, []);
 
   return (
-    <section id="works" className="section-pad">
-      <div className="container-narrow">
+    <section id="work" className="py-12 md:py-16 lg:py-20 scroll-mt-20">
+      <div id="works" className="container-narrow">
         <SectionHeading
-          eyebrow="Featured Systems"
-          title="Enterprise Systems Delivered"
-          subtitle="Flagship architecture case studies spanning event-driven commerce, integration orchestration, and platform modernization."
+          eyebrow={isArabic ? "أنظمة الإنتاج" : "PRODUCTION PROOF"}
+          title={isArabic ? "أنظمة إنتاجية مختارة" : "Selected Production Systems"}
+          subtitle={
+            isArabic
+              ? "منصات ساهمت في هندستها، بنائها، وتسليمها عبر قطاعات التجارة، السيارات، تكنولوجيا السفر والعمليات المؤسسية."
+              : "Platforms I've helped architect, build and deliver across commerce, automotive, travel technology and enterprise operations."
+          }
           align="left"
         />
 
-        <div className="mb-8 rounded-2xl bg-secondary/20 p-4 sm:mb-10 sm:p-6">
-          <div className="grid grid-cols-1 items-center gap-6 md:grid-cols-2 md:gap-8">
-            <ContainerStagger>
-              <ContainerAnimated className="mb-2 block text-xs font-medium text-accent md:mb-3 md:text-sm">
-                {ui.works.eyebrow}
-              </ContainerAnimated>
-              <ContainerAnimated className="text-2xl font-semibold tracking-tight text-primary sm:text-3xl md:text-4xl">
-                Architecture Programs With Measurable Outcomes
-              </ContainerAnimated>
-              <ContainerAnimated className="my-3 text-sm text-secondary md:my-5 md:text-base">
-                From platform decomposition to telemetry-informed operations,
-                each system is engineered for throughput, reliability, and enterprise governance.
-              </ContainerAnimated>
-              <ContainerAnimated>
-                <Button asChild className="bg-accent text-on-accent hover:bg-accent/90">
-                  <a href="#contact">Discuss your architecture roadmap</a>
-                </Button>
-              </ContainerAnimated>
-            </ContainerStagger>
-
-            <GalleryGrid className="mx-auto max-w-[22rem] md:mx-0 md:max-w-none">
-              {galleryHighlights.map((item, index) => (
-                <GalleryGridCell
-                  index={index}
-                  key={item.id}
-                  className={cn(
-                    "border border-default/70 p-4",
-                    index % 2 === 0
-                      ? "bg-gradient-to-br from-secondary via-background to-secondary/60"
-                      : "bg-gradient-to-br from-accent-soft/60 via-background to-secondary/70",
-                  )}
-                >
-                  <div className="flex h-full flex-col justify-end">
-                    <p className="text-xs font-semibold uppercase tracking-wide text-secondary">
-                      {item.detail}
-                    </p>
-                    <p className="mt-1 text-sm font-semibold text-primary sm:text-base">
-                      {item.title}
-                    </p>
-                    <p className="mt-2 line-clamp-3 text-xs text-secondary">
-                      {item.summary}
-                    </p>
+        <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2">
+          {systemsData.map((sys) => {
+            const Icon = sys.icon;
+            return (
+              <div
+                key={sys.id}
+                data-project-name={sys.title}
+                className="group relative flex flex-col justify-between rounded-2xl border border-border bg-secondary/20 p-6 sm:p-7 transition-all duration-300 hover:border-accent/50 hover:bg-secondary/40 shadow-sm"
+              >
+                <div>
+                  {/* Industry Header */}
+                  <div className="flex items-center justify-between gap-3 pb-3 border-b border-border/40">
+                    <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-accent">
+                      {sys.industry}
+                    </span>
+                    <Icon className="h-4 w-4 text-accent opacity-80" />
                   </div>
-                </GalleryGridCell>
-              ))}
-            </GalleryGrid>
-          </div>
-        </div>
 
-        <div className="mb-6 flex flex-wrap gap-2 sm:mb-8">
-          {workCategories.map((c) => (
-            <button
-              key={c}
-              onClick={() => setActive(c)}
-              className={cn(
-                "rounded-full border px-4 py-1.5 text-xs font-semibold transition-colors",
-                active === c
-                  ? "border-accent bg-accent text-on-accent"
-                  : "border-default bg-secondary text-secondary hover:text-primary",
-              )}
-            >
-              {ui.works.categoryLabels[c]}
-            </button>
-          ))}
-        </div>
+                  {/* Project Name */}
+                  <h3 className="mt-4 text-xl font-bold tracking-tight text-primary sm:text-2xl group-hover:text-accent transition-colors">
+                    {sys.title}
+                  </h3>
 
-        <div className="grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-2">
-          {filtered.map((w) => (
-            <article
-              key={w.title}
-              data-project-name={w.title
-                .toLowerCase()
-                .replace(/[^a-z0-9]+/g, "_")
-                .replace(/^_+|_+$/g, "")}
-              className="premium-card flex flex-col p-6 transition-all duration-300 hover:-translate-y-1 hover:border-accent-soft"
-            >
-              <div className="mb-3 flex items-center justify-between">
-                <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent-soft ring-1 ring-accent/30">
-                  {(() => {
-                    const Icon = categoryIcons[w.category] ?? Boxes;
-                    return <Icon className="h-[18px] w-[18px] text-accent" />;
-                  })()}
-                </span>
-                <span className="text-[11px] font-medium uppercase tracking-wide text-secondary">
-                  {w.scope}
-                </span>
+                  {/* Description */}
+                  <p className="mt-3 text-sm leading-relaxed text-secondary font-normal line-clamp-3">
+                    {sys.description}
+                  </p>
+
+                  {/* MY CONTRIBUTION (Max 3 clean tags) */}
+                  <div className="mt-5">
+                    <p className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground mb-2">
+                      MY CONTRIBUTION
+                    </p>
+                    <div className="flex flex-wrap gap-1.5">
+                      {sys.contributions.map((tag) => (
+                        <span
+                          key={tag}
+                          className="rounded-md border border-accent/30 bg-accent/10 px-2.5 py-1 text-xs font-semibold text-accent"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Evidence & Action Link */}
+                <div className="mt-6 pt-4 border-t border-border/40 flex items-center justify-between">
+                  <div className="rounded-lg bg-accent/10 border border-accent/20 px-3 py-1 text-xs font-bold text-accent">
+                    {sys.evidence}
+                  </div>
+
+                  <Link
+                    to={sys.projectUrl}
+                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-accent hover:underline group-hover:translate-x-0.5 transition-transform"
+                  >
+                    <span>View project</span>
+                    <ArrowRight className="h-3.5 w-3.5" />
+                  </Link>
+                </div>
               </div>
-
-              <h3 className="mb-4 text-[17px] font-semibold leading-snug text-primary">
-                {w.title}
-              </h3>
-              <div className="space-y-3 text-[15px] text-secondary">
-                <p>
-                  <span className="font-semibold text-primary">
-                    {ui.works.problem}:
-                  </span>{" "}
-                  {w.problem}
-                </p>
-                <p>
-                  <span className="font-semibold text-primary">
-                    {ui.works.solution}:
-                  </span>{" "}
-                  {w.solution}
-                </p>
-                <p>
-                  <span className="font-semibold text-accent">
-                    {ui.works.outcome}:
-                  </span>{" "}
-                  {w.outcome}
-                </p>
-              </div>
-              <div className="mt-4 flex flex-wrap gap-1.5">
-                {w.tags.map((t) => (
-                  <TechTag key={t} label={t} />
-                ))}
-              </div>
-            </article>
-          ))}
+            );
+          })}
         </div>
-
-        <nav
-          className="mt-8 flex flex-wrap gap-3"
-          aria-label="Projects section internal navigation"
-        >
-          <Link
-            to="/api-integration-services"
-            className="link-accent text-[14px] font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-          >
-            View Azure integration project delivery approach
-          </Link>
-          <a
-            href="#contact"
-            className="link-accent text-[14px] font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-          >
-            Contact for project architecture review
-          </a>
-        </nav>
       </div>
     </section>
   );

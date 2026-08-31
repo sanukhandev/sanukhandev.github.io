@@ -2,62 +2,51 @@ import { Suspense, lazy, memo, useEffect, useState } from "react";
 import type { ReactNode } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import Navbar from "@/components/Navbar";
-import EngineeringPhilosophy from "@/components/sections/EngineeringPhilosophy";
-import LocaleSwitchSkeleton from "@/components/LocaleSwitchSkeleton";
 import SeoMeta from "@/components/SeoMeta";
+import LocaleSwitchSkeleton from "@/components/LocaleSwitchSkeleton";
 import { useLocale } from "@/hooks/use-locale";
 import { cn } from "@/lib/utils";
-import { revealInView } from "@/lib/design-system";
 import { pageSeo } from "@/lib/seo";
 import { buildHomepageSchemas } from "@/lib/schema";
 import { trackEvent } from "@/utils/analytics";
 import { HeroSection04 } from "@/components/ui/hero-04";
 
 const TechParticles = lazy(() => import("@/components/TechParticles"));
-const Articles = lazy(() => import("@/components/sections/Articles"));
 const Works = lazy(() => import("@/components/sections/Works"));
-const Services = lazy(() => import("@/components/sections/Services"));
-const Skills = lazy(() => import("@/components/sections/Skills"));
+const ArchitectureInPractice = lazy(
+  () => import("@/components/sections/ArchitectureInPractice"),
+);
+const WhatIArchitect = lazy(
+  () => import("@/components/sections/WhatIArchitect"),
+);
 const ZaakiyHighlights = lazy(
   () => import("@/components/sections/ZaakiyHighlights"),
 );
-const BlogPreview = lazy(() => import("@/components/sections/BlogPreview"));
+const EngineeringNotes = lazy(
+  () => import("@/components/sections/EngineeringNotes"),
+);
+const BeyondArchitecture = lazy(
+  () => import("@/components/sections/BeyondArchitecture"),
+);
 const Footer = lazy(() => import("@/components/sections/Footer"));
 const ZaakiyChatWidget = lazy(() => import("@/components/ZaakiyChatWidget"));
 
 const sectionFallback = (
-  <div className="container-narrow section-pad">
-    <div className="h-40 animate-pulse rounded-2xl bg-muted" />
+  <div className="container-narrow py-12">
+    <div className="h-32 animate-pulse rounded-2xl bg-muted" />
   </div>
 );
 
 type FlowModuleProps = {
   children: ReactNode;
-  index: number;
   tone?: "base" | "muted" | "anchor";
 };
 
-function FlowModule({ children, index, tone = "base" }: FlowModuleProps) {
-  const reducedMotion = useReducedMotion();
-
+function FlowModule({ children, tone = "base" }: FlowModuleProps) {
   return (
-    <motion.div
-      className={cn("system-module", `system-module--${tone}`)}
-      initial={
-        reducedMotion ? false : revealInView.initial
-      }
-      whileInView={
-        reducedMotion ? undefined : revealInView.whileInView
-      }
-      viewport={{ once: true, amount: 0.18 }}
-      transition={{
-        duration: reducedMotion ? 0 : 0.6,
-        delay: reducedMotion ? 0 : index * 0.05,
-      }}
-    >
-      <span className="system-connector" aria-hidden />
+    <div className={cn("system-module relative", `system-module--${tone}`)}>
       {children}
-    </motion.div>
+    </div>
   );
 }
 
@@ -95,13 +84,12 @@ const Index = () => {
     const trackedSections = new Set<string>();
     const sectionIds = [
       "home",
-      "philosophy",
-      "stack",
-      "works",
-      "ops-intelligence",
-      "principles",
-      "experience",
-      "ecosystem",
+      "work",
+      "architecture",
+      "capabilities",
+      "zaakiy",
+      "writing",
+      "about",
       "contact",
     ];
     const sections = sectionIds
@@ -127,12 +115,11 @@ const Index = () => {
         });
       },
       {
-        threshold: 0.45,
+        threshold: 0.4,
       },
     );
 
     sections.forEach((section) => observer.observe(section));
-
     return () => observer.disconnect();
   }, []);
 
@@ -141,7 +128,7 @@ const Index = () => {
   }
 
   return (
-    <div className="system-shell relative bg-background text-foreground">
+    <div className="system-shell relative bg-background text-foreground min-h-screen">
       <div className="system-backdrop pointer-events-none fixed inset-0 -z-10" />
       {enableParticles ? (
         <Suspense fallback={null}>
@@ -163,38 +150,47 @@ const Index = () => {
           schema={buildHomepageSchemas()}
         />
         <Navbar />
-        <motion.main
-          className="section-flow pt-20 sm:pt-24"
-          initial={reducedMotion ? false : { opacity: 0 }}
-          animate={reducedMotion ? undefined : { opacity: 1 }}
-          transition={{ duration: 0.55, ease: "easeOut" }}
-        >
+        <main className="section-flow pt-16 sm:pt-20">
+          {/* 01. HERO */}
           <HeroSection04 />
-          <EngineeringPhilosophy />
+
           <Suspense fallback={sectionFallback}>
-            <FlowModule index={1} tone="muted">
-              <Skills />
-            </FlowModule>
-            <FlowModule index={2} tone="muted">
+            {/* 02. SELECTED PRODUCTION SYSTEMS */}
+            <FlowModule tone="base">
               <Works />
             </FlowModule>
-            <FlowModule index={3} tone="anchor">
+
+            {/* 03. ARCHITECTURE IN PRACTICE */}
+            <FlowModule tone="muted">
+              <ArchitectureInPractice />
+            </FlowModule>
+
+            {/* 04. WHAT I ARCHITECT */}
+            <FlowModule tone="base">
+              <WhatIArchitect />
+            </FlowModule>
+
+            {/* 05. ZAAKIYV3RSE */}
+            <FlowModule tone="anchor">
               <ZaakiyHighlights />
             </FlowModule>
-            <FlowModule index={4} tone="muted">
-              <Articles />
+
+            {/* 06. ENGINEERING NOTES */}
+            <FlowModule tone="muted">
+              <EngineeringNotes />
             </FlowModule>
-            <FlowModule index={5} tone="muted">
-              <Services />
-            </FlowModule>
-            <FlowModule index={6} tone="muted">
-              <BlogPreview />
+
+            {/* 07. ABOUT / ENGINEERING LEADERSHIP */}
+            <FlowModule tone="base">
+              <BeyondArchitecture />
             </FlowModule>
           </Suspense>
-        </motion.main>
+        </main>
+
         <Suspense fallback={null}>
+          {/* 08 & 09. FINAL CTA & FOOTER */}
           <Footer />
-          <ZaakiyChatWidget extraContext="Page: Sanu Khan portfolio homepage.\nZaakiyV3RSE: A suite of AI-driven platforms built by Sanu Khan.\n- Zaakiy AI: Multilingual AI chat support platform (10K+ conversations, English & Arabic).\n- Zaakiy CRM: CRM solution for SMEs, content creators, and social media influencers.\n- Zaakiy ERP: ERP solutions including a real estate platform.\n- Zaakiy GO: Food delivery app in Dubai.\nSanu is the founder and Solution Architect behind ZaakiyV3RSE." />
+          <ZaakiyChatWidget extraContext="Page: Sanu Khan portfolio homepage.\nSanu Khan: Technical Architect & Engineering Lead based in Dubai, UAE with 13+ years experience.\nZaakiyV3RSE: An AI-native operations intelligence platform exploring agent orchestration, contextual reasoning, and adaptive workflows." />
         </Suspense>
       </div>
     </div>

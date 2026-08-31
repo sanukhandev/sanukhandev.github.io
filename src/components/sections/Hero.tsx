@@ -217,6 +217,7 @@ function Hero() {
                     y="36"
                     fontSize="32"
                     fontWeight="800"
+                    fontFamily="'Laren Modern', sans-serif"
                     letterSpacing="-0.5"
                     fill="url(#hero-logo-grad)"
                   >
@@ -227,6 +228,7 @@ function Hero() {
                     y="36"
                     fontSize="32"
                     fontWeight="600"
+                    fontFamily="'Laren Modern', sans-serif"
                     letterSpacing="-0.5"
                     fill="url(#hero-logo-grad)"
                   >
@@ -237,6 +239,7 @@ function Hero() {
                     y="36"
                     fontSize="26"
                     fontWeight="500"
+                    fontFamily="'Laren Modern', sans-serif"
                     fill={isLight ? "#1f9f45" : "#38c755"}
                     opacity={isLight ? 0.85 : 0.75}
                   >
@@ -474,7 +477,7 @@ function Hero() {
                 src={profile.avatarUrl}
                 alt={`${profile.name} portrait`}
                 className="relative z-10 w-full object-contain"
-                fetchPriority="high"
+                fetchpriority="high"
                 decoding="async"
                 width={640}
                 height={640}

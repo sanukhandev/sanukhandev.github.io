@@ -114,10 +114,10 @@ export default function BlogIndex() {
 
       <Navbar />
 
-      <main className="bg-[var(--bg-primary)] pt-16 text-[var(--text-primary)]">
-        <div className="mx-auto grid h-[calc(100vh-4rem)] max-w-[1700px] grid-cols-1 gap-6 px-4 py-6 xl:grid-cols-[260px_minmax(0,1fr)_280px]">
+      <main className="bg-[var(--bg-primary)] pt-20 pb-16 text-[var(--text-primary)] min-h-screen">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-4 sm:px-6 xl:grid-cols-[260px_minmax(0,1fr)]">
           <aside className="hidden xl:block">
-            <div className="h-full rounded-2xl border border-[var(--border)] bg-[var(--bg-secondary)] p-4">
+            <div className="sticky top-24 max-h-[calc(100vh-8rem)] overflow-y-auto rounded-2xl border border-[var(--border)] bg-[var(--bg-secondary)] p-4 shadow-sm">
               <p className="mb-3 text-[11px] font-semibold uppercase tracking-widest text-[var(--text-secondary)]">
                 Filter &amp; Search
               </p>
@@ -135,7 +135,7 @@ export default function BlogIndex() {
               <p className="mb-2 mt-4 flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-widest text-[var(--text-secondary)]">
                 <Tag className="h-3.5 w-3.5" /> Filter by tag
               </p>
-              <div className="max-h-[calc(100vh-18rem)] space-y-1 overflow-y-auto pr-1">
+              <div className="space-y-1 pr-1">
                 {allTags.map((tag) => (
                   <button
                     key={tag}
@@ -143,7 +143,7 @@ export default function BlogIndex() {
                     onClick={() => onTagChange(tag)}
                     className={`block w-full rounded-lg px-2.5 py-1.5 text-left text-[12px] transition-colors ${
                       selectedTag === tag
-                        ? "bg-[var(--accent)]/20 text-[var(--accent)]"
+                        ? "bg-[var(--accent)]/20 font-semibold text-[var(--accent)]"
                         : "text-[var(--text-secondary)] hover:bg-[var(--bg-primary)]"
                     }`}
                   >
@@ -154,24 +154,23 @@ export default function BlogIndex() {
             </div>
           </aside>
 
-          <section className="min-h-0 overflow-y-auto pr-1">
-            <div className="flex items-end justify-between">
+          <section className="min-w-0">
+            <div className="flex items-end justify-between border-b border-[var(--border)]/60 pb-5">
               <div>
-                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--accent)] opacity-80">
-                  Tech Writing
+                <p className="text-xs font-semibold uppercase tracking-widest text-[var(--accent)]">
+                  Technical Articles
                 </p>
-                <h1 className="mt-1 text-[clamp(2rem,4vw,2.8rem)] font-extrabold tracking-tight text-[var(--text-primary)]">
-                  WriteUps
+                <h1 className="mt-1.5 text-2xl font-extrabold tracking-tight text-[var(--text-primary)] sm:text-3xl md:text-4xl">
+                  Articles &amp; Architecture Notes
                 </h1>
               </div>
-              <p className="hidden pb-1 text-[13px] text-[var(--text-secondary)] sm:block">
+              <p className="hidden pb-1 text-xs font-medium text-[var(--text-secondary)] sm:block">
                 {filteredPosts.length} post
                 {filteredPosts.length !== 1 ? "s" : ""}
               </p>
             </div>
-            <p className="mt-2 max-w-2xl text-[14px] leading-6 text-[var(--text-secondary)]">
-              Deep dives on architecture, backend patterns, cloud systems, and
-              practical engineering execution.
+            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[var(--text-secondary)] sm:text-base">
+              Deep dives on distributed systems, cloud architecture, event-driven patterns, and practical engineering execution.
             </p>
 
             <div className="mt-5 xl:hidden">

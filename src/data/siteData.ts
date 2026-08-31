@@ -1,12 +1,13 @@
 export const nav = {
   brand: "SanuKhan.dev",
   links: [
-    { label: "Work", href: "#works" },
-    { label: "Experience", href: "#experience" },
-    { label: "Stack", href: "#stack" },
-    { label: "Contact", href: "#contact" },
+    { label: "Work", href: "#work" },
+    { label: "Architecture", href: "#architecture" },
+    { label: "Zaakiy", href: "#zaakiy" },
+    { label: "Writing", href: "#writing" },
+    { label: "About", href: "#about" },
   ],
-  cta: { label: "Hire Me", href: "#contact" },
+  cta: { label: "Let's Talk", href: "#contact" },
 };
 
 export const profile = {
@@ -16,9 +17,9 @@ export const profile = {
   subRole:
     "Tech Lead • Cloud & MS Architect • Enterprise Integrations Specialist",
   subtitle:
-    "Designing scalable distributed systems, enterprise integrations, and high-performance platforms across global markets.",
+    "Cloud Architect & Tech Lead · Azure · Event-Driven Architecture",
   statement:
-    "Leading architecture and platform engineering for event-driven commerce, enterprise integration, and multi-region cloud delivery. Creator of ZaakiyV3RSE.",
+    "100+ Solutions Built · Creator of ZaakiyV3RSE · 13+ Years Experience",
   meta: [
     "13+ years building distributed systems",
     "Event-driven architecture specialist",
@@ -93,17 +94,17 @@ export const skills = {
 
 export const services = [
   {
-    company: "TechCarrot LLC",
-    client: "Al-Futtaim EIT Client",
+    company: "Enterprise Solution Consultancy",
+    client: "Enterprise Commerce Division",
     location: "Dubai, UAE",
     role: "Tech Lead & Solution Architect",
     duration: "Feb 2022 – Present",
     current: true,
     impact: [
-      "Architected enterprise PIM integrations across M&S, ACE, and Watsons retail brands — catalog, pricing, and inventory at scale",
+      "Architected enterprise PIM integrations across multi-brand retail ecosystems — catalog, pricing, and inventory at scale",
       "Designed event-driven pipelines on Azure Event Hub, Kafka, and RabbitMQ for real-time multi-region product and pricing sync",
       "Built serverless microservices using Node.js and Azure Functions for high-throughput integration orchestration",
-      "Delivered SAP–PIM–Shopify–Kibo integrations enabling unified omnichannel commerce platforms",
+      "Delivered ERP–PIM–Headless Storefront integrations enabling unified omnichannel commerce platforms",
       "Architected multi-tenant SaaS systems with strict tenant isolation, scalable deployments, and contract-driven APIs",
       "Led cloud-native delivery on Azure and Kubernetes — mentored engineering teams and owned architectural decisions",
     ],
@@ -114,14 +115,14 @@ export const services = [
       "RabbitMQ",
       "Node.js",
       "Kubernetes",
-      "SAP",
-      "Shopify",
-      "Kibo",
+      "ERP",
+      "PIM",
+      "Headless Storefronts",
       "Microservices",
     ],
   },
   {
-    company: "28 Light Bulbs",
+    company: "Digital Product Studio",
     client: null,
     location: "Dubai, UAE",
     role: "Frontend & Full Stack Engineer",
@@ -135,7 +136,7 @@ export const services = [
     stack: ["Laravel", "Angular", "NgRx", "PHP", "MySQL"],
   },
   {
-    company: "TP Connects Technologies",
+    company: "Travel Tech & Aggregation Platform",
     client: null,
     location: "Dubai, UAE",
     role: "Full Stack & Platform Engineer",
@@ -150,7 +151,7 @@ export const services = [
     stack: ["Node.js", "React", "Java", "NDC", "Microservices", "REST APIs"],
   },
   {
-    company: "Candour Automation",
+    company: "Enterprise Automation Solutions",
     client: null,
     location: "India",
     role: "R&D Engineer",
@@ -165,7 +166,7 @@ export const services = [
     stack: ["React", "Django", "Spring Boot", "PHP", "Android", "PostgreSQL"],
   },
   {
-    company: "Freelance & Independent Consulting",
+    company: "Independent Architecture Consulting",
     client: null,
     location: "Remote / Global",
     role: "Solution Architect & Full Stack Consultant",
@@ -341,7 +342,8 @@ export const articles = [
     excerpt:
       "How API Gateways act as the single entry point for microservices — handling auth, rate limiting, routing, and observability so your services don't have to.",
     tags: ["API Gateway", "DevOps", "Microservices"],
-    url: "https://dev.to/sanukhandev/api-gateway-the-bouncer-your-microservices-didnt-know-they-needed-1j0e",
+    url: "/blog/api-gateway-the-bouncer-your-microservices-didnt-know-they-needed-1j0e",
+    localPath: "/blog/api-gateway-the-bouncer-your-microservices-didnt-know-they-needed-1j0e",
   },
   {
     category: "Data Engineering",
@@ -349,7 +351,8 @@ export const articles = [
     excerpt:
       "An in-process OLAP database with zero config, blazing-fast columnar queries, and support for CSV, Parquet, and JSON — perfect for data science and offline analytics.",
     tags: ["DuckDB", "SQL", "Data Engineering"],
-    url: "https://dev.to/sanukhandev/duckdb-the-sqlite-of-analytics-you-didnt-know-you-needed-579m",
+    url: "/blog/duckdb-the-sqlite-of-analytics-you-didnt-know-you-needed-579m",
+    localPath: "/blog/duckdb-the-sqlite-of-analytics-you-didnt-know-you-needed-579m",
   },
   {
     category: "JavaScript",
@@ -358,7 +361,8 @@ export const articles = [
     excerpt:
       "How to use JavaScript's Proxy object to intercept and control object behaviour — covering validation, logging, access control, and Vue 3 reactivity internals.",
     tags: ["JavaScript", "Web Dev", "Frontend"],
-    url: "https://dev.to/sanukhandev/unmasking-javascript-proxies-the-secret-agents-of-your-objects-4eac",
+    url: "/blog/unmasking-javascript-proxies-the-secret-agents-of-your-objects-4eac",
+    localPath: "/blog/unmasking-javascript-proxies-the-secret-agents-of-your-objects-4eac",
   },
   {
     category: "Algorithms",
@@ -367,7 +371,8 @@ export const articles = [
     excerpt:
       "Build a custom non-mutating mergeSortBy() on Array.prototype that handles primitives, nested object keys, and custom comparator functions.",
     tags: ["JavaScript", "Algorithms", "Tutorial"],
-    url: "https://dev.to/sanukhandev/creating-a-merge-sort-array-prototype-for-nested-objects-strings-and-numbers-in-javascript-4l3j",
+    url: "/blog/creating-a-merge-sort-array-prototype-for-nested-objects-strings-and-numbers-in-javascript-4l3j",
+    localPath: "/blog/creating-a-merge-sort-array-prototype-for-nested-objects-strings-and-numbers-in-javascript-4l3j",
   },
   {
     category: "DSA",
@@ -376,7 +381,8 @@ export const articles = [
     excerpt:
       "How Project Euler's math-driven puzzles train you to think algorithmically, optimise solutions, and build real DSA skills that ace interviews.",
     tags: ["DSA", "Python", "Problem Solving"],
-    url: "https://dev.to/sanukhandev/why-project-euler-might-be-the-most-powerful-dsa-trainer-youre-not-using-yet-293c",
+    url: "/blog/why-project-euler-might-be-the-most-powerful-dsa-trainer-youre-not-using-yet-293c",
+    localPath: "/blog/why-project-euler-might-be-the-most-powerful-dsa-trainer-youre-not-using-yet-293c",
   },
   {
     category: "DevTools",
@@ -385,7 +391,8 @@ export const articles = [
     excerpt:
       "When a rebase went catastrophically wrong, one natural-language prompt in Warp Terminal produced the exact safe steps needed to recover — instantly.",
     tags: ["Git", "Terminal", "Productivity"],
-    url: "https://dev.to/sanukhandev/how-warp-terminal-saved-me-from-a-git-disaster-with-just-one-prompt-3fge",
+    url: "/blog/how-warp-terminal-saved-me-from-a-git-disaster-with-just-one-prompt-3fge",
+    localPath: "/blog/how-warp-terminal-saved-me-from-a-git-disaster-with-just-one-prompt-3fge",
   },
   {
     category: "Architecture",
@@ -394,7 +401,8 @@ export const articles = [
     excerpt:
       "A pragmatic full-stack architecture using Laravel, Next.js, MySQL, Headless WordPress, and cPanel hosting — built to balance cost, scalability, and maintainability.",
     tags: ["SaaS", "Full Stack", "Architecture"],
-    url: "https://dev.to/sanukhandev/building-a-cost-effective-full-stack-saas-platform-a-practical-guide-for-small-to-mid-size-it-2d44",
+    url: "/blog/building-a-cost-effective-full-stack-saas-platform-a-practical-guide-for-small-to-mid-size-it-2d44",
+    localPath: "/blog/building-a-cost-effective-full-stack-saas-platform-a-practical-guide-for-small-to-mid-size-it-2d44",
   },
   {
     category: "Computer Science",
@@ -403,7 +411,8 @@ export const articles = [
     excerpt:
       "Exploring how the P vs NP problem sits at the heart of AI research, and why quantum computing may offer new pathways toward resolving this millennium-prize puzzle.",
     tags: ["AI", "Computer Science", "Quantum Computing"],
-    url: "https://dev.to/sanukhandev/unravelling-p-vs-np-how-this-unsolved-problem-influences-the-future-of-ai-with-quantum-computing-37c3",
+    url: "/blog/unravelling-p-vs-np-how-this-unsolved-problem-influences-the-future-of-ai-with-quantum-computing-37c3",
+    localPath: "/blog/unravelling-p-vs-np-how-this-unsolved-problem-influences-the-future-of-ai-with-quantum-computing-37c3",
   },
   {
     category: "Computer Science",
@@ -411,7 +420,8 @@ export const articles = [
     excerpt:
       "A one-byte explainer on the most famous open problem in computer science — and why a $1 million prize still awaits its solver.",
     tags: ["Computer Science", "Theory", "Beginners"],
-    url: "https://dev.to/sanukhandev/p-vs-np-problem-the-ultimate-computer-math-puzzle-5hj0",
+    url: "/blog/p-vs-np-problem-the-ultimate-computer-math-puzzle-5hj0",
+    localPath: "/blog/p-vs-np-problem-the-ultimate-computer-math-puzzle-5hj0",
   },
   {
     category: "Algorithms",
@@ -420,7 +430,8 @@ export const articles = [
     excerpt:
       "Time and space complexity explained with real JavaScript examples — from O(1) to O(n²) — and why mastering Big O is essential for interviews and production code.",
     tags: ["JavaScript", "Algorithms", "Big O"],
-    url: "https://dev.to/sanukhandev/a-comprehensive-guide-to-big-o-notation-and-efficient-coding-practices-with-examples-44n2",
+    url: "/blog/a-comprehensive-guide-to-big-o-notation-and-efficient-coding-practices-with-examples-44n2",
+    localPath: "/blog/a-comprehensive-guide-to-big-o-notation-and-efficient-coding-practices-with-examples-44n2",
   },
   {
     category: "Algorithms",
@@ -429,7 +440,8 @@ export const articles = [
     excerpt:
       "Master the sliding window pattern for arrays and strings — with practical JavaScript examples covering max subarray sums, real-time data streaming, and more.",
     tags: ["JavaScript", "Algorithms", "Web Dev"],
-    url: "https://dev.to/sanukhandev/the-sliding-window-technique-a-powerful-algorithm-for-javascript-developers-3nfm",
+    url: "/blog/the-sliding-window-technique-a-powerful-algorithm-for-javascript-developers-3nfm",
+    localPath: "/blog/the-sliding-window-technique-a-powerful-algorithm-for-javascript-developers-3nfm",
   },
 ];
 

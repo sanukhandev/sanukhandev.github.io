@@ -53,14 +53,14 @@ export default function BlogSeoPage(props: BlogSeoPageProps) {
         kind="article"
         schema={schemas}
       />
-      <main className="min-h-[100dvh] bg-background pt-20 text-foreground">
-        <article className="container-narrow section-pad">
-          <h1 className="text-[38px] font-extrabold leading-[1.1] text-primary">{h1}</h1>
-          <p className="mt-4 text-[16px] leading-7 text-secondary">{keywordLead}</p>
+      <main className="min-h-[100dvh] bg-background pt-20 pb-16 text-foreground">
+        <article className="container-narrow section-pad max-w-3xl mx-auto">
+          <h1 className="text-2xl font-extrabold leading-tight tracking-tight text-primary sm:text-3xl md:text-4xl">{h1}</h1>
+          <p className="mt-4 text-base leading-relaxed text-secondary sm:text-lg">{keywordLead}</p>
 
           <section className="mt-8 rounded-xl border border-default bg-secondary p-5">
-            <h2 className="text-[24px] font-bold text-primary">Table of Contents</h2>
-            <ul className="mt-3 space-y-2 text-[15px] text-secondary">
+            <h2 className="text-lg font-bold text-primary">Table of Contents</h2>
+            <ul className="mt-3 space-y-2 text-sm text-secondary">
               {toc.map((item) => (
                 <li key={item.id}>
                   <a href={`#${item.id}`} className="hover:text-primary hover:underline">
@@ -74,14 +74,14 @@ export default function BlogSeoPage(props: BlogSeoPageProps) {
           <div className="mt-8 space-y-8">
             {sections.map((section) => (
               <section key={section.id} id={section.id}>
-                <h2 className="text-[28px] font-bold text-primary">{section.title}</h2>
-                <div className="mt-3 space-y-4 text-[15px] leading-7 text-secondary">
+                <h2 className="text-xl font-bold text-primary sm:text-2xl pb-2 border-b border-border/40">{section.title}</h2>
+                <div className="mt-3 space-y-4 text-base leading-relaxed text-secondary">
                   {section.paragraphs.map((p, index) => (
                     <p key={index}>{p}</p>
                   ))}
                 </div>
                 {section.code ? (
-                  <pre className="mt-4 overflow-x-auto rounded-xl border border-default bg-secondary p-4 text-[13px] text-secondary">
+                  <pre className="mt-4 overflow-x-auto rounded-xl border border-default bg-secondary p-4 font-mono text-xs sm:text-sm text-secondary">
                     {section.code}
                   </pre>
                 ) : null}
