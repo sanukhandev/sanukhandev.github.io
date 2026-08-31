@@ -1,5 +1,12 @@
+import { useMemo } from "react";
 import { useLocale } from "@/hooks/use-locale";
+import { useSiteContent } from "@/data/siteContent";
 import { SectionHeading } from "@/components/shared/SectionHeading";
+import {
+  WorkExperience,
+  type ExperienceItemType,
+  type ExperiencePositionIconType,
+} from "@/components/ui/work-experience";
 import { ArrowRight, Compass, Shield, Users, Target } from "lucide-react";
 
 interface FlowStep {
@@ -40,9 +47,53 @@ const leadershipItems = [
   },
 ];
 
+function inferPositionIcon(role: string): ExperiencePositionIconType {
+  const value = role.toLowerCase();
+  if (value.includes("design") || value.includes("ux") || value.includes("ui")) {
+    return "design";
+  }
+  if (value.includes("engineer") || value.includes("architect") || value.includes("developer")) {
+    return "code";
+  }
+  if (value.includes("research") || value.includes("learning") || value.includes("trainer")) {
+    return "education";
+  }
+  return "business";
+}
+
 export default function BeyondArchitecture() {
   const { locale } = useLocale();
+  const { services } = useSiteContent();
   const isArabic = locale === "ar";
+
+  const experiences = useMemo<ExperienceItemType[]>(
+    () =>
+      services.map((item) => ({
+        id: item.company
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, "-")
+          .replace(/^-+|-+$/g, ""),
+        companyName: item.company,
+        isCurrentEmployer: item.current,
+        positions: [
+          {
+            id: `${item.company}-${item.role}`
+              .toLowerCase()
+              .replace(/[^a-z0-9]+/g, "-")
+              .replace(/^-+|-+$/g, ""),
+            title: item.role,
+            employmentPeriod: item.duration,
+            employmentType: item.client ?? item.location,
+            summary: item.impact[0],
+            details: item.impact.slice(1),
+            skills: item.stack,
+            icon: inferPositionIcon(item.role),
+            isExpanded: Boolean(item.current),
+          },
+        ],
+      })),
+    [services],
+  );
 
   return (
     <section id="about" className="py-12 md:py-16 lg:py-20 scroll-mt-20">
@@ -79,7 +130,7 @@ export default function BeyondArchitecture() {
                   )}
                 </div>
                 <h4 className="text-sm font-bold text-primary">{step.title}</h4>
-                <p className="text-[11px] text-secondary mt-0.5 leading-snug">
+                <p className="text-[11px] text-secondary mt-0.5 leading-snug font-normal">
                   {step.desc}
                 </p>
               </div>
@@ -114,6 +165,15 @@ export default function BeyondArchitecture() {
               );
             })}
           </div>
+        </div>
+
+        {/* FULL WORK EXPERIENCE TIMELINE */}
+        <div id="experience" className="mt-12 scroll-mt-20">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-accent mb-4">
+            13+ YEARS CAREER &amp; WORK EXPERIENCE
+          </p>
+
+          <WorkExperience experiences={experiences} />
         </div>
       </div>
     </section>
