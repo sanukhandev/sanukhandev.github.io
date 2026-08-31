@@ -126,10 +126,15 @@ export function HeroSection04() {
                   </Button>
                 </div>
 
-                {/* Subtle Tech Line */}
-                <p className="mt-5 text-[11px] font-mono tracking-wide text-muted-foreground opacity-75">
-                  WordPress / WooCommerce · Next.js · Node.js · PHP · Python · Cloud · AI
-                </p>
+                {/* Inspiring Leadership Quote */}
+                <div className="mt-5 flex items-center justify-center md:justify-start gap-2.5 text-[12px] font-mono tracking-wide text-secondary">
+                  <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-accent animate-pulse" />
+                  <span className="italic">
+                    {isArabic
+                      ? "“تجاوز الحدود في الهندسة المعمارية — بناء منصات فائقة التوسع وتحويل التعقيدات إلى واقع تقني ملموس.”"
+                      : "“Breaking glass ceilings in architecture — engineering scalable platforms and turning complex challenges into production reality.”"}
+                  </span>
+                </div>
               </div>
             </div>
           </div>

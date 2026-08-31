@@ -94,17 +94,17 @@ export const skills = {
 
 export const services = [
   {
-    company: "TechCarrot LLC",
-    client: "Al-Futtaim EIT Client",
+    company: "Enterprise Solution Consultancy",
+    client: "Enterprise Commerce Division",
     location: "Dubai, UAE",
     role: "Tech Lead & Solution Architect",
     duration: "Feb 2022 – Present",
     current: true,
     impact: [
-      "Architected enterprise PIM integrations across M&S, ACE, and Watsons retail brands — catalog, pricing, and inventory at scale",
+      "Architected enterprise PIM integrations across multi-brand retail ecosystems — catalog, pricing, and inventory at scale",
       "Designed event-driven pipelines on Azure Event Hub, Kafka, and RabbitMQ for real-time multi-region product and pricing sync",
       "Built serverless microservices using Node.js and Azure Functions for high-throughput integration orchestration",
-      "Delivered SAP–PIM–Shopify–Kibo integrations enabling unified omnichannel commerce platforms",
+      "Delivered ERP–PIM–Headless Storefront integrations enabling unified omnichannel commerce platforms",
       "Architected multi-tenant SaaS systems with strict tenant isolation, scalable deployments, and contract-driven APIs",
       "Led cloud-native delivery on Azure and Kubernetes — mentored engineering teams and owned architectural decisions",
     ],
@@ -115,14 +115,14 @@ export const services = [
       "RabbitMQ",
       "Node.js",
       "Kubernetes",
-      "SAP",
-      "Shopify",
-      "Kibo",
+      "ERP",
+      "PIM",
+      "Headless Storefronts",
       "Microservices",
     ],
   },
   {
-    company: "28 Light Bulbs",
+    company: "Digital Product Studio",
     client: null,
     location: "Dubai, UAE",
     role: "Frontend & Full Stack Engineer",
@@ -136,7 +136,7 @@ export const services = [
     stack: ["Laravel", "Angular", "NgRx", "PHP", "MySQL"],
   },
   {
-    company: "TP Connects Technologies",
+    company: "Travel Tech & Aggregation Platform",
     client: null,
     location: "Dubai, UAE",
     role: "Full Stack & Platform Engineer",
@@ -151,7 +151,7 @@ export const services = [
     stack: ["Node.js", "React", "Java", "NDC", "Microservices", "REST APIs"],
   },
   {
-    company: "Candour Automation",
+    company: "Enterprise Automation Solutions",
     client: null,
     location: "India",
     role: "R&D Engineer",
@@ -166,7 +166,7 @@ export const services = [
     stack: ["React", "Django", "Spring Boot", "PHP", "Android", "PostgreSQL"],
   },
   {
-    company: "Freelance & Independent Consulting",
+    company: "Independent Architecture Consulting",
     client: null,
     location: "Remote / Global",
     role: "Solution Architect & Full Stack Consultant",

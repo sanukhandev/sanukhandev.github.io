@@ -18,31 +18,31 @@ interface SystemCard {
 
 const systemsData: SystemCard[] = [
   {
-    id: "m-and-s-commerce",
+    id: "regional-commerce-platform",
     industry: "COMMERCE · MULTI-REGION",
-    title: "Marks & Spencer Regional Commerce Platform",
+    title: "Regional Enterprise Commerce Platform",
     description:
-      "Regional commerce experience supporting multiple Middle East markets with synchronized product catalog, pricing, and inventory updates.",
+      "Multi-market regional commerce platform synchronizing product catalog, pricing, and inventory across regional markets.",
     contributions: ["Platform Engineering", "Integration", "Production Delivery"],
     evidence: "9 regional markets",
     icon: ShoppingCart,
     projectUrl: "/projects",
   },
   {
-    id: "tradepoint-omnichannel",
+    id: "omnichannel-commerce-fabric",
     industry: "AUTOMOTIVE & ENTERPRISE COMMERCE",
-    title: "Al-Futtaim TradePoint Omnichannel Platform",
+    title: "Enterprise Omnichannel Commerce Fabric",
     description:
-      "Event-driven integration fabric connecting SAP ERP, PIM, and omnichannel storefronts with real-time payload validation.",
+      "Event-driven integration fabric connecting ERP, PIM, and omnichannel storefronts with real-time payload validation.",
     contributions: ["Solution Architecture", "Event Streaming", "API Governance"],
     evidence: "Production Enterprise Platform",
     icon: Layers,
     projectUrl: "/projects",
   },
   {
-    id: "tpconnects-marketplace",
+    id: "airline-b2b-marketplace",
     industry: "TRAVEL TECH · AIRLINE AGGREGATION",
-    title: "TPConnects Airline B2B Content Marketplace",
+    title: "Airline NDC & Travel B2B Marketplace",
     description:
       "High-availability NDC aggregation platform handling multi-supplier airline content, pricing, and B2B booking workflows.",
     contributions: ["Platform Engineering", "NDC Integration", "B2B Workflows"],
@@ -51,11 +51,11 @@ const systemsData: SystemCard[] = [
     projectUrl: "/projects",
   },
   {
-    id: "airport-commerce",
+    id: "airport-commerce-platform",
     industry: "AIRPORT COMMERCE · TRAVEL RETAIL",
-    title: "Airport Commerce & Duty-Free Platform",
+    title: "Airport Commerce & Travel Retail Platform",
     description:
-      "Multi-terminal airport commerce system for real-time inventory management, order processing, and payment gateway integrations.",
+      "Multi-terminal airport commerce system for real-time inventory management, order processing, and payment integrations.",
     contributions: ["Domain Architecture", "Commerce Core", "Resilient APIs"],
     evidence: "Multi-Terminal Operations",
     icon: Server,

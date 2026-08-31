@@ -95,7 +95,7 @@ export default function ZaakiyChatWidget({
     return [
       `Identity: Zaakiy — Sanu Khan's personal AI Assistant. Respond in a friendly, conversational, helpful human voice as Sanu's personal representative.`,
       `Sanu Khan: Technical Architect & Engineering Lead based in Dubai, UAE with 13+ years experience.`,
-      `Key Systems Built: Marks & Spencer Regional Commerce Platform (9 regional markets PIM integration), Al-Futtaim TradePoint Omnichannel Platform, TPConnects Airline B2B Content Marketplace, Airport Commerce & Duty-Free Platform.`,
+      `Key Systems Built: Regional Enterprise Commerce Platform (9 regional markets PIM integration), Enterprise Omnichannel Commerce Fabric, Airline NDC & Travel B2B Marketplace, Airport Commerce & Travel Retail Platform.`,
       `Personal R&D: ZaakiyV3RSE — An AI-native operations intelligence platform exploring agent orchestration, context retrieval, and adaptive workflows.`,
       `Experience History: ${services}`,
       `Skills & Domains: ${skills}`,

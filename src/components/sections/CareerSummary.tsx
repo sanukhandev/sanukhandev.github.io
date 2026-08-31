@@ -14,15 +14,15 @@ const careerMilestones: Milestone[] = [
   {
     period: "2022 – Present",
     role: "Tech Lead & Solution Architect",
-    company: "TechCarrot LLC (Al-Futtaim Client)",
+    company: "Enterprise Solutions Consultancy",
     location: "Dubai, UAE",
     highlights:
-      "Enterprise PIM, catalog, pricing, and event-driven multi-region commerce architecture for M&S, ACE, and Watsons.",
+      "Enterprise PIM, catalog, pricing, and event-driven multi-region commerce architecture across retail ecosystems.",
   },
   {
     period: "2021 – 2022",
     role: "Frontend & Full Stack Engineer",
-    company: "28 Light Bulbs",
+    company: "Digital Product Studio",
     location: "Dubai, UAE",
     highlights:
       "Built ERP and task management platforms using Laravel and Angular with NgRx state architecture.",
@@ -30,7 +30,7 @@ const careerMilestones: Milestone[] = [
   {
     period: "2021 – 2021",
     role: "Full Stack & Platform Engineer",
-    company: "TPConnects Technologies",
+    company: "Travel Tech Platform",
     location: "Dubai, UAE",
     highlights:
       "Airline B2B marketplace and NDC-based flight content aggregation microservices.",
@@ -38,7 +38,7 @@ const careerMilestones: Milestone[] = [
   {
     period: "2016 – 2020",
     role: "R&D Engineer",
-    company: "Candour Automation",
+    company: "Enterprise Automation Solutions",
     location: "India",
     highlights:
       "Video conferencing, enterprise ERP systems, roadside assistance, and Android/Spring Boot backends.",

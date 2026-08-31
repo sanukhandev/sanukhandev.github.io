@@ -4,7 +4,7 @@ export default function ApiIntegrationServicesPage() {
   return (
     <SeoPageLayout
       title="API Integration Services | Sanu Khan"
-      description="API integration services for SAP, Shopify, Kibo, and enterprise systems using event-driven architecture, contract-first APIs, and resilient cloud delivery."
+      description="API integration services for ERPs, PIMs, headless storefronts, and enterprise platforms using event-driven architecture, contract-first APIs, and resilient cloud delivery."
       canonicalPath="/api-integration-services"
       h1="API Integration Services for Enterprise-Grade Reliability"
       intro="My API integration services are designed for organizations that need dependable data flow across platforms without operational chaos. The focus is on contract integrity, observability, and event reliability so integrations remain stable even as business logic and partner systems evolve."
