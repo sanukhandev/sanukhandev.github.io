@@ -1,26 +1,25 @@
 import { Link } from "react-router-dom";
 import { useLocale } from "@/hooks/use-locale";
 import { SectionHeading } from "@/components/shared/SectionHeading";
-import { ArrowRight, BookOpen, Clock } from "lucide-react";
+import { useDevToArticles } from "@/hooks/use-devto-articles";
+import { ArrowRight, Clock } from "lucide-react";
 
-interface Note {
+interface FallbackNote {
   category: string;
   title: string;
   description: string;
   readTime: string;
-  url: string;
-  isExternal?: boolean;
+  localPath: string;
 }
 
-const featuredNotes: Note[] = [
+const fallbackNotes: FallbackNote[] = [
   {
     category: "Architecture",
     title: "API Gateway: The Bouncer Your Microservices Didn't Know They Needed",
     description:
       "How API Gateways act as the single entry point for microservices — handling auth, rate limiting, routing, and observability so your services don't have to.",
     readTime: "5 min read",
-    url: "https://dev.to/sanukhandev/api-gateway-the-bouncer-your-microservices-didnt-know-they-needed-1j0e",
-    isExternal: true,
+    localPath: "/blog/api-gateway-the-bouncer-your-microservices-didnt-know-they-needed-1j0e",
   },
   {
     category: "Data Engineering",
@@ -28,23 +27,33 @@ const featuredNotes: Note[] = [
     description:
       "An in-process OLAP database with zero config, blazing-fast columnar queries, and support for CSV, Parquet, and JSON — perfect for data science and offline analytics.",
     readTime: "4 min read",
-    url: "https://dev.to/sanukhandev",
-    isExternal: true,
+    localPath: "/blog/duckdb-the-sqlite-of-analytics-you-didnt-know-you-needed-579m",
   },
   {
     category: "Platform Engineering",
-    title: "Architecting a Resilient Multi-Tenant SaaS Engine",
+    title: "Unmasking JavaScript Proxies: The Secret Agents of Your Objects",
     description:
-      "Design considerations for tenant isolation, data boundaries, and API rate-limiting in production cloud environments.",
+      "Using JavaScript Proxy to intercept object behaviors for validation, logging, access control, and understanding Vue 3 reactivity.",
     readTime: "6 min read",
-    url: "/blog/nodejs-api-best-practices",
-    isExternal: false,
+    localPath: "/blog/unmasking-javascript-proxies-the-secret-agents-of-your-objects-4eac",
   },
 ];
 
 export default function EngineeringNotes() {
   const { locale } = useLocale();
   const isArabic = locale === "ar";
+  const { data: fetchedArticles } = useDevToArticles(3);
+
+  const displayNotes =
+    fetchedArticles && fetchedArticles.length > 0
+      ? fetchedArticles.slice(0, 3).map((art) => ({
+          category: art.tags[0] ? art.tags[0].toUpperCase() : "ARCHITECTURE",
+          title: art.title,
+          description: art.description,
+          readTime: "~5 min read",
+          localPath: art.localPath,
+        }))
+      : fallbackNotes;
 
   return (
     <section id="writing" className="section-pad scroll-mt-20">
@@ -60,11 +69,12 @@ export default function EngineeringNotes() {
           align="left"
         />
 
-        {/* 3 Featured Article Cards */}
+        {/* 3 Featured Article Cards Routing Internally to /blog/:slug */}
         <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
-          {featuredNotes.map((note) => (
-            <div
+          {displayNotes.map((note) => (
+            <Link
               key={note.title}
+              to={note.localPath}
               className="group flex flex-col justify-between rounded-2xl border border-border bg-secondary/20 p-6 transition-all duration-300 hover:border-accent/50 hover:bg-secondary/50 shadow-sm"
             >
               <div>
@@ -88,27 +98,12 @@ export default function EngineeringNotes() {
               </div>
 
               <div className="mt-6 pt-4 border-t border-border/40">
-                {note.isExternal ? (
-                  <a
-                    href={note.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-accent hover:underline"
-                  >
-                    <span>Read article</span>
-                    <ArrowRight className="h-3.5 w-3.5" />
-                  </a>
-                ) : (
-                  <Link
-                    to={note.url}
-                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-accent hover:underline"
-                  >
-                    <span>Read article</span>
-                    <ArrowRight className="h-3.5 w-3.5" />
-                  </Link>
-                )}
+                <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-accent group-hover:underline">
+                  <span>Read article</span>
+                  <ArrowRight className="h-3.5 w-3.5" />
+                </span>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
 
