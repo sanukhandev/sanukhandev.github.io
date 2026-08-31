@@ -1,12 +1,13 @@
 export const nav = {
   brand: "SanuKhan.dev",
   links: [
-    { label: "Work", href: "#works" },
-    { label: "Experience", href: "#experience" },
-    { label: "Stack", href: "#stack" },
-    { label: "Contact", href: "#contact" },
+    { label: "Work", href: "#work" },
+    { label: "Architecture", href: "#architecture" },
+    { label: "Zaakiy", href: "#zaakiy" },
+    { label: "Writing", href: "#writing" },
+    { label: "About", href: "#about" },
   ],
-  cta: { label: "Hire Me", href: "#contact" },
+  cta: { label: "Let's Talk", href: "#contact" },
 };
 
 export const profile = {

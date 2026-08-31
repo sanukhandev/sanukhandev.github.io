@@ -33,8 +33,44 @@ export default function Footer() {
   const isArabic = locale === "ar";
 
   return (
-    <footer id="contact" className="border-t border-default bg-primary">
-      <div className="container-narrow py-12">
+    <footer id="contact" className="border-t border-default bg-primary scroll-mt-20">
+      <div className="container-narrow py-16">
+        {/* FINAL CTA SECTION */}
+        <div className="mb-14 rounded-2xl border border-accent/40 bg-secondary/30 p-8 sm:p-10 shadow-lg">
+          <div className="max-w-2xl">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-primary leading-tight">
+              {isArabic
+                ? "هل تبني منصة معقدة ذات تحديات هندسية صعبة؟"
+                : "Building a platform with hard engineering problems?"}
+            </h2>
+            <p className="mt-3 text-sm sm:text-base leading-relaxed text-secondary font-normal">
+              {isArabic
+                ? "أنا مهتم بفرص الهندسة المعمارية، هندسة المنصات، والقيادة التقنية حيث تحتاج الأنظمة المعقدة إلى أن تصبح أسطح وأبسط وقابلة للتوسع والتشغيل."
+                : "I'm interested in architecture, platform engineering and technical leadership opportunities where complex systems need to become simpler, scalable and operable."}
+            </p>
+
+            <div className="mt-6 flex flex-wrap items-center gap-3">
+              <a
+                href="mailto:hello@sanukhan.dev?subject=Architecture%20Inquiry%20%E2%80%93%20SanuKhan.dev"
+                onClick={() => trackEvent("contact_click", { cta_type: "final_cta_lets_talk" })}
+                className="inline-flex items-center gap-2 rounded-xl bg-accent px-6 py-3 text-sm font-semibold text-primary shadow-md transition-all duration-300 hover:bg-accent/90"
+              >
+                <span>{isArabic ? "تواصل معي" : "Let's Talk"}</span>
+              </a>
+
+              <a
+                href="https://linkedin.com/in/sanukhan"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => trackEvent("linkedin_click")}
+                className="inline-flex items-center gap-2 rounded-xl border border-border bg-background/80 px-6 py-3 text-sm font-semibold text-primary transition-all duration-300 hover:border-accent/40 hover:bg-secondary"
+              >
+                <span>LinkedIn</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
         <div className="flex flex-col items-start justify-between gap-5 sm:flex-row sm:items-center">
           <div>
             <a

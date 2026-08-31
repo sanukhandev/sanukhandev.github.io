@@ -41,7 +41,7 @@ function Navbar() {
   }, []);
 
   useEffect(() => {
-    const sectionIds = ["home", "works", "experience", "stack", "contact"];
+    const sectionIds = ["home", "work", "architecture", "capabilities", "philosophy", "zaakiy", "writing", "process", "how-i-work", "leadership", "about", "contact"];
     const sections = sectionIds
       .map((id) => document.getElementById(id))
       .filter((el): el is HTMLElement => Boolean(el));

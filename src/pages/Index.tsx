@@ -2,9 +2,8 @@ import { Suspense, lazy, memo, useEffect, useState } from "react";
 import type { ReactNode } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import Navbar from "@/components/Navbar";
-import EngineeringPhilosophy from "@/components/sections/EngineeringPhilosophy";
-import LocaleSwitchSkeleton from "@/components/LocaleSwitchSkeleton";
 import SeoMeta from "@/components/SeoMeta";
+import LocaleSwitchSkeleton from "@/components/LocaleSwitchSkeleton";
 import { useLocale } from "@/hooks/use-locale";
 import { cn } from "@/lib/utils";
 import { revealInView } from "@/lib/design-system";
@@ -14,14 +13,34 @@ import { trackEvent } from "@/utils/analytics";
 import { HeroSection04 } from "@/components/ui/hero-04";
 
 const TechParticles = lazy(() => import("@/components/TechParticles"));
-const Articles = lazy(() => import("@/components/sections/Articles"));
 const Works = lazy(() => import("@/components/sections/Works"));
-const Services = lazy(() => import("@/components/sections/Services"));
-const Skills = lazy(() => import("@/components/sections/Skills"));
+const ArchitectureInPractice = lazy(
+  () => import("@/components/sections/ArchitectureInPractice"),
+);
+const WhatIArchitect = lazy(
+  () => import("@/components/sections/WhatIArchitect"),
+);
+const SystemsPhilosophy = lazy(
+  () => import("@/components/sections/SystemsPhilosophy"),
+);
 const ZaakiyHighlights = lazy(
   () => import("@/components/sections/ZaakiyHighlights"),
 );
-const BlogPreview = lazy(() => import("@/components/sections/BlogPreview"));
+const EngineeringNotes = lazy(
+  () => import("@/components/sections/EngineeringNotes"),
+);
+const ArchitectureProcess = lazy(
+  () => import("@/components/sections/ArchitectureProcess"),
+);
+const FromAmbiguityToProduction = lazy(
+  () => import("@/components/sections/FromAmbiguityToProduction"),
+);
+const EngineeringLeadership = lazy(
+  () => import("@/components/sections/EngineeringLeadership"),
+);
+const CareerSummary = lazy(
+  () => import("@/components/sections/CareerSummary"),
+);
 const Footer = lazy(() => import("@/components/sections/Footer"));
 const ZaakiyChatWidget = lazy(() => import("@/components/ZaakiyChatWidget"));
 
@@ -43,16 +62,12 @@ function FlowModule({ children, index, tone = "base" }: FlowModuleProps) {
   return (
     <motion.div
       className={cn("system-module", `system-module--${tone}`)}
-      initial={
-        reducedMotion ? false : revealInView.initial
-      }
-      whileInView={
-        reducedMotion ? undefined : revealInView.whileInView
-      }
-      viewport={{ once: true, amount: 0.18 }}
+      initial={reducedMotion ? false : revealInView.initial}
+      whileInView={reducedMotion ? undefined : revealInView.whileInView}
+      viewport={{ once: true, amount: 0.15 }}
       transition={{
         duration: reducedMotion ? 0 : 0.6,
-        delay: reducedMotion ? 0 : index * 0.05,
+        delay: reducedMotion ? 0 : index * 0.04,
       }}
     >
       <span className="system-connector" aria-hidden />
@@ -95,13 +110,16 @@ const Index = () => {
     const trackedSections = new Set<string>();
     const sectionIds = [
       "home",
+      "work",
+      "architecture",
+      "capabilities",
       "philosophy",
-      "stack",
-      "works",
-      "ops-intelligence",
-      "principles",
-      "experience",
-      "ecosystem",
+      "zaakiy",
+      "writing",
+      "process",
+      "how-i-work",
+      "leadership",
+      "about",
       "contact",
     ];
     const sections = sectionIds
@@ -127,12 +145,11 @@ const Index = () => {
         });
       },
       {
-        threshold: 0.45,
+        threshold: 0.4,
       },
     );
 
     sections.forEach((section) => observer.observe(section));
-
     return () => observer.disconnect();
   }, []);
 
@@ -169,32 +186,65 @@ const Index = () => {
           animate={reducedMotion ? undefined : { opacity: 1 }}
           transition={{ duration: 0.55, ease: "easeOut" }}
         >
+          {/* 1. HERO */}
           <HeroSection04 />
-          <EngineeringPhilosophy />
+
           <Suspense fallback={sectionFallback}>
-            <FlowModule index={1} tone="muted">
-              <Skills />
-            </FlowModule>
-            <FlowModule index={2} tone="muted">
+            {/* 2. SELECTED PRODUCTION SYSTEMS */}
+            <FlowModule index={1} tone="base">
               <Works />
             </FlowModule>
-            <FlowModule index={3} tone="anchor">
+
+            {/* 3. ARCHITECTURE IN PRACTICE */}
+            <FlowModule index={2} tone="muted">
+              <ArchitectureInPractice />
+            </FlowModule>
+
+            {/* 4. WHAT I ARCHITECT */}
+            <FlowModule index={3} tone="base">
+              <WhatIArchitect />
+            </FlowModule>
+
+            {/* 5. SYSTEMS PHILOSOPHY */}
+            <FlowModule index={4} tone="muted">
+              <SystemsPhilosophy />
+            </FlowModule>
+
+            {/* 6. ZAAKIYV3RSE R&D */}
+            <FlowModule index={5} tone="anchor">
               <ZaakiyHighlights />
             </FlowModule>
-            <FlowModule index={4} tone="muted">
-              <Articles />
-            </FlowModule>
-            <FlowModule index={5} tone="muted">
-              <Services />
-            </FlowModule>
+
+            {/* 7. ENGINEERING NOTES */}
             <FlowModule index={6} tone="muted">
-              <BlogPreview />
+              <EngineeringNotes />
+            </FlowModule>
+
+            {/* 8. HOW I THINK ABOUT ARCHITECTURE */}
+            <FlowModule index={7} tone="base">
+              <ArchitectureProcess />
+            </FlowModule>
+
+            {/* 9. FROM AMBIGUITY TO PRODUCTION */}
+            <FlowModule index={8} tone="muted">
+              <FromAmbiguityToProduction />
+            </FlowModule>
+
+            {/* 10. ENGINEERING LEADERSHIP */}
+            <FlowModule index={9} tone="base">
+              <EngineeringLeadership />
+            </FlowModule>
+
+            {/* 11. ABOUT & CAREER SUMMARY */}
+            <FlowModule index={10} tone="muted">
+              <CareerSummary />
             </FlowModule>
           </Suspense>
         </motion.main>
         <Suspense fallback={null}>
+          {/* 12. FINAL CTA & FOOTER */}
           <Footer />
-          <ZaakiyChatWidget extraContext="Page: Sanu Khan portfolio homepage.\nZaakiyV3RSE: A suite of AI-driven platforms built by Sanu Khan.\n- Zaakiy AI: Multilingual AI chat support platform (10K+ conversations, English & Arabic).\n- Zaakiy CRM: CRM solution for SMEs, content creators, and social media influencers.\n- Zaakiy ERP: ERP solutions including a real estate platform.\n- Zaakiy GO: Food delivery app in Dubai.\nSanu is the founder and Solution Architect behind ZaakiyV3RSE." />
+          <ZaakiyChatWidget extraContext="Page: Sanu Khan portfolio homepage.\nSanu Khan: Technical Architect & Engineering Lead based in Dubai, UAE with 13+ years experience.\nZaakiyV3RSE: An AI-native operations intelligence platform exploring agent orchestration, contextual reasoning, and adaptive workflows." />
         </Suspense>
       </div>
     </div>
