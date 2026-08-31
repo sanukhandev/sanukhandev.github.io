@@ -269,10 +269,10 @@ export default function DevToBlogPage() {
 
       <Navbar />
 
-      <main className="bg-[var(--bg-primary)] pt-16 text-[var(--text-primary)]">
-        <div className="mx-auto grid h-[calc(100vh-4rem)] max-w-[1700px] grid-cols-1 gap-6 px-4 py-6 xl:grid-cols-[260px_minmax(0,1fr)_300px]">
+      <main className="min-h-screen bg-[var(--bg-primary)] pt-20 pb-16 text-[var(--text-primary)]">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-4 sm:px-6 xl:grid-cols-[280px_minmax(0,1fr)]">
           <aside className="hidden xl:block">
-            <div className="sticky top-24 h-[calc(100vh-7rem)] overflow-y-auto rounded-2xl border border-[var(--border)] bg-[var(--bg-secondary)] p-4">
+            <div className="sticky top-24 max-h-[calc(100vh-8rem)] overflow-y-auto rounded-2xl border border-[var(--border)] bg-[var(--bg-secondary)] p-4 shadow-sm">
               <p className="mb-3 flex items-center gap-2 text-[11px] font-semibold uppercase tracking-widest text-[var(--text-secondary)]">
                 <BookOpen className="h-3.5 w-3.5 text-[var(--accent)]" />
                 On this page
@@ -397,21 +397,21 @@ export default function DevToBlogPage() {
             </div>
           </aside>
 
-          <article ref={articleRef} className="min-h-0 overflow-y-auto pr-1">
+          <article ref={articleRef} className="max-w-3xl mx-auto w-full min-w-0">
             <Link
               to="/blog"
-              className="inline-flex items-center gap-1.5 text-[13px] text-[var(--accent)] hover:underline"
+              className="inline-flex items-center gap-1.5 text-xs font-medium text-[var(--accent)] hover:underline"
             >
               <ArrowLeft className="h-3.5 w-3.5" /> All Posts
             </Link>
 
-            <p className="mt-4 text-[11px] font-semibold uppercase tracking-widest text-[var(--accent)] opacity-80">
-              Tech Writing
+            <p className="mt-4 text-xs font-semibold uppercase tracking-widest text-[var(--accent)]">
+              Technical Writing
             </p>
-            <h1 className="mt-2 text-[clamp(1.8rem,3.5vw,2.6rem)] font-extrabold leading-[1.12] tracking-tight">
+            <h1 className="mt-2 text-2xl font-extrabold leading-tight tracking-tight text-[var(--text-primary)] sm:text-3xl md:text-4xl">
               {article.title}
             </h1>
-            <p className="mt-3 text-[15px] leading-7 text-[var(--text-secondary)]">
+            <p className="mt-3 text-base leading-relaxed text-[var(--text-secondary)] font-normal sm:text-lg">
               {article.description}
             </p>
 
