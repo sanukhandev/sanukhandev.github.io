@@ -12,6 +12,7 @@ import SeoMeta from "@/components/SeoMeta";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/sections/Footer";
 import ZaakiyChatWidget from "@/components/ZaakiyChatWidget";
+import { profile } from "@/data/siteData";
 import { useDevToArticle, useDevToArticles } from "@/hooks/use-devto-articles";
 import { buildBlogPostingSchema, buildBreadcrumbListSchema } from "@/lib/schema";
 
@@ -270,12 +271,20 @@ export default function DevToBlogPage() {
       <Navbar />
 
       <main className="min-h-screen bg-[var(--bg-primary)] pt-20 pb-16 text-[var(--text-primary)]">
-        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-4 sm:px-6 xl:grid-cols-[280px_minmax(0,1fr)]">
+        <div className="mx-auto grid max-w-[1550px] grid-cols-1 gap-8 px-4 sm:px-6 xl:grid-cols-[250px_minmax(0,1fr)_280px]">
+          {/* Left Sticky Sidebar: Table of Contents & Quick Navigation */}
           <aside className="hidden xl:block">
             <div className="sticky top-24 max-h-[calc(100vh-8rem)] overflow-y-auto rounded-2xl border border-[var(--border)] bg-[var(--bg-secondary)] p-4 shadow-sm">
-              <p className="mb-3 flex items-center gap-2 text-[11px] font-semibold uppercase tracking-widest text-[var(--text-secondary)]">
+              <Link
+                to="/blog"
+                className="mb-3.5 inline-flex items-center gap-1.5 text-xs font-semibold text-[var(--accent)] hover:underline"
+              >
+                <ArrowLeft className="h-3.5 w-3.5" /> All Posts
+              </Link>
+
+              <p className="mb-3 flex items-center gap-2 border-t border-[var(--border)]/60 pt-3 text-[11px] font-semibold uppercase tracking-widest text-[var(--text-secondary)]">
                 <BookOpen className="h-3.5 w-3.5 text-[var(--accent)]" />
-                On this page
+                Table of Contents
               </p>
 
               {toc.length > 0 ? (
@@ -289,7 +298,7 @@ export default function DevToBlogPage() {
                           className={[
                             "block rounded-md py-1.5 text-[12px] leading-snug transition-colors",
                             isActive
-                              ? "bg-[var(--accent)]/10 font-semibold text-[var(--accent)]"
+                              ? "bg-[var(--accent)]/15 font-semibold text-[var(--accent)]"
                               : "text-[var(--text-secondary)] hover:bg-[var(--bg-primary)] hover:text-[var(--accent)]",
                           ].join(" ")}
                           style={{
@@ -319,27 +328,9 @@ export default function DevToBlogPage() {
                   })}
                 </ul>
               ) : (
-                <p className="text-[12px] text-[var(--text-secondary)]">
-                  No headings found.
+                <p className="text-[12px] text-[var(--text-secondary)] italic">
+                  Overview section
                 </p>
-              )}
-
-              {article.tags.length > 0 && (
-                <div className="mt-4 border-t border-[var(--border)] pt-3">
-                  <p className="mb-2 flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-widest text-[var(--text-secondary)]">
-                    <Hash className="h-3 w-3 text-[var(--accent)]" /> Tags
-                  </p>
-                  <div className="flex flex-wrap gap-1.5">
-                    {article.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="rounded-full border border-[var(--border)] bg-[var(--bg-primary)] px-2 py-0.5 text-[10px] font-semibold text-[var(--text-secondary)]"
-                      >
-                        #{tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
               )}
 
               <div className="mt-4 border-t border-[var(--border)] pt-3">
@@ -349,51 +340,9 @@ export default function DevToBlogPage() {
                 <div className="space-y-1.5 text-[12px] text-[var(--text-secondary)]">
                   {published && <p>Published: {published}</p>}
                   <p>Read time: ~{readingMinutes} min</p>
-                  <p>Total tags: {article.tags.length}</p>
+                  <p>Total sections: {toc.length}</p>
                 </div>
               </div>
-
-              <div className="mt-4 border-t border-[var(--border)] pt-3">
-                <p className="mb-2 text-[11px] font-semibold uppercase tracking-widest text-[var(--text-secondary)]">
-                  Quick Links
-                </p>
-                <div className="space-y-2 text-[12px]">
-                  <Link
-                    className="block text-[var(--accent)] hover:underline"
-                    to="/blog"
-                  >
-                    Browse all blog posts
-                  </Link>
-                  <a
-                    href={article.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-[var(--accent)] hover:underline"
-                  >
-                    <ExternalLink className="h-3.5 w-3.5" />
-                    Open on Dev.to
-                  </a>
-                </div>
-              </div>
-
-              {recentPosts.length > 0 && (
-                <div className="mt-4 border-t border-[var(--border)] pt-3">
-                  <p className="mb-2 text-[11px] font-semibold uppercase tracking-widest text-[var(--text-secondary)]">
-                    More to Read
-                  </p>
-                  <div className="space-y-2">
-                    {recentPosts.slice(0, 3).map((post) => (
-                      <Link
-                        key={post.id}
-                        to={post.localPath}
-                        className="block rounded-lg px-2 py-1.5 text-[12px] text-[var(--text-secondary)] hover:bg-[var(--bg-primary)] hover:text-[var(--accent)]"
-                      >
-                        {post.title}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              )}
             </div>
           </aside>
 
@@ -567,31 +516,35 @@ export default function DevToBlogPage() {
             )}
           </article>
 
+          {/* Right Sticky Sidebar: Author Info, Tags & Recommended Reading */}
           <aside className="hidden xl:block">
-            <div className="h-full space-y-4">
-              <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-secondary)] px-4 py-4">
+            <div className="sticky top-24 max-h-[calc(100vh-8rem)] overflow-y-auto space-y-4 pr-1">
+              <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-secondary)] px-4 py-4 shadow-sm">
                 <div className="flex items-center gap-3">
-                  <img
-                    src="/assets/images/sanu.avif"
-                    alt="Sanu Khan"
-                    width={40}
-                    height={40}
-                    loading="lazy"
-                    decoding="async"
-                    className="h-10 w-10 rounded-full border border-[var(--border)] object-cover"
-                  />
+                  <picture>
+                    <source srcSet="/assets/images/sanu.avif" type="image/avif" />
+                    <source srcSet="/assets/images/sanu.webp" type="image/webp" />
+                    <img
+                      src={profile.avatarUrl}
+                      alt={profile.name}
+                      width={44}
+                      height={44}
+                      loading="lazy"
+                      decoding="async"
+                      className="h-11 w-11 rounded-full border border-[var(--accent)]/30 object-cover"
+                    />
+                  </picture>
                   <div>
                     <p className="text-[13px] font-bold text-[var(--text-primary)]">
-                      Sanu Khan
+                      {profile.name}
                     </p>
-                    <p className="text-[11px] text-[var(--text-secondary)]">
-                      Tech Lead · Cloud Architect
+                    <p className="text-[11px] font-medium text-[var(--accent)]">
+                      Cloud Architect &amp; Tech Lead
                     </p>
                   </div>
                 </div>
-                <p className="mt-3 text-[12px] leading-5 text-[var(--text-secondary)]">
-                  13+ years building distributed systems. Writing about
-                  architecture, cloud, and engineering.
+                <p className="mt-3 text-[12px] leading-relaxed text-[var(--text-secondary)]">
+                  13+ years building distributed systems, event-driven architecture, and enterprise cloud solutions.
                 </p>
                 <a
                   href="https://dev.to/sanukhandev"
@@ -603,9 +556,27 @@ export default function DevToBlogPage() {
                 </a>
               </div>
 
+              {article.tags.length > 0 && (
+                <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-secondary)] px-4 py-4 shadow-sm">
+                  <p className="mb-2.5 flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-widest text-[var(--text-secondary)]">
+                    <Hash className="h-3.5 w-3.5 text-[var(--accent)]" /> Article Tags
+                  </p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {article.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="rounded-full border border-[var(--border)] bg-[var(--bg-primary)] px-2.5 py-0.5 text-[11px] font-medium text-[var(--text-secondary)]"
+                      >
+                        #{tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+
               {recentPosts.length > 0 && (
-                <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-secondary)] px-4 py-4">
-                  <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--text-secondary)]">
+                <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-secondary)] px-4 py-4 shadow-sm">
+                  <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--text-secondary)]">
                     More to Read
                   </p>
                   <ul className="space-y-3">

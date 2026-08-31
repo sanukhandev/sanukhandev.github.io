@@ -148,36 +148,19 @@ export default function Footer() {
                   </>
                 ) : (
                   <>
-                    <text
-                      x="0"
-                      y="24"
-                      fontSize="22"
-                      fontWeight="800"
-                      letterSpacing="-0.5"
-                      fill="url(#footer-logo-grad)"
-                    >
-                      Sanu
-                    </text>
+                   
                     <text
                       x="57"
                       y="24"
                       fontSize="22"
                       fontWeight="600"
+                      fontFamily="'Laren Modern', sans-serif"
                       letterSpacing="-0.5"
                       fill="url(#footer-logo-grad)"
                     >
-                      Khan
+                      sanukhan.dev
                     </text>
-                    <text
-                      x="116"
-                      y="24"
-                      fontSize="18"
-                      fontWeight="500"
-                      fill={isLight ? "#1f9f45" : "#38c755"}
-                      opacity={isLight ? 0.85 : 0.75}
-                    >
-                      .dev
-                    </text>
+                   
                   </>
                 )}
               </svg>
