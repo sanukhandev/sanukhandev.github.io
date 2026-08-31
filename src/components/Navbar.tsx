@@ -250,27 +250,6 @@ function Navbar() {
               />
             </a>
           ))}
-          <Link
-            to="/blog"
-            className={cn(
-              "relative text-[15px] transition-all duration-300 hover:scale-[1.02]",
-              isBlogPage
-                ? isLight
-                  ? "text-[#0f1015] font-semibold"
-                  : "text-[#f5f7fa] font-semibold"
-                : isLight
-                  ? "text-[#4d5a66] hover:text-[#0f1015]"
-                  : "text-[#c9ced6] hover:text-[#38c755]",
-            )}
-          >
-            WriteUps
-            <span
-              className={cn(
-                "absolute -bottom-1.5 left-0 h-[2px] bg-accent transition-all duration-300",
-                isBlogPage ? "w-full opacity-100" : "w-0 opacity-0",
-              )}
-            />
-          </Link>
         </nav>
 
         <div className="hidden md:flex items-center gap-1.5">
@@ -449,18 +428,6 @@ function Navbar() {
                   {l.label}
                 </a>
               ))}
-              <Link
-                to="/blog"
-                onClick={() => setOpen(false)}
-                className={cn(
-                  "rounded-md px-3 py-2 text-sm transition-all duration-300",
-                  isLight
-                    ? "text-[#4d5a66] hover:bg-[#e8f0ec] hover:text-[#0f1015]"
-                    : "text-[#c9ced6] hover:bg-[#1e2028] hover:text-[#38c755]",
-                )}
-              >
-                WriteUps
-              </Link>
               <Button
                 asChild
                 className={cn(

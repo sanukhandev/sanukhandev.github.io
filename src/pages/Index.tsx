@@ -6,7 +6,6 @@ import SeoMeta from "@/components/SeoMeta";
 import LocaleSwitchSkeleton from "@/components/LocaleSwitchSkeleton";
 import { useLocale } from "@/hooks/use-locale";
 import { cn } from "@/lib/utils";
-import { revealInView } from "@/lib/design-system";
 import { pageSeo } from "@/lib/seo";
 import { buildHomepageSchemas } from "@/lib/schema";
 import { trackEvent } from "@/utils/analytics";
@@ -20,59 +19,34 @@ const ArchitectureInPractice = lazy(
 const WhatIArchitect = lazy(
   () => import("@/components/sections/WhatIArchitect"),
 );
-const SystemsPhilosophy = lazy(
-  () => import("@/components/sections/SystemsPhilosophy"),
-);
 const ZaakiyHighlights = lazy(
   () => import("@/components/sections/ZaakiyHighlights"),
 );
 const EngineeringNotes = lazy(
   () => import("@/components/sections/EngineeringNotes"),
 );
-const ArchitectureProcess = lazy(
-  () => import("@/components/sections/ArchitectureProcess"),
-);
-const FromAmbiguityToProduction = lazy(
-  () => import("@/components/sections/FromAmbiguityToProduction"),
-);
-const EngineeringLeadership = lazy(
-  () => import("@/components/sections/EngineeringLeadership"),
-);
-const CareerSummary = lazy(
-  () => import("@/components/sections/CareerSummary"),
+const BeyondArchitecture = lazy(
+  () => import("@/components/sections/BeyondArchitecture"),
 );
 const Footer = lazy(() => import("@/components/sections/Footer"));
 const ZaakiyChatWidget = lazy(() => import("@/components/ZaakiyChatWidget"));
 
 const sectionFallback = (
-  <div className="container-narrow section-pad">
-    <div className="h-40 animate-pulse rounded-2xl bg-muted" />
+  <div className="container-narrow py-12">
+    <div className="h-32 animate-pulse rounded-2xl bg-muted" />
   </div>
 );
 
 type FlowModuleProps = {
   children: ReactNode;
-  index: number;
   tone?: "base" | "muted" | "anchor";
 };
 
-function FlowModule({ children, index, tone = "base" }: FlowModuleProps) {
-  const reducedMotion = useReducedMotion();
-
+function FlowModule({ children, tone = "base" }: FlowModuleProps) {
   return (
-    <motion.div
-      className={cn("system-module", `system-module--${tone}`)}
-      initial={reducedMotion ? false : revealInView.initial}
-      whileInView={reducedMotion ? undefined : revealInView.whileInView}
-      viewport={{ once: true, amount: 0.15 }}
-      transition={{
-        duration: reducedMotion ? 0 : 0.6,
-        delay: reducedMotion ? 0 : index * 0.04,
-      }}
-    >
-      <span className="system-connector" aria-hidden />
+    <div className={cn("system-module relative", `system-module--${tone}`)}>
       {children}
-    </motion.div>
+    </div>
   );
 }
 
@@ -113,12 +87,8 @@ const Index = () => {
       "work",
       "architecture",
       "capabilities",
-      "philosophy",
       "zaakiy",
       "writing",
-      "process",
-      "how-i-work",
-      "leadership",
       "about",
       "contact",
     ];
@@ -158,7 +128,7 @@ const Index = () => {
   }
 
   return (
-    <div className="system-shell relative bg-background text-foreground">
+    <div className="system-shell relative bg-background text-foreground min-h-screen">
       <div className="system-backdrop pointer-events-none fixed inset-0 -z-10" />
       {enableParticles ? (
         <Suspense fallback={null}>
@@ -180,69 +150,45 @@ const Index = () => {
           schema={buildHomepageSchemas()}
         />
         <Navbar />
-        <motion.main
-          className="section-flow pt-20 sm:pt-24"
-          initial={reducedMotion ? false : { opacity: 0 }}
-          animate={reducedMotion ? undefined : { opacity: 1 }}
-          transition={{ duration: 0.55, ease: "easeOut" }}
-        >
-          {/* 1. HERO */}
+        <main className="section-flow pt-16 sm:pt-20">
+          {/* 01. HERO */}
           <HeroSection04 />
 
           <Suspense fallback={sectionFallback}>
-            {/* 2. SELECTED PRODUCTION SYSTEMS */}
-            <FlowModule index={1} tone="base">
+            {/* 02. SELECTED PRODUCTION SYSTEMS */}
+            <FlowModule tone="base">
               <Works />
             </FlowModule>
 
-            {/* 3. ARCHITECTURE IN PRACTICE */}
-            <FlowModule index={2} tone="muted">
+            {/* 03. ARCHITECTURE IN PRACTICE */}
+            <FlowModule tone="muted">
               <ArchitectureInPractice />
             </FlowModule>
 
-            {/* 4. WHAT I ARCHITECT */}
-            <FlowModule index={3} tone="base">
+            {/* 04. WHAT I ARCHITECT */}
+            <FlowModule tone="base">
               <WhatIArchitect />
             </FlowModule>
 
-            {/* 5. SYSTEMS PHILOSOPHY */}
-            <FlowModule index={4} tone="muted">
-              <SystemsPhilosophy />
-            </FlowModule>
-
-            {/* 6. ZAAKIYV3RSE R&D */}
-            <FlowModule index={5} tone="anchor">
+            {/* 05. ZAAKIYV3RSE */}
+            <FlowModule tone="anchor">
               <ZaakiyHighlights />
             </FlowModule>
 
-            {/* 7. ENGINEERING NOTES */}
-            <FlowModule index={6} tone="muted">
+            {/* 06. ENGINEERING NOTES */}
+            <FlowModule tone="muted">
               <EngineeringNotes />
             </FlowModule>
 
-            {/* 8. HOW I THINK ABOUT ARCHITECTURE */}
-            <FlowModule index={7} tone="base">
-              <ArchitectureProcess />
-            </FlowModule>
-
-            {/* 9. FROM AMBIGUITY TO PRODUCTION */}
-            <FlowModule index={8} tone="muted">
-              <FromAmbiguityToProduction />
-            </FlowModule>
-
-            {/* 10. ENGINEERING LEADERSHIP */}
-            <FlowModule index={9} tone="base">
-              <EngineeringLeadership />
-            </FlowModule>
-
-            {/* 11. ABOUT & CAREER SUMMARY */}
-            <FlowModule index={10} tone="muted">
-              <CareerSummary />
+            {/* 07. ABOUT / ENGINEERING LEADERSHIP */}
+            <FlowModule tone="base">
+              <BeyondArchitecture />
             </FlowModule>
           </Suspense>
-        </motion.main>
+        </main>
+
         <Suspense fallback={null}>
-          {/* 12. FINAL CTA & FOOTER */}
+          {/* 08 & 09. FINAL CTA & FOOTER */}
           <Footer />
           <ZaakiyChatWidget extraContext="Page: Sanu Khan portfolio homepage.\nSanu Khan: Technical Architect & Engineering Lead based in Dubai, UAE with 13+ years experience.\nZaakiyV3RSE: An AI-native operations intelligence platform exploring agent orchestration, contextual reasoning, and adaptive workflows." />
         </Suspense>

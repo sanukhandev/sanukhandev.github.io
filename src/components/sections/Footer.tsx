@@ -41,7 +41,7 @@ export default function Footer() {
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-primary leading-tight">
               {isArabic
                 ? "هل تبني منصة معقدة ذات تحديات هندسية صعبة؟"
-                : "Building a platform with hard engineering problems?"}
+                : "Building a platform with complex engineering challenges?"}
             </h2>
             <p className="mt-3 text-sm sm:text-base leading-relaxed text-secondary font-normal">
               {isArabic

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useLocale } from "@/hooks/use-locale";
 import { ArrowRight, Bot, Cpu, Network, ShieldCheck, Zap, LineChart } from "lucide-react";
 
@@ -23,12 +24,12 @@ export default function ZaakiyHighlights() {
   ];
 
   return (
-    <section id="zaakiy" className="section-pad relative overflow-hidden scroll-mt-20">
+    <section id="zaakiy" className="py-12 md:py-16 lg:py-20 relative overflow-hidden scroll-mt-20">
       <div id="ops-intelligence" className="container-narrow">
         {/* Header & Positioning */}
         <div className="max-w-3xl">
-          <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-accent">
-            <span>PERSONAL R&amp;D PROJECT</span>
+          <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-3.5 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-accent">
+            <span>PERSONAL R&amp;D</span>
           </div>
 
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-primary">
@@ -46,10 +47,20 @@ export default function ZaakiyHighlights() {
               ? "منصة تجريبية تستكشف كيف يمكن للوكلاء والبيانات التشغيلية والسياق الهندسي العمل معاً لاكتشاف الأحداث التشغيلية وتحليلها والاستجابة لها."
               : "An experimental platform exploring how agents, operational data and engineering context can work together to detect, reason about and respond to operational events."}
           </p>
+
+          <div className="mt-4">
+            <Link
+              to="/projects"
+              className="inline-flex items-center gap-1.5 text-xs font-semibold text-accent hover:underline"
+            >
+              <span>Explore Zaakiy</span>
+              <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+          </div>
         </div>
 
         {/* CONCEPTUAL FLOW: Signals → Context → Reasoning → Decision → Action */}
-        <div className="mt-8 rounded-2xl border border-border bg-secondary/20 p-6 sm:p-8">
+        <div className="mt-8 rounded-2xl border border-border bg-secondary/20 p-6 sm:p-7 shadow-sm">
           <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-accent mb-4">
             CONCEPTUAL EXECUTION FLOW
           </p>
@@ -87,13 +98,13 @@ export default function ZaakiyHighlights() {
             {exploringItems.map((item) => (
               <div
                 key={item.title}
-                className="rounded-xl border border-border bg-background/60 p-5 transition-all duration-300 hover:border-accent/40"
+                className="rounded-xl border border-border bg-background/60 p-5 transition-all duration-300 hover:border-accent/40 shadow-sm"
               >
                 <h4 className="text-sm font-bold text-primary mb-1.5 flex items-center gap-2">
                   <LineChart className="h-3.5 w-3.5 text-accent" />
                   {item.title}
                 </h4>
-                <p className="text-xs text-secondary leading-relaxed">
+                <p className="text-xs text-secondary leading-relaxed font-normal">
                   {item.desc}
                 </p>
               </div>

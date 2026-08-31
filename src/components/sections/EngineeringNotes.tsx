@@ -56,26 +56,26 @@ export default function EngineeringNotes() {
       : fallbackNotes;
 
   return (
-    <section id="writing" className="section-pad scroll-mt-20">
+    <section id="writing" className="py-12 md:py-16 lg:py-20 scroll-mt-20">
       <div id="articles" className="container-narrow">
         <SectionHeading
           eyebrow={isArabic ? "المقالات الهندسية" : "TECHNICAL WRITING"}
           title={isArabic ? "ملاحظات هندسية" : "Engineering Notes"}
           subtitle={
             isArabic
-              ? "رؤى معمارية، دروس من الإنتاج، وملاحظات حول بناء المنصات القابلة للتوسع."
-              : "Architectural insights, platform notes, and lessons learned from production systems."
+              ? "ملاحظات عملية حول الهندسة المعمارية والتوسع والبيانات وهندسة الذكاء الاصطناعي."
+              : "Practical notes on architecture, scaling, data and AI engineering."
           }
           align="left"
         />
 
         {/* 3 Featured Article Cards Routing Internally to /blog/:slug */}
-        <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
+        <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-3">
           {displayNotes.map((note) => (
             <Link
               key={note.title}
               to={note.localPath}
-              className="group flex flex-col justify-between rounded-2xl border border-border bg-secondary/20 p-6 transition-all duration-300 hover:border-accent/50 hover:bg-secondary/50 shadow-sm"
+              className="group flex flex-col justify-between rounded-2xl border border-border bg-secondary/20 p-6 transition-all duration-300 hover:border-accent/50 hover:bg-secondary/40 shadow-sm"
             >
               <div>
                 <div className="flex items-center justify-between gap-2 mb-3">
@@ -88,11 +88,11 @@ export default function EngineeringNotes() {
                   </span>
                 </div>
 
-                <h3 className="text-lg font-bold tracking-tight text-primary group-hover:text-accent transition-colors line-clamp-2">
+                <h3 className="text-base sm:text-lg font-bold tracking-tight text-primary group-hover:text-accent transition-colors line-clamp-2">
                   {note.title}
                 </h3>
 
-                <p className="mt-2 text-xs sm:text-sm leading-relaxed text-secondary line-clamp-3">
+                <p className="mt-2 text-xs sm:text-sm leading-relaxed text-secondary line-clamp-3 font-normal">
                   {note.description}
                 </p>
               </div>
@@ -113,8 +113,7 @@ export default function EngineeringNotes() {
             to="/blog"
             className="inline-flex items-center gap-2 text-sm font-semibold text-accent hover:underline"
           >
-            <span>View all engineering notes</span>
-            <ArrowRight className="h-4 w-4" />
+            <span>View all engineering notes →</span>
           </Link>
         </div>
       </div>
