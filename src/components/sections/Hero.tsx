@@ -474,7 +474,7 @@ function Hero() {
                 src={profile.avatarUrl}
                 alt={`${profile.name} portrait`}
                 className="relative z-10 w-full object-contain"
-                fetchPriority="high"
+                fetchpriority="high"
                 decoding="async"
                 width={640}
                 height={640}

@@ -450,7 +450,7 @@ export default function DevToBlogPage() {
                 height={630}
                 loading="eager"
                 decoding="async"
-                fetchPriority="high"
+                fetchpriority="high"
                 className="mt-6 w-full rounded-2xl border border-[var(--border)] object-cover"
               />
             )}

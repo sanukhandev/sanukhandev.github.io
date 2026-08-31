@@ -16,9 +16,9 @@ export const profile = {
   subRole:
     "Tech Lead • Cloud & MS Architect • Enterprise Integrations Specialist",
   subtitle:
-    "Designing scalable distributed systems, enterprise integrations, and high-performance platforms across global markets.",
+    "Cloud Architect & Tech Lead · Azure · Event-Driven Architecture",
   statement:
-    "Leading architecture and platform engineering for event-driven commerce, enterprise integration, and multi-region cloud delivery. Creator of ZaakiyV3RSE.",
+    "100+ Solutions Built · Creator of ZaakiyV3RSE · 13+ Years Experience",
   meta: [
     "13+ years building distributed systems",
     "Event-driven architecture specialist",

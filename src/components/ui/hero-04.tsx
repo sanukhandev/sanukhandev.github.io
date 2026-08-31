@@ -96,7 +96,7 @@ export function HeroSection04() {
                   height={520}
                   sizes="(max-width: 768px) 70vw, 420px"
                   loading="eager"
-                  fetchPriority="high"
+                  fetchpriority="high"
                   className="h-auto w-full scale-[0.92] object-contain"
                 />
               </picture>
