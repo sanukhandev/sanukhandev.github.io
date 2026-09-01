@@ -216,11 +216,11 @@ export default function ZaakiyChatWidget({
                 <h3 className="text-sm font-bold text-primary flex items-center gap-1.5">
                   <span>Zaakiy AI</span>
                   <span className="rounded-full bg-accent/15 px-2 py-0.5 text-[10px] font-mono text-accent font-semibold">
-                    Assistant
+                    {isArabic ? "مساعد" : "Assistant"}
                   </span>
                 </h3>
                 <p className="text-[10px] text-muted-foreground">
-                  Sanu Khan's Personal AI Representative
+                  {isArabic ? "المساعد الشخصي بالذكاء الاصطناعي لسانو خان" : "Sanu Khan's Personal AI Representative"}
                 </p>
               </div>
             </div>
@@ -249,8 +249,8 @@ export default function ZaakiyChatWidget({
                 className={cn(
                   "max-w-[88%] rounded-2xl px-3.5 py-2.5 text-[13px] leading-relaxed shadow-sm",
                   m.role === "assistant"
-                    ? "border border-border bg-secondary/40 text-primary rounded-tl-sm"
-                    : "ml-auto bg-accent text-white font-medium rounded-tr-sm",
+                    ? "border border-border bg-secondary/40 text-primary rounded-tl-sm rtl:rounded-tr-sm rtl:rounded-tl-2xl"
+                    : "ml-auto rtl:mr-auto rtl:ml-0 bg-accent text-white font-medium rounded-tr-sm rtl:rounded-tl-sm rtl:rounded-tr-2xl",
                 )}
               >
                 {m.text}

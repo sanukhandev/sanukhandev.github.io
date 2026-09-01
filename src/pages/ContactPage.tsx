@@ -4,13 +4,19 @@ import SeoMeta from "@/components/SeoMeta";
 import { pageSeo } from "@/lib/seo";
 import { buildBreadcrumbListSchema, buildContactPageSchema } from "@/lib/schema";
 
+import { useLocale } from "@/hooks/use-locale";
+import { getLocalizedPageSeo } from "@/lib/seo";
+
 export default function ContactPage() {
+  const { locale } = useLocale();
+  const seo = getLocalizedPageSeo("contact", locale);
+
   return (
     <>
       <SeoMeta
-        title={pageSeo.contact.title}
-        description={pageSeo.contact.description}
-        canonicalPath={pageSeo.contact.canonicalPath}
+        title={seo.title}
+        description={seo.description}
+        canonicalPath={seo.canonicalPath}
         keywords={[
           "contact sanu khan",
           "architecture consulting contact",

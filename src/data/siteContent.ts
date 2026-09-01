@@ -98,7 +98,7 @@ const arArticlesByIndex: Array<{ title: string; excerpt: string }> = [
   },
   {
     title:
-      "فك لغز P vs NP: لماذا يؤثر على مستقبل الذكاء الاصطناعي والحوسبة الكمية",
+      "فك لغز P vs NP: لماذا تؤثر على مستقبل الذكاء الاصطناعي والحوسبة الكمية",
     excerpt:
       "استكشاف دور مسألة P vs NP في قلب أبحاث الذكاء الاصطناعي وكيف قد تفتح الحوسبة الكمية مسارات جديدة للحل.",
   },
@@ -124,21 +124,22 @@ const arContent = {
     ...baseNav,
     brand: "سانوخان.ديف",
     links: [
-      { label: "الأعمال", href: "#works" },
-      { label: "الخبرات", href: "#experience" },
-      { label: "المهارات", href: "#stack" },
-      { label: "تواصل", href: "#contact" },
+      { label: "الأعمال", href: "#work" },
+      { label: "المعمارية", href: "#architecture" },
+      { label: "Zaakiy", href: "#zaakiy" },
+      { label: "المقالات", href: "#writing" },
+      { label: "نبذة عني", href: "#about" },
     ],
-    cta: { ...baseNav.cta, label: "تواصل" },
+    cta: { ...baseNav.cta, label: "لنتحدث" },
   },
   profile: {
     ...baseProfile,
     name: "سانو خان",
-    role: "مؤسس ZaakiyV3RSE",
+    role: "معماري تقني · قائد هندسي",
     roleBrand: "ZaakiyV3RSE",
-    subRole: "قائد تقني • معماري سحابي ومعماري MS • متخصص في تكاملات المؤسسات",
+    subRole: "معماري تقني · قائد هندسي · متخصص في تكاملات المؤسسات",
     subtitle:
-      "مهندس سحابي وقائد تقني · Azure · معمارية قائمة على الأحداث",
+      "معماري سحابي وقائد تقني · Azure · معمارية قائمة على الأحداث",
     statement:
       "أكثر من 100 حل تقني · مؤسس ZaakiyV3RSE · خبرة +13 سنة",
     meta: [
@@ -154,7 +155,7 @@ const arContent = {
       { value: "800K+", label: "أنظمة على نطاق منتج" },
     ],
     ctas: [
-      { ...baseProfile.ctas[0], label: "دعني أتحدث" },
+      { label: "لنتحدث", href: "#contact", variant: "hire" as const },
       {
         label: "تحميل السيرة الذاتية",
         href: "/Sanu Khan - Resume.pdf",
@@ -169,7 +170,7 @@ const arContent = {
   },
   skills: {
     ...baseSkills,
-    eyebrow: "المهارات",
+    eyebrow: "مجالات الهندسة",
     title: "مجموعات الخبرة الهندسية",
     intro:
       "تنفيذ تقني بمنهجية العمارة أولاً عبر السحابة والتكاملات وهندسة المنصات بمعايير إنتاجية عالية.",
@@ -284,74 +285,272 @@ const arContent = {
       s.label === "Buy me a coffee" ? { ...s, label: "ادعمني بقهوة" } : s,
     ),
     quickLinks: [
-      { label: "الأعمال", href: "#works" },
-      { label: "الخبرات", href: "#experience" },
-      { label: "المهارات", href: "#stack" },
-      { label: "تواصل", href: "#contact" },
+      { label: "الأعمال", href: "#work" },
+      { label: "المعمارية", href: "#architecture" },
+      { label: "Zaakiy", href: "#zaakiy" },
+      { label: "المقالات", href: "#writing" },
+      { label: "نبذة عني", href: "#about" },
     ],
     contact: {
       ...baseFooter.contact,
       location: "دبي، الإمارات",
-      cta: { ...baseFooter.contact.cta, label: "تواصل" },
+      cta: { label: "لنتحدث", href: "#contact" },
     },
     copyright: `© ${new Date().getFullYear()} سانو خان. جميع الحقوق محفوظة.`,
   },
   ui: {
     localeSwitch: { en: "English", ar: "العربية" },
+    coffeeCta: "ادعمني بقهوة",
     hero: {
       coffeeCta: "ادعمني بقهوة",
-      leadershipBadge: "+13 سنة من القيادة الهندسية",
-      creatorLabel: "مؤسس",
-      title: "مهندس",
-      metaLine: "منذ 2011 | 13+ سنوات | دبي، الإمارات | مفتوح المصدر | مهندس",
-      impactLine: "هندسة · تكامل · تأثير",
-      recentExperienceLabel: "أحدث الخبرات",
-      architectureWithoutLimits: "عمارة بلا حدود",
-      innovationLines: ["نبني", "ابتكارات", "منذ 2011"],
-      floatingBadges: [
-        "معمارية الخدمات المصغرة",
-        "تسليم إقليمي وعالمي",
-        "+13 سنة خبرة",
-        "الهندسة منذ 2011",
-        "+100 حل مُسلَّم",
+      eyebrow: "معماري تقني · قائد هندسي",
+      title: "معماري",
+      headline: "أصمم وأبني منصات قابلة للتوسع.",
+      supporting:
+        "أصمم وأطور منصات إنتاجية في التجارة الرقمية وتقنيات السفر والأنظمة المؤسسية والذكاء الاصطناعي، بدءًا من المعمارية وواجهات API وحتى النشر والتشغيل.",
+      credibilityLine: [
+        "+13 سنة خبرة هندسية",
+        "أنظمة إنتاجية",
+        "المعمارية ← التسليم",
       ],
+      exploreWork: "استعرض أعمالي",
+      viewArchitecture: "استعرض المعمارية",
+      quote:
+        "“تجاوز الحدود في الهندسة المعمارية — بناء منصات فائقة التوسع وتحويل التعقيدات إلى واقع تقني ملموس.”",
     },
     works: {
-      eyebrow: "الأعمال",
-      title: "دراسات حالة",
-      subtitle: "تنفيذ يعتمد على الأثر عبر التجارة الموزعة وتكاملات المؤسسات.",
-      categoryLabels: {
-        All: "الكل",
-        Commerce: "التجارة",
-        Integration: "التكامل",
-        Platform: "المنصة",
-        "Operations Intelligence": "استخبارات العمليات",
-        "Automation": "الأتمتة",
-        "AI": "الذكاء الاصطناعي",
-        "Operations": "العمليات",
-        "Infrastructure": "البنية التحتية",
+      eyebrow: "منصات إنتاجية مختارة",
+      title: "منصات إنتاجية مختارة",
+      subtitle:
+        "منصات ساهمت في تصميمها وبنائها وتسليمها عبر التجارة الرقمية والسيارات وتقنيات السفر والأنظمة المؤسسية.",
+      myContributionLabel: "مساهمتي",
+      viewProject: "عرض المشروع",
+      systemsData: [
+        {
+          id: "regional-commerce-platform",
+          industry: "التجارة الرقمية · متعددة المناطق",
+          title: "منصة تجارة إقليمية للمؤسسات",
+          description:
+            "منصة تجارة إقليمية متعددة الأسواق تُزامن كتالوج المنتجات، الأسعار، والمخزون عبر الأسواق الإقليمية.",
+          contributions: ["هندسة المنصات", "التكامل المؤسسي", "التسليم للإنتاج"],
+          evidence: "9 أسواق إقليمية",
+          projectUrl: "/projects",
+        },
+        {
+          id: "omnichannel-commerce-fabric",
+          industry: "السيارات والتجارة المؤسسية",
+          title: "بنية تجارة موحدة متعددة القنوات",
+          description:
+            "شبكة تكامل معتمدة على الأحداث تربط أنظمة ERP وPIM وواجهات المتاجر مع التحقق لحظياً من عقود البيانات.",
+          contributions: ["معمارية الحلول", "تدفق الأحداث", "حوكمة واجهات API"],
+          evidence: "منصة إنتاجية مؤسسية",
+          projectUrl: "/projects",
+        },
+        {
+          id: "airline-b2b-marketplace",
+          industry: "تقنيات السفر · تجميع خدمات الطيران",
+          title: "منصة تجميع NDC وسوق الطيران B2B",
+          description:
+            "منصة تجميع NDC عالية التوافر تعالج محتوى الطيران متعدد الموردين، التسعير، وسير عمل حجز B2B.",
+          contributions: ["هندسة المنصات", "تكامل NDC", "سير عمل B2B"],
+          evidence: "تجميع متعدد الموردين",
+          projectUrl: "/projects",
+        },
+        {
+          id: "airport-commerce-platform",
+          industry: "تجارة المطارات · تجارة التجزئة للسفر",
+          title: "منصة تجارة المطارات والتجزئة",
+          description:
+            "نظام تجارة مطارات متعدد المحطات لإدارة المخزون لحظياً، معالجة الطلبات، وتكاملات الدفع.",
+          contributions: ["معمارية النطاق", "نواة التجارة", "واجهات API مرنة"],
+          evidence: "عمليات متعددة المحطات",
+          projectUrl: "/projects",
+        },
+      ],
+    },
+    architecture: {
+      eyebrow: "دراسة حالة معمارية",
+      title: "الهندسة المعمارية في التطبيق",
+      subtitle:
+        "كيف أحول متطلبات الأعمال إلى هندسة معمارية قابلة للتنفيذ والتشغيل في بيئات الإنتاج.",
+      challengeLabel: "التحدي",
+      challengeText:
+        "بناء منصة تجارة مطارات معيارية تتيح تجارب منتجات مستقلة مع الحفاظ على أساس تجاري مشترك للمنتجات، الحجز، الدفع، وسير العمل التشغيلي.",
+      topologyLabel: "مخطط المعمارية الهندسية",
+      topologyEcosystem: "منظومة تجارة المطارات",
+      diagram: {
+        tier1Label: "الطبقة 1",
+        tier1Text: "العميل ونقاط البيع POS",
+        tier2Label: "الطبقة 2",
+        tier2Text: "تجربة الويب والهاتف المحمول",
+        interfaceLabel: "طبقة الواجهات",
+        interfaceText: "بوابة واجهات التجارة API Gateway",
+        domainALabel: "النطاق أ",
+        domainAText: "النقل والتنقل / المواقف",
+        domainBLabel: "النطاق ب",
+        domainBText: "المنتجات / التجزئة",
+        domainCLabel: "النطاق ج",
+        domainCText: "الحجز / الصالات",
+        coreLabel: "السلطة المركزية",
+        coreText: "مُحرّك نواة التجارة Commerce Core",
+        integrationsLabel: "التكاملات",
+        integrationsText: "بوابات الدفع · OMS · تدفق الأحداث",
       },
-      problem: "المشكلة",
-      solution: "الحل",
-      outcome: "النتيجة",
+      keyDecisionsLabel: "القرارات المعمارية الرئيسية",
+      keyDecisions: [
+        {
+          title: "واجهة أمامية قائمة على APIs",
+          desc: "فصل واجهات الويب والهاتف والمحطات عن منطق أعمال الخلفية.",
+        },
+        {
+          title: "حدود النطاقات Domain Boundaries",
+          desc: "فصل كتالوج المنتجات، المخزون، وإتمام الشراء إلى حدود خدمات مستقلة.",
+        },
+        {
+          title: "مرجعية التجارة المركزية",
+          desc: "تأسيس مصدر واحد للحقيقة لقواعد التسعير، منطق العروض، وحالة الطلب.",
+        },
+        {
+          title: "مسارات عمل مستقلة",
+          desc: "طوابير انتظار غير متزامنة لمعالجة بوابات الدفع، التحقق الجمركي، وإتمام الطلبات.",
+        },
+        {
+          title: "فصل البيئات و CI/CD",
+          desc: "أتمتة مسارات النشر مع القياس البعادي المركزي، التسجيل المنظم، والتتبع الموزع.",
+        },
+      ],
+      whyArchitectureLabel: "لماذا هذه المعمارية؟",
+      whyArchitectureText:
+        "مكّنت المعمارية المنفصلة من إجراء عمليات النشر بدون توقف، والتوسع المستقل لمعالجة الدفع كثيفة التزامن، وتبسيط الملكية التشغيلية عبر الفرق الهندسية.",
     },
-    experience: {
-      title: "الخبرات",
-      subtitle: "مهندس ← باني أنظمة ← معماري ← قائد تقني",
-      stats: ["13+ سنة", "6 أدوار", "3 دول", "متاح حالياً"],
-      current: "حالي",
+    whatIArchitect: {
+      eyebrow: "مجالات الهندسة",
+      title: "مجالات الهندسة المعمارية التي أعمل عليها",
+      subtitle:
+        "هندسة معمارية تركز على الأنظمة الحيوية للأعمال، وليس التقنية لمجرد التقنية.",
+      domainsData: [
+        {
+          id: "platform-architecture",
+          title: "هندسة المنصات",
+          description:
+            "الأنظمة الموزعة، واجهات API، حدود النطاقات، سير العمل القائم على الأحداث، ومعمارية التكامل.",
+          tags: ["الأنظمة الموزعة", "المعتمدة على الأحداث", "تصميم API"],
+        },
+        {
+          id: "commerce-transaction",
+          title: "أنظمة التجارة والمعاملات",
+          description:
+            "سير عمل المنتجات، الحجز، إتمام الشراء، الدفع، وإدارة الطلبات.",
+          tags: ["إدارة الطلبات", "تكامل الدفع", "مزامنة الكتالوج"],
+        },
+        {
+          id: "enterprise-integration",
+          title: "تكامل الأنظمة المؤسسية",
+          description:
+            "تحديث الأنظمة القديمة، تكاملات B2B، المنصات الداخلية، وأتمتة العمليات.",
+          tags: ["تكامل SAP", "الحوسبة بدون خوادم", "التحقق من العقود"],
+        },
+        {
+          id: "ai-enabled-engineering",
+          title: "الهندسة المدعومة بالذكاء الاصطناعي",
+          description:
+            "سير عمل قائم على الوكلاء الذكيين، أنظمة استرجاع السياق، الذكاء الهندسي، والعمليات المدعومة بالذكاء الاصطناعي.",
+          tags: ["سير عمل الوكلاء", "استرجاع السياق", "أتمتة الذكاء الاصطناعي"],
+        },
+      ],
     },
-    articles: {
-      eyebrow: "رؤى",
-      title: "رؤى تقنية",
-      subtitle: "ملاحظات مختارة في العمارة التقنية.",
-      read: "اقرأ المقال",
+    zaakiy: {
+      eyebrow: "بحث وتطوير شخصي",
+      title: "ZaakiyV3RSE",
+      subtitle: "منصة ذكاء تشغيلي مبنية حول الذكاء الاصطناعي.",
+      supporting:
+        "منصة تجريبية تستكشف كيف يمكن للوكلاء والبيانات التشغيلية والسياق الهندسي العمل معاً لاكتشاف الأحداث التشغيلية وتحليلها والاستجابة لها.",
+      exploreLink: "استكشف Zaakiy",
+      flowEyebrow: "تدفق التنفيذ المفهومي",
+      flowNodes: [
+        { label: "الإشارات", desc: "القياس البعادي والأحداث" },
+        { label: "السياق", desc: "رسم بياني للنظام" },
+        { label: "الاستدلال", desc: "تقييم الوكلاء" },
+        { label: "القرار", desc: "ضوابط السياسات" },
+        { label: "التنفيذ", desc: "سير عمل مؤتمت" },
+      ],
+      exploringEyebrow: "ما أستكشفه تقنيًا",
+      exploringItems: [
+        {
+          title: "تنسيق الوكلاء Agent Orchestration",
+          desc: "توزيع المهام بين عدة وكلاء ومزامنة الحالة.",
+        },
+        {
+          title: "الذكاء التشغيلي Operational Intelligence",
+          desc: "تحليل البيانات لحظياً واكتشاف الشذوذ.",
+        },
+        {
+          title: "استرجاع السياق Context Retrieval",
+          desc: "تضمين سياق الكود، مخططات النظام، والسجل للاستدلال.",
+        },
+        {
+          title: "الاستدلال المؤتمت Automated Reasoning",
+          desc: "حل المشكلات التشغيلية بناءً على القواعد ونماذج الذكاء الاصطناعي.",
+        },
+        {
+          title: "الإنسان ضمن دورة القرار Human-in-the-Loop",
+          desc: "بوابات موافقة خاضعة للرقابة للتغييرات عالية التأثير.",
+        },
+        {
+          title: "سير العمل التكيفي Adaptive Workflows",
+          desc: "رسوم بيانية للتنفيذ الديناميكي تتكيف مع أعطال التشغيل.",
+        },
+      ],
     },
-    certifications: {
-      title: "الشهادات",
-      subtitle: "توثيق مختصر للتطوير المهني المستمر.",
-      issued: "تاريخ الإصدار",
-      view: "عرض الشهادة",
+    engineeringNotes: {
+      eyebrow: "ملاحظات هندسية",
+      title: "ملاحظات هندسية",
+      subtitle:
+        "ملاحظات عملية حول الهندسة المعمارية والتوسع والبيانات والذكاء الاصطناعي.",
+      readArticle: "قراءة المقال",
+      viewAll: "عرض جميع الملاحظات الهندسية ←",
+      readTimeSuffix: "مدة القراءة",
+    },
+    beyondArchitecture: {
+      eyebrow: "ما بعد مخطط المعمارية",
+      title: "ما بعد مخطط الهندسة المعمارية",
+      subtitle:
+        "أبقى مشاركًا من مرحلة المتطلبات والتصميم المعماري وحتى التنفيذ والاختبار والنشر والتحقق في بيئة الإنتاج.",
+      executionFlowEyebrow: "سير العمل المتكامل",
+      processFlow: [
+        { number: "01", title: "الفهم", desc: "أهداف الأعمال والقيود" },
+        { number: "02", title: "النمذجة", desc: "النطاقات وحدود النظام" },
+        { number: "03", title: "التصميم", desc: "عقود API والمرونة" },
+        { number: "04", title: "البناء", desc: "التنفيذ البرمجي والتسليم" },
+        { number: "05", title: "التشغيل", desc: "القابلية للملاحظة والقياس" },
+        { number: "06", title: "التعلم", desc: "حلقات التغذية الراجعة من الإنتاج" },
+      ],
+      leadershipEyebrow: "قدرات القيادة الهندسية",
+      leadershipItems: [
+        {
+          title: "التوجيه المعماري",
+          desc: "تحويل متطلبات الأعمال إلى توجيه تقني قابل للتنفيذ.",
+        },
+        {
+          title: "ضوابط الهندسة",
+          desc: "وضع الحدود والعقود والمعايير وممارسات التسليم.",
+        },
+        {
+          title: "تمكين الفريق",
+          desc: "جعل القرارات المعمارية مفهومة وقابلة للتطبيق للفرق الهندسية.",
+        },
+        {
+          title: "ملكية التسليم",
+          desc: "البقاء قريباً من التنفيذ والاختبار والنشر ونتائج بيئة الإنتاج.",
+        },
+      ],
+      experienceEyebrow: "+13 سنة من مسيرة العمل والخبرات",
+    },
+    footer: {
+      ctaHeading: "هل تعمل على منصة تواجه تحديات هندسية معقدة؟",
+      ctaSubtitle:
+        "أهتم بفرص الهندسة المعمارية وهندسة المنصات والقيادة التقنية التي تتطلب تحويل الأنظمة المعقدة إلى حلول أبسط وأكثر قابلية للتوسع والتشغيل.",
+      ctaButton: "لنتحدث",
     },
     zaakiychat: {
       greeting: (koFiLink: string) =>
@@ -382,60 +581,270 @@ const enContent = {
     coffeeCta: "Buy me a coffee",
     hero: {
       coffeeCta: "Buy me a coffee",
-      leadershipBadge: "13+ Years of Engineering Leadership",
-      creatorLabel: "Creator of",
+      eyebrow: "TECHNICAL ARCHITECT · ENGINEERING LEAD",
       title: "ARCHITECT",
-      metaLine:
-        "SINCE 2011 | 13+ YEARS | DUBAI, UAE | OPEN SOURCE | ARCHITECT | TECH LEAD | CONSULTANT | DEVELOPER | TECH ENTREPRENEUR | WRITER",
-      impactLine: "ARCHITECTURE · INTEGRATION · IMPACT",
-      recentExperienceLabel: "RECENT EXPERIENCE",
-      architectureWithoutLimits: "Architecture without Limits",
-      innovationLines: ["Building", "Innovations", "since 2011"],
-      floatingBadges: [
-        "Microservices Architecture",
-        "Regional & Global Delivery",
-        "13+ Years Experience",
-        "Engineering Since 2011",
-        "100+ Solutions Delivered",
+      headline: "I architect and build platforms that scale.",
+      supporting:
+        "I design and deliver production platforms across commerce, travel technology, enterprise systems and AI — from architecture and APIs to deployment and operations.",
+      credibilityLine: [
+        "13+ Years Engineering",
+        "Production Systems",
+        "Architecture → Delivery",
       ],
+      exploreWork: "Explore My Work",
+      viewArchitecture: "View Architecture",
+      quote:
+        "“Breaking glass ceilings in architecture — engineering scalable platforms and turning complex challenges into production reality.”",
     },
     works: {
-      eyebrow: "Work",
-      title: "Case Studies",
+      eyebrow: "Selected Production Systems",
+      title: "Selected Production Systems",
       subtitle:
-        "Impact-led delivery across distributed commerce and enterprise integration landscapes.",
-      categoryLabels: {
-        All: "All",
-        Commerce: "Commerce",
-        Integration: "Integration",
-        Platform: "Platform",
-        "Operations Intelligence": "Operations Intelligence",
-        "Automation": "Automation",
-        "AI": "AI",
-        "Operations": "Operations",
-        "Infrastructure": "Infrastructure",
+        "Platforms I've helped architect, build and deliver across commerce, automotive, travel technology and enterprise operations.",
+      myContributionLabel: "MY CONTRIBUTION",
+      viewProject: "View project",
+      systemsData: [
+        {
+          id: "regional-commerce-platform",
+          industry: "COMMERCE · MULTI-REGION",
+          title: "Regional Enterprise Commerce Platform",
+          description:
+            "Multi-market regional commerce platform synchronizing product catalog, pricing, and inventory across regional markets.",
+          contributions: [
+            "Platform Engineering",
+            "Integration",
+            "Production Delivery",
+          ],
+          evidence: "9 regional markets",
+          projectUrl: "/projects",
+        },
+        {
+          id: "omnichannel-commerce-fabric",
+          industry: "AUTOMOTIVE & ENTERPRISE COMMERCE",
+          title: "Enterprise Omnichannel Commerce Fabric",
+          description:
+            "Event-driven integration fabric connecting ERP, PIM, and omnichannel storefronts with real-time payload validation.",
+          contributions: [
+            "Solution Architecture",
+            "Event Streaming",
+            "API Governance",
+          ],
+          evidence: "Production Enterprise Platform",
+          projectUrl: "/projects",
+        },
+        {
+          id: "airline-b2b-marketplace",
+          industry: "TRAVEL TECH · AIRLINE AGGREGATION",
+          title: "Airline NDC & Travel B2B Marketplace",
+          description:
+            "High-availability NDC aggregation platform handling multi-supplier airline content, pricing, and B2B booking workflows.",
+          contributions: [
+            "Platform Engineering",
+            "NDC Integration",
+            "B2B Workflows",
+          ],
+          evidence: "Multi-Supplier Aggregation",
+          projectUrl: "/projects",
+        },
+        {
+          id: "airport-commerce-platform",
+          industry: "AIRPORT COMMERCE · TRAVEL RETAIL",
+          title: "Airport Commerce & Travel Retail Platform",
+          description:
+            "Multi-terminal airport commerce system for real-time inventory management, order processing, and payment integrations.",
+          contributions: [
+            "Domain Architecture",
+            "Commerce Core",
+            "Resilient APIs",
+          ],
+          evidence: "Multi-Terminal Operations",
+          projectUrl: "/projects",
+        },
+      ],
+    },
+    architecture: {
+      eyebrow: "Architecture in Practice",
+      title: "Architecture in Practice",
+      subtitle:
+        "How I turn business requirements into production architecture.",
+      challengeLabel: "THE CHALLENGE",
+      challengeText:
+        "Build a modular airport commerce platform capable of supporting independent product experiences while retaining a shared commerce foundation for products, booking, checkout and operational workflows.",
+      topologyLabel: "SYSTEM ARCHITECTURE TOPOLOGY",
+      topologyEcosystem: "Airport Commerce Ecosystem",
+      diagram: {
+        tier1Label: "Tier 1",
+        tier1Text: "Customer & POS",
+        tier2Label: "Tier 2",
+        tier2Text: "Web & Mobile Experience",
+        interfaceLabel: "Interface Layer",
+        interfaceText: "Commerce APIs Gateway",
+        domainALabel: "Domain A",
+        domainAText: "Shuttle / Parking",
+        domainBLabel: "Domain B",
+        domainBText: "Products / Retail",
+        domainCLabel: "Domain C",
+        domainCText: "Booking / Lounge",
+        coreLabel: "Core Authority",
+        coreText: "Commerce Core Engine",
+        integrationsLabel: "Integrations",
+        integrationsText: "Payment Gateways · OMS · Event Streaming",
       },
-      problem: "Problem",
-      solution: "Solution",
-      outcome: "Outcome",
+      keyDecisionsLabel: "KEY ARCHITECTURAL DECISIONS",
+      keyDecisions: [
+        {
+          title: "API-First Frontend",
+          desc: "Decoupled web, mobile, and terminal interfaces from backend business logic.",
+        },
+        {
+          title: "Domain Boundaries",
+          desc: "Separated product catalog, inventory, and checkout into autonomous service boundaries.",
+        },
+        {
+          title: "Commerce Authority",
+          desc: "Established single source of truth for pricing rules, promotion logic, and order status.",
+        },
+        {
+          title: "Independent Workflows",
+          desc: "Asynchronous queuing for payment gateway processing, duty-free validation, and fulfillment.",
+        },
+        {
+          title: "CI/CD & Environment Separation",
+          desc: "Automated deployment pipelines with centralized telemetry, structured logging, and distributed tracing.",
+        },
+      ],
+      whyArchitectureLabel: "WHY THIS ARCHITECTURE?",
+      whyArchitectureText:
+        "The decoupled architecture enabled zero-downtime deployments, independent scaling for high-concurrency payment processing, and streamlined operational ownership across engineering teams.",
     },
-    experience: {
-      title: "Experience",
-      subtitle: "Engineer → System Builder → Architect → Tech Lead",
-      stats: ["13+ Years", "6 Roles", "3 Countries", "Currently Available"],
-      current: "Current",
+    whatIArchitect: {
+      eyebrow: "CORE DOMAINS",
+      title: "What I Architect",
+      subtitle:
+        "Architecture focused on business-critical systems, not technology for technology's sake.",
+      domainsData: [
+        {
+          id: "platform-architecture",
+          title: "PLATFORM ARCHITECTURE",
+          description:
+            "Distributed systems, APIs, domain boundaries, event-driven workflows and integration architecture.",
+          tags: ["Distributed Systems", "Event-Driven", "API Design"],
+        },
+        {
+          id: "commerce-transaction",
+          title: "COMMERCE & TRANSACTION SYSTEMS",
+          description:
+            "Product, booking, checkout, payment and order-management workflows.",
+          tags: ["Order Management", "Payment Integration", "Catalog Sync"],
+        },
+        {
+          id: "enterprise-integration",
+          title: "ENTERPRISE INTEGRATION",
+          description:
+            "Legacy modernization, B2B integrations, internal platforms and operational automation.",
+          tags: ["SAP Integration", "Serverless", "Contract Validation"],
+        },
+        {
+          id: "ai-enabled-engineering",
+          title: "AI-ENABLED ENGINEERING",
+          description:
+            "Agentic workflows, retrieval systems, engineering intelligence and AI-assisted operations.",
+          tags: ["Agentic Workflows", "Context Retrieval", "AI Automation"],
+        },
+      ],
     },
-    articles: {
-      eyebrow: "Insights",
-      title: "Insights",
-      subtitle: "Selected architecture notes.",
-      read: "Read Article",
+    zaakiy: {
+      eyebrow: "PERSONAL R&D",
+      title: "ZaakiyV3RSE",
+      subtitle: "An AI-native operations intelligence platform.",
+      supporting:
+        "An experimental platform exploring how agents, operational data and engineering context can work together to detect, reason about and respond to operational events.",
+      exploreLink: "Explore Zaakiy",
+      flowEyebrow: "CONCEPTUAL EXECUTION FLOW",
+      flowNodes: [
+        { label: "Signals", desc: "Telemetry & Events" },
+        { label: "Context", desc: "System Graph" },
+        { label: "Reasoning", desc: "Agent Evaluation" },
+        { label: "Decision", desc: "Policy Guardrails" },
+        { label: "Action", desc: "Automated Workflow" },
+      ],
+      exploringEyebrow: "WHAT I'M EXPLORING",
+      exploringItems: [
+        {
+          title: "Agent Orchestration",
+          desc: "Multi-agent task distribution and state synchronization.",
+        },
+        {
+          title: "Operational Intelligence",
+          desc: "Real-time telemetry analysis and anomaly detection.",
+        },
+        {
+          title: "Context Retrieval",
+          desc: "Embedding code context, system schemas, and history for reasoning.",
+        },
+        {
+          title: "Automated Reasoning",
+          desc: "Rule-based and LLM-driven operational problem resolution.",
+        },
+        {
+          title: "Human-in-the-Loop",
+          desc: "Controlled approval gates for high-impact system mutations.",
+        },
+        {
+          title: "Adaptive Workflows",
+          desc: "Dynamic execution graphs that adjust to runtime failure modes.",
+        },
+      ],
     },
-    certifications: {
-      title: "Certifications",
-      subtitle: "Compact verification of continuous upskilling.",
-      issued: "Issued",
-      view: "View Certificate",
+    engineeringNotes: {
+      eyebrow: "TECHNICAL WRITING",
+      title: "Engineering Notes",
+      subtitle:
+        "Practical notes on architecture, scaling, data and AI engineering.",
+      readArticle: "Read article",
+      viewAll: "View all engineering notes →",
+      readTimeSuffix: "min read",
+    },
+    beyondArchitecture: {
+      eyebrow: "ABOUT & LEADERSHIP",
+      title: "Beyond the Architecture Diagram",
+      subtitle:
+        "I stay involved from requirements and architecture through implementation, QA, deployment and production validation.",
+      executionFlowEyebrow: "END-TO-END EXECUTION FLOW",
+      processFlow: [
+        { number: "01", title: "Understand", desc: "Business goals & constraints" },
+        { number: "02", title: "Model", desc: "Domains & system boundaries" },
+        { number: "03", title: "Design", desc: "API contracts & resilience" },
+        { number: "04", title: "Build", desc: "Hands-on delivery & code" },
+        { number: "05", title: "Operate", desc: "Observability & telemetry" },
+        { number: "06", title: "Learn", desc: "Production feedback loops" },
+      ],
+      leadershipEyebrow: "ENGINEERING LEADERSHIP CAPABILITIES",
+      leadershipItems: [
+        {
+          title: "ARCHITECTURE DIRECTION",
+          desc: "Translate business requirements into implementable technical direction.",
+        },
+        {
+          title: "ENGINEERING GUARDRAILS",
+          desc: "Establish boundaries, contracts, standards and delivery practices.",
+        },
+        {
+          title: "TEAM ENABLEMENT",
+          desc: "Make architectural decisions understandable and actionable for engineering teams.",
+        },
+        {
+          title: "DELIVERY OWNERSHIP",
+          desc: "Stay close to implementation, QA, deployment and production outcomes.",
+        },
+      ],
+      experienceEyebrow: "13+ YEARS CAREER & WORK EXPERIENCE",
+    },
+    footer: {
+      ctaHeading: "Building a platform with complex engineering challenges?",
+      ctaSubtitle:
+        "I'm interested in architecture, platform engineering and technical leadership opportunities where complex systems need to become simpler, scalable and operable.",
+      ctaButton: "Let's Talk",
     },
     zaakiychat: {
       greeting: (koFiLink: string) =>

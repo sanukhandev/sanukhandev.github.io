@@ -54,9 +54,9 @@ export function HeroSection04() {
       >
         {/* Eyebrow & ARCHITECT display background */}
         <motion.div className="relative text-center" variants={reveal}>
-          <div className="mb-2 inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-3.5 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-accent sm:text-xs">
+          <div className="mb-2 inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-3.5 py-1 text-[11px] font-semibold uppercase text-accent sm:text-xs">
             <span className="h-1.5 w-1.5 rounded-full bg-accent animate-pulse" />
-            {isArabic ? "مهندس بنية تحتية وقائد تقني" : "TECHNICAL ARCHITECT · ENGINEERING LEAD"}
+            {ui.hero.eyebrow}
           </div>
 
           <h1 className="font-display relative z-10 text-[clamp(3.5rem,14vw,7.5rem)] font-extrabold leading-[0.95] tracking-[-0.045em] text-primary/15 select-none pointer-events-none md:text-9xl xl:text-[10rem]">
@@ -84,24 +84,25 @@ export function HeroSection04() {
               </div>
 
               {/* Main Headline & Positioning */}
-              <div className="text-center md:text-left max-w-xl">
+              <div className="text-center md:text-start max-w-xl">
                 <h2 className="text-3xl font-extrabold tracking-tight text-primary sm:text-4xl md:text-5xl leading-[1.1]">
-                  {isArabic ? "أصمم وأبني منصات إنتاجية قابلة للتوسع." : "I architect and build platforms that scale."}
+                  {ui.hero.headline}
                 </h2>
 
                 <p className="mt-4 text-sm sm:text-base leading-relaxed text-secondary font-normal">
-                  {isArabic
-                    ? "أصمم وأنفذ منصات إنتاجية عبر التجارة الإلكترونية، تكنولوجيا السفر، الأنظمة المؤسسية والذكاء الاصطناعي — من الهندسة المعمارية والـ APIs إلى النشر والعمليات."
-                    : "I design and deliver production platforms across commerce, travel technology, enterprise systems and AI — from architecture and APIs to deployment and operations."}
+                  {ui.hero.supporting}
                 </p>
 
                 {/* Compact Verified Credibility Line */}
-                <div className="mt-5 flex flex-wrap items-center justify-center md:justify-start gap-2 text-xs font-semibold text-accent/90 border-l-2 border-accent/40 pl-3 py-0.5">
-                  <span>13+ Years Engineering</span>
-                  <span className="opacity-40">•</span>
-                  <span>Production Systems</span>
-                  <span className="opacity-40">•</span>
-                  <span>Architecture → Delivery</span>
+                <div className="mt-5 flex flex-wrap items-center justify-center md:justify-start gap-2 text-xs font-semibold text-accent/90 border-l-2 rtl:border-r-2 rtl:border-l-0 pl-3 rtl:pr-3 rtl:pl-0 py-0.5">
+                  {ui.hero.credibilityLine.map((item, idx) => (
+                    <React.Fragment key={item}>
+                      <span>{item}</span>
+                      {idx < ui.hero.credibilityLine.length - 1 && (
+                        <span className="opacity-40">•</span>
+                      )}
+                    </React.Fragment>
+                  ))}
                 </div>
 
                 {/* Primary & Secondary Action CTAs */}
@@ -110,9 +111,7 @@ export function HeroSection04() {
                     className="h-11 rounded-xl bg-accent px-6 font-semibold text-white transition-all duration-300 hover:bg-accent/90 shadow-md shadow-accent/20"
                     asChild
                   >
-                    <a href="#work">
-                      {isArabic ? "استكشف أعمالي" : "Explore My Work"}
-                    </a>
+                    <a href="#work">{ui.hero.exploreWork}</a>
                   </Button>
 
                   <Button
@@ -120,20 +119,14 @@ export function HeroSection04() {
                     className="h-11 rounded-xl border-border bg-secondary/50 px-6 font-semibold text-primary transition-all duration-300 hover:border-accent/50 hover:bg-secondary"
                     asChild
                   >
-                    <a href="#architecture">
-                      {isArabic ? "عرض الهندسة المعمارية" : "View Architecture"}
-                    </a>
+                    <a href="#architecture">{ui.hero.viewArchitecture}</a>
                   </Button>
                 </div>
 
                 {/* Inspiring Leadership Quote */}
                 <div className="mt-5 flex items-center justify-center md:justify-start gap-2.5 text-[12px] font-mono tracking-wide text-secondary">
                   <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-accent animate-pulse" />
-                  <span className="italic">
-                    {isArabic
-                      ? "“تجاوز الحدود في الهندسة المعمارية — بناء منصات فائقة التوسع وتحويل التعقيدات إلى واقع تقني ملموس.”"
-                      : "“Breaking glass ceilings in architecture — engineering scalable platforms and turning complex challenges into production reality.”"}
-                  </span>
+                  <span className="italic">{ui.hero.quote}</span>
                 </div>
               </div>
             </div>

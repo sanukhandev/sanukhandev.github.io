@@ -24,7 +24,12 @@ const slugFromDevToUrl = (url: string) => {
 
 const PAGE_SIZE = 6;
 
+import { useLocale } from "@/hooks/use-locale";
+import { getLocalizedPageSeo } from "@/lib/seo";
+
 export default function BlogIndex() {
+  const { locale } = useLocale();
+  const seo = getLocalizedPageSeo("blog", locale);
   const { data } = useDevToArticles(30);
   const [query, setQuery] = useState("");
   const [selectedTag, setSelectedTag] = useState<string>("all");
@@ -102,9 +107,9 @@ export default function BlogIndex() {
   return (
     <>
       <SeoMeta
-        title={pageSeo.blogIndex.title}
-        description={pageSeo.blogIndex.description}
-        canonicalPath={pageSeo.blogIndex.canonicalPath}
+        title={seo.title}
+        description={seo.description}
+        canonicalPath={seo.canonicalPath}
         keywords={pageSeo.blogIndex.keywords}
         schema={buildBreadcrumbListSchema([
           { name: "Home", path: "/" },

@@ -28,7 +28,7 @@ const socialIcons: Record<string, ComponentType<{ className?: string }>> = {
 export default function Footer() {
   const { theme } = useTheme();
   const { locale } = useLocale();
-  const { footer } = useSiteContent();
+  const { footer, ui } = useSiteContent();
   const isLight = theme === "light";
   const isArabic = locale === "ar";
 
@@ -39,14 +39,10 @@ export default function Footer() {
         <div className="mb-14 rounded-2xl border border-accent/40 bg-secondary/30 p-8 sm:p-10 shadow-lg">
           <div className="max-w-2xl">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-primary leading-tight">
-              {isArabic
-                ? "هل تبني منصة معقدة ذات تحديات هندسية صعبة؟"
-                : "Building a platform with complex engineering challenges?"}
+              {ui.footer.ctaHeading}
             </h2>
             <p className="mt-3 text-sm sm:text-base leading-relaxed text-secondary font-normal">
-              {isArabic
-                ? "أنا مهتم بفرص الهندسة المعمارية، هندسة المنصات، والقيادة التقنية حيث تحتاج الأنظمة المعقدة إلى أن تصبح أسطح وأبسط وقابلة للتوسع والتشغيل."
-                : "I'm interested in architecture, platform engineering and technical leadership opportunities where complex systems need to become simpler, scalable and operable."}
+              {ui.footer.ctaSubtitle}
             </p>
 
             <div className="mt-6 flex flex-wrap items-center gap-3">
@@ -55,7 +51,7 @@ export default function Footer() {
                 onClick={() => trackEvent("contact_click", { cta_type: "final_cta_lets_talk" })}
                 className="inline-flex items-center gap-2 rounded-xl bg-accent px-6 py-3 text-sm font-semibold text-white shadow-md transition-all duration-300 hover:bg-accent/90"
               >
-                <span>{isArabic ? "تواصل معي" : "Let's Talk"}</span>
+                <span>{ui.footer.ctaButton}</span>
               </a>
 
               <a
@@ -188,7 +184,7 @@ export default function Footer() {
                     <text
                       x="57"
                       y="24"
-                      fontSize="20"
+                      fontSize="20~"
                       fontFamily="'Poppins', sans-serif"
                       letterSpacing="-0.5"
                       fill="url(#footer-logo-grad)"
