@@ -6,7 +6,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/sections/Footer";
 import { useDevToArticles } from "@/hooks/use-devto-articles";
 import { articles as fallbackArticles } from "@/data/siteData";
-import { getLocalizedPageSeo, pageSeo } from "@/lib/seo";
+import { getLocalizedPageSeo } from "@/lib/seo";
 import { buildBreadcrumbListSchema } from "@/lib/schema";
 import { useLocale } from "@/hooks/use-locale";
 
@@ -108,7 +108,7 @@ export default function BlogIndex() {
         title={seo.title}
         description={seo.description}
         canonicalPath={seo.canonicalPath}
-        keywords={pageSeo.blogIndex.keywords}
+        keywords={seo.keywords}
         schema={buildBreadcrumbListSchema([
           { name: "Home", path: "/" },
           { name: "Blog", path: "/blog" },
