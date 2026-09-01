@@ -3,14 +3,19 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/sections/Footer";
 import SeoMeta from "@/components/SeoMeta";
 import { works } from "@/data/siteData";
-import { pageSeo } from "@/lib/seo";
 import {
   buildBreadcrumbListSchema,
   buildCreativeWorkSchema,
   buildTechArticleSchema,
 } from "@/lib/schema";
 
+import { useLocale } from "@/hooks/use-locale";
+import { getLocalizedPageSeo } from "@/lib/seo";
+
 export default function ProjectsPage() {
+  const { locale } = useLocale();
+  const seo = getLocalizedPageSeo("projects", locale);
+
   const schemas = [
     buildBreadcrumbListSchema([
       { name: "Home", path: "/" },
@@ -18,13 +23,13 @@ export default function ProjectsPage() {
     ]),
     buildCreativeWorkSchema({
       title: "Projects and Case Studies",
-      description: pageSeo.projects.description,
+      description: seo.description,
       path: "/projects",
       technologies: ["Azure", "AWS", "Node.js", "React", "Kafka"],
     }),
     buildTechArticleSchema({
       title: "Enterprise Architecture Case Studies",
-      description: pageSeo.projects.description,
+      description: seo.description,
       path: "/projects",
     }),
   ];
@@ -32,9 +37,9 @@ export default function ProjectsPage() {
   return (
     <>
       <SeoMeta
-        title={pageSeo.projects.title}
-        description={pageSeo.projects.description}
-        canonicalPath={pageSeo.projects.canonicalPath}
+        title={seo.title}
+        description={seo.description}
+        canonicalPath={seo.canonicalPath}
         keywords={[
           "project case studies",
           "enterprise architecture",

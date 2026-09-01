@@ -94,7 +94,7 @@ function ExperienceItem({
         ) : null}
       </div>
 
-      <div className="relative ml-3 space-y-2 before:absolute before:left-0 before:top-0 before:h-full before:w-px before:bg-border">
+      <div className="relative ml-3 rtl:mr-3 rtl:ml-0 space-y-2 before:absolute before:left-0 rtl:before:right-0 rtl:before:left-auto before:top-0 before:h-full before:w-px before:bg-border">
         {experience.positions.map((position) => (
           <ExperiencePositionItem key={position.id} position={position} />
         ))}
@@ -125,9 +125,9 @@ function ExperiencePositionItem({
     <motion.article
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="relative pl-5"
+      className="relative pl-5 rtl:pr-5 rtl:pl-0"
     >
-      <span className="absolute left-[-3px] top-5 size-1.5 rounded-full bg-accent" aria-hidden />
+      <span className="absolute left-[-3px] rtl:right-[-3px] rtl:left-auto top-5 size-1.5 rounded-full bg-accent" aria-hidden />
 
       <motion.div
         transition={{ type: "spring", stiffness: 320, damping: 28 }}
@@ -138,7 +138,7 @@ function ExperiencePositionItem({
       >
         <button
           type="button"
-          className="group block w-full text-left"
+          className="group block w-full text-start"
           onClick={() => setIsPinnedOpen((prev) => !prev)}
           aria-expanded={isExpanded}
         >
@@ -160,7 +160,7 @@ function ExperiencePositionItem({
             </span>
           </div>
 
-          <div className="flex flex-wrap items-center gap-2 pl-9 text-xs text-secondary sm:text-sm">
+          <div className="flex flex-wrap items-center gap-2 pl-9 rtl:pr-9 rtl:pl-0 text-xs text-secondary sm:text-sm">
             {position.employmentType ? (
               <>
                 <span>{position.employmentType}</span>
@@ -182,13 +182,13 @@ function ExperiencePositionItem({
               className="overflow-hidden"
             >
               {position.summary ? (
-                <p className="pt-3 pl-9 text-sm leading-relaxed text-secondary">
+                <p className="pt-3 pl-9 rtl:pr-9 rtl:pl-0 text-sm leading-relaxed text-secondary">
                   {position.summary}
                 </p>
               ) : null}
 
               {detailLines.length ? (
-                <ul className="space-y-1.5 pt-3 pl-9 text-sm leading-relaxed text-secondary">
+                <ul className="space-y-1.5 pt-3 pl-9 rtl:pr-9 rtl:pl-0 text-sm leading-relaxed text-secondary">
                   {detailLines.map((line) => (
                     <li key={line} className="flex gap-2">
                       <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent/80" />
@@ -199,7 +199,7 @@ function ExperiencePositionItem({
               ) : null}
 
               {Array.isArray(position.skills) && position.skills.length > 0 ? (
-                <ul className="flex flex-wrap gap-1.5 pt-3 pl-9">
+                <ul className="flex flex-wrap gap-1.5 pt-3 pl-9 rtl:pr-9 rtl:pl-0">
                   {position.skills.map((skill) => (
                     <li key={skill}>
                       <span className="inline-flex items-center rounded-lg border border-default bg-secondary/60 px-1.5 py-0.5 text-xs text-secondary">

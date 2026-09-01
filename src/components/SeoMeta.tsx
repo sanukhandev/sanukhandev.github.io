@@ -1,5 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { useLocation } from "react-router-dom";
+import { useLocale } from "@/hooks/use-locale";
 import { buildSeoMetadata } from "@/lib/seo";
 import { safeJsonLdStringify } from "@/lib/schema";
 
@@ -30,6 +31,7 @@ export default function SeoMeta({
   publishedTime,
   modifiedTime,
 }: SeoMetaProps) {
+  const { locale } = useLocale();
   const location = useLocation();
   const resolvedCanonicalPath = canonicalPath || location.pathname;
   const metadata = buildSeoMetadata({
@@ -48,6 +50,7 @@ export default function SeoMeta({
 
   return (
     <Helmet prioritizeSeoTags>
+      <html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"} />
       <title>{metadata.title}</title>
       <meta name="description" content={metadata.description} />
       {metadata.keywords ? (
@@ -61,6 +64,10 @@ export default function SeoMeta({
       <meta property="og:type" content={metadata.type} />
       <meta property="og:image" content={metadata.ogImage} />
       <meta property="og:site_name" content={metadata.siteName} />
+      <meta
+        property="og:locale"
+        content={locale === "ar" ? "ar_AE" : "en_AE"}
+      />
       {metadata.publishedTime ? (
         <meta
           property="article:published_time"

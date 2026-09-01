@@ -1,71 +1,30 @@
-import { useLocale } from "@/hooks/use-locale";
+import { useSiteContent } from "@/data/siteContent";
 import { SectionHeading } from "@/components/shared/SectionHeading";
 import { Cpu, ShoppingBag, Network, Bot } from "lucide-react";
 
-interface DomainCard {
-  id: string;
-  title: string;
-  description: string;
-  tags: string[];
-  icon: typeof Cpu;
-}
-
-const domainsData: DomainCard[] = [
-  {
-    id: "platform-architecture",
-    title: "PLATFORM ARCHITECTURE",
-    description:
-      "Distributed systems, APIs, domain boundaries, event-driven workflows and integration architecture.",
-    tags: ["Distributed Systems", "Event-Driven", "API Design"],
-    icon: Cpu,
-  },
-  {
-    id: "commerce-transaction",
-    title: "COMMERCE & TRANSACTION SYSTEMS",
-    description:
-      "Product, booking, checkout, payment and order-management workflows.",
-    tags: ["Order Management", "Payment Integration", "Catalog Sync"],
-    icon: ShoppingBag,
-  },
-  {
-    id: "enterprise-integration",
-    title: "ENTERPRISE INTEGRATION",
-    description:
-      "Legacy modernization, B2B integrations, internal platforms and operational automation.",
-    tags: ["SAP Integration", "Serverless", "Contract Validation"],
-    icon: Network,
-  },
-  {
-    id: "ai-enabled-engineering",
-    title: "AI-ENABLED ENGINEERING",
-    description:
-      "Agentic workflows, retrieval systems, engineering intelligence and AI-assisted operations.",
-    tags: ["Agentic Workflows", "Context Retrieval", "AI Automation"],
-    icon: Bot,
-  },
-];
+const domainIcons: Record<string, typeof Cpu> = {
+  "platform-architecture": Cpu,
+  "commerce-transaction": ShoppingBag,
+  "enterprise-integration": Network,
+  "ai-enabled-engineering": Bot,
+};
 
 export default function WhatIArchitect() {
-  const { locale } = useLocale();
-  const isArabic = locale === "ar";
+  const { ui } = useSiteContent();
 
   return (
     <section id="capabilities" className="py-12 md:py-16 lg:py-20 scroll-mt-20">
       <div id="stack" className="container-narrow">
         <SectionHeading
-          eyebrow={isArabic ? "مجالات الهندسة" : "CORE DOMAINS"}
-          title={isArabic ? "ما أقوم بهندسته" : "What I Architect"}
-          subtitle={
-            isArabic
-              ? "هندسة معمارية تركز على الأنظمة الحيوية للأعمال، وليس التقنية لمجرد التقنية."
-              : "Architecture focused on business-critical systems, not technology for technology's sake."
-          }
+          eyebrow={ui.whatIArchitect.eyebrow}
+          title={ui.whatIArchitect.title}
+          subtitle={ui.whatIArchitect.subtitle}
           align="left"
         />
 
         <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2">
-          {domainsData.map((domain) => {
-            const Icon = domain.icon;
+          {ui.whatIArchitect.domainsData.map((domain) => {
+            const Icon = domainIcons[domain.id] || Cpu;
             return (
               <div
                 key={domain.id}

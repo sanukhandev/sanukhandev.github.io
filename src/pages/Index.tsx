@@ -6,7 +6,7 @@ import SeoMeta from "@/components/SeoMeta";
 import LocaleSwitchSkeleton from "@/components/LocaleSwitchSkeleton";
 import { useLocale } from "@/hooks/use-locale";
 import { cn } from "@/lib/utils";
-import { pageSeo } from "@/lib/seo";
+import { getLocalizedPageSeo } from "@/lib/seo";
 import { buildHomepageSchemas } from "@/lib/schema";
 import { trackEvent } from "@/utils/analytics";
 import { HeroSection04 } from "@/components/ui/hero-04";
@@ -51,9 +51,10 @@ function FlowModule({ children, tone = "base" }: FlowModuleProps) {
 }
 
 const Index = () => {
-  const { isSwitchingLocale } = useLocale();
+  const { isSwitchingLocale, locale } = useLocale();
   const reducedMotion = useReducedMotion();
   const [enableParticles, setEnableParticles] = useState(false);
+  const currentSeo = getLocalizedPageSeo("home", locale);
 
   useEffect(() => {
     if (reducedMotion || typeof window === "undefined") {
@@ -142,10 +143,10 @@ const Index = () => {
 
       <div className="relative z-10">
         <SeoMeta
-          title={pageSeo.home.title}
-          description={pageSeo.home.description}
-          canonicalPath={pageSeo.home.canonicalPath}
-          keywords={pageSeo.home.keywords}
+          title={currentSeo.title}
+          description={currentSeo.description}
+          canonicalPath={currentSeo.canonicalPath}
+          keywords={currentSeo.keywords}
           kind="profile"
           schema={buildHomepageSchemas()}
         />

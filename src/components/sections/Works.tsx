@@ -1,71 +1,19 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useLocale } from "@/hooks/use-locale";
+import { useSiteContent } from "@/data/siteContent";
 import { SectionHeading } from "@/components/shared/SectionHeading";
 import { trackEvent } from "@/utils/analytics";
 import { ArrowRight, ShoppingCart, Layers, Globe, Server } from "lucide-react";
 
-interface SystemCard {
-  id: string;
-  industry: string;
-  title: string;
-  description: string;
-  contributions: string[];
-  evidence: string;
-  icon: typeof ShoppingCart;
-  projectUrl: string;
-}
-
-const systemsData: SystemCard[] = [
-  {
-    id: "regional-commerce-platform",
-    industry: "COMMERCE · MULTI-REGION",
-    title: "Regional Enterprise Commerce Platform",
-    description:
-      "Multi-market regional commerce platform synchronizing product catalog, pricing, and inventory across regional markets.",
-    contributions: ["Platform Engineering", "Integration", "Production Delivery"],
-    evidence: "9 regional markets",
-    icon: ShoppingCart,
-    projectUrl: "/projects",
-  },
-  {
-    id: "omnichannel-commerce-fabric",
-    industry: "AUTOMOTIVE & ENTERPRISE COMMERCE",
-    title: "Enterprise Omnichannel Commerce Fabric",
-    description:
-      "Event-driven integration fabric connecting ERP, PIM, and omnichannel storefronts with real-time payload validation.",
-    contributions: ["Solution Architecture", "Event Streaming", "API Governance"],
-    evidence: "Production Enterprise Platform",
-    icon: Layers,
-    projectUrl: "/projects",
-  },
-  {
-    id: "airline-b2b-marketplace",
-    industry: "TRAVEL TECH · AIRLINE AGGREGATION",
-    title: "Airline NDC & Travel B2B Marketplace",
-    description:
-      "High-availability NDC aggregation platform handling multi-supplier airline content, pricing, and B2B booking workflows.",
-    contributions: ["Platform Engineering", "NDC Integration", "B2B Workflows"],
-    evidence: "Multi-Supplier Aggregation",
-    icon: Globe,
-    projectUrl: "/projects",
-  },
-  {
-    id: "airport-commerce-platform",
-    industry: "AIRPORT COMMERCE · TRAVEL RETAIL",
-    title: "Airport Commerce & Travel Retail Platform",
-    description:
-      "Multi-terminal airport commerce system for real-time inventory management, order processing, and payment integrations.",
-    contributions: ["Domain Architecture", "Commerce Core", "Resilient APIs"],
-    evidence: "Multi-Terminal Operations",
-    icon: Server,
-    projectUrl: "/projects",
-  },
-];
+const systemIcons: Record<string, typeof ShoppingCart> = {
+  "regional-commerce-platform": ShoppingCart,
+  "omnichannel-commerce-fabric": Layers,
+  "airline-b2b-marketplace": Globe,
+  "airport-commerce-platform": Server,
+};
 
 export default function Works() {
-  const { locale } = useLocale();
-  const isArabic = locale === "ar";
+  const { ui } = useSiteContent();
 
   useEffect(() => {
     if (!("IntersectionObserver" in window)) {
@@ -106,19 +54,15 @@ export default function Works() {
     <section id="work" className="py-12 md:py-16 lg:py-20 scroll-mt-20">
       <div id="works" className="container-narrow">
         <SectionHeading
-          eyebrow={isArabic ? "أنظمة الإنتاج" : "PRODUCTION PROOF"}
-          title={isArabic ? "أنظمة إنتاجية مختارة" : "Selected Production Systems"}
-          subtitle={
-            isArabic
-              ? "منصات ساهمت في هندستها، بنائها، وتسليمها عبر قطاعات التجارة، السيارات، تكنولوجيا السفر والعمليات المؤسسية."
-              : "Platforms I've helped architect, build and deliver across commerce, automotive, travel technology and enterprise operations."
-          }
+          eyebrow={ui.works.eyebrow}
+          title={ui.works.title}
+          subtitle={ui.works.subtitle}
           align="left"
         />
 
         <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2">
-          {systemsData.map((sys) => {
-            const Icon = sys.icon;
+          {ui.works.systemsData.map((sys) => {
+            const Icon = systemIcons[sys.id] || ShoppingCart;
             return (
               <div
                 key={sys.id}
@@ -128,7 +72,7 @@ export default function Works() {
                 <div>
                   {/* Industry Header */}
                   <div className="flex items-center justify-between gap-3 pb-3 border-b border-border/40">
-                    <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-accent">
+                    <span className="text-[11px] font-semibold uppercase text-accent">
                       {sys.industry}
                     </span>
                     <Icon className="h-4 w-4 text-accent opacity-80" />
@@ -146,8 +90,8 @@ export default function Works() {
 
                   {/* MY CONTRIBUTION (Max 3 clean tags) */}
                   <div className="mt-5">
-                    <p className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground mb-2">
-                      MY CONTRIBUTION
+                    <p className="text-[11px] font-semibold uppercase text-muted-foreground mb-2">
+                      {ui.works.myContributionLabel}
                     </p>
                     <div className="flex flex-wrap gap-1.5">
                       {sys.contributions.map((tag) => (
@@ -170,10 +114,10 @@ export default function Works() {
 
                   <Link
                     to={sys.projectUrl}
-                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-accent hover:underline group-hover:translate-x-0.5 transition-transform"
+                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-accent hover:underline group-hover:translate-x-0.5 rtl:group-hover:-translate-x-0.5 transition-transform"
                   >
-                    <span>View project</span>
-                    <ArrowRight className="h-3.5 w-3.5" />
+                    <span>{ui.works.viewProject}</span>
+                    <ArrowRight className="h-3.5 w-3.5 rtl:rotate-180" />
                   </Link>
                 </div>
               </div>

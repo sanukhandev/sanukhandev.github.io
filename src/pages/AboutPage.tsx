@@ -3,16 +3,21 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/sections/Footer";
 import SeoMeta from "@/components/SeoMeta";
 import { profile, skills } from "@/data/siteData";
-import { pageSeo } from "@/lib/seo";
 import { buildBreadcrumbListSchema } from "@/lib/schema";
 
+import { useLocale } from "@/hooks/use-locale";
+import { getLocalizedPageSeo } from "@/lib/seo";
+
 export default function AboutPage() {
+  const { locale } = useLocale();
+  const seo = getLocalizedPageSeo("about", locale);
+
   return (
     <>
       <SeoMeta
-        title={pageSeo.about.title}
-        description={pageSeo.about.description}
-        canonicalPath={pageSeo.about.canonicalPath}
+        title={seo.title}
+        description={seo.description}
+        canonicalPath={seo.canonicalPath}
         kind="profile"
         keywords={[
           "about sanu khan",
