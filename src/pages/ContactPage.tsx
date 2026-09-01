@@ -1,7 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/sections/Footer";
 import SeoMeta from "@/components/SeoMeta";
-import { pageSeo } from "@/lib/seo";
 import { buildBreadcrumbListSchema, buildContactPageSchema } from "@/lib/schema";
 
 import { useLocale } from "@/hooks/use-locale";

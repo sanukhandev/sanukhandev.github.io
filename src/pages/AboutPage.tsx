@@ -3,7 +3,6 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/sections/Footer";
 import SeoMeta from "@/components/SeoMeta";
 import { profile, skills } from "@/data/siteData";
-import { pageSeo } from "@/lib/seo";
 import { buildBreadcrumbListSchema } from "@/lib/schema";
 
 import { useLocale } from "@/hooks/use-locale";

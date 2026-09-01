@@ -184,7 +184,7 @@ export default function Footer() {
                     <text
                       x="57"
                       y="24"
-                      fontSize="20~"
+                      fontSize="20"
                       fontFamily="'Poppins', sans-serif"
                       letterSpacing="-0.5"
                       fill="url(#footer-logo-grad)"

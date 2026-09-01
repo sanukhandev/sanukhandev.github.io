@@ -68,21 +68,6 @@ export default function SeoMeta({
         property="og:locale"
         content={locale === "ar" ? "ar_AE" : "en_AE"}
       />
-      <link
-        rel="alternate"
-        hrefLang="en"
-        href={metadata.canonicalUrl}
-      />
-      <link
-        rel="alternate"
-        hrefLang="ar"
-        href={metadata.canonicalUrl}
-      />
-      <link
-        rel="alternate"
-        hrefLang="x-default"
-        href={metadata.canonicalUrl}
-      />
       {metadata.publishedTime ? (
         <meta
           property="article:published_time"
