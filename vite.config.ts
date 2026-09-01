@@ -413,10 +413,7 @@ export default defineConfig(({ command, mode }) => {
             if (id.includes("node_modules/framer-motion/")) {
               return "motion";
             }
-            if (
-              id.includes("node_modules/dompurify/") ||
-              id.includes("node_modules/recharts/")
-            ) {
+            if (id.includes("node_modules/dompurify/")) {
               return "contentHeavy";
             }
           },
