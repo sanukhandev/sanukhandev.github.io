@@ -323,6 +323,7 @@ export default defineConfig(({ command, mode }) => {
           "/tools/api-client-tool",
           "/tools/curl-to-json-converter",
           "/blog",
+          "/blogs",
           "/blog/javascript-algorithms",
           "/blog/nodejs-api-best-practices",
           "/nodejs-developer-uae",
@@ -413,10 +414,7 @@ export default defineConfig(({ command, mode }) => {
             if (id.includes("node_modules/framer-motion/")) {
               return "motion";
             }
-            if (
-              id.includes("node_modules/dompurify/") ||
-              id.includes("node_modules/recharts/")
-            ) {
+            if (id.includes("node_modules/dompurify/")) {
               return "contentHeavy";
             }
           },
