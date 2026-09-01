@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { useLocale } from "@/hooks/use-locale";
 import { useSiteContent } from "@/data/siteContent";
 import { ArrowRight, Bot, Cpu, Network, ShieldCheck, Zap, LineChart } from "lucide-react";
 

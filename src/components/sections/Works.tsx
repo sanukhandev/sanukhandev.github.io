@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useLocale } from "@/hooks/use-locale";
 import { useSiteContent } from "@/data/siteContent";
 import { SectionHeading } from "@/components/shared/SectionHeading";
 import { trackEvent } from "@/utils/analytics";
@@ -15,7 +14,6 @@ const systemIcons: Record<string, typeof ShoppingCart> = {
 
 export default function Works() {
   const { ui } = useSiteContent();
-  const { locale } = useLocale();
 
   useEffect(() => {
     if (!("IntersectionObserver" in window)) {

@@ -6,8 +6,9 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/sections/Footer";
 import { useDevToArticles } from "@/hooks/use-devto-articles";
 import { articles as fallbackArticles } from "@/data/siteData";
-import { pageSeo } from "@/lib/seo";
+import { getLocalizedPageSeo, pageSeo } from "@/lib/seo";
 import { buildBreadcrumbListSchema } from "@/lib/schema";
+import { useLocale } from "@/hooks/use-locale";
 
 type BlogCard = {
   href: string;
@@ -24,12 +25,9 @@ const slugFromDevToUrl = (url: string) => {
 
 const PAGE_SIZE = 6;
 
-import { useLocale } from "@/hooks/use-locale";
-import { getLocalizedPageSeo } from "@/lib/seo";
-
 export default function BlogIndex() {
   const { locale } = useLocale();
-  const seo = getLocalizedPageSeo("blog", locale);
+  const seo = getLocalizedPageSeo("blogIndex", locale);
   const { data } = useDevToArticles(30);
   const [query, setQuery] = useState("");
   const [selectedTag, setSelectedTag] = useState<string>("all");

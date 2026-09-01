@@ -1,4 +1,3 @@
-import { useLocale } from "@/hooks/use-locale";
 import { useSiteContent } from "@/data/siteContent";
 import { SectionHeading } from "@/components/shared/SectionHeading";
 import { CheckCircle2, ArrowRight } from "lucide-react";
