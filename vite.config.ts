@@ -323,6 +323,7 @@ export default defineConfig(({ command, mode }) => {
           "/tools/api-client-tool",
           "/tools/curl-to-json-converter",
           "/blog",
+          "/blogs",
           "/blog/javascript-algorithms",
           "/blog/nodejs-api-best-practices",
           "/nodejs-developer-uae",

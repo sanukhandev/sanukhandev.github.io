@@ -14,7 +14,7 @@ function Navbar() {
   const location = useLocation();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [activeHref, setActiveHref] = useState("#works");
+  const [activeHref, setActiveHref] = useState("#home");
   const { theme, toggleTheme } = useTheme();
   const { locale, setLocale } = useLocale();
   const { nav, profile } = useSiteContent();
@@ -36,38 +36,105 @@ function Navbar() {
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
     onScroll();
-    window.addEventListener("scroll", onScroll);
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   useEffect(() => {
-    const sectionIds = ["home", "work", "architecture", "capabilities", "philosophy", "zaakiy", "writing", "process", "how-i-work", "leadership", "about", "contact"];
-    const sections = sectionIds
-      .map((id) => document.getElementById(id))
-      .filter((el): el is HTMLElement => Boolean(el));
-
-    if (!sections.length || !("IntersectionObserver" in window)) {
+    if (!isHomePage) {
+      if (location.pathname.startsWith("/blog")) {
+        setActiveHref("#writing");
+      } else if (location.pathname === "/about") {
+        setActiveHref("#about");
+      } else if (location.pathname === "/projects") {
+        setActiveHref("#work");
+      } else {
+        setActiveHref("");
+      }
       return;
     }
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            setActiveHref(`#${entry.target.id}`);
-          }
+    const sectionToNavMap: Record<string, string> = {
+      home: "#home",
+      work: "#work",
+      works: "#work",
+      architecture: "#architecture",
+      capabilities: "#architecture",
+      philosophy: "#architecture",
+      zaakiy: "#zaakiy",
+      "ops-intelligence": "#zaakiy",
+      writing: "#writing",
+      articles: "#writing",
+      about: "#about",
+      leadership: "#about",
+      experience: "#about",
+      process: "#about",
+      "how-i-work": "#about",
+      contact: "#contact",
+    };
+
+    const updateActiveSection = () => {
+      const scrollY = window.scrollY;
+      const innerHeight = window.innerHeight;
+      const scrollHeight = document.documentElement.scrollHeight;
+
+      if (scrollY < 100) {
+        setActiveHref("#home");
+        return;
+      }
+
+      if (scrollY + innerHeight >= scrollHeight - 50) {
+        setActiveHref("#about");
+        return;
+      }
+
+      const targetOffset = 150;
+      const sectionIds = Object.keys(sectionToNavMap);
+      let currentNavHref = "";
+      let minDistance = Infinity;
+
+      for (const id of sectionIds) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+
+        const rect = el.getBoundingClientRect();
+        if (rect.top <= targetOffset && rect.bottom > targetOffset) {
+          currentNavHref = sectionToNavMap[id];
+          break;
         }
-      },
-      {
-        rootMargin: "-120px 0px -55% 0px",
-        threshold: [0, 0.2, 0.5],
-      },
-    );
 
-    sections.forEach((section) => observer.observe(section));
+        const dist = Math.abs(rect.top - targetOffset);
+        if (rect.top <= targetOffset + 150 && dist < minDistance) {
+          minDistance = dist;
+          currentNavHref = sectionToNavMap[id];
+        }
+      }
 
-    return () => observer.disconnect();
-  }, []);
+      if (currentNavHref) {
+        setActiveHref(currentNavHref);
+      }
+    };
+
+    let ticking = false;
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          updateActiveSection();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    updateActiveSection();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+    };
+  }, [isHomePage, location.pathname]);
 
   return (
     <motion.header
@@ -432,9 +499,13 @@ function Navbar() {
                   onClick={() => setOpen(false)}
                   className={cn(
                     "rounded-md px-3 py-2 text-sm transition-all duration-300",
-                    isLight
-                      ? "text-[#4d5a66] hover:bg-[#e8f0ec] hover:text-[#0f1015]"
-                      : "text-[#c9ced6] hover:bg-[#1e2028] hover:text-[#38c755]",
+                    activeHref === l.href
+                      ? isLight
+                        ? "bg-[#e8f0ec] text-[#0f1015] font-semibold"
+                        : "bg-[#1e2028] text-[#38c755] font-semibold"
+                      : isLight
+                        ? "text-[#4d5a66] hover:bg-[#e8f0ec] hover:text-[#0f1015]"
+                        : "text-[#c9ced6] hover:bg-[#1e2028] hover:text-[#38c755]",
                   )}
                 >
                   {l.label}
