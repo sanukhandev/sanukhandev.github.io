@@ -3,6 +3,8 @@ import { render, screen } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import Navbar from "@/components/Navbar";
+import { ThemeProvider } from "@/hooks/use-theme";
+import { LocaleProvider } from "@/hooks/use-locale";
 
 describe("ErrorBoundary and lazyWithRetry unit tests", () => {
   const originalLocation = window.location;
@@ -55,9 +57,13 @@ describe("ErrorBoundary and lazyWithRetry unit tests", () => {
 
   it("renders Navbar component with nav links", () => {
     render(
-      <BrowserRouter>
-        <Navbar />
-      </BrowserRouter>
+      <LocaleProvider>
+        <ThemeProvider>
+          <BrowserRouter>
+            <Navbar />
+          </BrowserRouter>
+        </ThemeProvider>
+      </LocaleProvider>
     );
 
     expect(screen.getByText("Work")).toBeInTheDocument();
