@@ -3,8 +3,7 @@ export const nav = {
   links: [
     { label: "Work", href: "#work" },
     { label: "Architecture", href: "#architecture" },
-    { label: "Zaakiy", href: "#zaakiy" },
-    { label: "Writing", href: "#writing" },
+    { label: "Notes", href: "#writing" },
     { label: "About", href: "#about" },
   ],
   cta: { label: "Let's Talk", href: "#contact" },

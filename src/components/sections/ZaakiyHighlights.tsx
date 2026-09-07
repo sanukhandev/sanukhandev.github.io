@@ -1,97 +1,96 @@
 import { Link } from "react-router-dom";
-import { useSiteContent } from "@/data/siteContent";
-import { ArrowRight, Bot, Cpu, Network, ShieldCheck, Zap, LineChart } from "lucide-react";
-
-const flowIcons = [Zap, Network, Bot, ShieldCheck, Cpu];
+import { Button } from "@/components/ui/button";
+import { useLocale } from "@/hooks/use-locale";
+import { ArrowRight, GitMerge, Network, Cpu, AlertCircle, Bot, CheckCircle2 } from "lucide-react";
 
 export default function ZaakiyHighlights() {
-  const { ui } = useSiteContent();
+  const { locale } = useLocale();
+  const isArabic = locale === "ar";
+
+  const researchItems = [
+    { icon: GitMerge, name: isArabic ? "ربط الأحداث Event correlation" : "Event correlation" },
+    { icon: Network, name: isArabic ? "السياق التشغيلي Operational context" : "Operational context" },
+    { icon: Cpu, name: isArabic ? "ذكاء تدفق العمل Workflow intelligence" : "Workflow intelligence" },
+    { icon: AlertCircle, name: isArabic ? "اكتشاف الشذوذ Anomaly detection" : "Anomaly detection" },
+    { icon: Bot, name: isArabic ? "التشخيص بالذكاء الاصطناعي" : "AI-assisted diagnosis" },
+    { icon: CheckCircle2, name: isArabic ? "الإدراك بنتائج الأعمال" : "Business outcome awareness" },
+  ];
 
   return (
-    <section id="zaakiy" className="py-12 md:py-16 lg:py-20 relative overflow-hidden scroll-mt-20">
-      <div id="ops-intelligence" className="container-narrow">
-        {/* Header & Positioning */}
-        <div className="max-w-3xl">
-          <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-3.5 py-1 text-[11px] font-semibold uppercase text-accent">
-            <span>{ui.zaakiy.eyebrow}</span>
+    <section id="zaakiy" className="py-12 md:py-16 scroll-mt-20 border-t border-border/60">
+      <div className="container-narrow">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-start divide-y md:divide-y-0 md:divide-x divide-border/60">
+          {/* Left Column (md:col-span-7) */}
+          <div className="md:col-span-7 space-y-4">
+            <div className="text-[13px] font-mono uppercase text-accent font-semibold tracking-[0.08em]">
+              {isArabic ? "بحث وتطوير" : "R&D"}
+            </div>
+
+            <h2 className="text-3xl font-bold tracking-tight text-accent font-anta">
+              ZaakiyV3RSE
+            </h2>
+
+            <h3 className="text-[21px] font-semibold text-primary leading-snug">
+              {isArabic
+                ? "هل يمكن للنظام فهم ما إذا كان قد حقق ما كُلّف به بالفعل؟"
+                : "Can a system understand whether it accomplished what it was supposed to do?"}
+            </h3>
+
+            <div className="space-y-3 text-[16.5px] text-secondary leading-[1.65] font-normal">
+              <p>
+                {isArabic
+                  ? "معظم المنصات تخبرك أن المهمة عُمِلت أو أن API أعاد 200 أو أن الرسالة استُهلكت. لكن ذلك لا يعني بالضرورة تحقق نتيجة الأعمال المطلوبة."
+                  : "Most platforms can tell us that a job ran, an API returned 200, or a message was consumed. That doesn't necessarily tell us whether the intended business outcome actually happened."}
+              </p>
+              <p>
+                <span className="font-anta text-accent font-bold">ZaakiyV3RSE</span>{" "}
+                {isArabic
+                  ? "هو المكان الذي أستكشف فيه هذه الفجوة — ربط الإشارات التشغيلية وسياق النظام ونتائج الأعمال لاستكشاف ذكاء تشغيلي أفضل."
+                  : "is where I explore that gap — connecting operational signals, system context and business outcomes to investigate better operational intelligence."}
+              </p>
+              <p className="text-[14.5px] text-muted-foreground italic pt-0.5">
+                {isArabic
+                  ? "هنا أختبر وأجرب الأفكار دون ادعاء أنها جاهزة للإنتاج الفوري."
+                  : "This is where I experiment without pretending every idea is production-ready."}
+              </p>
+            </div>
+
+            <div className="pt-4">
+              <Button
+                asChild
+                className="h-10 rounded-lg bg-accent px-5 text-[14px] font-semibold text-white transition-colors hover:bg-accent/90 gap-1.5 shadow-xs"
+              >
+                <Link to="/projects">
+                  <span>{isArabic ? "استكشف البحث والتطوير" : "Explore the research"}</span>
+                  <ArrowRight className="h-3.5 w-3.5 rtl:rotate-180" />
+                </Link>
+              </Button>
+            </div>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-primary">
-            <span className="brand-zaakiy text-accent">{ui.zaakiy.title}</span>
-          </h2>
+          {/* Right Column (md:col-span-5) */}
+          <div className="md:col-span-5 pt-6 md:pt-0 md:pl-8 rtl:md:pl-0 rtl:md:pr-8 space-y-4">
+            <div className="text-[14px] font-mono font-semibold text-primary">
+              {isArabic ? "مجالات أستكشفها" : "Areas I'm exploring"}
+            </div>
 
-          <p className="mt-2 text-xl font-bold text-primary">
-            {ui.zaakiy.subtitle}
-          </p>
-
-          <p className="mt-3 text-sm sm:text-base leading-relaxed text-secondary font-normal">
-            {ui.zaakiy.supporting}
-          </p>
-
-          <div className="mt-4">
-            <Link
-              to="/projects"
-              className="inline-flex items-center gap-1.5 text-xs font-semibold text-accent hover:underline"
-            >
-              <span>{ui.zaakiy.exploreLink}</span>
-              <ArrowRight className="h-3.5 w-3.5 rtl:rotate-180" />
-            </Link>
-          </div>
-        </div>
-
-        {/* CONCEPTUAL FLOW: Signals → Context → Reasoning → Decision → Action */}
-        <div className="mt-8 rounded-2xl border border-border bg-secondary/20 p-6 sm:p-7 shadow-sm">
-          <p className="text-[11px] font-semibold uppercase text-accent mb-4">
-            {ui.zaakiy.flowEyebrow}
-          </p>
-
-          <div className="overflow-x-auto py-2">
-            <div className="min-w-[650px] flex items-center justify-between gap-2">
-              {ui.zaakiy.flowNodes.map((node, idx) => {
-                const Icon = flowIcons[idx] || Zap;
+            <div className="space-y-3">
+              {researchItems.map((item) => {
+                const Icon = item.icon;
                 return (
-                  <div key={node.label} className="flex items-center gap-2 flex-1">
-                    <div className="w-full rounded-xl border border-border bg-background/80 p-4 text-center shadow-sm">
-                      <div className="flex items-center justify-center text-accent mb-1.5">
-                        <Icon className="h-4 w-4" />
-                      </div>
-                      <span className="block text-xs font-bold text-primary">{node.label}</span>
-                      <span className="block text-[10px] text-muted-foreground mt-0.5">{node.desc}</span>
+                  <div key={item.name} className="flex items-center gap-3 text-[14.5px] font-medium text-secondary">
+                    <div className="flex h-7 w-7 items-center justify-center rounded bg-accent/10 text-accent shrink-0">
+                      <Icon className="h-3.5 w-3.5" />
                     </div>
-                    {idx < ui.zaakiy.flowNodes.length - 1 && (
-                      <ArrowRight className="h-4 w-4 shrink-0 text-accent/60 rtl:rotate-180" />
-                    )}
+                    <span>{item.name}</span>
                   </div>
                 );
               })}
             </div>
           </div>
         </div>
-
-        {/* WHAT I'M EXPLORING */}
-        <div className="mt-8">
-          <p className="text-[11px] font-semibold uppercase text-accent mb-4">
-            {ui.zaakiy.exploringEyebrow}
-          </p>
-
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {ui.zaakiy.exploringItems.map((item) => (
-              <div
-                key={item.title}
-                className="rounded-xl border border-border bg-background/60 p-5 transition-all duration-300 hover:border-accent/40 shadow-sm"
-              >
-                <h4 className="text-sm font-bold text-primary mb-1.5 flex items-center gap-2">
-                  <LineChart className="h-3.5 w-3.5 text-accent" />
-                  {item.title}
-                </h4>
-                <p className="text-xs text-secondary leading-relaxed font-normal">
-                  {item.desc}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
       </div>
     </section>
   );
 }
+

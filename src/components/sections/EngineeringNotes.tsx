@@ -1,127 +1,105 @@
 import { Link } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
 import { useLocale } from "@/hooks/use-locale";
-import { useSiteContent } from "@/data/siteContent";
-import { SectionHeading } from "@/components/shared/SectionHeading";
-import { useDevToArticles } from "@/hooks/use-devto-articles";
-import { ArrowRight, Clock } from "lucide-react";
-
-interface FallbackNote {
-  category: string;
-  title: string;
-  description: string;
-  readTime: string;
-  localPath: string;
-}
-
-const fallbackNotes: FallbackNote[] = [
-  {
-    category: "Architecture",
-    title: "API Gateway: The Bouncer Your Microservices Didn't Know They Needed",
-    description:
-      "How API Gateways act as the single entry point for microservices — handling auth, rate limiting, routing, and observability so your services don't have to.",
-    readTime: "5 min read",
-    localPath: "/blog/api-gateway-the-bouncer-your-microservices-didnt-know-they-needed-1j0e",
-  },
-  {
-    category: "Data Engineering",
-    title: "DuckDB: The SQLite of Analytics You Didn't Know You Needed",
-    description:
-      "An in-process OLAP database with zero config, blazing-fast columnar queries, and support for CSV, Parquet, and JSON — perfect for data science and offline analytics.",
-    readTime: "4 min read",
-    localPath: "/blog/duckdb-the-sqlite-of-analytics-you-didnt-know-you-needed-579m",
-  },
-  {
-    category: "Platform Engineering",
-    title: "Unmasking JavaScript Proxies: The Secret Agents of Your Objects",
-    description:
-      "Using JavaScript Proxy to intercept object behaviors for validation, logging, access control, and understanding Vue 3 reactivity.",
-    readTime: "6 min read",
-    localPath: "/blog/unmasking-javascript-proxies-the-secret-agents-of-your-objects-4eac",
-  },
-];
 
 export default function EngineeringNotes() {
   const { locale } = useLocale();
-  const content = useSiteContent();
   const isArabic = locale === "ar";
-  const { data: fetchedArticles } = useDevToArticles(3);
 
-  const displayNotes = isArabic
-    ? content.articles.slice(0, 3).map((art) => ({
-        category: art.category,
-        title: art.title,
-        description: art.excerpt,
-        readTime: "قراءة 5 دقائق",
-        localPath: art.localPath,
-      }))
-    : fetchedArticles && fetchedArticles.length > 0
-      ? fetchedArticles.slice(0, 3).map((art) => ({
-          category: art.tags[0] ? art.tags[0].toUpperCase() : "ARCHITECTURE",
-          title: art.title,
-          description: art.description,
-          readTime: "~5 min read",
-          localPath: art.localPath,
-        }))
-      : fallbackNotes;
+  const notes = [
+    {
+      date: isArabic ? "28 أغسطس 2024" : "Aug 28, 2024",
+      title: isArabic
+        ? "بوابة API: الحارس الذي تحتاجه خدماتك المصغرة"
+        : "Round Robin Is Lying to You",
+      premise: isArabic
+        ? "كيف تعمل بوابة API كنقطة دخول موحدة للخدمات المصغرة مع إدارة التوثيق والتوجيه."
+        : "Equal traffic doesn't mean equal load.",
+      readTime: isArabic ? "5 دقائق قراءة" : "5 min read",
+      path: "/blog/api-gateway-the-bouncer-your-microservices-didnt-know-they-needed-1j0e",
+    },
+    {
+      date: isArabic ? "12 يوليو 2024" : "Jul 12, 2024",
+      title: isArabic
+        ? "DuckDB: نسخة SQLite لعالم التحليلات"
+        : "Scaling a Backend from 1 User to 1 Million",
+      premise: isArabic
+        ? "قاعدة OLAP داخلية دون إعدادات مع أداء عمودي سريع ودعم CSV وParquet للتحليلات المحلية."
+        : "Where architecture actually starts changing.",
+      readTime: isArabic ? "8 دقائق قراءة" : "8 min read",
+      path: "/blog/duckdb-the-sqlite-of-analytics-you-didnt-know-you-needed-579m",
+    },
+    {
+      date: isArabic ? "03 يونيو 2024" : "Jun 03, 2024",
+      title: isArabic
+        ? "دليل عملي لبناء منصة SaaS متكاملة وفعالة من حيث التكلفة"
+        : "Choosing the Right Storage Model",
+      premise: isArabic
+        ? "عمارة عملية باستخدام Laravel وNext.js وMySQL لاستهداف التوسع والصيانة بتكلفة متوازنة."
+        : "How data characteristics affect architectural choices.",
+      readTime: isArabic ? "6 دقائق قراءة" : "6 min read",
+      path: "/blog/building-a-cost-effective-full-stack-saas-platform-a-practical-guide-for-small-to-mid-size-it-2d44",
+    },
+  ];
 
   return (
-    <section id="writing" className="py-12 md:py-16 lg:py-20 scroll-mt-20">
-      <div id="articles" className="container-narrow">
-        <SectionHeading
-          eyebrow={content.ui.engineeringNotes.eyebrow}
-          title={content.ui.engineeringNotes.title}
-          subtitle={content.ui.engineeringNotes.subtitle}
-          align="left"
-        />
+    <section id="writing" className="py-12 md:py-16 scroll-mt-20 border-t border-border/60">
+      <div className="container-narrow">
+        {/* Header */}
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
+          <div>
+            <div className="text-[13px] font-mono uppercase text-accent font-semibold tracking-[0.08em] mb-1.5">
+              {isArabic ? "ملاحظات هندسية" : "ENGINEERING NOTES"}
+            </div>
+            <h2 className="section-h2 text-primary">
+              {isArabic
+                ? "أشياء تعلمتها أو شككت فيها أو غيرت رأيي بشأنها."
+                : "Things I've learned, questioned or changed my mind about."}
+            </h2>
+          </div>
 
-        {/* 3 Featured Article Cards Routing Internally to /blog/:slug */}
-        <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-3">
-          {displayNotes.map((note) => (
+          <Link
+            to="/blog"
+            className="inline-flex items-center gap-1.5 text-[13.5px] font-mono font-semibold text-accent hover:underline shrink-0"
+          >
+            <span>{isArabic ? "عرض كل الملاحظات" : "View all notes"}</span>
+            <ArrowRight className="h-3.5 w-3.5 rtl:rotate-180" />
+          </Link>
+        </div>
+
+        {/* 3-Column Horizontal Grid with Thin Vertical Dividers (No Cards) */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 divide-y md:divide-y-0 md:divide-x divide-border/60">
+          {notes.map((note, idx) => (
             <Link
               key={note.title}
-              to={note.localPath}
-              className="group flex flex-col justify-between rounded-2xl border border-border bg-secondary/20 p-6 transition-all duration-300 hover:border-accent/50 hover:bg-secondary/40 shadow-sm"
+              to={note.path}
+              className={`group flex flex-col justify-between ${
+                idx > 0 ? "pt-6 md:pt-0 md:pl-8 rtl:md:pl-0 rtl:md:pr-8" : ""
+              }`}
             >
               <div>
-                <div className="flex items-center justify-between gap-2 mb-3">
-                  <span className="rounded-md border border-accent/30 bg-accent/10 px-2.5 py-0.5 text-[11px] font-semibold uppercase text-accent">
-                    {note.category}
-                  </span>
-                  <span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-mono">
-                    <Clock className="h-3 w-3" />
-                    {note.readTime}
-                  </span>
+                <div className="text-[13px] font-mono text-muted-foreground mb-2.5">
+                  {note.date}
                 </div>
 
-                <h3 className="text-base sm:text-lg font-bold tracking-tight text-primary group-hover:text-accent transition-colors line-clamp-2">
+                <h3 className="text-[19px] font-semibold text-primary group-hover:text-accent transition-colors mb-2 leading-snug">
                   {note.title}
                 </h3>
 
-                <p className="mt-2 text-xs sm:text-sm leading-relaxed text-secondary line-clamp-3 font-normal">
-                  {note.description}
+                <p className="text-[15.5px] text-secondary leading-relaxed font-normal mb-4">
+                  {note.premise}
                 </p>
               </div>
 
-              <div className="mt-6 pt-4 border-t border-border/40">
-                <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-accent group-hover:underline">
-                  <span>{content.ui.engineeringNotes.readArticle}</span>
-                  <ArrowRight className="h-3.5 w-3.5 rtl:rotate-180" />
-                </span>
+              <div className="inline-flex items-center gap-1 text-[13.5px] font-semibold text-accent group-hover:underline pt-2">
+                <span>{note.readTime}</span>
+                <ArrowRight className="h-3.5 w-3.5 rtl:rotate-180" />
               </div>
             </Link>
           ))}
-        </div>
-
-        {/* View All CTA */}
-        <div className="mt-8 text-center sm:text-start">
-          <Link
-            to="/blog"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-accent hover:underline"
-          >
-            <span>{content.ui.engineeringNotes.viewAll}</span>
-          </Link>
         </div>
       </div>
     </section>
   );
 }
+

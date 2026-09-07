@@ -126,8 +126,7 @@ const arContent = {
     links: [
       { label: "الأعمال", href: "#work" },
       { label: "المعمارية", href: "#architecture" },
-      { label: "Zaakiy", href: "#zaakiy" },
-      { label: "المقالات", href: "#writing" },
+      { label: "الملاحظات", href: "#writing" },
       { label: "نبذة عني", href: "#about" },
     ],
     cta: { ...baseNav.cta, label: "لنتحدث" },

@@ -1,295 +1,137 @@
-import type { ComponentType } from "react";
-import { Mail, MapPin, Phone } from "lucide-react";
-import {
-  FaDev,
-  FaGithub,
-  FaLinkedin,
-  FaMedium,
-  FaStackOverflow,
-  FaYoutube,
-} from "react-icons/fa";
-import { FaXTwitter } from "react-icons/fa6";
-import { cn } from "@/lib/utils";
-import { useSiteContent } from "@/data/siteContent";
-import { useTheme } from "@/hooks/use-theme";
+import { Button } from "@/components/ui/button";
+import { ArrowRight, Github, Linkedin } from "lucide-react";
 import { useLocale } from "@/hooks/use-locale";
-import { trackEvent } from "@/utils/analytics";
-
-const socialIcons: Record<string, ComponentType<{ className?: string }>> = {
-  GitHub: FaGithub,
-  LinkedIn: FaLinkedin,
-  DevTo: FaDev,
-  StackOverflow: FaStackOverflow,
-  Medium: FaMedium,
-  X: FaXTwitter,
-  YouTube: FaYoutube,
-};
 
 export default function Footer() {
-  const { theme } = useTheme();
   const { locale } = useLocale();
-  const { footer, ui } = useSiteContent();
-  const isLight = theme === "light";
   const isArabic = locale === "ar";
 
   return (
-    <footer id="contact" className="border-t border-default bg-primary scroll-mt-20">
-      <div className="container-narrow py-16">
-        {/* FINAL CTA SECTION */}
-        <div className="mb-14 rounded-2xl border border-accent/40 bg-secondary/30 p-8 sm:p-10 shadow-lg">
-          <div className="max-w-2xl">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-primary leading-tight">
-              {ui.footer.ctaHeading}
-            </h2>
-            <p className="mt-3 text-sm sm:text-base leading-relaxed text-secondary font-normal">
-              {ui.footer.ctaSubtitle}
-            </p>
+    <footer className="border-t border-border/60 bg-background text-foreground">
+      {/* Soft Light-Green Contact CTA Box */}
+      <section id="contact" className="py-12 md:py-16 scroll-mt-20">
+        <div className="container-narrow">
+          <div className="rounded-xl border border-accent/30 bg-accent/5 p-6 sm:p-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+            {/* Left Side */}
+            <div className="max-w-xl space-y-3">
+              <div className="text-[13px] font-mono uppercase text-accent font-semibold tracking-[0.08em]">
+                {isArabic ? "لنتحدث" : "LET'S TALK"}
+              </div>
 
-            <div className="mt-6 flex flex-wrap items-center gap-3">
-              <a
-                href="mailto:hello@sanukhan.dev?subject=Architecture%20Inquiry%20%E2%80%93%20SanuKhan.dev"
-                onClick={() => trackEvent("contact_click", { cta_type: "final_cta_lets_talk" })}
-                className="inline-flex items-center gap-2 rounded-xl bg-accent px-6 py-3 text-sm font-semibold text-white shadow-md transition-all duration-300 hover:bg-accent/90"
-              >
-                <span>{ui.footer.ctaButton}</span>
-              </a>
+              <h2 className="section-h2 text-primary">
+                {isArabic
+                  ? "هل تواجه تحدياً معقداً في نظامك؟"
+                  : "Have a difficult system problem?"}
+              </h2>
 
-              <a
-                href="https://linkedin.com/in/sanukhan"
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => trackEvent("linkedin_click")}
-                className="inline-flex items-center gap-2 rounded-xl border border-border bg-background/80 px-6 py-3 text-sm font-semibold text-primary transition-all duration-300 hover:border-accent/40 hover:bg-secondary"
-              >
-                <span>LinkedIn</span>
-              </a>
+              <p className="text-[16px] text-secondary leading-relaxed font-normal">
+                {isArabic
+                  ? "إذا كنت تعمل على العمارة المعمارية أو والتكامل أو تعقيدات المنصة، يسعدني دائماً تبادل الخبرات."
+                  : "If you're working through architecture, integration or platform complexity, I'm always happy to compare notes."}
+              </p>
+
+              <div className="flex flex-wrap items-center gap-3 pt-2">
+                <Button
+                  asChild
+                  className="h-10 rounded-lg bg-accent px-5 text-[14px] font-semibold text-white transition-colors hover:bg-accent/90 gap-1.5 shadow-xs"
+                >
+                  <a href="mailto:hello@sanukhan.dev?subject=Architecture%20Inquiry%20–%20SanuKhan.dev">
+                    <span>{isArabic ? "لنتحدث" : "Let's talk"}</span>
+                    <ArrowRight className="h-3.5 w-3.5 rtl:rotate-180" />
+                  </a>
+                </Button>
+
+                <Button
+                  variant="outline"
+                  asChild
+                  className="h-10 rounded-lg border-border bg-background px-5 text-[14px] font-semibold text-primary transition-colors hover:border-accent/40"
+                >
+                  <a href="mailto:hello@sanukhan.dev">
+                    {isArabic ? "راسلني بالبريد" : "Email me"}
+                  </a>
+                </Button>
+              </div>
+            </div>
+
+            {/* Right Side */}
+            <div className="flex flex-col md:items-end gap-3 text-[13px] font-mono text-muted-foreground">
+              <span>{isArabic ? "أو تواصل معي عبر ———" : "Or find me on ———"}</span>
+              <div className="flex items-center gap-4">
+                <a
+                  href="https://www.linkedin.com/in/sanukhandev/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 font-semibold text-primary hover:text-accent transition-colors"
+                >
+                  <Linkedin className="h-4 w-4 text-accent" />
+                  LinkedIn
+                </a>
+
+                <a
+                  href="https://github.com/sanukhandev"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 font-semibold text-primary hover:text-accent transition-colors"
+                >
+                  <Github className="h-4 w-4 text-accent" />
+                  GitHub
+                </a>
+              </div>
             </div>
           </div>
         </div>
+      </section>
 
-        <div className="flex flex-col items-start justify-between gap-5 sm:flex-row sm:items-center">
+      {/* Main Footer */}
+      <div className="py-8 border-t border-border/60 text-[13px]">
+        <div className="container-narrow flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+          {/* Left */}
           <div>
-            <a
-              href="#home"
-              aria-label={isArabic ? "الصفحة الرئيسية" : "SanuKhan.dev home"}
-            >
-              <svg
-                viewBox={isArabic ? "0 0 300 36" : "0 0 180 32"}
-                height="32"
-                className={cn(
-                  "h-8",
-                  isArabic
-                    ? "w-[198px] sm:w-[250px]"
-                    : "w-[150px] sm:w-[180px]",
-                )}
-                xmlns="http://www.w3.org/2000/svg"
-                aria-hidden
-              >
-                <defs>
-                  <linearGradient
-                    id="footer-logo-grad"
-                    x1="-100%"
-                    y1="0%"
-                    x2="200%"
-                    y2="0%"
-                    gradientUnits="userSpaceOnUse"
-                  >
-                    <stop
-                      offset="0%"
-                      stopColor={isLight ? "#1f9f45" : "#38c755"}
-                    />
-                    <stop
-                      offset="35%"
-                      stopColor={isLight ? "#1f9f45" : "#38c755"}
-                    />
-                    <stop
-                      offset="50%"
-                      stopColor={isLight ? "#6ed18a" : "#b4ffca"}
-                    />
-                    <stop
-                      offset="65%"
-                      stopColor={isLight ? "#153625" : "#ffffff"}
-                    />
-                    <stop
-                      offset="80%"
-                      stopColor={isLight ? "#1f9f45" : "#38c755"}
-                    />
-                    <stop
-                      offset="100%"
-                      stopColor={isLight ? "#1f9f45" : "#38c755"}
-                    />
-                    <animateTransform
-                      attributeName="gradientTransform"
-                      type="translate"
-                      values={
-                        isArabic
-                          ? "-240 0; 240 0; -240 0"
-                          : "-180 0; 180 0; -180 0"
-                      }
-                      keyTimes="0; 0.5; 1"
-                      dur="4s"
-                      repeatCount="indefinite"
-                    />
-                  </linearGradient>
-                </defs>
-                {isArabic ? (
-                  <>
-                    <text
-                      x="210"
-                      y="25"
-                      fontSize="26"
-                      fontWeight="700"
-                      textAnchor="end"
-                      fill={isLight ? "#145a34" : "#bfffd3"}
-                      stroke={isLight ? "#edf4ef" : "#0b0c10"}
-                      strokeWidth="0.85"
-                      paintOrder="stroke"
-                    >
-                      سانو خان
-                      <animate
-                        attributeName="fill"
-                        values={
-                          isLight
-                            ? "#145a34;#239f4a;#145a34"
-                            : "#bfffd3;#ffffff;#bfffd3"
-                        }
-                        dur="3.8s"
-                        repeatCount="indefinite"
-                      />
-                    </text>
-                    <text
-                      x="292"
-                      y="25"
-                      fontSize="20"
-                      fontWeight="500"
-                      textAnchor="end"
-                      fill={isLight ? "#1f9f45" : "#38c755"}
-                      opacity={isLight ? 0.95 : 0.9}
-                      stroke={isLight ? "#edf4ef" : "#0b0c10"}
-                      strokeWidth="0.7"
-                      paintOrder="stroke"
-                    >
-                      .ديف
-                      <animate
-                        attributeName="opacity"
-                        values="0.85;1;0.85"
-                        dur="2.8s"
-                        repeatCount="indefinite"
-                      />
-                    </text>
-                  </>
-                ) : (
-                  <>
-                   
-                    <text
-                      x="57"
-                      y="24"
-                      fontSize="20"
-                      fontFamily="'Poppins', sans-serif"
-                      letterSpacing="-0.5"
-                      fill="url(#footer-logo-grad)"
-                    >
-                      sanukhan.dev
-                    </text>
-                   
-                  </>
-                )}
-              </svg>
-            </a>
-            <p
-              className={cn(
-                "mt-1 text-[15px]",
-                isLight ? "text-[#4d5a66]" : "text-secondary",
+            <div className="wordmark inline-flex items-baseline text-primary select-none">
+              {isArabic ? (
+                <span>سانو خان</span>
+              ) : (
+                <>
+                  <span>SanuKhan</span>
+                  <span className="wordmark-domain">.dev</span>
+                </>
               )}
-            >
-              {footer.blurb}
-            </p>
+            </div>
+            <div className="text-muted-foreground text-[13px] mt-1 font-mono">
+              {isArabic
+                ? "معماري حلول · هندسة المنصات | دبي، الإمارات"
+                : "Solution Architect · Platform Engineering | Dubai, UAE"}
+            </div>
           </div>
 
-          <div className="flex w-full flex-wrap gap-2 sm:w-auto sm:gap-4">
-            {footer.socials.map((s) => {
-              const Icon = socialIcons[s.icon];
-              return (
-                <a
-                  key={s.label}
-                  href={s.href}
-                  target={s.href.startsWith("http") ? "_blank" : undefined}
-                  rel={
-                    s.href.startsWith("http")
-                      ? "noopener noreferrer"
-                      : undefined
-                  }
-                  onClick={() => {
-                    const normalizedLabel = s.label.toLowerCase();
-                    trackEvent("social_click", { platform: normalizedLabel });
-                    if (normalizedLabel.includes("github")) {
-                      trackEvent("github_click");
-                    }
-                    if (normalizedLabel.includes("linkedin")) {
-                      trackEvent("linkedin_click");
-                    }
-                  }}
-                  aria-label={s.label}
-                  className={cn(
-                    "inline-flex items-center gap-2 rounded-md border px-3 py-2 text-sm transition-all duration-300 hover:scale-[1.02]",
-                    isLight
-                      ? "border-[#d4dde1] bg-white text-[#4d5a66] hover:border-[#1f9f45]/35 hover:text-[#121722]"
-                      : "border-default bg-primary text-secondary hover:border-accent-soft hover:text-primary",
-                  )}
-                >
-                  <Icon className="h-4 w-4" />
-                  {s.label}
-                </a>
-              );
-            })}
-          </div>
-        </div>
-
-        <div
-          className={cn(
-            "mt-8 border-t pt-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between text-xs",
-            isLight
-              ? "border-[#d4dde1] text-[#4d5a66]"
-              : "border-default text-secondary",
-          )}
-        >
-          <div className="flex flex-wrap gap-4">
-            <a
-              href={`mailto:${footer.contact.email}`}
-              onClick={() =>
-                trackEvent("contact_click", { cta_type: "contact" })
-              }
-              className={cn(
-                "inline-flex items-center gap-1 transition-colors",
-                isLight ? "hover:text-[#121722]" : "hover:text-primary",
-              )}
-            >
-              <Mail className="h-3 w-3" />
-              {footer.contact.email}
+          {/* Center Links */}
+          <div className="flex flex-wrap items-center gap-5 text-secondary text-[14px] font-medium">
+            <a href="#work" className="hover:text-accent transition-colors">
+              {isArabic ? "الأعمال" : "Work"}
             </a>
-            {footer.contact.phone && (
-              <a
-                href={`tel:${footer.contact.phone}`}
-                onClick={() =>
-                  trackEvent("contact_click", { cta_type: "contact" })
-                }
-                className={cn(
-                  "inline-flex items-center gap-1 transition-colors",
-                  isLight ? "hover:text-[#121722]" : "hover:text-primary",
-                )}
-              >
-                <Phone className="h-3 w-3" />
-                {footer.contact.phone}
-              </a>
-            )}
-            <span className="inline-flex items-center gap-1">
-              <MapPin className="h-3 w-3" />
-              {footer.contact.location}
-            </span>
+            <a href="#architecture" className="hover:text-accent transition-colors">
+              {isArabic ? "المعمارية" : "Architecture"}
+            </a>
+            <a href="#writing" className="hover:text-accent transition-colors">
+              {isArabic ? "الملاحظات" : "Notes"}
+            </a>
+            <a href="#about" className="hover:text-accent transition-colors">
+              {isArabic ? "نبذة عني" : "About"}
+            </a>
+            <a href="/Sanu Khan - Resume.pdf" download className="hover:text-accent transition-colors">
+              {isArabic ? "السيرة الذاتية" : "Resume"}
+            </a>
           </div>
-          <span>{footer.copyright}</span>
+
+          {/* Right Copyright */}
+          <div className="text-muted-foreground font-mono text-[12.5px]">
+            {isArabic
+              ? `© ${new Date().getFullYear()} سانو خان. بُني بهدف.`
+              : `© ${new Date().getFullYear()} Sanu Khan. Built with purpose.`}
+          </div>
         </div>
       </div>
     </footer>
   );
 }
+

@@ -1,8 +1,7 @@
 import { memo, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Moon, Sun, Download, Globe, ArrowUpRight } from "lucide-react";
+import { Menu, X, Moon, Sun, Globe, ArrowRight } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import CoffeeIconAnimated from "@/components/CoffeeIconAnimated";
 import { useSiteContent } from "@/data/siteContent";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -17,24 +16,15 @@ function Navbar() {
   const [activeHref, setActiveHref] = useState("#home");
   const { theme, toggleTheme } = useTheme();
   const { locale, setLocale } = useLocale();
-  const { nav, profile } = useSiteContent();
+  const { nav } = useSiteContent();
   const isLight = theme === "light";
   const isArabic = locale === "ar";
   const reducedMotion = useReducedMotion();
   const isHomePage = location.pathname === "/";
-  const isBlogPage = location.pathname.startsWith("/blog");
-  const ctaHref =
-    !isHomePage && nav.cta.href.startsWith("#")
-      ? `/${nav.cta.href}`
-      : nav.cta.href;
-  const resumeCta = profile.ctas.find((cta) => cta.variant === "download");
-  const resumeLabel =
-    resumeCta?.label ||
-    (isArabic ? "تحميل السيرة الذاتية" : "Download Resume");
-  const resumeHref = resumeCta?.href || "/Sanu Khan - Resume.pdf";
+  const ctaHref = !isHomePage && nav.cta.href.startsWith("#") ? `/${nav.cta.href}` : nav.cta.href;
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    const onScroll = () => setScrolled(window.scrollY > 20);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -57,439 +47,154 @@ function Navbar() {
     const sectionToNavMap: Record<string, string> = {
       home: "#home",
       work: "#work",
-      works: "#work",
       architecture: "#architecture",
-      capabilities: "#architecture",
-      philosophy: "#architecture",
-      zaakiy: "#zaakiy",
-      "ops-intelligence": "#zaakiy",
       writing: "#writing",
-      articles: "#writing",
       about: "#about",
-      leadership: "#about",
-      experience: "#about",
-      process: "#about",
-      "how-i-work": "#about",
       contact: "#contact",
     };
 
     const updateActiveSection = () => {
       const scrollY = window.scrollY;
-      const innerHeight = window.innerHeight;
-      const scrollHeight = document.documentElement.scrollHeight;
-
-      if (scrollY < 100) {
+      if (scrollY < 80) {
         setActiveHref("#home");
         return;
       }
 
-      if (scrollY + innerHeight >= scrollHeight - 50) {
-        setActiveHref("#about");
-        return;
-      }
-
-      const targetOffset = 150;
-      const sectionIds = Object.keys(sectionToNavMap);
-      let currentNavHref = "";
-      let minDistance = Infinity;
-
-      for (const id of sectionIds) {
+      const targetOffset = 140;
+      for (const [id, href] of Object.entries(sectionToNavMap)) {
         const el = document.getElementById(id);
         if (!el) continue;
-
         const rect = el.getBoundingClientRect();
         if (rect.top <= targetOffset && rect.bottom > targetOffset) {
-          currentNavHref = sectionToNavMap[id];
+          setActiveHref(href);
           break;
         }
-
-        const dist = Math.abs(rect.top - targetOffset);
-        if (rect.top <= targetOffset + 150 && dist < minDistance) {
-          minDistance = dist;
-          currentNavHref = sectionToNavMap[id];
-        }
-      }
-
-      if (currentNavHref) {
-        setActiveHref(currentNavHref);
       }
     };
 
-    let ticking = false;
-    const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          updateActiveSection();
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-
-    updateActiveSection();
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("resize", handleScroll, { passive: true });
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", handleScroll);
-    };
+    window.addEventListener("scroll", updateActiveSection, { passive: true });
+    return () => window.removeEventListener("scroll", updateActiveSection);
   }, [isHomePage, location.pathname]);
 
   return (
-    <motion.header
-      className="fixed inset-x-0 top-0 z-50 pt-2 sm:pt-3"
-      initial={reducedMotion ? false : { y: -22, opacity: 0 }}
-      animate={reducedMotion ? undefined : { y: 0, opacity: 1 }}
-      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-    >
-      <motion.div
+    <header className="fixed inset-x-0 top-0 z-50 pt-2 sm:pt-3">
+      <div
         className={cn(
-          "mx-auto w-[min(1180px,calc(100%-1rem))] sm:w-[min(1180px,calc(100%-2rem))]",
-          "transition-colors duration-300",
+          "mx-auto w-[min(1200px,calc(100%-1.5rem))]",
+          "transition-all duration-200",
           scrolled
             ? isLight
-              ? "rounded-full border border-[#d4dde1] bg-primary-glass backdrop-blur-xl"
-              : "rounded-full border border-default bg-primary-glass backdrop-blur-xl"
-            : "rounded-2xl border border-transparent bg-transparent",
+              ? "rounded-full border border-border bg-white/90 backdrop-blur-md shadow-sm"
+              : "rounded-full border border-border bg-[#101828]/90 backdrop-blur-md shadow-sm"
+            : "rounded-2xl bg-transparent",
         )}
-        animate={
-          reducedMotion
-            ? undefined
-            : {
-                y: scrolled ? 0 : -1,
-                scale: scrolled ? 1 : 0.995,
-                boxShadow: scrolled
-                  ? isLight
-                    ? "0 18px 34px -22px rgba(20, 29, 40, 0.28)"
-                    : "0 18px 34px -20px rgba(0, 0, 0, 0.55)"
-                  : "0 0 0 rgba(0,0,0,0)",
-              }
-        }
-        transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
       >
-        <div className="flex h-16 items-center justify-between px-4 sm:px-6">
-        <a
-          href={isHomePage ? "#home" : "/#home"}
-          className="group shrink-0"
-          aria-label={isArabic ? "الصفحة الرئيسية" : "SanuKhan.dev home"}
-        >
-          <svg
-            viewBox={isArabic ? "0 0 300 36" : "0 0 180 32"}
-            height="32"
-            className={cn(
-              "h-8",
-              isArabic ? "w-[198px] sm:w-[250px]" : "w-[150px] sm:w-[180px]",
-            )}
-            xmlns="http://www.w3.org/2000/svg"
-            aria-hidden
-          >
-            <defs>
-              <linearGradient
-                id="logo-grad-move"
-                x1="-100%"
-                y1="0%"
-                x2="200%"
-                y2="0%"
-                gradientUnits="userSpaceOnUse"
-              >
-                <stop offset="0%" stopColor={isLight ? "#1f9f45" : "#38c755"} />
-                <stop
-                  offset="35%"
-                  stopColor={isLight ? "#1f9f45" : "#38c755"}
-                />
-                <stop
-                  offset="50%"
-                  stopColor={isLight ? "#6ed18a" : "#b4ffca"}
-                />
-                <stop
-                  offset="65%"
-                  stopColor={isLight ? "#153625" : "#ffffff"}
-                />
-                <stop
-                  offset="80%"
-                  stopColor={isLight ? "#1f9f45" : "#38c755"}
-                />
-                <stop
-                  offset="100%"
-                  stopColor={isLight ? "#1f9f45" : "#38c755"}
-                />
-                <animateTransform
-                  attributeName="gradientTransform"
-                  type="translate"
-                  values={
-                    isArabic ? "-240 0; 240 0; -240 0" : "-180 0; 180 0; -180 0"
-                  }
-                  keyTimes="0; 0.5; 1"
-                  dur="4s"
-                  repeatCount="indefinite"
-                />
-              </linearGradient>
-            </defs>
-            {isArabic ? (
-              <>
-                <text
-                  x="210"
-                  y="25"
-                  fontSize="26"
-                  fontWeight="700"
-                  textAnchor="end"
-                  fill={isLight ? "#145a34" : "#bfffd3"}
-                  stroke={isLight ? "#f4f8f5" : "#0b0c10"}
-                  strokeWidth="0.85"
-                  paintOrder="stroke"
-                >
-                  سانو خان
-                  <animate
-                    attributeName="fill"
-                    values={
-                      isLight
-                        ? "#145a34;#239f4a;#145a34"
-                        : "#bfffd3;#ffffff;#bfffd3"
-                    }
-                    dur="3.8s"
-                    repeatCount="indefinite"
-                  />
-                </text>
-                <text
-                  x="292"
-                  y="25"
-                  fontSize="20"
-                  fontWeight="500"
-                  textAnchor="end"
-                  fill={isLight ? "#1f9f45" : "#38c755"}
-                  opacity={isLight ? 0.95 : 0.9}
-                  stroke={isLight ? "#f4f8f5" : "#0b0c10"}
-                  strokeWidth="0.7"
-                  paintOrder="stroke"
-                >
-                  .ديف
-                  <animate
-                    attributeName="opacity"
-                    values="0.85;1;0.85"
-                    dur="2.8s"
-                    repeatCount="indefinite"
-                  />
-                </text>
-              </>
-            ) : (
-              <>
-                <text
-                  x="57"
-                  y="24"
-                  fontSize="20"
-                  fontWeight="100"
-                  fontFamily="'Poppins', sans-serif"
-                  letterSpacing="-0.5"
-                  fill="url(#logo-grad-move)"
-                >
-                  sanukhan.dev
-                </text>
-              </>
-            )}
-          </svg>
-        </a>
-
-        <nav className="hidden items-center gap-7 md:flex">
-          {nav.links.map((l) => (
-            <a
-              key={l.href}
-              href={isHomePage ? l.href : `/${l.href}`}
-              className={cn(
-                "relative text-[15px] transition-all duration-300 hover:scale-[1.02]",
-                isHomePage && activeHref === l.href
-                  ? isLight
-                    ? "text-[#0f1015] font-semibold"
-                    : "text-[#f5f7fa] font-semibold"
-                  : isLight
-                    ? "text-[#4d5a66] hover:text-[#0f1015]"
-                    : "text-[#c9ced6] hover:text-[#38c755]",
-              )}
-            >
-              {l.label}
-              <span
-                className={cn(
-                  "absolute -bottom-1.5 left-0 h-[2px] bg-accent transition-all duration-300",
-                  isHomePage && activeHref === l.href
-                    ? "w-full opacity-100"
-                    : "w-0 opacity-0",
-                )}
-              />
-            </a>
-          ))}
-        </nav>
-
-        <div className="hidden md:flex items-center gap-1.5">
-          {/* Theme */}
-          <button
-            type="button"
-            aria-label={
-              isLight ? "Switch to dark theme" : "Switch to light theme"
-            }
-            onClick={toggleTheme}
-            className={cn(
-              "inline-flex h-9 w-9 items-center justify-center rounded-lg border transition-all duration-200 hover:scale-[1.06]",
-              isLight
-                ? "border-[#cfd8dd] bg-white text-[#1a232e] hover:bg-[#eef4f0]"
-                : "border-[#2b2f3b] bg-[#16171d] text-[#f5f7fa] hover:bg-[#20222b]",
-            )}
-          >
-            {isLight ? (
-              <Moon className="h-4 w-4" />
-            ) : (
-              <Sun className="h-4 w-4" />
-            )}
-          </button>
-
-          {/* Locale — single toggle */}
-          <button
-            type="button"
-            aria-label={
-              locale === "en" ? "Switch to Arabic" : "Switch to English"
-            }
-            title={locale === "en" ? "Switch to Arabic" : "Switch to English"}
-            onClick={() => setLocale(locale === "en" ? "ar" : "en")}
-            className={cn(
-              "inline-flex h-9 w-9 items-center justify-center rounded-lg border text-[11px] font-bold transition-all duration-200 hover:scale-[1.06]",
-              isLight
-                ? "border-[#cfd8dd] bg-white text-[#1a232e] hover:bg-[#eef4f0]"
-                : "border-[#2b2f3b] bg-[#16171d] text-[#f5f7fa] hover:bg-[#20222b]",
-            )}
-          >
-            {locale === "en" ? (
-              <span className="text-[12px]">ع</span>
-            ) : (
-              <span>EN</span>
-            )}
-          </button>
-
-          {/* Buy me a coffee */}
+        <div className="flex h-14 items-center justify-between px-4 sm:px-6">
+          {/* Brand Wordmark */}
           <a
-            href="https://ko-fi.com/sanukhan"
-            target="_blank"
-            rel="noopener noreferrer"
-            title={isArabic ? "ادعمني بقهوة" : "Buy me a coffee"}
-            onClick={() => trackEvent("coffee_click", { source: "navbar" })}
-            className={cn(
-              "inline-flex h-9 w-9 items-center justify-center rounded-lg border transition-all duration-200 hover:scale-[1.06]",
-              isLight
-                ? "border-[#cfd8dd] bg-white text-[#1f9f45] hover:bg-[#eef4f0]"
-                : "border-[#2b2f3b] bg-[#16171d] text-[#38c755] hover:bg-[#20222b]",
-            )}
+            href={isHomePage ? "#home" : "/#home"}
+            className="wordmark inline-flex items-baseline text-primary hover:opacity-95 transition-opacity select-none"
+            aria-label="SanuKhan.dev home"
           >
-            <CoffeeIconAnimated className="h-4 w-4" />
+            {isArabic ? (
+              <span>سانو خان</span>
+            ) : (
+              <>
+                <span>SanuKhan</span>
+                <span className="wordmark-domain">.dev</span>
+              </>
+            )}
           </a>
 
-          <div className="mx-0.5 h-5 w-px shrink-0 rounded-full opacity-30 bg-current" />
+          {/* Desktop Nav Links */}
+          <nav className="hidden items-center gap-8 md:flex">
+            {nav.links.map((l) => (
+              <a
+                key={l.href}
+                href={isHomePage ? l.href : `/${l.href}`}
+                className={cn(
+                  "text-[14.5px] font-medium transition-colors hover:text-accent",
+                  isHomePage && activeHref === l.href
+                    ? "text-primary font-semibold"
+                    : "text-secondary",
+                )}
+              >
+                {l.label}
+              </a>
+            ))}
+          </nav>
 
-          {/* Download Resume CTA */}
-          <Button
-            asChild
-            className="h-9 rounded-lg px-4 hover:scale-[1.02] gap-1 transition-all duration-200 bg-accent text-white hover:bg-accent/90 shadow-sm"
-          >
-            <a
-              href={resumeHref}
-              download
-              onClick={() => {
-                trackEvent("download_resume_click", {
-                  cta_type: "download",
-                  source: "navbar",
-                });
-                trackEvent("cta_click", {
-                  cta_type: "download",
-                  cta_label: resumeLabel,
-                });
-              }}
+          {/* Actions */}
+          <div className="hidden md:flex items-center gap-3">
+            {/* Theme Toggle */}
+            <button
+              type="button"
+              aria-label={isLight ? "Switch to dark theme" : "Switch to light theme"}
+              onClick={toggleTheme}
+              className="inline-flex h-8 w-8 items-center justify-center rounded-lg border border-border text-secondary hover:text-primary transition-colors"
             >
-              <Download className="h-3.5 w-3.5 animate-bounce" />
-              {resumeLabel}
-            </a>
-          </Button>
-        </div>
+              {isLight ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
+            </button>
 
-        <button
-          className={cn(
-            "grid h-9 w-9 place-items-center rounded-md border md:hidden",
-            isLight
-              ? "border-[#cfd8dd] bg-white text-[#1a232e]"
-              : "border-[#2b2f3b] bg-[#16171d] text-[#f5f7fa]",
-          )}
-          aria-label="Toggle menu"
-          onClick={() => setOpen((v) => !v)}
-        >
-          {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
-        </button>
-        </div>
-      </motion.div>
+            {/* Locale Toggle */}
+            <button
+              type="button"
+              onClick={() => setLocale(locale === "en" ? "ar" : "en")}
+              className="inline-flex h-8 px-2.5 items-center justify-center rounded-lg border border-border text-xs font-bold text-secondary hover:text-primary transition-colors"
+            >
+              {locale === "en" ? "ع" : "EN"}
+            </button>
 
+            {/* Primary CTA: Let's talk */}
+            <Button
+              asChild
+              className="h-9 rounded-lg bg-accent px-4 text-xs font-semibold text-white transition-colors hover:bg-accent/90 gap-1.5 shadow-sm"
+            >
+              <a href={ctaHref}>
+                {isArabic ? "لنتحدث" : "Let's talk"}
+                <ArrowRight className="h-3.5 w-3.5 rtl:rotate-180" />
+              </a>
+            </Button>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            className="grid h-9 w-9 place-items-center rounded-md border border-border text-primary md:hidden"
+            aria-label="Toggle menu"
+            onClick={() => setOpen((v) => !v)}
+          >
+            {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Menu */}
       <AnimatePresence>
         {open && (
           <motion.div
-            className={cn(
-              "mx-auto mt-2 w-[min(1180px,calc(100%-1rem))] sm:w-[min(1180px,calc(100%-2rem))] overflow-hidden rounded-2xl border-t md:hidden",
-              isLight
-                ? "border-[#d4dde1] bg-[#f6faf7]"
-                : "border-default bg-secondary",
-            )}
+            className="mx-auto mt-2 w-[min(1200px,calc(100%-1.5rem))] overflow-hidden rounded-2xl border border-border bg-background p-4 md:hidden shadow-lg"
             initial={reducedMotion ? false : { opacity: 0, height: 0 }}
             animate={reducedMotion ? undefined : { opacity: 1, height: "auto" }}
             exit={reducedMotion ? undefined : { opacity: 0, height: 0 }}
-            transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
           >
-            <div className="flex flex-col gap-1 px-4 py-3 sm:px-6">
-              {/* Mobile toolbar: locale + theme + coffee */}
-              <div className="mb-2 flex items-center gap-2">
+            <div className="flex flex-col gap-2">
+              <div className="flex items-center gap-2 mb-2 pb-2 border-b border-border">
                 <button
                   type="button"
                   onClick={() => setLocale(locale === "en" ? "ar" : "en")}
-                  className={cn(
-                    "inline-flex h-8 items-center gap-1.5 rounded-md border px-2.5 text-[11px] font-bold transition-colors",
-                    isLight
-                      ? "border-[#cfd8dd] bg-white text-[#1a232e]"
-                      : "border-[#2b2f3b] bg-[#16171d] text-[#f5f7fa]",
-                  )}
+                  className="inline-flex h-8 items-center gap-1.5 rounded-md border border-border px-3 text-xs font-bold text-primary"
                 >
-                  <Globe className="h-3 w-3 opacity-60" />
-                  {locale === "en" ? "ع" : "EN"}
+                  <Globe className="h-3.5 w-3.5" />
+                  {locale === "en" ? "العربية" : "English"}
                 </button>
                 <button
                   type="button"
                   onClick={toggleTheme}
-                  className={cn(
-                    "inline-flex h-8 items-center gap-1.5 rounded-md border px-2.5 text-[11px] font-semibold transition-colors",
-                    isLight
-                      ? "border-[#cfd8dd] bg-white text-[#1a232e]"
-                      : "border-[#2b2f3b] bg-[#16171d] text-[#f5f7fa]",
-                  )}
+                  className="inline-flex h-8 items-center gap-1.5 rounded-md border border-border px-3 text-xs font-semibold text-primary"
                 >
-                  {isLight ? (
-                    <Moon className="h-3.5 w-3.5" />
-                  ) : (
-                    <Sun className="h-3.5 w-3.5" />
-                  )}
-                  {isArabic
-                    ? isLight
-                      ? "داكن"
-                      : "فاتح"
-                    : isLight
-                      ? "Dark"
-                      : "Light"}
+                  {isLight ? <Moon className="h-3.5 w-3.5" /> : <Sun className="h-3.5 w-3.5" />}
+                  {isLight ? "Dark" : "Light"}
                 </button>
-                <a
-                  href="https://ko-fi.com/sanukhan"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => setOpen(false)}
-                  title={isArabic ? "ادعمني بقهوة" : "Buy me a coffee"}
-                  className={cn(
-                    "inline-flex h-8 w-8 items-center justify-center rounded-md border transition-colors",
-                    isLight
-                      ? "border-[#1f9f45]/45 bg-[#1f9f45]/8 text-[#1f9f45]"
-                      : "border-[#38c755]/40 bg-[#38c755]/10 text-[#38c755]",
-                  )}
-                >
-                  <CoffeeIconAnimated className="h-4 w-4" />
-                </a>
               </div>
 
               {nav.links.map((l) => (
@@ -497,49 +202,25 @@ function Navbar() {
                   key={l.href}
                   href={isHomePage ? l.href : `/${l.href}`}
                   onClick={() => setOpen(false)}
-                  className={cn(
-                    "rounded-md px-3 py-2 text-sm transition-all duration-300",
-                    activeHref === l.href
-                      ? isLight
-                        ? "bg-[#e8f0ec] text-[#0f1015] font-semibold"
-                        : "bg-[#1e2028] text-[#38c755] font-semibold"
-                      : isLight
-                        ? "text-[#4d5a66] hover:bg-[#e8f0ec] hover:text-[#0f1015]"
-                        : "text-[#c9ced6] hover:bg-[#1e2028] hover:text-[#38c755]",
-                  )}
+                  className="rounded-md px-3 py-2 text-sm font-medium text-secondary hover:text-accent hover:bg-secondary/20"
                 >
                   {l.label}
                 </a>
               ))}
+
               <Button
                 asChild
-                className={cn(
-                  "mt-2 rounded-lg gap-1",
-                  isLight
-                    ? "bg-[#1f9f45] text-white hover:bg-[#2caf54]"
-                    : "bg-accent text-on-accent hover:bg-[#4ade80]",
-                )}
+                className="mt-2 rounded-lg bg-accent text-white hover:bg-accent/90"
               >
-                <a
-                  href={ctaHref}
-                  onClick={() => {
-                    setOpen(false);
-                    trackEvent("contact_click", { cta_type: "contact" });
-                    trackEvent("cta_click", {
-                      cta_type: "contact",
-                      cta_label: nav.cta.label,
-                    });
-                  }}
-                >
-                  {nav.cta.label}
-                  <ArrowUpRight className="h-3.5 w-3.5" />
+                <a href={ctaHref} onClick={() => setOpen(false)}>
+                  {isArabic ? "لنتحدث" : "Let's talk"} →
                 </a>
               </Button>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.header>
+    </header>
   );
 }
 

@@ -385,12 +385,10 @@ export default defineConfig(({ command, mode }) => {
       sourcemap: isAnalyze,
       rollupOptions: {
         output: {
-          entryFileNames: "assets/index.js",
-          chunkFileNames: "assets/[name]-[hash].js",
-          assetFileNames: (assetInfo) =>
-            assetInfo.name?.endsWith(".css")
-              ? "assets/index.css"
-              : "assets/[name]-[hash][extname]",
+          // Filenames are intentionally left to Vite's hashed defaults.
+          // A fixed name (e.g. "assets/index.js") combined with the
+          // `immutable, max-age=31536000` header in vercel.json pins
+          // returning visitors to a stale entry chunk for a year.
           manualChunks(id) {
             if (
               id.includes("node_modules/react/") ||
@@ -399,18 +397,13 @@ export default defineConfig(({ command, mode }) => {
             ) {
               return "vendor";
             }
-            if (
-              id.includes("node_modules/react-router") ||
-              id.includes("node_modules/@tanstack/")
-            ) {
+            if (id.includes("node_modules/react-router")) {
               return "routingData";
             }
-            if (
-              id.includes("node_modules/@radix-ui/") ||
-              id.includes("node_modules/lucide-react/")
-            ) {
-              return "ui";
-            }
+            // @radix-ui and lucide-react are deliberately NOT lumped into a
+            // single "ui" chunk: one entry-level Radix import would then drag
+            // every Radix package and icon into the critical path. Left to
+            // Vite, they split per consuming route chunk.
             if (id.includes("node_modules/framer-motion/")) {
               return "motion";
             }
