@@ -2,7 +2,10 @@ export const SITE_URL = "https://www.sanukhan.dev";
 export const SITE_NAME = "sanukhan.dev";
 export const DEFAULT_AUTHOR = "Sanu Khan";
 export const DEFAULT_TWITTER_HANDLE = "@sanukhandev";
-export const DEFAULT_OG_IMAGE = `${SITE_URL}/assets/images/sanu.avif`;
+// Must stay a raster format (JPG/PNG): LinkedIn, X, Facebook, Slack and
+// WhatsApp OG scrapers do not decode AVIF/WebP. Regenerate with
+// `node scripts/generate-og-image.mjs`.
+export const DEFAULT_OG_IMAGE = `${SITE_URL}/assets/images/og-card.jpg`;
 
 export type SeoKind = "website" | "article" | "profile";
 

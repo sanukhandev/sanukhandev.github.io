@@ -214,7 +214,6 @@ export default function DevToBlogPage() {
           </div>
         </main>
         <Footer />
-        <ZaakiyChatWidget />
       </>
     );
   }
@@ -399,7 +398,6 @@ export default function DevToBlogPage() {
                 height={630}
                 loading="eager"
                 decoding="async"
-                fetchpriority="high"
                 className="mt-6 w-full rounded-2xl border border-[var(--border)] object-cover"
               />
             )}
@@ -618,7 +616,6 @@ export default function DevToBlogPage() {
       </main>
 
       <Footer />
-      <ZaakiyChatWidget extraContext={chatContext} />
     </>
   );
 }

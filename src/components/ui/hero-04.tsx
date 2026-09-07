@@ -1,233 +1,163 @@
-import React from "react";
-import { motion, useReducedMotion } from "framer-motion";
-import type { Variants } from "framer-motion";
-import { ArrowDownRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { RotateCardStack } from "@/components/ui/rotate-card-stack";
-import { useSiteContent } from "@/data/siteContent";
+import { ArrowRight, MapPin } from "lucide-react";
 import { useLocale } from "@/hooks/use-locale";
 
 export function HeroSection04() {
-  const { profile, works, skills, ui } = useSiteContent();
   const { locale } = useLocale();
   const isArabic = locale === "ar";
 
-  const roleBrand =
-    (profile as typeof profile & { roleBrand?: string }).roleBrand ?? "ZaakiyV3RSE";
-  const primarySkills = skills.clusters
-    .slice(0, 5)
-    .map((cluster) => cluster.title.toUpperCase());
-  const showcaseWorks = works.slice(0, 3);
-  const primaryCtas = profile.ctas.slice(0, 2);
-  const reduceMotion = useReducedMotion();
-
-  const container: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.4,
-      },
+  const stats = [
+    {
+      title: isArabic ? "13+ سنة" : "13+ years",
+      sub: isArabic ? "بناء أنظمة إنتاجية" : "Building production systems",
     },
-  };
-
-  const reveal: Variants = {
-    hidden: { opacity: 0, y: 22 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.7 },
+    {
+      title: isArabic ? "تكامل المؤسسات" : "Enterprise integration",
+      sub: isArabic ? "ERP · PIM · التجارة · OMS" : "ERP · PIM · Commerce · OMS",
     },
-  };
+    {
+      title: isArabic ? "المجالات" : "Domains",
+      sub: isArabic ? "التجزئة · السيارات · الطيران · SaaS" : "Retail · Automotive · Airline · SaaS",
+    },
+    {
+      title: isArabic ? "المقر" : "Based in",
+      icon: MapPin,
+      sub: isArabic ? "دبي، الإمارات" : "Dubai, UAE",
+    },
+  ];
 
   return (
     <section
       id="home"
-      className="font-body relative overflow-hidden py-12 md:py-16"
+      className="relative pt-8 pb-10 md:pt-12 md:pb-14 bg-background text-foreground"
     >
-      <motion.div
-        className="relative z-20 mx-auto max-w-6xl px-4 sm:px-6"
-        variants={container}
-        initial={reduceMotion ? false : "hidden"}
-        animate={reduceMotion ? undefined : "visible"}
-      >
-        {/* Eyebrow & ARCHITECT display background */}
-        <motion.div className="relative text-center" variants={reveal}>
-          <div className="mb-2 inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-3.5 py-1 text-[11px] font-semibold uppercase text-accent sm:text-xs">
-            <span className="h-1.5 w-1.5 rounded-full bg-accent animate-pulse" />
-            {ui.hero.eyebrow}
+      <div className="container-narrow">
+        {/* Balanced 2-Column Desktop Hero Layout */}
+        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-10 lg:gap-14 min-h-[400px] md:min-h-[440px]">
+          {/* Left Column (~68% desktop) */}
+          <div className="flex-1 max-w-[720px]">
+            {/* Eyebrow */}
+            <div className="text-[13px] font-mono uppercase text-accent font-semibold tracking-[0.08em] mb-3 flex items-center gap-1.5">
+              <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+              <span>
+                {isArabic
+                  ? "معماري تقني · هندسة المنصات"
+                  : "SOLUTION ARCHITECT · PLATFORM ENGINEERING"}
+              </span>
+            </div>
+
+            {/* Main Headline */}
+            <h1 className="text-3xl sm:text-4xl lg:text-[clamp(52px,5vw,64px)] font-extrabold tracking-[-0.045em] text-primary leading-[0.98] sm:leading-[1.03] mb-5">
+              {isArabic ? (
+                "أصمم الأنظمة حول مشكلات الأعمال المعقدة."
+              ) : (
+                <>
+                  I design systems around <br className="hidden sm:block" />
+                  messy business problems.
+                </>
+              )}
+            </h1>
+
+            {/* Supporting Copy */}
+            <p className="text-base sm:text-[18.5px] text-secondary leading-[1.6] font-normal max-w-[640px] mb-6">
+              {isArabic
+                ? "أعمل عبر العمارة المعمارية والتكامل والتنفيذ — خاصة حيث تتطلب الأنظمة والفرق والعمليات المتعددة أن تعمل كمنصة واحدة."
+                : "I work across architecture, integration and implementation — particularly where multiple systems, teams and business processes need to behave as one platform."}
+            </p>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-wrap items-center gap-3">
+              <Button
+                asChild
+                className="h-11 rounded-lg bg-accent px-6 text-[14.5px] font-semibold text-white transition-colors hover:bg-accent/90 shadow-sm gap-1.5"
+              >
+                <a href="#work">
+                  <span>{isArabic ? "عرض أعمالي" : "View my work"}</span>
+                  <ArrowRight className="h-4 w-4 rtl:rotate-180" />
+                </a>
+              </Button>
+
+              <Button
+                variant="outline"
+                asChild
+                className="h-11 rounded-lg border-border bg-transparent px-6 text-[14.5px] font-semibold text-primary transition-colors hover:bg-secondary/20 hover:border-accent/40"
+              >
+                <a href="#writing">
+                  {isArabic ? "قراءة الملاحظات الهندسية" : "Read engineering notes"}
+                </a>
+              </Button>
+            </div>
+
+            {/* Human Context Line */}
+            <p className="text-[13.5px] text-muted-foreground font-mono mt-4 font-medium flex items-center gap-2">
+              <span className="h-1.5 w-1.5 rounded-full bg-accent/70 shrink-0" />
+              <span>
+                {isArabic
+                  ? "العمارة والتكامل — ومع كود كافٍ للبقاء على اتصال بالواقع."
+                  : "Architecture, integration — and still enough code to stay honest."}
+              </span>
+            </p>
           </div>
 
-          <h1 className="font-display relative z-10 text-[clamp(3.5rem,14vw,7.5rem)] font-extrabold leading-[0.95] tracking-[-0.045em] text-primary/15 select-none pointer-events-none md:text-9xl xl:text-[10rem]">
-            {ui.hero.title}
-          </h1>
+          {/* Right Column — Larger Avatar with Expanded ARCHITECT Background Word & One-line Quote */}
+          <div className="shrink-0 relative flex flex-col items-center justify-center self-center my-4 lg:my-0 min-h-[360px] lg:min-h-[400px] w-full lg:w-[36%] overflow-hidden sm:overflow-visible">
+            {/* Background Decorative Word: ARCHITECT (Expanded behind avatar & text) */}
+            <div
+              aria-hidden="true"
+              className="absolute left-1/2 top-[48%] -translate-x-1/2 -translate-y-1/2 z-0 pointer-events-none select-none font-mono text-[clamp(80px,12vw,160px)] font-extrabold tracking-[-0.06em] leading-[0.8] text-accent/10 dark:text-accent/12 uppercase text-center whitespace-nowrap"
+              style={{ fontFamily: '"Space Grotesk", sans-serif' }}
+            >
+              ARCHITECT
+            </div>
 
-          {/* Overlapping Character Portrait & Core Positioning */}
-          <div className="relative -mt-16 sm:-mt-24 z-20 mx-auto max-w-4xl">
-            <div className="flex flex-col items-center gap-6 md:flex-row md:items-center md:justify-center md:gap-10">
-              {/* Character Illustration */}
-              <div className="shrink-0 w-44 sm:w-52 md:w-60">
-                <picture>
-                  <source srcSet="/assets/images/sanu.avif" type="image/avif" />
-                  <source srcSet="/assets/images/sanu.webp" type="image/webp" />
-                  <img
-                    src={profile.avatarUrl}
-                    alt={`${profile.name} portrait`}
-                    width={420}
-                    height={520}
-                    loading="eager"
-                    fetchpriority="high"
-                    className="h-auto w-full object-contain filter drop-shadow-[0_12px_24px_rgba(0,0,0,0.4)]"
-                  />
-                </picture>
-              </div>
+            {/* Larger Floating Portrait (z-index 10, completely unframed) */}
+            <div className="relative z-10 w-[240px] sm:w-[280px] lg:w-[320px]">
+              <picture>
+                <source srcSet="/assets/images/sanu-400.avif" type="image/avif" />
+                <source srcSet="/assets/images/sanu-400.webp" type="image/webp" />
+                <img
+                  src="/assets/images/sanu-400.avif"
+                  alt="Sanu Khan illustration"
+                  width={400}
+                  height={600}
+                  loading="eager"
+                  className="h-auto w-full object-contain filter drop-shadow-[0_14px_28px_rgba(20,35,25,0.09)]"
+                />
+              </picture>
+            </div>
 
-              {/* Main Headline & Positioning */}
-              <div className="text-center md:text-start max-w-xl">
-                <h2 className="text-3xl font-extrabold tracking-tight text-primary sm:text-4xl md:text-5xl leading-[1.1]">
-                  {ui.hero.headline}
-                </h2>
-
-                <p className="mt-4 text-sm sm:text-base leading-relaxed text-secondary font-normal">
-                  {ui.hero.supporting}
-                </p>
-
-                {/* Compact Verified Credibility Line */}
-                <div className="mt-5 flex flex-wrap items-center justify-center md:justify-start gap-2 text-xs font-semibold text-accent/90 border-l-2 rtl:border-r-2 rtl:border-l-0 pl-3 rtl:pr-3 rtl:pl-0 py-0.5">
-                  {ui.hero.credibilityLine.map((item, idx) => (
-                    <React.Fragment key={item}>
-                      <span>{item}</span>
-                      {idx < ui.hero.credibilityLine.length - 1 && (
-                        <span className="opacity-40">•</span>
-                      )}
-                    </React.Fragment>
-                  ))}
-                </div>
-
-                {/* Primary & Secondary Action CTAs */}
-                <div className="mt-6 flex flex-wrap items-center justify-center md:justify-start gap-3">
-                  <Button
-                    className="h-11 rounded-xl bg-accent px-6 font-semibold text-white transition-all duration-300 hover:bg-accent/90 shadow-md shadow-accent/20"
-                    asChild
-                  >
-                    <a href="#work">{ui.hero.exploreWork}</a>
-                  </Button>
-
-                  <Button
-                    variant="outline"
-                    className="h-11 rounded-xl border-border bg-secondary/50 px-6 font-semibold text-primary transition-all duration-300 hover:border-accent/50 hover:bg-secondary"
-                    asChild
-                  >
-                    <a href="#architecture">{ui.hero.viewArchitecture}</a>
-                  </Button>
-                </div>
-
-                {/* Inspiring Leadership Quote */}
-                <div className="mt-5 flex items-center justify-center md:justify-start gap-2.5 text-[12px] font-mono tracking-wide text-secondary">
-                  <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-accent animate-pulse" />
-                  <span className="italic">{ui.hero.quote}</span>
-                </div>
-              </div>
+            {/* One-Line Personal Annotation */}
+            <div className="relative z-20 mt-3 font-handwritten text-[19px] sm:text-[21px] text-accent font-semibold text-center select-none transform -rotate-1">
+              {isArabic
+                ? "أنظمة معقدة. قرارات واضحة. نتائج أفضل."
+                : "Complex systems. Clear decisions. Better outcomes."}
             </div>
           </div>
-        </motion.div>
-      </motion.div>
-      <div
-        className="absolute inset-0 z-0 block dark:hidden"
-        style={{
-          backgroundImage: `
-        linear-gradient(to right, #e5e5e5 1px, transparent 1px),
-        linear-gradient(to bottom, #e5e5e5 1px, transparent 1px)
-      `,
-          backgroundSize: "20px 20px",
-          backgroundPosition: "0 0, 0 0",
-          maskImage: `
-        repeating-linear-gradient(
-              to right,
-              black 0px,
-              black 3px,
-              transparent 3px,
-              transparent 8px
-            ),
-            repeating-linear-gradient(
-              to bottom,
-              black 0px,
-              black 3px,
-              transparent 3px,
-              transparent 8px
-            ),
-            radial-gradient(ellipse 70% 60% at 50% 0%, #000 60%, transparent 100%)
-      `,
-          WebkitMaskImage: `
- repeating-linear-gradient(
-              to right,
-              black 0px,
-              black 3px,
-              transparent 3px,
-              transparent 8px
-            ),
-            repeating-linear-gradient(
-              to bottom,
-              black 0px,
-              black 3px,
-              transparent 3px,
-              transparent 8px
-            ),
-            radial-gradient(ellipse 70% 60% at 50% 0%, #000 60%, transparent 100%)
-      `,
-          maskComposite: "intersect",
-          WebkitMaskComposite: "source-in",
-        }}
-      />
+        </div>
 
-      <div
-        className="absolute inset-0 z-0 hidden dark:block"
-        style={{
-          backgroundImage: `
-        linear-gradient(to right, #404040 1px, transparent 1px),
-        linear-gradient(to bottom, #404040 1px, transparent 1px)
-      `,
-          backgroundSize: "20px 20px",
-          backgroundPosition: "0 0, 0 0",
-          maskImage: `
-        repeating-linear-gradient(
-              to right,
-              black 0px,
-              black 3px,
-              transparent 3px,
-              transparent 8px
-            ),
-            repeating-linear-gradient(
-              to bottom,
-              black 0px,
-              black 3px,
-              transparent 3px,
-              transparent 8px
-            ),
-            radial-gradient(ellipse 70% 60% at 50% 0%, #000 60%, transparent 100%)
-      `,
-          WebkitMaskImage: `
- repeating-linear-gradient(
-              to right,
-              black 0px,
-              black 3px,
-              transparent 3px,
-              transparent 8px
-            ),
-            repeating-linear-gradient(
-              to bottom,
-              black 0px,
-              black 3px,
-              transparent 3px,
-              transparent 8px
-            ),
-            radial-gradient(ellipse 70% 60% at 50% 0%, #000 60%, transparent 100%)
-      `,
-          maskComposite: "intersect",
-          WebkitMaskComposite: "source-in",
-        }}
-      />
+        {/* Integrated Hero Experience Strip */}
+        <div className="mt-12 pt-8 border-t border-border/60">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 divide-y sm:divide-y-0 sm:divide-x divide-border/60">
+            {stats.map((stat, idx) => (
+              <div
+                key={stat.title}
+                className={`flex flex-col justify-center ${
+                  idx > 0 ? "pt-4 sm:pt-0 sm:pl-6 lg:pl-8 rtl:sm:pl-0 rtl:sm:pr-6 rtl:lg:pr-8" : ""
+                }`}
+              >
+                <div className="flex items-center gap-1.5 text-[13px] font-mono uppercase text-accent font-semibold tracking-wider">
+                  {stat.icon && <stat.icon className="h-3.5 w-3.5" />}
+                  <span>{stat.title}</span>
+                </div>
+                <span className="mt-1 text-[14.5px] font-semibold text-primary">
+                  {stat.sub}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
     </section>
   );
 }
+

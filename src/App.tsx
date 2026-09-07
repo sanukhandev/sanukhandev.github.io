@@ -1,14 +1,28 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Suspense, useEffect, useRef } from "react";
-import { BrowserRouter, Navigate, Route, Routes, useLocation } from "react-router-dom";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { Toaster } from "@/components/ui/toaster";
+import { Suspense, lazy, useEffect, useRef } from "react";
+import {
+  BrowserRouter,
+  Navigate,
+  Route,
+  Routes,
+  useLocation,
+  useParams,
+} from "react-router-dom";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/hooks/use-theme";
 import { LocaleProvider } from "@/hooks/use-locale";
 import { trackEvent, trackPageView } from "@/utils/analytics";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { lazyWithRetry } from "@/utils/lazyWithRetry";
+
+// Both toasters render nothing until a toast fires, so they have no business
+// being in the first-paint bundle.
+const Toaster = lazy(() =>
+  import("@/components/ui/toaster").then((m) => ({ default: m.Toaster })),
+);
+const Sonner = lazy(() =>
+  import("@/components/ui/sonner").then((m) => ({ default: m.Toaster })),
+);
 
 const runWhenIdle = (fn: () => void) => {
   if (typeof window === "undefined") {
@@ -61,7 +75,19 @@ const NodejsApiBestPracticesPage = lazyWithRetry(
   () => import("./pages/blog/NodejsApiBestPracticesPage.tsx"),
 );
 const FaqPage = lazyWithRetry(() => import("./pages/FaqPage.tsx"));
-const Hero04DemoPage = lazyWithRetry(() => import("./components/ui/demo.tsx"));
+const CaseStudyDetailPage = lazyWithRetry(
+  () => import("./pages/CaseStudyDetailPage.tsx"),
+);
+const ZaakiyChatWidget = lazyWithRetry(
+  () => import("./components/ZaakiyChatWidget.tsx"),
+);
+
+// `<Navigate to="/blog/:slug">` treats the pattern as a literal path, so the
+// old /blogs/<slug> URLs landed on a dead "/blog/:slug" page. Resolve the param.
+const BlogSlugRedirect = () => {
+  const { slug } = useParams();
+  return <Navigate to={`/blog/${slug}`} replace />;
+};
 
 const queryClient = new QueryClient();
 
@@ -132,8 +158,10 @@ function AnalyticsTracker() {
 const AppShell = () => {
   return (
     <TooltipProvider>
-      <Toaster />
-      <Sonner />
+      <Suspense fallback={null}>
+        <Toaster />
+        <Sonner />
+      </Suspense>
       <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <AnalyticsTracker />
         <ErrorBoundary>
@@ -143,9 +171,12 @@ const AppShell = () => {
               <Route path="/tools" element={<ToolsIndex />} />
               <Route path="/about" element={<AboutPage />} />
               <Route path="/projects" element={<ProjectsPage />} />
+              <Route
+                path="/projects/:slug"
+                element={<CaseStudyDetailPage />}
+              />
               <Route path="/contact" element={<ContactPage />} />
               <Route path="/faq" element={<FaqPage />} />
-              <Route path="/demo/hero-04" element={<Hero04DemoPage />} />
               <Route
                 path="/tools/json-formatter-online"
                 element={<JsonFormatterToolPage />}
@@ -169,7 +200,7 @@ const AppShell = () => {
                 element={<NodejsApiBestPracticesPage />}
               />
               <Route path="/blog/:slug" element={<DevToBlogPage />} />
-              <Route path="/blogs/:slug" element={<Navigate to="/blog/:slug" replace />} />
+              <Route path="/blogs/:slug" element={<BlogSlugRedirect />} />
               <Route
                 path="/nodejs-developer-uae"
                 element={<NodejsDeveloperUaePage />}
@@ -204,6 +235,9 @@ const AppShell = () => {
               />
               <Route path="*" element={<NotFound />} />
             </Routes>
+          </Suspense>
+          <Suspense fallback={null}>
+            <ZaakiyChatWidget />
           </Suspense>
         </ErrorBoundary>
       </BrowserRouter>
