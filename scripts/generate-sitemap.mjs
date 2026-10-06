@@ -16,6 +16,7 @@ const staticRoutes = [
   "/projects/real-estate-erp-architecture",
   "/projects/garage-management-and-diagnostics",
   "/projects/headless-healthcare-digital-experience",
+  "/projects/zaakiy-v3rse",
   "/software-engineer-uae",
   "/contact",
   "/faq",

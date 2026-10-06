@@ -126,7 +126,7 @@ export function ZaakiyHighlights() {
                 asChild
                 className="h-11 rounded-lg bg-accent px-6 text-[14px] font-semibold text-white transition-colors hover:bg-accent/90 shadow-xs gap-2"
               >
-                <Link to="/projects">
+                <Link to="/projects/zaakiy-v3rse">
                   <span>{isArabic ? "استكشف البحث والتطوير" : "Explore the research"}</span>
                   <ArrowRight className="h-4 w-4 rtl:rotate-180" />
                 </Link>

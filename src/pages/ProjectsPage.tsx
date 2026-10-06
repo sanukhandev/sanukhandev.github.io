@@ -26,6 +26,8 @@ export default function ProjectsPage() {
           "airline retailing NDC aggregation",
           "automotive omnichannel platform",
           "headless healthcare digital experience",
+          "Zaakiy V3RSE operational intelligence",
+          "agentic AI platform",
           "Next.js WordPress headless CMS",
           "solution architecture case studies"
         ]}

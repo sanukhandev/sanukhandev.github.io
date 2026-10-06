@@ -325,6 +325,7 @@ export default defineConfig(({ command, mode }) => {
           "/projects/real-estate-erp-architecture",
           "/projects/garage-management-and-diagnostics",
           "/projects/headless-healthcare-digital-experience",
+          "/projects/zaakiy-v3rse",
           "/contact",
           "/faq",
           "/tools",

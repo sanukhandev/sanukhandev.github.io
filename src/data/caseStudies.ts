@@ -502,6 +502,96 @@ export const flagshipCaseStudies: CaseStudy[] = [
       "Operational Visibility"
     ],
     systemsInvolved: ["Dealership DMS", "Inspection Yard App", "Central State Store", "Digital Showroom", "Pricing Engine"]
+  },
+  {
+    slug: "zaakiy-v3rse",
+    title: "Zaakiy V3RSE — Operational Intelligence Agentic Platform",
+    subtitle: "Designing a configuration-driven, multi-tenant agent platform that combines source-of-truth routing, enterprise RAG, live connectors, deterministic calculations and LLM reasoning.",
+    domain: "AI Platforms & Operational Intelligence",
+    summary: "Zaakiy V3RSE is an OpsInt platform rather than a document chat application: a shared agent runtime gives each organization a versioned Agent Package, controlled connectors, tenant-scoped knowledge and explainable operational outputs.",
+    context: "Organizations need answers that combine stable knowledge with current operational truth. Policies may live in Drive, budgets in Sheets, project status in an API and actual cost in a finance system. Zaakiy V3RSE was shaped as a generic platform where those rules are configured per organization instead of implemented as customer-specific frontend and backend code.",
+    problem: "A semantic match alone cannot decide which source is authoritative, whether a user may access it, or how conflicting values should be reconciled. The platform therefore had to coordinate retrieval, live connectors, business rules, deterministic calculations and LLM explanation while preserving tenant isolation and auditability.",
+    constraints: [
+      "Every tenant-scoped operation must carry server-derived user, organization, role, permission and request context",
+      "Stable documents and live operational data must remain separate source categories",
+      "Organization behaviour must live in declarative Agent Packages, not customer-specific application code",
+      "Only validated and active Agent Package versions may be used by the runtime",
+      "LLM output must explain evidence and never become the source of truth for deterministic calculations"
+    ],
+    architectureDiagramText: `
+  [ Next.js / React Operations UI ]
+                │ JWT / SSE
+                ▼
+  [ Spring Boot Modular Monolith ]
+   ├── Auth + Tenant Context
+   ├── Agent Runtime + Source Routing
+   ├── Knowledge Ingestion + Hybrid Retrieval
+   ├── Connector Registry + MCP Tools
+   ├── Deterministic Calculations
+   └── Reports + Audit + Usage
+        │             │             │
+        ▼             ▼             ▼
+  [PostgreSQL]   [pgvector]   [Google / HTTP / MCP]
+                         │
+                         ▼
+                 [ Gemini Provider ]
+
+  Organization → Agent Package → Active Version → Operational Answer
+`,
+    diagramStyle: "flow",
+    keyDecisions: [
+      {
+        title: "Shared Runtime, Tenant-Specific Intelligence",
+        description: "The same platform serves multiple organizations while each organization supplies its own Agent Package, sources, terminology, rules, connectors and report definitions."
+      },
+      {
+        title: "Source-of-Truth Routing",
+        description: "The runtime decides whether a question needs RAG knowledge, a live structured connector or both before the model receives context."
+      },
+      {
+        title: "Declarative Agent Packages",
+        description: "Instructions, domain behaviour, procedures, routing, calculations and conflict rules are versioned files rather than customer-specific Java or React implementations."
+      },
+      {
+        title: "Deterministic Evidence Before Reasoning",
+        description: "Backend calculations produce validated values and evidence first; Gemini explains the result rather than inventing financial or operational truth."
+      },
+      {
+        title: "Modular Monolith Before Microservices",
+        description: "Spring Boot keeps the initial platform cohesive while domain boundaries allow retrieval, connectors, reports and workflows to scale independently later."
+      }
+    ],
+    failureModel: "A request is rejected when organization context, authorization or source policy is missing. Retrieval always applies organization filters, live connectors are allow-listed, tool execution is audited, and report rendering consumes validated report JSON rather than arbitrary generated HTML. If a source conflicts with an approved authority, the conflict is surfaced instead of silently merged.",
+    role: "Product Architect & AI Systems Engineer — defined the Gen-3 product model, multi-tenant boundary, Agent Package contract, runtime flow, source-of-truth strategy, retrieval architecture, connector abstraction, reporting model and security invariants.",
+    outcomes: [
+      "Reframed Zaakiy from document chat into an operational intelligence platform",
+      "Created a reusable onboarding model where a new organization requires configuration, connectors, knowledge indexing and package activation rather than a code fork",
+      "Separated enterprise RAG from live structured data so policies, metrics and financial values are handled by the right source",
+      "Defined an auditable path from user question to authorized tools, deterministic calculations, evidence and generated operational report",
+      "Established a cost-conscious modular-monolith baseline with optional Temporal and Redis only when measured demand requires them"
+    ],
+    lessons: "The most important AI architecture decision is not which model answers the question. It is defining what the system is allowed to know, which source is authoritative, what must be calculated deterministically and how the answer can be explained and audited.",
+    wouldRevisitToday: "I would add stronger package contract testing, connector simulators, retrieval evaluation datasets, tenant-aware PostgreSQL RLS verification and production tracing before onboarding sensitive operational data.",
+    themes: [
+      "Operational Intelligence",
+      "Agentic Runtime",
+      "Multi-Tenant Security",
+      "Source-of-Truth Routing",
+      "Enterprise RAG",
+      "MCP Connectors",
+      "Deterministic AI Workflows",
+      "Modular Monolith"
+    ],
+    systemsInvolved: [
+      "Next.js / React",
+      "Spring Boot",
+      "PostgreSQL",
+      "pgvector",
+      "Gemini",
+      "Google Drive / Sheets",
+      "HTTP / MCP Connectors",
+      "Docker"
+    ]
   }
 ];
 
@@ -804,7 +894,15 @@ export const arFlagshipCaseStudies: CaseStudy[] = [
 ];
 
 export function getLocalizedCaseStudies(locale: string): CaseStudy[] {
-  return locale === "ar" ? arFlagshipCaseStudies : flagshipCaseStudies;
+  if (locale !== "ar") {
+    return flagshipCaseStudies;
+  }
+
+  const translatedSlugs = new Set(arFlagshipCaseStudies.map((cs) => cs.slug));
+  return [
+    ...arFlagshipCaseStudies,
+    ...flagshipCaseStudies.filter((cs) => !translatedSlugs.has(cs.slug)),
+  ];
 }
 
 export function getLocalizedCaseStudy(slug: string, locale: string): CaseStudy | undefined {
