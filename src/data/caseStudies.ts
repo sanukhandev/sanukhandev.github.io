@@ -26,6 +26,291 @@ export interface CaseStudy {
 
 export const flagshipCaseStudies: CaseStudy[] = [
   {
+    slug: "real-estate-erp-architecture",
+    title: "AI-Assisted Real Estate ERP Architecture",
+    subtitle: "Designing a multi-branch property, leasing, payments, maintenance and inventory platform in a 25-hour AI-assisted product engineering sprint.",
+    domain: "Real Estate Operations & Product Architecture",
+    summary: "An architecture-first ERP concept that turns fragmented property operations into one branch-aware operational platform, with financial invariants, auditable workflows and a permission-aware AI assistant.",
+    context: "The real-estate operation needed one platform for branches, owners, tenants, properties, agreements, collections, owner payouts, maintenance, procurement, inventory, reporting and documents. I approached it as a solo product engineering sprint with Codex and Antigravity: discovery, domain modelling, UX, architecture and an interactive prototype.",
+    problem: "The system had to make complex real-estate operations feel simple without compromising branch isolation, lease availability, financial correctness or inventory traceability. The portfolio challenge was to prove the architecture and core workflows in 25 hours without presenting a projected ERP as a finished production system.",
+    constraints: [
+      "Every sensitive read and write must satisfy both permission and active-branch authorization",
+      "One directly leasable property record must never have overlapping active tenant agreements",
+      "Posted payments, receipts and stock movements must remain auditable and correctable without silent edits",
+      "The prototype needed a credible path from low-cost deployment to production hardening without shared-server coupling"
+    ],
+    architectureDiagramText: `
+  [ Angular SPA ]
+        │ HTTPS / JSON
+        ▼
+  [ Laravel REST API ]
+   ├── Branch Context + RBAC + Policies
+   ├── Domain Services + Transaction Boundaries
+   ├── Availability + Installment Rules
+   ├── Payment / Receipt / Inventory Workflows
+   └── Permission-aware AI Tools
+        │
+        ▼
+  [ MySQL ]  ── [ Private Files ]  ── [ Notifications ]
+
+  Owner → Property → Owner Agreement → Tenant Agreement
+  Payment → Receipt       PO Receiving → Stock Movement
+`,
+    diagramStyle: "flow",
+    keyDecisions: [
+      {
+        title: "Simplified Direct-Property Model",
+        description: "Represented every independently leasable flat, villa, shop or office as a Property record, removing unnecessary rooms, beds and rentable-component hierarchies while preserving leasing behaviour."
+      },
+      {
+        title: "Branch Tenancy as a Security Boundary",
+        description: "Made branch context first-class across middleware, policies, queries and foreign-key validation so a record ID alone can never authorize cross-branch access."
+      },
+      {
+        title: "Server-Authoritative Invariants",
+        description: "Kept availability, installment totals, outstanding balances and inventory balances inside transactional application rules rather than trusting frontend calculations."
+      },
+      {
+        title: "AI as a Narrow Assistant Layer",
+        description: "Designed natural-language operational queries and draft actions around permission-aware tools, with explicit confirmation required for posting payments, activating agreements or scrapping stock."
+      }
+    ],
+    failureModel: "Financial and operational workflows are treated as atomic boundaries: agreement plus schedule, payment plus receipt, PO receiving plus stock, and work-order consumption plus stock either commit together or fail together. Posted records use void, reverse or replacement patterns. For deployment, the lean path is a managed MySQL database, one small application service and object storage for private documents—avoiding the operational drag of shared hosting while leaving room to scale workers and notifications independently.",
+    role: "Solo Solution Architect & Product Engineer — used Codex and Antigravity to move from domain discovery to an interactive ERP prototype in 25 hours, while defining the information architecture, design system, Laravel + Angular boundaries, database model, security invariants and core leasing and payment flows.",
+    outcomes: [
+      "A coherent multi-branch ERP concept covering 15+ operational modules and 30+ planned workflows",
+      "A reduced property model that lowered schema and UX complexity without losing independent leasing capability",
+      "A clear architecture for branch-safe access, no-double-booking, immutable financial posting and movement-based inventory",
+      "A practical low-cost deployment direction that keeps infrastructure simple without relying on shared servers"
+    ],
+    lessons: "The fastest path was not generating more features; it was making the domain boundaries explicit early. A smaller model with clear invariants gives AI-assisted development something reliable to build on.",
+    wouldRevisitToday: "I would harden the prototype with automated authorization and invariant tests, managed backups, queue workers, rate limiting, observability and deployment pipelines before calling it production-ready. The architecture is designed to grow; the 25-hour claim is for the design and interactive prototype sprint.\n\n\"Its not about the features of tools, its how to use it to make it better\"",
+    themes: [
+      "Modular Monolith",
+      "Branch Tenancy",
+      "RBAC",
+      "Financial Integrity",
+      "Availability Rules",
+      "Inventory Traceability",
+      "AI-Assisted Engineering",
+      "Low-Cost Deployment"
+    ],
+    systemsInvolved: ["Angular", "Laravel REST API", "MySQL", "Private Storage", "AI Tool Layer", "Managed Deployment"]
+  },
+  {
+    slug: "garage-management-and-diagnostics",
+    title: "Garage Management & Diagnostic Intelligence Platform",
+    subtitle: "Architecting a workshop operating system that connects vehicle diagnosis, service execution, resource allocation and predictive spare-parts intelligence.",
+    domain: "Automotive Service Operations & Applied ML",
+    summary: "A modular garage platform combining deep spare-parts inventory, service work orders, technician and bay allocation, machine-diagnosis connectors, generated reports and ML-assisted demand and lifespan forecasting.",
+    context: "Independent garages and multi-site workshops need to coordinate customers, vehicles, diagnosis, estimates, work orders, technicians, service bays, parts and suppliers without losing the link between a diagnostic signal and the repair action. The architecture treats the workshop as one operational system instead of a collection of disconnected point tools.",
+    problem: "A diagnosis often arrives in one tool, the repair decision is made in another, and parts availability is checked manually. That creates repeat inspections, incorrect allocations, parts shortages, idle technicians and weak visibility into which components actually fail over time.",
+    constraints: [
+      "Diagnostic connectors must normalize different machine and vehicle data formats without coupling the core workflow to one vendor",
+      "A work order must reserve the right technician, bay, tools and parts while preserving an auditable service history",
+      "Inventory must track serialized and non-serialized spares, kits, substitutes, returns, wastage, transfers and reorder thresholds",
+      "ML recommendations can guide demand, movement and lifespan decisions but cannot silently approve purchases or replace technician judgement"
+    ],
+    architectureDiagramText: `
+  [ Angular Workshop Console ]
+                │ HTTPS / JSON
+                ▼
+  [ Java MVC Application ]
+   ├── Auth / Roles / Branch Context
+   ├── Vehicle + Customer Service History
+   ├── Work Order + Resource Allocation
+   ├── Parts Ledger + Procurement
+   ├── Diagnostic Connector Gateway
+   └── ML Recommendation API
+                │
+        [ Hibernate / Transaction Layer ]
+                │
+                ▼
+  [ MySQL / Audit Store ]  [ Object Storage / Reports ]
+
+  AWS VPC → private application/data subnets → load balancer
+       → DNS resolver → controlled garage and diagnostic integrations
+`,
+    diagramStyle: "flow",
+    keyDecisions: [
+      {
+        title: "Diagnostic Adapter Boundary",
+        description: "Placed vendor and machine-diagnostic connectors behind a normalized gateway so the service domain receives stable fault codes, measurements, severity and evidence regardless of source protocol."
+      },
+      {
+        title: "Work Order as the Operational Spine",
+        description: "Connected diagnosis, estimate, approval, resource reservation, parts consumption, technician notes, quality checks and final report through an explicit work-order lifecycle."
+      },
+      {
+        title: "Movement-Based Spare Ledger",
+        description: "Kept purchases, reservations, issues, returns, transfers, adjustments and scrap as immutable movements, deriving stock and cost instead of trusting an editable quantity field."
+      },
+      {
+        title: "ML as Decision Support",
+        description: "Used spare density, movement velocity, failure history and remaining-life signals to recommend reorder levels and predictive replacements while keeping approval and safety decisions human-controlled."
+      }
+    ],
+    failureModel: "A diagnostic connector can fail without blocking manual work-order creation; the report records source, confidence and missing evidence. Resource reservations and parts consumption commit transactionally with the work order. If an ML service is unavailable, the platform falls back to deterministic movement and threshold rules. The deployment baseline uses an AWS VPC, private subnets, a VPS or small application nodes behind load balancing, DNS resolution and managed backups, with connectors isolated from the database.",
+    role: "Solution Architect & Product Engineer — defined the domain boundaries, normalized diagnostic contract, service workflow, inventory ledger, resource allocation model, ML decision points and AWS network/deployment shape across Java MVC, Hibernate and Angular.",
+    outcomes: [
+      "One traceable flow from machine diagnosis to generated report, approved work order and consumed spare parts",
+      "A resource-aware workshop schedule covering technicians, service bays, tools and parts availability",
+      "Deep inventory visibility for spare movement, density, substitutions, returns, wastage and predictive lifespan",
+      "A pragmatic Java and AWS architecture that can begin on a lean VPS footprint and scale behind load balancing"
+    ],
+    lessons: "The valuable unit is not the diagnostic code or the stock count by itself; it is the decision chain that explains what was found, why a repair was chosen, which resources were used and what the next service should expect.",
+    wouldRevisitToday: "I would validate connector contracts with real diagnostic equipment, add event-driven ingestion for high-volume telemetry, measure ML precision against technician outcomes and harden the AWS topology with autoscaling, observability, backups and disaster recovery before production rollout.",
+    themes: [
+      "Java MVC",
+      "Hibernate",
+      "Angular",
+      "Diagnostic Integrations",
+      "Work Order Orchestration",
+      "Resource Allocation",
+      "Inventory Intelligence",
+      "Predictive ML",
+      "AWS VPC"
+    ],
+    systemsInvolved: ["Angular", "Java MVC", "Hibernate", "MySQL", "Diagnostic Connectors", "AWS VPC", "Load Balancer", "DNS Resolver"]
+  },
+  {
+    slug: "headless-healthcare-digital-experience",
+    title: "منصة التجربة الرقمية الصحية وHeadless CMS",
+    subtitle: "فصل إدارة المحتوى عن تجربة ويب صحية آمنة وقائمة على المكونات ومحسنة لمحركات البحث.",
+    domain: "التجارب الرقمية الصحية والعمارة المنفصلة",
+    summary: "منصة Next.js للعرض والتطبيق مع WordPress كنظام CMS منظم، متصلة عبر عمليات GraphQL مضبوطة وطبقة خادم وتخزين مؤقت وإعادة تحقق آمنة.",
+    context: "احتاجت المؤسسة الصحية إلى تحديث منصة تسويقية قائمة مع الحفاظ على هويتها البصرية ومنح المحررين مرونة أكبر وإنشاء أساس قابل للتوسع للمتخصصين والخدمات والأقسام والمواقع والتنقل وSEO.",
+    problem: "كان يجب دعم التحرير الغني دون السماح لنظام CMS بالتحكم في العرض أو كشف WordPress للمتصفح أو نشر استجابات GraphQL الخام داخل مكونات React، مع الحفاظ على الأداء وإمكانية الوصول والمعاينة والأمان.",
+    constraints: [
+      "يبقى WordPress مرجع المحتوى بينما تملك Next.js العرض والتوجيه والبيانات الوصفية وتجربة المستخدم",
+      "لا يصل المتصفح إلى WordPress مباشرة ولا تنكشف الأسرار الخاصة بالخادم",
+      "تتحول البنى المنظمة إلى مكونات معتمدة بدلاً من ترميز page-builder عشوائي",
+      "تؤثر تحديثات المحتوى على ذاكرة التخزين الخاصة بالكيانات المتأثرة فقط مع الحفاظ على المعاينة الآمنة"
+    ],
+    architectureDiagramText: `
+  [ محررو المحتوى ]
+          │
+          ▼
+  [ WordPress + Custom Plugin ]
+   ├── محتوى منظم / ACF
+   ├── التنقل / القوائم الكبيرة
+   ├── SEO / الإعدادات العامة
+   └── المتخصصون / الخدمات / الأقسام / المواقع
+          │
+          ▼
+  [ WPGraphQL ] → [ عمليات معتمدة ومثبتة ]
+          │
+          ▼
+  [ طبقة بيانات خادم Next.js ]
+   ├── التحقق + تحويل الأنواع
+   ├── View Models + SEO
+   ├── Cache Tags + Revalidation
+   └── المعاينة + معالجة الأخطاء
+          │
+          ▼
+  [ React Components ] → [ HTML مؤقت ] → [ CDN ]
+`,
+    diagramStyle: "flow",
+    keyDecisions: [
+      { title: "حد CMS على الخادم", description: "تم إبقاء اتصال WordPress خلف Next.js حتى لا يصل المتصفح إلى CMS مباشرة ولا تنكشف بيانات الاعتماد." },
+      { title: "محتوى منظم بدلاً من Page Builder", description: "تم نمذجة المتخصصين والخدمات والأقسام والمواقع والتنقل والأقسام القابلة لإعادة الاستخدام كمحتوى منظم." },
+      { title: "View Models مملوكة للواجهة", description: "أضيفت طبقة تحقق وتحويل ونماذج typed بين GraphQL وReact لمعالجة الحقول الفارغة وتطور المخطط مركزياً." },
+      { title: "إعادة تحقق موجهة", description: "استخدمت وسوم الكاش وwebhooks موقعة بـ HMAC حتى تؤثر تغييرات المحرر على الصفحات والكيانات المتأثرة فقط." }
+    ],
+    failureModel: "ترفض البيانات غير الصحيحة أو تطبع قبل وصولها إلى المكونات. ولا يمكن لطلب إعادة تحقق مزور أو معاد استخدامه إبطال الكاش بسبب التحقق من POST وHMAC والطابع الزمني وقائمة الأحداث والحمولة. تستخدم المعاينة حد ثقة موثقاً ولا تشارك عبر الكاش العام، بينما يستمر المحتوى المخزن مؤقتاً عند تعطل CMS.",
+    role: "معماري حلول ومهندس Full-Stack — صممت عمارة Next.js وWordPress plugin وعقود WPGraphQL ونماذج المحتوى وView Models وSEO والكاش والمعاينة والأمان وتوافق إصدارات الواجهة والخلفية.",
+    outcomes: [
+      "منصة Headless منفصلة يدير فيها المحررون المحتوى المنظم دون التحكم في العرض",
+      "نظام مكونات قابل لإعادة الاستخدام للأبطال والأقسام والبطاقات والمتخصصين والخدمات والأسئلة الشائعة",
+      "طبقة GraphQL وخادم مضبوطة مع التحقق والعمليات المعتمدة وغياب mutations العامة",
+      "إبطال موجه للكاش وتدفقات معاينة وإعادة تحقق موقعة وبيئات تطوير وتجربة وإنتاج معزولة"
+    ],
+    lessons: "العمارة المنفصلة ليست مجرد وضع CMS خلف API؛ الحد المهم هو العقد بين نية المحرر ومسؤولية الواجهة: منظم بما يكفي للإدارة ومقيد بما يكفي للحفاظ على اتساق المنتج.",
+    wouldRevisitToday: "سأوسع المراقبة حول زمن GraphQL ونسب إصابة الكاش، وأؤتمت فحوص توافق العقود بين إصدارات المستودعات، وأضيف اختبارات مرونة لتعطل CMS وإساءة المعاينة وإعادة استخدام webhooks والحمولات الكبيرة.",
+    themes: ["Next.js App Router", "React Server Components", "WordPress Headless CMS", "WPGraphQL", "Backend for Frontend", "Structured Content", "SEO Architecture", "Cache Revalidation", "HMAC Webhooks", "Secure Preview"],
+    systemsInvolved: ["Next.js", "React", "TypeScript", "WordPress", "ACF", "WPGraphQL", "WP Engine", "CDN", "CI/CD"]
+  },
+  {
+    slug: "headless-healthcare-digital-experience",
+    title: "Headless Healthcare & Digital Experience Platform",
+    subtitle: "Separating editorial content management from a secure, component-driven and SEO-optimized healthcare web experience.",
+    domain: "Healthcare Digital Experience & Headless Architecture",
+    summary: "A Next.js presentation platform with WordPress as a structured headless CMS, connected through controlled GraphQL operations, server-side mapping, targeted caching and secure content revalidation.",
+    context: "The healthcare organization needed to modernize an established marketing platform while preserving its visual language, giving editors more flexibility and creating a scalable foundation for specialists, services, departments, locations, navigation, SEO and future integrations.",
+    problem: "The platform had to support rich editorial workflows without allowing CMS changes to control presentation, expose WordPress to normal browser traffic or scatter raw CMS responses throughout React components. Performance, accessibility, SEO, preview and security all had to remain first-class concerns.",
+    constraints: [
+      "WordPress must remain the content and editorial authority while Next.js owns presentation, routing, metadata and user experience",
+      "Browser traffic must not query WordPress directly or expose server-side credentials and implementation details",
+      "Reusable CMS structures must map to approved frontend components instead of arbitrary page-builder markup",
+      "Content updates must invalidate only affected cached entities while preserving safe preview, rollback and deployment boundaries"
+    ],
+    architectureDiagramText: `
+  [ Content Editors ]
+          │
+          ▼
+  [ WordPress Admin + Custom Plugin ]
+   ├── Structured Content / ACF
+   ├── Navigation / Mega Menus
+   ├── SEO / Global Settings
+   └── Specialists / Services / Departments / Locations
+          │
+          ▼
+  [ WPGraphQL ] → [ Approved / Persisted Operations ]
+          │
+          ▼
+  [ Next.js Server Data Layer ]
+   ├── Validation + Type Mapping
+   ├── View Models + SEO Mapping
+   ├── Cache Tags + Revalidation
+   └── Preview + Error Handling
+          │
+          ▼
+  [ React Components ] → [ Static / Cached HTML ] → [ CDN ]
+`,
+    diagramStyle: "flow",
+    keyDecisions: [
+      {
+        title: "Server-Side CMS Boundary",
+        description: "Kept all WordPress communication behind Next.js so browser traffic never reaches the CMS directly and credentials remain server-only."
+      },
+      {
+        title: "Structured Content, Not Page-Builder Markup",
+        description: "Modeled specialists, services, departments, locations, navigation and reusable sections as structured content mapped to approved component patterns."
+      },
+      {
+        title: "Frontend-Owned View Models",
+        description: "Added validation, mappers and typed view models between GraphQL responses and React components, centralizing nullable-field handling and schema evolution."
+      },
+      {
+        title: "Targeted Cache Revalidation",
+        description: "Used entity cache tags and signed HMAC webhooks so editorial changes invalidate only affected pages, lists, navigation or global settings."
+      }
+    ],
+    failureModel: "Malformed GraphQL data is rejected or normalized before it reaches the component tree. A failed or forged revalidation request cannot invalidate caches because the endpoint requires POST, HMAC verification, timestamp and replay checks, allow-listed events and bounded payloads. Preview content uses a separate authenticated trust boundary and is never shared through public caches. If the CMS is unavailable, cached public content can continue serving while errors remain observable.",
+    role: "Solution Architect & Full-Stack Engineer — designed and engineered the Next.js application boundary, WordPress plugin architecture, WPGraphQL contracts, structured content models, frontend view models, SEO, caching, preview, security and FE/BE release compatibility.",
+    outcomes: [
+      "A decoupled headless platform where editorial teams manage structured content without controlling presentation",
+      "A reusable component-driven design system for heroes, content sections, cards, specialists, services, statistics, FAQs and CTAs",
+      "A controlled GraphQL and server-side data layer with validation, generated types, approved operations and no public mutations",
+      "Targeted cache invalidation, signed preview/revalidation workflows and isolated development, staging and production environments"
+    ],
+    lessons: "Headless architecture is not simply moving a CMS behind an API. The valuable boundary is the contract between editorial intent and frontend responsibility: structured enough for people to manage, constrained enough for the product to stay coherent.",
+    wouldRevisitToday: "I would extend observability around GraphQL latency and cache hit ratios, automate contract compatibility checks across submodule revisions, and add more resilience testing for CMS outages, preview abuse, oversized payloads and webhook replay attempts.",
+    themes: [
+      "Next.js App Router",
+      "React Server Components",
+      "WordPress Headless CMS",
+      "WPGraphQL",
+      "Backend for Frontend",
+      "Structured Content",
+      "SEO Architecture",
+      "Cache Revalidation",
+      "HMAC Webhooks",
+      "Secure Preview"
+    ],
+    systemsInvolved: ["Next.js", "React", "TypeScript", "WordPress", "ACF", "WPGraphQL", "WP Engine", "CDN", "CI/CD"]
+  },
+  {
     slug: "enterprise-retail-integration",
     title: "Enterprise Retail Integration",
     subtitle: "Connecting product, inventory, pricing and order flows across enterprise and commerce platforms.",
@@ -221,6 +506,108 @@ export const flagshipCaseStudies: CaseStudy[] = [
 ];
 
 export const arFlagshipCaseStudies: CaseStudy[] = [
+  {
+    slug: "real-estate-erp-architecture",
+    title: "عمارة نظام ERP عقاري بمساعدة الذكاء الاصطناعي",
+    subtitle: "تصميم منصة متعددة الفروع للعقارات والتأجير والمدفوعات والصيانة والمخزون ضمن sprint هندسي مدته 25 ساعة.",
+    domain: "عمليات العقارات وعمارة المنتجات",
+    summary: "تصور معماري لنظام ERP يحول عمليات العقارات المتفرقة إلى منصة تشغيلية واحدة مع عزل للفروع وسلامة مالية وتدقيق ومساعد ذكاء اصطناعي واعٍ بالصلاحيات.",
+    context: "احتاجت عملية العقارات إلى منصة واحدة للفروع والمالكين والمستأجرين والعقارات والاتفاقيات والتحصيل والصيانة والمشتريات والمخزون والتقارير. أدرت المشروع كمهندس منتجات ومعماري حلول منفرد باستخدام Codex وAntigravity.",
+    problem: "كان التحدي جعل العمليات العقارية المعقدة بسيطة دون التضحية بعزل الفروع أو صحة العقود والمدفوعات أو تتبع المخزون، مع إثبات العمارة والتدفقات الأساسية خلال 25 ساعة دون الادعاء ببناء نظام إنتاج كامل.",
+    constraints: [
+      "كل قراءة أو كتابة حساسة يجب أن تمر عبر الصلاحية والفرع النشط",
+      "لا يجوز وجود عقود تأجير نشطة متداخلة للعقار نفسه",
+      "المدفوعات والإيصالات وحركات المخزون المنشورة قابلة للتدقيق وليست قابلة للتعديل الصامت",
+      "يجب أن يبدأ النموذج الأولي بنشر منخفض التكلفة دون الاعتماد على خوادم الاستضافة المشتركة"
+    ],
+    architectureDiagramText: `
+  [ Angular SPA ]
+        │ HTTPS / JSON
+        ▼
+  [ Laravel REST API ]
+   ├── سياق الفرع + RBAC + السياسات
+   ├── خدمات النطاق + حدود المعاملات
+   ├── قواعد التوفر والأقساط
+   ├── المدفوعات / الإيصالات / المخزون
+   └── أدوات ذكاء اصطناعي واعية بالصلاحيات
+        │
+        ▼
+  [ MySQL ] ── [ ملفات خاصة ] ── [ إشعارات ]
+`,
+    diagramStyle: "flow",
+    keyDecisions: [
+      { title: "نموذج عقار مباشر مبسط", description: "تم تمثيل كل وحدة قابلة للتأجير كسجل Property واحد وإزالة التسلسلات غير الضرورية للغرف والأسرة والمكونات." },
+      { title: "عزل الفروع كحد أمني", description: "أصبح سياق الفرع أساسياً في الوسيط والسياسات والاستعلامات والتحقق من المفاتيح الأجنبية." },
+      { title: "قواعد موثوقة على الخادم", description: "بقيت التوافر والأقساط والأرصدة وحركات المخزون داخل قواعد التطبيق والمعاملات بدلاً من الاعتماد على الواجهة." },
+      { title: "الذكاء الاصطناعي كمساعد محدود", description: "تصل الاستعلامات الطبيعية إلى أدوات محددة الصلاحيات، مع تأكيد صريح قبل العمليات الحساسة." }
+    ],
+    failureModel: "تعمل الاتفاقية مع جدولها، والدفع مع إيصالها، واستلام أمر الشراء مع حركة المخزون كحدود ذرية. تستخدم السجلات المالية المنشورة الإبطال أو العكس أو الاستبدال. ومسار النشر المنخفض التكلفة هو قاعدة MySQL مُدارة وخدمة تطبيق صغيرة وتخزين كائنات خاص، بدلاً من الاستضافة المشتركة.",
+    role: "معماري حلول ومهندس منتجات منفرد — استخدمت Codex وAntigravity للانتقال من اكتشاف النطاق إلى نموذج ERP تفاعلي خلال 25 ساعة، مع تحديد العمارة ونظام التصميم وحدود Angular وLaravel وقواعد الأمان.",
+    outcomes: [
+      "تصور ERP متعدد الفروع يغطي أكثر من 15 وحدة تشغيلية و30 تدفقاً مخططاً",
+      "نموذج عقاري مبسط خفض تعقيد قاعدة البيانات وتجربة المستخدم",
+      "عمارة واضحة لعزل الفروع ومنع الحجز المزدوج وسلامة المدفوعات وتتبع المخزون",
+      "مسار نشر منخفض التكلفة لا يعتمد على خوادم مشتركة"
+    ],
+    lessons: "لم يكن أسرع طريق هو توليد مزيد من الميزات، بل توضيح حدود النطاق والقواعد أولاً. النموذج الأصغر ذو الثوابت الواضحة يمنح التطوير بمساعدة الذكاء الاصطناعي أساساً موثوقاً.",
+    wouldRevisitToday: "سأضيف اختبارات الصلاحيات والثوابت والنسخ الاحتياطية والمراقبة ومحددات المعدل قبل اعتبار النظام جاهزاً للإنتاج. ادعاء 25 ساعة يخص تصميم النموذج الأولي التفاعلي فقط.\n\n\"Its not about the features of tools, its how to use it to make it better\"",
+    themes: ["Modular Monolith", "عزل الفروع", "RBAC", "السلامة المالية", "تتبع المخزون", "هندسة بمساعدة الذكاء الاصطناعي", "نشر منخفض التكلفة"],
+    systemsInvolved: ["Angular", "Laravel REST API", "MySQL", "Private Storage", "AI Tool Layer", "Managed Deployment"]
+  },
+  {
+    slug: "garage-management-and-diagnostics",
+    title: "منصة إدارة الورش وذكاء التشخيص",
+    subtitle: "عمارة نظام تشغيل للورش يربط تشخيص المركبات وتنفيذ أوامر العمل وتخصيص الموارد وذكاء قطع الغيار التنبؤي.",
+    domain: "عمليات خدمات السيارات والتعلم الآلي التطبيقي",
+    summary: "منصة للورش تجمع مخزون قطع الغيار العميق وأوامر الخدمة وتخصيص الفنيين والموارد وموصلات التشخيص وتقارير الإصلاح وتوقع الطلب والعمر الافتراضي للقطع.",
+    context: "تحتاج الورش المستقلة ومتعددة الفروع إلى تنسيق العملاء والمركبات والتشخيص والتقديرات وأوامر العمل والفنيين والمواقع وقطع الغيار والموردين دون فقدان الصلة بين إشارة التشخيص وإجراء الإصلاح.",
+    problem: "غالباً ما يصل التشخيص من أداة، ويُتخذ قرار الإصلاح في أداة أخرى، ويتم فحص توفر القطعة يدوياً. يؤدي ذلك إلى إعادة الفحص وتخصيص غير صحيح ونقص في القطع وفنيين غير مستغلين وضعف في سجل الأعطال.",
+    constraints: [
+      "يجب تطبيع تنسيقات أجهزة وموردي التشخيص دون ربط النظام بمورد واحد",
+      "يجب أن يربط أمر العمل الفني والموقع والأدوات والقطع مع سجل خدمة قابل للتدقيق",
+      "يجب تتبع القطع التسلسلية وغير التسلسلية والبدائل والمرتجعات والهدر والتحويلات",
+      "تقدم توصيات التعلم الآلي الدعم فقط ولا تعتمد المشتريات أو تستبدل حكم الفني"
+    ],
+    architectureDiagramText: `
+  [ Angular Workshop Console ]
+                │ HTTPS / JSON
+                ▼
+  [ Java MVC Application ]
+   ├── المصادقة والأدوار وسياق الفرع
+   ├── المركبات وسجل الخدمة
+   ├── أوامر العمل وتخصيص الموارد
+   ├── دفتر القطع والمشتريات
+   ├── بوابة موصلات التشخيص
+   └── واجهة توصيات التعلم الآلي
+                │
+        [ Hibernate / Transaction Layer ]
+                │
+                ▼
+  [ MySQL / Audit Store ]  [ Object Storage / Reports ]
+
+  AWS VPC → شبكات خاصة للتطبيق والبيانات → موازن حمل
+       → محلل DNS → تكاملات تشخيص مضبوطة
+`,
+    diagramStyle: "flow",
+    keyDecisions: [
+      { title: "حد فاصل لمحوّلات التشخيص", description: "وضع موصلات الموردين والأجهزة خلف بوابة موحدة حتى يستقبل نطاق الخدمة أكواداً وقياسات وأدلة ثابتة." },
+      { title: "أمر العمل كمحور تشغيلي", description: "ربط التشخيص والتقدير والموافقة وحجز الموارد واستهلاك القطع وملاحظات الفني والتقرير النهائي بدورة واضحة." },
+      { title: "دفتر قطع قائم على الحركات", description: "تسجيل الشراء والحجز والصرف والمرتجعات والتحويلات والتعديلات والهدر كحركات غير قابلة للتعديل." },
+      { title: "التعلم الآلي لدعم القرار", description: "استخدام كثافة القطع وسرعة الحركة وسجل الأعطال وإشارات العمر المتبقي لاقتراح إعادة الطلب والاستبدال مع إبقاء القرار بشرياً." }
+    ],
+    failureModel: "يمكن أن يتعطل موصل التشخيص دون منع إنشاء أمر عمل يدوي؛ ويسجل التقرير المصدر ودرجة الثقة والأدلة الناقصة. تلتزم حجوزات الموارد واستهلاك القطع بالمعاملة. وعند تعطل التعلم الآلي يعود النظام إلى قواعد الحركة والحدود. يبدأ النشر داخل AWS VPC مع شبكات خاصة وVPS أو عقد تطبيق صغيرة خلف موازن حمل ومحلل DNS ونسخ احتياطية مُدارة.",
+    role: "معماري حلول ومهندس منتجات — حددت حدود النطاق وعقد التشخيص الموحد وسير الخدمة ودفتر المخزون ونموذج تخصيص الموارد ونقاط قرار التعلم الآلي وشكل شبكة AWS والنشر باستخدام Java MVC وHibernate وAngular.",
+    outcomes: [
+      "مسار قابل للتتبع من تشخيص الجهاز إلى التقرير وأمر العمل وقطع الغيار المستخدمة",
+      "جدولة واعية بالموارد تشمل الفنيين والمواقع والأدوات وتوفر القطع",
+      "رؤية عميقة لحركة القطع والبدائل والمرتجعات والهدر والعمر الافتراضي",
+      "عمارة Java وAWS عملية يمكن أن تبدأ على VPS منخفض التكلفة وتتوسع خلف موازن حمل"
+    ],
+    lessons: "الوحدة المهمة ليست كود التشخيص أو كمية المخزون وحدها، بل سلسلة القرار التي تشرح ما تم اكتشافه ولماذا اختير الإصلاح وما الموارد المستخدمة وما المتوقع في الخدمة القادمة.",
+    wouldRevisitToday: "سأختبر عقود الموصلات مع أجهزة تشخيص حقيقية، وأضيف استقبالاً قائماً على الأحداث للبيانات الكثيفة، وأقيس دقة التعلم الآلي مقابل نتائج الفنيين، ثم أضيف المراقبة والنسخ الاحتياطية والتعافي من الكوارث قبل الإطلاق الإنتاجي.",
+    themes: ["Java MVC", "Hibernate", "Angular", "تكاملات التشخيص", "أوامر العمل", "تخصيص الموارد", "ذكاء المخزون", "التعلم الآلي التنبؤي", "AWS VPC"],
+    systemsInvolved: ["Angular", "Java MVC", "Hibernate", "MySQL", "Diagnostic Connectors", "AWS VPC", "Load Balancer", "DNS Resolver"]
+  },
   {
     slug: "enterprise-retail-integration",
     title: "تكامل التجزئة للمؤسسات",
@@ -424,4 +811,3 @@ export function getLocalizedCaseStudy(slug: string, locale: string): CaseStudy |
   const list = getLocalizedCaseStudies(locale);
   return list.find((cs) => cs.slug === slug);
 }
-

@@ -16,29 +16,40 @@
     <link rel="manifest" href="/site.webmanifest" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&family=Anta&family=Aref+Ruqaa+Ink:wght@400;700&family=Chewy&family=Nunito+Sans:ital,opsz,wght@0,6..12,300;0,6..12,400;0,6..12,500;0,6..12,600;0,6..12,700;1,6..12,400;1,6..12,600&display=swap" rel="stylesheet" />
     <link rel="preconnect" href="https://generativelanguage.googleapis.com" crossorigin />
     <link rel="dns-prefetch" href="https://generativelanguage.googleapis.com" />
-    <link rel="preload" as="image" href="/assets/images/sanu-400.avif" type="image/avif" fetchpriority="high" />
+    <link rel="preload" as="image" href="/avatar_new.avif" type="image/avif" fetchpriority="high" />
     <style>
       :root {
-        --background: 230 18% 7%;
-        --foreground: 225 18% 95%;
+        --background: 100 15% 97%;
+        --foreground: 146 17% 8%;
+      }
+      html.dark {
+        --background: 135 14% 5%;
+        --foreground: 140 13% 96%;
       }
       html {
-        color-scheme: dark;
+        color-scheme: dark light;
         scroll-behavior: smooth;
       }
       body {
         margin: 0;
-        background: hsl(var(--background));
-        color: hsl(var(--foreground));
-        font-family: "Raleway", ui-sans-serif, system-ui, sans-serif;
+        background: #F7F9F6;
+        color: #111814;
+        font-family: "Nunito Sans", ui-sans-serif, system-ui, sans-serif;
         font-size: 15px;
         line-height: 1.55;
-        font-weight: 500;
+        font-weight: 400;
         text-rendering: optimizeLegibility;
         -webkit-font-smoothing: antialiased;
+      }
+      html.dark body {
+        background: #0C100D;
+        color: #F4F7F5;
+      }
+      html[lang="ar"] body {
+        font-family: "Almarai", ui-sans-serif, system-ui, sans-serif;
       }
       #root {
         min-height: 100vh;
@@ -47,14 +58,13 @@
         margin-left: auto;
         margin-right: auto;
         width: 100%;
-        max-width: 1180px;
-        padding-left: 1.25rem;
-        padding-right: 1.25rem;
+        max-width: 1440px;
+        padding-left: clamp(24px, 5vw, 72px);
+        padding-right: clamp(24px, 5vw, 72px);
       }
-      @media (min-width: 640px) {
+      @media (min-width: 1536px) {
         .container-narrow {
-          padding-left: 2rem;
-          padding-right: 2rem;
+          max-width: 1520px;
         }
       }
     </style>
@@ -147,7 +157,7 @@
       "@type": "WebSite",
       "name": "sanukhan.dev",
       "url": "https://www.sanukhan.dev",
-      "inLanguage": ["en", "ar"],
+      "inLanguage": "en",
       "publisher": {
         "@type": "Person",
         "name": "Sanu Khan"

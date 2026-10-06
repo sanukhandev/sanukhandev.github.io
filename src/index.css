@@ -12,260 +12,248 @@
   }
 
   :root {
-    --bg-primary: #07110d;
-    --bg-secondary: #0b1511;
-    --text-primary: #edf4f1;
-    --text-secondary: #a8b8b2;
-    --text-muted: #7d8e87;
+    /* ── Light Mode Design Tokens (Prompt Section 3 & 27) ── */
+    --bg: #F7F9F6;
+    --surface: #FFFFFF;
+    --surface-elevated: #FFFFFF;
+    --text: #111814;
+    --text-secondary: #59645D;
+    --text-muted: #89928C;
+    --border: #DEE5DF;
 
-    --accent: #25c06f;
-    --accent-soft: #38c755cc;
-    --accent-bg: rgba(56, 199, 85, 0.12);
+    /* Signal Green (10% usage) */
+    --primary-green: #147A3A;
+    --primary-green-hover: #0F6530;
+    --primary-soft: #EAF5EC;
+    --strong-dark-green: #0E4926;
 
-    --border: #1b3027;
+    /* Semantic Compatibility Aliases */
+    --bg-primary: var(--bg);
+    --bg-secondary: var(--surface);
+    --text-primary: var(--text);
+    --accent: var(--primary-green);
+    --accent-soft: var(--primary-soft);
+    --accent-bg: var(--primary-soft);
 
-    /* Glass/translucent surface variants */
-    --bg-primary-glass: rgba(15, 16, 21, 0.92);
-    --bg-secondary-glass: rgba(22, 23, 29, 0.88);
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 18px;
+    --container: 1280px;
 
-    --background: 153 41% 4%;
-    --foreground: 155 20% 95%;
-
-    --card: 230 13% 10%;
-    --card-foreground: 225 18% 95%;
-
-    --popover: 230 13% 10%;
-    --popover-foreground: 225 18% 95%;
-
-    --primary: 148 67% 45%;
-    --primary-foreground: 153 41% 4%;
-
-    --secondary: 154 27% 10%;
-    --secondary-foreground: 155 20% 95%;
-
-    --muted: 154 22% 11%;
-    --muted-foreground: 154 10% 63%;
-
-    --accent-hsl: 148 67% 45%;
-    --accent-foreground-hsl: 154 20% 95%;
-
-    --destructive: 4 99% 50%;
+    /* HSL Mappings for Tailwind & Radix UI */
+    --background: 100 15% 97%;
+    --foreground: 146 17% 8%;
+    --card: 0 0% 100%;
+    --card-foreground: 146 17% 8%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 146 17% 8%;
+    --primary: 142 72% 28%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 100 12% 94%;
+    --secondary-foreground: 146 17% 8%;
+    --muted: 100 12% 94%;
+    --muted-foreground: 137 4% 56%;
+    --accent-hsl: 142 72% 28%;
+    --accent-foreground-hsl: 0 0% 100%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
+    --border-hsl: 131 11% 88%;
+    --input-hsl: 131 11% 88%;
+    --ring: 142 72% 28%;
+    --radius: 0.625rem;
 
-    --border-hsl: 154 27% 17%;
-    --input-hsl: 154 27% 17%;
-    --ring: 148 67% 45%;
-
-    --radius: 0.875rem;
-
-    --site-bg: var(--bg-primary);
-    --site-fg: var(--text-primary);
+    --site-bg: var(--bg);
+    --site-fg: var(--text);
     --site-muted: var(--text-muted);
-    --site-surface: var(--bg-secondary);
+    --site-surface: var(--surface);
     --site-border-strong: var(--border);
 
-    /* ── Surface layer system ── */
-    --surface-2-bg: #101915;
-    --surface-anchor-bg: #08120f;
+    --surface-2-bg: #EAF5EC;
+    --surface-anchor-bg: #0C100D;
   }
 
-  html.light {
-    --bg-primary: #f4f8f5;
-    --bg-secondary: #ffffff;
-    --text-primary: #121722;
-    --text-secondary: #2f3a46;
-    --text-muted: #4d5a66;
+  html.dark {
+    /* ── Dark Mode Design Tokens (Prompt Section 3 & 27) ── */
+    --bg: #0C100D;
+    --surface: #131814;
+    --surface-elevated: #171D18;
+    --text: #F4F7F5;
+    --text-secondary: #AAB4AD;
+    --text-muted: #78827B;
+    --border: #29322B;
 
-    /* Darker accessible accent for light surfaces */
-    --accent: #187a34;
-    --accent-soft: #187a34cc;
-    --accent-bg: rgba(24, 122, 52, 0.14);
+    /* Signal Green */
+    --primary-green: #56C878;
+    --primary-green-hover: #48b868;
+    --primary-soft: #163D24;
+    --strong-dark-green: #0E4926;
 
-    --border: #cfd8dd;
+    /* Semantic Compatibility Aliases */
+    --bg-primary: var(--bg);
+    --bg-secondary: var(--surface);
+    --text-primary: var(--text);
+    --accent: var(--primary-green);
+    --accent-soft: var(--primary-soft);
+    --accent-bg: var(--primary-soft);
 
-    /* Glass/translucent surface variants */
-    --bg-primary-glass: rgba(244, 248, 245, 0.92);
-    --bg-secondary-glass: rgba(255, 255, 255, 0.88);
+    /* HSL Mappings for Tailwind & Radix UI */
+    --background: 135 14% 5%;
+    --foreground: 140 13% 96%;
+    --card: 135 11% 8%;
+    --card-foreground: 140 13% 96%;
+    --popover: 135 11% 8%;
+    --popover-foreground: 140 13% 96%;
+    --primary: 138 52% 56%;
+    --primary-foreground: 135 14% 5%;
+    --secondary: 135 10% 10%;
+    --secondary-foreground: 140 13% 96%;
+    --muted: 135 10% 10%;
+    --muted-foreground: 136 3% 49%;
+    --accent-hsl: 138 52% 56%;
+    --accent-foreground-hsl: 135 14% 5%;
+    --border-hsl: 133 9% 18%;
+    --input-hsl: 133 9% 18%;
+    --ring: 138 52% 56%;
 
-    --background: 146 34% 97%;
-    --foreground: 222 23% 13%;
+    --site-bg: var(--bg);
+    --site-fg: var(--text);
+    --site-muted: var(--text-muted);
+    --site-surface: var(--surface);
+    --site-border-strong: var(--border);
 
-    --card: 0 0% 100%;
-    --card-foreground: 222 23% 13%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 222 23% 13%;
-
-    --primary: 135 64% 37%;
-    --primary-foreground: 0 0% 100%;
-
-    --secondary: 160 15% 91%;
-    --secondary-foreground: 222 23% 13%;
-
-    --muted: 160 13% 92%;
-    --muted-foreground: 212 15% 38%;
-
-    --accent-hsl: 135 64% 37%;
-    --accent-foreground-hsl: 0 0% 100%;
-
-    --border-hsl: 203 18% 84%;
-    --input-hsl: 203 18% 84%;
-    --ring: 135 64% 37%;
-
-    --site-bg: #f4f8f5;
-    --site-fg: #121722;
-    --site-muted: #4d5a66;
-    --site-surface: #ffffff;
-    --site-border-strong: #cfd8dd;
-
-    /* ── Surface layer system (light mode) ── */
-    --surface-2-bg: #eef5f0;
-  }
-
-  /* Light-mode compatibility for remaining hardcoded utility colors */
-  html.light [class*="bg-[#20222b]"] {
-    background-color: #e7efea !important;
-  }
-
-  html.light [class*="bg-[#1c1e28]"] {
-    background-color: #eef3f0 !important;
-  }
-
-  html.light [class*="border-[#2e3140]"] {
-    border-color: #cfd8dd !important;
-  }
-
-  html.light [class*="text-[#c8cdde]"] {
-    color: #2d3748 !important;
-  }
-
-  html.light .premium-card {
-    background: rgba(255, 255, 255, 0.92);
-    border-color: #d6dee2;
-    box-shadow: 0 8px 24px -22px rgba(20, 29, 40, 0.24);
+    --surface-2-bg: #163D24;
+    --surface-anchor-bg: #0C100D;
   }
 
   html {
-    color-scheme: dark;
+    color-scheme: light dark;
     scroll-behavior: smooth;
     overflow-x: clip;
   }
 
-  html.light {
-    color-scheme: light;
+  html.dark {
+    color-scheme: dark;
   }
 
   * {
     @apply border-border;
   }
 
+  /* Accessible Focus Style (WCAG 2.2 AA) */
+  :focus-visible {
+    outline: 2px solid var(--primary-green) !important;
+    outline-offset: 4px !important;
+  }
+
   body {
     margin: 0;
-    background: var(--bg-primary);
-    color: var(--text-primary);
+    background: var(--bg);
+    color: var(--text);
     overflow-x: hidden;
-    font-family: "Raleway", ui-sans-serif, system-ui, sans-serif;
-    font-size: 17px;
-    line-height: 1.65;
-    font-weight: 450;
+    font-family: "Nunito Sans", ui-sans-serif, system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    font-weight: 400;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
   }
 
-  html.locale-ar body,
-  html.locale-ar h1,
-  html.locale-ar h2,
-  html.locale-ar h3,
-  html.locale-ar h4,
-  html.locale-ar h5,
-  html.locale-ar h6,
-  html.locale-ar button,
-  html.locale-ar a,
-  html.locale-ar input,
-  html.locale-ar textarea,
-  html.locale-ar select {
-    font-family: "Noto Naskh Arabic", serif;
+  /* Global English typography */
+  html[lang="en"] body,
+  html.locale-en body,
+  html[lang="en"] h1, html.locale-en h1,
+  html[lang="en"] h2, html.locale-en h2,
+  html[lang="en"] h3, html.locale-en h3,
+  html[lang="en"] h4, html.locale-en h4,
+  html[lang="en"] h5, html.locale-en h5,
+  html[lang="en"] h6, html.locale-en h6,
+  html[lang="en"] button, html.locale-en button,
+  html[lang="en"] a, html.locale-en a,
+  html[lang="en"] input, html.locale-en input,
+  html[lang="en"] textarea, html.locale-en textarea,
+  html[lang="en"] select, html.locale-en select {
+    font-family: "Nunito Sans", ui-sans-serif, system-ui, sans-serif;
   }
 
-  html.locale-ar body {
+  /* Global Arabic typography (Almarai) & RTL */
+  html[lang="ar"] body,
+  html.locale-ar body,
+  html[lang="ar"] h1, html.locale-ar h1,
+  html[lang="ar"] h2, html.locale-ar h2,
+  html[lang="ar"] h3, html.locale-ar h3,
+  html[lang="ar"] h4, html.locale-ar h4,
+  html[lang="ar"] h5, html.locale-ar h5,
+  html[lang="ar"] h6, html.locale-ar h6,
+  html[lang="ar"] button, html.locale-ar button,
+  html[lang="ar"] a, html.locale-ar a,
+  html[lang="ar"] input, html.locale-ar input,
+  html[lang="ar"] textarea, html.locale-ar textarea,
+  html[lang="ar"] select, html.locale-ar select {
+    font-family: "Almarai", ui-sans-serif, system-ui, sans-serif;
+  }
+
+  html.locale-ar body,
+  html[dir="rtl"] body {
     direction: rtl;
     text-align: right;
-    font-size: 17px;
-    line-height: 1.95;
-    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.85;
+    font-weight: 400;
     text-rendering: optimizeLegibility;
   }
 
-  html.locale-ar .container-narrow {
+  html.locale-ar .container-narrow,
+  html[dir="rtl"] .container-narrow {
     direction: rtl;
   }
 
-  html.locale-ar h1,
-  html.locale-ar h2,
-  html.locale-ar h3,
-  html.locale-ar h4,
-  html.locale-ar h5,
-  html.locale-ar h6 {
-    letter-spacing: 0;
-    line-height: 1.5;
+  html.locale-ar h1, html[dir="rtl"] h1,
+  html.locale-ar h2, html[dir="rtl"] h2,
+  html.locale-ar h3, html[dir="rtl"] h3,
+  html.locale-ar h4, html[dir="rtl"] h4,
+  html.locale-ar h5, html[dir="rtl"] h5,
+  html.locale-ar h6, html[dir="rtl"] h6 {
+    letter-spacing: normal !important;
+    line-height: 1.25 !important;
     font-weight: 700;
   }
 
-  html.locale-ar p,
-  html.locale-ar li,
-  html.locale-ar a,
-  html.locale-ar button,
-  html.locale-ar span,
-  html.locale-ar input,
-  html.locale-ar textarea,
-  html.locale-ar label {
-    letter-spacing: 0;
-    line-height: 1.9;
+  html.locale-ar p, html[dir="rtl"] p,
+  html.locale-ar li, html[dir="rtl"] li,
+  html.locale-ar a, html[dir="rtl"] a,
+  html.locale-ar button, html[dir="rtl"] button,
+  html.locale-ar span, html[dir="rtl"] span,
+  html.locale-ar input, html[dir="rtl"] input,
+  html.locale-ar textarea, html[dir="rtl"] textarea,
+  html.locale-ar label, html[dir="rtl"] label {
+    letter-spacing: normal !important;
+    line-height: 1.8;
   }
 
   /* Arabic copy should not inherit aggressive uppercase/tracking styles from EN UI */
-  html.locale-ar [class*="uppercase"] {
+  html.locale-ar [class*="uppercase"],
+  html[dir="rtl"] [class*="uppercase"] {
     text-transform: none !important;
   }
 
-  html.locale-ar [class*="tracking-"] {
-    letter-spacing: 0 !important;
+  html.locale-ar [class*="tracking-"],
+  html[dir="rtl"] [class*="tracking-"] {
+    letter-spacing: normal !important;
   }
 
-  /* Small EN-oriented text sizes look cramped in Arabic script */
-  html.locale-ar [class*="text-[11px]"] {
-    font-size: 14px !important;
+  /* Responsive wide editorial container with generous horizontal breathing space */
+  .container-narrow {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    max-width: 1440px;
+    padding-left: clamp(24px, 5vw, 72px);
+    padding-right: clamp(24px, 5vw, 72px);
   }
-
-  html.locale-ar [class*="text-[12px]"] {
-    font-size: 15px !important;
-  }
-
-  html.locale-ar [class*="text-xs"] {
-    font-size: 15px !important;
-  }
-
-  html.locale-ar [class*="text-sm"] {
-    font-size: 16px !important;
-  }
-
-  html.locale-ar [class*="text-base"] {
-    font-size: 17px !important;
-  }
-
-  html.locale-ar [class*="text-lg"] {
-    font-size: 19px !important;
-  }
-
-  html.locale-ar .innovation-label {
-    line-height: 1.45;
-    letter-spacing: 0;
-  }
-
-  html.locale-ar .timeline-year-shimmer {
-    font-size: 20px;
-    letter-spacing: 0;
-    font-weight: 700;
+  @media (min-width: 1536px) {
+    .container-narrow {
+      max-width: 1520px;
+    }
   }
 
   h1,
@@ -274,18 +262,34 @@
   h4,
   h5,
   h6 {
-    font-family: "Raleway", ui-sans-serif, system-ui, sans-serif;
-    letter-spacing: -0.02em;
+    font-family: "Nunito Sans", ui-sans-serif, system-ui, sans-serif;
+    letter-spacing: -0.03em;
+    font-weight: 600;
   }
 
   h1 {
-    font-size: clamp(72px, 8.2vw, 96px);
-    line-height: 1.02;
+    font-size: clamp(34px, 4vw, 54px);
+    line-height: 1.08;
   }
 
   h2 {
-    font-size: clamp(36px, 4.2vw, 48px);
-    line-height: 1.08;
+    font-size: clamp(32px, 3.8vw, 44px);
+    line-height: 1.1;
+  }
+
+  /* Quotes styling: Chewy for English, Aref Ruqaa Ink for Arabic */
+  .quote-handwritten {
+    font-family: "Chewy", cursive, sans-serif;
+    font-style: normal;
+    letter-spacing: 0.02em;
+  }
+
+  html[lang="ar"] .quote-handwritten,
+  html.locale-ar .quote-handwritten,
+  html[dir="rtl"] .quote-handwritten {
+    font-family: "Aref Ruqaa Ink", serif;
+    font-style: normal;
+    letter-spacing: normal;
   }
 }
 
@@ -1200,10 +1204,204 @@ html.light .zaakiy-chat .placeholder\:text-\[\#8a90a8\]::placeholder {
   }
 }
 
-.brand-zaakiy {
-  font-family: "Anta", ui-sans-serif, system-ui, sans-serif;
-  letter-spacing: 0.02em;
-  font-weight: 600;
+@keyframes brand-gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.brand-zaakiy,
+.brand-zaakiyv3rse {
+  font-family: "Anta", ui-sans-serif, system-ui, sans-serif !important;
+  letter-spacing: 0.04em;
+  font-weight: 700;
+  background: linear-gradient(
+    135deg,
+    #147A3A 0%,
+    #38c755 25%,
+    #10b981 50%,
+    #059669 75%,
+    #147A3A 100%
+  );
+  background-size: 250% 250%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  display: inline-block;
+  animation: brand-gradient-shift 4s ease-in-out infinite;
+}
+
+html.dark .brand-zaakiy,
+html.dark .brand-zaakiyv3rse {
+  background: linear-gradient(
+    135deg,
+    #56c878 0%,
+    #34d399 25%,
+    #86efac 50%,
+    #4ade80 75%,
+    #56c878 100%
+  );
+  background-size: 250% 250%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: brand-gradient-shift 4s ease-in-out infinite;
+}
+
+/* Cross Tape Marquee Animations */
+@keyframes marquee-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marquee-right {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.animate-marquee-left {
+  display: flex;
+  width: max-content;
+  animation: marquee-left 32s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-right {
+  display: flex;
+  width: max-content;
+  animation: marquee-right 32s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-left:hover,
+.animate-marquee-right:hover {
+  animation-play-state: paused;
+}
+
+/* ============================================================
+   Zaakiy Cat Animations (Walking, Sitting, Tail Sway, Breathing)
+   ============================================================ */
+@keyframes cat-walk-bob {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-1.5px);
+  }
+}
+
+@keyframes cat-leg-walk-1 {
+  0%, 100% {
+    transform: rotate(-16deg);
+  }
+  50% {
+    transform: rotate(16deg);
+  }
+}
+
+@keyframes cat-leg-walk-2 {
+  0%, 100% {
+    transform: rotate(16deg);
+  }
+  50% {
+    transform: rotate(-16deg);
+  }
+}
+
+@keyframes cat-tail-walk {
+  0%, 100% {
+    transform: rotate(-8deg);
+  }
+  50% {
+    transform: rotate(8deg);
+  }
+}
+
+@keyframes cat-tail-sway {
+  0%, 100% {
+    transform: rotate(-5deg);
+  }
+  50% {
+    transform: rotate(12deg);
+  }
+}
+
+@keyframes cat-breathe {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-0.8px);
+  }
+}
+
+@keyframes cat-blink {
+  0%, 92%, 96%, 100% {
+    transform: scaleY(1);
+  }
+  94% {
+    transform: scaleY(0.1);
+  }
+}
+
+@keyframes cat-head-bob {
+  0%, 88%, 100% {
+    transform: rotate(0deg);
+  }
+  92% {
+    transform: rotate(-3deg);
+  }
+  96% {
+    transform: rotate(2deg);
+  }
+}
+
+.animate-cat-walk-bob {
+  animation: cat-walk-bob 0.4s ease-in-out infinite;
+}
+
+.animate-cat-leg-1 {
+  animation: cat-leg-walk-1 0.4s ease-in-out infinite;
+}
+
+.animate-cat-leg-2 {
+  animation: cat-leg-walk-2 0.4s ease-in-out infinite;
+}
+
+.animate-cat-tail-walk {
+  animation: cat-tail-walk 0.6s ease-in-out infinite;
+}
+
+.animate-cat-tail-sway {
+  animation: cat-tail-sway 2.4s ease-in-out infinite;
+}
+
+.animate-cat-breathe {
+  animation: cat-breathe 2.8s ease-in-out infinite;
+}
+
+.animate-cat-blink {
+  animation: cat-blink 4.2s ease-in-out infinite;
+}
+
+.animate-cat-head-bob {
+  animation: cat-head-bob 6s ease-in-out infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1223,7 +1421,17 @@ html.light .zaakiy-chat .placeholder\:text-\[\#8a90a8\]::placeholder {
   .hero-reveal,
   .innovation-label,
   .innovation-label > span,
-  .timeline-year-shimmer {
+  .timeline-year-shimmer,
+  .animate-marquee-left,
+  .animate-marquee-right,
+  .animate-cat-walk-bob,
+  .animate-cat-leg-1,
+  .animate-cat-leg-2,
+  .animate-cat-tail-walk,
+  .animate-cat-tail-sway,
+  .animate-cat-breathe,
+  .animate-cat-blink,
+  .animate-cat-head-bob {
     animation: none;
   }
 }

@@ -1,102 +1,117 @@
+import { memo } from "react";
+import { ArrowRight, Github, Linkedin, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Github, Linkedin } from "lucide-react";
 import { useLocale } from "@/hooks/use-locale";
 
-export default function Footer() {
+export function Footer() {
   const { locale } = useLocale();
   const isArabic = locale === "ar";
+  const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-border/60 bg-background text-foreground">
-      {/* Soft Light-Green Contact CTA Box */}
-      <section id="contact" className="py-12 md:py-16 scroll-mt-20">
+    <footer className="bg-background text-foreground">
+      {/* ==================================================
+          18. CONTACT CTA (Tactile Architectural Dispatch Card)
+          ================================================== */}
+      <section id="contact" className="py-10 sm:py-12 md:py-14 scroll-mt-20">
         <div className="container-narrow">
-          <div className="rounded-xl border border-accent/30 bg-accent/5 p-6 sm:p-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
-            {/* Left Side */}
-            <div className="max-w-xl space-y-3">
-              <div className="text-[13px] font-mono uppercase text-accent font-semibold tracking-[0.08em]">
-                {isArabic ? "لنتحدث" : "LET'S TALK"}
+          <div className="rounded-2xl border border-dashed border-accent/40 bg-accent/5 p-6 sm:p-8 lg:p-10 relative flex flex-col md:flex-row items-start md:items-center justify-between gap-8 select-none">
+            {/* Drafting Corner Crosshairs */}
+            <span
+              aria-hidden="true"
+              className="absolute top-2.5 left-2.5 font-mono text-[11px] text-accent/40 select-none pointer-events-none"
+            >
+              +
+            </span>
+            <span
+              aria-hidden="true"
+              className="absolute top-2.5 right-2.5 font-mono text-[11px] text-accent/40 select-none pointer-events-none"
+            >
+              +
+            </span>
+            <span
+              aria-hidden="true"
+              className="absolute bottom-2.5 left-2.5 font-mono text-[11px] text-accent/40 select-none pointer-events-none"
+            >
+              +
+            </span>
+            <span
+              aria-hidden="true"
+              className="absolute bottom-2.5 right-2.5 font-mono text-[11px] text-accent/40 select-none pointer-events-none"
+            >
+              +
+            </span>
+
+            <div className="max-w-xl">
+              <div className="flex items-center gap-2 mb-2">
+                <span className="font-mono text-[11px] text-accent font-semibold tracking-wider uppercase">
+                  {isArabic ? "قنوات التواصل" : "DISPATCH // OPEN_CHANNELS"}
+                </span>
+                <span
+                  aria-hidden="true"
+                  className="font-mono text-[10px] text-accent/80 border border-dashed border-accent/40 bg-background/60 px-1.5 py-0.2 rounded transform rotate-1 select-none"
+                >
+                  STATUS: ACCEPTING
+                </span>
               </div>
 
-              <h2 className="section-h2 text-primary">
-                {isArabic
-                  ? "هل تواجه تحدياً معقداً في نظامك؟"
-                  : "Have a difficult system problem?"}
+              <h2 className="text-2xl sm:text-3xl lg:text-[34px] font-semibold text-primary tracking-[-0.03em] leading-tight mb-3">
+                {isArabic ? "هل تواجه مشكلة نظام معقدة؟" : "Have a difficult system problem?"}
               </h2>
 
-              <p className="text-[16px] text-secondary leading-relaxed font-normal">
+              <p className="text-[15.5px] sm:text-[16px] text-secondary leading-relaxed font-normal mb-3">
                 {isArabic
-                  ? "إذا كنت تعمل على العمارة المعمارية أو والتكامل أو تعقيدات المنصة، يسعدني دائماً تبادل الخبرات."
+                  ? "إذا كنت تعمل على العمارة المعمارية أو التكامل أو تعقيدات المنصة، يسعدني دائماً تبادل الخبرات."
                   : "If you're working through architecture, integration or platform complexity, I'm always happy to compare notes."}
               </p>
 
-              <div className="flex flex-wrap items-center gap-3 pt-2">
-                <Button
-                  asChild
-                  className="h-10 rounded-lg bg-accent px-5 text-[14px] font-semibold text-white transition-colors hover:bg-accent/90 gap-1.5 shadow-xs"
-                >
-                  <a href="mailto:hello@sanukhan.dev?subject=Architecture%20Inquiry%20–%20SanuKhan.dev">
-                    <span>{isArabic ? "لنتحدث" : "Let's talk"}</span>
-                    <ArrowRight className="h-3.5 w-3.5 rtl:rotate-180" />
-                  </a>
-                </Button>
-
-                <Button
-                  variant="outline"
-                  asChild
-                  className="h-10 rounded-lg border-border bg-background px-5 text-[14px] font-semibold text-primary transition-colors hover:border-accent/40"
-                >
-                  <a href="mailto:hello@sanukhan.dev">
-                    {isArabic ? "راسلني بالبريد" : "Email me"}
-                  </a>
-                </Button>
+              <div className="quote-handwritten text-[16px] sm:text-[17px] text-accent/90">
+                {isArabic
+                  ? "“ محادثة واحدة قد توفر شهوراً من إعادة البناء. ”"
+                  : "“ One candid conversation can save months of architectural rework. ”"}
               </div>
             </div>
 
-            {/* Right Side */}
-            <div className="flex flex-col md:items-end gap-3 text-[13px] font-mono text-muted-foreground">
-              <span>{isArabic ? "أو تواصل معي عبر ———" : "Or find me on ———"}</span>
-              <div className="flex items-center gap-4">
-                <a
-                  href="https://www.linkedin.com/in/sanukhandev/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 font-semibold text-primary hover:text-accent transition-colors"
-                >
-                  <Linkedin className="h-4 w-4 text-accent" />
-                  LinkedIn
+            <div className="flex flex-wrap items-center gap-3 shrink-0">
+              <Button
+                asChild
+                className="h-11 rounded-lg bg-accent px-5 text-[14px] font-semibold text-white transition-colors hover:bg-accent/90 shadow-xs gap-1.5"
+              >
+                <a href="mailto:hello@sanukhan.dev?subject=Architecture%20Inquiry%20–%20SanuKhan.dev">
+                  <span>{isArabic ? "لنتحدث" : "Let's talk"}</span>
+                  <ArrowRight className="h-4 w-4 rtl:rotate-180" />
                 </a>
+              </Button>
 
-                <a
-                  href="https://github.com/sanukhandev"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 font-semibold text-primary hover:text-accent transition-colors"
-                >
-                  <Github className="h-4 w-4 text-accent" />
-                  GitHub
+              <Button
+                variant="outline"
+                asChild
+                className="h-11 rounded-lg border-border bg-surface px-5 text-[14px] font-semibold text-primary transition-colors hover:border-accent/40"
+              >
+                <a href="mailto:hello@sanukhan.dev">
+                  {isArabic ? "راسلني بالبريد" : "Email me"}
                 </a>
-              </div>
+              </Button>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Main Footer */}
-      <div className="py-8 border-t border-border/60 text-[13px]">
-        <div className="container-narrow flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-          {/* Left */}
+      {/* ==================================================
+          19. FOOTER (Minimal Technical Editorial Style)
+          ================================================== */}
+      <div className="border-t border-border/60 py-8 sm:py-10 text-[14px]">
+        <div className="container-narrow flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+          {/* LEFT: SanuKhan.dev & identity */}
           <div>
-            <div className="wordmark inline-flex items-baseline text-primary select-none">
-              {isArabic ? (
-                <span>سانو خان</span>
-              ) : (
-                <>
-                  <span>SanuKhan</span>
-                  <span className="wordmark-domain">.dev</span>
-                </>
-              )}
-            </div>
+            <a
+              href="#home"
+              className="inline-flex items-baseline text-[18px] font-semibold tracking-tight text-primary transition-opacity hover:opacity-90 select-none"
+              aria-label="SanuKhan.dev home"
+            >
+              <span>SanuKhan</span>
+              <span className="text-accent font-semibold">.dev</span>
+            </a>
             <div className="text-muted-foreground text-[13px] mt-1 font-mono">
               {isArabic
                 ? "معماري حلول · هندسة المنصات | دبي، الإمارات"
@@ -104,8 +119,8 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Center Links */}
-          <div className="flex flex-wrap items-center gap-5 text-secondary text-[14px] font-medium">
+          {/* CENTER NAVIGATION: Work, Architecture, Notes, About */}
+          <nav className="flex flex-wrap items-center gap-6 text-[14px] font-medium text-secondary" aria-label="Footer Navigation">
             <a href="#work" className="hover:text-accent transition-colors">
               {isArabic ? "الأعمال" : "Work"}
             </a>
@@ -118,16 +133,48 @@ export default function Footer() {
             <a href="#about" className="hover:text-accent transition-colors">
               {isArabic ? "نبذة عني" : "About"}
             </a>
-            <a href="/Sanu Khan - Resume.pdf" download className="hover:text-accent transition-colors">
-              {isArabic ? "السيرة الذاتية" : "Resume"}
+          </nav>
+
+          {/* SOCIAL LINKS: LinkedIn, GitHub, Email */}
+          <div className="flex items-center gap-5 text-sm font-medium text-secondary">
+            <a
+              href="https://www.linkedin.com/in/sanukhandev/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 hover:text-accent transition-colors"
+            >
+              <Linkedin className="h-4 w-4 text-accent" />
+              LinkedIn
+            </a>
+            <a
+              href="https://github.com/sanukhandev"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 hover:text-accent transition-colors"
+            >
+              <Github className="h-4 w-4 text-accent" />
+              GitHub
+            </a>
+            <a
+              href="mailto:hello@sanukhan.dev"
+              className="inline-flex items-center gap-1.5 hover:text-accent transition-colors"
+            >
+              <Mail className="h-4 w-4 text-accent" />
+              Email
             </a>
           </div>
+        </div>
 
-          {/* Right Copyright */}
-          <div className="text-muted-foreground font-mono text-[12.5px]">
+        {/* COPYRIGHT BOTTOM BAR */}
+        <div className="container-narrow pt-8 mt-8 border-t border-dashed border-border/60 flex flex-col sm:flex-row items-center justify-between gap-3 text-muted-foreground font-mono text-[12px]">
+          <div>
             {isArabic
-              ? `© ${new Date().getFullYear()} سانو خان. بُني بهدف.`
-              : `© ${new Date().getFullYear()} Sanu Khan. Built with purpose.`}
+              ? `© ${currentYear} سانو خان. صُممت بحرفية.`
+              : `© ${currentYear} Sanu Khan. Designed with intent.`}
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="h-1.5 w-1.5 rounded-full bg-accent animate-pulse" />
+            <span>25.2048° N, 55.2708° E · AE</span>
           </div>
         </div>
       </div>
@@ -135,3 +182,4 @@ export default function Footer() {
   );
 }
 
+export default memo(Footer);

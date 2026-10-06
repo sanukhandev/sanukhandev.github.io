@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import { useLocale } from "@/hooks/use-locale";
 import { useSiteContent } from "@/data/siteContent";
 import { useDevToArticles } from "@/hooks/use-devto-articles";
+import { ZaakiyCat } from "@/components/ui/ZaakiyCat";
 
 type ChatRole = "user" | "assistant";
 
@@ -110,7 +111,7 @@ export default function ZaakiyChatWidget({
   const [loading, setLoading] = useState(false);
   const { locale } = useLocale();
   const content = useSiteContent();
-  const { data: articles } = useDevToArticles(20);
+  const { data: articles } = useDevToArticles(20, open);
   
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
@@ -286,6 +287,8 @@ export default function ZaakiyChatWidget({
       {open && (
         <div
           role="dialog"
+          aria-modal="true"
+          aria-labelledby="zaakiy-chat-title"
           aria-label={isArabic ? "مساعد معرض سانو خان" : "Zaakiy Portfolio Assistant"}
           className="mb-3 flex flex-col w-[min(380px,calc(100vw-1.5rem))] h-[min(560px,calc(100vh-6rem))] max-h-[620px] overflow-hidden rounded-[16px] border border-border bg-background shadow-xl transition-all duration-200"
         >
@@ -296,7 +299,7 @@ export default function ZaakiyChatWidget({
                 <Bot className="h-3.5 w-3.5" />
               </div>
               <div className="flex flex-col leading-none">
-                <span className="brand-zaakiy text-[14px] font-semibold text-primary">Zaakiy</span>
+                <span id="zaakiy-chat-title" className="brand-zaakiy text-[14px] font-semibold text-primary">Zaakiy</span>
                 <span className="mt-0.5 text-[11px] text-muted-foreground font-normal">
                   {isArabic ? "مساعد المعرض" : "Portfolio Assistant"}
                 </span>
@@ -410,6 +413,7 @@ export default function ZaakiyChatWidget({
             <div className="flex items-center gap-2">
               <textarea
                 ref={inputRef}
+                aria-label={isArabic ? "اكتب سؤالك" : "Ask about Sanu's work"}
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={onKeyDown}
@@ -440,21 +444,28 @@ export default function ZaakiyChatWidget({
         </div>
       )}
 
-      {/* Understated Floating Launcher Button */}
-      <button
-        ref={launcherRef}
-        type="button"
-        onClick={() => setOpen((v) => !v)}
-        className={cn(
-          "inline-flex h-11 items-center gap-2 rounded-full border border-accent/30 bg-accent px-4 text-xs font-semibold text-white shadow-md transition-all hover:bg-accent/90 focus:outline-none focus:ring-2 focus:ring-accent/40",
-          open && "ring-2 ring-accent/40 bg-accent/90"
-        )}
-        aria-label={isArabic ? "فتح مساعد Zaakiy" : "Open Zaakiy Portfolio Assistant"}
-      >
-        <MessageCircle className="h-4 w-4" />
-        <span className="font-medium">{isArabic ? "اسأل Zaakiy" : "Ask Zaakiy"}</span>
-      </button>
+      {/* Floating Launcher Button Container with Perched Animated Cat */}
+      <div className="relative inline-flex flex-col items-end">
+        <ZaakiyCat
+          isOpen={open}
+          onClick={() => setOpen((v) => !v)}
+          isArabic={isArabic}
+        />
+
+        <button
+          ref={launcherRef}
+          type="button"
+          onClick={() => setOpen((v) => !v)}
+          className={cn(
+            "relative inline-flex h-11 items-center gap-2 rounded-full border border-accent/30 bg-accent px-4 text-xs font-semibold text-white shadow-md transition-all hover:bg-accent/90 focus:outline-none focus:ring-2 focus:ring-accent/40",
+            open && "ring-2 ring-accent/40 bg-accent/90"
+          )}
+          aria-label={isArabic ? "فتح مساعد Zaakiy" : "Open Zaakiy Portfolio Assistant"}
+        >
+          <MessageCircle className="h-4 w-4" />
+          <span className="font-medium">{isArabic ? "اسأل Zaakiy" : "Ask Zaakiy"}</span>
+        </button>
+      </div>
     </div>
   );
 }
-

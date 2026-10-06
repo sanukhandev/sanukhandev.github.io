@@ -6,11 +6,12 @@ import { useLocale } from "@/hooks/use-locale";
 import { getLocalizedPageSeo } from "@/lib/seo";
 import { buildHomepageSchemas } from "@/lib/schema";
 import { HeroSection04 } from "@/components/ui/hero-04";
+import ScrollReveal from "@/components/ui/scroll-reveal";
 
-const ExperienceStrip = lazy(() => import("@/components/sections/ExperienceStrip"));
 const Works = lazy(() => import("@/components/sections/Works"));
 const HowIThink = lazy(() => import("@/components/sections/HowIThink"));
 const ArchitectureInPractice = lazy(() => import("@/components/sections/ArchitectureInPractice"));
+const CrossTapeMarquee = lazy(() => import("@/components/sections/CrossTapeMarquee"));
 const ProblemsSection = lazy(() => import("@/components/sections/ProblemsSection"));
 const DomainExperience = lazy(() => import("@/components/sections/DomainExperience"));
 const ZaakiyHighlights = lazy(() => import("@/components/sections/ZaakiyHighlights"));
@@ -19,8 +20,8 @@ const AboutTeaser = lazy(() => import("@/components/sections/AboutTeaser"));
 const Footer = lazy(() => import("@/components/sections/Footer"));
 
 const sectionFallback = (
-  <div className="container-narrow py-12">
-    <div className="h-24 animate-pulse rounded-xl bg-muted" />
+  <div className="container-narrow py-8">
+    <div className="h-24 animate-pulse rounded-xl bg-muted/40" />
   </div>
 );
 
@@ -34,18 +35,28 @@ const Index = () => {
 
   return (
     <div className="relative bg-background text-foreground min-h-screen">
+      {/* Accessible Skip to Content Link (WCAG 2.2 AA) */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 z-[100] rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-white shadow-md focus:outline-none focus:ring-2 focus:ring-white"
+      >
+        {locale === "ar" ? "الانتقال إلى المحتوى الرئيسي" : "Skip to content"}
+      </a>
+
       <SeoMeta
-        title="Sanu Khan — Solution Architect & Platform Engineer"
-        description="Solution Architect with 13+ years designing enterprise integrations, distributed platforms and cloud systems across retail, airline, automotive and SaaS environments."
+        title="Software Engineer & Solution Architect in Dubai, UAE"
+        description="Software Engineer and Solution Architect in Dubai, UAE with 13+ years designing enterprise integrations, distributed platforms and cloud systems across retail, airline, automotive and SaaS environments."
         canonicalPath={currentSeo.canonicalPath}
         keywords={[
+          "Software Engineer UAE",
+          "Software Engineer Dubai",
           "Solution Architect Dubai",
           "Platform Engineer UAE",
           "Enterprise Integration Architect",
           "Cloud Architect Dubai",
           "Distributed Systems Architect",
           "Event-Driven Architecture",
-          "Sanu Khan"
+          "Sanu Khan",
         ]}
         kind="profile"
         schema={buildHomepageSchemas()}
@@ -53,53 +64,76 @@ const Index = () => {
 
       <Navbar />
 
-      <main className="pt-16 sm:pt-20">
-        {/* 01. HERO (with integrated Experience Strip) */}
+      <main id="main-content" className="pt-[72px] sm:pt-20">
+        {/* 01. HERO (Includes copy, CTAs, Avatar, and Metrics in mobile-first responsive order) */}
         <HeroSection04 />
 
-        {/* 03. SELECTED ARCHITECTURE WORK */}
+        {/* 02. SELECTED WORK */}
         <Suspense fallback={sectionFallback}>
-          <Works />
+          <ScrollReveal>
+            <Works />
+          </ScrollReveal>
         </Suspense>
 
-        {/* 04. HOW I THINK ABOUT SYSTEMS */}
+        {/* 03. HOW I THINK (Architecture Principles) */}
         <Suspense fallback={sectionFallback}>
-          <HowIThink />
+          <ScrollReveal>
+            <HowIThink />
+          </ScrollReveal>
         </Suspense>
 
-        {/* 05. ARCHITECTURE IN PRACTICE */}
+        {/* 04. ARCHITECTURE IN PRACTICE (Interactive Blueprint Diagram) */}
         <Suspense fallback={sectionFallback}>
-          <ArchitectureInPractice />
+          <ScrollReveal>
+            <ArchitectureInPractice />
+          </ScrollReveal>
         </Suspense>
 
-        {/* 06. PROBLEMS I TEND TO GET PULLED INTO */}
-        <Suspense fallback={sectionFallback}>
-          <ProblemsSection />
-        </Suspense>
-
-        {/* 07. EXPERIENCE ACROSS DOMAINS */}
-        <Suspense fallback={sectionFallback}>
-          <DomainExperience />
-        </Suspense>
-
-        {/* 08. ZAAKIYV3RSE R&D */}
-        <Suspense fallback={sectionFallback}>
-          <ZaakiyHighlights />
-        </Suspense>
-
-        {/* 09. ENGINEERING NOTES */}
-        <Suspense fallback={sectionFallback}>
-          <EngineeringNotes />
-        </Suspense>
-
-        {/* 10. ABOUT TEASER */}
-        <Suspense fallback={sectionFallback}>
-          <AboutTeaser />
-        </Suspense>
-
-        {/* 11. CONTACT & FOOTER */}
+        {/* MID-PAGE CROSS TAPE MARQUEE */}
         <Suspense fallback={null}>
-          <Footer />
+          <CrossTapeMarquee />
+        </Suspense>
+
+        {/* 05. PROBLEMS I GET PULLED INTO */}
+        <Suspense fallback={sectionFallback}>
+          <ScrollReveal>
+            <ProblemsSection />
+          </ScrollReveal>
+        </Suspense>
+
+        {/* 06. DOMAINS I WORK ACROSS */}
+        <Suspense fallback={sectionFallback}>
+          <ScrollReveal>
+            <DomainExperience />
+          </ScrollReveal>
+        </Suspense>
+
+        {/* 07. ZAAKIYV3RSE / LAB SECTION */}
+        <Suspense fallback={sectionFallback}>
+          <ScrollReveal>
+            <ZaakiyHighlights />
+          </ScrollReveal>
+        </Suspense>
+
+        {/* 08. ENGINEERING NOTES */}
+        <Suspense fallback={sectionFallback}>
+          <ScrollReveal>
+            <EngineeringNotes />
+          </ScrollReveal>
+        </Suspense>
+
+        {/* 09. ABOUT */}
+        <Suspense fallback={sectionFallback}>
+          <ScrollReveal>
+            <AboutTeaser />
+          </ScrollReveal>
+        </Suspense>
+
+        {/* 10. CONTACT CTA & FOOTER */}
+        <Suspense fallback={null}>
+          <ScrollReveal>
+            <Footer />
+          </ScrollReveal>
         </Suspense>
       </main>
     </div>
