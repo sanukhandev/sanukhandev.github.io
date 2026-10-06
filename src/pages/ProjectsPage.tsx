@@ -18,13 +18,15 @@ export default function ProjectsPage() {
     <>
       <SeoMeta
         title={isArabic ? "أعمال معمارية مختارة ودراسات حالة — سانو خان" : "Selected Architecture Work & Case Studies — Sanu Khan"}
-        description={isArabic ? "دراسات حالة تفصيلية لتكاملات المؤسسات، وتجميع تجزئة رحلات الطيران، ومنصات السيارات متعددة القنوات بواسطة معماري الحلول سانو خان." : "Detailed case studies of enterprise integrations, airline retailing aggregation, and automotive omnichannel platforms by Solution Architect Sanu Khan."}
+        description={isArabic ? "دراسات حالة تفصيلية لتكاملات المؤسسات، والتجارب الرقمية الصحية، وتجميع تجزئة رحلات الطيران، ومنصات السيارات متعددة القنوات بواسطة معماري الحلول سانو خان." : "Detailed case studies of enterprise integrations, headless healthcare experiences, airline retailing aggregation, and automotive omnichannel platforms by Solution Architect Sanu Khan."}
         canonicalPath={seo.canonicalPath}
         keywords={[
           "architecture case studies",
           "enterprise retail integration",
           "airline retailing NDC aggregation",
           "automotive omnichannel platform",
+          "headless healthcare digital experience",
+          "Next.js WordPress headless CMS",
           "solution architecture case studies"
         ]}
         schema={buildBreadcrumbListSchema([
@@ -137,4 +139,3 @@ export default function ProjectsPage() {
     </>
   );
 }
-

@@ -67,6 +67,9 @@ const ApiIntegrationServicesPage = lazyWithRetry(
 const FullStackConsultantUaePage = lazyWithRetry(
   () => import("./pages/services/FullStackConsultantUaePage.tsx"),
 );
+const SoftwareEngineerUaePage = lazyWithRetry(
+  () => import("./pages/services/SoftwareEngineerUaePage.tsx"),
+);
 const DevToBlogPage = lazyWithRetry(() => import("./pages/blog/DevToBlogPage.tsx"));
 const JavascriptAlgorithmsPage = lazyWithRetry(
   () => import("./pages/blog/JavascriptAlgorithmsPage.tsx"),
@@ -216,6 +219,10 @@ const AppShell = () => {
               <Route
                 path="/full-stack-consultant-uae"
                 element={<FullStackConsultantUaePage />}
+              />
+              <Route
+                path="/software-engineer-uae"
+                element={<SoftwareEngineerUaePage />}
               />
               <Route
                 path="/services/nodejs-backend-engineer"

@@ -26,38 +26,14 @@ export const buildBreadcrumbListSchema = (
 export const buildHomepageSchemas = (): JsonLdNode[] => [
   {
     "@context": "https://schema.org",
-    "@type": "Person",
-    name: "Sanu Khan",
-    url: SITE_URL,
-    image: DEFAULT_OG_IMAGE,
-    jobTitle: "CTO / Solutions Architect",
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: "Dubai",
-      addressCountry: "AE",
-    },
-    sameAs: [
-      "https://github.com/sanukhandev",
-      "https://linkedin.com/in/sanukhandev",
-      "https://dev.to/sanukhandev",
-      "https://x.com/sanukhandev",
-    ],
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    name: "sanukhan.dev",
-    url: SITE_URL,
-    inLanguage: ["en", "ar"],
-  },
-  {
-    "@context": "https://schema.org",
     "@type": "Organization",
+    "@id": `${SITE_URL}/#organization`,
     name: "Sanu Khan Engineering",
     url: SITE_URL,
     logo: DEFAULT_OG_IMAGE,
     founder: {
       "@type": "Person",
+      "@id": `${SITE_URL}/#person`,
       name: "Sanu Khan",
     },
   },

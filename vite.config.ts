@@ -301,12 +301,15 @@ export default defineConfig(({ command, mode }) => {
       threshold: 10240,
     }),
   ];
-  const isCiBuild = process.env.CI === "true" || process.env.VERCEL === "1";
-  const shouldPrerender = mode === "production" && !isCiBuild;
+  const shouldPrerender =
+    mode === "production" &&
+    (process.env.PRERENDER === "true" ||
+      (process.env.CI !== "true" && process.env.VERCEL !== "1"));
 
   // vite-plugin-prerender has ESM/CJS interop issues in dev config loading.
-  // Also skip it in CI/Vercel because Puppeteer requires system libs
-  // (e.g. libnss3) that are not available in the default build image.
+  // Set PRERENDER=true in the deploy environment so public routes expose
+  // page-specific metadata before JavaScript executes. CI can validate the
+  // normal SPA build without requiring a system Chromium installation.
   if (shouldPrerender) {
     const vitePrerender = require("vite-plugin-prerender");
     plugins.push(
@@ -316,6 +319,12 @@ export default defineConfig(({ command, mode }) => {
           "/",
           "/about",
           "/projects",
+          "/projects/enterprise-retail-integration",
+          "/projects/airline-retailing-aggregation",
+          "/projects/automotive-omnichannel-platform",
+          "/projects/real-estate-erp-architecture",
+          "/projects/garage-management-and-diagnostics",
+          "/projects/headless-healthcare-digital-experience",
           "/contact",
           "/faq",
           "/tools",
@@ -330,6 +339,7 @@ export default defineConfig(({ command, mode }) => {
           "/react-developer-dubai",
           "/api-integration-services",
           "/full-stack-consultant-uae",
+          "/software-engineer-uae",
           "/services/nodejs-backend-engineer",
           "/services/react-developer-dubai",
           "/services/azure-cloud-architect",

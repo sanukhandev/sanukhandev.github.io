@@ -1,6 +1,6 @@
 import { lazy, ComponentType } from "react";
 
-export function lazyWithRetry<T extends ComponentType<any>>(
+export function lazyWithRetry<T extends ComponentType<never>>(
   componentImport: () => Promise<{ default: T }>,
 ) {
   return lazy(async () => {

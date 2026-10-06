@@ -88,9 +88,15 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"],
-        display: ["Raleway", "ui-sans-serif", "system-ui", "sans-serif"],
-        body: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"],
+        sans: ["Nunito Sans", "ui-sans-serif", "system-ui", "sans-serif"],
+        display: ["Nunito Sans", "ui-sans-serif", "system-ui", "sans-serif"],
+        body: ["Nunito Sans", "ui-sans-serif", "system-ui", "sans-serif"],
+        nunito: ["Nunito Sans", "sans-serif"],
+        poppins: ["Poppins", "sans-serif"],
+        almarai: ["Almarai", "sans-serif"],
+        chewy: ["Chewy", "cursive", "sans-serif"],
+        ruqaa: ["Aref Ruqaa Ink", "serif"],
+        anta: ["Anta", "sans-serif"],
       },
       colors: {
         ...palette,
