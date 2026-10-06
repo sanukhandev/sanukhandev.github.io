@@ -117,12 +117,14 @@ export const buildSeoMetadata = (input: BuildSeoInput): SeoMetadata => {
 
 export const pageSeo = {
   home: {
-    title: "Sanu Khan — Technical Architect & Engineering Lead",
+    title: "Software Engineer & Solution Architect in Dubai, UAE | Sanu Khan",
     description:
       "Technical Architect and Engineering Lead designing production platforms across commerce, travel technology, enterprise systems and AI-enabled engineering.",
     canonicalPath: "/",
     keywords: [
       "Sanu Khan",
+      "Software Engineer Dubai",
+      "Software Engineer UAE",
       "Technical Architect",
       "Engineering Lead",
       "Commerce Platforms",

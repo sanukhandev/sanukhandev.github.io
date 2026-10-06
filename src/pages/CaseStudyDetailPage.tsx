@@ -4,7 +4,7 @@ import Footer from "@/components/sections/Footer";
 import SeoMeta from "@/components/SeoMeta";
 import { getLocalizedCaseStudy, getLocalizedCaseStudies } from "@/data/caseStudies";
 import { ArrowLeft, ArrowRight, CheckCircle2, ShieldAlert, Cpu, GitBranch, Terminal } from "lucide-react";
-import { buildBreadcrumbListSchema } from "@/lib/schema";
+import { buildBreadcrumbListSchema, buildCreativeWorkSchema } from "@/lib/schema";
 import { useLocale } from "@/hooks/use-locale";
 
 export default function CaseStudyDetailPage() {
@@ -30,11 +30,19 @@ export default function CaseStudyDetailPage() {
         canonicalPath={`/projects/${caseStudy.slug}`}
         kind="article"
         keywords={caseStudy.themes}
-        schema={buildBreadcrumbListSchema([
-          { name: isArabic ? "الرئيسية" : "Home", path: "/" },
-          { name: isArabic ? "الأعمال" : "Projects", path: "/projects" },
-          { name: caseStudy.title, path: `/projects/${caseStudy.slug}` }
-        ])}
+        schema={[
+          buildBreadcrumbListSchema([
+            { name: isArabic ? "الرئيسية" : "Home", path: "/" },
+            { name: isArabic ? "الأعمال" : "Projects", path: "/projects" },
+            { name: caseStudy.title, path: `/projects/${caseStudy.slug}` },
+          ]),
+          buildCreativeWorkSchema({
+            title: caseStudy.title,
+            description: caseStudy.summary,
+            path: `/projects/${caseStudy.slug}`,
+            technologies: caseStudy.systemsInvolved,
+          }),
+        ]}
       />
       <Navbar />
 

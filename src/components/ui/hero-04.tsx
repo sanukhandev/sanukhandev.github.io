@@ -71,7 +71,7 @@ export function HeroSection04() {
                 <span>
                   {isArabic
                     ? "معماري حلول · هندسة المنصات"
-                    : "SOLUTION ARCHITECT · PLATFORM ENGINEERING"}
+                    : "SOFTWARE ENGINEER · SOLUTION ARCHITECT · DUBAI, UAE"}
                 </span>
               </div>
 
@@ -105,7 +105,7 @@ export function HeroSection04() {
             <p className="text-[16px] sm:text-[17.5px] text-secondary leading-[1.65] font-normal max-w-[560px] mb-8">
               {isArabic
                 ? "العمارة والتكامل وهندسة المنصات للأنظمة التي تحتاج للصمود أمام التعقيدات التشغيلية والتجارية الواقعية."
-                : "Architecture, integration and platform engineering for systems that need to survive real-world complexity."}
+                : "Software engineering, architecture and integration for production systems that need to survive real-world complexity."}
             </p>
 
             {/* CTAs */}

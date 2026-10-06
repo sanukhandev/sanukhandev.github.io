@@ -18,7 +18,7 @@ export default function ProjectsPage() {
     <>
       <SeoMeta
         title={isArabic ? "أعمال معمارية مختارة ودراسات حالة — سانو خان" : "Selected Architecture Work & Case Studies — Sanu Khan"}
-        description={isArabic ? "دراسات حالة تفصيلية لتكاملات المؤسسات، والتجارب الرقمية الصحية، وتجميع تجزئة رحلات الطيران، ومنصات السيارات متعددة القنوات بواسطة معماري الحلول سانو خان." : "Detailed case studies of enterprise integrations, headless healthcare experiences, airline retailing aggregation, and automotive omnichannel platforms by Solution Architect Sanu Khan."}
+        description={isArabic ? "دراسات حالة تفصيلية لتكاملات المؤسسات والمنصات العقارية والذكاء التشغيلي والتجارب الرقمية الصحية بواسطة مهندس البرمجيات ومعماري الحلول سانو خان." : "Architecture case studies by Dubai-based Software Engineer and Solution Architect Sanu Khan, covering enterprise integrations, AI operational intelligence, real estate ERP, healthcare and automotive platforms."}
         canonicalPath={seo.canonicalPath}
         keywords={[
           "architecture case studies",

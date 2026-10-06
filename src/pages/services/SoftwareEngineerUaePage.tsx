@@ -41,6 +41,9 @@ export default function SoftwareEngineerUaePage() {
       }}
       links={[
         { label: "API Integration Services", href: "/api-integration-services" },
+        { label: "Zaakiy V3RSE AI Platform", href: "/projects/zaakiy-v3rse" },
+        { label: "Garage Management Architecture", href: "/projects/garage-management-and-diagnostics" },
+        { label: "Real Estate ERP Architecture", href: "/projects/real-estate-erp-architecture" },
         { label: "Selected Projects", href: "/projects" },
         { label: "About Sanu Khan", href: "/about" },
       ]}
