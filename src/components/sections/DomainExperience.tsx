@@ -27,7 +27,7 @@ export function DomainExperience() {
             </span>
             <span
               aria-hidden="true"
-              className="font-mono text-[10px] text-muted-foreground/75 border border-dashed border-border px-1.5 py-0.2 rounded transform rotate-1 select-none"
+              className="font-mono text-[10px] text-muted-foreground border border-dashed border-border px-1.5 py-0.2 rounded transform rotate-1 select-none"
             >
               [INDEX_SECTORS // 7]
             </span>
@@ -52,7 +52,7 @@ export function DomainExperience() {
                 className="group relative flex flex-col items-center justify-between p-4 sm:p-5 rounded-xl border border-dashed border-border/80 bg-card/40 transition-all duration-200 hover:border-accent/60 hover:bg-card/90 text-center"
               >
                 {/* Sector index code in corner */}
-                <div className="w-full flex items-center justify-end font-mono text-[9px] text-muted-foreground/50 mb-2">
+                <div className="w-full flex items-center justify-end font-mono text-[9px] text-muted-foreground mb-2">
                   <span>SEC.{item.code}</span>
                 </div>
 
@@ -67,7 +67,7 @@ export function DomainExperience() {
                 </span>
 
                 {/* Micro Footprint Tag */}
-                <span className="text-[10px] font-mono text-muted-foreground/70 tracking-tight">
+                <span className="text-[10px] font-mono text-muted-foreground tracking-tight">
                   {item.tag}
                 </span>
               </div>

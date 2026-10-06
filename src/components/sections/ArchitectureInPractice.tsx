@@ -167,7 +167,7 @@ export function ArchitectureInPractice() {
             </span>
             <span
               aria-hidden="true"
-              className="font-mono text-[10px] text-muted-foreground/75 border border-dashed border-border px-1.5 py-0.2 rounded transform -rotate-1 select-none"
+              className="font-mono text-[10px] text-muted-foreground border border-dashed border-border px-1.5 py-0.2 rounded transform -rotate-1 select-none"
             >
               [SCHEMATIC_04]
             </span>
@@ -233,7 +233,7 @@ export function ArchitectureInPractice() {
                 <span className="h-1.5 w-1.5 rounded-full bg-accent animate-pulse" />
                 <span>CANONICAL EVENT BUS</span>
               </div>
-              <span className="text-muted-foreground/75">SCALE: 1:1</span>
+              <span className="text-muted-foreground">SCALE: 1:1</span>
             </div>
 
             <div className="relative z-10 flex flex-col items-center gap-3.5 max-w-lg mx-auto">
@@ -413,7 +413,7 @@ export function ArchitectureInPractice() {
                   <Info className="h-3.5 w-3.5" />
                   <span>{isArabic ? "تفاصيل العقدة النشطة" : "SPEC // BOUNDARY_AUDIT"}</span>
                 </div>
-                <span className="font-mono text-[10px] text-muted-foreground/80 px-2 py-0.5 rounded border border-border bg-background">
+                <span className="font-mono text-[10px] text-muted-foreground px-2 py-0.5 rounded border border-border bg-background">
                   {activeNode.tag}
                 </span>
               </div>
@@ -468,7 +468,7 @@ export function ArchitectureInPractice() {
                 <span>{isArabic ? "المزيد من الملاحظات المعمارية" : "See more architecture notes"}</span>
                 <ArrowRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-1 rtl:group-hover:-translate-x-1 rtl:rotate-180" />
               </Link>
-              <span className="font-mono text-[10px] text-muted-foreground/75">
+              <span className="font-mono text-[10px] text-muted-foreground">
                 STATUS: ISOLATED_CONTEXT
               </span>
             </div>

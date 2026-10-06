@@ -77,7 +77,10 @@ export function Footer() {
                 asChild
                 className="h-11 rounded-lg bg-accent px-5 text-[14px] font-semibold text-white transition-colors hover:bg-accent/90 shadow-xs gap-1.5"
               >
-                <a href="mailto:hello@sanukhan.dev?subject=Architecture%20Inquiry%20–%20SanuKhan.dev">
+                <a
+                  href="mailto:hello@sanukhan.dev?subject=Architecture%20Inquiry%20–%20SanuKhan.dev"
+                  aria-label={isArabic ? "إرسال استفسار معماري عبر البريد الإلكتروني" : "Send architecture inquiry via email"}
+                >
                   <span>{isArabic ? "لنتحدث" : "Let's talk"}</span>
                   <ArrowRight className="h-4 w-4 rtl:rotate-180" />
                 </a>
@@ -88,7 +91,10 @@ export function Footer() {
                 asChild
                 className="h-11 rounded-lg border-border bg-surface px-5 text-[14px] font-semibold text-primary transition-colors hover:border-accent/40"
               >
-                <a href="mailto:hello@sanukhan.dev">
+                <a
+                  href="mailto:hello@sanukhan.dev"
+                  aria-label={isArabic ? "مراسلة سانو خان مباشرة" : "Email Sanu Khan directly"}
+                >
                   {isArabic ? "راسلني بالبريد" : "Email me"}
                 </a>
               </Button>
@@ -105,7 +111,7 @@ export function Footer() {
           {/* LEFT: SanuKhan.dev & identity */}
           <div>
             <a
-              href="#home"
+              href="/"
               className="inline-flex items-baseline text-[18px] font-semibold tracking-tight text-primary transition-opacity hover:opacity-90 select-none"
               aria-label="SanuKhan.dev home"
             >

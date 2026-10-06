@@ -63,7 +63,7 @@ export function HowIThink() {
               </span>
               <span
                 aria-hidden="true"
-                className="font-mono text-[10px] text-muted-foreground/60 border border-dashed border-border px-1.5 py-0.2 rounded select-none transform -rotate-1"
+                className="font-mono text-[10px] text-muted-foreground border border-dashed border-border px-1.5 py-0.2 rounded select-none transform -rotate-1"
               >
                 // 02_PRINCIPLES
               </span>
@@ -127,7 +127,7 @@ export function HowIThink() {
                 </div>
 
                 {/* Classification tag */}
-                <div className="pt-3 mt-4 border-t border-dashed border-border/40 font-mono text-[9.5px] text-muted-foreground/60 tracking-wider">
+                <div className="pt-3 mt-4 border-t border-dashed border-border/40 font-mono text-[9.5px] text-muted-foreground tracking-wider">
                   // {p.tag}
                 </div>
               </div>

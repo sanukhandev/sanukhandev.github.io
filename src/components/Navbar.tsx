@@ -1,7 +1,6 @@
 import { memo, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Menu, X, Moon, Sun, ArrowRight, Github, Linkedin, Mail } from "lucide-react";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useSiteContent } from "@/data/siteContent";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -18,7 +17,6 @@ function Navbar() {
   const { nav } = useSiteContent();
   const isLight = theme === "light";
   const isArabic = locale === "ar";
-  const reducedMotion = useReducedMotion();
   const isHomePage = location.pathname === "/";
   const ctaHref = !isHomePage && nav.cta.href.startsWith("#") ? `/${nav.cta.href}` : nav.cta.href;
 
@@ -162,7 +160,10 @@ function Navbar() {
               asChild
               className="h-11 rounded-lg bg-accent px-5 text-[14px] font-semibold text-white transition-colors hover:bg-accent/90 shadow-xs gap-1.5"
             >
-              <a href={ctaHref}>
+              <a
+                href={ctaHref}
+                aria-label={isArabic ? "الانتقال إلى قسم التواصل" : "Go to contact section"}
+              >
                 <span>{isArabic ? "لنتحدث" : "Let's talk"}</span>
                 <ArrowRight className="h-4 w-4 rtl:rotate-180" />
               </a>
@@ -195,16 +196,11 @@ function Navbar() {
       </div>
 
       {/* MOBILE FULLSCREEN MENU OVERLAY */}
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            id="mobile-navigation"
-            className="fixed inset-0 top-[72px] sm:top-20 z-40 bg-background/98 backdrop-blur-xl border-t border-border flex flex-col justify-between p-6 sm:p-8 md:hidden overflow-y-auto"
-            initial={reducedMotion ? { opacity: 1 } : { opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={reducedMotion ? { opacity: 0 } : { opacity: 0, y: -10 }}
-            transition={{ duration: 0.2 }}
-          >
+      {open && (
+        <div
+          id="mobile-navigation"
+          className="fixed inset-0 top-[72px] sm:top-20 z-40 bg-background/98 backdrop-blur-xl border-t border-border flex flex-col justify-between p-6 sm:p-8 md:hidden overflow-y-auto animate-in fade-in slide-in-from-top-2 duration-200"
+        >
             <div className="flex flex-col gap-6 pt-4">
               {/* Big Nav items */}
               <nav className="flex flex-col gap-4" aria-label="Mobile Navigation">
@@ -229,7 +225,11 @@ function Navbar() {
                   asChild
                   className="w-full h-12 rounded-lg bg-accent text-[15px] font-semibold text-white hover:bg-accent/90 justify-center gap-2"
                 >
-                  <a href={ctaHref} onClick={() => setOpen(false)}>
+                  <a
+                    href={ctaHref}
+                    aria-label={isArabic ? "الانتقال إلى قسم التواصل" : "Go to contact section"}
+                    onClick={() => setOpen(false)}
+                  >
                     <span>{isArabic ? "لنتحدث" : "Let's talk"}</span>
                     <ArrowRight className="h-4 w-4 rtl:rotate-180" />
                   </a>
@@ -289,9 +289,8 @@ function Navbar() {
                 </a>
               </div>
             </div>
-          </motion.div>
+          </div>
         )}
-      </AnimatePresence>
     </header>
   );
 }

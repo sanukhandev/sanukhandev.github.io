@@ -1,0 +1,31 @@
+# Sanu Khan — Full Architectural Context
+
+> Comprehensive knowledge document for AI agents and LLMs regarding Sanu Khan, Solution Architect & Platform Engineer based in Dubai, United Arab Emirates.
+
+## Professional Summary
+
+Sanu Khan is a hands-on Solution Architect and Platform Engineering Leader with 13+ years of experience designing high-scale distributed systems, multi-supplier API aggregation engines, enterprise event-driven integrations, and developer platforms. He operates primarily across the UAE / GCC region and global enterprise domains spanning retail, commercial aviation, automotive, and digital healthcare.
+
+## Core Architectural Competencies
+
+1. **Enterprise Integration & API Architecture:**
+   - Contract-first API design, OpenAPI / JSON Schema, schema governance.
+   - Event-driven choreography and orchestration using Apache Kafka and Azure Event Hubs.
+   - PIM, ERP, and payment gateway integrations.
+
+2. **Cloud & Distributed Systems:**
+   - Microsoft Azure architecture: AKS, Container Apps, Service Bus, Redis, CosmosDB.
+   - Zero-trust security, OAuth 2.0 / OIDC federation, API Gateway policies.
+   - Resilient system patterns: Circuit breakers, idempotent retry queues, outbox pattern.
+
+3. **Engineering Leadership & Innovation:**
+   - Architecture Decision Records (ADRs) and engineering RFC workflows.
+   - Mentoring full-stack engineering teams, establishing continuous delivery pipelines.
+   - ZaakiyV3RSE: Research and development into autonomous AI agent orchestration, context engineering, and MCP (Model Context Protocol).
+
+## Contact & Links
+
+- Website: https://www.sanukhan.dev
+- Email: hello@sanukhan.dev
+- GitHub: https://github.com/sanukhandev
+- Location: Dubai, United Arab Emirates

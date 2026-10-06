@@ -79,7 +79,7 @@ export function Works() {
               <span className="text-[11.5px] sm:text-[12px] font-mono uppercase text-accent font-semibold tracking-[0.08em]">
                 {isArabic ? "أعمال مختارة" : "SELECTED WORK"}
               </span>
-              <span className="font-mono text-[10px] text-muted-foreground/60 border border-dashed border-border px-1.5 py-0.2 rounded select-none">
+              <span className="font-mono text-[10px] text-muted-foreground border border-dashed border-border px-1.5 py-0.2 rounded select-none">
                 // 01_FIELD_CASES
               </span>
             </div>

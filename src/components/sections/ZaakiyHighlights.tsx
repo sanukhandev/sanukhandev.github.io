@@ -114,7 +114,7 @@ export function ZaakiyHighlights() {
                           </div>
                           <span>{item.name}</span>
                         </div>
-                        <span className="font-mono text-[9px] text-muted-foreground/60">{item.code}</span>
+                        <span className="font-mono text-[9px] text-muted-foreground">{item.code}</span>
                       </div>
                     );
                   })}
@@ -194,7 +194,7 @@ export function ZaakiyHighlights() {
                 </div>
 
                 {/* Bottom Spec Footer */}
-                <div className="mt-4 pt-3 border-t border-dashed border-border/70 flex items-center justify-between text-[10px] text-muted-foreground/75">
+                <div className="mt-4 pt-3 border-t border-dashed border-border/70 flex items-center justify-between text-[10px] text-muted-foreground">
                   <span>SPEC: AUTONOMOUS_CORRELATION</span>
                   <span>v3.4.1</span>
                 </div>

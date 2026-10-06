@@ -18,7 +18,7 @@
     --surface-elevated: #FFFFFF;
     --text: #111814;
     --text-secondary: #59645D;
-    --text-muted: #89928C;
+    --text-muted: #647068;
     --border: #DEE5DF;
 
     /* Signal Green (10% usage) */
@@ -52,7 +52,7 @@
     --secondary: 100 12% 94%;
     --secondary-foreground: 146 17% 8%;
     --muted: 100 12% 94%;
-    --muted-foreground: 137 4% 56%;
+    --muted-foreground: 135 6% 42%;
     --accent-hsl: 142 72% 28%;
     --accent-foreground-hsl: 0 0% 100%;
     --destructive: 0 84% 60%;
@@ -79,7 +79,7 @@
     --surface-elevated: #171D18;
     --text: #F4F7F5;
     --text-secondary: #AAB4AD;
-    --text-muted: #78827B;
+    --text-muted: #9BA89E;
     --border: #29322B;
 
     /* Signal Green */
@@ -108,7 +108,7 @@
     --secondary: 135 10% 10%;
     --secondary-foreground: 140 13% 96%;
     --muted: 135 10% 10%;
-    --muted-foreground: 136 3% 49%;
+    --muted-foreground: 136 7% 63%;
     --accent-hsl: 138 52% 56%;
     --accent-foreground-hsl: 135 14% 5%;
     --border-hsl: 133 9% 18%;
@@ -1204,18 +1204,6 @@ html.light .zaakiy-chat .placeholder\:text-\[\#8a90a8\]::placeholder {
   }
 }
 
-@keyframes brand-gradient-shift {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
 .brand-zaakiy,
 .brand-zaakiyv3rse {
   font-family: "Anta", ui-sans-serif, system-ui, sans-serif !important;
@@ -1224,18 +1212,15 @@ html.light .zaakiy-chat .placeholder\:text-\[\#8a90a8\]::placeholder {
   background: linear-gradient(
     135deg,
     #147A3A 0%,
-    #38c755 25%,
-    #10b981 50%,
-    #059669 75%,
-    #147A3A 100%
+    #22c55e 35%,
+    #10b981 70%,
+    #059669 100%
   );
-  background-size: 250% 250%;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
   display: inline-block;
-  animation: brand-gradient-shift 4s ease-in-out infinite;
 }
 
 html.dark .brand-zaakiy,
@@ -1243,17 +1228,14 @@ html.dark .brand-zaakiyv3rse {
   background: linear-gradient(
     135deg,
     #56c878 0%,
-    #34d399 25%,
-    #86efac 50%,
-    #4ade80 75%,
-    #56c878 100%
+    #34d399 35%,
+    #86efac 70%,
+    #4ade80 100%
   );
-  background-size: 250% 250%;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
-  animation: brand-gradient-shift 4s ease-in-out infinite;
 }
 
 /* Cross Tape Marquee Animations */

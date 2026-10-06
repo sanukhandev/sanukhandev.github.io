@@ -24,7 +24,7 @@ export function EngineeringNotes() {
               </span>
               <span
                 aria-hidden="true"
-                className="font-mono text-[10px] text-muted-foreground/75 border border-dashed border-border px-1.5 py-0.2 rounded transform -rotate-1 select-none"
+                className="font-mono text-[10px] text-muted-foreground border border-dashed border-border px-1.5 py-0.2 rounded transform -rotate-1 select-none"
               >
                 [NOTEBOOK // DISPATCHES]
               </span>

@@ -1,0 +1,27 @@
+# Sanu Khan — Solution Architect & Platform Engineer
+
+> Solution Architect and Platform Engineering Leader based in Dubai, UAE with 13+ years designing enterprise integrations, distributed platforms, and cloud systems across retail, airline, automotive, and SaaS environments.
+
+## Core Information
+
+- [About Sanu Khan](https://www.sanukhan.dev/about): Architectural philosophy, leadership background, and career trajectory.
+- [Selected Work & Case Studies](https://www.sanukhan.dev/projects): Detailed case studies on high-throughput distributed systems.
+- [Enterprise Retail Integration](https://www.sanukhan.dev/projects/enterprise-retail-integration): Multi-market PIM and ERP integration architecture.
+- [Airline NDC Retailing Aggregation](https://www.sanukhan.dev/projects/airline-retailing-aggregation): Multi-supplier flight booking and NDC retailing platform.
+- [Automotive Omnichannel Platform](https://www.sanukhan.dev/projects/automotive-omnichannel-platform): Event-driven inventory and lead orchestration system.
+- [Real Estate ERP Architecture](https://www.sanukhan.dev/projects/real-estate-erp-architecture): Distributed property lifecycle and accounting platform.
+- [Headless Healthcare Digital Experience](https://www.sanukhan.dev/projects/headless-healthcare-digital-experience): Unified patient portal and telehealth integration.
+- [Garage Management & Diagnostics](https://www.sanukhan.dev/projects/garage-management-and-diagnostics): Real-time fleet diagnostics and workshop workflow platform.
+- [Technical Blog](https://www.sanukhan.dev/blog): Deep-dives into system design, Node.js API best practices, and distributed systems.
+- [Contact](https://www.sanukhan.dev/contact): Direct contact channels, email (hello@sanukhan.dev), and professional inquiries.
+
+## Technical Capabilities
+
+- **Architecture:** Solution Architecture, Domain-Driven Design (DDD), Event-Driven Architecture (EDA), Microservices, API Gateways, Cloud Migrations.
+- **Platforms & Clouds:** Microsoft Azure, Node.js, TypeScript, Kafka, Redis, Docker, Kubernetes, React.
+- **AI & Innovation:** ZaakiyV3RSE agent orchestration, semantic context engines, Model Context Protocol (MCP).
+
+## Optional
+
+- [Zaakiy V3RSE Project](https://www.sanukhan.dev/projects/zaakiy-v3rse): Autonomous AI agent orchestration and context retrieval engine.
+- [Developer Tools](https://www.sanukhan.dev/tools): Fast browser-based developer utility tools (JSON Formatter, API Client, cURL to JSON).

@@ -59,7 +59,7 @@ export function ProblemsSection() {
             </span>
             <span
               aria-hidden="true"
-              className="font-mono text-[10px] text-muted-foreground/75 border border-dashed border-border px-1.5 py-0.2 rounded transform -rotate-1 select-none"
+              className="font-mono text-[10px] text-muted-foreground border border-dashed border-border px-1.5 py-0.2 rounded transform -rotate-1 select-none"
             >
               /* field dispatches */
             </span>
@@ -88,7 +88,7 @@ export function ProblemsSection() {
                   <span className="font-semibold text-accent/90 tracking-wider">
                     [ DISPATCH // {p.num} ]
                   </span>
-                  <span className="text-[10px] text-muted-foreground/60 border border-border/60 px-1.5 py-0.2 rounded">
+                  <span className="text-[10px] text-muted-foreground border border-border/60 px-1.5 py-0.2 rounded">
                     {p.code}
                   </span>
                 </div>
@@ -103,7 +103,7 @@ export function ProblemsSection() {
               </div>
 
               {/* Subtle drafting tick line at bottom */}
-              <div className="pt-4 mt-4 border-t border-dashed border-border/40 font-mono text-[10px] text-muted-foreground/50">
+              <div className="pt-4 mt-4 border-t border-dashed border-border/40 font-mono text-[10px] text-muted-foreground">
                 STATUS: TRIAGED & SOLVED
               </div>
             </div>

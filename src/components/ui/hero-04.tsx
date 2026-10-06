@@ -78,7 +78,7 @@ export function HeroSection04() {
               {/* Imperfection stamp tag (slightly tilted notebook stamp) */}
               <span
                 aria-hidden="true"
-                className="hidden sm:inline-block font-mono text-[10px] text-muted-foreground/75 border border-dashed border-border px-2 py-0.5 rounded transform rotate-1 select-none"
+                className="hidden sm:inline-block font-mono text-[10px] text-muted-foreground border border-dashed border-border px-2 py-0.5 rounded transform rotate-1 select-none"
               >
                 [REF: ENG_2026]
               </span>
@@ -134,16 +134,24 @@ export function HeroSection04() {
             {/* MOBILE ONLY: Unboxed Avatar visual in mobile reading flow */}
             <div className="w-full flex flex-col items-center justify-center my-6 lg:hidden">
               <div className="relative w-full max-w-[340px] sm:max-w-[400px] flex flex-col items-center">
-                {/* Floating Avatar (Completely unboxed!) */}
-                <img
-                  src="/avatar_new.avif"
-                  alt="Sanu Khan - Solution Architect & Platform Engineer"
-                  width={1312}
-                  height={1199}
-                  loading="eager"
-                  fetchPriority="high"
-                  className="w-full h-auto object-contain drop-shadow-[0_16px_32px_rgba(17,24,20,0.12)] select-none"
-                />
+                {/* Floating Avatar (Completely unboxed with responsive srcset) */}
+                <picture className="w-full flex justify-center">
+                  <source
+                    type="image/avif"
+                    srcSet="/avatar-340.avif 340w, /avatar-680.avif 680w"
+                    sizes="(max-width: 640px) 340px, 400px"
+                  />
+                  <img
+                    src="/avatar-340.avif"
+                    alt="Sanu Khan - Solution Architect & Platform Engineer"
+                    width={340}
+                    height={311}
+                    loading="eager"
+                    fetchPriority="high"
+                    decoding="async"
+                    className="w-full h-auto object-contain drop-shadow-[0_16px_32px_rgba(17,24,20,0.12)] select-none"
+                  />
+                </picture>
 
                 {/* Imperfection tape note on mobile */}
                 <div className="mt-3.5 inline-flex items-center gap-2 rounded border border-dashed border-border/90 bg-surface/90 px-3.5 py-1.5 shadow-2xs transform -rotate-1 select-none">
@@ -232,7 +240,7 @@ export function HeroSection04() {
               {/* Blueprint coordinate tag floating at the top-right */}
               <div
                 aria-hidden="true"
-                className="w-full flex items-center justify-between font-mono text-[10px] text-muted-foreground/60 mb-2 px-1 tracking-wider"
+                className="w-full flex items-center justify-between font-mono text-[10px] text-muted-foreground mb-2 px-1 tracking-wider"
               >
                 <span>FIG. 00 // FIELD PORTRAIT</span>
                 <span>25.2048° N, 55.2708° E · AE</span>
@@ -241,18 +249,26 @@ export function HeroSection04() {
               {/*
                 THE AVATAR: COMPLETELY UNBOXED!
                 NO border, NO card container, NO background frame.
-                Renders freely, floating naturally on the page with its original 1312x1199 aspect ratio.
+                Renders freely, floating naturally on the page with responsive srcset.
               */}
               <div className="relative w-full flex items-center justify-center">
-                <img
-                  src="/avatar_new.avif"
-                  alt="Sanu Khan - Solution Architect & Platform Engineer"
-                  width={1312}
-                  height={1199}
-                  loading="eager"
-                  fetchPriority="high"
-                  className="w-full h-auto object-contain drop-shadow-[0_20px_42px_rgba(17,24,20,0.14)] select-none transition-transform duration-300 ease-out hover:scale-[1.015]"
-                />
+                <picture className="w-full flex justify-center">
+                  <source
+                    type="image/avif"
+                    srcSet="/avatar-680.avif 680w, /avatar-1000.avif 1000w, /avatar_new.avif 1312w"
+                    sizes="(max-width: 1280px) 560px, 620px"
+                  />
+                  <img
+                    src="/avatar_new.avif"
+                    alt="Sanu Khan - Solution Architect & Platform Engineer"
+                    width={1312}
+                    height={1199}
+                    loading="eager"
+                    fetchPriority="high"
+                    decoding="async"
+                    className="w-full h-auto object-contain drop-shadow-[0_20px_42px_rgba(17,24,20,0.14)] select-none transition-transform duration-300 ease-out hover:scale-[1.015]"
+                  />
+                </picture>
               </div>
 
               {/* Tilted Notebook Tape Note Annotation (Imperfection Style) */}
@@ -263,7 +279,7 @@ export function HeroSection04() {
                     ? "أنظمة معقدة. قرارات واضحة. نتائج أفضل."
                     : "Complex systems. Clear decisions. Better outcomes."}
                 </span>
-                <span className="text-[10px] text-muted-foreground/60 ml-1">/* memo */</span>
+                <span className="text-[10px] text-muted-foreground ml-1">/* memo */</span>
               </div>
 
               {/* Floating System Tags (Editorial tactile badges) */}

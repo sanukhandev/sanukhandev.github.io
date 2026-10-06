@@ -128,8 +128,13 @@ export default function ZaakiyChatWidget({
   // Start with empty messages feed so welcome state is displayed initially
   const [messages, setMessages] = useState<ChatMessage[]>([]);
 
-  // Focus input on open, and handle Escape key to close
+  // Focus input on open, and refocus launcher only after user closes (avoid initial mount reflow)
+  const isFirstRender = useRef(true);
   useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
     if (open) {
       setTimeout(() => inputRef.current?.focus(), 100);
     } else {
@@ -283,7 +288,10 @@ export default function ZaakiyChatWidget({
       ];
 
   return (
-    <div className="zaakiy-chat fixed bottom-4 right-4 z-[70] max-w-[calc(100vw-1.5rem)] sm:bottom-6 sm:right-6">
+    <div
+      style={{ contain: "layout style" }}
+      className="zaakiy-chat fixed bottom-4 right-4 z-[70] max-w-[calc(100vw-1.5rem)] sm:bottom-6 sm:right-6"
+    >
       {open && (
         <div
           role="dialog"
