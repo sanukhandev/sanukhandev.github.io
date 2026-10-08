@@ -19,6 +19,8 @@ import {
   Flag,
   Compass,
   Sparkles,
+  Maximize2,
+  Minimize2,
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/sections/Footer";
@@ -167,6 +169,7 @@ export default function RabbitHolePage() {
   const [elapsedMs, setElapsedMs] = useState(0);
   const [shakingCell, setShakingCell] = useState<number | null>(null);
   const [hintCell, setHintCell] = useState<number | null>(null);
+  const [isFullscreen, setIsFullscreen] = useState(false);
 
   // Audio state
   const [soundEnabled, setSoundEnabled] = useState(() => gameAudio.isEnabled());
@@ -186,6 +189,17 @@ export default function RabbitHolePage() {
   // Dynamic geometry measurement for seamless cube-center vector connections
   const [boardSize, setBoardSize] = useState({ width: 0, height: 0 });
   const [cellCenters, setCellCenters] = useState<{ x: number; y: number }[]>([]);
+
+  useEffect(() => {
+    const syncFullscreen = () => setIsFullscreen(document.fullscreenElement === boardContainerRef.current);
+    document.addEventListener("fullscreenchange", syncFullscreen);
+    return () => document.removeEventListener("fullscreenchange", syncFullscreen);
+  }, []);
+
+  const toggleFullscreen = () => {
+    if (document.fullscreenElement) return document.exitFullscreen();
+    return boardContainerRef.current?.requestFullscreen();
+  };
 
   // Sync drag ref
   useEffect(() => {
@@ -766,8 +780,17 @@ export default function RabbitHolePage() {
                   onTouchStart={() => setIsDragging(true)}
                   onTouchMove={handleTouchMove}
                   onTouchEnd={() => setIsDragging(false)}
-                  className="relative w-full max-w-[480px] aspect-square rounded-2xl overflow-hidden p-2 sm:p-2.5 bg-muted/30 dark:bg-black/40 border border-border/80 shadow-inner select-none touch-none"
+                  className="relative w-full max-w-[480px] aspect-square rounded-2xl overflow-hidden p-2 sm:p-2.5 bg-muted/30 dark:bg-black/40 border border-border/80 shadow-inner select-none touch-none fullscreen:w-screen fullscreen:h-screen fullscreen:max-w-none fullscreen:aspect-auto fullscreen:rounded-none fullscreen:p-4"
                 >
+                  <button
+                    type="button"
+                    onClick={toggleFullscreen}
+                    aria-label={isFullscreen ? "Exit fullscreen" : "Enter fullscreen"}
+                    title={isFullscreen ? "Exit fullscreen" : "Enter fullscreen"}
+                    className="absolute right-3 top-3 z-50 rounded-lg border border-border/80 bg-card/90 p-2 text-foreground shadow-sm backdrop-blur hover:border-accent hover:text-accent"
+                  >
+                    {isFullscreen ? <Minimize2 className="h-4 w-4" /> : <Maximize2 className="h-4 w-4" />}
+                  </button>
                   {/* Seamless Dual-Layer Vector Conduit (Subpixel Alignment, Zero Overflow) */}
                   {pathD && boardSize.width > 0 && (
                     <svg
@@ -833,8 +856,6 @@ export default function RabbitHolePage() {
                       // Highlight the generated start node and numbered checkpoints.
                       const isDailyStartCell = mode === "daily" && selected.length === 0 && cell === puzzlePath[0];
                       const checkpointNumber = CHECKPOINT_STEPS.indexOf(puzzlePath.indexOf(cell)) + 1;
-                      const isRightWall = col < GRID_SIZE - 1 && hasWall(puzzleWalls, cell, cell + 1);
-                      const isBottomWall = row < GRID_SIZE - 1 && hasWall(puzzleWalls, cell, cell + GRID_SIZE);
                       const isRightWall = col < GRID_SIZE - 1 && hasWall(puzzleWalls, cell, cell + 1);
                       const isBottomWall = row < GRID_SIZE - 1 && hasWall(puzzleWalls, cell, cell + GRID_SIZE);
 
