@@ -185,6 +185,9 @@ const registerZaakiyApi = (
         email?: string;
         maxOutputChars?: number;
         sessionId?: string;
+        game?: string;
+        chessState?: string;
+        legalMoves?: string[];
       };
 
       const locale: ZaakiyLocale = body.locale === "ar" ? "ar" : "en";
@@ -200,6 +203,41 @@ const registerZaakiyApi = (
         setSessionScope(sessionId, incomingSiteScope);
       }
       const siteScope = incomingSiteScope || getSessionScope(sessionId);
+
+      if (body.game === "chess") {
+        if (!body.chessState || !Array.isArray(body.legalMoves) || body.legalMoves.length === 0) {
+          sendJson(res, 400, { error: "Missing chess position or legal moves" });
+          return;
+        }
+        const chessPrompt = [
+          "You are Zaakiy Chess, playing black against a human in a chess game.",
+          "Choose the strongest legal move from the supplied legal moves.",
+          "Return only compact JSON with exactly these keys: move and message.",
+          "move must be one exact UCI move from the legal moves list.",
+          "message must be under 100 characters, sarcastic but encouraging. Tease the move, never the person, and make the player want to continue.",
+          `Position FEN: ${body.chessState}`,
+          `Legal moves: ${body.legalMoves.join(", ")}`,
+        ].join("\n");
+        const chessResponse = await fetch(
+          `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`,
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              contents: [{ role: "user", parts: [{ text: chessPrompt }] }],
+              generationConfig: { temperature: 0.35, topP: 0.8, maxOutputTokens: 120 },
+            }),
+          },
+        );
+        if (!chessResponse.ok) {
+          sendJson(res, chessResponse.status, { error: "Upstream chess AI error" });
+          return;
+        }
+        const chessPayload = await chessResponse.json();
+        const chessText = extractModelText(chessPayload);
+        sendJson(res, 200, { text: chessText || JSON.stringify({ move: body.legalMoves[0], message: "Your move." }) });
+        return;
+      }
 
       if (!userQuestion || !siteScope) {
         sendJson(res, 400, { error: "Missing required fields" });
@@ -328,6 +366,10 @@ export default defineConfig(({ command, mode }) => {
           "/projects/zaakiy-v3rse",
           "/contact",
           "/faq",
+          "/games",
+          "/games/chess",
+          "/games/queens-problem",
+          "/games/rabbit-hole",
           "/tools",
           "/tools/json-formatter-online",
           "/tools/api-client-tool",

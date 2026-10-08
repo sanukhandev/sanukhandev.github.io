@@ -127,17 +127,20 @@ export function Footer() {
 
           {/* CENTER NAVIGATION: Work, Architecture, Notes, About */}
           <nav className="flex flex-wrap items-center gap-6 text-[14px] font-medium text-secondary" aria-label="Footer Navigation">
-            <a href="#work" className="hover:text-accent transition-colors">
+            <a href="/#work" className="hover:text-accent transition-colors">
               {isArabic ? "الأعمال" : "Work"}
             </a>
-            <a href="#architecture" className="hover:text-accent transition-colors">
+            <a href="/#architecture" className="hover:text-accent transition-colors">
               {isArabic ? "المعمارية" : "Architecture"}
             </a>
-            <a href="#writing" className="hover:text-accent transition-colors">
+            <a href="/#writing" className="hover:text-accent transition-colors">
               {isArabic ? "الملاحظات" : "Notes"}
             </a>
-            <a href="#about" className="hover:text-accent transition-colors">
+            <a href="/#about" className="hover:text-accent transition-colors">
               {isArabic ? "نبذة عني" : "About"}
+            </a>
+            <a href="/games" className="hover:text-accent transition-colors text-accent font-semibold">
+              {isArabic ? "الألعاب" : "Games"}
             </a>
           </nav>
 

@@ -43,6 +43,9 @@ type ChatRequestBody = {
   email?: string;
   maxOutputChars?: number;
   sessionId?: string;
+  game?: string;
+  chessState?: string;
+  legalMoves?: string[];
 };
 
 const conversationMemory = new Map<string, SessionEntry>();
@@ -406,6 +409,17 @@ const buildPrompt = (args: {
   ].join("\n\n");
 };
 
+const buildChessPrompt = (body: ChatRequestBody) =>
+  [
+    "You are Zaakiy Chess, playing black against a human in a chess game.",
+    "Choose the strongest legal move from the supplied legal moves.",
+    "Return only compact JSON with exactly these keys: move and message.",
+    "move must be one exact UCI move from the legal moves list, such as e7e5 or e7e8q.",
+    "message should be a short sarcastic but encouraging reaction under 100 characters. Tease the move, never the person, and make the player want to continue.",
+    `Position FEN: ${body.chessState || ""}`,
+    `Legal moves: ${(body.legalMoves || []).join(", ")}`,
+  ].join("\n");
+
 export default async function handler(req: ApiRequest, res: ApiResponse) {
   if (req.method === "OPTIONS") {
     sendJson(res, 200, { ok: true });
@@ -460,6 +474,35 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
     const incomingExtraContext = String(body.extraContext || "")
       .trim()
       .slice(0, 1500);
+
+    if (body.game === "chess") {
+      if (!body.chessState || !Array.isArray(body.legalMoves) || body.legalMoves.length === 0) {
+        sendJson(res, 400, { error: "Missing chess position or legal moves" });
+        return;
+      }
+
+      const googleResp = await fetch(
+        `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            contents: [{ role: "user", parts: [{ text: buildChessPrompt(body) }] }],
+            generationConfig: { temperature: 0.35, topP: 0.8, maxOutputTokens: 120 },
+          }),
+        },
+      );
+
+      if (!googleResp.ok) {
+        sendJson(res, googleResp.status, { error: "Upstream chess AI error" });
+        return;
+      }
+
+      const payload = await googleResp.json();
+      const text = extractModelText(payload);
+      sendJson(res, 200, { text: text || JSON.stringify({ move: body.legalMoves[0], message: "Your move." }) });
+      return;
+    }
     // Only persist the incoming scope if the session doesn't already have one
     // stored (i.e. first message only), so later messages cannot accidentally
     // overwrite the full scope with a smaller/partial one.

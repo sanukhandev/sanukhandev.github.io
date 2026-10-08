@@ -183,6 +183,34 @@ export const pageSeo = {
       "Contact Sanu Khan for architecture consulting, technical leadership, API integration strategy, and platform modernization engagements.",
     canonicalPath: "/contact",
   },
+  gamesIndex: {
+    title: "Tactile Daily Games & Focus Experiments | Sanu Khan",
+    description:
+      "Algorithmic daily puzzles and interactive experiments crafted for engineers and thinkers. Reset your mental state and benchmark your speed on the global board.",
+    canonicalPath: "/games",
+    keywords: [
+      "developer games",
+      "daily puzzles",
+      "rabbit hole puzzle",
+      "algorithmic challenges",
+      "tactile browser games",
+      "memory grid game",
+    ],
+  },
+  rabbitHole: {
+    title: "Rabbit Hole — Daily 7×7 Grid Trail Puzzle | Sanu Khan Games",
+    description:
+      "Connect every tile across the 7×7 matrix in continuous order without triggering a system fault. Daily seeded puzzle with live timing and global ranking.",
+    canonicalPath: "/games/rabbit-hole",
+    keywords: [
+      "rabbit hole game",
+      "daily path puzzle",
+      "grid trail puzzle",
+      "7x7 grid game",
+      "schulte memory game",
+      "algorithmic speed puzzle",
+    ],
+  },
 } as const;
 
 export const pageSeoAr = {
@@ -250,6 +278,18 @@ export const pageSeoAr = {
     description:
       "تواصل مع سانو خان للاستشارات المعمارية، القيادة التقنية، استراتيجية تكامل APIs، وتحديث المنصات.",
     canonicalPath: "/contact",
+  },
+  gamesIndex: {
+    title: "ألعاب وألغاز يومية تفاعلية | سانو خان",
+    description:
+      "ألغاز خوارزمية يومية وتجارب تفاعلية مصممة لإعادة شحن التركيز والسرعة الذهنية.",
+    canonicalPath: "/games",
+  },
+  rabbitHole: {
+    title: "حفرة الأرنب — لغز المسار اليومي 7×7 | سانو خان",
+    description:
+      "صل كل المربعات في شبكة 7×7 بترتيب خوارزمي متصل دون أي خطأ في المسار. تحدّ يومي مع توقيت فوري ولوحة متصدرين.",
+    canonicalPath: "/games/rabbit-hole",
   },
 } as const;
 

@@ -81,6 +81,10 @@ const FaqPage = lazyWithRetry(() => import("./pages/FaqPage.tsx"));
 const CaseStudyDetailPage = lazyWithRetry(
   () => import("./pages/CaseStudyDetailPage.tsx"),
 );
+const RabbitHolePage = lazyWithRetry(() => import("./pages/RabbitHolePage.tsx"));
+const GamesPage = lazyWithRetry(() => import("./pages/GamesPage.tsx"));
+const ChessPage = lazyWithRetry(() => import("./pages/ChessPage.tsx"));
+const QueensProblemPage = lazyWithRetry(() => import("./pages/QueensProblemPage.tsx"));
 const ZaakiyChatWidget = lazyWithRetry(
   () => import("./components/ZaakiyChatWidget.tsx"),
 );
@@ -180,6 +184,10 @@ const AppShell = () => {
               />
               <Route path="/contact" element={<ContactPage />} />
               <Route path="/faq" element={<FaqPage />} />
+              <Route path="/games" element={<GamesPage />} />
+              <Route path="/games/chess" element={<ChessPage />} />
+              <Route path="/games/queens-problem" element={<QueensProblemPage />} />
+              <Route path="/games/rabbit-hole" element={<RabbitHolePage />} />
               <Route
                 path="/tools/json-formatter-online"
                 element={<JsonFormatterToolPage />}
