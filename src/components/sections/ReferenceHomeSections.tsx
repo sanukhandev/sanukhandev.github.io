@@ -10,6 +10,13 @@ import { useSiteContent } from "@/data/siteContent";
 import { getLocalizedCaseStudy } from "@/data/caseStudies";
 
 const join = (isArabic: boolean, en: string, ar: string) => isArabic ? ar : en;
+function DevToCover({ coverImage, title, index }: { coverImage: string | null; title: string; index: number }) {
+  const [failed, setFailed] = useState(false);
+  return coverImage?.startsWith("https://") && !failed
+    ? <img src={coverImage} alt={title} loading="lazy" referrerPolicy="no-referrer" className="zr-devto-cover" onError={() => setFailed(true)} />
+    : <MediaPlaceholder kind="article" index={String(index + 1).padStart(2, "0")} />;
+}
+
 
 export function ReferenceHero() {
   const { locale } = useLocale();
@@ -157,8 +164,8 @@ export function ReferenceServices() {
       <div className="zr-shell">
         <header className="zr-section-heading zr-centered-heading">
           <p className="zr-kicker">{join(ar, "HOW I CAN HELP", "كيف يمكنني المساعدة")}</p>
-          <h2>{join(ar, "Clear decisions. Better systems.", "قرارات واضحة. أنظمة أفضل.")}</h2>
-          <p>{join(ar, "I work at the intersection of architecture, integration, and delivery—where decisions become systems that teams can sustain.", "أعمل في نقطة التقاء العمارة والتكامل والتسليم، حيث تتحول القرارات إلى أنظمة يمكن للفرق تشغيلها وتطويرها.")}</p>
+          <h2>{join(ar, "Decisions that survive production.", "قرارات تصمد في بيئة الإنتاج.")}</h2>
+          <p>{join(ar, "Architecture decisions, integration contracts and delivery choices grounded in actual operating constraints—not diagrams for their own sake.", "قرارات معمارية وعقود تكامل وخيارات تنفيذ تستند إلى قيود التشغيل الحقيقية، لا إلى المخططات وحدها.")}</p>
         </header>
         <figure className="zr-section-art zr-service-art">
           <img src="/media/architecture-capabilities.avif" alt={join(ar, "Concept illustration of system architecture, integration and delivery", "رسم تصوري للعمارة والتكامل وتسليم الأنظمة")} loading="lazy" width={1093} height={820} />
@@ -212,7 +219,7 @@ export function ReferenceExpertise() {
       <div className="zr-shell">
         <header className="zr-section-heading zr-centered-heading">
           <p className="zr-kicker">{join(ar, "EXPERTISE", "الخبرات")}</p>
-          <h2>{join(ar, "Architecture beyond the stack.", "العمارة تتجاوز قائمة التقنيات.")}</h2>
+          <h2>{join(ar, "Capability, not a list of tools.", "قدرات تتجاوز مجرد قائمة أدوات.")}</h2>
           <p>{join(ar, "Technology is a choice; understanding constraints, risk and business outcomes is the discipline.", "التقنية اختيار، أما فهم القيود والمخاطر ونتائج الأعمال فهو جوهر الممارسة.")}</p>
         </header>
         <figure className="zr-section-art zr-expertise-art">
@@ -307,9 +314,7 @@ export function ReferenceWriting() {
           {posts.map((post,i)=>(
             <article key={post.localPath || post.title} className="zr-writing-item">
               <Link to={post.localPath} className="zr-writing-image" aria-label={post.title}>
-                {post.coverImage?.startsWith("https://")
-                  ? <img src={post.coverImage} alt={post.title} loading="lazy" referrerPolicy="no-referrer" className="zr-devto-cover" />
-                  : <MediaPlaceholder kind="article" index={String(i+1).padStart(2,"0")} />}
+                <DevToCover coverImage={post.coverImage} title={post.title} index={i} />
               </Link>
               <div className="zr-writing-text">
                 <span className="zr-card-label">{post.category} / 0{i+1}</span>
@@ -338,7 +343,7 @@ export function ReferenceZaakiy() {
             <div className="brand-zaakiy zr-zaakiy-wordmark">ZaakiyV3RSE</div>
             <h2>{join(ar, "Can a system understand whether it accomplished what it was supposed to do?", "هل يمكن للنظام فهم ما إذا كان قد حقق ما كُلّف به بالفعل؟")}</h2>
             <p>{join(ar,
-              "An experiment around AI-powered operational intelligence, graph context correlation and semantic system awareness — moving beyond HTTP 200 status codes to business outcome guarantees.",
+              "An ongoing research effort in operational intelligence: correlating events with business context, then exploring whether observed behavior matches intended outcomes.",
               "تجربة هندسية حول الذكاء التشغيلي المدعوم بالذكاء الاصطناعي وربط السياق والوعي بالأنظمة للتحقق من نتائج الأعمال."
             )}</p>
             <Link className="zr-button zr-button-primary" to="/projects/zaakiy-v3rse">{join(ar, "Explore the research", "استكشف البحث والتطوير")} <ArrowUpRight size={18} aria-hidden="true" /></Link>
@@ -375,7 +380,7 @@ export function ReferenceEngagement() {
       <div className="zr-shell">
         <header className="zr-section-heading zr-centered-heading">
           <p className="zr-kicker">{join(ar, "WORKING TOGETHER", "العمل معاً")}</p>
-          <h2>{join(ar, "Simple & Transparent Engagements", "طرق تعاون واضحة ومباشرة")}</h2>
+          <h2>{join(ar, "Define the problem before the scope.", "تحديد المشكلة يسبق تحديد النطاق.")}</h2>
           <p>{join(ar, "Defined scope and a clear technical outcome. Pricing is agreed after requirements are reviewed.", "نطاق واضح ومخرجات تقنية محددة، مع الاتفاق على التكلفة بعد مراجعة المتطلبات.")}</p>
         </header>
         <div className="zr-engagement-box">
@@ -417,7 +422,7 @@ export function ReferenceProcess() {
       <div className="zr-shell">
         <header className="zr-section-heading zr-centered-heading">
           <p className="zr-kicker">{join(ar, "HOW I WORK", "كيف أعمل")}</p>
-          <h2>{join(ar, "My Engineering Process", "منهجي في الهندسة")}</h2>
+          <h2>{join(ar, "From constraints to a working system.", "من القيود إلى نظام يعمل فعلياً.")}</h2>
           <p>{join(ar, "A practical route from complex requirements to reliable systems.", "خطوات عملية لتحويل المتطلبات المعقدة إلى أنظمة موثوقة.")}</p>
         </header>
         <ol className="zr-process-steps">
@@ -442,7 +447,7 @@ export function ReferenceAbout() {
       <div className="zr-shell">
         <header className="zr-section-heading zr-centered-heading">
           <p className="zr-kicker">{join(ar, "A LITTLE CONTEXT", "نبذة")}</p>
-          <h2>{join(ar, "A little about how I think", "نبذة عن طريقة تفكيري")}</h2>
+          <h2>{join(ar, "The perspective behind the work.", "المنظور الذي يوجّه عملي.")}</h2>
         </header>
         <div className="zr-about-panel">
           <div className="zr-about-avatar"><MediaPlaceholder kind="portrait" /></div>
@@ -506,7 +511,7 @@ export function ReferenceContact() {
         <div className="zr-contact-gradient">
           <div className="zr-contact-heading">
             <span className="zr-kicker">{join(ar,"LET'S WORK TOGETHER","لنعمل معاً")}</span>
-            <h2>{join(ar,"Let's Build Something Exceptional","لنبنِ شيئاً استثنائياً")}</h2>
+            <h2>{join(ar,"Have a complex system to untangle?","هل لديك نظام معقّد يحتاج إلى حل؟")}</h2>
             <p>{join(ar,"Tell me a little about the system, platform or problem you're working on.","أخبرني عن النظام أو المنصة أو المشكلة التي تعمل عليها.")}</p>
           </div>
           <form onSubmit={send} className="zr-contact-form">
