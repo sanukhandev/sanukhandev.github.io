@@ -17,6 +17,7 @@ type DevToApiArticle = {
   description?: string;
   url: string;
   cover_image?: string | null;
+  social_image?: string | null;
   published_at?: string;
   tag_list?: string[] | string;
   slug: string;
@@ -46,7 +47,7 @@ const mapArticle = (article: DevToApiArticle): DevToArticle => ({
   description:
     article.description || "Read this engineering article on Dev.to.",
   url: article.url,
-  coverImage: article.cover_image || null,
+  coverImage: article.cover_image || article.social_image || null,
   publishedAt: article.published_at || "",
   tags: toTags(article.tag_list),
   slug: article.slug,
