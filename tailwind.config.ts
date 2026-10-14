@@ -88,10 +88,10 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ["Raleway", "Arial", "sans-serif"],
-        display: ["Raleway", "Arial", "sans-serif"],
-        body: ["Raleway", "Arial", "sans-serif"],
-        nunito: ["Raleway", "sans-serif"],
+        sans: ["Montserrat", "Arial", "sans-serif"],
+        display: ["Montserrat", "Arial", "sans-serif"],
+        body: ["Montserrat", "Arial", "sans-serif"],
+        nunito: ["Montserrat", "sans-serif"],
         poppins: ["Poppins", "sans-serif"],
         almarai: ["Almarai", "sans-serif"],
         chewy: ["Allura", "cursive"],

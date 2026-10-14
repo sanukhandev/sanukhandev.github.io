@@ -54,7 +54,7 @@ The reference site visibly organizes a large personal introduction, concise serv
 | Oversized identity-led hero | Name + precise engineering positioning + selected value proposition |
 | Editorial, asymmetrical composition | Two-column hero and deliberately offset project compositions |
 | Selected project storytelling | Outcome-led engineering case studies with role, stack and constraints |
-| Contrasting display and utility typography | Bricolage Grotesque + DM Sans + IBM Plex Mono for English; IBM Plex Sans Arabic + Aref Ruqaa for Arabic |
+| Contrasting display and utility typography | Montserrat + IBM Plex Mono for English, with Sloop Script used sparingly as an expressive accent; IBM Plex Sans Arabic + Aref Ruqaa for Arabic |
 | Large project previews and clear pacing | Actual screenshots/diagrams with mobile fallbacks and captions |
 | Numbered services/capabilities | Architecture, full-stack/platforms, automation/AI, integrations (only where evidenced) |
 | Playful visual accents | Restrained script treatments, accent lines and well-considered hover transitions |
@@ -120,24 +120,25 @@ For the main light experience: approximately **60–70% ivory**, **25–35% blac
 | Language/context | Typeface | Purpose | Allowed weights / treatment |
 |---|---|---|---|
 | Brand logotype | **Klaxon** (licensed local font) | Wordmark/monogram only | Only actual licensed styles; never fake bold |
-| English display | **Bricolage Grotesque** | Brand headlines, hero, H1–H6, featured project titles | 600 / 700 / 800 |
-| English body/UI | **DM Sans** | Descriptions, navigation, buttons, articles, contact information | 400 / 500 / 600 |
+| English primary/display/body/UI | **Montserrat** | Brand headlines, hero, H1–H6, descriptions, navigation, buttons, articles and contact information | 400 / 500 / 600 / 700 / 800 |
 | Technical utility | **IBM Plex Mono** | Project identifiers, section numbers, dates, diagram labels | 400 / 500 |
-| English decorative | **Allura** | One short expressive annotation or calligraphic accent per view/section | 400 only |
+| English decorative | **Sloop Script** | One short expressive annotation or calligraphic accent per view/section; use a licensed webfont only | 400 only |
 | Arabic primary | **IBM Plex Sans Arabic** | All Arabic headings, paragraph text, controls, navigation | 400 / 500 / 600 / 700 |
-| Arabic decorative | **Aref Ruqaa** | Arabic stylistic counterpart to Allura; short artistic phrases only | 400 / 700 |
+| Arabic decorative | **Aref Ruqaa** | Arabic stylistic counterpart to Sloop Script; short artistic phrases only | 400 / 700 |
 | Code/technical snippets | Existing project monospaced font or system mono | Inline code, file paths, architecture snippets | 400 / 500 |
 
-**Why Aref Ruqaa?** Its calligraphic Ruqaa construction supplies a natural handwritten contrast to IBM Plex Sans Arabic. It is **not** a letter-for-letter visual equivalent of English Allura; this is intentional: Arabic should have an authentic typographic expression. Prefer standard **Aref Ruqaa** over **Aref Ruqaa Ink** initially to avoid color-font compatibility and rendering variability.
+**Why Aref Ruqaa?** Its calligraphic Ruqaa construction supplies a natural handwritten contrast to IBM Plex Sans Arabic. It is **not** a letter-for-letter visual equivalent of Sloop Script; this is intentional: Arabic should have an authentic typographic expression. Prefer standard **Aref Ruqaa** over **Aref Ruqaa Ink** initially to avoid color-font compatibility and rendering variability.
 
 **Font restrictions:**
 
-- Allura and Aref Ruqaa are accents, not body fonts and not replacements for meaningful H1 text.
+- Sloop Script and Aref Ruqaa are accents, not body fonts and not replacements for meaningful H1 text. When Sloop Script licensing/files are unavailable, fall back to the existing licensed-safe Allura stack rather than embedding a downloaded copy.
 - Never render the primary headline as an SVG/image to emulate handwritten glyphs.
-- Apply Allura only to English runs and Aref Ruqaa only to Arabic runs. Do not rely on fallback to mix them in one word.
+- Apply Sloop Script only to English runs and Aref Ruqaa only to Arabic runs. Do not rely on fallback to mix them in one word.
 - Never artificially italicize Arabic. Avoid uppercase transformation, positive tracking and Latin-inspired disconnected letter spacing on Arabic glyphs.
 - Never stretch, compress or outline live body copy. Preserve selectable DOM text.
-- Klaxon is commercially licensed by its foundry in at least some distributions. **A desktop/print license is not automatically a webfont license.** Use it only after the appropriate rights and files are present. If unavailable, temporarily render a Bricolage Grotesque-based wordmark; do **not** download random font copies or commit a counterfeit.
+- Klaxon is commercially licensed by its foundry in at least some distributions. **A desktop/print license is not automatically a webfont license.** Use it only after the appropriate rights and files are present. If unavailable, temporarily render a Montserrat-based wordmark; do **not** download random font copies or commit a counterfeit.
+
+**User-approved visual override (2026-10-14):** The current refinement uses Montserrat as the single English family and Sloop Script as an optional short accent, while preserving the approved palette and Arabic IBM Plex Sans Arabic / Aref Ruqaa pairing. Sloop Script is not bundled until a permitted webfont file is supplied; CSS may name it first and use Allura as the safe fallback.
 
 ### 4.2 Responsive type scale — English
 
@@ -199,13 +200,13 @@ Implement these in the project's existing styling architecture. They are design 
   --color-black: #101010;
   --color-white: #ffffff; /* restricted: orange button text */
 
-  --font-display-en: var(--font-bricolage-grotesque), Arial, sans-serif;
-  --font-primary-en: var(--font-dm-sans), Arial, sans-serif;
+  --font-display-en: var(--font-montserrat), Arial, sans-serif;
+  --font-primary-en: var(--font-montserrat), Arial, sans-serif;
   --font-mono: var(--font-ibm-plex-mono), Consolas, monospace;
-  --font-script-en: var(--font-allura), cursive;
+  --font-script-en: var(--font-sloop-script, var(--font-allura)), cursive;
   --font-primary-ar: var(--font-ibm-plex-sans-arabic), Tahoma, sans-serif;
   --font-script-ar: var(--font-aref-ruqaa), serif;
-  --font-brand: var(--font-klaxon, var(--font-bricolage-grotesque)), sans-serif;
+  --font-brand: var(--font-klaxon, var(--font-montserrat)), sans-serif;
 
   --type-display: clamp(2.75rem, 9vw, 10rem);
   --type-h1: clamp(2.375rem, 6vw, 6rem);
@@ -307,18 +308,12 @@ Use Next.js built-in font optimization and self-hosting. Use only installed and 
 
 ```tsx
 // src/app/fonts.ts (example location only)
-import { Bricolage_Grotesque, DM_Sans, IBM_Plex_Mono, IBM_Plex_Sans_Arabic, Allura, Aref_Ruqaa } from 'next/font/google';
+import { Montserrat, IBM_Plex_Mono, IBM_Plex_Sans_Arabic, Allura, Aref_Ruqaa } from 'next/font/google';
 
-export const bricolageGrotesque = Bricolage_Grotesque({
-  weight: ['600', '700', '800'],
+export const montserrat = Montserrat({
+  weight: ['400', '500', '600', '700', '800'],
   subsets: ['latin'],
-  variable: '--font-bricolage-grotesque',
-  display: 'swap',
-});
-export const dmSans = DM_Sans({
-  weight: ['400', '500', '600'],
-  subsets: ['latin'],
-  variable: '--font-dm-sans',
+  variable: '--font-montserrat',
   display: 'swap',
 });
 export const ibmPlexMono = IBM_Plex_Mono({
@@ -363,7 +358,7 @@ export const klaxon = localFont({
 Notes:
 
 - Verify `Aref_Ruqaa` and locale subsets against the actual installed Next.js version; resolve any generated `next/font` build errors rather than guessing names/subsets.
-- **Do not add the Klaxon import until the asset exists and license is confirmed.** If omitted, define `--font-klaxon` as a valid local/fallback family value or use the Bricolage Grotesque wordmark directly.
+- **Do not add the Klaxon import until the asset exists and license is confirmed.** If omitted, define `--font-klaxon` as a valid local/fallback family value or use the Montserrat wordmark directly.
 - Load only required subsets/weights and reserve space for fallback glyph metrics. Consider isolating noncritical scripts to the pages that actually use them.
 - If the Vercel build fails while fetching Google Fonts, diagnose the build network, font CSS response and Next.js version. An allowed local copy of OFL fonts can be bundled with `next/font/local` as a deterministic alternative. Do not commit downloaded proprietary Klaxon files without rights.
 - Place font-variable classes on the proper document root/layout for both locales; avoid generating per-component `@import` rules.
@@ -482,7 +477,7 @@ Suggested order: project introduction → role and scope → problem/context →
 ### Hero
 
 - Layout: one large content zone and a narrower side/meta zone; collapse to a single content flow at narrow widths.
-- Copy: render the actual H1 as semantic text; decorative Allura/Aref Ruqaa can add emphasis, not replace the entire meaning.
+- Copy: render the actual H1 as semantic text; decorative Sloop Script/Aref Ruqaa can add emphasis, not replace the entire meaning.
 - If a portrait exists: `next/image`, actual dimensions, descriptive alt when informative, empty alt if redundant and purely decorative.
 - Background shapes and oversized numerals must be `aria-hidden="true"` and must not obscure text.
 
@@ -842,7 +837,7 @@ A deliverable is complete only when all applicable boxes are checked with eviden
 - [ ] Existing routes/slugs and content inventory reviewed and preserved (or mapped to approved redirects).
 - [ ] Pamidor-inspired editorial hierarchy implemented **without copying** its copyrighted assets or code.
 - [ ] Core palette implemented with acceptable color combinations; no 16px original-orange text on ivory.
-- [ ] Bricolage Grotesque / DM Sans / IBM Plex Mono / IBM Plex Sans Arabic / Aref Ruqaa applied to the correct purposes, with font files verified.
+- [ ] Montserrat / Sloop Script fallback / IBM Plex Mono / IBM Plex Sans Arabic / Aref Ruqaa applied to the correct purposes, with font files and licensing verified.
 - [ ] Klaxon only used when correctly licensed and locally supplied; fallback wordmark otherwise.
 - [ ] Desktop display type stays within user-specified range; mobile scale readable from 320px.
 - [ ] Body copy accessible and line spacing comfortable in both English and Arabic.

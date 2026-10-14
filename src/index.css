@@ -150,7 +150,7 @@
     background: var(--bg);
     color: var(--text);
     overflow-x: clip;
-    font-family: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+    font-family: "Montserrat", ui-sans-serif, system-ui, sans-serif;
     font-size: 16px;
     line-height: 1.6;
     font-weight: 400;
@@ -172,7 +172,7 @@
   html[lang="en"] input, html.locale-en input,
   html[lang="en"] textarea, html.locale-en textarea,
   html[lang="en"] select, html.locale-en select {
-    font-family: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+    font-family: "Montserrat", ui-sans-serif, system-ui, sans-serif;
   }
 
   /* Global Arabic typography (IBM Plex Sans Arabic) & RTL */
@@ -262,7 +262,7 @@
   h4,
   h5,
   h6 {
-    font-family: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+    font-family: "Montserrat", ui-sans-serif, system-ui, sans-serif;
     letter-spacing: -0.03em;
     font-weight: 600;
   }
@@ -380,7 +380,7 @@
   }
 
   .wordmark {
-    font-family: "Space Grotesk", system-ui, -apple-system, sans-serif;
+    font-family: "Montserrat", system-ui, -apple-system, sans-serif;
     font-size: 21px;
     font-weight: 600;
     letter-spacing: -0.04em;

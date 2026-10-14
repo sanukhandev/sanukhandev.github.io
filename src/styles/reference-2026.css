@@ -446,7 +446,7 @@ header.reference-nav-pastel a[class*="bg-accent"] { color:#101010; }
 .zr-site .zr-engagement-options { background:#101010; }
 
 /* Component accents reuse the sampled reference, including the floating Zaakiy assistant.
-   The existing Anta/Raleway/Almarai font rules are intentionally unmodified. */
+   The existing Anta/Montserrat/IBM Plex Sans Arabic font rules are intentionally unmodified. */
 .zaakiy-chat {
   --accent:#D5360C;
   --accent-hsl:12 90% 36%;
