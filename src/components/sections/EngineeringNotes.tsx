@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { useLocale } from "@/hooks/use-locale";
 import { useSiteContent } from "@/data/siteContent";
+import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
 
 export function EngineeringNotes() {
   const { locale } = useLocale();
@@ -56,6 +57,9 @@ export function EngineeringNotes() {
                 idx > 0 ? "pt-8 md:pt-0 md:pl-8 lg:pl-10 rtl:md:pl-0 rtl:md:pr-8 rtl:lg:pr-10" : ""
               }`}
             >
+              <div className="portfolio-article-media">
+                <MediaPlaceholder kind="article" index={String(idx + 1).padStart(2, "0")} />
+              </div>
               <div>
                 {/* Folio & Date Metadata */}
                 <div className="flex items-center justify-between text-[11.5px] font-mono text-muted-foreground mb-3 pb-2 border-b border-dashed border-border/50">
