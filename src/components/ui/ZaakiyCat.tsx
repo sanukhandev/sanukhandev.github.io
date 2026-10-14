@@ -64,7 +64,7 @@ export function ZaakiyCat({ isOpen, onClick, isArabic = false }: ZaakiyCatProps)
       {/* Cat Animation Container */}
       <div
         className={cn(
-          "relative transition-transform duration-[2400ms] ease-out",
+          "relative transition-transform duration-2400 ease-out",
           // Slide from left start position to resting perch position if not open
           !isOpen && (catState === "walking" ? "translate-x-0" : "translate-x-7 sm:translate-x-9")
         )}

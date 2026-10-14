@@ -90,7 +90,7 @@ export function BrushRevealPortrait({ className = "", alt }: BrushRevealPortrait
         alt={alt}
         width={900}
         height={1200}
-        fetchPriority="high"
+        fetchpriority="high"
         decoding="async"
         className="hero-brush-avatar__photo"
       />
