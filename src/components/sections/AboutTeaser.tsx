@@ -9,7 +9,7 @@ export function AboutTeaser() {
   const isArabic = locale === "ar";
 
   return (
-    <section id="about" className="py-10 sm:py-12 md:py-14 lg:py-16 scroll-mt-20 border-b border-border/60">
+    <section id="about" className="reference-about py-10 sm:py-12 md:py-14 lg:py-16 scroll-mt-20 border-b border-border/60">
       <div className="container-narrow">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
           {/* Left Column (7 cols): Editorial Text & Journey */}
