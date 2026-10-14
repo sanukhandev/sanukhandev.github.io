@@ -468,7 +468,7 @@ export default function ZaakiyChatWidget({
             "relative inline-flex h-11 items-center gap-2 rounded-full border border-accent/30 bg-accent px-4 text-xs font-semibold text-white shadow-md transition-all hover:bg-accent/90 focus:outline-none focus:ring-2 focus:ring-accent/40",
             open && "ring-2 ring-accent/40 bg-accent/90"
           )}
-          aria-label={isArabic ? "فتح مساعد Zaakiy" : "Open Zaakiy Portfolio Assistant"}
+          aria-label={isArabic ? "اسأل Zaakiy — فتح مساعد Zaakiy" : "Ask Zaakiy — Open Zaakiy Portfolio Assistant"}
         >
           <MessageCircle className="h-4 w-4" />
           <span className="font-medium">{isArabic ? "اسأل Zaakiy" : "Ask Zaakiy"}</span>

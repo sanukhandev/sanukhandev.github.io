@@ -10,6 +10,8 @@ type BrushRevealPortraitProps = {
 
 type BrushPoint = { x: number; y: number };
 const portraitSrc = "/hero-avatar-cutout.avif";
+const portraitSrcSet = "/hero-avatar-cutout-360.avif 360w, /hero-avatar-cutout-720.avif 720w, /hero-avatar-cutout.avif 900w";
+const portraitSizes = "(max-width: 767px) min(100vw, 350px), (max-width: 1050px) 430px, 600px";
 
 /**
  * Two identical image layers guarantee pixel-perfect registration at every
@@ -90,6 +92,8 @@ export function BrushRevealPortrait({ className = "", alt, ariaLabel, mirrored =
     >
       <img
         src={portraitSrc}
+        srcSet={portraitSrcSet}
+        sizes={portraitSizes}
         alt={alt}
         width={900}
         height={1200}
@@ -99,6 +103,8 @@ export function BrushRevealPortrait({ className = "", alt, ariaLabel, mirrored =
       />
       <motion.img
         src={portraitSrc}
+        srcSet={portraitSrcSet}
+        sizes={portraitSizes}
         alt=""
         aria-hidden="true"
         width={900}

@@ -203,7 +203,7 @@ function Navbar() {
             >
               <a
                 href={ctaHref}
-                aria-label={isArabic ? "الانتقال إلى قسم التواصل" : "Go to contact section"}
+                aria-label={isArabic ? "لنتحدث — الانتقال إلى قسم التواصل" : "Let's talk — Go to contact section"}
               >
                 <span>{isArabic ? "لنتحدث" : "Let's talk"}</span>
                 <ArrowRight className="h-4 w-4 rtl:rotate-180" />
@@ -269,11 +269,11 @@ function Navbar() {
               <div className="pt-2">
                 <Button
                   asChild
-                  className="w-full h-12 rounded-lg bg-accent text-[15px] font-semibold text-white hover:bg-accent/90 justify-center gap-2"
+                  className="sk-navbar__cta w-full h-12 rounded-lg bg-accent text-[15px] font-semibold text-white hover:bg-accent/90 justify-center gap-2"
                 >
                   <a
                     href={ctaHref}
-                    aria-label={isArabic ? "الانتقال إلى قسم التواصل" : "Go to contact section"}
+                    aria-label={isArabic ? "لنتحدث — الانتقال إلى قسم التواصل" : "Let's talk — Go to contact section"}
                     onClick={() => setOpen(false)}
                   >
                     <span>{isArabic ? "لنتحدث" : "Let's talk"}</span>
