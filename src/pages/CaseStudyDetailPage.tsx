@@ -47,7 +47,7 @@ export default function CaseStudyDetailPage() {
       />
       <Navbar />
 
-      <main className="min-h-screen bg-background pt-24 pb-16 text-foreground">
+      <main className="reference-subpage reference-case-study-page min-h-screen bg-background pt-24 pb-16 text-foreground">
         <article className="container-narrow max-w-4xl">
           {/* Back link */}
           <Link
