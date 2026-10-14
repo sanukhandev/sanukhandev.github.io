@@ -40,7 +40,7 @@ export default function ProjectsPage() {
 
       <Navbar />
 
-      <main className="min-h-screen bg-background pt-24 pb-16 text-foreground">
+      <main className="reference-subpage reference-projects-page min-h-screen bg-background pt-24 pb-16 text-foreground">
         <section className="projects-page-grid container-narrow max-w-4xl space-y-12">
           {/* Header */}
           <header className="border-b border-border/60 pb-8">
