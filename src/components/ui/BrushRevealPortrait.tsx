@@ -5,6 +5,7 @@ type BrushRevealPortraitProps = {
   className?: string;
   alt: string;
   ariaLabel?: string;
+  mirrored?: boolean;
 };
 
 type BrushPoint = { x: number; y: number };
@@ -17,14 +18,15 @@ const portraitSrc = "/hero-avatar-cutout.avif";
  *
  * No canvas redraw, bitmap stretching, or new animation dependency.
  */
-export function BrushRevealPortrait({ className = "", alt, ariaLabel }: BrushRevealPortraitProps) {
+export function BrushRevealPortrait({ className = "", alt, ariaLabel, mirrored = false }: BrushRevealPortraitProps) {
   const reducedMotion = useReducedMotion();
   const pointsRef = useRef<BrushPoint[]>([]);
   const [mask, setMask] = useState<string>("");
   const [expanded, setExpanded] = useState(false);
 
   const paint = useCallback((clientX: number, clientY: number, rect: DOMRect) => {
-    const x = clientX - rect.left;
+    const pointerX = clientX - rect.left;
+    const x = mirrored ? rect.width - pointerX : pointerX;
     const y = clientY - rect.top;
     if (x < 0 || y < 0 || x > rect.width || y > rect.height) return;
 
@@ -52,7 +54,7 @@ export function BrushRevealPortrait({ className = "", alt, ariaLabel }: BrushRev
       ];
     });
     setMask(gradients.join(", "));
-  }, []);
+  }, [mirrored]);
 
   const reset = useCallback(() => {
     pointsRef.current = [];
@@ -65,7 +67,7 @@ export function BrushRevealPortrait({ className = "", alt, ariaLabel }: BrushRev
 
   return (
     <div
-      className={`hero-brush-avatar ${className}`}
+      className={`hero-brush-avatar ${mirrored ? "hero-brush-avatar--mirrored" : ""} ${className}`}
       tabIndex={0}
       role="group"
       aria-label={ariaLabel ?? "Portrait. Move your pointer to paint in the original colors, or focus with the keyboard to reveal the full-color image."}

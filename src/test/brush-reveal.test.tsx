@@ -23,4 +23,9 @@ describe("BrushRevealPortrait", () => {
     fireEvent.blur(portrait);
     expect(layers[1].style.maskImage).toContain("linear-gradient");
   });
+
+  it("marks the portrait as mirrored when the Arabic layout requests it", () => {
+    render(<BrushRevealPortrait alt="Portrait of Sanu Khan" mirrored />);
+    expect(screen.getByRole("group")).toHaveClass("hero-brush-avatar--mirrored");
+  });
 });
