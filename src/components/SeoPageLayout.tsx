@@ -63,7 +63,7 @@ export default function SeoPageLayout(props: SeoPageLayoutProps) {
       { name: "Home", path: "/" },
       { name: h1, path: canonicalPath },
     ]),
-    serviceSchema,
+    ...(Array.isArray(serviceSchema) ? serviceSchema : [serviceSchema]),
   ];
 
   return (
