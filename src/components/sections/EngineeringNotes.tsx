@@ -14,7 +14,7 @@ export function EngineeringNotes() {
   const latestPosts = articles.slice(0, 3);
 
   return (
-    <section id="writing" className="py-10 sm:py-12 md:py-14 lg:py-16 scroll-mt-20 border-b border-border/60">
+    <section id="writing" className="reference-writing py-10 sm:py-12 md:py-14 lg:py-16 scroll-mt-20 border-b border-border/60">
       <div className="container-narrow">
         {/* Section Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 sm:mb-10">
