@@ -157,7 +157,7 @@ export function ArchitectureInPractice() {
   };
 
   return (
-    <section id="architecture" className="py-10 sm:py-12 md:py-14 lg:py-16 scroll-mt-20 border-b border-border/60">
+    <section id="architecture" className="reference-architecture py-10 sm:py-12 md:py-14 lg:py-16 scroll-mt-20 border-b border-border/60">
       <div className="container-narrow">
         {/* Section Header */}
         <div className="max-w-2xl mb-8 sm:mb-10">
