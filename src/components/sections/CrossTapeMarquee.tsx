@@ -31,7 +31,7 @@ export function CrossTapeMarquee() {
   return (
     <div
       aria-hidden="true"
-      className="relative w-full overflow-hidden py-10 sm:py-14 my-3 select-none pointer-events-auto"
+      className="reference-marquee relative w-full overflow-hidden py-10 sm:py-14 my-3 select-none pointer-events-auto"
     >
       {/* Background ambient lighting */}
       <div className="absolute inset-0 bg-accent/[0.02] pointer-events-none" />
