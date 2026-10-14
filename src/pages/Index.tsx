@@ -10,11 +10,9 @@ import {
   ReferenceHero,
   ReferenceProof,
   ReferenceServices,
-  ReferenceExpertise,
   ReferenceProjects,
   ReferenceWriting,
   ReferenceZaakiy,
-  ReferenceEngagement,
   ReferenceProcess,
   ReferenceAbout,
   ReferenceFaq,
@@ -31,7 +29,7 @@ const Index = () => {
   }
 
   return (
-    <div className="zr-site relative min-h-screen">
+    <div className="sk-page relative min-h-screen">
       {/* Accessible Skip to Content Link (WCAG 2.2 AA) */}
       <a
         href="#main-content"
@@ -65,11 +63,9 @@ const Index = () => {
         <ReferenceHero />
         <SectionReveal><ReferenceProof /></SectionReveal>
         <SectionReveal><ReferenceServices /></SectionReveal>
-        <SectionReveal><ReferenceExpertise /></SectionReveal>
         <SectionReveal><ReferenceProjects /></SectionReveal>
         <SectionReveal><ReferenceWriting /></SectionReveal>
         <SectionReveal><ReferenceZaakiy /></SectionReveal>
-        <SectionReveal><ReferenceEngagement /></SectionReveal>
         <SectionReveal><ReferenceProcess /></SectionReveal>
         <SectionReveal><ReferenceAbout /></SectionReveal>
         <SectionReveal><ReferenceFaq /></SectionReveal>

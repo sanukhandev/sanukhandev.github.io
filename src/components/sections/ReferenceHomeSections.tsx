@@ -1,285 +1,65 @@
 import { type FormEvent, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
-import { BrushRevealPortrait } from "@/components/ui/BrushRevealPortrait";
+import { ArrowRight, ArrowUpRight, Boxes, ChevronDown, Cloud, Code2, CircuitBoard, Download, GitBranch, Mail, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
-import { ArrowRight, ArrowUpRight, ChevronDown, Code2, Boxes, Cloud, CircuitBoard, GitBranch, Mail, MapPin, Download } from "lucide-react";
-import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
+import { BrandIdentity } from "@/components/BrandIdentity";
+import { BrushRevealPortrait } from "@/components/ui/BrushRevealPortrait";
+import { ZaakiyBrain } from "@/components/ui/ZaakiyBrain";
 import { useDevToArticles } from "@/hooks/use-devto-articles";
 import { useLocale } from "@/hooks/use-locale";
 import { useSiteContent } from "@/data/siteContent";
 import { getLocalizedCaseStudy } from "@/data/caseStudies";
 
-const join = (isArabic: boolean, en: string, ar: string) => isArabic ? ar : en;
+const join = (isArabic: boolean, en: string, ar: string) => (isArabic ? ar : en);
+
 function DevToCover({ coverImage, title, index }: { coverImage: string | null; title: string; index: number }) {
   const [failed, setFailed] = useState(false);
-  return coverImage?.startsWith("https://") && !failed
-    ? <img src={coverImage} alt={title} loading="lazy" referrerPolicy="no-referrer" className="zr-devto-cover" onError={() => setFailed(true)} />
-    : <MediaPlaceholder kind="article" index={String(index + 1).padStart(2, "0")} />;
+  if (coverImage?.startsWith("https://") && !failed) {
+    return <img src={coverImage} alt={title} loading="lazy" referrerPolicy="no-referrer" className="sk-journal__cover" onError={() => setFailed(true)} />;
+  }
+  return <div className="sk-journal__fallback" aria-label={title}><span className="sk-mono">NOTE / 0{index + 1}</span><strong>{title}</strong></div>;
 }
 
+function SectionHeading({ eyebrow, title, intro, isArabic }: { eyebrow: string; title: string; intro?: string; isArabic: boolean }) {
+  return <header className="sk-section-heading"><p className="sk-eyebrow"><span aria-hidden="true">/</span>{eyebrow}</p><h2>{title}</h2>{intro && <p className="sk-section-heading__intro">{intro}</p>}<span className="sk-heading-rule" aria-hidden="true" /><span className="sr-only">{isArabic ? "قسم من الصفحة الرئيسية" : "Homepage section"}</span></header>;
+}
 
 export function ReferenceHero() {
   const { locale } = useLocale();
   const ar = locale === "ar";
   const reducedMotion = useReducedMotion();
+  const enter = (delay: number, y = 18) => ({ initial: reducedMotion ? false : { opacity: 0, y }, animate: { opacity: 1, y: 0 }, transition: { duration: 0.62, delay: reducedMotion ? 0 : delay, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } });
 
-  const enter = (delay: number, y = 20) => ({
-    initial: reducedMotion ? false : { opacity: 0, y },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.7, delay: reducedMotion ? 0 : delay, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
-  });
-
-  return (
-    <section id="home" className="zr-hero zr-hero-v3" aria-labelledby="zr-hero-title">
-      <div className="zr-hero-three-column zr-shell">
-        <div className="zr-hero-introduction">
-          <motion.p className="zr-hero-v3-eyebrow" {...enter(0.05)}>
-            <span className="zr-hero-v3-accent-line" aria-hidden="true" />
-            {join(ar, "HELLO, I'M SANU KHAN", "مرحباً، أنا سانو خان")}
-          </motion.p>
-          <h1 id="zr-hero-title" className="zr-hero-v3-title">
-            <motion.span {...enter(0.13)}>
-              {join(ar, "Architecting", "أصمم ما")}
-            </motion.span>
-            <motion.span className="zr-hero-v3-highlight" {...enter(0.21)}>
-              {join(ar, "what matters.", "يهم فعلاً.")}
-            </motion.span>
-          </h1>
-          <motion.p className="zr-hero-v3-summary" {...enter(0.49)}>
-            {join(ar,
-              "Solution architecture, systems integration and scalable platforms for real-world operational challenges.",
-              "هندسة الحلول وتكامل الأنظمة والمنصات القابلة للتوسع لمواجهة التحديات التشغيلية الواقعية."
-            )}
-          </motion.p>
-          <motion.div className="zr-hero-v3-actions" {...enter(0.56)}>
-            <a className="zr-hero-v3-action-primary" href="#work">
-              {join(ar, "View My Work", "شاهد أعمالي")}
-              <ArrowRight size={18} aria-hidden="true" className="rtl:rotate-180" />
-            </a>
-            <a className="zr-hero-v3-action-secondary" href="/Sanu%20Khan%20-%20Resume.pdf" download>
-              {join(ar, "Download Resume", "تحميل السيرة الذاتية")}
-              <Download size={17} aria-hidden="true" />
-            </a>
-          </motion.div>
-          <motion.a className="zr-hero-v3-scroll" href="#services" {...enter(0.7)}>
-            <span>{join(ar, "SCROLL TO EXPLORE", "مرّر للاستكشاف")}</span>
-            <span className="zr-hero-v3-scroll-line" aria-hidden="true" />
-          </motion.a>
-        </div>
-
-        <motion.div className="zr-hero-v3-person" {...enter(0.22, 28)}>
-          <BrushRevealPortrait
-            alt={join(ar, "Portrait of Sanu Khan wearing a beige blazer", "صورة سانو خان بسترة بيج")}
-          />
-          <div className="zr-hero-v3-paint-label" aria-hidden="true">
-            {join(ar, "Hover to see me in color", "مرّر لرؤية الألوان")}
-            <span className="zr-hero-v3-hand-arrow">↙</span>
-          </div>
-        </motion.div>
-
-        <motion.aside className="zr-hero-v3-details" aria-label={join(ar, "Professional summary", "الملخص المهني")} {...enter(0.35)}>
-          <div className="zr-hero-v3-detail">
-            <span className="zr-hero-v3-detail-label">
-              <span className="zr-hero-v3-accent-line" aria-hidden="true" />
-              {join(ar, "CURRENTLY", "حالياً")}
-            </span>
-            <h2>{join(ar, "Solution Architect", "معماري حلول")}</h2>
-            <p>{join(ar, "Designing scalable solutions for real-world impact.", "أصمم حلولاً قابلة للتوسع ذات أثر واقعي.")}</p>
-          </div>
-          <div className="zr-hero-v3-detail">
-            <span className="zr-hero-v3-detail-label">
-              <MapPin size={19} aria-hidden="true" />
-              {join(ar, "BASED IN", "الموقع")}
-            </span>
-            <h3>{join(ar, "Dubai, UAE", "دبي، الإمارات")}</h3>
-            <p>{join(ar, "Building global solutions from here.", "أبني حلولاً عالمية من هنا.")}</p>
-          </div>
-          <div className="zr-hero-v3-detail">
-            <span className="zr-hero-v3-detail-label">
-              <CircuitBoard size={19} aria-hidden="true" />
-              {join(ar, "FOCUS AREAS", "مجالات التركيز")}
-            </span>
-            <div className="zr-hero-v3-focus">
-              {(ar
-                ? ["تصميم الأنظمة", "العمارة السحابية", "هندسة الخلفيات", "الأنظمة القابلة للتوسع"]
-                : ["System Design", "Cloud Architecture", "Backend Engineering", "Scalable Solutions"]
-              ).map((item) => <span key={item}>{item}</span>)}
-            </div>
-          </div>
-        </motion.aside>
-      </div>
-    </section>
-  );
+  return <section id="home" className="sk-hero" aria-labelledby="sk-hero-title"><div className="sk-shell sk-hero__grid">
+    <div className="sk-hero__intro"><motion.p className="sk-eyebrow" {...enter(0.02)}><span aria-hidden="true">01</span>{join(ar, "PERSONAL BRAND", "الهوية المهنية")}</motion.p><motion.div {...enter(0.08)}><BrandIdentity className="sk-hero__brand" /></motion.div><motion.h1 id="sk-hero-title" {...enter(0.14)}><span className="sk-hero__word">{join(ar, "Engineering", "أهندس")}</span> <span>{join(ar, "clarity", "الوضوح")}</span><br />{join(ar, "into complex", "في الأنظمة")} <span>{join(ar, "systems.", "المعقدة.")}</span></motion.h1><motion.p className="sk-hero__lead" {...enter(0.28)}>{join(ar, "I connect business problems, architecture and delivery across enterprise systems, integrations and cloud platforms.", "أربط بين مشكلات الأعمال والعمارة والتنفيذ عبر الأنظمة المؤسسية والتكاملات والمنصات السحابية.")}</motion.p><motion.div className="sk-hero__actions" {...enter(0.38)}><a className="sk-button sk-button--accent" href="#work">{join(ar, "View selected work", "استعرض الأعمال المختارة")} <ArrowRight size={17} aria-hidden="true" className="rtl:rotate-180" /></a><a className="sk-text-link" href="mailto:hello@sanukhan.dev">{join(ar, "Start a conversation", "ابدأ محادثة")} <ArrowUpRight size={17} aria-hidden="true" /></a></motion.div><motion.a className="sk-hero__resume" href="/Sanu%20Khan%20-%20Resume.pdf" download {...enter(0.44)}><Download size={14} aria-hidden="true" /> {join(ar, "Download résumé", "تحميل السيرة الذاتية")}</motion.a></div>
+    <motion.figure className="sk-hero__portrait" {...enter(0.18, 26)}><div className="sk-hero__portrait-frame"><BrushRevealPortrait alt={join(ar, "Portrait of Sanu Khan wearing a beige blazer", "صورة سانو خان بسترة بيج")} ariaLabel={join(ar, "Portrait. Move your pointer to reveal the original colors, or focus to reveal the full-color image.", "صورة. حرّك المؤشر لإظهار الألوان الأصلية أو استخدم التركيز لإظهار الصورة الملونة.")} /></div><figcaption><span className="sk-mono">PORTRAIT / 01</span>{join(ar, "Move across the portrait to reveal the original color.", "حرّك المؤشر فوق الصورة لإظهار الألوان الأصلية.")}</figcaption></motion.figure>
+    <motion.aside className="sk-hero__identity" aria-label={join(ar, "Professional identity", "الهوية المهنية")} {...enter(0.25)}><div className="sk-hero__identity-block"><span className="sk-eyebrow"><span aria-hidden="true">/</span>{join(ar, "POSITION", "المجال")}</span><h2>{join(ar, "Tech Lead · Solution Architect", "قائد تقني · معماري حلول")}</h2><p>{join(ar, "Architecture-to-delivery ownership for systems that have to work in the real world.", "ملكية كاملة من العمارة إلى التنفيذ لأنظمة يجب أن تعمل في الواقع.")}</p></div><dl className="sk-hero__facts"><div><dt>{join(ar, "BASED IN", "الموقع")}</dt><dd><MapPin size={15} aria-hidden="true" /> Dubai, UAE</dd></div><div><dt>{join(ar, "FOCUS", "التركيز")}</dt><dd>{join(ar, "Integration · Platforms · Reliability", "التكامل · المنصات · الموثوقية")}</dd></div><div><dt>{join(ar, "SIGNATURE RESEARCH", "البحث المميز")}</dt><dd>ZaakiyV3RSE</dd></div></dl></motion.aside>
+  </div></section>;
 }
 
 export function ReferenceProof() {
   const { locale } = useLocale();
   const ar = locale === "ar";
   const { profile } = useSiteContent();
-  return (
-    <section className="zr-proof zr-shell" aria-label={join(ar, "Engineering experience", "الخبرة الهندسية")}>
-      <p className="zr-proof-label">{join(ar, "PLATFORMS, PATTERNS & OPERATING MODELS", "خبرة عبر التقنيات والمنصات")}</p>
-      <div className="zr-tech-strip" aria-label={join(ar, "Architecture and platform experience", "المنصات والممارسات المعمارية")}>
-        {["Azure", "AWS", "Kubernetes", "Kafka", "ERP / PIM", "Power Platform"].map(name => <span key={name}>{name}</span>)}
-      </div>
-      <div className="zr-metrics">
-        {profile.impactMetrics.map((metric) => (
-          <div key={metric.label} className="zr-metric">
-            <strong>{metric.value}</strong><span>{metric.label}</span>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
+  return <section className="sk-proof" aria-label={join(ar, "Selected impact", "أثر مختار")}><div className="sk-shell sk-proof__layout"><div className="sk-proof__intro"><p className="sk-eyebrow"><span aria-hidden="true">02</span>{join(ar, "SELECTED IMPACT", "أثر مختار")}</p><p>{join(ar, "Verified signals from the work behind the systems.", "مؤشرات موثقة من العمل خلف هذه الأنظمة.")}</p></div><div className="sk-proof__metrics">{profile.impactMetrics.map((metric) => <div className="sk-proof__metric" key={metric.label}><strong>{metric.value}</strong><span>{metric.label}</span></div>)}</div><div className="sk-proof__platforms"><span className="sk-mono">ECOSYSTEMS</span><span>Azure</span><span>AWS</span><span>Kubernetes</span><span>Kafka</span><span>ERP / PIM</span><span>Power Platform</span></div></div></section>;
 }
 
 export function ReferenceServices() {
   const { locale } = useLocale();
   const ar = locale === "ar";
-  const services = [
-    {
-      title: join(ar, "Architecture & Technical Direction", "العمارة والتوجيه التقني"),
-      copy: join(ar, "Clarify system boundaries, make trade-offs explicit, and choose a design the team can own and operate.", "توضيح حدود الأنظمة ومفاضلاتها واختيار تصميم يمكن للفريق تشغيله وتطويره بثقة."),
-      label: "01 / ARCHITECTURE",
-    },
-    {
-      title: join(ar, "Enterprise Integration & Data Flow", "التكامل المؤسسي وتدفق البيانات"),
-      copy: join(ar, "Connect commerce, ERP, inventory and distributed services through dependable data contracts and failure paths.", "ربط التجارة وأنظمة ERP والمخزون والخدمات الموزعة بعقود بيانات واضحة ومسارات معالجة موثوقة."),
-      label: "02 / INTEGRATION",
-    },
-    {
-      title: join(ar, "Cloud & Platform Modernization", "تحديث المنصات والسحابة"),
-      copy: join(ar, "Modernize infrastructure, delivery and platform architecture without losing sight of operational continuity.", "تحديث البنية التحتية وأساليب التسليم والمنصات دون الإخلال باستمرارية التشغيل."),
-      label: "03 / PLATFORM",
-    },
-  ];
-  return (
-    <section id="services" className="zr-section zr-services">
-      <div className="zr-shell">
-        <header className="zr-section-heading zr-centered-heading">
-          <p className="zr-kicker">{join(ar, "HOW I CAN HELP", "كيف يمكنني المساعدة")}</p>
-          <h2>{join(ar, "From complexity to clarity.", "من التعقيد إلى الوضوح.")}</h2>
-          <p>{join(ar, "Architecture decisions, integration contracts and delivery choices grounded in actual operating constraints—not diagrams for their own sake.", "قرارات معمارية وعقود تكامل وخيارات تنفيذ تستند إلى قيود التشغيل الحقيقية، لا إلى المخططات وحدها.")}</p>
-        </header>
-        <figure className="zr-section-art zr-service-art">
-          <img src="/media/architecture-capabilities.avif" alt={join(ar, "Concept illustration of system architecture, integration and delivery", "رسم تصوري للعمارة والتكامل وتسليم الأنظمة")} loading="lazy" width={1093} height={820} />
-          <figcaption>{join(ar, "Concept illustration · Architecture / Integration / Delivery", "رسم توضيحي · العمارة / التكامل / التسليم")}</figcaption>
-        </figure>
-        <div className="zr-service-grid">
-          {services.map((service, i) => (
-            <article key={service.label} className={"zr-service-card zr-service-card-" + (i + 1)}>
-              <div className="zr-service-card-copy">
-                <span className="zr-card-label">{service.label}</span>
-                <h3>{service.title}</h3>
-                <p>{service.copy}</p>
-                <a href="#contact" className="zr-service-arrow" aria-label={join(ar, "Discuss", "ناقش") + " " + service.title}><ArrowUpRight size={21} aria-hidden="true" /></a>
-              </div>
-              <span className="zr-service-index" aria-hidden="true">0{i + 1}</span>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
+  const capabilities = [["01", join(ar, "Enterprise Architecture & Governance", "العمارة المؤسسية والحوكمة"), join(ar, "Make system boundaries, ownership and trade-offs explicit before complexity becomes operational risk.", "تحديد حدود الأنظمة وملكيتها ومفاضلاتها قبل أن يتحول التعقيد إلى مخاطرة تشغيلية.")], ["02", join(ar, "Cloud & Platform Strategy", "استراتيجية السحابة والمنصات"), join(ar, "Choose an operating model that balances reliability, scale, cost and the team's ability to own it.", "اختيار نموذج تشغيل يوازن بين الموثوقية والتوسع والتكلفة وقدرة الفريق على امتلاكه.")], ["03", join(ar, "Systems Integration & Modernization", "تكامل الأنظمة والتحديث"), join(ar, "Connect enterprise systems around explicit contracts, data ownership and recoverable workflows.", "ربط الأنظمة المؤسسية بعقود واضحة وملكية بيانات ومسارات قابلة للتعافي.")], ["04", join(ar, "Technical Leadership & Delivery", "القيادة التقنية والتنفيذ"), join(ar, "Align teams and delivery decisions with observable production behavior and a practical path forward.", "مواءمة الفرق وقرارات التنفيذ مع سلوك إنتاج قابل للرصد ومسار عملي إلى الأمام.")]];
+  return <section id="architecture" className="sk-section sk-capabilities"><span id="services" className="sk-anchor" aria-hidden="true" /><div className="sk-shell"><SectionHeading isArabic={ar} eyebrow={join(ar, "WHAT I SOLVE", "ما أتعامل معه")} title={join(ar, "Where architecture meets execution.", "حيث تلتقي العمارة بالتنفيذ.")} intro={join(ar, "The discipline is not choosing more technology. It is creating a system the business and the engineering team can understand, operate and evolve.", "الممارسة ليست اختيار المزيد من التقنيات، بل بناء نظام يمكن للأعمال والفريق الهندسي فهمه وتشغيله وتطويره.")} /><div className="sk-capabilities__list">{capabilities.map(([number, title, description]) => <article className="sk-capability" key={number}><span className="sk-capability__number sk-mono">{number}</span><h3>{title}</h3><p>{description}</p><ArrowUpRight className="sk-capability__arrow" size={20} aria-hidden="true" /></article>)}</div><div className="sk-system-line" aria-hidden="true"><span>CONTEXT</span><i /><span>ARCHITECTURE</span><i /><span>DELIVERY</span><i /><span>OUTCOMES</span></div></div></section>;
 }
 
-export function ReferenceExpertise() {
-  const { locale } = useLocale();
-  const ar = locale === "ar";
-  const capabilities = [
-    {
-      title: join(ar, "Architecture & Governance", "العمارة والحوكمة"),
-      description: join(ar, "Design choices explained through ownership, constraints, risk and the cost of change.", "توضيح قرارات التصميم من منظور المسؤولية والقيود والمخاطر وتكلفة التغيير."),
-      tags: ["System Boundaries", "Architecture Decisions", "Governance"],
-    },
-    {
-      title: join(ar, "Cloud & Platform Strategy", "استراتيجية السحابة والمنصات"),
-      description: join(ar, "Build the right operating model for reliability, scale and predictable delivery.", "اختيار نموذج تشغيل مناسب للموثوقية والتوسع والتسليم المتوقع."),
-      tags: ["Azure", "AWS", "Kubernetes", "Resilience"],
-    },
-    {
-      title: join(ar, "Enterprise Integration", "التكامل المؤسسي"),
-      description: join(ar, "Connect complex systems around explicit contracts, data ownership and recoverable workflows.", "ربط الأنظمة المعقدة بعقود واضحة وملكية بيانات محددة ومسارات قابلة للتعافي."),
-      tags: ["ERP / PIM", "Event-Driven", "API Contracts", "Kafka"],
-    },
-    {
-      title: join(ar, "Delivery & Operability", "التسليم والجاهزية التشغيلية"),
-      description: join(ar, "Align teams and technical decisions with observability, change management and production outcomes.", "مواءمة الفرق والقرارات التقنية مع المراقبة وإدارة التغيير والنتائج التشغيلية."),
-      tags: ["Observability", "CI/CD", "Stakeholder Alignment"],
-    },
-  ];
-  return (
-    <section id="architecture" className="zr-section zr-expertise">
-      <div className="zr-shell">
-        <header className="zr-section-heading zr-centered-heading">
-          <p className="zr-kicker">{join(ar, "EXPERTISE", "الخبرات")}</p>
-          <h2>{join(ar, "The disciplines behind reliable systems.", "الممارسات وراء الأنظمة الموثوقة.")}</h2>
-          <p>{join(ar, "Technology is a choice; understanding constraints, risk and business outcomes is the discipline.", "التقنية اختيار، أما فهم القيود والمخاطر ونتائج الأعمال فهو جوهر الممارسة.")}</p>
-        </header>
-        <figure className="zr-section-art zr-expertise-art">
-          <img src="/media/expertise-systems.avif" alt={join(ar, "Conceptual capability system spanning architecture, cloud, integration and operations", "رسم تصوري لمجالات العمارة والسحابة والتكامل والعمليات")} loading="lazy" width={1160} height={638} />
-          <figcaption>{join(ar, "Capabilities are connected, not siloed.", "القدرات مترابطة وليست منعزلة.")}</figcaption>
-        </figure>
-        <div className="zr-expertise-stack">
-          {capabilities.map((cluster, i) => (
-            <article key={cluster.title} className="zr-expertise-row">
-              <div className="zr-expertise-copy">
-                <span className="zr-card-label">0{i + 1} / {join(ar, "CORE CAPABILITY", "قدرة أساسية")}</span>
-                <h3>{cluster.title}</h3>
-                <p>{cluster.description}</p>
-                <div className="zr-tech-tags">{cluster.tags.map(tag => <span key={tag}>{tag}</span>)}</div>
-              </div>
-
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
+export function ReferenceExpertise() { return null; }
 
 export function ReferenceProjects() {
   const { locale } = useLocale();
   const ar = locale === "ar";
-  const ids = [
-    "enterprise-retail-integration",
-    "airline-retailing-aggregation",
-    "automotive-omnichannel-platform",
-    "real-estate-erp-architecture",
-    "zaakiy-v3rse"
-  ];
-  const projects = ids.map(slug => getLocalizedCaseStudy(slug, locale)).filter((entry) => entry !== undefined && entry !== null);
-  return (
-    <section id="work" className="zr-section zr-projects">
-      <div className="zr-shell">
-        <header className="zr-section-heading zr-centered-heading">
-          <p className="zr-kicker">{join(ar, "SELECTED WORK", "أعمال مختارة")}</p>
-          <h2>{join(ar, "Systems I've helped shape.", "أنظمة ساهمت في تشكيلها.")}</h2>
-          <p>{join(ar, "A selection of systems shaped by real constraints, integration challenges and operational requirements.", "مجموعة من الأنظمة صُممت وفق قيود واقعية وتحديات تكامل ومتطلبات تشغيلية.")}</p>
-        </header>
-        <figure className="zr-section-art zr-project-art">
-          <img src="/media/selected-projects.avif" alt={join(ar, "Concept illustration of enterprise system dashboards and architectural decisions", "رسم تصوري للأنظمة المؤسسية وقرارات العمارة")} loading="lazy" width={983} height={650} />
-          <figcaption>{join(ar, "Concept illustration · The work is in the case studies below.", "رسم توضيحي · التفاصيل الحقيقية موثقة في دراسات الحالة أدناه.")}</figcaption>
-        </figure>
-        <div className="zr-project-grid">
-          {projects.map((project, i) => (
-            <Link to={"/projects/" + project.slug} key={project.slug} className={"zr-project-tile zr-project-tile-" + (i + 1)}>
-              <div className="zr-project-media">
-                <img src={["/media/case-retail.svg", "/media/case-airline.svg", "/media/case-automotive.svg", "/media/case-property.svg", "/media/case-zaakiy.svg"][i]} alt={join(ar, "Conceptual architecture diagram for ", "مخطط معماري تصوري لـ ") + project.title} loading="lazy" width={960} height={600} />
-                <span className="zr-project-link-icon"><ArrowUpRight size={19} aria-hidden="true" /></span>
-              </div>
-              <div className="zr-project-info">
-                <span className="zr-card-label">{project.domain}</span>
-                <h3>{project.title}</h3>
-                <p>{project.subtitle}</p>
-              </div>
-            </Link>
-          ))}
-        </div>
-        <div className="zr-projects-footer"><Link to="/projects" className="zr-text-action">{join(ar, "View all projects", "عرض جميع المشاريع")} <ArrowUpRight size={20} aria-hidden="true" /></Link></div>
-      </div>
-    </section>
-  );
+  const ids = ["enterprise-retail-integration", "airline-retailing-aggregation", "automotive-omnichannel-platform", "real-estate-erp-architecture", "zaakiy-v3rse"];
+  const projects = ids.map((slug) => getLocalizedCaseStudy(slug, locale)).filter(Boolean);
+  const visuals = ["/media/case-retail.svg", "/media/case-airline.svg", "/media/case-automotive.svg", "/media/case-property.svg", "/media/case-zaakiy.svg"];
+  return <section id="work" className="sk-section sk-work"><div className="sk-shell"><SectionHeading isArabic={ar} eyebrow={join(ar, "SELECTED WORK", "أعمال مختارة")} title={join(ar, "Systems I've helped shape.", "أنظمة ساهمت في تشكيلها.")} intro={join(ar, "Case studies grounded in integration challenges, operating constraints and architectural decisions.", "دراسات حالة تستند إلى تحديات التكامل والقيود التشغيلية والقرارات المعمارية.")} /><div className="sk-work__grid">{projects.map((project, index) => { const isFeatured = index === 0; const isCompact = index > 2; return <Link to={`/projects/${project.slug}`} key={project.slug} className={`sk-project ${isFeatured ? "sk-project--featured" : ""} ${isCompact ? "sk-project--compact" : ""}`}>{!isCompact && <div className="sk-project__media"><img src={visuals[index]} alt={join(ar, `Conceptual architecture diagram for ${project.title}`, `مخطط معماري تصوري لـ ${project.title}`)} loading="lazy" width={960} height={600} /><span className="sk-project__index sk-mono">0{index + 1}</span></div>}{isCompact && <span className="sk-project__compact-index sk-mono">0{index + 1}</span>}<div className="sk-project__copy"><span className="sk-mono">{project.domain}</span><h3>{project.title}</h3><p>{project.subtitle}</p><span className="sk-text-link">{join(ar, "Read case study", "اقرأ دراسة الحالة")} <ArrowUpRight size={16} aria-hidden="true" /></span></div></Link>; })}</div><div className="sk-section__footer"><Link to="/projects" className="sk-text-link">{join(ar, "View all architecture work", "عرض جميع الأعمال المعمارية")} <ArrowRight size={17} aria-hidden="true" className="rtl:rotate-180" /></Link></div></div></section>;
 }
 
 export function ReferenceWriting() {
@@ -287,272 +67,49 @@ export function ReferenceWriting() {
   const ar = locale === "ar";
   const { articles } = useSiteContent();
   const { data: devToArticles } = useDevToArticles(20);
-  const posts = devToArticles?.length
-    ? devToArticles.slice(0, 3).map(post => ({
-        title: post.title,
-        excerpt: post.description,
-        category: post.tags[0] || "Engineering",
-        localPath: post.localPath,
-        coverImage: post.coverImage,
-      }))
-    : articles.slice(0, 3).map(post => ({ ...post, coverImage: null as string | null }));
-  return (
-    <section id="writing" className="zr-section zr-writing">
-      <div className="zr-shell">
-        <header className="zr-section-heading zr-centered-heading">
-          <p className="zr-kicker">{join(ar,"ENGINEERING JOURNAL","الملاحظات الهندسية")}</p>
-          <h2>{join(ar,"Notes from the architecture desk.", "ملاحظات من مكتب العمارة.")}</h2>
-          <p>{join(ar,"Field notes on architecture, technical trade-offs and operating real systems.","ملاحظات عملية حول العمارة والمفاضلات التقنية وتشغيل الأنظمة الحقيقية.")}</p>
-        </header>
-        <div className="zr-writing-list">
-          {posts.map((post,i)=>(
-            <article key={post.localPath || post.title} className="zr-writing-item">
-              <Link to={post.localPath} className="zr-writing-image" aria-label={post.title}>
-                <DevToCover coverImage={post.coverImage} title={post.title} index={i} />
-              </Link>
-              <div className="zr-writing-text">
-                <span className="zr-card-label">{post.category} / 0{i+1}</span>
-                <h3><Link to={post.localPath}>{post.title}</Link></h3>
-                <p>{post.excerpt}</p>
-                <Link to={post.localPath} className="zr-text-action">{join(ar,"Read article","اقرأ المقال")} <ArrowUpRight size={17} aria-hidden="true" /></Link>
-              </div>
-            </article>
-          ))}
-        </div>
-        <div className="zr-writing-all"><Link to="/blog" className="zr-text-action">{join(ar,"Browse all articles","تصفح جميع المقالات")} <ArrowUpRight size={18} aria-hidden="true" /></Link></div>
-      </div>
-    </section>
-  );
+  const posts = devToArticles?.length ? devToArticles.slice(0, 3).map((post) => ({ title: post.title, excerpt: post.description, category: post.tags[0] || "Engineering", localPath: post.localPath, coverImage: post.coverImage })) : articles.slice(0, 3).map((post) => ({ ...post, coverImage: null as string | null }));
+  return <section id="writing" className="sk-section sk-journal"><div className="sk-shell"><SectionHeading isArabic={ar} eyebrow={join(ar, "ENGINEERING JOURNAL", "الملاحظات الهندسية")} title={join(ar, "Notes from the architecture desk.", "ملاحظات من مكتب العمارة.")} intro={join(ar, "Field notes on architecture, technical trade-offs and operating real systems.", "ملاحظات عملية حول العمارة والمفاضلات التقنية وتشغيل الأنظمة الحقيقية.")} /><div className="sk-journal__grid">{posts.map((post, index) => <article className={`sk-journal__item ${index === 0 ? "sk-journal__item--featured" : ""}`} key={post.localPath || post.title}><Link to={post.localPath} aria-label={post.title}><DevToCover coverImage={post.coverImage} title={post.title} index={index} /></Link><div className="sk-journal__copy"><span className="sk-mono">{post.category} / 0{index + 1}</span><h3><Link to={post.localPath}>{post.title}</Link></h3><p>{post.excerpt}</p><Link to={post.localPath} className="sk-text-link">{join(ar, "Read article", "اقرأ المقال")} <ArrowUpRight size={16} aria-hidden="true" /></Link></div></article>)}</div><div className="sk-section__footer"><Link to="/blog" className="sk-text-link">{join(ar, "Browse all notes", "تصفح جميع الملاحظات")} <ArrowRight size={17} aria-hidden="true" className="rtl:rotate-180" /></Link></div></div></section>;
 }
 
 export function ReferenceZaakiy() {
   const { locale } = useLocale();
   const ar = locale === "ar";
-  return (
-    <section id="zaakiy" className="zr-section zr-zaakiy">
-      <div className="zr-shell">
-        <div className="zr-zaakiy-panel">
-          <div className="zr-zaakiy-copy">
-            <p className="zr-kicker">{join(ar, "R&D / OPERATIONS INTELLIGENCE", "البحث والتطوير / الذكاء التشغيلي")}</p>
-            <div className="brand-zaakiy zr-zaakiy-wordmark">ZaakiyV3RSE</div>
-            <h2>{join(ar, "Beyond uptime. Toward outcome intelligence.", "ما بعد الجاهزية. نحو ذكاء النتائج.")}</h2>
-            <p>{join(ar,
-              "An ongoing research effort in operational intelligence: correlating events with business context, then exploring whether observed behavior matches intended outcomes.",
-              "تجربة هندسية حول الذكاء التشغيلي المدعوم بالذكاء الاصطناعي وربط السياق والوعي بالأنظمة للتحقق من نتائج الأعمال."
-            )}</p>
-            <Link className="zr-button zr-button-primary" to="/projects/zaakiy-v3rse">{join(ar, "Explore the research", "استكشف البحث والتطوير")} <ArrowUpRight size={18} aria-hidden="true" /></Link>
-          </div>
-          <figure className="zr-zaakiy-display zr-zaakiy-visual">
-            <img src="/media/zaakiy-intelligence.avif" alt={join(ar, "Concept diagram of operational intelligence with input signals, agent orchestration and outputs", "رسم توضيحي للذكاء التشغيلي والمدخلات والتنسيق والمخرجات")} loading="lazy" width={1093} height={820} />
-            <figcaption>{join(ar, "Research concept · Not a product screenshot", "تصور بحثي · ليس لقطة من المنتج")}</figcaption>
-          </figure>
-        </div>
-      </div>
-    </section>
-  );
+  return <section id="zaakiy" className="sk-zaakiy"><div className="sk-shell sk-zaakiy__grid"><div className="sk-zaakiy__copy"><p className="sk-eyebrow"><span aria-hidden="true">05</span>{join(ar, "SIGNATURE RESEARCH / OPERATIONS INTELLIGENCE", "البحث المميز / الذكاء التشغيلي")}</p><div className="brand-zaakiy sk-zaakiy__wordmark">ZaakiyV3RSE</div><h2>{join(ar, "Beyond uptime. Toward outcome intelligence.", "ما بعد الجاهزية. نحو ذكاء النتائج.")}</h2><p>{join(ar, "ZaakiyV3RSE explores how systems can connect technical signals to operational context and reason about whether a workflow delivered its intended outcome.", "يستكشف ZaakiyV3RSE كيف يمكن للأنظمة ربط الإشارات التقنية بالسياق التشغيلي والتفكير في تحقق النتيجة المقصودة من سير العمل.")}</p><Link to="/projects/zaakiy-v3rse" className="sk-button sk-button--light">{join(ar, "Explore the research", "استكشف البحث")} <ArrowUpRight size={17} aria-hidden="true" /></Link></div><figure className="sk-zaakiy__visual"><ZaakiyBrain locale={locale} /><figcaption className="sk-mono">{join(ar, "CONCEPTUAL VISUAL / NOT A LIVE SYSTEM", "تصور مفاهيمي / ليس نظاماً حياً")}</figcaption></figure></div></section>;
 }
 
-export function ReferenceEngagement() {
-  const { locale } = useLocale();
-  const ar = locale === "ar";
-  const options = [
-    {
-      num: "01",
-      title: join(ar, "Architecture & Technical Review", "مراجعة العمارة والتقنيات"),
-      desc: join(ar, "For teams seeking a clear technical direction before committing to a larger implementation.", "للفرق التي تحتاج إلى توجه تقني واضح قبل الالتزام بالتنفيذ."),
-      points: ["System assessment", "Architecture decisions", "Risks & trade-offs", "Delivery recommendations"],
-    },
-    {
-      num: "02",
-      title: join(ar, "Platform & Integration Delivery", "تطوير المنصات والتكامل"),
-      desc: join(ar, "For scoped engineering engagements spanning integration, cloud and full-stack systems.", "لمشاريع هندسية محددة النطاق تشمل التكامل والسحابة والمنصات."),
-      points: ["API & backend design", "Cloud & deployment", "Enterprise integrations", "Delivery & handover"],
-    },
-  ];
-  return (
-    <section id="engagement" className="zr-section zr-engagement">
-      <div className="zr-shell">
-        <header className="zr-section-heading zr-centered-heading">
-          <p className="zr-kicker">{join(ar, "WORKING TOGETHER", "العمل معاً")}</p>
-          <h2>{join(ar, "Clarity before commitment.", "الوضوح قبل الالتزام.")}</h2>
-          <p>{join(ar, "Defined scope and a clear technical outcome. Pricing is agreed after requirements are reviewed.", "نطاق واضح ومخرجات تقنية محددة، مع الاتفاق على التكلفة بعد مراجعة المتطلبات.")}</p>
-        </header>
-        <div className="zr-engagement-box">
-          <div className="zr-engagement-options">
-            {options.map(option => (
-              <article className="zr-engagement-option" key={option.num}>
-                <div className="zr-engagement-option-top"><span>{option.num} / {join(ar, "ENGAGEMENT", "التعاون")}</span><Code2 size={20} aria-hidden="true" /></div>
-                <h3>{option.title}</h3>
-                <p>{option.desc}</p>
-                <ul>{option.points.map(point => <li key={point}>{point}</li>)}</ul>
-                <a href="#contact">{join(ar, "Discuss scope", "ناقش النطاق")} <ArrowRight size={16} aria-hidden="true" /></a>
-              </article>
-            ))}
-          </div>
-          <aside className="zr-engagement-note">
-            <span className="zr-kicker">{join(ar, "SCOPE FIRST", "النطاق أولاً")}</span>
-            <h3>{join(ar, "A realistic plan starts with understanding the problem.", "تبدأ الخطة الواقعية بفهم المشكلة.")}</h3>
-            <p>{join(ar, "Share the business context, constraints, and timeline. I'll help clarify a sensible next step before any commitment.", "شارك سياق العمل والقيود والجدول الزمني لنحدد الخطوة المناسبة قبل أي التزام.")}</p>
-            <a className="zr-gradient-link" href="#contact">{join(ar, "Start a conversation", "ابدأ المحادثة")} <ArrowUpRight size={18} aria-hidden="true" /></a>
-          </aside>
-        </div>
-      </div>
-    </section>
-  );
-}
+export function ReferenceEngagement() { return null; }
 
 export function ReferenceProcess() {
   const { locale } = useLocale();
   const ar = locale === "ar";
-  const steps = [
-    [join(ar, "Discovery", "الاستكشاف"), join(ar, "Understand the business problem and operating constraints.", "فهم مشكلة العمل والقيود التشغيلية.")],
-    [join(ar, "System Mapping", "تحليل الأنظمة"), join(ar, "Identify boundaries, dependencies and data ownership.", "تحديد حدود الأنظمة وتبعياتها وملكية البيانات.")],
-    [join(ar, "Architecture", "التصميم المعماري"), join(ar, "Make deliberate design decisions and agree the trade-offs.", "اتخاذ قرارات معمارية واضحة والاتفاق على المفاضلات.")],
-    [join(ar, "Delivery", "التنفيذ"), join(ar, "Build, integrate and validate the solution in small steps.", "بناء الحل وتكامله والتحقق منه تدريجياً.")],
-    [join(ar, "Operate & Evolve", "التشغيل والتطوير"), join(ar, "Observe production behavior and iterate where it matters.", "رصد سلوك الإنتاج وتطوير ما يحقق القيمة.")],
-  ];
-  return (
-    <section id="process" className="zr-section zr-process">
-      <div className="zr-shell">
-        <header className="zr-section-heading zr-centered-heading">
-          <p className="zr-kicker">{join(ar, "HOW I WORK", "كيف أعمل")}</p>
-          <h2>{join(ar, "From complexity to a workable plan.", "من التعقيد إلى خطة قابلة للتنفيذ.")}</h2>
-          <p>{join(ar, "A practical route from complex requirements to reliable systems.", "خطوات عملية لتحويل المتطلبات المعقدة إلى أنظمة موثوقة.")}</p>
-        </header>
-        <ol className="zr-process-steps">
-          {steps.map(([title,desc],i) => (
-            <li key={title} className={"zr-process-step zr-process-step-" + (i + 1)}>
-              <span className="zr-process-marker">0{i+1}</span>
-              <div><h3>{title}</h3><p>{desc}</p></div>
-              <span className="zr-process-icon" aria-hidden="true">{i === 0 ? <Boxes /> : i === 1 ? <GitBranch /> : i === 2 ? <CircuitBoard /> : i === 3 ? <Code2 /> : <Cloud />}</span>
-            </li>
-          ))}
-        </ol>
-      </div>
-    </section>
-  );
+  const steps = [[join(ar, "Understand", "افهم"), join(ar, "Start with the business problem and operating constraints.", "ابدأ بمشكلة العمل والقيود التشغيلية.")], [join(ar, "Architect", "صمّم"), join(ar, "Map boundaries, dependencies, ownership and failure paths.", "ارسم الحدود والتبعيات والملكية ومسارات الفشل.")], [join(ar, "Align", "وائم"), join(ar, "Make trade-offs legible to decision-makers and delivery teams.", "اجعل المفاضلات واضحة لصنّاع القرار وفرق التنفيذ.")], [join(ar, "Deliver", "نفّذ"), join(ar, "Build, integrate and validate the smallest useful path.", "ابنِ وادمج وتحقق من أصغر مسار مفيد.")], [join(ar, "Evolve", "طوّر"), join(ar, "Observe production behavior and improve what matters.", "راقب سلوك الإنتاج وطوّر ما يحقق القيمة.")]];
+  const icons = [<Boxes />, <GitBranch />, <CircuitBoard />, <Code2 />, <Cloud />];
+  return <section id="process" className="sk-section sk-process"><div className="sk-shell"><SectionHeading isArabic={ar} eyebrow={join(ar, "APPROACH & LEADERSHIP", "المنهجية والقيادة")} title={join(ar, "From complexity to a workable plan.", "من التعقيد إلى خطة قابلة للتنفيذ.")} intro={join(ar, "A clear sequence keeps architecture connected to the work of delivering and operating a real system.", "تُبقي الخطوات الواضحة العمارة متصلة بعمل تنفيذ وتشغيل النظام الحقيقي.")} /><ol className="sk-process__timeline">{steps.map(([title, description], index) => <li key={title}><span className="sk-process__number sk-mono">0{index + 1}</span><span className="sk-process__icon" aria-hidden="true">{icons[index]}</span><div><h3>{title}</h3><p>{description}</p></div></li>)}</ol></div></section>;
 }
 
 export function ReferenceAbout() {
   const { locale } = useLocale();
   const ar = locale === "ar";
-  return (
-    <section id="about" className="zr-section zr-about">
-      <div className="zr-shell">
-        <header className="zr-section-heading zr-centered-heading">
-          <p className="zr-kicker">{join(ar, "A LITTLE CONTEXT", "نبذة")}</p>
-          <h2>{join(ar, "How I approach difficult problems.", "كيف أتعامل مع المشكلات الصعبة.")}</h2>
-        </header>
-        <div className="zr-about-panel">
-          <div className="zr-about-avatar">
-            <img
-              src="/hero-avatar-cutout.avif"
-              alt={join(ar, "Portrait of Sanu Khan", "صورة سانو خان")}
-              width={400}
-              height={400}
-              loading="lazy"
-            />
-          </div>
-          <div className="zr-about-copy">
-            <span className="zr-kicker">SANU KHAN / ARCHITECT & ENGINEER</span>
-            <blockquote>{join(ar,
-              "“Good systems aren't just built. They're understood, operated and evolved.”",
-              "«الأنظمة الجيدة لا تُبنى فقط، بل تُفهم وتُشغّل وتتطور.»"
-            )}</blockquote>
-            <p>{join(ar,
-              "I started closer to infrastructure than application architecture. Working with networks and systems taught me to look at software from the outside in: what it depends on, what can fail and how each decision affects the whole.",
-              "بدأت بالقرب من البنية التحتية أكثر من عمارة التطبيقات. علمني العمل مع الشبكات والأنظمة النظر إلى البرمجيات من الخارج إلى الداخل: تبعياتها ومواطن فشلها وتأثير القرارات على المنظومة."
-            )}</p>
-            <Link to="/about" className="zr-text-action">{join(ar, "More about me", "المزيد عني")} <ArrowUpRight size={19} aria-hidden="true" /></Link>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
+  return <section id="about" className="sk-section sk-about"><div className="sk-shell sk-about__grid"><div className="sk-about__portrait"><img src="/hero-avatar-cutout.avif" alt={join(ar, "Portrait of Sanu Khan", "صورة سانو خان")} width={400} height={400} loading="lazy" /></div><div className="sk-about__copy"><p className="sk-eyebrow"><span aria-hidden="true">07</span>{join(ar, "PERSONAL PERSPECTIVE", "رؤية شخصية")}</p><BrandIdentity compact /><blockquote>{join(ar, "“Good systems aren't just built. They're understood, operated and evolved.”", "«الأنظمة الجيدة لا تُبنى فقط، بل تُفهم وتُشغّل وتتطور.»")}</blockquote><p>{join(ar, "I started closer to infrastructure than application architecture. That shaped how I work today: look at software from the outside in, understand what it depends on, what can fail and how each decision affects the whole.", "بدأت بالقرب من البنية التحتية أكثر من عمارة التطبيقات. شكّل ذلك منهجي اليوم: النظر إلى البرمجيات من الخارج إلى الداخل وفهم تبعياتها ومواطن فشلها وتأثير كل قرار على المنظومة.")}</p><Link to="/about" className="sk-text-link">{join(ar, "More about my work", "المزيد عن عملي")} <ArrowUpRight size={16} aria-hidden="true" /></Link></div></div></section>;
 }
 
 export function ReferenceFaq() {
   const { locale } = useLocale();
   const ar = locale === "ar";
-  const faqs = [
-    [join(ar,"What services does Sanu Khan provide?","ما الخدمات التي يقدمها سانو خان؟"),join(ar,"I provide architecture consulting, full-stack engineering, API integrations, and cloud modernization for event-driven and enterprise-grade platforms.","أقدم استشارات هندسة الحلول وتطوير البرمجيات المتكامل وتكامل الواجهات البرمجية وتحديث الأنظمة السحابية.")],
-    [join(ar,"Do you work with UAE and remote clients?","هل تعمل مع عملاء الإمارات وعن بُعد؟"),join(ar,"Yes. I work with teams in the UAE and globally across discovery, architecture, delivery, and optimization phases.","نعم. أعمل مع فرق في الإمارات وحول العالم من الاستكشاف والتصميم إلى التنفيذ والتحسين.")],
-    [join(ar,"Do you work with a fixed technology stack?","هل تلتزم بمجموعة تقنيات ثابتة؟"),join(ar,"No single language defines the solution. I select architectures and platforms around operational requirements, team capability, cost and long-term ownership.","لا تحدد لغة واحدة شكل الحل، بل أختار العمارة والمنصات بناءً على المتطلبات التشغيلية وقدرات الفرق والتكلفة والمسؤولية طويلة المدى.")],
-    [join(ar,"How can I contact you for a project?","كيف يمكنني التواصل بشأن مشروع؟"),join(ar,"Use the contact section on the homepage or send an email to hello@sanukhan.dev with your scope and timeline.","استخدم قسم التواصل في الصفحة الرئيسية أو أرسل رسالة إلى hello@sanukhan.dev تتضمن النطاق والجدول الزمني.")],
-  ];
-  return (
-    <section id="faq" className="zr-section zr-faq">
-      <div className="zr-shell">
-        <header className="zr-section-heading zr-centered-heading"><p className="zr-kicker">FAQ</p><h2>{join(ar,"Frequently Asked Questions","أسئلة شائعة")}</h2></header>
-        <div className="zr-faq-list">
-          {faqs.map(([question,answer],i)=>(
-            <details className="zr-faq-item" key={question}>
-              <summary><span>{String(i+1).padStart(2,"0")}.</span>{question}<ChevronDown size={19} aria-hidden="true" /></summary>
-              <p>{answer}</p>
-            </details>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
+  const faqs = [[join(ar, "What services does Sanu Khan provide?", "ما الخدمات التي يقدمها سانو خان؟"), join(ar, "Architecture consulting, full-stack engineering, API integrations and cloud modernization for enterprise-grade platforms.", "استشارات هندسة الحلول وتطوير البرمجيات وتكامل الواجهات البرمجية وتحديث الأنظمة السحابية للمنصات المؤسسية.")], [join(ar, "Do you work with UAE and remote teams?", "هل تعمل مع فرق في الإمارات وعن بُعد؟"), join(ar, "Yes. Work can span discovery, architecture, delivery and optimization with teams in the UAE and globally.", "نعم. يمكن أن يشمل العمل الاستكشاف والعمارة والتنفيذ والتحسين مع فرق في الإمارات وحول العالم.")], [join(ar, "How can I start a conversation?", "كيف أبدأ محادثة؟"), join(ar, "Use the contact section below or email hello@sanukhan.dev with your context, scope and timeline.", "استخدم قسم التواصل أدناه أو أرسل رسالة إلى hello@sanukhan.dev تتضمن السياق والنطاق والجدول الزمني.")]];
+  return <section id="faq" className="sk-section sk-faq"><div className="sk-shell"><SectionHeading isArabic={ar} eyebrow="FAQ" title={join(ar, "A few useful answers.", "بعض الإجابات المفيدة.")} /><div className="sk-faq__list">{faqs.map(([question, answer], index) => <details key={question}><summary><span className="sk-mono">0{index + 1}</span>{question}<ChevronDown size={18} aria-hidden="true" /></summary><p>{answer}</p></details>)}</div></div></section>;
 }
 
 export function ReferenceContact() {
   const { locale } = useLocale();
   const ar = locale === "ar";
-  const [form, setForm] = useState({name:"",email:"",subject:"",message:""});
-  const send = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const subject = form.subject.trim() || "Project inquiry from sanukhan.dev";
-    const body = ["Name: "+form.name, "Email: "+form.email, "", form.message].join("\n");
-    window.location.href = "mailto:hello@sanukhan.dev?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
-  };
-  return (
-    <section id="contact" className="zr-contact">
-      <div className="zr-shell">
-        <div className="zr-contact-gradient">
-          <div className="zr-contact-heading">
-            <span className="zr-kicker">{join(ar,"LET'S WORK TOGETHER","لنعمل معاً")}</span>
-            <h2>{join(ar,"Have a complex system to untangle?","هل لديك نظام معقّد يحتاج إلى حل؟")}</h2>
-            <p>{join(ar,"Tell me a little about the system, platform or problem you're working on.","أخبرني عن النظام أو المنصة أو المشكلة التي تعمل عليها.")}</p>
-          </div>
-          <form onSubmit={send} className="zr-contact-form">
-            <label>{join(ar,"Name","الاسم")}<input name="name" autoComplete="name" required maxLength={120} value={form.name} onChange={e=>setForm({...form,name:e.target.value})} placeholder={join(ar,"Your name","اسمك")} /></label>
-            <label>{join(ar,"Email","البريد الإلكتروني")}<input name="email" type="email" autoComplete="email" required maxLength={240} value={form.email} onChange={e=>setForm({...form,email:e.target.value})} placeholder="you@company.com" /></label>
-            <label>{join(ar,"Project / Subject","المشروع / الموضوع")}<input name="subject" required maxLength={160} value={form.subject} onChange={e=>setForm({...form,subject:e.target.value})} placeholder={join(ar,"What are you working on?","ما الذي تعمل عليه؟")} /></label>
-            <label>{join(ar,"Project details","تفاصيل المشروع")}<textarea name="message" rows={5} required maxLength={5000} value={form.message} onChange={e=>setForm({...form,message:e.target.value})} placeholder={join(ar,"Scope, timeline, and context...","النطاق والجدول الزمني والسياق...")} /></label>
-            <button className="zr-contact-submit" type="submit">{join(ar,"Compose inquiry email","إعداد رسالة الاستفسار")} <ArrowUpRight size={18} aria-hidden="true" /></button>
-            <small>{join(ar,"Opens your email app with the details filled in. Nothing is submitted to a server.","يُفتح تطبيق البريد الإلكتروني مع تعبئة التفاصيل. لا يتم إرسال شيء إلى خادم.")}</small>
-          </form>
-        </div>
-      </div>
-    </section>
-  );
+  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const send = (event: FormEvent<HTMLFormElement>) => { event.preventDefault(); const body = ["Name: " + form.name, "Email: " + form.email, "", form.message].join("\n"); window.location.href = "mailto:hello@sanukhan.dev?subject=" + encodeURIComponent("Project inquiry from sanukhan.dev") + "&body=" + encodeURIComponent(body); };
+  return <section id="contact" className="sk-contact"><div className="sk-shell sk-contact__grid"><div className="sk-contact__intro"><p className="sk-eyebrow"><span aria-hidden="true">08</span>{join(ar, "CONTACT / NEXT STEP", "التواصل / الخطوة التالية")}</p><h2>{join(ar, "Have a complex system to untangle?", "هل لديك نظام معقّد يحتاج إلى حل؟")}</h2><p>{join(ar, "Bring the context, constraints and the decision in front of you. We can start with clarity before commitment.", "شارك السياق والقيود والقرار الذي تواجهه. يمكننا البدء بالوضوح قبل الالتزام.")}</p><div className="sk-contact__paths"><div><span className="sk-mono">01 / REVIEW</span><strong>{join(ar, "Architecture & technical review", "مراجعة العمارة والتقنيات")}</strong></div><div><span className="sk-mono">02 / DELIVERY</span><strong>{join(ar, "Platform & integration delivery", "تطوير المنصات والتكامل")}</strong></div></div></div><form onSubmit={send} className="sk-contact__form"><label>{join(ar, "Name", "الاسم")}<input name="name" autoComplete="name" required maxLength={120} value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder={join(ar, "Your name", "اسمك")} /></label><label>{join(ar, "Email", "البريد الإلكتروني")}<input name="email" type="email" autoComplete="email" required maxLength={240} value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="you@company.com" /></label><label>{join(ar, "Project details", "تفاصيل المشروع")}<textarea name="message" rows={5} required maxLength={5000} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} placeholder={join(ar, "Scope, timeline and context...", "النطاق والجدول الزمني والسياق...")} /></label><button className="sk-button sk-button--accent" type="submit">{join(ar, "Compose inquiry email", "إعداد رسالة الاستفسار")} <ArrowUpRight size={17} aria-hidden="true" /></button><small>{join(ar, "Opens your email app. Nothing is submitted to a server.", "يُفتح تطبيق البريد الإلكتروني. لا يتم إرسال شيء إلى خادم.")}</small></form></div></section>;
 }
 
 export function ReferenceFooter() {
   const { locale } = useLocale();
   const ar = locale === "ar";
-  return (
-    <footer className="zr-footer">
-      <div className="zr-shell zr-footer-layout">
-        <div>
-          <a href="#home" className="zr-footer-brand">SanuKhan<span>.dev</span></a>
-          <p>{join(ar,"Solution Architect · Platform Engineering | Dubai, UAE","معماري حلول · هندسة المنصات | دبي، الإمارات")}</p>
-        </div>
-        <nav aria-label={join(ar,"Footer navigation","روابط التذييل")}>
-          <a href="#services">{join(ar,"Services","الخدمات")}</a>
-          <a href="#work">{join(ar,"Work","الأعمال")}</a>
-          <a href="#expertise">{join(ar,"Expertise","الخبرات")}</a>
-          <a href="#about">{join(ar,"About","عني")}</a>
-        </nav>
-        <div className="zr-footer-links">
-          <a href="https://github.com/sanukhandev" target="_blank" rel="noopener noreferrer">GitHub <ArrowUpRight size={13} aria-hidden="true" /></a>
-          <a href="https://www.linkedin.com/in/sanukhandev/" target="_blank" rel="noopener noreferrer">LinkedIn <ArrowUpRight size={13} aria-hidden="true" /></a>
-          <a href="mailto:hello@sanukhan.dev"><Mail size={14} aria-hidden="true" /> Email</a>
-        </div>
-      </div>
-      <div className="zr-shell zr-footer-bottom"><span>© {new Date().getFullYear()} Sanu Khan.</span><span><MapPin size={12} aria-hidden="true" /> Dubai, UAE</span></div>
-    </footer>
-  );
+  return <footer className="sk-footer"><div className="sk-shell sk-footer__grid"><div><a href="#home" aria-label="Sanu Khan home"><BrandIdentity /></a><p>{join(ar, "Tech Lead · Solution Architect | Dubai, UAE", "قائد تقني · معماري حلول | دبي، الإمارات")}</p></div><nav aria-label={join(ar, "Footer navigation", "روابط التذييل")}><a href="#architecture">{join(ar, "Capabilities", "القدرات")}</a><a href="#work">{join(ar, "Work", "الأعمال")}</a><a href="#writing">{join(ar, "Notes", "الملاحظات")}</a><a href="#about">{join(ar, "About", "عني")}</a></nav><div className="sk-footer__links"><a href="https://github.com/sanukhandev" target="_blank" rel="noopener noreferrer">GitHub <ArrowUpRight size={13} aria-hidden="true" /></a><a href="https://www.linkedin.com/in/sanukhandev/" target="_blank" rel="noopener noreferrer">LinkedIn <ArrowUpRight size={13} aria-hidden="true" /></a><a href="mailto:hello@sanukhan.dev"><Mail size={14} aria-hidden="true" /> Email</a></div></div><div className="sk-shell sk-footer__bottom"><span>© {new Date().getFullYear()} Sanu Khan.</span><span><MapPin size={12} aria-hidden="true" /> Dubai, UAE</span></div></footer>;
 }

@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useTheme } from "@/hooks/use-theme";
 import { useLocale } from "@/hooks/use-locale";
+import { BrandIdentity } from "@/components/BrandIdentity";
 
 function Navbar() {
   const location = useLocation();
@@ -135,23 +136,21 @@ function Navbar() {
   return (
     <header
       className={cn(
-        "fixed inset-x-0 top-0 z-50 transition-all duration-200",
-        isHomePage && "reference-nav-pastel",
+        "sk-navbar fixed inset-x-0 top-0 z-50 transition-all duration-200",
         scrolled
           ? "border-b border-border/80 bg-background/95 backdrop-blur-md shadow-xs"
           : "border-b border-transparent bg-transparent"
       )}
     >
-      <div className="container-narrow">
+      <div className="sk-shell">
         <div className="flex h-[72px] sm:h-20 items-center justify-between">
           {/* LEFT: SanuKhan.dev Brand Wordmark */}
           <a
             href={isHomePage ? "#home" : "/#home"}
-            className="group inline-flex items-baseline text-[19px] sm:text-[21px] font-semibold tracking-tight text-primary transition-opacity hover:opacity-90 select-none"
-            aria-label="SanuKhan.dev home"
+            className="sk-navbar__brand group select-none"
+            aria-label={isArabic ? "العودة إلى الصفحة الرئيسية لسنو خان" : "Sanu Khan home"}
           >
-            <span>SanuKhan</span>
-            <span className="text-accent font-semibold">.dev</span>
+            <BrandIdentity compact />
           </a>
 
           {/* CENTER / RIGHT: Desktop Nav Links */}
@@ -161,7 +160,7 @@ function Navbar() {
                 <a
                   key={item.href}
                   href={isHomePage ? item.href : `/${item.href}`}
-                  aria-current={activeHref === item.href ? "location" : undefined}
+                  aria-current={activeHref === item.href ? "page" : undefined}
                   className={cn(
                     "text-[14.5px] font-medium transition-colors hover:text-accent focus-visible:text-accent",
                     isHomePage && activeHref === item.href
@@ -200,7 +199,7 @@ function Navbar() {
             {/* Primary CTA: Let's talk → */}
             <Button
               asChild
-              className="h-11 rounded-lg bg-accent px-5 text-[14px] font-semibold text-white transition-colors hover:bg-accent/90 shadow-xs gap-1.5"
+              className="sk-navbar__cta h-11 rounded-lg bg-accent px-5 text-[14px] font-semibold text-white transition-colors hover:bg-accent/90 shadow-xs gap-1.5"
             >
               <a
                 href={ctaHref}
@@ -246,7 +245,7 @@ function Navbar() {
           role="dialog"
           aria-modal="true"
           aria-label={isArabic ? "القائمة الرئيسية" : "Mobile navigation"}
-          className="fixed inset-0 top-[72px] sm:top-20 z-40 bg-background/98 backdrop-blur-xl border-t border-border flex flex-col justify-between p-6 sm:p-8 md:hidden overflow-y-auto animate-in fade-in slide-in-from-top-2 duration-200"
+          className="sk-mobile-nav fixed inset-0 top-[72px] sm:top-20 z-40 bg-background/98 backdrop-blur-xl border-t border-border flex flex-col justify-between p-6 sm:p-8 md:hidden overflow-y-auto animate-in fade-in slide-in-from-top-2 duration-200"
         >
             <div className="flex flex-col gap-6 pt-4">
               {/* Big Nav items */}

@@ -4,6 +4,7 @@ import { motion, useReducedMotion } from "framer-motion";
 type BrushRevealPortraitProps = {
   className?: string;
   alt: string;
+  ariaLabel?: string;
 };
 
 type BrushPoint = { x: number; y: number };
@@ -16,7 +17,7 @@ const portraitSrc = "/hero-avatar-cutout.avif";
  *
  * No canvas redraw, bitmap stretching, or new animation dependency.
  */
-export function BrushRevealPortrait({ className = "", alt }: BrushRevealPortraitProps) {
+export function BrushRevealPortrait({ className = "", alt, ariaLabel }: BrushRevealPortraitProps) {
   const reducedMotion = useReducedMotion();
   const pointsRef = useRef<BrushPoint[]>([]);
   const [mask, setMask] = useState<string>("");
@@ -67,7 +68,7 @@ export function BrushRevealPortrait({ className = "", alt }: BrushRevealPortrait
       className={`hero-brush-avatar ${className}`}
       tabIndex={0}
       role="group"
-      aria-label="Portrait. Move your pointer to paint in the original colors, or focus with the keyboard to reveal the full-color image."
+      aria-label={ariaLabel ?? "Portrait. Move your pointer to paint in the original colors, or focus with the keyboard to reveal the full-color image."}
       onPointerEnter={(event) => {
         if (event.pointerType === "mouse" || event.pointerType === "pen") {
           paint(event.clientX, event.clientY, event.currentTarget.getBoundingClientRect());

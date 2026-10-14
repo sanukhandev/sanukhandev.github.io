@@ -9,8 +9,10 @@
   --color-ivory: #e6d5bd;
   --color-black: #101010;
   --color-white: #fff;
-  --font-primary-en: "Raleway", Arial, sans-serif;
-  --font-primary-ar: "Almarai", Tahoma, sans-serif;
+  --font-primary-en: "DM Sans", Arial, sans-serif;
+  --font-display-en: "Bricolage Grotesque", Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", Consolas, monospace;
+  --font-primary-ar: "IBM Plex Sans Arabic", Tahoma, sans-serif;
   --font-script-en: "Allura", cursive;
   --font-script-ar: "Aref Ruqaa", serif;
   --bg: var(--color-ivory);
@@ -140,7 +142,8 @@ a:hover { text-decoration-thickness: 2px; }
 :is(.bg-accent, .bg-\[var\(--accent\)\]) { color: var(--color-white); }
 .bg-accent-soft { background: var(--primary-soft); }
 .text-accent-strong { color: var(--accent-readable); }
-.wordmark, .font-display { font-family: var(--font-primary-en); }
+.wordmark, .font-display { font-family: var(--font-display-en); }
+.font-mono { font-family: var(--font-mono); }
 html[lang="ar"] .font-display { font-family: var(--font-primary-ar); }
 .system-backdrop { background: var(--color-black); }
 .system-grid { background-image: none; background-size: 72px 72px; animation: none; }

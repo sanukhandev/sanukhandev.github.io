@@ -150,7 +150,7 @@
     background: var(--bg);
     color: var(--text);
     overflow-x: clip;
-    font-family: "Nunito Sans", ui-sans-serif, system-ui, sans-serif;
+    font-family: "DM Sans", ui-sans-serif, system-ui, sans-serif;
     font-size: 16px;
     line-height: 1.6;
     font-weight: 400;
@@ -172,10 +172,10 @@
   html[lang="en"] input, html.locale-en input,
   html[lang="en"] textarea, html.locale-en textarea,
   html[lang="en"] select, html.locale-en select {
-    font-family: "Nunito Sans", ui-sans-serif, system-ui, sans-serif;
+    font-family: "DM Sans", ui-sans-serif, system-ui, sans-serif;
   }
 
-  /* Global Arabic typography (Almarai) & RTL */
+  /* Global Arabic typography (IBM Plex Sans Arabic) & RTL */
   html[lang="ar"] body,
   html.locale-ar body,
   html[lang="ar"] h1, html.locale-ar h1,
@@ -189,7 +189,7 @@
   html[lang="ar"] input, html.locale-ar input,
   html[lang="ar"] textarea, html.locale-ar textarea,
   html[lang="ar"] select, html.locale-ar select {
-    font-family: "Almarai", ui-sans-serif, system-ui, sans-serif;
+    font-family: "IBM Plex Sans Arabic", ui-sans-serif, system-ui, sans-serif;
   }
 
   html.locale-ar body,
@@ -262,7 +262,7 @@
   h4,
   h5,
   h6 {
-    font-family: "Nunito Sans", ui-sans-serif, system-ui, sans-serif;
+    font-family: "DM Sans", ui-sans-serif, system-ui, sans-serif;
     letter-spacing: -0.03em;
     font-weight: 600;
   }
