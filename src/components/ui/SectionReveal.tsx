@@ -18,7 +18,7 @@ export function SectionReveal({ children, delay = 0, className }: SectionRevealP
   return (
     <motion.div
       className={className}
-      initial={shouldReduceMotion ? false : { opacity: 0.94, y: 18 }}
+      initial={shouldReduceMotion ? false : { opacity: 1, y: 18 }}
       whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.08, margin: "0px 0px -48px 0px" }}
       transition={{
