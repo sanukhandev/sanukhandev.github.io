@@ -13,6 +13,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/sections/Footer";
 import ZaakiyChatWidget from "@/components/ZaakiyChatWidget";
 import { profile } from "@/data/siteData";
+import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
 import { useDevToArticle, useDevToArticles } from "@/hooks/use-devto-articles";
 import { buildBlogPostingSchema, buildBreadcrumbListSchema } from "@/lib/schema";
 
@@ -390,17 +391,9 @@ export default function DevToBlogPage() {
               </a>
             </div>
 
-            {article.coverImage && (
-              <img
-                src={article.coverImage}
-                alt={article.title}
-                width={1200}
-                height={630}
-                loading="eager"
-                decoding="async"
-                className="mt-6 w-full rounded-2xl border border-[var(--border)] object-cover"
-              />
-            )}
+            <div className="portfolio-article-cover mt-6">
+              <MediaPlaceholder kind="article" index="01" />
+            </div>
 
             {article.tags.length > 0 && (
               <div className="mt-4 flex flex-wrap gap-1.5">
@@ -467,21 +460,9 @@ export default function DevToBlogPage() {
                       to={post.localPath}
                       className="group flex gap-3 rounded-xl border border-[var(--border)] bg-[var(--bg-secondary)] p-3.5 transition-colors hover:border-[var(--accent)]/40 hover:bg-[var(--bg-primary)]"
                     >
-                      {post.coverImage ? (
-                        <img
-                          src={post.coverImage}
-                          alt={post.title}
-                          width={320}
-                          height={224}
-                          loading="lazy"
-                          decoding="async"
-                          className="mt-0.5 h-14 w-20 shrink-0 rounded-lg object-cover"
-                        />
-                      ) : (
-                        <div className="mt-0.5 flex h-14 w-20 shrink-0 items-center justify-center rounded-lg bg-[var(--bg-primary)]">
-                          <BookOpen className="h-5 w-5 text-[var(--text-secondary)]" />
-                        </div>
-                      )}
+                      <div className="mt-0.5 h-14 w-20 shrink-0">
+                        <MediaPlaceholder kind="article" className="h-full" />
+                      </div>
                       <div className="min-w-0">
                         <p className="line-clamp-2 text-[13px] font-semibold leading-snug text-[var(--text-primary)] group-hover:text-[var(--accent)]">
                           {post.title}
@@ -519,19 +500,7 @@ export default function DevToBlogPage() {
             <div className="sticky top-24 max-h-[calc(100vh-8rem)] overflow-y-auto space-y-4 pr-1">
               <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-secondary)] px-4 py-4 shadow-sm">
                 <div className="flex items-center gap-3">
-                  <picture>
-                    <source srcSet="/assets/images/sanu.avif" type="image/avif" />
-                    <source srcSet="/assets/images/sanu.webp" type="image/webp" />
-                    <img
-                      src={profile.avatarUrl}
-                      alt={profile.name}
-                      width={44}
-                      height={44}
-                      loading="lazy"
-                      decoding="async"
-                      className="h-11 w-11 rounded-full border border-[var(--accent)]/30 object-cover"
-                    />
-                  </picture>
+                  <MediaPlaceholder kind="portrait" className="portfolio-author-placeholder" />
                   <div>
                     <p className="text-[13px] font-bold text-[var(--text-primary)]">
                       {profile.name}
