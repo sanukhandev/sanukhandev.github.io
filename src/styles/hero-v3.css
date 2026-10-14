@@ -120,7 +120,7 @@
 .zr-site .zr-hero-v3-paint-label {
   position:absolute;top:15%;inset-inline-end:-28px;
   max-width:105px;line-height:1.12;transform:rotate(-7deg);
-  font-family:var(--font-accent-en),cursive;
+  font-family:var(--font-script-en),cursive;
   font-size:clamp(23px,2.1vw,36px);
   color:#101010;pointer-events:none;
   z-index:4;
@@ -181,7 +181,7 @@ html[dir="rtl"] .zr-site .zr-hero-v3-title {
   font-size:clamp(35px,3.6vw,70px) !important;
 }
 html[dir="rtl"] .zr-site .zr-hero-v3-title > span { white-space:normal; }
-html[dir="rtl"] .zr-site .zr-hero-v3-paint-label { font-family:var(--font-accent-ar),serif; }
+html[dir="rtl"] .zr-site .zr-hero-v3-paint-label { font-family:var(--font-script-ar),serif; }
 @media (min-width:1700px) {
   .zr-site .zr-hero-v3-title { font-size:78px !important; }
   .zr-site .zr-hero-v3-details { padding-inline-start:55px; }
