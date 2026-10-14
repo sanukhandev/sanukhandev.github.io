@@ -95,7 +95,7 @@ export function HeroSection04() {
                 </>
               ) : (
                 <>
-                  I design systems for <br className="hidden sm:inline" />
+                  I design systems for 
                   <MatrixScrambleWord words={matrixWordsEn} />
                   {" "}business problems.
                 </>
