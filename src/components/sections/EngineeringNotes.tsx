@@ -28,7 +28,7 @@ export function EngineeringNotes() {
             <article key={post.localPath || post.title} className={`studio-journal-entry studio-journal-entry--${idx + 1}`}>
               <Link to={post.localPath} className="studio-journal-cover" aria-label={post.title}>
                 <MediaPlaceholder kind="article" index={String(idx + 1).padStart(2, "0")} />
-                <span className="studio-journal-cover-index" aria-hidden="true">0{idx + 1}</span>
+                
               </Link>
               <div className="studio-journal-copy">
                 <div className="studio-journal-meta"><span>FOLIO // 0{idx + 1}</span><span>{post.category}</span></div>
