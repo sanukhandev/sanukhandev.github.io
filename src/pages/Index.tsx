@@ -11,6 +11,7 @@ import {
   ReferenceServices,
   ReferenceExpertise,
   ReferenceProjects,
+  ReferenceWriting,
   ReferenceZaakiy,
   ReferenceEngagement,
   ReferenceProcess,
@@ -65,6 +66,7 @@ const Index = () => {
         <ReferenceServices />
         <ReferenceExpertise />
         <ReferenceProjects />
+        <ReferenceWriting />
         <ReferenceZaakiy />
         <ReferenceEngagement />
         <ReferenceProcess />
