@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { ArrowLeft, ArrowRight, Calendar, Search, Tag } from "lucide-react";
 import SeoMeta from "@/components/SeoMeta";
 import Navbar from "@/components/Navbar";
+import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
 import Footer from "@/components/sections/Footer";
 import { useDevToArticles } from "@/hooks/use-devto-articles";
 import { articles as fallbackArticles } from "@/data/siteData";
@@ -205,12 +206,15 @@ export default function BlogIndex() {
             </div>
 
             <div className="mt-5 grid gap-4 sm:grid-cols-2">
-              {paginatedPosts.map((post) => (
+              {paginatedPosts.map((post, idx) => (
                 <Link
                   key={post.href}
                   to={post.href}
                   className="group relative flex flex-col overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--bg-secondary)] p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-[var(--accent)]/40 hover:shadow-[0_0_0_1px_color-mix(in_srgb,var(--accent)_10%,transparent),0_8px_24px_color-mix(in_srgb,var(--accent)_6%,transparent)]"
                 >
+                  <div className="portfolio-article-media mb-5">
+                    <MediaPlaceholder kind="article" index={String(idx + 1).padStart(2, "0")} />
+                  </div>
                   {/* accent top bar on hover */}
                   <span className="pointer-events-none absolute inset-x-0 top-0 h-[2px] rounded-t-2xl bg-[var(--accent)] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
