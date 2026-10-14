@@ -14,7 +14,7 @@ const THEME_STORAGE_KEY = "sanukhan-theme";
 
 const getInitialTheme = (): Theme => {
   if (typeof window === "undefined") {
-    return "dark";
+    return "light";
   }
 
   const stored = window.localStorage.getItem(THEME_STORAGE_KEY);
@@ -22,7 +22,7 @@ const getInitialTheme = (): Theme => {
     return stored;
   }
 
-  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  return "light"; // Editorial brand canvas; keep user-selected themes unchanged.
 };
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
