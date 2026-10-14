@@ -88,14 +88,14 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ["Nunito Sans", "ui-sans-serif", "system-ui", "sans-serif"],
-        display: ["Nunito Sans", "ui-sans-serif", "system-ui", "sans-serif"],
-        body: ["Nunito Sans", "ui-sans-serif", "system-ui", "sans-serif"],
-        nunito: ["Nunito Sans", "sans-serif"],
+        sans: ["Raleway", "Arial", "sans-serif"],
+        display: ["Raleway", "Arial", "sans-serif"],
+        body: ["Raleway", "Arial", "sans-serif"],
+        nunito: ["Raleway", "sans-serif"],
         poppins: ["Poppins", "sans-serif"],
         almarai: ["Almarai", "sans-serif"],
-        chewy: ["Chewy", "cursive", "sans-serif"],
-        ruqaa: ["Aref Ruqaa Ink", "serif"],
+        chewy: ["Allura", "cursive"],
+        ruqaa: ["Aref Ruqaa", "serif"],
         anta: ["Anta", "sans-serif"],
       },
       colors: {
