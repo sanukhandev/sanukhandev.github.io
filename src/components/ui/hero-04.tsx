@@ -3,6 +3,7 @@ import { ArrowRight, MapPin, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLocale } from "@/hooks/use-locale";
 import { MatrixScrambleWord } from "@/components/ui/MatrixScrambleWord";
+import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
 
 export function HeroSection04() {
   const { locale } = useLocale();
@@ -56,11 +57,11 @@ export function HeroSection04() {
 
       {/* WIDE HERO CONTAINER (Max 1440px with generous margins) */}
       <div className="w-full max-w-[1440px] px-5 sm:px-8 md:px-10 lg:px-14 xl:px-16 mx-auto relative z-10">
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-10 lg:gap-12 xl:gap-16">
+        <div className="editorial-hero-layout flex flex-col lg:flex-row lg:items-center justify-between gap-10 lg:gap-12 xl:gap-16">
           {/* ============================================================
               LEFT COLUMN: Editorial Content (~50% Desktop)
               ============================================================ */}
-          <div className="w-full lg:w-[50%] xl:w-[48%] flex flex-col items-start text-left rtl:text-right">
+          <div className="editorial-hero-copy w-full lg:w-[58%] xl:w-[58%] flex flex-col items-start text-left rtl:text-right">
             {/* Technical Stamp & Eyebrow with Active Beacon */}
             <div className="flex flex-wrap items-center gap-2.5 mb-4">
               <div className="inline-flex items-center gap-2 rounded-md border border-border/80 bg-surface/90 px-3 py-1 text-[11px] font-mono font-semibold uppercase tracking-[0.08em] text-accent shadow-2xs backdrop-blur-xs">
@@ -85,7 +86,7 @@ export function HeroSection04() {
             </div>
 
             {/* Main Headline (Refined editorial scale, balanced & confident with Matrix scramble) */}
-            <h1 className="text-[34px] sm:text-[44px] lg:text-[48px] xl:text-[54px] font-semibold tracking-[-0.035em] text-primary leading-[1.08] sm:leading-[1.06] mb-5 max-w-[620px]">
+            <h1 className="editorial-hero-title text-[34px] sm:text-[44px] lg:text-[48px] xl:text-[54px] font-semibold tracking-[-0.035em] text-primary leading-[1.08] sm:leading-[1.06] mb-5 max-w-[620px]">
               {isArabic ? (
                 <>
                   أصمم الأنظمة لمواجهة{" "}
@@ -135,23 +136,7 @@ export function HeroSection04() {
             <div className="w-full flex flex-col items-center justify-center my-6 lg:hidden">
               <div className="relative w-full max-w-[340px] sm:max-w-[400px] flex flex-col items-center">
                 {/* Floating Avatar (Completely unboxed with responsive srcset) */}
-                <picture className="w-full flex justify-center">
-                  <source
-                    type="image/avif"
-                    srcSet="/avatar-340.avif 340w, /avatar-680.avif 680w"
-                    sizes="(max-width: 640px) 340px, 400px"
-                  />
-                  <img
-                    src="/avatar-340.avif"
-                    alt="Sanu Khan - Solution Architect & Platform Engineer"
-                    width={340}
-                    height={311}
-                    loading="eager"
-                    fetchPriority="high"
-                    decoding="async"
-                    className="w-full h-auto object-contain drop-shadow-[0_16px_32px_rgba(17,24,20,0.12)] select-none"
-                  />
-                </picture>
+                <MediaPlaceholder kind="portrait" className={"editorial-hero-portrait-mobile"} />
 
                 {/* Imperfection tape note on mobile */}
                 <div className="mt-3.5 inline-flex items-center gap-2 rounded border border-dashed border-border/90 bg-surface/90 px-3.5 py-1.5 shadow-2xs transform -rotate-1 select-none">
@@ -208,7 +193,7 @@ export function HeroSection04() {
               RIGHT COLUMN: Prominent, Unboxed Architectural Avatar (~50% Desktop)
               NO BOX, NO CARD BORDER, NATURALLY FLOATING WITH TACTILE TOUCHES
               ============================================================ */}
-          <div className="hidden lg:flex w-full lg:w-[50%] xl:w-[52%] flex-col items-center justify-center relative select-none">
+          <div className="editorial-hero-media hidden lg:flex w-full lg:w-[42%] xl:w-[42%] flex-col items-center justify-center relative select-none">
             {/* Open Canvas with Subtle Blueprint Registration Marks */}
             <div className="relative w-full max-w-[560px] xl:max-w-[620px] flex flex-col items-center">
               {/* Architectural Canvas Corner Crosshairs (drafting table markings) */}
@@ -252,23 +237,7 @@ export function HeroSection04() {
                 Renders freely, floating naturally on the page with responsive srcset.
               */}
               <div className="relative w-full flex items-center justify-center">
-                <picture className="w-full flex justify-center">
-                  <source
-                    type="image/avif"
-                    srcSet="/avatar-680.avif 680w, /avatar-1000.avif 1000w, /avatar_new.avif 1312w"
-                    sizes="(max-width: 1280px) 560px, 620px"
-                  />
-                  <img
-                    src="/avatar_new.avif"
-                    alt="Sanu Khan - Solution Architect & Platform Engineer"
-                    width={1312}
-                    height={1199}
-                    loading="eager"
-                    fetchPriority="high"
-                    decoding="async"
-                    className="w-full h-auto object-contain drop-shadow-[0_20px_42px_rgba(17,24,20,0.14)] select-none transition-transform duration-300 ease-out hover:scale-[1.015]"
-                  />
-                </picture>
+                <MediaPlaceholder kind="portrait" className={"editorial-hero-portrait-desktop"} />
               </div>
 
               {/* Tilted Notebook Tape Note Annotation (Imperfection Style) */}
