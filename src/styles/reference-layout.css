@@ -34,6 +34,34 @@
 .reference-home .font-mono { font-variant-numeric: tabular-nums; }
 .reference-home .text-accent { color: var(--color-orange-ink); }
 
+/* Scoped semantic tokens keep the intentionally light chapters legible even
+ * if the user selected the site's dark preference on another route. */
+.reference-home :is(#work,.reference-services,.reference-problems,.reference-domains,.reference-lab,#writing,#about) {
+  --primary:0 0% 6%;
+  --foreground:0 0% 6%;
+  --background:35 45% 82%;
+  --card:35 45% 82%;
+  --secondary:35 37% 77%;
+  --muted-foreground:20 17% 25%;
+  --text-primary:var(--color-black);
+  --text-secondary:#423629;
+  --text-muted:#5b4c3a;
+  --accent-readable:var(--color-orange-ink);
+  --bg:var(--color-ivory);
+  --surface:#f4e9d9;
+}
+.reference-home footer > div.border-t {
+  --primary:0 0% 6%;
+  --foreground:0 0% 6%;
+  --muted-foreground:20 17% 25%;
+  --text-primary:var(--color-black);
+  --text-secondary:#443729;
+  --accent-readable:var(--color-orange-ink);
+  color:var(--color-black);
+}
+.reference-home footer > div.border-t .text-primary { color:var(--color-black); }
+.reference-home footer > div.border-t .text-secondary { color:#443729; }
+
 /* Nav: no ivory strip above the dark hero. Switch to regular header on scroll. */
 header.fixed.reference-nav-dark {
   --primary: 35 45% 82%;
