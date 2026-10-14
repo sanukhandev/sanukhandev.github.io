@@ -97,7 +97,7 @@
 .sk-hero__portrait .hero-brush-avatar__photo { filter: grayscale(1); }
 .sk-hero__portrait .hero-brush-avatar__color { pointer-events: none; user-select: none; }
 .sk-hero__portrait .hero-brush-avatar__photo, .sk-hero__portrait .hero-brush-avatar__color { object-fit: contain; }
-.sk-hero__identity { align-self: center; border-block-start: 1px solid var(--sk-black); }
+.sk-hero__identity { align-self: start; margin-block-start: clamp(1.25rem, 2.5vw, 2.5rem); border-block-start: 1px solid var(--sk-black); }
 .sk-hero__identity-block { padding-block: 1.35rem 2.3rem; }
 .sk-hero__identity h2 { max-width: 10ch; margin: 1.15rem 0 1rem; font-size: clamp(1.8rem, 2.9vw, 3rem); line-height: 1.02; }
 .sk-hero__identity p { margin: 0; font-size: 0.93rem; }
@@ -292,7 +292,7 @@ html.dark .sk-hero__identity { border-color: var(--sk-ivory); }
 @media (max-width: 1050px) {
   .sk-hero__grid { grid-template-columns: minmax(0, 1fr) minmax(240px, 0.7fr); }
   .sk-hero__portrait { inset-inline-start: 0; width: min(100%, 430px); height: auto; margin-block: 0; align-self: center; }
-  .sk-hero__identity { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .sk-hero__identity { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-block-start: 0; }
   .sk-hero__identity-block { padding-block-end: 1rem; }
   .sk-hero__facts { display: grid; grid-template-columns: repeat(3, 1fr); }
   .sk-hero__facts > div { border-inline-start: 1px solid var(--sk-line); padding-inline-start: 1rem; }
@@ -309,7 +309,7 @@ html.dark .sk-hero__identity { border-color: var(--sk-ivory); }
   .sk-hero__grid { gap: 2.2rem; min-height: 0; }
   .sk-hero__intro { order: 1; }
   .sk-hero__portrait { order: 2; width: min(100%, 350px); height: auto; margin-inline: auto; }
-  .sk-hero__identity { order: 3; display: block; }
+  .sk-hero__identity { order: 3; display: block; margin-block-start: 0; }
   .sk-hero h1 { max-width: 9.2ch; font-size: clamp(3.1rem, 14vw, 5rem); }
   html.locale-ar .sk-hero h1 { font-size: clamp(2.65rem, 12vw, 4.2rem); }
   .sk-hero__matrix-line { width: 5.2em; margin-block: -0.18em; }
