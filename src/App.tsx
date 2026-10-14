@@ -34,8 +34,8 @@ const runWhenIdle = (fn: () => void) => {
     return () => window.cancelIdleCallback(id);
   }
 
-  const id = window.setTimeout(fn, 200);
-  return () => window.clearTimeout(id);
+  const id = globalThis.setTimeout(fn, 200);
+  return () => globalThis.clearTimeout(id);
 };
 
 const Index = lazyWithRetry(() => import("./pages/Index.tsx"));
