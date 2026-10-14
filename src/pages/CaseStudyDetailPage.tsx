@@ -1,6 +1,7 @@
 import { useParams, Link, Navigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/sections/Footer";
+import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
 import SeoMeta from "@/components/SeoMeta";
 import { getLocalizedCaseStudy, getLocalizedCaseStudies } from "@/data/caseStudies";
 import { ArrowLeft, ArrowRight, CheckCircle2, ShieldAlert, Cpu, GitBranch, Terminal } from "lucide-react";
@@ -85,6 +86,9 @@ export default function CaseStudyDetailPage() {
           </header>
 
           {/* 10-Point Architectural Structure */}
+          <div className="mt-10 mb-10 portfolio-article-cover">
+            <MediaPlaceholder kind="project" />
+          </div>
           <div className="mt-12 space-y-12 text-secondary">
             {/* 01 — Context */}
             <section className="border-l-2 border-accent/40 pl-6 rtl:pl-0 rtl:pr-6 py-1">
