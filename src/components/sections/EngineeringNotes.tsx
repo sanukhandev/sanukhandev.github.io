@@ -52,7 +52,7 @@ export function EngineeringNotes() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10 divide-y md:divide-y-0 md:divide-x divide-dashed divide-border/80">
           {latestPosts.map((post, idx) => (
             <article
-              key={post.slug || post.title}
+              key={post.localPath || post.title}
               className={`group flex flex-col justify-between ${
                 idx > 0 ? "pt-8 md:pt-0 md:pl-8 lg:pl-10 rtl:md:pl-0 rtl:md:pr-8 rtl:lg:pr-10" : ""
               }`}
@@ -66,20 +66,12 @@ export function EngineeringNotes() {
                   <span className="text-accent font-semibold">
                     FOLIO // 0{idx + 1}
                   </span>
-                  <div className="flex items-center gap-1.5">
-                    <span>{post.date}</span>
-                    {post.readTime && (
-                      <>
-                        <span aria-hidden="true">·</span>
-                        <span>{post.readTime}</span>
-                      </>
-                    )}
-                  </div>
+                  <span>{post.category}</span>
                 </div>
 
                 {/* Title */}
                 <h3 className="text-[19px] sm:text-[20px] font-semibold text-primary group-hover:text-accent transition-colors duration-200 mb-3 leading-snug">
-                  <Link to={post.path || `/blog/${post.slug}`}>
+                  <Link to={post.localPath}>
                     {post.title}
                   </Link>
                 </h3>
@@ -93,7 +85,7 @@ export function EngineeringNotes() {
               {/* Read note → Link */}
               <div className="pt-2">
                 <Link
-                  to={post.path || `/blog/${post.slug}`}
+                  to={post.localPath}
                   className="inline-flex items-center gap-1.5 text-[13.5px] font-semibold text-accent group-hover:underline"
                 >
                   <span>{isArabic ? "قراءة الملاحظة" : "Read note"}</span>
