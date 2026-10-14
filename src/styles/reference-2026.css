@@ -402,3 +402,26 @@ html[dir="rtl"] .zr-site .zr-faq-item > p { padding:0 54px 25px 25px; }
  .zr-site .zr-writing-item:last-child { grid-column:span 2; display:grid; grid-template-columns:1fr 1fr; }
  .zr-site .zr-writing-item:last-child .zr-writing-image { height:100%; min-height:245px; }
 }
+
+
+/* Tailwind semantic HSL aliases: prevent stale green accents in navigation,
+ * focus rings and chat controls. The installed font families are unchanged. */
+.zr-site {
+  --accent-hsl:11 81% 55%;
+  --accent-foreground-hsl:0 0% 100%;
+  --border-hsl:23 21% 79%;
+  --input-hsl:23 21% 79%;
+  --ring:273 45% 54%;
+  --primary-green:#e75e41;
+  --primary-green-hover:#ce4c34;
+}
+.zr-site :focus-visible,.zaakiy-chat :focus-visible { outline-color:#9457c5 !important; }
+.zaakiy-chat {
+  --accent:#d64a71;
+  --accent-hsl:342 62% 53%;
+  --accent-foreground-hsl:0 0% 100%;
+  --border-hsl:344 13% 78%;
+  --ring:272 46% 58%;
+  --primary-green:#d64a71;
+}
+html[dir="rtl"] .zr-site .zr-faq-item > p { padding-inline:54px 25px; }
