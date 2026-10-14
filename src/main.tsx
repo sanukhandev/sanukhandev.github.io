@@ -13,6 +13,7 @@ import "./styles/editorial.css";
 import "./styles/reference-layout.css";
 import "./styles/reference-2026.css";
 import "./styles/full-width-motion.css";
+import "./styles/hero-v3.css";
 
 createRoot(document.getElementById("root")!).render(
 	<HelmetProvider>
