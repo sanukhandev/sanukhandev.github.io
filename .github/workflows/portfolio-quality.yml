@@ -1,0 +1,36 @@
+name: Portfolio quality gates
+
+on:
+  push:
+    branches:
+      - "2026/10/dev"
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Lint, tests, types, build
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: ESLint
+        run: npm run lint
+      - name: Unit tests
+        run: npm run test
+      - name: TypeScript
+        run: npx tsc -b
+      - name: Production build
+        run: npm run build
