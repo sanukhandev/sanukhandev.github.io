@@ -66,7 +66,7 @@ describe("ErrorBoundary and lazyWithRetry unit tests", () => {
     );
 
     expect(screen.getByText("Work")).toBeInTheDocument();
-    expect(screen.getByText("Architecture")).toBeInTheDocument();
+    expect(screen.getByText("Services")).toBeInTheDocument();
     expect(screen.getByText("Notes")).toBeInTheDocument();
     expect(screen.getByText("About")).toBeInTheDocument();
   });
