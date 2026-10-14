@@ -49,64 +49,21 @@ export function ProblemsSection() {
   ];
 
   return (
-    <section className="reference-problems py-10 sm:py-12 md:py-14 lg:py-16 scroll-mt-20 border-b border-border/60">
-      <div className="container-narrow">
-        {/* Section Header */}
-        <div className="max-w-2xl mb-8 sm:mb-10">
-          <div className="flex items-center gap-2 mb-2 sm:mb-3">
-            <span className="text-[11.5px] sm:text-[12px] font-mono uppercase text-accent font-semibold tracking-[0.08em]">
-              {isArabic ? "المشكلات التي أتعامل معها" : "PROBLEMS I GET PULLED INTO"}
-            </span>
-            <span
-              aria-hidden="true"
-              className="font-mono text-[10px] text-muted-foreground border border-dashed border-border px-1.5 py-0.2 rounded transform -rotate-1 select-none"
-            >
-              /* field dispatches */
-            </span>
+    <section className="studio-problems">
+      <div className="studio-shell">
+        <header className="studio-section-heading studio-problems-intro">
+          <div>
+            <div className="studio-eyebrow"><span>{isArabic ? "المشكلات التي أتعامل معها" : "PROBLEMS I GET PULLED INTO"}</span><span aria-hidden="true">/ FIELD DISPATCHES</span></div>
+            <h2>{isArabic ? "المشكلات التي يُطلب مني التعامل معها." : "Problems I get pulled into."}</h2>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-semibold text-primary tracking-[-0.035em] leading-[1.08]">
-            {isArabic ? "المشكلات التي يُطلب مني التعامل معها." : "Problems I get pulled into."}
-          </h2>
-        </div>
-
-        {/*
-          4-Column Editorial Notebook Layout:
-          Desktop: 4 columns with dashed dividers
-          Tablet: 2 columns
-          Mobile: 1 column
-        */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6 divide-y md:divide-y-0 md:divide-x divide-dashed divide-border/80">
-          {problems.map((p, idx) => (
-            <div
-              key={p.num}
-              className={`flex flex-col justify-between group ${
-                idx > 0 ? "pt-6 md:pt-0 md:pl-6 lg:pl-6 rtl:md:pl-0 rtl:md:pr-6 rtl:lg:pr-6" : ""
-              }`}
-            >
-              <div>
-                <div className="flex items-center justify-between font-mono text-xs mb-3">
-                  <span className="font-semibold text-accent/90 tracking-wider">
-                    [ DISPATCH // {p.num} ]
-                  </span>
-                  <span className="text-[10px] text-muted-foreground border border-border/60 px-1.5 py-0.2 rounded">
-                    {p.code}
-                  </span>
-                </div>
-
-                <h3 className="text-[19px] sm:text-[20px] font-semibold text-primary mb-3 leading-snug group-hover:text-accent transition-colors duration-200">
-                  {p.title}
-                </h3>
-
-                <p className="text-[14.5px] sm:text-[15px] text-secondary leading-relaxed font-normal">
-                  {p.description}
-                </p>
-              </div>
-
-              {/* Subtle drafting tick line at bottom */}
-              <div className="pt-4 mt-4 border-t border-dashed border-border/40 font-mono text-[10px] text-muted-foreground">
-                STATUS: TRIAGED & SOLVED
-              </div>
-            </div>
+        </header>
+        <div className="studio-problem-list">
+          {problems.map((p) => (
+            <article className="studio-problem-item" key={p.num}>
+              <div className="studio-problem-index">{p.num}<span>{p.code}</span></div>
+              <div className="studio-problem-detail"><h3>{p.title}</h3><p>{p.description}</p></div>
+              <span className="studio-problem-status">STATUS: TRIAGED &amp; SOLVED</span>
+            </article>
           ))}
         </div>
       </div>
