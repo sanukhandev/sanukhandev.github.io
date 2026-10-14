@@ -98,7 +98,7 @@ export function Works() {
                 aria-label={project.title}
               >
                 <MediaPlaceholder kind="project" index={project.num} />
-                <span className="studio-project-watermark" aria-hidden="true">{project.num}</span>
+                
                 <span className="studio-project-visual-bottom">
                   <span>{project.stamp}</span>
                   <ArrowRight size={22} aria-hidden="true" className="rtl:rotate-180" />
