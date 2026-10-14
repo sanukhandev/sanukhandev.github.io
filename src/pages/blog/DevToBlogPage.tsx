@@ -270,7 +270,7 @@ export default function DevToBlogPage() {
 
       <Navbar />
 
-      <main className="min-h-screen bg-[var(--bg-primary)] pt-20 pb-16 text-[var(--text-primary)]">
+      <main className="reference-subpage reference-blog-detail-page min-h-screen bg-[var(--bg-primary)] pt-20 pb-16 text-[var(--text-primary)]">
         <div className="mx-auto grid max-w-[1550px] grid-cols-1 gap-8 px-4 sm:px-6 xl:grid-cols-[250px_minmax(0,1fr)_280px]">
           {/* Left Sticky Sidebar: Table of Contents & Quick Navigation */}
           <aside className="hidden xl:block">
