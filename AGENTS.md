@@ -64,53 +64,52 @@ The reference site visibly organizes a large personal introduction, concise serv
 
 ---
 
-## 3. Brand system — current user-approved screenshot palette
+## 3. Brand system
 
-> **2026-10-14 override:** The user explicitly supplied the Rajib Kabir Framer reference screenshot and directed use of **its colors**. This palette supersedes the original orange/ivory/black 2026-10-14 concept. Reuse its visual color roles; do **not** copy the source site's artwork, text, typography or assets. **Existing portfolio fonts are locked and must not change.**
+### 3.1 Core palette — exact values
 
-### 3.1 Palette sampled from the supplied screenshot
-
-| Role | Value | Where used |
+| Token | Value | Intended role |
 |---|---|---|
-| Main canvas | `#F5F1EC` | Site and inner-page light backgrounds |
-| Card surface | `#FBF9F7` | Cards, inputs, notes, FAQ, service/expertise panels |
-| Primary ink | `#171717` | Headlines, reading text, black engagement panels |
-| Sand highlight | `#F8E4CD` | Metrics, soft section highlights |
-| Hero peach | `#FFDDBB` | Opening hero gradient |
-| Warm pink | `#FFD9C8` | Hero and visual transition |
-| Blush pink | `#FFCED2` | Gradient endings, footer, contact |
-| Coral accent | `#F3633E` | Larger graphic accents and illustrations |
-| Readable dark coral | `#AD2A09` | Small text links and labels on light backgrounds |
-| CTA gradient (left → right) | `#FF783C` → `#FA6464` → `#E75C93` → `#BD5ACE` | Primary CTAs and ZaakiyV3RSE brand accents, used sparingly |
+| `--color-orange` | `#D5360C` | Primary brand accent; large statement type, ornamentation, CTA fills |
+| `--color-ivory` | `#E6D5BD` | Default warm canvas, cards, light sections, dark-section content |
+| `--color-black` | `#101010` | Primary readable text, navigation, dark blocks, borders |
 
-The image is low-resolution, so these are **representative sampled/normalized colors**, not claimed to be original Framer design tokens. Keep exact shared values in `src/styles/reference-2026.css`; global tokens in `src/styles/editorial.css` and `src/index.css` must stay in sync. The ZaakiyV3RSE wordmark **retains its existing Anta font**; only brand color treatment changes.
+**Support colors (restricted accessibility exceptions, not new brand colors):**
 
-### 3.2 Accessibility / contrast
+- `--color-white: #FFFFFF` — text **inside orange-filled controls**. The three fixed brand colors alone cannot provide AA contrast for ordinary text over an orange fill.
+- `--color-orange-ink: #AD2A09` — a darker value of the *same brand hue* for small orange links/labels against ivory, when a non-black accent text treatment is essential.
+- Transparent overlays of brand colors are allowed only after the resulting composite contrast has been verified. Do not assume opacity produces an accessible text color.
 
-| Combination | Approx. contrast | Instruction |
+### 3.2 Measured WCAG contrast ratios
+
+Computed using the WCAG relative-luminance contrast formula; measurements are approximate to two decimal places.
+
+| Foreground / background pair | Ratio | Permitted use |
 |---|---:|---|
-| `#171717` on `#F5F1EC` | 15.94:1 | Readable copy on canvas |
-| `#171717` on `#FBF9F7` | 17.07:1 | Readable copy on cards |
-| `#AD2A09` on `#F5F1EC` | 6.00:1 | Accessible small colored labels/links |
-| `#F3633E` on `#F5F1EC` | 2.80:1 | **Not for small text** |
-| `#171717` on `#FF783C` | 6.83:1 | Accessible dark labels on gradient start |
-| `#171717` on `#BD5ACE` | 4.71:1 | Accessible dark labels on gradient end |
-| White on `#F3633E` | 3.15:1 | **Not for small CTA labels** |
+| Soft black `#101010` on warm ivory `#E6D5BD` | **13.24:1** | All normal text, links, inputs, headings; preferred light theme |
+| Warm ivory on soft black | **13.24:1** | All normal text and headings on dark sections |
+| Orange `#D5360C` on warm ivory | **3.35:1** | **Large text only** (WCAG AA large-text threshold) and qualifying graphics, not normal copy |
+| Orange on soft black | **3.95:1** | **Large text only** and qualifying graphics, not normal copy |
+| Soft black on orange | **3.95:1** | Large text only; do not use for small button labels |
+| Warm ivory on orange | **3.35:1** | Large text only; do not use for normal button labels |
+| White `#FFFFFF` on orange | **4.81:1** | Normal button/CTA text: passes AA; does not meet AAA normal-text contrast |
+| Dark orange `#AD2A09` on warm ivory | **4.70:1** | Optional normal-sized orange-toned links/labels: passes AA |
+| Ivory on white | **1.44:1** | **Never** for text or meaningful controls |
 
-Keep ordinary text at WCAG 2.2 AA ≥4.5:1, meaningful focus/controls ≥3:1, and evaluate contrast throughout any gradient. Use dark near-black text on bright gradient CTAs; when white text is required use a dark-coral fill (`#AD2A09`).
+WCAG 2.2 AA: target **at least 4.5:1 for ordinary text**, **3:1 for large text** (at least ~24px regular or ~18.66px bold) and **3:1 for meaningful non-text UI component boundaries and states**. Color alone must not communicate an interactive state.
 
-### 3.3 Application rules
+### 3.3 Approved combinations
 
-- Backgrounds and navigation: predominantly warm off-white, as in the supplied screenshot. Cards should be distinguishable with near-white surfaces and subtle neutral borders.
-- Hero and contact: soft **peach → blush** gradients; avoid introducing unrelated teal/green/purple surfaces. Purple may appear **only as the deliberate endpoint** of the CTA/Zaakiy gradient.
-- Projects: let real approved imagery lead; until available, keep clearly labeled conceptual placeholders rather than fabricating product screenshots.
-- ZaakiyV3RSE brand + portfolio assistant: use the same sampled coral/rose/violet family consistently; **do not change their fonts or API behavior**.
-- Existing HTML content, bilingual translations, engineering case-study data, slugs, SEO/analytics and route behavior are invariant.
-- Keep the current layout static. Build scroll and hover animation in a separate user-approved phase rather than bundling it into color work.
+- Default page: ivory background + black text. Orange reserved for **large** highlighted words, dividers, shapes and button fills.
+- Dark editorial panel: black background + ivory text; orange for oversize numerals, emphatic display fragments and icons.
+- Orange CTA button: orange fill + white text; ensure visible keyboard focus ring and a different hover/pressed state; no ivory text at ordinary button size.
+- Underlined standard text link on ivory: black or `--color-orange-ink`; orange at its original hex is **not** valid for 16px text here.
+- On imagery, put text on an opaque black/ivory surface or a contrast-tested overlay; never assume the image affords contrast.
+- Do not add gradients, pastels, neon hues, purple or random gray panels. A color decision is either one of these roles or must be documented as an explicit accessibility exception.
 
-### 3.4 Target distribution
+### 3.4 Color distribution target
 
-Approximately 75–85% canvas/card neutrals, 10–20% peach/sand/blush, and up to 5–10% bright gradient/coral depending on the section. No green-dominant theme, saturated neon decoration, invented client brand colors or unrelated visual palettes.
+For the main light experience: approximately **60–70% ivory**, **25–35% black**, **5–10% orange**. This is a visual guideline, not a pixel test. Alternate full-bleed black chapters to introduce editorial rhythm. Orange should be striking because it is scarce.
 
 ---
 
