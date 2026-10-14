@@ -25,12 +25,14 @@ export function BrushRevealPortrait({ className = "", alt, ariaLabel, mirrored =
   const pointsRef = useRef<BrushPoint[]>([]);
   const [mask, setMask] = useState<string>("");
   const [expanded, setExpanded] = useState(false);
+  const [hasInteracted, setHasInteracted] = useState(false);
 
   const paint = useCallback((clientX: number, clientY: number, rect: DOMRect) => {
     const pointerX = clientX - rect.left;
     const x = mirrored ? rect.width - pointerX : pointerX;
     const y = clientY - rect.top;
     if (x < 0 || y < 0 || x > rect.width || y > rect.height) return;
+    setHasInteracted(true);
 
     const previous = pointsRef.current.at(-1);
     const distance = previous ? Math.hypot(x - previous.x, y - previous.y) : Infinity;
@@ -85,9 +87,15 @@ export function BrushRevealPortrait({ className = "", alt, ariaLabel, mirrored =
       }}
       onPointerLeave={reset}
       onPointerDown={(event) => {
-        if (event.pointerType === "touch") setExpanded(true);
+        if (event.pointerType === "touch") {
+          setHasInteracted(true);
+          setExpanded(true);
+        }
       }}
-      onFocus={() => setExpanded(true)}
+      onFocus={() => {
+        setHasInteracted(true);
+        setExpanded(true);
+      }}
       onBlur={reset}
     >
       <img
@@ -102,9 +110,9 @@ export function BrushRevealPortrait({ className = "", alt, ariaLabel, mirrored =
         className="hero-brush-avatar__photo"
       />
       <motion.img
-        src={portraitSrc}
-        srcSet={portraitSrcSet}
-        sizes={portraitSizes}
+        src={hasInteracted ? portraitSrc : undefined}
+        srcSet={hasInteracted ? portraitSrcSet : undefined}
+        sizes={hasInteracted ? portraitSizes : undefined}
         alt=""
         aria-hidden="true"
         width={900}

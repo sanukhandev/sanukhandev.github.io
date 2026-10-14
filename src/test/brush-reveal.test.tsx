@@ -8,11 +8,14 @@ describe("BrushRevealPortrait", () => {
     const images = container.querySelectorAll("img");
     expect(images).toHaveLength(2);
     expect(images[0]).toHaveAttribute("src", "/hero-avatar-cutout.avif");
-    expect(images[1]).toHaveAttribute("src", "/hero-avatar-cutout.avif");
+    expect(images[1]).not.toHaveAttribute("src");
     expect(images[0]).toHaveAttribute("srcset", expect.stringContaining("/hero-avatar-cutout-360.avif 360w"));
-    expect(images[1]).toHaveAttribute("srcset", expect.stringContaining("/hero-avatar-cutout-720.avif 720w"));
+    expect(images[1]).not.toHaveAttribute("srcset");
     expect(images[0]).toHaveAttribute("alt", "Portrait of Sanu Khan");
     expect(images[1]).toHaveAttribute("aria-hidden", "true");
+    fireEvent.focus(screen.getByRole("group"));
+    expect(images[1]).toHaveAttribute("src", "/hero-avatar-cutout.avif");
+    expect(images[1]).toHaveAttribute("srcset", expect.stringContaining("/hero-avatar-cutout-720.avif 720w"));
     expect(container.querySelector("canvas")).toBeNull();
   });
 
