@@ -1,4 +1,6 @@
 import { type FormEvent, useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
+import { BrushRevealPortrait } from "@/components/ui/BrushRevealPortrait";
 import { Link } from "react-router-dom";
 import { ArrowRight, ArrowUpRight, ChevronDown, Code2, Boxes, Cloud, CircuitBoard, GitBranch, Mail, MapPin } from "lucide-react";
 import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
@@ -11,36 +13,98 @@ const join = (isArabic: boolean, en: string, ar: string) => isArabic ? ar : en;
 export function ReferenceHero() {
   const { locale } = useLocale();
   const ar = locale === "ar";
+  const reducedMotion = useReducedMotion();
+
+  const enter = (delay: number, y = 20) => ({
+    initial: reducedMotion ? false : { opacity: 0, y },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.7, delay: reducedMotion ? 0 : delay, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
+  });
+
   return (
-    <section id="home" className="zr-hero" aria-labelledby="zr-hero-title">
-      <div className="zr-hero-atmosphere" aria-hidden="true" />
-      <div className="zr-hero-content zr-shell">
-        <div className="zr-hero-presentation">
-          <div className="zr-hero-type zr-hero-type-left" aria-hidden="true">
-            <span>{join(ar, "Building what", "أبني ما")}</span>
-            <span>{join(ar, "matters.", "يهم.")}</span>
-          </div>
-          <h1 id="zr-hero-title" className="zr-hero-heading">
-            {ar ? <>أصمم الأنظمة <strong>لأصعب تحديات الأعمال.</strong></> : <>I design systems for <strong>real business problems.</strong></>}
+    <section id="home" className="zr-hero zr-hero-v3" aria-labelledby="zr-hero-title">
+      <div className="zr-hero-three-column zr-shell">
+        <div className="zr-hero-introduction">
+          <motion.p className="zr-hero-v3-eyebrow" {...enter(0.05)}>
+            <span className="zr-hero-v3-accent-line" aria-hidden="true" />
+            {join(ar, "HELLO, I'M SANU KHAN", "مرحباً، أنا سانو خان")}
+          </motion.p>
+          <h1 id="zr-hero-title" className="zr-hero-v3-title">
+            <motion.span {...enter(0.13)}>
+              {join(ar, "A Solution", "معماري حلول")}
+            </motion.span>
+            <motion.span {...enter(0.21)}>
+              {join(ar, "Architect", "وهندسة منصات")}
+            </motion.span>
+            <motion.span className="zr-hero-v3-highlight" {...enter(0.31)}>
+              {join(ar, "who builds", "أبني ما")}
+            </motion.span>
+            <motion.span className="zr-hero-v3-highlight" {...enter(0.4)}>
+              {join(ar, "what matters.", "يهم حقاً.")}
+            </motion.span>
           </h1>
-          <div className="zr-portrait-frame">
-            <MediaPlaceholder kind="portrait" className="zr-portrait" />
-          </div>
-          <div className="zr-hero-type zr-hero-type-right" aria-hidden="true">
-            <span>{join(ar, "Think beyond", "نفكر خارج")}</span>
-            <span>{join(ar, "the code.", "الكود.")}</span>
-          </div>
+          <motion.p className="zr-hero-v3-summary" {...enter(0.49)}>
+            {join(ar,
+              "I design scalable systems, solve complex problems, and turn ideas into real-world software solutions.",
+              "أصمم أنظمة قابلة للتوسع، وأحل التحديات المعقدة، وأحوّل الأفكار إلى حلول برمجية واقعية."
+            )}
+          </motion.p>
+          <motion.div className="zr-hero-v3-actions" {...enter(0.56)}>
+            <a className="zr-hero-v3-action-primary" href="#work">
+              {join(ar, "View My Work", "شاهد أعمالي")}
+              <ArrowRight size={18} aria-hidden="true" className="rtl:rotate-180" />
+            </a>
+            <a className="zr-hero-v3-action-secondary" href="/Sanu%20Khan%20-%20Resume.pdf" download>
+              {join(ar, "Download Resume", "تحميل السيرة الذاتية")}
+              <ArrowUpRight size={17} aria-hidden="true" />
+            </a>
+          </motion.div>
+          <motion.a className="zr-hero-v3-scroll" href="#services" {...enter(0.7)}>
+            <span>{join(ar, "SCROLL TO EXPLORE", "مرّر للاستكشاف")}</span>
+            <span className="zr-hero-v3-scroll-line" aria-hidden="true" />
+          </motion.a>
         </div>
-        <div className="zr-hero-bottom">
-          <p>{join(ar,
-            "Software engineering, architecture and integration for production systems that need to survive real-world complexity.",
-            "العمارة والتكامل وهندسة المنصات لأنظمة إنتاجية تتحمل تعقيدات العالم الحقيقي."
-          )}</p>
-          <div className="zr-hero-actions">
-            <a href="#work" className="zr-button zr-button-primary">{join(ar, "Explore my work", "استكشف أعمالي")} <ArrowUpRight size={18} aria-hidden="true" /></a>
-            <a href="#contact" className="zr-button zr-button-subtle">{join(ar, "Let's talk", "لنتحدث")} <ArrowRight size={18} aria-hidden="true" /></a>
+
+        <motion.div className="zr-hero-v3-person" {...enter(0.22, 28)}>
+          <BrushRevealPortrait
+            alt={join(ar, "Portrait of Sanu Khan wearing a beige blazer", "صورة سانو خان بسترة بيج")}
+          />
+          <div className="zr-hero-v3-paint-label" aria-hidden="true">
+            {join(ar, "Hover to see me in color", "مرّر لرؤية الألوان")}
+            <span className="zr-hero-v3-hand-arrow">↙</span>
           </div>
-        </div>
+        </motion.div>
+
+        <motion.aside className="zr-hero-v3-details" aria-label={join(ar, "Professional summary", "الملخص المهني")} {...enter(0.35)}>
+          <div className="zr-hero-v3-detail">
+            <span className="zr-hero-v3-detail-label">
+              <span className="zr-hero-v3-accent-line" aria-hidden="true" />
+              {join(ar, "CURRENTLY", "حالياً")}
+            </span>
+            <h2>{join(ar, "Solution Architect", "معماري حلول")}</h2>
+            <p>{join(ar, "Designing scalable solutions for real-world impact.", "أصمم حلولاً قابلة للتوسع ذات أثر واقعي.")}</p>
+          </div>
+          <div className="zr-hero-v3-detail">
+            <span className="zr-hero-v3-detail-label">
+              <MapPin size={19} aria-hidden="true" />
+              {join(ar, "BASED IN", "الموقع")}
+            </span>
+            <h3>{join(ar, "Dubai, UAE", "دبي، الإمارات")}</h3>
+            <p>{join(ar, "Building global solutions from here.", "أبني حلولاً عالمية من هنا.")}</p>
+          </div>
+          <div className="zr-hero-v3-detail">
+            <span className="zr-hero-v3-detail-label">
+              <CircuitBoard size={19} aria-hidden="true" />
+              {join(ar, "FOCUS AREAS", "مجالات التركيز")}
+            </span>
+            <div className="zr-hero-v3-focus">
+              {(ar
+                ? ["تصميم الأنظمة", "العمارة السحابية", "هندسة الخلفيات", "الأنظمة القابلة للتوسع"]
+                : ["System Design", "Cloud Architecture", "Backend Engineering", "Scalable Solutions"]
+              ).map((item) => <span key={item}>{item}</span>)}
+            </div>
+          </div>
+        </motion.aside>
       </div>
     </section>
   );
