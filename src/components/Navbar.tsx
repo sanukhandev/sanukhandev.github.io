@@ -135,7 +135,7 @@ function Navbar() {
     <header
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-all duration-200",
-        isHomePage && !scrolled && "reference-nav-dark",
+        isHomePage && "reference-nav-pastel",
         scrolled
           ? "border-b border-border/80 bg-background/95 backdrop-blur-md shadow-xs"
           : "border-b border-transparent bg-transparent"
