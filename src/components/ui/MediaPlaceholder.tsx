@@ -29,6 +29,11 @@ export function MediaPlaceholder({
         {portrait ? "PORTRAIT / 001" : `FRAME / ${index}`}
       </span>
       <span className="editorial-placeholder__corners" aria-hidden="true" />
+      <span className="editorial-placeholder__art" aria-hidden="true">
+        <span className="editorial-placeholder__module" />
+        <span className="editorial-placeholder__module" />
+        <span className="editorial-placeholder__module" />
+      </span>
       <span className="editorial-placeholder__glyph" aria-hidden="true">
         {portrait ? "SK" : index}
       </span>
