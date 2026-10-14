@@ -1,5 +1,6 @@
 import { memo } from "react";
 import Navbar from "@/components/Navbar";
+import { SectionReveal } from "@/components/ui/SectionReveal";
 import SeoMeta from "@/components/SeoMeta";
 import LocaleSwitchSkeleton from "@/components/LocaleSwitchSkeleton";
 import { useLocale } from "@/hooks/use-locale";
@@ -62,17 +63,17 @@ const Index = () => {
 
       <main id="main-content" className="pt-[72px] sm:pt-20">
         <ReferenceHero />
-        <ReferenceProof />
-        <ReferenceServices />
-        <ReferenceExpertise />
-        <ReferenceProjects />
-        <ReferenceWriting />
-        <ReferenceZaakiy />
-        <ReferenceEngagement />
-        <ReferenceProcess />
-        <ReferenceAbout />
-        <ReferenceFaq />
-        <ReferenceContact />
+        <SectionReveal><ReferenceProof /></SectionReveal>
+        <SectionReveal><ReferenceServices /></SectionReveal>
+        <SectionReveal><ReferenceExpertise /></SectionReveal>
+        <SectionReveal><ReferenceProjects /></SectionReveal>
+        <SectionReveal><ReferenceWriting /></SectionReveal>
+        <SectionReveal><ReferenceZaakiy /></SectionReveal>
+        <SectionReveal><ReferenceEngagement /></SectionReveal>
+        <SectionReveal><ReferenceProcess /></SectionReveal>
+        <SectionReveal><ReferenceAbout /></SectionReveal>
+        <SectionReveal><ReferenceFaq /></SectionReveal>
+        <SectionReveal><ReferenceContact /></SectionReveal>
         <ReferenceFooter />
       </main>
     </div>
