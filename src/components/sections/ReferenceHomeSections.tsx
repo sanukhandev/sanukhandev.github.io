@@ -123,7 +123,7 @@ export function ReferenceExpertise() {
   const { skills } = useSiteContent();
   const clusters = skills.clusters.slice(0, 4);
   return (
-    <section id="expertise" className="zr-section zr-expertise">
+    <section id="architecture" className="zr-section zr-expertise">
       <div className="zr-shell">
         <header className="zr-section-heading zr-centered-heading">
           <p className="zr-kicker">{join(ar, "EXPERTISE", "الخبرات")}</p>
@@ -183,6 +183,40 @@ export function ReferenceProjects() {
           ))}
         </div>
         <div className="zr-projects-footer"><Link to="/projects" className="zr-text-action">{join(ar, "View all projects", "عرض جميع المشاريع")} <ArrowUpRight size={20} aria-hidden="true" /></Link></div>
+      </div>
+    </section>
+  );
+}
+
+export function ReferenceWriting() {
+  const { locale } = useLocale();
+  const ar = locale === "ar";
+  const { articles } = useSiteContent();
+  const posts = articles.slice(0,3);
+  return (
+    <section id="writing" className="zr-section zr-writing">
+      <div className="zr-shell">
+        <header className="zr-section-heading zr-centered-heading">
+          <p className="zr-kicker">{join(ar,"ENGINEERING JOURNAL","الملاحظات الهندسية")}</p>
+          <h2>{join(ar,"Latest Thinking", "أحدث الأفكار")}</h2>
+          <p>{join(ar,"Notes on architecture, data, programming and the decisions behind reliable software.","ملاحظات حول العمارة والبيانات والبرمجة والقرارات وراء الأنظمة الموثوقة.")}</p>
+        </header>
+        <div className="zr-writing-list">
+          {posts.map((post,i)=>(
+            <article key={post.localPath || post.title} className="zr-writing-item">
+              <Link to={post.localPath} className="zr-writing-image" aria-label={post.title}>
+                <MediaPlaceholder kind="article" index={String(i+1).padStart(2,"0")} />
+              </Link>
+              <div className="zr-writing-text">
+                <span className="zr-card-label">{post.category} / 0{i+1}</span>
+                <h3><Link to={post.localPath}>{post.title}</Link></h3>
+                <p>{post.excerpt}</p>
+                <Link to={post.localPath} className="zr-text-action">{join(ar,"Read article","اقرأ المقال")} <ArrowUpRight size={17} aria-hidden="true" /></Link>
+              </div>
+            </article>
+          ))}
+        </div>
+        <div className="zr-writing-all"><Link to="/blog" className="zr-text-action">{join(ar,"Browse all articles","تصفح جميع المقالات")} <ArrowUpRight size={18} aria-hidden="true" /></Link></div>
       </div>
     </section>
   );
