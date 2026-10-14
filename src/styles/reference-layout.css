@@ -697,6 +697,7 @@ html[dir="rtl"] .reference-home #about blockquote {
   .reference-home #home .editorial-hero-title { font-size:clamp(31px,7.4vw,40px) !important; }
   .reference-home #home .editorial-hero-title .inline-flex {
     display:inline; white-space:normal; overflow-wrap:normal;
+    font-size:.9em;
   }
   .reference-home #home .editorial-hero-copy > div[class*="border-t"] { padding-top:16px; }
   .reference-home #home .editorial-hero-copy a[href="#work"],
