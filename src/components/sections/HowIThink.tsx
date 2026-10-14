@@ -52,7 +52,7 @@ export function HowIThink() {
   ];
 
   return (
-    <section className="py-10 sm:py-12 md:py-14 lg:py-16 scroll-mt-20 border-b border-border/60">
+    <section className="reference-services py-10 sm:py-12 md:py-14 lg:py-16 scroll-mt-20 border-b border-border/60">
       <div className="container-narrow">
         {/* Top Editorial Header */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 lg:gap-14 mb-8 sm:mb-10">
