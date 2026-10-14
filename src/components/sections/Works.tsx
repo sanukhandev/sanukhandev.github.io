@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { useLocale } from "@/hooks/use-locale";
 import { getLocalizedCaseStudy } from "@/data/caseStudies";
+import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
 
 export function Works() {
   const { locale } = useLocale();
@@ -106,14 +107,18 @@ export function Works() {
         </div>
 
         {/* 3-Column Structured Project Blocks with Tactile Editorial Details */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-7 lg:gap-8">
+        <div className="selected-work-grid grid grid-cols-1 gap-7 lg:gap-8">
           {projects.map((project, idx) => (
             <article
               key={project.slug}
-              className={`group flex flex-col justify-between rounded-xl border border-dashed border-border/90 bg-card/60 p-6 sm:p-7 transition-all duration-200 ease-out hover:border-accent/60 hover:bg-card/90 active:scale-[0.99] relative ${
+              className={`editorial-work-card group flex flex-col justify-between rounded-xl border border-dashed border-border/90 bg-card/60 p-6 sm:p-7 transition-all duration-200 ease-out hover:border-accent/60 hover:bg-card/90 active:scale-[0.99] relative ${
                 idx === 1 ? "md:-translate-y-1.5" : ""
               }`}
             >
+              <div className="editorial-work-preview">
+                <MediaPlaceholder kind="project" index={project.num} />
+              </div>
+              <div className="editorial-work-content">
               {/* Corner Drafting Marks */}
               <span
                 aria-hidden="true"
@@ -208,6 +213,7 @@ export function Works() {
                   <span>{isArabic ? "عرض دراسة الحالة" : "View case study"}</span>
                   <ArrowRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-1 rtl:group-hover:-translate-x-1 rtl:rotate-180" />
                 </Link>
+              </div>
               </div>
             </article>
           ))}
