@@ -54,7 +54,7 @@ header.fixed.reference-nav-pastel {
 }
 header.fixed.reference-nav-pastel :is(.text-primary,.text-secondary) { color:#171717; }
 header.fixed.reference-nav-pastel .text-accent { color:#ad2a09; }
-header.fixed.reference-nav-pastel :is(button,a):focus-visible { outline-color:#9959bd !important; }
+header.fixed.reference-nav-pastel :is(button,a):focus-visible { outline-color:#bd5ace !important; }
 header.fixed.reference-nav-pastel a[class*="bg-accent"] { background:var(--zr-gradient); color:#fff; border-radius:8px; }
 
 /* HERO: an expansive but tidy portrait-led soft peach composition. */
@@ -271,12 +271,12 @@ header.fixed.reference-nav-pastel a[class*="bg-accent"] { background:var(--zr-gr
  * retaining the original font-family and font weights defined in index.css. */
 .brand-zaakiy,.brand-zaakiyv3rse,
 html.dark .brand-zaakiy, html.dark .brand-zaakiyv3rse {
-  background:linear-gradient(110deg,#c74424 0%,#e75e46 30%,#d24581 66%,#8551be 100%);
+  background:linear-gradient(110deg,#c34421 0%,#f3633e 30%,#e75c93 66%,#bd5ace 100%);
   -webkit-background-clip:text; background-clip:text;
   -webkit-text-fill-color:transparent; color:transparent;
 }
 html.dark .brand-zaakiy, html.dark .brand-zaakiyv3rse {
-  background:linear-gradient(110deg,#ffb089 0%,#fc8c6f 30%,#f28ac1 66%,#b9a0ff 100%);
+  background:linear-gradient(110deg,#ffddb4 0%,#ff9c74 30%,#f18bba 66%,#dbacef 100%);
   -webkit-background-clip:text; background-clip:text;
   -webkit-text-fill-color:transparent; color:transparent;
 }
@@ -379,18 +379,18 @@ html[dir="rtl"] .zr-site .zr-faq-item > p { padding:0 54px 25px 25px; }
 .zaakiy-chat {
  --text-primary:#171717;
  --text-secondary:#53454c;
- --accent-readable:#a93639;
+ --accent-readable:#ad2a09;
 }
 .zaakiy-chat button[class*="bg-accent"] {
- background:linear-gradient(115deg,#e65835,#e45d8e 58%,#9256c3);
- border-color:#d56280;
+ background:linear-gradient(115deg,#ff783c,#e75c93 58%,#bd5ace);
+ border-color:#e75c93;
  color:#fff;
 }
-.zaakiy-chat .text-accent { color:#ab3560; }
+.zaakiy-chat .text-accent { color:#ad2a09; }
 .zaakiy-chat .border-accent\/20 { border-color:rgba(210,76,126,.22); }
 .zaakiy-chat .bg-accent\/10 { background:rgba(221,93,135,.1); }
 .zr-site .zr-project-tile:focus-visible,
-.zr-site .zr-writing-image:focus-visible { outline:3px solid #9256c3; outline-offset:4px; }
+.zr-site .zr-writing-image:focus-visible { outline:3px solid #bd5ace; outline-offset:4px; }
 
 /* Writing cards and consistent tap sizes on mobile. */
 @media(max-width:767px) {
@@ -416,14 +416,14 @@ html[dir="rtl"] .zr-site .zr-faq-item > p { padding:0 54px 25px 25px; }
   --primary-green:#e75e41;
   --primary-green-hover:#ce4c34;
 }
-.zr-site :focus-visible,.zaakiy-chat :focus-visible { outline-color:#9457c5 !important; }
+.zr-site :focus-visible,.zaakiy-chat :focus-visible { outline-color:#bd5ace !important; }
 .zaakiy-chat {
-  --accent:#d64a71;
+  --accent:#e75c93;
   --accent-hsl:342 62% 53%;
   --accent-foreground-hsl:0 0% 100%;
   --border-hsl:344 13% 78%;
   --ring:272 46% 58%;
-  --primary-green:#d64a71;
+  --primary-green:#e75c93;
 }
 html[dir="rtl"] .zr-site .zr-faq-item > p { padding-inline:54px 25px; }
 
@@ -443,3 +443,30 @@ header.reference-nav-pastel a[class*="bg-accent"] { color:#171717; }
 .zr-site .zr-zaakiy-display { background:radial-gradient(circle at 48% 42%,#ffd296,#ffd9c8 46%,#ffced2 100%); }
 .zr-site .zr-zaakiy-orbit span:nth-child(3) { background:#bd5ace; }
 .zr-site .zr-engagement-options { background:#101010; }
+
+/* Component accents reuse the sampled reference, including the floating Zaakiy assistant.
+   The existing Anta/Raleway/Almarai font rules are intentionally unmodified. */
+.zaakiy-chat {
+  --accent:#ad2a09;
+  --accent-hsl:12 90% 36%;
+  --primary-green:#ad2a09;
+  --ring:18 100% 62%;
+}
+.zaakiy-chat button[class*="bg-accent"] {
+  background:linear-gradient(105deg,#ff783c 0%,#fa6464 34%,#e75c93 69%,#bd5ace 100%);
+  color:#171717;
+}
+.zaakiy-chat .bg-accent\/10 { background:rgba(248,228,205,.56); }
+.zaakiy-chat .text-accent { color:#ad2a09; }
+.zaakiy-chat .border-accent\/20 { border-color:rgba(173,42,9,.22); }
+html.dark .zaakiy-chat {
+  --text-primary:#f5f1ec;
+  --text-secondary:#d9c8be;
+  --accent:#ffb28b;
+  --accent-hsl:19 100% 77%;
+  --primary-green:#ffb28b;
+}
+html.dark .zaakiy-chat .text-accent { color:#ffb28b; }
+.zr-site .zr-process-step:nth-child(odd) { background:linear-gradient(120deg,#ffd296 0%,#ffddb4 58%,#ffd9c8 100%); }
+.zr-site .zr-service-card-3 .zr-service-media { background:linear-gradient(145deg,#ffd296,#ffccd1); }
+.zr-site .zr-writing-item:nth-child(2) .editorial-placeholder { background:linear-gradient(125deg,#f8e4cd,#ffccd1); }
