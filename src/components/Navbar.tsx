@@ -45,6 +45,7 @@ function Navbar() {
 
     const sectionToNavMap: Record<string, string> = {
       home: "#home",
+      services: "#services",
       work: "#work",
       architecture: "#architecture",
       writing: "#writing",
@@ -125,10 +126,10 @@ function Navbar() {
   }, [open]);
 
     const navItems = [
-    { label: isArabic ? "الأعمال" : "Work", href: "#work", num: "01" },
-    { label: isArabic ? "المعمارية" : "Architecture", href: "#architecture", num: "02" },
-    { label: isArabic ? "الملاحظات" : "Notes", href: "#writing", num: "03" },
-    { label: isArabic ? "نبذة عني" : "About", href: "#about", num: "04" },
+    { label: isArabic ? "الخدمات" : "Services", href: "#services", num: "01" },
+    { label: isArabic ? "الأعمال" : "Work", href: "#work", num: "02" },
+    { label: isArabic ? "نبذة عني" : "About", href: "#about", num: "03" },
+    { label: isArabic ? "الملاحظات" : "Notes", href: "#writing", num: "04" },
   ];
 
   return (
