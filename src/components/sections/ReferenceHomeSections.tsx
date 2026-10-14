@@ -15,10 +15,6 @@ export function ReferenceHero() {
     <section id="home" className="zr-hero" aria-labelledby="zr-hero-title">
       <div className="zr-hero-atmosphere" aria-hidden="true" />
       <div className="zr-hero-content zr-shell">
-        <div className="zr-hero-overline">
-          <span className="zr-availability"><span aria-hidden="true" className="zr-availability-dot" />{join(ar, "SOLUTION ARCHITECT · DUBAI, UAE", "معماري حلول · دبي، الإمارات")}</span>
-          <span className="zr-hero-year">© 2026 / SANUKHAN.DEV</span>
-        </div>
         <div className="zr-hero-presentation">
           <div className="zr-hero-type zr-hero-type-left" aria-hidden="true">
             <span>{join(ar, "Building what", "أبني ما")}</span>
