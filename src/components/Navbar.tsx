@@ -1,4 +1,4 @@
-import { memo, useEffect, useState } from "react";
+import { memo, useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Menu, X, Moon, Sun, ArrowRight, Github, Linkedin, Mail } from "lucide-react";
 import { useSiteContent } from "@/data/siteContent";
@@ -10,6 +10,8 @@ import { useLocale } from "@/hooks/use-locale";
 function Navbar() {
   const location = useLocation();
   const [open, setOpen] = useState(false);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
+  const mobileToggleRef = useRef<HTMLButtonElement>(null);
   const [scrolled, setScrolled] = useState(false);
   const [activeHref, setActiveHref] = useState("#home");
   const { theme, toggleTheme } = useTheme();
@@ -85,7 +87,44 @@ function Navbar() {
     };
   }, [open]);
 
-  const navItems = [
+  // Focus the drawer on open; trap Tab and restore focus when Escape closes it.
+  useEffect(() => {
+    if (!open) return;
+
+    const menu = mobileMenuRef.current;
+    const focusable = () =>
+      Array.from(
+        menu?.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+        ) ?? [],
+      );
+
+    focusable()[0]?.focus();
+    const handleKeyboard = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        setOpen(false);
+        mobileToggleRef.current?.focus();
+        return;
+      }
+      if (event.key !== "Tab") return;
+      const items = focusable();
+      if (!items.length) return;
+      const first = items[0];
+      const last = items[items.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+    document.addEventListener("keydown", handleKeyboard);
+    return () => document.removeEventListener("keydown", handleKeyboard);
+  }, [open]);
+
+    const navItems = [
     { label: isArabic ? "الأعمال" : "Work", href: "#work", num: "01" },
     { label: isArabic ? "المعمارية" : "Architecture", href: "#architecture", num: "02" },
     { label: isArabic ? "الملاحظات" : "Notes", href: "#writing", num: "03" },
@@ -120,6 +159,7 @@ function Navbar() {
                 <a
                   key={item.href}
                   href={isHomePage ? item.href : `/${item.href}`}
+                  aria-current={activeHref === item.href ? "location" : undefined}
                   className={cn(
                     "text-[14.5px] font-medium transition-colors hover:text-accent focus-visible:text-accent",
                     isHomePage && activeHref === item.href
@@ -187,6 +227,7 @@ function Navbar() {
               aria-label={open ? "Close menu" : "Open menu"}
               aria-expanded={open}
               aria-controls="mobile-navigation"
+              ref={mobileToggleRef}
               onClick={() => setOpen((v) => !v)}
             >
               {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -199,6 +240,10 @@ function Navbar() {
       {open && (
         <div
           id="mobile-navigation"
+          ref={mobileMenuRef}
+          role="dialog"
+          aria-modal="true"
+          aria-label={isArabic ? "القائمة الرئيسية" : "Mobile navigation"}
           className="fixed inset-0 top-[72px] sm:top-20 z-40 bg-background/98 backdrop-blur-xl border-t border-border flex flex-col justify-between p-6 sm:p-8 md:hidden overflow-y-auto animate-in fade-in slide-in-from-top-2 duration-200"
         >
             <div className="flex flex-col gap-6 pt-4">
