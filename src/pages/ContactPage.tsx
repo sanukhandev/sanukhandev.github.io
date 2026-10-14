@@ -30,7 +30,7 @@ export default function ContactPage() {
         ]}
       />
       <Navbar />
-      <main className="min-h-[100dvh] bg-background pt-20 text-foreground">
+      <main className="reference-subpage reference-contact-page min-h-[100dvh] bg-background pt-20 text-foreground">
         <section className="container-narrow section-pad">
           <h1 className="text-[38px] font-extrabold text-primary">Contact</h1>
           <p className="mt-4 max-w-3xl text-[15px] text-secondary">
