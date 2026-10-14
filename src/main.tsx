@@ -11,6 +11,7 @@ import App from "./App.tsx";
 import "./index.css";
 import "./styles/editorial.css";
 import "./styles/reference-layout.css";
+import "./styles/studio.css";
 
 createRoot(document.getElementById("root")!).render(
 	<HelmetProvider>
