@@ -2,7 +2,7 @@ import { type FormEvent, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { BrushRevealPortrait } from "@/components/ui/BrushRevealPortrait";
 import { Link } from "react-router-dom";
-import { ArrowRight, ArrowUpRight, ChevronDown, Code2, Boxes, Cloud, CircuitBoard, GitBranch, Mail, MapPin } from "lucide-react";
+import { ArrowRight, ArrowUpRight, ChevronDown, Code2, Boxes, Cloud, CircuitBoard, GitBranch, Mail, MapPin, Download } from "lucide-react";
 import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
 import { useLocale } from "@/hooks/use-locale";
 import { useSiteContent } from "@/data/siteContent";
@@ -56,7 +56,7 @@ export function ReferenceHero() {
             </a>
             <a className="zr-hero-v3-action-secondary" href="/Sanu%20Khan%20-%20Resume.pdf" download>
               {join(ar, "Download Resume", "تحميل السيرة الذاتية")}
-              <ArrowUpRight size={17} aria-hidden="true" />
+              <Download size={17} aria-hidden="true" />
             </a>
           </motion.div>
           <motion.a className="zr-hero-v3-scroll" href="#services" {...enter(0.7)}>
