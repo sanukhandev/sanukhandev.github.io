@@ -17,7 +17,7 @@ describe("ErrorBoundary and lazyWithRetry unit tests", () => {
   });
 
   afterEach(() => {
-    window.location = originalLocation;
+    (window as unknown as { location: Location }).location = originalLocation;
     vi.restoreAllMocks();
   });
 
