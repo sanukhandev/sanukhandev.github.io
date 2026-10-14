@@ -1,0 +1,277 @@
+
+/* Editorial refinement – keep AGENTS.md brand tokens and established font pairs.
+ * English: Raleway + Allura. Arabic: Almarai + Aref Ruqaa.
+ * Concept artwork is labeled; SVGs depict architectures, not product screenshots.
+ */
+
+/* Two registered portrait layers; only the portrait carries a drop shadow. */
+.zr-site .hero-brush-avatar { background:transparent; }
+.zr-site .hero-brush-avatar__photo,
+.zr-site .hero-brush-avatar__color {
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  display:block;
+  background:none!important;
+  border:0;
+  border-radius:0;
+}
+.zr-site .hero-brush-avatar__photo { filter:grayscale(1)!important; }
+.zr-site .hero-brush-avatar__color { filter:none!important; pointer-events:none; user-select:none; }
+.zr-site .hero-brush-avatar:hover { cursor:crosshair; }
+
+/* Cohesive Raleway reading and display typography. The signature script remains
+ * restrained to the existing portrait interaction note. No new font downloads. */
+.zr-site .zr-section-heading h2 {
+  font-family:var(--font-primary-en),sans-serif;
+  font-weight:750;
+  letter-spacing:-.058em;
+  line-height:1.1;
+  max-width:19ch;
+}
+.zr-site .zr-centered-heading h2 { max-width:20ch; }
+.zr-site .zr-section-heading > p:last-child {
+  max-width:66ch;
+  font-size:clamp(15px,1.25vw,18px);
+  line-height:1.73;
+}
+.zr-site .zr-section-heading .zr-kicker,
+.zr-site .zr-card-label {
+  font-family:var(--font-primary-en),sans-serif;
+  font-size:11px;
+  font-weight:750;
+  letter-spacing:.13em;
+}
+.zr-site .zr-service-card h3,
+.zr-site .zr-expertise-copy h3,
+.zr-site .zr-project-info h3,
+.zr-site .zr-writing-text h3 {
+  font-family:var(--font-primary-en),sans-serif;
+  font-weight:750;
+  letter-spacing:-.05em;
+  line-height:1.19;
+}
+.zr-site .zr-hero-v3-paint-label { font-family:var(--font-script-en),cursive; }
+
+/* Feature artwork sits in whitespace, without adding a fifth shadowed card. */
+.zr-site .zr-section-art {
+  margin:0 auto clamp(34px,4.4vw,68px);
+  position:relative;
+  max-width:min(100%,1330px);
+  text-align:center;
+}
+.zr-site .zr-section-art img {
+  display:block;
+  width:100%;
+  max-height:500px;
+  height:auto;
+  object-fit:contain;
+  margin-inline:auto;
+  background:#E6D5BD;
+  border:1px solid color-mix(in srgb,#101010 12%,#E6D5BD);
+  border-radius:8px;
+}
+.zr-site .zr-section-art figcaption,
+.zr-site .zr-zaakiy-visual figcaption {
+  text-align:end;
+  padding:11px 4px 0;
+  font-size:11px;
+  line-height:1.45;
+  letter-spacing:.045em;
+  color:#101010;
+}
+.zr-site .zr-expertise-art img { max-height:430px; }
+.zr-site .zr-project-art {
+  max-width:min(100%,1160px);
+  margin-bottom:clamp(46px,5.2vw,85px);
+}
+.zr-site .zr-project-art img {
+  object-fit:contain;
+  max-height:490px;
+}
+
+/* Services are now actual advisory/engineering offerings, not stock service tiles. */
+.zr-site .zr-service-grid {
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:clamp(15px,2vw,28px);
+}
+.zr-site .zr-service-card {
+  border-radius:9px;
+  min-height:305px;
+  overflow:hidden;
+  position:relative;
+  border:1px solid color-mix(in srgb,#101010 26%,#E6D5BD);
+  background:#E6D5BD;
+  box-shadow:none!important;
+}
+.zr-site .zr-service-card-copy {
+  min-height:305px;
+  height:100%;
+  padding:clamp(24px,2.7vw,42px);
+  position:relative;
+  z-index:1;
+}
+.zr-site .zr-service-card h3 {
+  font-size:clamp(23px,2.2vw,33px);
+  margin-top:28px;
+  max-width:18ch;
+}
+.zr-site .zr-service-card p {
+  color:#101010;
+  font-size:clamp(14px,1.12vw,16px);
+  line-height:1.7;
+  max-width:52ch;
+  opacity:.78;
+}
+.zr-site .zr-service-index {
+  position:absolute;
+  inset-inline-end:20px;
+  top:20px;
+  font:700 clamp(30px,3.5vw,53px)/1 var(--font-primary-en),sans-serif;
+  color:color-mix(in srgb,#101010 17%,#E6D5BD);
+  pointer-events:none;
+}
+.zr-site .zr-service-arrow {
+  background:none;
+  border:1px solid #101010;
+  border-radius:50%;
+  box-shadow:none!important;
+}
+.zr-site .zr-service-card:nth-child(2) {
+  background:#101010;
+  border-color:#101010;
+}
+.zr-site .zr-service-card:nth-child(2) :is(.zr-card-label,h3,p,.zr-service-arrow) { color:#E6D5BD; }
+.zr-site .zr-service-card:nth-child(2) .zr-service-arrow { border-color:#E6D5BD; }
+.zr-site .zr-service-card:nth-child(2) .zr-service-index { color:color-mix(in srgb,#E6D5BD 30%,#101010); }
+
+/* Four pillars rather than duplicating each preview placeholder. */
+.zr-site .zr-expertise-stack {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:16px;
+}
+.zr-site .zr-expertise-row {
+  display:flex;
+  flex-direction:column;
+  min-height:290px;
+  background:#E6D5BD;
+  border:1px solid color-mix(in srgb,#101010 23%,#E6D5BD);
+  border-radius:8px;
+  box-shadow:none!important;
+}
+.zr-site .zr-expertise-copy {
+  display:flex;
+  flex-direction:column;
+  min-height:290px;
+  width:100%;
+  padding:clamp(26px,3vw,45px);
+}
+.zr-site .zr-expertise-copy h3 { max-width:25ch; }
+.zr-site .zr-expertise-copy p {
+  max-width:57ch;
+  color:#101010;
+  opacity:.76;
+  line-height:1.7;
+}
+.zr-site .zr-tech-tags { padding-top:30px; }
+.zr-site .zr-tech-tags span {
+  background:transparent;
+  color:#101010;
+  border:1px solid color-mix(in srgb,#101010 28%,#E6D5BD);
+  font-size:11px;
+  letter-spacing:.01em;
+}
+.zr-site .zr-expertise-row:nth-child(3) {
+  border-inline-start:3px solid #D5360C;
+}
+.zr-site .zr-expertise-row:nth-child(4) {
+  background:color-mix(in srgb,#101010 5%,#E6D5BD);
+}
+
+/* Each case study gets its own verified-domain conceptual SVG, not mock claims. */
+.zr-site .zr-project-media { background:#E6D5BD; }
+.zr-site .zr-project-media > img {
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+  background:#E6D5BD;
+  border:0;
+}
+.zr-site .zr-project-tile:nth-child(odd) .zr-project-media > img { object-position:center; }
+.zr-site .zr-project-tile .zr-project-info p { max-width:56ch; }
+
+/* Make Dev.to's published artwork the cover. Fallback stays conceptual if a
+   cover was not published or cannot be loaded. */
+.zr-site .zr-writing-image .zr-devto-cover {
+  display:block;
+  width:100%;
+  height:100%;
+  min-height:230px;
+  object-fit:cover;
+  background:#E6D5BD;
+}
+.zr-site .zr-writing-image .editorial-placeholder { width:100%;height:100%; }
+.zr-site .zr-writing-image { position:relative; }
+
+/* Feature concept is a single image with an explicit qualification caption. */
+.zr-site .zr-zaakiy-visual {
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  margin:0;
+  aspect-ratio:auto;
+  padding:0;
+  background:#E6D5BD;
+  border:0;
+  border-radius:7px;
+  overflow:hidden;
+  color:#101010;
+}
+.zr-site .zr-zaakiy-visual img {
+  display:block;
+  width:100%;
+  height:auto;
+  max-height:560px;
+  object-fit:contain;
+  background:#E6D5BD;
+}
+.zr-site .zr-zaakiy-visual figcaption {
+  width:100%;
+  color:#101010;
+  padding:10px 14px 14px;
+  text-align:center;
+}
+.zr-site .zr-tech-strip span {
+  font-family:var(--font-primary-en),sans-serif;
+  letter-spacing:0;
+  color:#101010;
+  font-size:clamp(13px,1.35vw,18px);
+}
+.zr-site .zr-proof-label { color:#AD2A09; }
+
+html[dir="rtl"] .zr-site .zr-section-heading h2,
+html[dir="rtl"] .zr-site :is(.zr-service-card h3,.zr-expertise-copy h3,.zr-project-info h3) {
+  font-family:var(--font-primary-ar),sans-serif;
+  letter-spacing:normal!important;
+  line-height:1.4;
+}
+html[dir="rtl"] .zr-site .zr-hero-v3-paint-label {
+  font-family:var(--font-script-ar),serif;
+}
+@media(max-width:1199px) {
+  .zr-site .zr-service-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+}
+@media(max-width:767px) {
+  .zr-site .zr-service-grid,
+  .zr-site .zr-expertise-stack { grid-template-columns:1fr; }
+  .zr-site .zr-service-card,.zr-site .zr-service-card-copy { min-height:255px; }
+  .zr-site .zr-expertise-row,.zr-site .zr-expertise-copy { min-height:245px; }
+  .zr-site .zr-section-art { margin-bottom:27px; }
+  .zr-site .zr-section-art img { max-height:360px; }
+}
