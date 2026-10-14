@@ -17,9 +17,9 @@
   --surface: var(--color-ivory);
   --surface-elevated: var(--color-ivory);
   --text: var(--color-black);
-  --text-secondary: #302721;
-  --text-muted: #483e32;
-  --border: #796b58;
+  --text-secondary: #101010;
+  --text-muted: #101010;
+  --border: color-mix(in srgb,#101010 35%,#E6D5BD);
   --primary-green: var(--color-orange);
   --primary-green-hover: #ad2a09;
   --primary-soft: color-mix(in srgb, var(--color-orange) 9%, var(--color-ivory));
@@ -66,8 +66,8 @@ html.dark {
   --surface-elevated: color-mix(in srgb, var(--color-ivory) 9%, var(--color-black));
   --text: var(--color-ivory);
   --text-secondary: #e6d5bd;
-  --text-muted: #d4c2a7;
-  --border: #a59681;
+  --text-muted: #E6D5BD;
+  --border: color-mix(in srgb,#101010 32%,#E6D5BD);
   --primary-green: var(--color-orange);
   --primary-green-hover: #ad2a09;
   --primary-soft: color-mix(in srgb, var(--color-orange) 18%, var(--color-black));
@@ -143,16 +143,16 @@ a:hover { text-decoration-thickness: 2px; }
 .wordmark, .font-display { font-family: var(--font-primary-en); }
 html[lang="ar"] .font-display { font-family: var(--font-primary-ar); }
 .system-backdrop { background: var(--color-black); }
-.system-grid { background-image: linear-gradient(color-mix(in srgb, var(--color-black) 10%, transparent) 1px, transparent 1px), linear-gradient(90deg,color-mix(in srgb, var(--color-black) 10%, transparent) 1px, transparent 1px); background-size: 72px 72px; animation: none; }
+.system-grid { background-image: none; background-size: 72px 72px; animation: none; }
 .system-connector { background: var(--color-orange); }
 .surface-anchor {
   background: var(--color-black);
   --text-primary: var(--color-ivory);
   --text-secondary: var(--color-ivory);
   --text-muted: var(--color-ivory);
-  --border: #b19f85;
+  --border: color-mix(in srgb,#101010 30%,#E6D5BD);
   --bg-primary: var(--color-black);
-  --bg-secondary: #202020;
+  --bg-secondary: #101010;
   --accent: var(--color-orange);
   --accent-readable: var(--color-ivory);
 }
@@ -249,12 +249,12 @@ html[dir="rtl"] #home .grid.grid-cols-2 > div { border-right:0; border-left:1px 
   content:"";
   position:absolute;
   inset:0;
-  background:linear-gradient(135deg,transparent 49.9%, color-mix(in srgb,var(--color-ivory) 20%, transparent) 50%, transparent 50.1%);
+  background:none;
   pointer-events:none;
 }
 .editorial-placeholder--portrait { aspect-ratio:4/5; background:color-mix(in srgb,var(--color-black) 8%,var(--color-ivory)); color:var(--color-black); border-color:var(--color-black); }
 .editorial-placeholder--portrait::before { border-color:color-mix(in srgb,var(--color-black) 25%,transparent); }
-.editorial-placeholder--portrait::after { background:linear-gradient(135deg, transparent 49.9%,color-mix(in srgb,var(--color-black) 17%,transparent) 50%,transparent 50.1%); }
+.editorial-placeholder--portrait::after { background:none; }
 .editorial-placeholder__index { position:absolute; top:30px; inset-inline-start:34px; font:600 12px/1 var(--font-primary-en); letter-spacing:.13em; z-index:1; }
 .editorial-placeholder__glyph { font:700 clamp(64px, 12vw, 176px)/1 var(--font-primary-en); letter-spacing:-.10em; opacity:.78; z-index:1; }
 .editorial-placeholder--portrait .editorial-placeholder__glyph { font-size:clamp(90px,14vw,230px); color:var(--color-orange); }
@@ -269,7 +269,7 @@ html[dir="rtl"] #home .grid.grid-cols-2 > div { border-right:0; border-left:1px 
 #about blockquote .quote-handwritten { font-size:clamp(40px,4vw,64px); color:var(--text-primary); }
 #contact { background:var(--color-black); color:var(--color-ivory);
   --text-primary:var(--color-ivory);--text-secondary:var(--color-ivory);--text-muted:var(--color-ivory);
-  --bg-primary:var(--color-black);--bg-secondary:var(--color-black);--border:#b3a18a;
+  --bg-primary:var(--color-black);--bg-secondary:var(--color-black);--border:color-mix(in srgb,#101010 30%,#E6D5BD);
   --accent-readable:var(--color-ivory);
 }
 #contact > div > div { background:none; border:0; border-radius:0; padding:0; }
