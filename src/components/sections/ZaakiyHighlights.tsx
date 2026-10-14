@@ -17,7 +17,7 @@ export function ZaakiyHighlights() {
   ];
 
   return (
-    <section id="zaakiy" className="py-10 sm:py-12 md:py-14 lg:py-16 scroll-mt-20 border-b border-border/60">
+    <section id="zaakiy" className="reference-lab py-10 sm:py-12 md:py-14 lg:py-16 scroll-mt-20 border-b border-border/60">
       <div className="container-narrow">
         {/* Distinct Architectural Notebook Lab Container */}
         <div className="rounded-2xl border border-dashed border-accent/40 bg-accent/5 p-6 sm:p-9 lg:p-11 relative overflow-hidden select-none">
