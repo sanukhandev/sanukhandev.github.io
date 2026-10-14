@@ -78,7 +78,7 @@ const normalizeKeywords = (
     return undefined;
   }
 
-  if (Array.isArray(keywords)) {
+  if (typeof keywords !== "string") {
     const unique = Array.from(
       new Set(keywords.map((item) => item.trim()).filter(Boolean)),
     );
