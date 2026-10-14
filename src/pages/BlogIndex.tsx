@@ -118,7 +118,7 @@ export default function BlogIndex() {
 
       <Navbar />
 
-      <main className="bg-[var(--bg-primary)] pt-20 pb-16 text-[var(--text-primary)] min-h-screen">
+      <main className="reference-subpage reference-blog-page bg-[var(--bg-primary)] pt-20 pb-16 text-[var(--text-primary)] min-h-screen">
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-4 sm:px-6 xl:grid-cols-[260px_minmax(0,1fr)]">
           <aside className="hidden xl:block">
             <div className="sticky top-24 max-h-[calc(100vh-8rem)] overflow-y-auto rounded-2xl border border-[var(--border)] bg-[var(--bg-secondary)] p-4 shadow-sm">
