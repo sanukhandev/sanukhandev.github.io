@@ -45,6 +45,8 @@
 
 /* Nav matches the reference's thin light navigation bar, regardless of saved theme. */
 header.fixed.reference-nav-pastel {
+  /* Header sits outside .zr-site: it needs its own shared gradient token. */
+  --zr-gradient:linear-gradient(105deg,#ff783c 0%,#fa6464 34%,#e75c93 69%,#bd5ace 100%);
   --text-primary:#171717; --text-secondary:#453a36;
   --accent-readable:#ad2a09; --border:#d9c8be;
   --foreground:340 11% 9%; --primary:340 11% 9%;
