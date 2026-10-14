@@ -8,21 +8,11 @@ import {
   useLocation,
   useParams,
 } from "react-router-dom";
-import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/hooks/use-theme";
 import { LocaleProvider } from "@/hooks/use-locale";
 import { trackEvent, trackPageView } from "@/utils/analytics";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { lazyWithRetry } from "@/utils/lazyWithRetry";
-
-// Both toasters render nothing until a toast fires, so they have no business
-// being in the first-paint bundle.
-const Toaster = lazy(() =>
-  import("@/components/ui/toaster").then((m) => ({ default: m.Toaster })),
-);
-const Sonner = lazy(() =>
-  import("@/components/ui/sonner").then((m) => ({ default: m.Toaster })),
-);
 
 const runWhenIdle = (fn: () => void) => {
   if (typeof window === "undefined") {
@@ -160,12 +150,7 @@ function AnalyticsTracker() {
 
 const AppShell = () => {
   return (
-    <TooltipProvider>
-      <Suspense fallback={null}>
-        <Toaster />
-        <Sonner />
-      </Suspense>
-      <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+    <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <AnalyticsTracker />
         <ErrorBoundary>
           <Suspense fallback={routeFallback}>
@@ -248,7 +233,6 @@ const AppShell = () => {
           </Suspense>
         </ErrorBoundary>
       </BrowserRouter>
-    </TooltipProvider>
   );
 };
 

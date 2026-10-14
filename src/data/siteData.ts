@@ -14,9 +14,9 @@ export const profile = {
   role: "Creator of ZaakiyV3RSE",
   roleBrand: "ZaakiyV3RSE",
   subRole:
-    "Tech Lead • Cloud & MS Architect • Enterprise Integrations Specialist",
+    "Tech Lead • Cloud & MS Expert • Enterprise Integrations Specialist",
   subtitle:
-    "Cloud Architect & Tech Lead · Azure · Event-Driven Architecture",
+    "Cloud Expert & Tech Lead · Azure · Event-Driven Architecture",
   statement:
     "100+ Solutions Built · Creator of ZaakiyV3RSE · 13+ Years Experience",
   meta: [
@@ -96,7 +96,7 @@ export const services = [
     company: "Enterprise Solution Consultancy",
     client: "Enterprise Commerce Division",
     location: "Dubai, UAE",
-    role: "Tech Lead & Solution Architect",
+    role: "Tech Lead & Solution Expert",
     duration: "Feb 2022 – Present",
     current: true,
     impact: [
@@ -168,7 +168,7 @@ export const services = [
     company: "Independent Architecture Consulting",
     client: null,
     location: "Remote / Global",
-    role: "Solution Architect & Full Stack Consultant",
+    role: "Solution Expert & Full Stack Consultant",
     duration: "2010 – Present",
     current: false,
     impact: [
@@ -497,7 +497,7 @@ export const certifications = [
 
 export const footer = {
   brand: "SanuKhan.dev",
-  blurb: "Tech Lead • Cloud Architect",
+  blurb: "Tech Lead • Cloud Expert",
   socials: [
     { label: "GitHub", icon: "GitHub", href: "https://github.com/sanukhandev" },
     {

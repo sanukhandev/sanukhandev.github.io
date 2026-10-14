@@ -23,44 +23,53 @@ const portraitSizes = "(max-width: 767px) min(100vw, 350px), (max-width: 1050px)
 export function BrushRevealPortrait({ className = "", alt, ariaLabel, mirrored = false }: BrushRevealPortraitProps) {
   const reducedMotion = useReducedMotion();
   const pointsRef = useRef<BrushPoint[]>([]);
+  const rafRef = useRef<number | null>(null);
   const [mask, setMask] = useState<string>("");
   const [expanded, setExpanded] = useState(false);
   const [hasInteracted, setHasInteracted] = useState(false);
 
   const paint = useCallback((clientX: number, clientY: number, rect: DOMRect) => {
-    const pointerX = clientX - rect.left;
-    const x = mirrored ? rect.width - pointerX : pointerX;
-    const y = clientY - rect.top;
-    if (x < 0 || y < 0 || x > rect.width || y > rect.height) return;
-    setHasInteracted(true);
+    if (rafRef.current) return;
+    rafRef.current = window.requestAnimationFrame(() => {
+      rafRef.current = null;
+      const pointerX = clientX - rect.left;
+      const x = mirrored ? rect.width - pointerX : pointerX;
+      const y = clientY - rect.top;
+      if (x < 0 || y < 0 || x > rect.width || y > rect.height) return;
+      setHasInteracted(true);
 
-    const previous = pointsRef.current.at(-1);
-    const distance = previous ? Math.hypot(x - previous.x, y - previous.y) : Infinity;
-    if (distance < 13) return;
+      const previous = pointsRef.current.at(-1);
+      const distance = previous ? Math.hypot(x - previous.x, y - previous.y) : Infinity;
+      if (distance < 13) return;
 
-    // Interpolate long pointer jumps so a quick gesture stays brush-like.
-    const stamps = previous ? Math.min(15, Math.ceil(distance / 22)) : 1;
-    const added = Array.from({ length: stamps }, (_, index) => {
-      const t = (index + 1) / stamps;
-      return {
-        x: previous ? previous.x + (x - previous.x) * t : x,
-        y: previous ? previous.y + (y - previous.y) * t : y,
-      };
+      // Interpolate long pointer jumps so a quick gesture stays brush-like.
+      const stamps = previous ? Math.min(8, Math.ceil(distance / 26)) : 1;
+      const added = Array.from({ length: stamps }, (_, index) => {
+        const t = (index + 1) / stamps;
+        return {
+          x: previous ? previous.x + (x - previous.x) * t : x,
+          y: previous ? previous.y + (y - previous.y) * t : y,
+        };
+      });
+      pointsRef.current = [...pointsRef.current, ...added].slice(-45);
+
+      const gradients = pointsRef.current.flatMap((point) => {
+        const px = point.x.toFixed(1);
+        const py = point.y.toFixed(1);
+        return [
+          `radial-gradient(ellipse 43px 54px at ${px}px ${py}px, #000 0%, #000 54%, transparent 100%)`,
+          `radial-gradient(ellipse 8px 31px at ${(point.x - 17).toFixed(1)}px ${(point.y + 5).toFixed(1)}px, #000 0%, transparent 100%)`,
+        ];
+      });
+      setMask(gradients.join(", "));
     });
-    pointsRef.current = [...pointsRef.current, ...added].slice(-65);
-
-    const gradients = pointsRef.current.flatMap((point) => {
-      const px = point.x.toFixed(1);
-      const py = point.y.toFixed(1);
-      return [
-        `radial-gradient(ellipse 43px 54px at ${px}px ${py}px, #000 0%, #000 54%, transparent 100%)`,
-        `radial-gradient(ellipse 8px 31px at ${(point.x - 17).toFixed(1)}px ${(point.y + 5).toFixed(1)}px, #000 0%, transparent 100%)`,
-      ];
-    });
-    setMask(gradients.join(", "));
   }, [mirrored]);
 
   const reset = useCallback(() => {
+    if (rafRef.current) {
+      window.cancelAnimationFrame(rafRef.current);
+      rafRef.current = null;
+    }
     pointsRef.current = [];
     setMask("");
     setExpanded(false);

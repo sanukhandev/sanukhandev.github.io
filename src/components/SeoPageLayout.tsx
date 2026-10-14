@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import SeoMeta from "@/components/SeoMeta";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/sections/Footer";
 import {
   buildBreadcrumbListSchema,
   buildCreativeWorkSchema,
@@ -74,7 +76,8 @@ export default function SeoPageLayout(props: SeoPageLayoutProps) {
         canonicalPath={canonicalPath}
         schema={pageSchemas}
       />
-      <main className="min-h-[100dvh] bg-background pt-20 text-foreground">
+      <Navbar />
+      <main className="min-h-[100dvh] bg-background pt-24 pb-16 text-foreground">
         <article className="container-narrow section-pad">
           <header>
             <h1 className="text-[40px] font-extrabold leading-[1.1] text-primary">
@@ -127,6 +130,7 @@ export default function SeoPageLayout(props: SeoPageLayoutProps) {
           </nav>
         </article>
       </main>
+      <Footer />
     </>
   );
 }

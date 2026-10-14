@@ -98,7 +98,7 @@ const getProfessionalFallbackResponse = (query: string, email: string, isArabic 
     return "Technical Specializations:\n• Architecture: Solution Architecture, Domain-Driven Design, Microservices, Event-Driven Systems\n• Engineering: Node.js, TypeScript, React, Azure Cloud, Kafka, REST/GraphQL APIs, PIM/ERP Integrations";
   }
 
-  return `Sanu Khan is a Solution Architect & Platform Engineering Leader based in Dubai, UAE with 13+ years of experience.\n\nFeel free to ask about his enterprise case studies or reach out directly at ${email}.`;
+  return `Sanu Khan is a Solution Expert & Platform Engineering Leader based in Dubai, UAE with 13+ years of experience.\n\nFeel free to ask about his enterprise case studies or reach out directly at ${email}.`;
 };
 
 export default function ZaakiyChatWidget({
@@ -177,7 +177,7 @@ export default function ZaakiyChatWidget({
     return [
       `Identity: Zaakiy — Sanu Khan's Portfolio Assistant.`,
       `Persona & Tone: Professional, calm, concise, technical, and helpful solution architect representative. Keep responses clear and under 3-4 bullet points or concise paragraphs.`,
-      `Sanu Khan: Solution Architect & Platform Engineering Leader based in Dubai, UAE with 13+ years experience.`,
+      `Sanu Khan: Solution Expert & Platform Engineering Leader based in Dubai, UAE with 13+ years experience.`,
       `Key Systems Built: Regional Enterprise Commerce Platform (9 regional markets PIM integration), Enterprise Omnichannel Commerce Fabric, Airline NDC & Travel B2B Marketplace, Airport Commerce & Travel Retail Platform.`,
       `Personal R&D: ZaakiyV3RSE — An AI-native operations intelligence platform exploring agent orchestration, context retrieval, and adaptive workflows.`,
       `Experience History: ${services}`,
@@ -230,7 +230,6 @@ export default function ZaakiyChatWidget({
         body: JSON.stringify({
           locale,
           userQuestion: userText,
-          siteScope: scopeSentRef.current ? undefined : siteScope,
           extraContext: extraContext || undefined,
           email,
           maxOutputChars: MAX_OUTPUT_CHARS,

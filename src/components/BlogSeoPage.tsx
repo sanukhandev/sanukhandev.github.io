@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import SeoMeta from "@/components/SeoMeta";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/sections/Footer";
 import {
   buildBlogPostingSchema,
   buildBreadcrumbListSchema,
@@ -53,7 +55,8 @@ export default function BlogSeoPage(props: BlogSeoPageProps) {
         kind="article"
         schema={schemas}
       />
-      <main className="min-h-[100dvh] bg-background pt-20 pb-16 text-foreground">
+      <Navbar />
+      <main className="min-h-[100dvh] bg-background pt-24 pb-16 text-foreground">
         <article className="container-narrow section-pad max-w-3xl mx-auto">
           <h1 className="text-2xl font-extrabold leading-tight tracking-tight text-primary sm:text-3xl md:text-4xl">{h1}</h1>
           <p className="mt-4 text-base leading-relaxed text-secondary sm:text-lg">{keywordLead}</p>
@@ -115,6 +118,7 @@ export default function BlogSeoPage(props: BlogSeoPageProps) {
           </nav>
         </article>
       </main>
+      <Footer />
     </>
   );
 }

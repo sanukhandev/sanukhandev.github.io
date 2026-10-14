@@ -117,20 +117,20 @@ export const buildSeoMetadata = (input: BuildSeoInput): SeoMetadata => {
 
 export const pageSeo = {
   home: {
-    title: "Software Engineer & Solution Architect in Dubai, UAE | Sanu Khan",
+    title: "Software Engineer & Solution Expert in Dubai, UAE | Sanu Khan",
     description:
-      "Technical Architect and Engineering Lead designing production platforms across commerce, travel technology, enterprise systems and AI-enabled engineering.",
+      "Technical Expert and Engineering Lead designing production platforms across commerce, travel technology, enterprise systems and AI-enabled engineering.",
     canonicalPath: "/",
     keywords: [
       "Sanu Khan",
       "Software Engineer Dubai",
       "Software Engineer UAE",
-      "Technical Architect",
+      "Technical Expert",
       "Engineering Lead",
       "Commerce Platforms",
       "Travel Technology",
       "Enterprise Systems",
-      "Cloud Architect UAE",
+      "Cloud Expert UAE",
       "Tech Lead Dubai",
     ],
   },
@@ -187,18 +187,18 @@ export const pageSeo = {
 
 export const pageSeoAr = {
   home: {
-    title: "Sanu Khan — معماري تقني وقائد هندسي",
+    title: "Sanu Khan — خبير تقني وقائد هندسي",
     description:
-      "معماري تقني وقائد هندسي متخصص في تصميم وبناء منصات إنتاجية للتجارة الرقمية وتقنيات السفر والأنظمة المؤسسية والهندسة المدعومة بالذكاء الاصطناعي.",
+      "خبير تقني وقائد هندسي متخصص في تصميم وبناء منصات إنتاجية للتجارة الرقمية وتقنيات السفر والأنظمة المؤسسية والهندسة المدعومة بالذكاء الاصطناعي.",
     canonicalPath: "/",
     keywords: [
       "سانو خان",
-      "معماري تقني",
+      "خبير تقني",
       "قائد هندسي",
       "منصات التجارة الرقمية",
       "تقنيات السفر",
       "الأنظمة المؤسسية",
-      "معماري سحابي الإمارات",
+      "خبير سحابي الإمارات",
       "قائد تقني دبي",
     ],
   },

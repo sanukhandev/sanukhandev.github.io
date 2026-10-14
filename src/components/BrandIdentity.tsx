@@ -14,7 +14,7 @@ export function BrandIdentity({
   showDescriptor = true,
 }: BrandIdentityProps) {
   const { locale } = useLocale();
-  const descriptor = locale === "ar" ? "قائد تقني / معماري حلول" : "TECH LEAD / SOLUTION ARCHITECT";
+  const descriptor = locale === "ar" ? "قائد تقني / خبير حلول" : "TECH LEAD / SOLUTION EXPERT";
 
   return (
     <span className={cn("brand-identity", compact && "brand-identity--compact", className)}>

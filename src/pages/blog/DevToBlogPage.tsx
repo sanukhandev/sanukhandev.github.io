@@ -136,7 +136,7 @@ export default function DevToBlogPage() {
 
   useEffect(() => {
     if (!toc.length || !articleRef.current) return;
-    const root = articleRef.current;
+    const articleEl = articleRef.current;
     const observer = new IntersectionObserver(
       (entries) => {
         const visible = entries
@@ -144,10 +144,10 @@ export default function DevToBlogPage() {
           .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
         if (visible.length > 0) setActiveId(visible[0].target.id);
       },
-      { root, rootMargin: "-80px 0px -55% 0px", threshold: 0 },
+      { root: null, rootMargin: "-80px 0px -55% 0px", threshold: 0 },
     );
     toc.forEach(({ id }) => {
-      const el = root.querySelector<HTMLElement>(`#${CSS.escape(id)}`);
+      const el = articleEl.querySelector<HTMLElement>(`#${CSS.escape(id)}`);
       if (el) observer.observe(el);
     });
     return () => observer.disconnect();

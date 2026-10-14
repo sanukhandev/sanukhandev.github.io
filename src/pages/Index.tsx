@@ -2,7 +2,6 @@ import { memo } from "react";
 import Navbar from "@/components/Navbar";
 import { SectionReveal } from "@/components/ui/SectionReveal";
 import SeoMeta from "@/components/SeoMeta";
-import LocaleSwitchSkeleton from "@/components/LocaleSwitchSkeleton";
 import { useLocale } from "@/hooks/use-locale";
 import { getLocalizedPageSeo } from "@/lib/seo";
 import { buildHomepageSchemas } from "@/lib/schema";
@@ -21,12 +20,8 @@ import {
 } from "@/components/sections/ReferenceHomeSections";
 
 const Index = () => {
-  const { isSwitchingLocale, locale } = useLocale();
+  const { locale } = useLocale();
   const currentSeo = getLocalizedPageSeo("home", locale);
-
-  if (isSwitchingLocale) {
-    return <LocaleSwitchSkeleton />;
-  }
 
   return (
     <div className="sk-page relative min-h-screen">
@@ -39,16 +34,16 @@ const Index = () => {
       </a>
 
       <SeoMeta
-        title="Software Engineer & Solution Architect in Dubai, UAE"
-        description="Software Engineer and Solution Architect in Dubai, UAE with 13+ years designing enterprise integrations, distributed platforms and cloud systems across retail, airline, automotive and SaaS environments."
+        title="Software Engineer & Solution Expert in Dubai, UAE"
+        description="Software Engineer and Solution Expert in Dubai, UAE with 13+ years designing enterprise integrations, distributed platforms and cloud systems across retail, airline, automotive and SaaS environments."
         canonicalPath={currentSeo.canonicalPath}
         keywords={[
           "Software Engineer UAE",
           "Software Engineer Dubai",
-          "Solution Architect Dubai",
+          "Solution Expert Dubai",
           "Platform Engineer UAE",
-          "Enterprise Integration Architect",
-          "Cloud Architect Dubai",
+          "Enterprise Integration Expert",
+          "Cloud Expert Dubai",
           "Distributed Systems Architect",
           "Event-Driven Architecture",
           "Sanu Khan",

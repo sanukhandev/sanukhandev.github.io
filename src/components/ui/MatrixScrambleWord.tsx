@@ -110,7 +110,7 @@ export function MatrixScrambleWord({
         className={cn(
           "inline-block transition-all",
           isScrambling
-            ? "font-mono tracking-widest text-accent filter drop-shadow-[0_0_8px_rgba(20,122,58,0.35)] dark:drop-shadow-[0_0_12px_rgba(86,200,120,0.55)]"
+            ? "font-mono tracking-widest text-accent filter drop-shadow-[0_0_8px_rgba(213,54,12,0.35)] dark:drop-shadow-[0_0_12px_rgba(213,54,12,0.55)]"
             : "tracking-[-0.03em]"
         )}
       >
