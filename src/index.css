@@ -149,7 +149,7 @@
     margin: 0;
     background: var(--bg);
     color: var(--text);
-    overflow-x: hidden;
+    overflow-x: clip;
     font-family: "Nunito Sans", ui-sans-serif, system-ui, sans-serif;
     font-size: 16px;
     line-height: 1.6;

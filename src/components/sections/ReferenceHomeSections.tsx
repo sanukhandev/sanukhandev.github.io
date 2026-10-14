@@ -39,22 +39,16 @@ export function ReferenceHero() {
           </motion.p>
           <h1 id="zr-hero-title" className="zr-hero-v3-title">
             <motion.span {...enter(0.13)}>
-              {join(ar, "A Solution", "معماري حلول")}
+              {join(ar, "Architecting", "أصمم ما")}
             </motion.span>
-            <motion.span {...enter(0.21)}>
-              {join(ar, "Architect", "وهندسة منصات")}
-            </motion.span>
-            <motion.span className="zr-hero-v3-highlight" {...enter(0.31)}>
-              {join(ar, "who builds", "أبني ما")}
-            </motion.span>
-            <motion.span className="zr-hero-v3-highlight" {...enter(0.4)}>
-              {join(ar, "what matters.", "يهم حقاً.")}
+            <motion.span className="zr-hero-v3-highlight" {...enter(0.21)}>
+              {join(ar, "what matters.", "يهم فعلاً.")}
             </motion.span>
           </h1>
           <motion.p className="zr-hero-v3-summary" {...enter(0.49)}>
             {join(ar,
-              "I design scalable systems, solve complex problems, and turn ideas into real-world software solutions.",
-              "أصمم أنظمة قابلة للتوسع، وأحل التحديات المعقدة، وأحوّل الأفكار إلى حلول برمجية واقعية."
+              "Solution architecture, systems integration and scalable platforms for real-world operational challenges.",
+              "هندسة الحلول وتكامل الأنظمة والمنصات القابلة للتوسع لمواجهة التحديات التشغيلية الواقعية."
             )}
           </motion.p>
           <motion.div className="zr-hero-v3-actions" {...enter(0.56)}>
@@ -164,7 +158,7 @@ export function ReferenceServices() {
       <div className="zr-shell">
         <header className="zr-section-heading zr-centered-heading">
           <p className="zr-kicker">{join(ar, "HOW I CAN HELP", "كيف يمكنني المساعدة")}</p>
-          <h2>{join(ar, "Decisions that survive production.", "قرارات تصمد في بيئة الإنتاج.")}</h2>
+          <h2>{join(ar, "From complexity to clarity.", "من التعقيد إلى الوضوح.")}</h2>
           <p>{join(ar, "Architecture decisions, integration contracts and delivery choices grounded in actual operating constraints—not diagrams for their own sake.", "قرارات معمارية وعقود تكامل وخيارات تنفيذ تستند إلى قيود التشغيل الحقيقية، لا إلى المخططات وحدها.")}</p>
         </header>
         <figure className="zr-section-art zr-service-art">
@@ -219,7 +213,7 @@ export function ReferenceExpertise() {
       <div className="zr-shell">
         <header className="zr-section-heading zr-centered-heading">
           <p className="zr-kicker">{join(ar, "EXPERTISE", "الخبرات")}</p>
-          <h2>{join(ar, "Capability, not a list of tools.", "قدرات تتجاوز مجرد قائمة أدوات.")}</h2>
+          <h2>{join(ar, "The disciplines behind reliable systems.", "الممارسات وراء الأنظمة الموثوقة.")}</h2>
           <p>{join(ar, "Technology is a choice; understanding constraints, risk and business outcomes is the discipline.", "التقنية اختيار، أما فهم القيود والمخاطر ونتائج الأعمال فهو جوهر الممارسة.")}</p>
         </header>
         <figure className="zr-section-art zr-expertise-art">
@@ -260,7 +254,7 @@ export function ReferenceProjects() {
       <div className="zr-shell">
         <header className="zr-section-heading zr-centered-heading">
           <p className="zr-kicker">{join(ar, "SELECTED WORK", "أعمال مختارة")}</p>
-          <h2>{join(ar, "Selected Projects", "مشاريع مختارة")}</h2>
+          <h2>{join(ar, "Systems I've helped shape.", "أنظمة ساهمت في تشكيلها.")}</h2>
           <p>{join(ar, "A selection of systems shaped by real constraints, integration challenges and operational requirements.", "مجموعة من الأنظمة صُممت وفق قيود واقعية وتحديات تكامل ومتطلبات تشغيلية.")}</p>
         </header>
         <figure className="zr-section-art zr-project-art">
@@ -307,7 +301,7 @@ export function ReferenceWriting() {
       <div className="zr-shell">
         <header className="zr-section-heading zr-centered-heading">
           <p className="zr-kicker">{join(ar,"ENGINEERING JOURNAL","الملاحظات الهندسية")}</p>
-          <h2>{join(ar,"Latest Thinking", "أحدث الأفكار")}</h2>
+          <h2>{join(ar,"Notes from the architecture desk.", "ملاحظات من مكتب العمارة.")}</h2>
           <p>{join(ar,"Field notes on architecture, technical trade-offs and operating real systems.","ملاحظات عملية حول العمارة والمفاضلات التقنية وتشغيل الأنظمة الحقيقية.")}</p>
         </header>
         <div className="zr-writing-list">
@@ -341,7 +335,7 @@ export function ReferenceZaakiy() {
           <div className="zr-zaakiy-copy">
             <p className="zr-kicker">{join(ar, "R&D / OPERATIONS INTELLIGENCE", "البحث والتطوير / الذكاء التشغيلي")}</p>
             <div className="brand-zaakiy zr-zaakiy-wordmark">ZaakiyV3RSE</div>
-            <h2>{join(ar, "Can a system understand whether it accomplished what it was supposed to do?", "هل يمكن للنظام فهم ما إذا كان قد حقق ما كُلّف به بالفعل؟")}</h2>
+            <h2>{join(ar, "Beyond uptime. Toward outcome intelligence.", "ما بعد الجاهزية. نحو ذكاء النتائج.")}</h2>
             <p>{join(ar,
               "An ongoing research effort in operational intelligence: correlating events with business context, then exploring whether observed behavior matches intended outcomes.",
               "تجربة هندسية حول الذكاء التشغيلي المدعوم بالذكاء الاصطناعي وربط السياق والوعي بالأنظمة للتحقق من نتائج الأعمال."
@@ -380,7 +374,7 @@ export function ReferenceEngagement() {
       <div className="zr-shell">
         <header className="zr-section-heading zr-centered-heading">
           <p className="zr-kicker">{join(ar, "WORKING TOGETHER", "العمل معاً")}</p>
-          <h2>{join(ar, "Define the problem before the scope.", "تحديد المشكلة يسبق تحديد النطاق.")}</h2>
+          <h2>{join(ar, "Clarity before commitment.", "الوضوح قبل الالتزام.")}</h2>
           <p>{join(ar, "Defined scope and a clear technical outcome. Pricing is agreed after requirements are reviewed.", "نطاق واضح ومخرجات تقنية محددة، مع الاتفاق على التكلفة بعد مراجعة المتطلبات.")}</p>
         </header>
         <div className="zr-engagement-box">
@@ -422,7 +416,7 @@ export function ReferenceProcess() {
       <div className="zr-shell">
         <header className="zr-section-heading zr-centered-heading">
           <p className="zr-kicker">{join(ar, "HOW I WORK", "كيف أعمل")}</p>
-          <h2>{join(ar, "From constraints to a working system.", "من القيود إلى نظام يعمل فعلياً.")}</h2>
+          <h2>{join(ar, "From complexity to a workable plan.", "من التعقيد إلى خطة قابلة للتنفيذ.")}</h2>
           <p>{join(ar, "A practical route from complex requirements to reliable systems.", "خطوات عملية لتحويل المتطلبات المعقدة إلى أنظمة موثوقة.")}</p>
         </header>
         <ol className="zr-process-steps">
@@ -447,10 +441,18 @@ export function ReferenceAbout() {
       <div className="zr-shell">
         <header className="zr-section-heading zr-centered-heading">
           <p className="zr-kicker">{join(ar, "A LITTLE CONTEXT", "نبذة")}</p>
-          <h2>{join(ar, "The perspective behind the work.", "المنظور الذي يوجّه عملي.")}</h2>
+          <h2>{join(ar, "How I approach difficult problems.", "كيف أتعامل مع المشكلات الصعبة.")}</h2>
         </header>
         <div className="zr-about-panel">
-          <div className="zr-about-avatar"><MediaPlaceholder kind="portrait" /></div>
+          <div className="zr-about-avatar">
+            <img
+              src="/hero-avatar-cutout.avif"
+              alt={join(ar, "Portrait of Sanu Khan", "صورة سانو خان")}
+              width={400}
+              height={400}
+              loading="lazy"
+            />
+          </div>
           <div className="zr-about-copy">
             <span className="zr-kicker">SANU KHAN / ARCHITECT & ENGINEER</span>
             <blockquote>{join(ar,
