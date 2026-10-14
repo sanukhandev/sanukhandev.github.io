@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useRef, useState } from "react";
+import { type CSSProperties, type ReactNode, useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 
 interface ScrollRevealProps {
@@ -8,27 +8,34 @@ interface ScrollRevealProps {
 }
 
 /**
- * ScrollReveal with Zoom-Out Effect (Pure CSS & IntersectionObserver):
- * Element enters viewport initially slightly zoomed-in (scale: 1.04),
- * and smoothly reveals by zooming out to normal scale (scale: 1) with opacity fade-in.
- * 100% GPU composited, zero external animation libraries.
+ * Motion is progressive enhancement: content is visible until the client
+ * confirms it is below the fold. A single observer reveals it once.
+ * No scroll listeners, motion dependency, or text hidden without JavaScript.
  */
 export function ScrollReveal({
   children,
   className,
   delay = 0,
 }: ScrollRevealProps) {
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
-
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setIsVisible(true);
+    const node = ref.current;
+    if (
+      !node ||
+      !("IntersectionObserver" in window) ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
       return;
     }
 
+    // Content at or near the initial viewport stays visible (no flash or LCP delay).
+    if (node.getBoundingClientRect().top <= window.innerHeight * 0.94) {
+      return;
+    }
+
+    setIsVisible(false);
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -36,33 +43,23 @@ export function ScrollReveal({
           observer.disconnect();
         }
       },
-      {
-        rootMargin: "0px 0px -50px 0px",
-        threshold: 0.1,
-      }
+      { threshold: 0.04, rootMargin: "0px 0px -7% 0px" },
     );
 
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
-
+    observer.observe(node);
     return () => observer.disconnect();
   }, []);
 
   return (
     <div
       ref={ref}
-      style={{
-        transitionDuration: "650ms",
-        transitionDelay: `${delay * 1000}ms`,
-        transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
-      }}
+      style={
+        { "--motion-delay": `${Math.max(0, Math.min(delay, 0.45)) * 1000}ms` } as CSSProperties
+      }
       className={cn(
-        "transition-all will-change-[opacity,transform]",
-        isVisible
-          ? "opacity-100 scale-100 translate-y-0"
-          : "opacity-0 scale-[1.04] translate-y-4",
-        className
+        "motion-reveal",
+        isVisible ? "motion-reveal--visible" : "motion-reveal--pending",
+        className,
       )}
     >
       {children}
