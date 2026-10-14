@@ -4,6 +4,7 @@ import { BrushRevealPortrait } from "@/components/ui/BrushRevealPortrait";
 import { Link } from "react-router-dom";
 import { ArrowRight, ArrowUpRight, ChevronDown, Code2, Boxes, Cloud, CircuitBoard, GitBranch, Mail, MapPin, Download } from "lucide-react";
 import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
+import { useDevToArticles } from "@/hooks/use-devto-articles";
 import { useLocale } from "@/hooks/use-locale";
 import { useSiteContent } from "@/data/siteContent";
 import { getLocalizedCaseStudy } from "@/data/caseStudies";
@@ -116,9 +117,9 @@ export function ReferenceProof() {
   const { profile } = useSiteContent();
   return (
     <section className="zr-proof zr-shell" aria-label={join(ar, "Engineering experience", "الخبرة الهندسية")}>
-      <p className="zr-proof-label">{join(ar, "EXPERIENCE ACROSS TECHNOLOGIES AND PLATFORMS", "خبرة عبر التقنيات والمنصات")}</p>
-      <div className="zr-tech-strip" aria-label={join(ar, "Technology experience", "الخبرات التقنية")}>
-        {["Azure", "Node.js", "React", "Kubernetes", "Kafka", "TypeScript"].map(name => <span key={name}>{name}</span>)}
+      <p className="zr-proof-label">{join(ar, "PLATFORMS, PATTERNS & OPERATING MODELS", "خبرة عبر التقنيات والمنصات")}</p>
+      <div className="zr-tech-strip" aria-label={join(ar, "Architecture and platform experience", "المنصات والممارسات المعمارية")}>
+        {["Azure", "AWS", "Kubernetes", "Kafka", "ERP / PIM", "Power Platform"].map(name => <span key={name}>{name}</span>)}
       </div>
       <div className="zr-metrics">
         {profile.impactMetrics.map((metric) => (
@@ -136,18 +137,18 @@ export function ReferenceServices() {
   const ar = locale === "ar";
   const services = [
     {
-      title: join(ar, "Solution Architecture", "عمارة الحلول"),
-      copy: join(ar, "Architecture consulting for production systems, clear boundaries, and long-term platform decisions.", "استشارات معمارية للأنظمة الإنتاجية، وحدود المسؤولية، والقرارات طويلة المدى."),
+      title: join(ar, "Architecture & Technical Direction", "العمارة والتوجيه التقني"),
+      copy: join(ar, "Clarify system boundaries, make trade-offs explicit, and choose a design the team can own and operate.", "توضيح حدود الأنظمة ومفاضلاتها واختيار تصميم يمكن للفريق تشغيله وتطويره بثقة."),
       label: "01 / ARCHITECTURE",
     },
     {
-      title: join(ar, "Enterprise Integrations", "تكامل الأنظمة المؤسسية"),
-      copy: join(ar, "Connecting ERP, commerce, inventory, and event-driven services with reliable API contracts.", "ربط أنظمة ERP والتجارة والمخزون والخدمات المعتمدة على الأحداث عبر واجهات موثوقة."),
+      title: join(ar, "Enterprise Integration & Data Flow", "التكامل المؤسسي وتدفق البيانات"),
+      copy: join(ar, "Connect commerce, ERP, inventory and distributed services through dependable data contracts and failure paths.", "ربط التجارة وأنظمة ERP والمخزون والخدمات الموزعة بعقود بيانات واضحة ومسارات معالجة موثوقة."),
       label: "02 / INTEGRATION",
     },
     {
-      title: join(ar, "Full-Stack & Cloud Platforms", "منصات الويب والسحابة"),
-      copy: join(ar, "Scalable backend and frontend delivery across SaaS, cloud and enterprise environments.", "تطوير واجهات وخدمات قابلة للتوسع لمنصات SaaS والسحابة والمؤسسات."),
+      title: join(ar, "Cloud & Platform Modernization", "تحديث المنصات والسحابة"),
+      copy: join(ar, "Modernize infrastructure, delivery and platform architecture without losing sight of operational continuity.", "تحديث البنية التحتية وأساليب التسليم والمنصات دون الإخلال باستمرارية التشغيل."),
       label: "03 / PLATFORM",
     },
   ];
@@ -156,9 +157,13 @@ export function ReferenceServices() {
       <div className="zr-shell">
         <header className="zr-section-heading zr-centered-heading">
           <p className="zr-kicker">{join(ar, "HOW I CAN HELP", "كيف يمكنني المساعدة")}</p>
-          <h2>{join(ar, "What I Can Do for You", "كيف يمكنني مساعدتك")}</h2>
-          <p>{join(ar, "Engineering expertise from problem discovery to dependable production systems.", "خبرة هندسية من استكشاف المشكلة حتى الأنظمة الإنتاجية الموثوقة.")}</p>
+          <h2>{join(ar, "Clear decisions. Better systems.", "قرارات واضحة. أنظمة أفضل.")}</h2>
+          <p>{join(ar, "I work at the intersection of architecture, integration, and delivery—where decisions become systems that teams can sustain.", "أعمل في نقطة التقاء العمارة والتكامل والتسليم، حيث تتحول القرارات إلى أنظمة يمكن للفرق تشغيلها وتطويرها.")}</p>
         </header>
+        <figure className="zr-section-art zr-service-art">
+          <img src="/media/architecture-capabilities.avif" alt={join(ar, "Concept illustration of system architecture, integration and delivery", "رسم تصوري للعمارة والتكامل وتسليم الأنظمة")} loading="lazy" width={1093} height={820} />
+          <figcaption>{join(ar, "Concept illustration · Architecture / Integration / Delivery", "رسم توضيحي · العمارة / التكامل / التسليم")}</figcaption>
+        </figure>
         <div className="zr-service-grid">
           {services.map((service, i) => (
             <article key={service.label} className={"zr-service-card zr-service-card-" + (i + 1)}>
@@ -168,7 +173,7 @@ export function ReferenceServices() {
                 <p>{service.copy}</p>
                 <a href="#contact" className="zr-service-arrow" aria-label={join(ar, "Discuss", "ناقش") + " " + service.title}><ArrowUpRight size={21} aria-hidden="true" /></a>
               </div>
-              <MediaPlaceholder kind="project" index={"0" + (i + 1)} className="zr-service-media" />
+              <span className="zr-service-index" aria-hidden="true">0{i + 1}</span>
             </article>
           ))}
         </div>
@@ -180,26 +185,50 @@ export function ReferenceServices() {
 export function ReferenceExpertise() {
   const { locale } = useLocale();
   const ar = locale === "ar";
-  const { skills } = useSiteContent();
-  const clusters = skills.clusters.slice(0, 4);
+  const capabilities = [
+    {
+      title: join(ar, "Architecture & Governance", "العمارة والحوكمة"),
+      description: join(ar, "Design choices explained through ownership, constraints, risk and the cost of change.", "توضيح قرارات التصميم من منظور المسؤولية والقيود والمخاطر وتكلفة التغيير."),
+      tags: ["System Boundaries", "Architecture Decisions", "Governance"],
+    },
+    {
+      title: join(ar, "Cloud & Platform Strategy", "استراتيجية السحابة والمنصات"),
+      description: join(ar, "Build the right operating model for reliability, scale and predictable delivery.", "اختيار نموذج تشغيل مناسب للموثوقية والتوسع والتسليم المتوقع."),
+      tags: ["Azure", "AWS", "Kubernetes", "Resilience"],
+    },
+    {
+      title: join(ar, "Enterprise Integration", "التكامل المؤسسي"),
+      description: join(ar, "Connect complex systems around explicit contracts, data ownership and recoverable workflows.", "ربط الأنظمة المعقدة بعقود واضحة وملكية بيانات محددة ومسارات قابلة للتعافي."),
+      tags: ["ERP / PIM", "Event-Driven", "API Contracts", "Kafka"],
+    },
+    {
+      title: join(ar, "Delivery & Operability", "التسليم والجاهزية التشغيلية"),
+      description: join(ar, "Align teams and technical decisions with observability, change management and production outcomes.", "مواءمة الفرق والقرارات التقنية مع المراقبة وإدارة التغيير والنتائج التشغيلية."),
+      tags: ["Observability", "CI/CD", "Stakeholder Alignment"],
+    },
+  ];
   return (
     <section id="architecture" className="zr-section zr-expertise">
       <div className="zr-shell">
         <header className="zr-section-heading zr-centered-heading">
           <p className="zr-kicker">{join(ar, "EXPERTISE", "الخبرات")}</p>
-          <h2>{join(ar, "Core Skills & Expertise", "المهارات والخبرات الأساسية")}</h2>
-          <p>{skills.intro}</p>
+          <h2>{join(ar, "Architecture beyond the stack.", "العمارة تتجاوز قائمة التقنيات.")}</h2>
+          <p>{join(ar, "Technology is a choice; understanding constraints, risk and business outcomes is the discipline.", "التقنية اختيار، أما فهم القيود والمخاطر ونتائج الأعمال فهو جوهر الممارسة.")}</p>
         </header>
+        <figure className="zr-section-art zr-expertise-art">
+          <img src="/media/expertise-systems.avif" alt={join(ar, "Conceptual capability system spanning architecture, cloud, integration and operations", "رسم تصوري لمجالات العمارة والسحابة والتكامل والعمليات")} loading="lazy" width={1160} height={638} />
+          <figcaption>{join(ar, "Capabilities are connected, not siloed.", "القدرات مترابطة وليست منعزلة.")}</figcaption>
+        </figure>
         <div className="zr-expertise-stack">
-          {clusters.map((cluster, i) => (
+          {capabilities.map((cluster, i) => (
             <article key={cluster.title} className="zr-expertise-row">
               <div className="zr-expertise-copy">
                 <span className="zr-card-label">0{i + 1} / {join(ar, "CORE CAPABILITY", "قدرة أساسية")}</span>
                 <h3>{cluster.title}</h3>
-                <p>{join(ar, "Production-focused capabilities across architecture, delivery, and maintainability.", "قدرات موجهة للأنظمة الإنتاجية في العمارة والتسليم وقابلية الصيانة.")}</p>
+                <p>{cluster.description}</p>
                 <div className="zr-tech-tags">{cluster.tags.map(tag => <span key={tag}>{tag}</span>)}</div>
               </div>
-              <MediaPlaceholder kind="project" index={"0" + (i + 4)} className="zr-expertise-media" />
+
             </article>
           ))}
         </div>
@@ -225,13 +254,17 @@ export function ReferenceProjects() {
         <header className="zr-section-heading zr-centered-heading">
           <p className="zr-kicker">{join(ar, "SELECTED WORK", "أعمال مختارة")}</p>
           <h2>{join(ar, "Selected Projects", "مشاريع مختارة")}</h2>
-          <p>{join(ar, "Architecture, integrations, platforms, and experiments from real engineering work.", "معمارية الأنظمة والتكامل والمنصات والتجارب الهندسية.")}</p>
+          <p>{join(ar, "A selection of systems shaped by real constraints, integration challenges and operational requirements.", "مجموعة من الأنظمة صُممت وفق قيود واقعية وتحديات تكامل ومتطلبات تشغيلية.")}</p>
         </header>
+        <figure className="zr-section-art zr-project-art">
+          <img src="/media/selected-projects.avif" alt={join(ar, "Concept illustration of enterprise system dashboards and architectural decisions", "رسم تصوري للأنظمة المؤسسية وقرارات العمارة")} loading="lazy" width={983} height={650} />
+          <figcaption>{join(ar, "Concept illustration · The work is in the case studies below.", "رسم توضيحي · التفاصيل الحقيقية موثقة في دراسات الحالة أدناه.")}</figcaption>
+        </figure>
         <div className="zr-project-grid">
           {projects.map((project, i) => (
             <Link to={"/projects/" + project.slug} key={project.slug} className={"zr-project-tile zr-project-tile-" + (i + 1)}>
               <div className="zr-project-media">
-                <MediaPlaceholder kind="project" index={"0" + (i + 1)} />
+                <img src={["/media/case-retail.svg", "/media/case-airline.svg", "/media/case-automotive.svg", "/media/case-property.svg", "/media/case-zaakiy.svg"][i]} alt={join(ar, "Conceptual architecture diagram for ", "مخطط معماري تصوري لـ ") + project.title} loading="lazy" width={960} height={600} />
                 <span className="zr-project-link-icon"><ArrowUpRight size={19} aria-hidden="true" /></span>
               </div>
               <div className="zr-project-info">
@@ -252,20 +285,31 @@ export function ReferenceWriting() {
   const { locale } = useLocale();
   const ar = locale === "ar";
   const { articles } = useSiteContent();
-  const posts = articles.slice(0,3);
+  const { data: devToArticles } = useDevToArticles(20);
+  const posts = devToArticles?.length
+    ? devToArticles.slice(0, 3).map(post => ({
+        title: post.title,
+        excerpt: post.description,
+        category: post.tags[0] || "Engineering",
+        localPath: post.localPath,
+        coverImage: post.coverImage,
+      }))
+    : articles.slice(0, 3).map(post => ({ ...post, coverImage: null as string | null }));
   return (
     <section id="writing" className="zr-section zr-writing">
       <div className="zr-shell">
         <header className="zr-section-heading zr-centered-heading">
           <p className="zr-kicker">{join(ar,"ENGINEERING JOURNAL","الملاحظات الهندسية")}</p>
           <h2>{join(ar,"Latest Thinking", "أحدث الأفكار")}</h2>
-          <p>{join(ar,"Notes on architecture, data, programming and the decisions behind reliable software.","ملاحظات حول العمارة والبيانات والبرمجة والقرارات وراء الأنظمة الموثوقة.")}</p>
+          <p>{join(ar,"Field notes on architecture, technical trade-offs and operating real systems.","ملاحظات عملية حول العمارة والمفاضلات التقنية وتشغيل الأنظمة الحقيقية.")}</p>
         </header>
         <div className="zr-writing-list">
           {posts.map((post,i)=>(
             <article key={post.localPath || post.title} className="zr-writing-item">
               <Link to={post.localPath} className="zr-writing-image" aria-label={post.title}>
-                <MediaPlaceholder kind="article" index={String(i+1).padStart(2,"0")} />
+                {post.coverImage?.startsWith("https://")
+                  ? <img src={post.coverImage} alt={post.title} loading="lazy" referrerPolicy="no-referrer" className="zr-devto-cover" />
+                  : <MediaPlaceholder kind="article" index={String(i+1).padStart(2,"0")} />}
               </Link>
               <div className="zr-writing-text">
                 <span className="zr-card-label">{post.category} / 0{i+1}</span>
@@ -299,15 +343,10 @@ export function ReferenceZaakiy() {
             )}</p>
             <Link className="zr-button zr-button-primary" to="/projects/zaakiy-v3rse">{join(ar, "Explore the research", "استكشف البحث والتطوير")} <ArrowUpRight size={18} aria-hidden="true" /></Link>
           </div>
-          <div className="zr-zaakiy-display" role="img" aria-label={join(ar, "Conceptual operational intelligence layers", "رسم توضيحي لطبقات الذكاء التشغيلي")}>
-            <div className="zr-zaakiy-orbit"><span /><span /><span /></div>
-            <div className="zr-zaakiy-core">
-              <CircuitBoard size={42} strokeWidth={1.4} aria-hidden="true" />
-              <strong>ZaakiyV3RSE</strong>
-              <small>CONTEXT / CORRELATION / OUTCOME</small>
-            </div>
-            <div className="zr-zaakiy-nodes"><span>01 / SIGNALS</span><span>02 / CONTEXT</span><span>03 / VERIFICATION</span></div>
-          </div>
+          <figure className="zr-zaakiy-display zr-zaakiy-visual">
+            <img src="/media/zaakiy-intelligence.avif" alt={join(ar, "Concept diagram of operational intelligence with input signals, agent orchestration and outputs", "رسم توضيحي للذكاء التشغيلي والمدخلات والتنسيق والمخرجات")} loading="lazy" width={1093} height={820} />
+            <figcaption>{join(ar, "Research concept · Not a product screenshot", "تصور بحثي · ليس لقطة من المنتج")}</figcaption>
+          </figure>
         </div>
       </div>
     </section>
@@ -431,7 +470,7 @@ export function ReferenceFaq() {
   const faqs = [
     [join(ar,"What services does Sanu Khan provide?","ما الخدمات التي يقدمها سانو خان؟"),join(ar,"I provide architecture consulting, full-stack engineering, API integrations, and cloud modernization for event-driven and enterprise-grade platforms.","أقدم استشارات هندسة الحلول وتطوير البرمجيات المتكامل وتكامل الواجهات البرمجية وتحديث الأنظمة السحابية.")],
     [join(ar,"Do you work with UAE and remote clients?","هل تعمل مع عملاء الإمارات وعن بُعد؟"),join(ar,"Yes. I work with teams in the UAE and globally across discovery, architecture, delivery, and optimization phases.","نعم. أعمل مع فرق في الإمارات وحول العالم من الاستكشاف والتصميم إلى التنفيذ والتحسين.")],
-    [join(ar,"Which technologies are part of your core stack?","ما التقنيات الأساسية التي تستخدمها؟"),join(ar,"I work with React, Node.js, TypeScript, Java, Spring Boot, Azure, AWS, Kubernetes, Kafka, and enterprise integration ecosystems.","أعمل باستخدام React وNode.js وTypeScript وJava وSpring Boot وAzure وAWS وKubernetes وKafka وأنظمة التكامل المؤسسية.")],
+    [join(ar,"Do you work with a fixed technology stack?","هل تلتزم بمجموعة تقنيات ثابتة؟"),join(ar,"No single language defines the solution. I select architectures and platforms around operational requirements, team capability, cost and long-term ownership.","لا تحدد لغة واحدة شكل الحل، بل أختار العمارة والمنصات بناءً على المتطلبات التشغيلية وقدرات الفرق والتكلفة والمسؤولية طويلة المدى.")],
     [join(ar,"How can I contact you for a project?","كيف يمكنني التواصل بشأن مشروع؟"),join(ar,"Use the contact section on the homepage or send an email to hello@sanukhan.dev with your scope and timeline.","استخدم قسم التواصل في الصفحة الرئيسية أو أرسل رسالة إلى hello@sanukhan.dev تتضمن النطاق والجدول الزمني.")],
   ];
   return (
