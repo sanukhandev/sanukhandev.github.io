@@ -354,3 +354,51 @@ html[dir="rtl"] .zr-site .zr-faq-item > p { padding:0 54px 25px 25px; }
   .zr-site .zr-faq-item > p { padding:0 16px 20px 39px; }
   .zr-site .zr-footer-layout { gap:21px; }
 }
+
+
+/* Editorial writing shelf - original published articles, new reference-style cards. */
+.zr-site #writing.zr-writing { background:#f9f5ef; padding-block:clamp(65px,7vw,102px) !important; }
+.zr-site .zr-writing-list { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px; }
+.zr-site .zr-writing-item { background:#fff; border:1px solid #e6dfd9; border-radius:14px; overflow:hidden; min-width:0; display:flex; flex-direction:column; }
+.zr-site .zr-writing-image { display:block; height:205px; position:relative; overflow:hidden; }
+.zr-site .zr-writing-image .editorial-placeholder { width:100%; height:100%; border:0; border-radius:0; }
+.zr-site .zr-writing-item:nth-child(1) .editorial-placeholder { background:linear-gradient(125deg,#efb8a3,#f8dec5); }
+.zr-site .zr-writing-item:nth-child(2) .editorial-placeholder { background:linear-gradient(125deg,#c9d9cf,#efc8c6); }
+.zr-site .zr-writing-item:nth-child(3) .editorial-placeholder { background:linear-gradient(125deg,#e2c0e7,#ffd7bb); }
+.zr-site .zr-writing-text { display:flex; flex-direction:column; align-items:flex-start; gap:11px; padding:24px; flex:1; }
+.zr-site .zr-writing-text h3 { font-size:clamp(19px,2vw,26px); line-height:1.22; font-weight:750; margin:0; }
+.zr-site .zr-writing-text h3 a { color:#211b1a; text-decoration:none; }
+.zr-site .zr-writing-text h3 a:hover { color:#ad3723; }
+.zr-site .zr-writing-text p { font-size:13px; line-height:1.6; color:#675b55; margin-bottom:12px; }
+.zr-site .zr-writing-text .zr-text-action { margin-top:auto; }
+.zr-site .zr-writing-all { margin-top:32px; text-align:center; }
+
+/* Always the existing Anta/English and Almarai/Arabic fonts. Only the color
+ * treatment changes; this corrects older Zaakiy green in every chat state. */
+.zaakiy-chat {
+ --text-primary:#17151a;
+ --text-secondary:#53454c;
+ --accent-readable:#a93639;
+}
+.zaakiy-chat button[class*="bg-accent"] {
+ background:linear-gradient(115deg,#e65835,#e45d8e 58%,#9256c3);
+ border-color:#d56280;
+ color:#fff;
+}
+.zaakiy-chat .text-accent { color:#ab3560; }
+.zaakiy-chat .border-accent\/20 { border-color:rgba(210,76,126,.22); }
+.zaakiy-chat .bg-accent\/10 { background:rgba(221,93,135,.1); }
+.zr-site .zr-project-tile:focus-visible,
+.zr-site .zr-writing-image:focus-visible { outline:3px solid #9256c3; outline-offset:4px; }
+
+/* Writing cards and consistent tap sizes on mobile. */
+@media(max-width:767px) {
+ .zr-site .zr-writing-list { grid-template-columns:1fr; }
+ .zr-site .zr-writing-image { height:240px; }
+ .zr-site .zr-writing-text { padding:22px; }
+}
+@media(min-width:768px) and (max-width:1023px) {
+ .zr-site .zr-writing-list { grid-template-columns:repeat(2,minmax(0,1fr)); }
+ .zr-site .zr-writing-item:last-child { grid-column:span 2; display:grid; grid-template-columns:1fr 1fr; }
+ .zr-site .zr-writing-item:last-child .zr-writing-image { height:100%; min-height:245px; }
+}
