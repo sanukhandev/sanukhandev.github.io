@@ -81,6 +81,10 @@
 .sk-hero h1 { max-width: 9.5ch; margin: 1.25rem 0 0; font-size: clamp(3.1rem, 6.5vw, 7.2rem); }
 .sk-hero h1 span { color: var(--sk-orange); }
 .sk-hero h1 .sk-hero__word { color: var(--sk-black); white-space: nowrap; }
+.sk-hero__matrix-line { display: inline-block; min-height: 0.9em; margin-inline-start: -0.08em; position: relative; z-index: 1; transform: translateY(-0.04em); }
+.sk-hero__matrix-word { color: var(--sk-orange) !important; font-family: var(--sk-script) !important; font-size: 1.04em; font-weight: 400 !important; letter-spacing: -0.045em; line-height: 0.82; }
+.sk-hero__matrix-word > span[aria-hidden="true"] { font-family: inherit; font-weight: inherit; }
+.sk-hero__matrix-word > span[aria-hidden="true"].font-mono { font-family: var(--sk-mono); font-size: 0.72em; font-weight: 500; letter-spacing: 0.02em; }
 .sk-hero__lead { max-width: 39ch; margin: 1.6rem 0 0; font-size: clamp(1rem, 1.05vw, 1.1rem); line-height: 1.55; }
 .sk-hero__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.9rem 1.25rem; margin-block-start: 1.6rem; }
 .sk-hero__resume { display: inline-flex; align-items: center; gap: 0.35rem; margin-block-start: 1rem; color: var(--sk-black); font-family: var(--sk-mono); font-size: 0.7rem; text-transform: uppercase; }
@@ -264,6 +268,8 @@
 html.locale-ar .sk-page { --sk-script: "Aref Ruqaa", serif; font-family: var(--sk-arabic); line-height: 1.85; }
 html.locale-ar .sk-page :where(h1, h2, h3, h4) { font-family: var(--sk-arabic); letter-spacing: normal; line-height: 1.18; }
 html.locale-ar .sk-page .sk-mono, html.locale-ar .sk-page .sk-eyebrow { font-family: var(--sk-arabic) !important; letter-spacing: normal; text-transform: none; }
+html.locale-ar .sk-hero__matrix-line { margin-inline-start: 0; transform: none; }
+html.locale-ar .sk-hero__matrix-word { font-family: var(--sk-script) !important; letter-spacing: normal; line-height: 1.05; }
 html.locale-ar .sk-hero h1 { max-width: 10ch; font-size: clamp(2.7rem, 7vw, 7rem); }
 html.locale-ar .sk-hero__identity h2 { max-width: 13ch; }
 html.locale-ar .sk-section-heading h2 { max-width: 15ch; }
