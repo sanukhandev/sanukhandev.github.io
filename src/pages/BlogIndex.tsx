@@ -109,7 +109,7 @@ export default function BlogIndex() {
         title={seo.title}
         description={seo.description}
         canonicalPath={seo.canonicalPath}
-        keywords={seo.keywords}
+        keywords={"keywords" in seo ? seo.keywords : undefined}
         schema={buildBreadcrumbListSchema([
           { name: "Home", path: "/" },
           { name: "Blog", path: "/blog" },
