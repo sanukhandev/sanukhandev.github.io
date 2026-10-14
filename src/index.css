@@ -12,20 +12,20 @@
   }
 
   :root {
-    /* ── Light Mode Design Tokens (Prompt Section 3 & 27) ── */
-    --bg: #F7F9F6;
-    --surface: #FFFFFF;
+    /* Reference image color palette: #F5F1EC canvas, #FBF9F7 cards, #F8E4CD sand. */
+    --bg: #F5F1EC;
+    --surface: #FBF9F7;
     --surface-elevated: #FFFFFF;
-    --text: #111814;
-    --text-secondary: #59645D;
-    --text-muted: #647068;
-    --border: #DEE5DF;
+    --text: #171717;
+    --text-secondary: #524942;
+    --text-muted: #6D635B;
+    --border: #E0D6CF;
 
-    /* Signal Green (10% usage) */
-    --primary-green: #147A3A;
-    --primary-green-hover: #0F6530;
-    --primary-soft: #EAF5EC;
-    --strong-dark-green: #0E4926;
+    /* Legacy variable names retained for compatibility; values use the coral palette. */
+    --primary-green: #AD2A09;
+    --primary-green-hover: #922508;
+    --primary-soft: #F8E4CD;
+    --strong-dark-green: #171717;
 
     /* Semantic Compatibility Aliases */
     --bg-primary: var(--bg);
@@ -41,25 +41,25 @@
     --container: 1280px;
 
     /* HSL Mappings for Tailwind & Radix UI */
-    --background: 100 15% 97%;
-    --foreground: 146 17% 8%;
-    --card: 0 0% 100%;
-    --card-foreground: 146 17% 8%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 146 17% 8%;
-    --primary: 142 72% 28%;
+    --background: 33 31% 94%;
+    --foreground: 0 0% 9%;
+    --card: 30 33% 98%;
+    --card-foreground: 0 0% 9%;
+    --popover: 30 33% 98%;
+    --popover-foreground: 0 0% 9%;
+    --primary: 12 90% 36%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 100 12% 94%;
-    --secondary-foreground: 146 17% 8%;
-    --muted: 100 12% 94%;
-    --muted-foreground: 135 6% 42%;
-    --accent-hsl: 142 72% 28%;
+    --secondary: 30 37% 92%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 30 37% 92%;
+    --muted-foreground: 22 14% 34%;
+    --accent-hsl: 12 90% 36%;
     --accent-foreground-hsl: 0 0% 100%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
-    --border-hsl: 131 11% 88%;
-    --input-hsl: 131 11% 88%;
-    --ring: 142 72% 28%;
+    --border-hsl: 24 20% 85%;
+    --input-hsl: 24 20% 85%;
+    --ring: 12 90% 36%;
     --radius: 0.625rem;
 
     --site-bg: var(--bg);
@@ -68,25 +68,25 @@
     --site-surface: var(--surface);
     --site-border-strong: var(--border);
 
-    --surface-2-bg: #EAF5EC;
-    --surface-anchor-bg: #0C100D;
+    --surface-2-bg: #F8E4CD;
+    --surface-anchor-bg: #171717;
   }
 
   html.dark {
-    /* ── Dark Mode Design Tokens (Prompt Section 3 & 27) ── */
-    --bg: #0C100D;
-    --surface: #131814;
-    --surface-elevated: #171D18;
-    --text: #F4F7F5;
-    --text-secondary: #AAB4AD;
-    --text-muted: #9BA89E;
-    --border: #29322B;
+    /* Dark alternative: same warm reference palette, no green accents. */
+    --bg: #171717;
+    --surface: #242121;
+    --surface-elevated: #302928;
+    --text: #F5F1EC;
+    --text-secondary: #D9C8BE;
+    --text-muted: #BFAEA4;
+    --border: #55433E;
 
-    /* Signal Green */
-    --primary-green: #56C878;
-    --primary-green-hover: #48b868;
-    --primary-soft: #163D24;
-    --strong-dark-green: #0E4926;
+    /* Legacy variable names retained; warm-peach dark-mode accent. */
+    --primary-green: #FFB28B;
+    --primary-green-hover: #FF9C74;
+    --primary-soft: #4A302D;
+    --strong-dark-green: #38201E;
 
     /* Semantic Compatibility Aliases */
     --bg-primary: var(--bg);
@@ -97,23 +97,23 @@
     --accent-bg: var(--primary-soft);
 
     /* HSL Mappings for Tailwind & Radix UI */
-    --background: 135 14% 5%;
-    --foreground: 140 13% 96%;
-    --card: 135 11% 8%;
-    --card-foreground: 140 13% 96%;
-    --popover: 135 11% 8%;
-    --popover-foreground: 140 13% 96%;
-    --primary: 138 52% 56%;
-    --primary-foreground: 135 14% 5%;
-    --secondary: 135 10% 10%;
-    --secondary-foreground: 140 13% 96%;
-    --muted: 135 10% 10%;
-    --muted-foreground: 136 7% 63%;
-    --accent-hsl: 138 52% 56%;
-    --accent-foreground-hsl: 135 14% 5%;
-    --border-hsl: 133 9% 18%;
-    --input-hsl: 133 9% 18%;
-    --ring: 138 52% 56%;
+    --background: 0 0% 9%;
+    --foreground: 33 31% 94%;
+    --card: 0 0% 14%;
+    --card-foreground: 33 31% 94%;
+    --popover: 0 0% 14%;
+    --popover-foreground: 33 31% 94%;
+    --primary: 19 100% 77%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 12 12% 18%;
+    --secondary-foreground: 33 31% 94%;
+    --muted: 12 12% 18%;
+    --muted-foreground: 22 18% 70%;
+    --accent-hsl: 19 100% 77%;
+    --accent-foreground-hsl: 0 0% 9%;
+    --border-hsl: 14 16% 29%;
+    --input-hsl: 14 16% 29%;
+    --ring: 19 100% 77%;
 
     --site-bg: var(--bg);
     --site-fg: var(--text);
@@ -121,8 +121,8 @@
     --site-surface: var(--surface);
     --site-border-strong: var(--border);
 
-    --surface-2-bg: #163D24;
-    --surface-anchor-bg: #0C100D;
+    --surface-2-bg: #302928;
+    --surface-anchor-bg: #171717;
   }
 
   html {
