@@ -34,7 +34,7 @@ const Index = () => {
   }
 
   return (
-    <div className="relative bg-background text-foreground min-h-screen">
+    <div className="reference-home relative bg-background text-foreground min-h-screen">
       {/* Accessible Skip to Content Link (WCAG 2.2 AA) */}
       <a
         href="#main-content"
