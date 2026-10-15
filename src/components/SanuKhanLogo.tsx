@@ -39,15 +39,15 @@ export function SanuKhanLogo({
         viewBox="0 0 512 512"
         width={compact ? 32 : 40}
         height={compact ? 32 : 40}
-        className={cn("sk-logo-icon select-none shrink-0", className)}
+        className={cn("sk-logo-icon text-[var(--sk-fg)] select-none shrink-0", className)}
         role="img"
         aria-label="SK Logo"
       >
         <defs>
           <linearGradient id={gradId} x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#E84A1C" />
-            <stop offset="50%" stopColor="#D5360C" />
-            <stop offset="100%" stopColor="#9C2003" />
+            <stop offset="0%" stopColor="#E84A1C" className="sk-logo-grad-stop-0" />
+            <stop offset="50%" stopColor="#D5360C" className="sk-logo-grad-stop-50" />
+            <stop offset="100%" stopColor="#9C2003" className="sk-logo-grad-stop-100" />
           </linearGradient>
         </defs>
         <rect x="32" y="32" width="448" height="448" rx="112" ry="112" fill={`url(#${gradId})`} />
@@ -73,16 +73,16 @@ export function SanuKhanLogo({
       viewBox="0 0 235 40"
       height={compact ? 32 : 38}
       width={compact ? 188 : 223}
-      className={cn("sk-logo-svg select-none shrink-0", className)}
+      className={cn("sk-logo-svg text-[var(--sk-fg)] select-none shrink-0", className)}
       role="img"
       aria-label="SanuKhan.dev"
     >
       <title>SanuKhan.dev</title>
       <defs>
         <linearGradient id={gradId} x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#E84A1C" />
-          <stop offset="50%" stopColor="#D5360C" />
-          <stop offset="100%" stopColor="#9C2003" />
+          <stop offset="0%" stopColor="#E84A1C" className="sk-logo-grad-stop-0" />
+          <stop offset="50%" stopColor="#D5360C" className="sk-logo-grad-stop-50" />
+          <stop offset="100%" stopColor="#9C2003" className="sk-logo-grad-stop-100" />
         </linearGradient>
       </defs>
 
@@ -109,14 +109,14 @@ export function SanuKhanLogo({
       <g className="sk-logo__text">
         {/* Sanu (Thin style) */}
         <path
-          className="sk-logo__sanu"
+          className="sk-logo__sanu fill-current"
           d={D_SANU}
           fill="currentColor"
           opacity="0.82"
         />
         {/* Khan (Regular style) */}
         <path
-          className="sk-logo__khan"
+          className="sk-logo__khan fill-current"
           d={D_KHAN}
           fill="currentColor"
         />

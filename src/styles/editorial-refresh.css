@@ -97,8 +97,8 @@ html.dark {
 .sk-mobile-nav a { color: var(--sk-black) !important; }
 
 /* Brand identity */
-.brand-identity { display: inline-flex; flex-direction: column; gap: 0.25rem; color: var(--sk-black); line-height: 1; }
-.brand-identity .sk-logo-svg { display: block; height: 38px; width: auto; max-width: 100%; transition: transform 160ms ease; }
+.brand-identity { display: inline-flex; flex-direction: column; gap: 0.25rem; color: var(--sk-fg); line-height: 1; }
+.brand-identity .sk-logo-svg { display: block; height: 38px; width: auto; max-width: 100%; color: inherit; transition: transform 160ms ease; }
 .brand-identity:hover .sk-logo-svg { transform: translateY(-1px); }
 .brand-identity__descriptor { color: var(--sk-orange-ink); font-family: var(--sk-mono); font-size: 0.58rem; font-weight: 500; letter-spacing: 0.08em; line-height: 1.25; margin-inline-start: 52px; }
 .brand-identity--compact .sk-logo-svg { height: 32px; }
@@ -471,6 +471,16 @@ html.dark .sk-page .sk-eyebrow, html.dark .sk-page .sk-eyebrow > span, html.dark
 html.dark .sk-navbar { background: rgba(16, 16, 16, 0.94); color: var(--sk-ivory); border-color: var(--sk-dark-line) !important; }
 html.dark .sk-navbar nav a, html.dark .sk-navbar__brand { color: var(--sk-ivory) !important; }
 html.dark .sk-navbar nav a:hover, html.dark .sk-navbar nav a[aria-current="page"] { color: var(--sk-orange) !important; }
+html.dark .brand-identity,
+html.dark .sk-navbar__brand .brand-identity,
+html.dark .sk-logo-svg { color: var(--sk-ivory) !important; }
+html.dark .sk-logo__sanu,
+html.dark .sk-logo__khan { fill: var(--sk-ivory) !important; color: var(--sk-ivory) !important; }
+html.dark .sk-logo__sanu { opacity: 0.92 !important; }
+html.dark .brand-identity__descriptor { color: var(--sk-orange) !important; }
+html.dark .sk-logo-grad-stop-0 { stop-color: #FF663B !important; }
+html.dark .sk-logo-grad-stop-50 { stop-color: #E84A1C !important; }
+html.dark .sk-logo-grad-stop-100 { stop-color: #D5360C !important; }
 html.dark .sk-mobile-nav { background: var(--sk-black) !important; border-color: var(--sk-dark-line) !important; }
 html.dark .sk-mobile-nav a { color: var(--sk-ivory) !important; }
 html.dark .sk-capabilities, html.dark .sk-journal, html.dark .sk-faq, html.dark .sk-work, html.dark .sk-about { background: var(--sk-black); color: var(--sk-ivory); border-color: var(--sk-dark-line); }
