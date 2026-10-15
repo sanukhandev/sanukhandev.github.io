@@ -1,9 +1,15 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, ArrowRight, Calendar, Search, Tag } from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowRight,
+  Calendar,
+  Search,
+  Tag,
+  X,
+} from "lucide-react";
 import SeoMeta from "@/components/SeoMeta";
 import Navbar from "@/components/Navbar";
-import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
 import Footer from "@/components/sections/Footer";
 import { useDevToArticles } from "@/hooks/use-devto-articles";
 import { articles as fallbackArticles } from "@/data/siteData";
@@ -17,6 +23,8 @@ type BlogCard = {
   description: string;
   publishedAt?: string;
   tags: string[];
+  coverImage?: string | null;
+  readTime?: string;
 };
 
 const slugFromDevToUrl = (url: string) => {
@@ -24,10 +32,11 @@ const slugFromDevToUrl = (url: string) => {
   return parts[parts.length - 1] || "";
 };
 
-const PAGE_SIZE = 6;
+const PAGE_SIZE = 8;
 
 export default function BlogIndex() {
   const { locale } = useLocale();
+  const ar = locale === "ar";
   const seo = getLocalizedPageSeo("blogIndex", locale);
   const { data } = useDevToArticles(30);
   const [query, setQuery] = useState("");
@@ -42,6 +51,7 @@ export default function BlogIndex() {
         description: post.description,
         publishedAt: post.publishedAt,
         tags: post.tags,
+        coverImage: post.coverImage,
       })),
     [data],
   );
@@ -53,6 +63,7 @@ export default function BlogIndex() {
         title: post.title,
         description: post.excerpt,
         tags: [post.category],
+        readTime: post.readTime,
       })),
     [],
   );
@@ -103,8 +114,14 @@ export default function BlogIndex() {
     setPage(1);
   };
 
+  const clearFilters = () => {
+    setQuery("");
+    setSelectedTag("all");
+    setPage(1);
+  };
+
   return (
-    <>
+    <div className="sk-page relative min-h-screen flex flex-col">
       <SeoMeta
         title={seo.title}
         description={seo.description}
@@ -118,218 +135,233 @@ export default function BlogIndex() {
 
       <Navbar />
 
-      <main className="reference-subpage reference-blog-page bg-[var(--bg-primary)] pt-20 pb-16 text-[var(--text-primary)] min-h-screen">
-        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-4 sm:px-6 xl:grid-cols-[260px_minmax(0,1fr)]">
-          <aside className="hidden xl:block">
-            <div className="sticky top-24 max-h-[calc(100vh-8rem)] overflow-y-auto rounded-2xl border border-[var(--border)] bg-[var(--bg-secondary)] p-4 shadow-sm">
-              <p className="mb-3 text-[11px] font-semibold uppercase tracking-widest text-[var(--text-secondary)]">
-                Filter &amp; Search
-              </p>
-
-              <label className="mb-2 flex items-center gap-2 rounded-lg border border-[var(--border)] bg-[var(--bg-primary)] px-3 py-2 text-[12px]">
-                <Search className="h-3.5 w-3.5 text-[var(--text-secondary)]" />
-                <input
-                  value={query}
-                  onChange={(e) => onSearchChange(e.target.value)}
-                  placeholder="Search blogs"
-                  className="w-full bg-transparent text-[12px] outline-none placeholder:text-[var(--text-secondary)]"
-                />
-              </label>
-
-              <p className="mb-2 mt-4 flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-widest text-[var(--text-secondary)]">
-                <Tag className="h-3.5 w-3.5" /> Filter by tag
-              </p>
-              <div className="space-y-1 pr-1">
-                {allTags.map((tag) => (
-                  <button
-                    key={tag}
-                    type="button"
-                    onClick={() => onTagChange(tag)}
-                    className={`block w-full rounded-lg px-2.5 py-1.5 text-left text-[12px] transition-colors ${
-                      selectedTag === tag
-                        ? "bg-[var(--accent)]/20 font-semibold text-[var(--accent)]"
-                        : "text-[var(--text-secondary)] hover:bg-[var(--bg-primary)]"
-                    }`}
-                  >
-                    {tag === "all" ? "All tags" : `#${tag}`}
-                  </button>
-                ))}
-              </div>
-            </div>
-          </aside>
-
-          <section className="min-w-0">
-            <div className="flex items-end justify-between border-b border-[var(--border)]/60 pb-5">
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-widest text-[var(--accent)]">
-                  Technical Articles
-                </p>
-                <h1 className="mt-1.5 text-2xl font-extrabold tracking-tight text-[var(--text-primary)] sm:text-3xl md:text-4xl">
-                  Articles &amp; Architecture Notes
-                </h1>
-              </div>
-              <p className="hidden pb-1 text-xs font-medium text-[var(--text-secondary)] sm:block">
-                {filteredPosts.length} post
-                {filteredPosts.length !== 1 ? "s" : ""}
-              </p>
-            </div>
-            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[var(--text-secondary)] sm:text-base">
-              Deep dives on distributed systems, cloud architecture, event-driven patterns, and practical engineering execution.
+      <main id="main-content" className="flex-1 pt-24 pb-20 sm:pt-28">
+        <div className="sk-shell">
+          {/* Header section */}
+          <header className="border-b border-[var(--sk-line)] pb-8 sm:pb-12">
+            <p className="sk-eyebrow mb-3">
+              <span aria-hidden="true">/</span>
+              {ar ? "الملاحظات الهندسية" : "ENGINEERING JOURNAL"}
             </p>
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[var(--sk-black)] leading-[1.08]">
+              {ar
+                ? "المقالات وملاحظات العمارة البرمجية"
+                : "Articles & Architecture Notes"}
+            </h1>
+            <p className="mt-4 max-w-2xl text-base sm:text-lg text-[var(--sk-black)] opacity-85 leading-relaxed">
+              {ar
+                ? "دراسات متعمقة حول الأنظمة الموزعة وتكامل المؤسسات وعمارة الأنظمة المعتمدة على الأحداث وموثوقية الإنتاج."
+                : "Field notes, deep dives and design decisions on distributed platforms, enterprise integration, event-driven systems and production reliability."}
+            </p>
+          </header>
 
-            <div className="mt-5 xl:hidden">
-              <label className="mb-2 flex items-center gap-2 rounded-lg border border-[var(--border)] bg-[var(--bg-secondary)] px-3 py-2 text-[12px]">
-                <Search className="h-3.5 w-3.5 text-[var(--text-secondary)]" />
+          {/* Search & Tag Filter Bar */}
+          <div className="mt-8 border-b border-[var(--sk-line)] pb-8">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+              {/* Search box */}
+              <div className="relative flex-1 max-w-xl">
+                <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--sk-black)] opacity-50 rtl:left-auto rtl:right-3.5 pointer-events-none" />
                 <input
+                  type="search"
                   value={query}
                   onChange={(e) => onSearchChange(e.target.value)}
-                  placeholder="Search blogs"
-                  className="w-full bg-transparent text-[12px] outline-none placeholder:text-[var(--text-secondary)]"
+                  placeholder={
+                    ar
+                      ? "ابحث في المقالات والمواضيع..."
+                      : "Search by title, topic, or keyword..."
+                  }
+                  className="w-full pl-10 pr-9 py-2.5 rtl:pl-9 rtl:pr-10 bg-transparent border border-[var(--sk-line)] rounded-none text-sm text-[var(--sk-black)] placeholder:text-[var(--sk-black)]/45 focus:outline-none focus:border-[var(--sk-orange-ink)] transition-colors"
                 />
-              </label>
-              <div className="mt-2 flex flex-wrap gap-2">
-                {allTags.slice(0, 10).map((tag) => (
+                {query && (
+                  <button
+                    type="button"
+                    onClick={() => onSearchChange("")}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-[var(--sk-black)] opacity-50 hover:opacity-100 rtl:right-auto rtl:left-3"
+                    aria-label={ar ? "مسح البحث" : "Clear search"}
+                  >
+                    <X className="h-4 w-4" />
+                  </button>
+                )}
+              </div>
+
+              {/* Counter */}
+              <p className="sk-mono text-[var(--sk-orange-ink)] font-semibold shrink-0">
+                {filteredPosts.length}{" "}
+                {filteredPosts.length === 1
+                  ? ar
+                    ? "مقال"
+                    : "ARTICLE"
+                  : ar
+                    ? "مقالات"
+                    : "ARTICLES"}
+              </p>
+            </div>
+
+            {/* Tag Pills */}
+            <div className="mt-5 flex flex-wrap items-center gap-2">
+              <span className="sk-mono text-[var(--sk-black)] opacity-60 mr-1 flex items-center gap-1 rtl:mr-0 rtl:ml-1">
+                <Tag className="h-3 w-3" /> {ar ? "الموضوع:" : "TOPIC:"}
+              </span>
+              {allTags.map((tag) => {
+                const isSelected = selectedTag === tag;
+                return (
                   <button
                     key={tag}
                     type="button"
                     onClick={() => onTagChange(tag)}
-                    className={`rounded-full border px-2.5 py-1 text-[11px] ${
-                      selectedTag === tag
-                        ? "border-[var(--accent)] text-[var(--accent)]"
-                        : "border-[var(--border)] text-[var(--text-secondary)]"
+                    className={`inline-flex items-center px-3 py-1 text-xs font-mono tracking-wider uppercase transition-colors ${
+                      isSelected
+                        ? "bg-[var(--sk-black)] text-[var(--sk-ivory)] border border-[var(--sk-black)]"
+                        : "border border-[var(--sk-line)] text-[var(--sk-black)] hover:border-[var(--sk-black)] bg-transparent"
                     }`}
                   >
-                    {tag === "all" ? "All" : `#${tag}`}
+                    {tag === "all" ? (ar ? "الكل" : "ALL") : `#${tag}`}
                   </button>
-                ))}
-              </div>
+                );
+              })}
             </div>
+          </div>
 
-            <div className="mt-5 grid gap-4 sm:grid-cols-2">
-              {paginatedPosts.map((post, idx) => (
-                <Link
-                  key={post.href}
-                  to={post.href}
-                  className="group relative flex flex-col overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--bg-secondary)] p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-[var(--accent)]/40 hover:shadow-[0_0_0_1px_color-mix(in_srgb,var(--accent)_10%,transparent),0_8px_24px_color-mix(in_srgb,var(--accent)_6%,transparent)]"
-                >
-                  <div className="portfolio-article-media mb-5">
-                    <MediaPlaceholder kind="article" index={String(idx + 1).padStart(2, "0")} />
-                  </div>
-                  {/* accent top bar on hover */}
-                  <span className="pointer-events-none absolute inset-x-0 top-0 h-[2px] rounded-t-2xl bg-[var(--accent)] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+          {/* Articles Grid */}
+          <div className="mt-10">
+            {paginatedPosts.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
+                {paginatedPosts.map((post, idx) => {
+                  const globalIdx = (page - 1) * PAGE_SIZE + idx + 1;
+                  const dateStr = post.publishedAt
+                    ? new Date(post.publishedAt).toLocaleDateString(
+                        ar ? "ar-AE" : "en-US",
+                        {
+                          year: "numeric",
+                          month: "short",
+                          day: "numeric",
+                        },
+                      )
+                    : null;
 
-                  <div className="flex items-start justify-between gap-2">
-                    <h2 className="line-clamp-2 text-[17px] font-bold leading-snug text-[var(--text-primary)] transition-colors group-hover:text-[var(--accent)]">
-                      {post.title}
-                    </h2>
-                    <ArrowRight className="mt-0.5 h-4 w-4 shrink-0 text-[var(--text-secondary)] opacity-0 transition-all duration-200 group-hover:translate-x-0.5 group-hover:opacity-70" />
-                  </div>
+                  return (
+                    <article
+                      key={post.href}
+                      className="group flex flex-col justify-between border border-[var(--sk-line)] bg-transparent p-6 sm:p-8 transition-all duration-200 hover:-translate-y-1 hover:border-[var(--sk-black)] hover:shadow-lg"
+                    >
+                      <div>
+                        {/* Top Meta: Index & Category */}
+                        <div className="flex items-center justify-between gap-2 border-b border-[var(--sk-line)] pb-3 text-xs">
+                          <span className="sk-mono text-[var(--sk-orange-ink)] font-semibold">
+                            {post.tags[0] || (ar ? "هندسة" : "ENGINEERING")} /{" "}
+                            {String(globalIdx).padStart(2, "0")}
+                          </span>
+                          {dateStr && (
+                            <span className="sk-mono text-[var(--sk-black)] opacity-65 flex items-center gap-1.5">
+                              <Calendar className="h-3 w-3" />
+                              {dateStr}
+                            </span>
+                          )}
+                        </div>
 
-                  <p className="mt-2 line-clamp-2 flex-1 text-[13px] leading-6 text-[var(--text-secondary)]">
-                    {post.description}
-                  </p>
+                        {/* Title */}
+                        <h2 className="mt-4 text-xl sm:text-2xl font-bold leading-snug text-[var(--sk-black)] group-hover:text-[var(--sk-orange-ink)] transition-colors">
+                          <Link to={post.href} className="hover:underline">
+                            {post.title}
+                          </Link>
+                        </h2>
 
-                  <div className="mt-4 flex items-center justify-between">
-                    <div className="flex flex-wrap gap-1.5">
-                      {post.tags.slice(0, 3).map((tag) => (
-                        <span
-                          key={`${post.href}-${tag}`}
-                          className="rounded-full border border-[var(--border)] bg-[var(--bg-primary)] px-2 py-0.5 text-[10px] font-medium text-[var(--text-secondary)] transition-colors group-hover:border-[var(--accent)]/30"
+                        {/* Excerpt / Summary */}
+                        <p className="mt-3 text-[15px] sm:text-base leading-relaxed text-[var(--sk-black)] opacity-85 line-clamp-3">
+                          {post.description}
+                        </p>
+                      </div>
+
+                      {/* Bottom Footer: Tags & Read Link */}
+                      <div className="mt-6 pt-4 border-t border-[var(--sk-line)] flex items-center justify-between gap-3">
+                        <div className="flex flex-wrap gap-1.5">
+                          {post.tags.slice(0, 3).map((tag) => (
+                            <span
+                              key={tag}
+                              className="text-[11px] font-mono text-[var(--sk-black)] opacity-60"
+                            >
+                              #{tag}
+                            </span>
+                          ))}
+                        </div>
+                        <Link
+                          to={post.href}
+                          className="sk-text-link shrink-0 inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--sk-orange-ink)] group-hover:text-[var(--sk-black)]"
                         >
-                          #{tag}
-                        </span>
-                      ))}
-                    </div>
-                    {post.publishedAt && (
-                      <span className="flex shrink-0 items-center gap-1 text-[10px] text-[var(--text-secondary)]">
-                        <Calendar className="h-3 w-3" />
-                        {new Date(post.publishedAt).toLocaleDateString(
-                          undefined,
-                          {
-                            year: "numeric",
-                            month: "short",
-                            day: "numeric",
-                          },
-                        )}
-                      </span>
-                    )}
-                  </div>
-                </Link>
-              ))}
+                          {ar ? "اقرأ المقال" : "Read article"}
+                          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1 rtl:rotate-180" />
+                        </Link>
+                      </div>
+                    </article>
+                  );
+                })}
+              </div>
+            ) : (
+              <div className="border border-[var(--sk-line)] p-12 text-center my-12">
+                <p className="text-xl font-bold text-[var(--sk-black)]">
+                  {ar ? "لم يتم العثور على مقالات" : "No articles found"}
+                </p>
+                <p className="mt-2 text-sm text-[var(--sk-black)] opacity-70">
+                  {ar
+                    ? "جرّب تغيير عبارة البحث أو اختيار موضوع آخر."
+                    : "Try adjusting your search terms or clearing selected topic filters."}
+                </p>
+                <button
+                  type="button"
+                  onClick={clearFilters}
+                  className="mt-6 inline-flex items-center gap-2 px-5 py-2.5 bg-[var(--sk-black)] text-[var(--sk-ivory)] text-sm font-semibold hover:bg-[var(--sk-orange-ink)] transition-colors"
+                >
+                  {ar ? "إعادة ضبط التصفية" : "Reset filters"}
+                </button>
+              </div>
+            )}
+          </div>
 
-              {!paginatedPosts.length && (
-                <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-secondary)] p-8 text-center sm:col-span-2">
-                  <p className="text-[15px] font-semibold text-[var(--text-primary)]">
-                    No posts found
-                  </p>
-                  <p className="mt-1 text-[13px] text-[var(--text-secondary)]">
-                    Try changing your search or selected tag.
-                  </p>
-                </div>
-              )}
-            </div>
-
-            <div className="mt-6 flex items-center justify-between gap-3 rounded-xl border border-[var(--border)] bg-[var(--bg-secondary)] px-4 py-3">
-              <p className="text-[12px] text-[var(--text-secondary)]">
-                Showing {paginatedPosts.length} of {filteredPosts.length} posts
+          {/* Pagination */}
+          {totalPages > 1 && (
+            <div className="mt-12 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-[var(--sk-line)] pt-6">
+              <p className="sk-mono text-xs text-[var(--sk-black)] opacity-70">
+                {ar
+                  ? `عرض ${paginatedPosts.length} من إجمالي ${filteredPosts.length} مقال`
+                  : `Showing ${paginatedPosts.length} of ${filteredPosts.length} articles`}
               </p>
               <div className="flex items-center gap-2">
                 <button
                   type="button"
                   disabled={page <= 1}
-                  onClick={() => setPage((p) => Math.max(1, p - 1))}
-                  className="inline-flex items-center gap-1 rounded-lg border border-[var(--border)] px-2.5 py-1.5 text-[12px] disabled:opacity-50"
+                  onClick={() => {
+                    setPage((p) => Math.max(1, p - 1));
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                  }}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 border border-[var(--sk-line)] text-xs font-mono uppercase text-[var(--sk-black)] disabled:opacity-30 disabled:pointer-events-none hover:border-[var(--sk-black)] transition-colors"
                 >
-                  <ArrowLeft className="h-3.5 w-3.5" /> Prev
+                  <ArrowLeft className="h-3.5 w-3.5 rtl:rotate-180" />{" "}
+                  {ar ? "السابق" : "Prev"}
                 </button>
-                <span className="text-[12px] text-[var(--text-secondary)]">
-                  Page {Math.min(page, totalPages)} of {totalPages}
+                <span className="sk-mono text-xs px-3 py-1 text-[var(--sk-black)]">
+                  {ar
+                    ? `صفحة ${page} من ${totalPages}`
+                    : `Page ${page} of ${totalPages}`}
                 </span>
                 <button
                   type="button"
                   disabled={page >= totalPages}
-                  onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
-                  className="inline-flex items-center gap-1 rounded-lg border border-[var(--border)] px-2.5 py-1.5 text-[12px] disabled:opacity-50"
+                  onClick={() => {
+                    setPage((p) => Math.min(totalPages, p + 1));
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                  }}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 border border-[var(--sk-line)] text-xs font-mono uppercase text-[var(--sk-black)] disabled:opacity-30 disabled:pointer-events-none hover:border-[var(--sk-black)] transition-colors"
                 >
-                  Next <ArrowRight className="h-3.5 w-3.5" />
+                  {ar ? "التالي" : "Next"}{" "}
+                  <ArrowRight className="h-3.5 w-3.5 rtl:rotate-180" />
                 </button>
               </div>
             </div>
-          </section>
-
-          <aside className="hidden xl:block">
-            <div className="h-full rounded-2xl border border-[var(--border)] bg-[var(--bg-secondary)] p-4">
-              <p className="text-[11px] font-semibold uppercase tracking-widest text-[var(--text-secondary)]">
-                Overview
-              </p>
-              <div className="mt-3 space-y-2 text-[13px] text-[var(--text-secondary)]">
-                <p>Total posts: {posts.length}</p>
-                <p>Filtered posts: {filteredPosts.length}</p>
-                <p>Total tags: {Math.max(0, allTags.length - 1)}</p>
-              </div>
-
-              <div className="mt-5 border-t border-[var(--border)] pt-4">
-                <p className="mb-2 text-[11px] font-semibold uppercase tracking-widest text-[var(--text-secondary)]">
-                  Quick Links
-                </p>
-                <div className="flex flex-col gap-2 text-[13px]">
-                  <Link className="text-[var(--accent)] hover:underline" to="/">
-                    Back to portfolio
-                  </Link>
-                  <Link
-                    className="text-[var(--accent)] hover:underline"
-                    to="/tools"
-                  >
-                    Explore tools
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </aside>
+          )}
         </div>
       </main>
 
       <Footer />
-    </>
+    </div>
   );
 }

@@ -402,3 +402,269 @@ html.dark .sk-hero__identity { border-color: var(--sk-ivory); }
   .sk-page *, .sk-page *::before, .sk-page *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: 0.01ms !important; }
   .sk-project__media img, .sk-journal__cover { transform: none !important; }
 }
+
+/* ==========================================================================
+   Editorial Blog Reader & devto-content Typography
+   High readability, AAA contrast, comfortable typography for long-form reading
+   ========================================================================== */
+
+.sk-page .devto-content {
+  color: var(--sk-black);
+  font-family: var(--sk-body);
+  font-size: clamp(1.05rem, 1rem + 0.25vw, 1.15rem);
+  line-height: 1.85;
+  letter-spacing: normal;
+  word-break: break-word;
+}
+
+.sk-page .devto-content > *:first-child {
+  margin-top: 0 !important;
+}
+
+.sk-page .devto-content p {
+  margin-bottom: 1.6rem;
+  color: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.sk-page .devto-content :where(h1, h2, h3, h4, h5, h6) {
+  font-family: var(--sk-display);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+  color: var(--sk-black);
+  text-wrap: balance;
+  scroll-margin-top: 6rem;
+}
+
+.sk-page .devto-content h1 {
+  font-size: clamp(1.85rem, 3.2vw, 2.5rem);
+  margin-top: 3.25rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.65rem;
+  border-bottom: 2px solid var(--sk-orange);
+}
+
+.sk-page .devto-content h2 {
+  font-size: clamp(1.5rem, 2.4vw, 2rem);
+  margin-top: 2.75rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--sk-line);
+}
+
+.sk-page .devto-content h3 {
+  font-size: clamp(1.25rem, 1.8vw, 1.55rem);
+  margin-top: 2.25rem;
+  margin-bottom: 0.85rem;
+}
+
+.sk-page .devto-content h4 {
+  font-size: 1.15rem;
+  color: var(--sk-orange-ink);
+  margin-top: 1.85rem;
+  margin-bottom: 0.65rem;
+}
+
+.sk-page .devto-content h5,
+.sk-page .devto-content h6 {
+  font-size: 0.95rem;
+  font-family: var(--sk-mono);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--sk-black);
+  opacity: 0.8;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.sk-page .devto-content a {
+  color: var(--sk-orange-ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1.5px;
+  font-weight: 600;
+  transition: color 150ms ease;
+}
+
+.sk-page .devto-content a:hover {
+  color: var(--sk-black);
+}
+
+.sk-page .devto-content :is(h1, h2, h3, h4, h5, h6) > a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.sk-page .devto-content blockquote {
+  border-inline-start: 4px solid var(--sk-orange);
+  background: rgba(16, 16, 16, 0.04);
+  padding: 1.25rem 1.6rem;
+  margin: 2rem 0;
+  font-style: italic;
+  font-size: 1.08em;
+  line-height: 1.75;
+  color: var(--sk-black);
+  border-radius: 0 4px 4px 0;
+}
+
+.sk-page .devto-content blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+.sk-page .devto-content ul,
+.sk-page .devto-content ol {
+  padding-inline-start: 1.85rem;
+  margin-bottom: 1.6rem;
+}
+
+.sk-page .devto-content li {
+  margin-bottom: 0.65rem;
+  line-height: 1.75;
+}
+
+.sk-page .devto-content ul > li {
+  list-style: square;
+}
+
+.sk-page .devto-content ol > li {
+  list-style: decimal;
+}
+
+.sk-page .devto-content hr {
+  margin: 3rem 0;
+  border: 0;
+  border-top: 1px solid var(--sk-line);
+}
+
+.sk-page .devto-content .highlight {
+  position: relative;
+  margin: 1.85rem 0;
+}
+
+.sk-page .devto-content pre,
+.sk-page .devto-content .highlight pre {
+  background: var(--sk-black);
+  color: var(--sk-ivory);
+  border: 1px solid rgba(230, 213, 189, 0.22);
+  border-radius: 6px;
+  padding: 1.25rem 1.4rem;
+  overflow-x: auto;
+  margin: 1.85rem 0;
+  font-family: var(--sk-mono);
+  font-size: 0.88rem;
+  line-height: 1.65;
+  tab-size: 2;
+  box-shadow: 0 4px 16px rgba(16, 16, 16, 0.12);
+}
+
+.sk-page .devto-content .highlight pre {
+  margin: 0;
+  padding-right: 4.5rem;
+}
+
+.sk-page .devto-content code {
+  font-family: var(--sk-mono);
+  font-size: 0.88em;
+}
+
+.sk-page .devto-content :not(pre) > code {
+  background: rgba(16, 16, 16, 0.08);
+  border: 1px solid rgba(16, 16, 16, 0.15);
+  border-radius: 4px;
+  padding: 0.18em 0.45em;
+  color: var(--sk-orange-ink);
+  font-weight: 500;
+}
+
+.sk-page .devto-copy-btn {
+  position: absolute;
+  top: 0.65rem;
+  right: 0.65rem;
+  z-index: 3;
+  background: rgba(230, 213, 189, 0.12);
+  border: 1px solid rgba(230, 213, 189, 0.28);
+  border-radius: 4px;
+  color: var(--sk-ivory);
+  font-family: var(--sk-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.35rem 0.65rem;
+  cursor: pointer;
+  transition: all 160ms ease;
+  line-height: 1.4;
+}
+
+.sk-page .devto-copy-btn:hover {
+  background: var(--sk-orange);
+  border-color: var(--sk-orange);
+  color: var(--sk-white);
+}
+
+.sk-page .devto-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+  margin: 2.25rem auto;
+  display: block;
+  border: 1px solid var(--sk-line);
+}
+
+.sk-page .devto-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2rem 0;
+  font-size: 0.95rem;
+}
+
+.sk-page .devto-content th,
+.sk-page .devto-content td {
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--sk-line);
+  text-align: start;
+}
+
+.sk-page .devto-content th {
+  background: rgba(16, 16, 16, 0.06);
+  font-weight: 700;
+  font-family: var(--sk-display);
+}
+
+/* Dark mode overrides for article content */
+html.dark .sk-page .devto-content {
+  color: var(--sk-ivory);
+}
+
+html.dark .sk-page .devto-content :where(h1, h2, h3, h4, h5, h6) {
+  color: var(--sk-ivory);
+}
+
+html.dark .sk-page .devto-content h4 {
+  color: var(--sk-orange);
+}
+
+html.dark .sk-page .devto-content a {
+  color: var(--sk-orange);
+}
+
+html.dark .sk-page .devto-content a:hover {
+  color: var(--sk-white);
+}
+
+html.dark .sk-page .devto-content blockquote {
+  background: rgba(230, 213, 189, 0.05);
+  color: var(--sk-ivory);
+}
+
+html.dark .sk-page .devto-content :not(pre) > code {
+  background: rgba(230, 213, 189, 0.1);
+  color: var(--sk-orange);
+  border-color: rgba(230, 213, 189, 0.2);
+}
+
+html.dark .sk-page .devto-content th {
+  background: rgba(230, 213, 189, 0.08);
+}
+

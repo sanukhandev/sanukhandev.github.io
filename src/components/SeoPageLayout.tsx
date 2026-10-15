@@ -47,7 +47,11 @@ export default function SeoPageLayout(props: SeoPageLayoutProps) {
       name: "Sanu Khan",
       url: "https://www.sanukhan.dev",
     },
-    areaServed: { "@type": "Country", name: "United Arab Emirates" },
+    areaServed: [
+      { "@type": "Country", name: "United Arab Emirates" },
+      { "@type": "Country", name: "Saudi Arabia" },
+      { "@type": "Country", name: "Qatar" },
+    ],
   };
 
   const pageSchemas = [
