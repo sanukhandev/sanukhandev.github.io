@@ -211,19 +211,19 @@ const AppShell = () => {
               />
               <Route
                 path="/services/nodejs-backend-engineer"
-                element={<NodejsDeveloperUaePage />}
+                element={<Navigate to="/nodejs-developer-uae" replace />}
               />
               <Route
                 path="/services/react-developer-dubai"
-                element={<ReactDeveloperDubaiPage />}
+                element={<Navigate to="/react-developer-dubai" replace />}
               />
               <Route
                 path="/services/azure-cloud-architect"
-                element={<ApiIntegrationServicesPage />}
+                element={<Navigate to="/api-integration-services" replace />}
               />
               <Route
                 path="/services/full-stack-developer-uae"
-                element={<FullStackConsultantUaePage />}
+                element={<Navigate to="/full-stack-consultant-uae" replace />}
               />
               <Route path="*" element={<NotFound />} />
             </Routes>

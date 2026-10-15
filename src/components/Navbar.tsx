@@ -22,12 +22,53 @@ function Navbar() {
   const isHomePage = location.pathname === "/";
   const ctaHref = !isHomePage && nav.cta.href.startsWith("#") ? `/${nav.cta.href}` : nav.cta.href;
 
+  const scrollToHash = (hash: string) => {
+    const id = hash.replace(/^#/, "");
+    const el = document.getElementById(id);
+    if (!el) return false;
+    const headerOffset = 84;
+    const elementPosition = el.getBoundingClientRect().top;
+    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+    window.scrollTo({
+      top: Math.max(0, offsetPosition),
+      behavior: "smooth",
+    });
+    return true;
+  };
+
+  const handleNavClick = (
+    event: React.MouseEvent<HTMLAnchorElement>,
+    href: string,
+  ) => {
+    if (isHomePage && href.startsWith("#")) {
+      event.preventDefault();
+      const success = scrollToHash(href);
+      if (success) {
+        window.history.pushState(null, "", href);
+        setActiveHref(href);
+      }
+      setOpen(false);
+    } else {
+      setOpen(false);
+    }
+  };
+
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  // Handle cross-route or initial load hash scroll
+  useEffect(() => {
+    if (!isHomePage || !location.hash) return;
+    const targetHash = location.hash;
+    const timer = setTimeout(() => {
+      scrollToHash(targetHash);
+    }, 120);
+    return () => clearTimeout(timer);
+  }, [isHomePage, location.hash]);
 
   useEffect(() => {
     if (!isHomePage) {
@@ -46,8 +87,8 @@ function Navbar() {
     const sectionToNavMap: Record<string, string> = {
       home: "#home",
       services: "#services",
+      architecture: "#services",
       work: "#work",
-      architecture: "#architecture",
       writing: "#writing",
       about: "#about",
       contact: "#contact",
@@ -60,7 +101,12 @@ function Navbar() {
         return;
       }
 
-      const targetOffset = 140;
+      if (window.innerHeight + scrollY >= document.documentElement.scrollHeight - 80) {
+        setActiveHref("#contact");
+        return;
+      }
+
+      const targetOffset = 150;
       for (const [id, href] of Object.entries(sectionToNavMap)) {
         const el = document.getElementById(id);
         if (!el) continue;
@@ -125,7 +171,7 @@ function Navbar() {
     return () => document.removeEventListener("keydown", handleKeyboard);
   }, [open]);
 
-    const navItems = [
+  const navItems = [
     { label: isArabic ? "الخدمات" : "Services", href: "#services", num: "01" },
     { label: isArabic ? "الأعمال" : "Work", href: "#work", num: "02" },
     { label: isArabic ? "نبذة عني" : "About", href: "#about", num: "03" },
@@ -146,6 +192,7 @@ function Navbar() {
           {/* LEFT: SanuKhan.dev Brand Wordmark */}
           <a
             href={isHomePage ? "#home" : "/#home"}
+            onClick={(e) => handleNavClick(e, "#home")}
             className="sk-navbar__brand group select-none"
             aria-label={isArabic ? "العودة إلى الصفحة الرئيسية لسنو خان" : "Sanu Khan home"}
           >
@@ -159,6 +206,7 @@ function Navbar() {
                 <a
                   key={item.href}
                   href={isHomePage ? item.href : `/${item.href}`}
+                  onClick={(e) => handleNavClick(e, item.href)}
                   aria-current={activeHref === item.href ? "page" : undefined}
                   className={cn(
                     "text-[14.5px] font-medium transition-colors hover:text-accent focus-visible:text-accent",
@@ -197,13 +245,14 @@ function Navbar() {
 
             {/* Primary CTA: Let's talk → */}
             <a
-                href={ctaHref}
-                aria-label={isArabic ? "لنتحدث — الانتقال إلى قسم التواصل" : "Let's talk — Go to contact section"}
-                className="sk-navbar__cta inline-flex items-center justify-center h-11 rounded-lg bg-accent px-5 text-[14px] font-semibold text-white transition-colors hover:bg-accent/90 shadow-xs gap-1.5"
-              >
-                <span>{isArabic ? "لنتحدث" : "Let's talk"}</span>
-                <ArrowRight className="h-4 w-4 rtl:rotate-180" />
-              </a>
+              href={ctaHref}
+              onClick={(e) => handleNavClick(e, ctaHref)}
+              aria-label={isArabic ? "لنتحدث — الانتقال إلى قسم التواصل" : "Let's talk — Go to contact section"}
+              className="sk-navbar__cta inline-flex items-center justify-center h-11 rounded-lg bg-accent px-5 text-[14px] font-semibold text-white transition-colors hover:bg-accent/90 shadow-xs gap-1.5"
+            >
+              <span>{isArabic ? "لنتحدث" : "Let's talk"}</span>
+              <ArrowRight className="h-4 w-4 rtl:rotate-180" />
+            </a>
           </div>
 
           {/* MOBILE: Menu Trigger */}
@@ -242,37 +291,37 @@ function Navbar() {
           aria-label={isArabic ? "القائمة الرئيسية" : "Mobile navigation"}
           className="sk-mobile-nav fixed inset-0 top-[72px] sm:top-20 z-40 bg-background/98 backdrop-blur-xl border-t border-border flex flex-col justify-between p-6 sm:p-8 md:hidden overflow-y-auto animate-in fade-in slide-in-from-top-2 duration-200"
         >
-            <div className="flex flex-col gap-6 pt-4">
-              {/* Big Nav items */}
-              <nav className="flex flex-col gap-4" aria-label="Mobile Navigation">
-                {navItems.map((item) => (
-                  <a
-                    key={item.href}
-                    href={isHomePage ? item.href : `/${item.href}`}
-                    onClick={() => setOpen(false)}
-                    className="flex items-baseline justify-between border-b border-border/60 pb-3 text-2xl font-semibold tracking-tight text-primary transition-colors hover:text-accent"
-                  >
-                    <span>{item.label}</span>
-                    <span className="font-mono text-xs font-semibold text-accent/80 tracking-widest">
-                      {item.num}
-                    </span>
-                  </a>
-                ))}
-              </nav>
-
-              {/* Mobile CTA */}
-              <div className="pt-2">
+          <div className="flex flex-col gap-6 pt-4">
+            {/* Big Nav items */}
+            <nav className="flex flex-col gap-4" aria-label="Mobile Navigation">
+              {navItems.map((item) => (
                 <a
-                    href={ctaHref}
-                    aria-label={isArabic ? "لنتحدث — الانتقال إلى قسم التواصل" : "Let's talk — Go to contact section"}
-                    onClick={() => setOpen(false)}
-                    className="sk-navbar__cta inline-flex items-center justify-center w-full h-12 rounded-lg bg-accent text-[15px] font-semibold text-white hover:bg-accent/90 justify-center gap-2"
-                  >
-                    <span>{isArabic ? "لنتحدث" : "Let's talk"}</span>
-                    <ArrowRight className="h-4 w-4 rtl:rotate-180" />
-                  </a>
-              </div>
+                  key={item.href}
+                  href={isHomePage ? item.href : `/${item.href}`}
+                  onClick={(e) => handleNavClick(e, item.href)}
+                  className="flex items-baseline justify-between border-b border-border/60 pb-3 text-2xl font-semibold tracking-tight text-primary transition-colors hover:text-accent"
+                >
+                  <span>{item.label}</span>
+                  <span className="font-mono text-xs font-semibold text-accent/80 tracking-widest">
+                    {item.num}
+                  </span>
+                </a>
+              ))}
+            </nav>
+
+            {/* Mobile CTA */}
+            <div className="pt-2">
+              <a
+                href={ctaHref}
+                aria-label={isArabic ? "لنتحدث — الانتقال إلى قسم التواصل" : "Let's talk — Go to contact section"}
+                onClick={(e) => handleNavClick(e, ctaHref)}
+                className="sk-navbar__cta inline-flex items-center justify-center w-full h-12 rounded-lg bg-accent text-[15px] font-semibold text-white hover:bg-accent/90 justify-center gap-2"
+              >
+                <span>{isArabic ? "لنتحدث" : "Let's talk"}</span>
+                <ArrowRight className="h-4 w-4 rtl:rotate-180" />
+              </a>
             </div>
+          </div>
 
             {/* Bottom Controls & Social Links */}
             <div className="pt-8 border-t border-border/80 flex flex-col gap-5">
