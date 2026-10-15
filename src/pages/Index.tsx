@@ -56,7 +56,7 @@ const Index = () => {
 
       <main id="main-content" className="pt-[72px] sm:pt-20">
         <ReferenceHero />
-        <SectionReveal><ReferenceProof /></SectionReveal>
+        <ReferenceProof />
         <SectionReveal><ReferenceServices /></SectionReveal>
         <SectionReveal><ReferenceProjects /></SectionReveal>
         <SectionReveal><ReferenceWriting /></SectionReveal>

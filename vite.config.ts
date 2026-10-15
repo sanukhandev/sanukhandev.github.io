@@ -137,10 +137,6 @@ export default defineConfig(({ command, mode }) => {
           "/api-integration-services",
           "/full-stack-consultant-uae",
           "/software-engineer-uae",
-          "/services/nodejs-backend-engineer",
-          "/services/react-developer-dubai",
-          "/services/azure-cloud-architect",
-          "/services/full-stack-developer-uae",
         ],
         renderer: new vitePrerender.PuppeteerRenderer({
           // Wait for intro preloader (1900ms) + SeoMeta useEffect to run

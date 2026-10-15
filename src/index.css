@@ -1101,34 +1101,12 @@ html.light .timeline-year-shimmer {
   animation: timelineYearPulseLight 3.4s ease-in-out infinite;
 }
 
-html.light .zaakiy-chat > div {
-  background-color: rgba(230,213,189,0.98) !important;
-  border-color: #E6D5BD !important;
-  box-shadow: 0 16px 40px -20px rgba(213,54,12,0.24) !important;
-}
-
-html.light .zaakiy-chat .text-\[\#d7ffe2\] {
-  color: #101010 !important;
-}
-
-html.light .zaakiy-chat .bg-\[\#38c755\]\/10 {
-  background-color: rgba(213,54,12,0.14) !important;
-}
-
-html.light .zaakiy-chat .border-\[\#38c755\]\/35 {
-  border-color: rgba(213,54,12,0.38) !important;
-}
-
-html.light .zaakiy-chat .bg-\[\#20222b\] {
-  background-color: #E6D5BD !important;
-}
-
-html.light .zaakiy-chat .text-\[\#8a90a8\] {
-  color: #101010 !important;
-}
-
-html.light .zaakiy-chat .placeholder\:text-\[\#8a90a8\]::placeholder {
-  color: #D5360C !important;
+/* Zaakiy Chat — Reset launcher container so launcher has no phantom background or border */
+.zaakiy-chat > div:not([role="dialog"]),
+.zaakiy-chat__launcher {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
 }
 
 @keyframes timelineYearPulseDark {

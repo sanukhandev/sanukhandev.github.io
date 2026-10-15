@@ -297,12 +297,12 @@ export default function ZaakiyChatWidget({
           aria-modal="true"
           aria-labelledby="zaakiy-chat-title"
           aria-label={isArabic ? "مساعد معرض سانو خان" : "Zaakiy Portfolio Assistant"}
-          className="mb-3 flex flex-col w-[min(380px,calc(100vw-1.5rem))] h-[min(560px,calc(100vh-6rem))] max-h-[620px] overflow-hidden rounded-[16px] border border-border bg-background shadow-xl transition-all duration-200"
+          className="zaakiy-chat__dialog mb-3 flex flex-col w-[min(380px,calc(100vw-1.5rem))] h-[min(560px,calc(100vh-6rem))] max-h-[620px] overflow-hidden rounded-[16px] shadow-xl transition-all duration-200"
         >
           {/* Header (56-64px height, understated neutral tone) */}
-          <div className="flex h-14 shrink-0 items-center justify-between border-b border-border/70 bg-secondary/20 px-4">
+          <div className="zaakiy-chat__header flex h-14 shrink-0 items-center justify-between px-4">
             <div className="flex items-center gap-2.5">
-              <div className="flex h-7 w-7 items-center justify-center rounded-lg border border-accent/20 bg-accent/10 text-accent">
+              <div className="zaakiy-chat__bot-icon flex h-7 w-7 items-center justify-center rounded-lg">
                 <Bot className="h-3.5 w-3.5" />
               </div>
               <div className="flex flex-col leading-none">
@@ -337,7 +337,7 @@ export default function ZaakiyChatWidget({
           <div
             ref={scrollRef}
             className={cn(
-              "flex-1 overflow-y-auto overflow-x-hidden p-4 space-y-4 font-sans text-primary",
+              "zaakiy-chat__body flex-1 overflow-y-auto overflow-x-hidden p-4 space-y-4 font-sans",
               isArabic ? "text-right" : "text-left",
             )}
           >
@@ -365,7 +365,7 @@ export default function ZaakiyChatWidget({
                 </div>
 
                 {/* Suggested Questions Stack */}
-                <div className="pt-3 space-y-2 border-t border-border/50">
+                <div className="zaakiy-chat__suggested-wrapper pt-3 space-y-2">
                   <p className="text-[11px] font-mono uppercase text-muted-foreground tracking-wider font-semibold">
                     {isArabic ? "أسئلة مقترحة" : "Suggested"}
                   </p>
@@ -375,7 +375,7 @@ export default function ZaakiyChatWidget({
                         key={q.label}
                         type="button"
                         onClick={() => handleSendQuery(q.query)}
-                        className="group flex items-center justify-between rounded-lg border border-border/70 bg-secondary/20 px-3 py-2 text-left rtl:text-right text-[12.5px] font-medium text-primary hover:border-accent/40 hover:bg-secondary/50 transition-colors"
+                        className="zaakiy-chat__suggested-btn group flex items-center justify-between rounded-lg px-3 py-2 text-left rtl:text-right text-[12.5px] font-medium transition-colors"
                       >
                         <span>{q.label}</span>
                         <ArrowRight className="h-3.5 w-3.5 text-muted-foreground group-hover:text-accent transition-colors rtl:rotate-180" />
@@ -390,12 +390,12 @@ export default function ZaakiyChatWidget({
             {messages.map((m) => (
               <div key={m.id} className="w-full">
                 {m.role === "user" ? (
-                  <div className="ml-auto rtl:ml-0 rtl:mr-auto max-w-[80%] rounded-[12px] bg-accent/10 border border-accent/20 px-3.5 py-2 text-[13px] text-primary leading-relaxed">
+                  <div className="zaakiy-chat__user-bubble ml-auto rtl:ml-0 rtl:mr-auto max-w-[80%] rounded-[12px] px-3.5 py-2 text-[13px] leading-relaxed">
                     {m.text}
                   </div>
                 ) : (
                   <div className="flex items-start gap-2.5 max-w-[95%]">
-                    <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-md border border-accent/20 bg-accent/10 text-accent">
+                    <div className="zaakiy-chat__bot-icon mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-md">
                       <Bot className="h-3.5 w-3.5" />
                     </div>
                     <div className="flex-1 space-y-1.5 text-[13px] leading-relaxed text-primary font-normal whitespace-pre-line">
@@ -416,7 +416,7 @@ export default function ZaakiyChatWidget({
           </div>
 
           {/* Composer Input Area */}
-          <form onSubmit={onSubmit} className="border-t border-border/70 bg-background p-3 space-y-2 shrink-0">
+          <form onSubmit={onSubmit} className="zaakiy-chat__form p-3 space-y-2 shrink-0">
             <div className="flex items-center gap-2">
               <textarea
                 ref={inputRef}
@@ -427,12 +427,12 @@ export default function ZaakiyChatWidget({
                 rows={1}
                 maxLength={400}
                 placeholder={isArabic ? "اسأل عن أعمال سانو…" : "Ask about Sanu's work…"}
-                className="min-h-[42px] max-h-[90px] flex-1 resize-none rounded-xl border border-border bg-secondary/15 px-3.5 py-2.5 text-[13px] text-primary outline-none placeholder:text-muted-foreground focus:border-accent/60 focus:bg-background transition-colors"
+                className="zaakiy-chat__input min-h-[42px] max-h-[90px] flex-1 resize-none rounded-xl px-3.5 py-2.5 text-[13px] outline-none placeholder:text-muted-foreground transition-colors"
               />
               <button
                 type="submit"
                 disabled={loading || !input.trim()}
-                className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-accent text-white transition-colors hover:bg-accent/90 disabled:opacity-40 disabled:cursor-not-allowed shadow-xs"
+                className="zaakiy-chat__send-btn inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition-colors disabled:opacity-40 disabled:cursor-not-allowed shadow-xs"
                 aria-label={isArabic ? "إرسال السؤال" : "Send query"}
               >
                 <Send className="h-4 w-4 rtl:rotate-180" />
@@ -452,7 +452,7 @@ export default function ZaakiyChatWidget({
       )}
 
       {/* Floating Launcher Button Container with Perched Animated Cat */}
-      <div className="relative inline-flex flex-col items-end">
+      <div className="zaakiy-chat__launcher relative inline-flex flex-col items-end">
         <ZaakiyCat
           isOpen={open}
           onClick={() => setOpen((v) => !v)}
@@ -464,8 +464,8 @@ export default function ZaakiyChatWidget({
           type="button"
           onClick={() => setOpen((v) => !v)}
           className={cn(
-            "relative inline-flex h-11 items-center gap-2 rounded-full border border-accent/30 bg-accent px-4 text-xs font-semibold text-white shadow-md transition-all hover:bg-accent/90 focus:outline-none focus:ring-2 focus:ring-accent/40",
-            open && "ring-2 ring-accent/40 bg-accent/90"
+            "zaakiy-chat__launcher-button relative inline-flex h-11 items-center gap-2 rounded-full border-0 px-4 text-xs font-semibold text-white shadow-md transition-all focus:outline-none",
+            open && "opacity-95"
           )}
           aria-label={isArabic ? "اسأل Zaakiy — فتح مساعد Zaakiy" : "Ask Zaakiy — Open Zaakiy Portfolio Assistant"}
         >

@@ -1,5 +1,5 @@
 import { describe, expect, it, vi, beforeEach, afterEach } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import Navbar from "@/components/Navbar";
@@ -54,7 +54,7 @@ describe("ErrorBoundary and lazyWithRetry unit tests", () => {
     spy.mockRestore();
   });
 
-  it("renders Navbar component with nav links", () => {
+  it("renders Navbar component with nav links in correct sequence", () => {
     render(
       <LocaleProvider>
         <ThemeProvider>
@@ -65,9 +65,17 @@ describe("ErrorBoundary and lazyWithRetry unit tests", () => {
       </LocaleProvider>
     );
 
-    expect(screen.getByText("Work")).toBeInTheDocument();
-    expect(screen.getByText("Services")).toBeInTheDocument();
-    expect(screen.getByText("Notes")).toBeInTheDocument();
-    expect(screen.getByText("About")).toBeInTheDocument();
+    const mainNav = screen.getByRole("navigation", { name: "Main Navigation" });
+    const links = within(mainNav).getAllByRole("link");
+    expect(links.map((link) => link.textContent)).toEqual([
+      "Services",
+      "Work",
+      "Notes",
+      "About",
+    ]);
+    expect(links[0]).toHaveAttribute("href", "#services");
+    expect(links[1]).toHaveAttribute("href", "#work");
+    expect(links[2]).toHaveAttribute("href", "#writing");
+    expect(links[3]).toHaveAttribute("href", "#about");
   });
 });

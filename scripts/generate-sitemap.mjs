@@ -31,10 +31,6 @@ const staticRoutes = [
   "/react-developer-dubai",
   "/api-integration-services",
   "/full-stack-consultant-uae",
-  "/services/nodejs-backend-engineer",
-  "/services/react-developer-dubai",
-  "/services/azure-cloud-architect",
-  "/services/full-stack-developer-uae",
 ];
 
 const fetchDevToBlogRoutes = async () => {
