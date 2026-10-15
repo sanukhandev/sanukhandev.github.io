@@ -64,7 +64,7 @@ export function ZaakiyCat({ isOpen, onClick, isArabic = false }: ZaakiyCatProps)
       {/* Cat Animation Container */}
       <div
         className={cn(
-          "relative transition-transform duration-[2400ms] ease-out",
+          "relative transition-transform duration-2400 ease-out",
           // Slide from left start position to resting perch position if not open
           !isOpen && (catState === "walking" ? "translate-x-0" : "translate-x-7 sm:translate-x-9")
         )}
@@ -80,7 +80,7 @@ export function ZaakiyCat({ isOpen, onClick, isArabic = false }: ZaakiyCatProps)
               viewBox="0 0 42 28"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-              className="text-[#242D27] dark:text-[#E2E8F0] drop-shadow-xs overflow-visible"
+              className="text-[#101010] dark:text-[#E6D5BD] drop-shadow-xs overflow-visible"
               aria-hidden="true"
             >
               {/* Animated Swaying Upright Tail */}
@@ -116,9 +116,9 @@ export function ZaakiyCat({ isOpen, onClick, isArabic = false }: ZaakiyCatProps)
               {/* Ears */}
               <polygon points="26,7 28,1.5 31,5" fill="currentColor" />
               <polygon points="31,5 34,1.5 35.5,7" fill="currentColor" />
-              {/* Inner ears pink */}
-              <polygon points="27,6.5 28.5,3 30.5,5" fill="#F472B6" />
-              <polygon points="31.5,5 33.5,3 34.5,6.5" fill="#F472B6" />
+              {/* Inner ears orange */}
+              <polygon points="27,6.5 28.5,3 30.5,5" fill="#D5360C" />
+              <polygon points="31.5,5 33.5,3 34.5,6.5" fill="#D5360C" />
 
               {/* Accent Collar & Signal Gem */}
               <path d="M 27 15.5 C 29 16.5 32 16.5 34 15.5" stroke="var(--accent)" strokeWidth="1.5" strokeLinecap="round" />
@@ -127,7 +127,7 @@ export function ZaakiyCat({ isOpen, onClick, isArabic = false }: ZaakiyCatProps)
               {/* Eyes & Nose */}
               <circle cx="29" cy="10" r="0.9" fill="var(--bg)" />
               <circle cx="33" cy="10" r="0.9" fill="var(--bg)" />
-              <polygon points="30.5,12 31.5,12 31,12.8" fill="#F472B6" />
+              <polygon points="30.5,12 31.5,12 31,12.8" fill="#D5360C" />
             </svg>
           </div>
         ) : (
@@ -143,7 +143,7 @@ export function ZaakiyCat({ isOpen, onClick, isArabic = false }: ZaakiyCatProps)
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
               className={cn(
-                "text-[#242D27] dark:text-[#E2E8F0] drop-shadow-xs overflow-visible transition-transform duration-200",
+                "text-[#101010] dark:text-[#E6D5BD] drop-shadow-xs overflow-visible transition-transform duration-200",
                 isHovered && "scale-105 -translate-y-0.5"
               )}
               aria-hidden="true"
@@ -180,9 +180,9 @@ export function ZaakiyCat({ isOpen, onClick, isArabic = false }: ZaakiyCatProps)
                 <polygon points="17.5,6 19,0.8 22.5,4.5" fill="currentColor" />
                 <polygon points="23,4.5 26.5,0.8 27.5,6" fill="currentColor" />
 
-                {/* Inner Ears Pink */}
-                <polygon points="18.5,5.2 19.5,2 22,4.5" fill="#F472B6" />
-                <polygon points="23.5,4.5 25.8,2 26.5,5.2" fill="#F472B6" />
+                {/* Inner Ears Orange */}
+                <polygon points="18.5,5.2 19.5,2 22,4.5" fill="#D5360C" />
+                <polygon points="23.5,4.5 25.8,2 26.5,5.2" fill="#D5360C" />
 
                 {/* Accent Collar & Signal Gem */}
                 <path d="M 18.5 14.8 C 21.5 16.2 24 15.8 26 14.5" stroke="var(--accent)" strokeWidth="1.4" strokeLinecap="round" />
@@ -206,8 +206,8 @@ export function ZaakiyCat({ isOpen, onClick, isArabic = false }: ZaakiyCatProps)
                   style={{ transformOrigin: "24.5px 10.5px" }}
                 />
 
-                {/* Cute Pink Nose */}
-                <polygon points="22,12 23,12 22.5,12.8" fill="#F472B6" />
+                {/* Cute Orange Nose */}
+                <polygon points="22,12 23,12 22.5,12.8" fill="#D5360C" />
 
                 {/* Whiskers */}
                 <path

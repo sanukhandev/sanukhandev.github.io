@@ -14,9 +14,9 @@ export const profile = {
   role: "Creator of ZaakiyV3RSE",
   roleBrand: "ZaakiyV3RSE",
   subRole:
-    "Tech Lead • Cloud & MS Architect • Enterprise Integrations Specialist",
+    "Tech Lead • Cloud & MS Expert • Enterprise Integrations Specialist",
   subtitle:
-    "Cloud Architect & Tech Lead · Azure · Event-Driven Architecture",
+    "Cloud Expert & Tech Lead · Azure · Event-Driven Architecture",
   statement:
     "100+ Solutions Built · Creator of ZaakiyV3RSE · 13+ Years Experience",
   meta: [
@@ -96,7 +96,7 @@ export const services = [
     company: "Enterprise Solution Consultancy",
     client: "Enterprise Commerce Division",
     location: "Dubai, UAE",
-    role: "Tech Lead & Solution Architect",
+    role: "Tech Lead & Solution Expert",
     duration: "Feb 2022 – Present",
     current: true,
     impact: [
@@ -168,7 +168,7 @@ export const services = [
     company: "Independent Architecture Consulting",
     client: null,
     location: "Remote / Global",
-    role: "Solution Architect & Full Stack Consultant",
+    role: "Solution Expert & Full Stack Consultant",
     duration: "2010 – Present",
     current: false,
     impact: [
@@ -202,18 +202,6 @@ export const services = [
   },
 ];
 
-export const workCategories = [
-  "All",
-  "Commerce",
-  "Integration",
-  "Platform",
-  "Operations Intelligence",
-  "Automation",
-  "AI",
-  "Operations",
-  "Infrastructure",
-] as const;
-export type WorkCategory = (typeof workCategories)[number];
 
 export const works: Array<{
   title: string;
@@ -444,60 +432,10 @@ export const articles = [
   },
 ];
 
-export const certifications = [
-  {
-    issuer: "Simplilearn",
-    title: "Introduction to Cyber Security",
-    issued: "Apr 2023",
-    credentialId: "MycyWRDvWyb",
-    category: "Security",
-    url: "https://simpli.app.link/MycyWRDvWyb",
-  },
-  {
-    issuer: "HackerRank",
-    title: "Python (Basic)",
-    issued: "Jan 2022",
-    credentialId: "8124d504fd5d",
-    category: "Programming",
-    url: "https://www.hackerrank.com/certificates/8124d504fd5d",
-  },
-  {
-    issuer: "HackerRank",
-    title: "SQL (Intermediate)",
-    issued: "Feb 2022",
-    credentialId: "0568be8a2030",
-    category: "Database",
-    url: "https://www.hackerrank.com/certificates/0568be8a2030",
-  },
-  {
-    issuer: "HackerRank",
-    title: "React (Basic)",
-    issued: "Feb 2022",
-    credentialId: "81d2dee86295",
-    category: "Frontend",
-    url: "https://www.hackerrank.com/certificates/81d2dee86295",
-  },
-  {
-    issuer: "HackerRank",
-    title: "Problem Solving (Intermediate)",
-    issued: "Feb 2022",
-    credentialId: "56d29c99f14d",
-    category: "Algorithms",
-    url: "https://www.hackerrank.com/certificates/56d29c99f14d",
-  },
-  {
-    issuer: "Udemy",
-    title: "React - The Complete Guide",
-    issued: "Jan 2022",
-    credentialId: "UC-119237dc-9851-489c-8f06-313fca17fdc1",
-    category: "Advanced Frontend",
-    url: "https://www.udemy.com/certificate/UC-119237dc-9851-489c-8f06-313fca17fdc1/",
-  },
-];
 
 export const footer = {
   brand: "SanuKhan.dev",
-  blurb: "Tech Lead • Cloud Architect",
+  blurb: "Tech Lead • Cloud Expert",
   socials: [
     { label: "GitHub", icon: "GitHub", href: "https://github.com/sanukhandev" },
     {

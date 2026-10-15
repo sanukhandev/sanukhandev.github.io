@@ -61,13 +61,13 @@ export default function AboutPage() {
   return (
     <>
       <SeoMeta
-        title={isArabic ? "نبذة عن سانو خان — معماري حلول ومهندس منصات" : "About Sanu Khan — Solution Architect & Platform Engineer"}
-        description={isArabic ? "الخلفية الشخصية، التطور المهني، والقيم التقنية لسانو خان — معماري حلول يمتلك 13+ عاماً في تصميم أنظمة المؤسسات." : "Personal background, career progression, and technical values of Sanu Khan — Solution Architect with 13+ years designing enterprise systems."}
+        title={isArabic ? "نبذة عن سانو خان — خبير حلول ومهندس منصات" : "About Sanu Khan — Solution Expert & Platform Engineer"}
+        description={isArabic ? "الخلفية الشخصية، التطور المهني، والقيم التقنية لسانو خان — خبير حلول يمتلك 13+ عاماً في تصميم أنظمة المؤسسات." : "Personal background, career progression, and technical values of Sanu Khan — Solution Expert with 13+ years designing enterprise systems."}
         canonicalPath={seo.canonicalPath}
         kind="profile"
         keywords={[
           "About Sanu Khan",
-          "Solution Architect Dubai",
+          "Solution Expert Dubai",
           "Platform Engineering Lead",
           "Enterprise Systems Architect"
         ]}
@@ -79,7 +79,7 @@ export default function AboutPage() {
 
       <Navbar />
 
-      <main className="min-h-screen bg-background pt-24 pb-16 text-foreground">
+      <main className="reference-subpage reference-about-page min-h-screen bg-background pt-24 pb-16 text-foreground">
         <article className="container-narrow max-w-4xl space-y-12">
           {/* Header */}
           <header className="border-b border-border/60 pb-8">
@@ -90,7 +90,7 @@ export default function AboutPage() {
               {isArabic ? "سانو خان" : "Sanu Khan"}
             </h1>
             <p className="mt-3 text-lg text-secondary font-medium">
-              {isArabic ? "معماري حلول · قائد هندسة المنصات · دبي، الإمارات" : "Solution Architect · Platform Engineering Lead · Dubai, UAE"}
+              {isArabic ? "خبير حلول · قائد هندسة المنصات · دبي، الإمارات" : "Solution Expert · Platform Engineering Lead · Dubai, UAE"}
             </p>
           </header>
 

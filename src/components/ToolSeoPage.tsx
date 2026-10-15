@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import SeoMeta from "@/components/SeoMeta";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/sections/Footer";
 import { buildBreadcrumbListSchema } from "@/lib/schema";
 
 type ToolSeoPageProps = {
@@ -52,7 +54,8 @@ export default function ToolSeoPage(props: ToolSeoPageProps) {
           ]),
         ]}
       />
-      <main className="min-h-[100dvh] bg-background pt-20 text-foreground">
+      <Navbar />
+      <main className="min-h-[100dvh] bg-background pt-24 pb-16 text-foreground">
         <article className="container-narrow section-pad">
           <h1 className="text-[38px] font-extrabold leading-[1.1] text-primary">{h1}</h1>
           <div className="mt-4 space-y-4 text-[15px] leading-7 text-secondary">
@@ -95,6 +98,7 @@ export default function ToolSeoPage(props: ToolSeoPageProps) {
           </nav>
         </article>
       </main>
+      <Footer />
     </>
   );
 }

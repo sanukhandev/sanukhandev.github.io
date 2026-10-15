@@ -66,12 +66,28 @@ const evictStaleSessions = () => {
   }
 };
 
-const allowedOrigins = new Set(
-  (process.env.ALLOWED_ORIGINS || "")
-    .split(",")
-    .map((origin) => origin.trim())
-    .filter(Boolean),
-);
+const defaultAllowedOrigins = [
+  "https://www.sanukhan.dev",
+  "https://sanukhan.dev",
+  "https://sanukhandev.github.io",
+  "http://localhost:5173",
+  "http://localhost:4173",
+  "http://localhost:3000",
+];
+
+const configuredOrigins = (process.env.ALLOWED_ORIGINS || "")
+  .split(",")
+  .map((origin) => origin.trim())
+  .filter(Boolean);
+
+const allowedOrigins = new Set([...defaultAllowedOrigins, ...configuredOrigins]);
+
+const isOriginAllowed = (origin: string): boolean => {
+  if (!origin) return false;
+  if (allowedOrigins.has(origin)) return true;
+  if (origin.endsWith(".vercel.app") || origin.endsWith("sanukhan.dev")) return true;
+  return false;
+};
 
 const getRequestOrigin = (req?: ApiRequest): string => {
   const origin = req?.headers?.origin;
@@ -84,7 +100,7 @@ const sendJson = (res: ApiResponse, status: number, data: unknown) => {
   const origin = getRequestOrigin(res.req);
   res.status(status);
   res.setHeader("Vary", "Origin");
-  if (origin && allowedOrigins.has(origin)) {
+  if (origin && isOriginAllowed(origin)) {
     res.setHeader("Access-Control-Allow-Origin", origin);
   }
   res.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
@@ -449,8 +465,7 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
 
     const locale: ZaakiyLocale = body.locale === "ar" ? "ar" : "en";
     const userQuestion = String(body.userQuestion || "").trim();
-    const incomingSiteScope = String(body.siteScope || "").trim();
-    const email = String(body.email || " hello@sanukhan.dev").trim();
+    const email = "hello@sanukhan.dev";
     const maxOutputChars = Math.max(
       120,
       Math.min(500, Number(body.maxOutputChars || 250)),
@@ -460,14 +475,17 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
     const incomingExtraContext = String(body.extraContext || "")
       .trim()
       .slice(0, 1500);
-    // Only persist the incoming scope if the session doesn't already have one
-    // stored (i.e. first message only), so later messages cannot accidentally
-    // overwrite the full scope with a smaller/partial one.
-    if (sessionId && incomingSiteScope && !getSessionScope(sessionId)) {
-      setSessionScope(sessionId, incomingSiteScope);
-    }
-    const siteScope =
-      (sessionId ? getSessionScope(sessionId) : "") || incomingSiteScope;
+
+    // Authoritative portfolio facts defined on server - protects against client prompt injection
+    const siteScope = [
+      "Identity: Zaakiy — Sanu Khan's Portfolio Assistant.",
+      "Persona & Tone: Professional, calm, concise, technical, and helpful solution architect representative.",
+      "Sanu Khan: Solution Expert & Platform Engineering Leader based in Dubai, UAE with 13+ years experience.",
+      "Key Systems Built: Regional Enterprise Commerce Platform (9 regional markets PIM integration), Enterprise Omnichannel Commerce Fabric, Airline NDC & Travel B2B Marketplace, Airport Commerce & Travel Retail Platform.",
+      "Personal R&D: ZaakiyV3RSE — An AI-native operations intelligence platform exploring agent orchestration, context retrieval, and adaptive workflows.",
+      "Domains: Enterprise Integrations, Cloud Platforms (Azure/AWS), Distributed Event-Driven Architecture, Microservices, Node.js, TypeScript, React.",
+      `Contact email: ${email}`,
+    ].join("\n");
 
     if (!userQuestion) {
       sendJson(res, 400, { error: "Missing required fields" });
@@ -490,10 +508,13 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
     });
 
     const googleResp = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`,
       {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "x-goog-api-key": apiKey,
+        },
         body: JSON.stringify({
           contents: [{ role: "user", parts: [{ text: mergedPrompt }] }],
           generationConfig: {

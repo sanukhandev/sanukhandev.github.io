@@ -11,14 +11,13 @@ describe("ErrorBoundary and lazyWithRetry unit tests", () => {
 
   beforeEach(() => {
     sessionStorage.clear();
-    // @ts-expect-error jsdom location replacement
-    delete window.location;
-    // @ts-expect-error jsdom location replacement
-    window.location = { ...originalLocation, reload: vi.fn(), pathname: "/" };
+    const mutableWindow = window as unknown as { location?: Location };
+    delete mutableWindow.location;
+    mutableWindow.location = { ...originalLocation, reload: vi.fn(), pathname: "/" };
   });
 
   afterEach(() => {
-    window.location = originalLocation;
+    (window as unknown as { location: Location }).location = originalLocation;
     vi.restoreAllMocks();
   });
 
@@ -67,7 +66,7 @@ describe("ErrorBoundary and lazyWithRetry unit tests", () => {
     );
 
     expect(screen.getByText("Work")).toBeInTheDocument();
-    expect(screen.getByText("Architecture")).toBeInTheDocument();
+    expect(screen.getByText("Services")).toBeInTheDocument();
     expect(screen.getByText("Notes")).toBeInTheDocument();
     expect(screen.getByText("About")).toBeInTheDocument();
   });

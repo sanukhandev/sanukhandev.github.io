@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import SeoMeta from "@/components/SeoMeta";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/sections/Footer";
 import {
   buildBreadcrumbListSchema,
   buildCreativeWorkSchema,
@@ -45,7 +47,11 @@ export default function SeoPageLayout(props: SeoPageLayoutProps) {
       name: "Sanu Khan",
       url: "https://www.sanukhan.dev",
     },
-    areaServed: { "@type": "Country", name: "United Arab Emirates" },
+    areaServed: [
+      { "@type": "Country", name: "United Arab Emirates" },
+      { "@type": "Country", name: "Saudi Arabia" },
+      { "@type": "Country", name: "Qatar" },
+    ],
   };
 
   const pageSchemas = [
@@ -63,7 +69,7 @@ export default function SeoPageLayout(props: SeoPageLayoutProps) {
       { name: "Home", path: "/" },
       { name: h1, path: canonicalPath },
     ]),
-    serviceSchema,
+    ...(Array.isArray(serviceSchema) ? serviceSchema : [serviceSchema]),
   ];
 
   return (
@@ -74,7 +80,8 @@ export default function SeoPageLayout(props: SeoPageLayoutProps) {
         canonicalPath={canonicalPath}
         schema={pageSchemas}
       />
-      <main className="min-h-[100dvh] bg-background pt-20 text-foreground">
+      <Navbar />
+      <main className="min-h-[100dvh] bg-background pt-24 pb-16 text-foreground">
         <article className="container-narrow section-pad">
           <header>
             <h1 className="text-[40px] font-extrabold leading-[1.1] text-primary">
@@ -127,6 +134,7 @@ export default function SeoPageLayout(props: SeoPageLayoutProps) {
           </nav>
         </article>
       </main>
+      <Footer />
     </>
   );
 }

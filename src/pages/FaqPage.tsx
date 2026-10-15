@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/sections/Footer";
 import SeoMeta from "@/components/SeoMeta";
 import { pageSeo } from "@/lib/seo";
 import { buildBreadcrumbListSchema, buildFaqSchema } from "@/lib/schema";
@@ -49,43 +51,58 @@ export default function FaqPage() {
           "full stack architect faq",
         ]}
       />
-      <main className="min-h-[100dvh] bg-background pt-20 text-foreground">
-        <section className="container-narrow section-pad">
-          <h1 className="text-[38px] font-extrabold text-primary">
-            Frequently Asked Questions
-          </h1>
-          <p className="mt-4 max-w-3xl text-[15px] text-secondary">
-            Answers about technical consulting, platform delivery, and
-            engagement style.
-          </p>
+      <Navbar />
+      <main className="min-h-[100dvh] bg-background pt-28 pb-20 text-foreground">
+        <section className="container mx-auto max-w-4xl px-4 sm:px-6">
+          <div className="border-b border-foreground/10 pb-8">
+            <span className="font-mono text-xs uppercase tracking-widest text-accent">02 / Questions</span>
+            <h1 className="mt-3 text-4xl font-black tracking-tight text-foreground sm:text-5xl lg:text-6xl">
+              Frequently Asked Questions
+            </h1>
+            <p className="mt-4 max-w-2xl text-base text-foreground/70 sm:text-lg">
+              Answers about technical consulting, platform delivery, and engagement style.
+            </p>
+          </div>
 
-          <div className="mt-8 space-y-4">
-            {faqs.map((faq) => (
-              <article key={faq.question} className="premium-card p-5">
-                <h2 className="text-[20px] font-bold text-primary">
+          <div className="mt-10 divide-y divide-foreground/15 border-y border-foreground/15">
+            {faqs.map((faq, idx) => (
+              <article key={faq.question} className="py-8">
+                <span className="font-mono text-xs text-foreground/40">0{idx + 1}</span>
+                <h2 className="mt-2 text-xl font-bold text-foreground sm:text-2xl">
                   {faq.question}
                 </h2>
-                <p className="mt-2 text-[14px] text-secondary">{faq.answer}</p>
+                <p className="mt-3 max-w-3xl text-base leading-relaxed text-foreground/80">
+                  {faq.answer}
+                </p>
               </article>
             ))}
           </div>
 
-          <div className="mt-8 flex flex-wrap gap-3">
+          <div className="mt-12 flex flex-wrap gap-4 border-t border-foreground/10 pt-8 text-sm">
             <Link
-              className="text-[14px] font-semibold text-accent hover:underline"
+              className="font-medium text-accent hover:underline"
               to="/"
             >
-              Back to Portfolio
+              &larr; Back to Portfolio
             </Link>
+            <span className="text-foreground/30">•</span>
             <Link
-              className="text-[14px] font-semibold text-accent hover:underline"
+              className="font-medium text-foreground/70 hover:text-foreground hover:underline"
               to="/blog"
             >
               Explore Blog Articles
             </Link>
+            <span className="text-foreground/30">•</span>
+            <Link
+              className="font-medium text-foreground/70 hover:text-foreground hover:underline"
+              to="/contact"
+            >
+              Get in Touch
+            </Link>
           </div>
         </section>
       </main>
+      <Footer />
     </>
   );
 }

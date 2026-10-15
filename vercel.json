@@ -59,7 +59,7 @@
       "destination": "/api/$1"
     },
     {
-      "source": "/((?!api/|assets/|favicon|robots.txt|sitemap.xml|site.webmanifest).*)",
+      "source": "/((?!api/|assets/|favicon|robots.txt|sitemap.xml|site.webmanifest|llms).*)",
       "destination": "/index.html"
     }
   ]

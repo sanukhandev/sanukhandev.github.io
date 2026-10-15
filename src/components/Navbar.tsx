@@ -1,15 +1,17 @@
-import { memo, useEffect, useState } from "react";
+import { memo, useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Menu, X, Moon, Sun, ArrowRight, Github, Linkedin, Mail } from "lucide-react";
 import { useSiteContent } from "@/data/siteContent";
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useTheme } from "@/hooks/use-theme";
 import { useLocale } from "@/hooks/use-locale";
+import { BrandIdentity } from "@/components/BrandIdentity";
 
 function Navbar() {
   const location = useLocation();
   const [open, setOpen] = useState(false);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
+  const mobileToggleRef = useRef<HTMLButtonElement>(null);
   const [scrolled, setScrolled] = useState(false);
   const [activeHref, setActiveHref] = useState("#home");
   const { theme, toggleTheme } = useTheme();
@@ -43,6 +45,7 @@ function Navbar() {
 
     const sectionToNavMap: Record<string, string> = {
       home: "#home",
+      services: "#services",
       work: "#work",
       architecture: "#architecture",
       writing: "#writing",
@@ -85,32 +88,68 @@ function Navbar() {
     };
   }, [open]);
 
-  const navItems = [
-    { label: isArabic ? "الأعمال" : "Work", href: "#work", num: "01" },
-    { label: isArabic ? "المعمارية" : "Architecture", href: "#architecture", num: "02" },
-    { label: isArabic ? "الملاحظات" : "Notes", href: "#writing", num: "03" },
-    { label: isArabic ? "نبذة عني" : "About", href: "#about", num: "04" },
+  // Focus the drawer on open; trap Tab and restore focus when Escape closes it.
+  useEffect(() => {
+    if (!open) return;
+
+    const menu = mobileMenuRef.current;
+    const focusable = () =>
+      Array.from(
+        menu?.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+        ) ?? [],
+      );
+
+    focusable()[0]?.focus();
+    const handleKeyboard = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        setOpen(false);
+        mobileToggleRef.current?.focus();
+        return;
+      }
+      if (event.key !== "Tab") return;
+      const items = focusable();
+      if (!items.length) return;
+      const first = items[0];
+      const last = items[items.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+    document.addEventListener("keydown", handleKeyboard);
+    return () => document.removeEventListener("keydown", handleKeyboard);
+  }, [open]);
+
+    const navItems = [
+    { label: isArabic ? "الخدمات" : "Services", href: "#services", num: "01" },
+    { label: isArabic ? "الأعمال" : "Work", href: "#work", num: "02" },
+    { label: isArabic ? "نبذة عني" : "About", href: "#about", num: "03" },
+    { label: isArabic ? "الملاحظات" : "Notes", href: "#writing", num: "04" },
   ];
 
   return (
     <header
       className={cn(
-        "fixed inset-x-0 top-0 z-50 transition-all duration-200",
+        "sk-navbar fixed inset-x-0 top-0 z-50 transition-all duration-200",
         scrolled
           ? "border-b border-border/80 bg-background/95 backdrop-blur-md shadow-xs"
           : "border-b border-transparent bg-transparent"
       )}
     >
-      <div className="container-narrow">
+      <div className="sk-shell">
         <div className="flex h-[72px] sm:h-20 items-center justify-between">
           {/* LEFT: SanuKhan.dev Brand Wordmark */}
           <a
             href={isHomePage ? "#home" : "/#home"}
-            className="group inline-flex items-baseline text-[19px] sm:text-[21px] font-semibold tracking-tight text-primary transition-opacity hover:opacity-90 select-none"
-            aria-label="SanuKhan.dev home"
+            className="sk-navbar__brand group select-none"
+            aria-label={isArabic ? "العودة إلى الصفحة الرئيسية لسنو خان" : "Sanu Khan home"}
           >
-            <span>SanuKhan</span>
-            <span className="text-accent font-semibold">.dev</span>
+            <BrandIdentity compact />
           </a>
 
           {/* CENTER / RIGHT: Desktop Nav Links */}
@@ -120,6 +159,7 @@ function Navbar() {
                 <a
                   key={item.href}
                   href={isHomePage ? item.href : `/${item.href}`}
+                  aria-current={activeHref === item.href ? "page" : undefined}
                   className={cn(
                     "text-[14.5px] font-medium transition-colors hover:text-accent focus-visible:text-accent",
                     isHomePage && activeHref === item.href
@@ -156,18 +196,14 @@ function Navbar() {
             </div>
 
             {/* Primary CTA: Let's talk → */}
-            <Button
-              asChild
-              className="h-11 rounded-lg bg-accent px-5 text-[14px] font-semibold text-white transition-colors hover:bg-accent/90 shadow-xs gap-1.5"
-            >
-              <a
+            <a
                 href={ctaHref}
-                aria-label={isArabic ? "الانتقال إلى قسم التواصل" : "Go to contact section"}
+                aria-label={isArabic ? "لنتحدث — الانتقال إلى قسم التواصل" : "Let's talk — Go to contact section"}
+                className="sk-navbar__cta inline-flex items-center justify-center h-11 rounded-lg bg-accent px-5 text-[14px] font-semibold text-white transition-colors hover:bg-accent/90 shadow-xs gap-1.5"
               >
                 <span>{isArabic ? "لنتحدث" : "Let's talk"}</span>
                 <ArrowRight className="h-4 w-4 rtl:rotate-180" />
               </a>
-            </Button>
           </div>
 
           {/* MOBILE: Menu Trigger */}
@@ -187,6 +223,7 @@ function Navbar() {
               aria-label={open ? "Close menu" : "Open menu"}
               aria-expanded={open}
               aria-controls="mobile-navigation"
+              ref={mobileToggleRef}
               onClick={() => setOpen((v) => !v)}
             >
               {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -199,7 +236,11 @@ function Navbar() {
       {open && (
         <div
           id="mobile-navigation"
-          className="fixed inset-0 top-[72px] sm:top-20 z-40 bg-background/98 backdrop-blur-xl border-t border-border flex flex-col justify-between p-6 sm:p-8 md:hidden overflow-y-auto animate-in fade-in slide-in-from-top-2 duration-200"
+          ref={mobileMenuRef}
+          role="dialog"
+          aria-modal="true"
+          aria-label={isArabic ? "القائمة الرئيسية" : "Mobile navigation"}
+          className="sk-mobile-nav fixed inset-0 top-[72px] sm:top-20 z-40 bg-background/98 backdrop-blur-xl border-t border-border flex flex-col justify-between p-6 sm:p-8 md:hidden overflow-y-auto animate-in fade-in slide-in-from-top-2 duration-200"
         >
             <div className="flex flex-col gap-6 pt-4">
               {/* Big Nav items */}
@@ -221,19 +262,15 @@ function Navbar() {
 
               {/* Mobile CTA */}
               <div className="pt-2">
-                <Button
-                  asChild
-                  className="w-full h-12 rounded-lg bg-accent text-[15px] font-semibold text-white hover:bg-accent/90 justify-center gap-2"
-                >
-                  <a
+                <a
                     href={ctaHref}
-                    aria-label={isArabic ? "الانتقال إلى قسم التواصل" : "Go to contact section"}
+                    aria-label={isArabic ? "لنتحدث — الانتقال إلى قسم التواصل" : "Let's talk — Go to contact section"}
                     onClick={() => setOpen(false)}
+                    className="sk-navbar__cta inline-flex items-center justify-center w-full h-12 rounded-lg bg-accent text-[15px] font-semibold text-white hover:bg-accent/90 justify-center gap-2"
                   >
                     <span>{isArabic ? "لنتحدث" : "Let's talk"}</span>
                     <ArrowRight className="h-4 w-4 rtl:rotate-180" />
                   </a>
-                </Button>
               </div>
             </div>
 

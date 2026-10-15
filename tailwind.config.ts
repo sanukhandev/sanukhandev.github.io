@@ -88,14 +88,14 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ["Nunito Sans", "ui-sans-serif", "system-ui", "sans-serif"],
-        display: ["Nunito Sans", "ui-sans-serif", "system-ui", "sans-serif"],
-        body: ["Nunito Sans", "ui-sans-serif", "system-ui", "sans-serif"],
-        nunito: ["Nunito Sans", "sans-serif"],
+        sans: ["Montserrat", "Arial", "sans-serif"],
+        display: ["Montserrat", "Arial", "sans-serif"],
+        body: ["Montserrat", "Arial", "sans-serif"],
+        nunito: ["Montserrat", "sans-serif"],
         poppins: ["Poppins", "sans-serif"],
         almarai: ["Almarai", "sans-serif"],
-        chewy: ["Chewy", "cursive", "sans-serif"],
-        ruqaa: ["Aref Ruqaa Ink", "serif"],
+        chewy: ["Allura", "cursive"],
+        ruqaa: ["Aref Ruqaa", "serif"],
         anta: ["Anta", "sans-serif"],
       },
       colors: {
@@ -148,6 +148,9 @@ export default {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+      },
+      transitionDuration: {
+        2400: "2400ms",
       },
       keyframes: {
         "accordion-down": {

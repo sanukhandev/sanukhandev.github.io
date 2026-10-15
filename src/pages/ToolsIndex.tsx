@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/sections/Footer";
 import SeoMeta from "@/components/SeoMeta";
 import { pageSeo } from "@/lib/seo";
 import { buildBreadcrumbListSchema } from "@/lib/schema";
@@ -34,36 +36,58 @@ export default function ToolsIndex() {
           { name: "Tools", path: "/tools" },
         ])}
       />
-      <main className="min-h-[100dvh] bg-background pt-20 text-foreground">
-        <section className="container-narrow section-pad">
-          <h1 className="text-[38px] font-extrabold text-primary">Developer Tools Platform</h1>
-          <p className="mt-4 max-w-3xl text-[15px] text-secondary">
-            Practical tools for API engineering, integration debugging, and request transformation.
-          </p>
-          <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {tools.map((tool) => (
-              <article key={tool.href} className="premium-card p-5">
-                <h2 className="text-[20px] font-bold text-primary">{tool.title}</h2>
-                <p className="mt-2 text-[14px] text-secondary">{tool.description}</p>
-                <Link className="mt-3 inline-flex text-[14px] font-semibold text-accent hover:underline" to={tool.href}>
-                  Open {tool.title}
+      <Navbar />
+      <main className="min-h-[100dvh] bg-background pt-28 pb-20 text-foreground">
+        <section className="container mx-auto max-w-5xl px-4 sm:px-6">
+          <div className="border-b border-foreground/10 pb-8">
+            <span className="font-mono text-xs uppercase tracking-widest text-accent">01 / Utilities</span>
+            <h1 className="mt-3 text-4xl font-black tracking-tight text-foreground sm:text-5xl lg:text-6xl">
+              Developer Tools
+            </h1>
+            <p className="mt-4 max-w-2xl text-base text-foreground/70 sm:text-lg">
+              Practical utilities for API engineering, integration debugging, and payload transformation.
+            </p>
+          </div>
+          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {tools.map((tool, idx) => (
+              <article
+                key={tool.href}
+                className="group relative flex flex-col justify-between border border-foreground/15 bg-background p-6 transition-all duration-200 hover:border-accent"
+              >
+                <div>
+                  <span className="font-mono text-xs text-foreground/40">0{idx + 1}</span>
+                  <h2 className="mt-2 text-xl font-bold text-foreground group-hover:text-accent">
+                    {tool.title}
+                  </h2>
+                  <p className="mt-3 text-sm leading-relaxed text-foreground/70">
+                    {tool.description}
+                  </p>
+                </div>
+                <Link
+                  className="mt-6 inline-flex items-center text-sm font-semibold text-accent hover:underline"
+                  to={tool.href}
+                >
+                  Launch tool &rarr;
                 </Link>
               </article>
             ))}
           </div>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link className="text-[14px] font-semibold text-accent hover:underline" to="/blog">
-              Explore Blog Articles
+          <div className="mt-12 flex flex-wrap gap-4 border-t border-foreground/10 pt-8 text-sm">
+            <Link className="font-medium text-accent hover:underline" to="/blog">
+              &larr; Explore Engineering Articles
             </Link>
-            <Link className="text-[14px] font-semibold text-accent hover:underline" to="/api-integration-services">
+            <span className="text-foreground/30">•</span>
+            <Link className="font-medium text-foreground/70 hover:text-foreground hover:underline" to="/api-integration-services">
               API Integration Services
             </Link>
-            <Link className="text-[14px] font-semibold text-accent hover:underline" to="/">
-              Portfolio Homepage
+            <span className="text-foreground/30">•</span>
+            <Link className="font-medium text-foreground/70 hover:text-foreground hover:underline" to="/">
+              Portfolio Overview
             </Link>
           </div>
         </section>
       </main>
+      <Footer />
     </>
   );
 }

@@ -7,6 +7,7 @@ import { buildBreadcrumbListSchema } from "@/lib/schema";
 import { useLocale } from "@/hooks/use-locale";
 import { getLocalizedPageSeo } from "@/lib/seo";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
 
 export default function ProjectsPage() {
   const { locale } = useLocale();
@@ -39,8 +40,8 @@ export default function ProjectsPage() {
 
       <Navbar />
 
-      <main className="min-h-screen bg-background pt-24 pb-16 text-foreground">
-        <section className="container-narrow max-w-4xl space-y-12">
+      <main className="reference-subpage reference-projects-page min-h-screen bg-background pt-24 pb-16 text-foreground">
+        <section className="projects-page-grid container-narrow max-w-4xl space-y-12">
           {/* Header */}
           <header className="border-b border-border/60 pb-8">
             <div className="inline-flex items-center gap-2 text-xs font-mono uppercase text-accent font-semibold mb-3">
@@ -61,8 +62,9 @@ export default function ProjectsPage() {
             {caseStudies.map((cs, idx) => (
               <article
                 key={cs.slug}
-                className="rounded-xl border border-border bg-secondary/20 p-6 sm:p-8 space-y-4"
+                className="projects-page-item rounded-xl border border-border bg-secondary/20 p-6 sm:p-8 space-y-4"
               >
+                <MediaPlaceholder kind="project" index={String(idx + 1).padStart(2, "0")} />
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-border/60 pb-3">
                   <div className="flex items-center gap-3">
                     <span className="text-xs font-mono font-bold text-accent">0{idx + 1}</span>

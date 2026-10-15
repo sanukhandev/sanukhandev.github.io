@@ -74,7 +74,7 @@ describe("Arabic Localization Integrity Tests", () => {
 
   it("should contain localized SEO metadata for all main routes", () => {
     expect(pageSeoAr.home.title).toContain("Sanu Khan");
-    expect(pageSeoAr.home.description).toContain("معماري تقني");
+    expect(pageSeoAr.home.description).toContain("خبير تقني");
     expect(pageSeoAr.blogIndex.title).toBeDefined();
     expect(pageSeoAr.projects.title).toBeDefined();
     expect(pageSeoAr.about.title).toBeDefined();
