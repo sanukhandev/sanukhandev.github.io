@@ -1,8 +1,8 @@
 export const nav = {
   brand: "SanuKhan.dev",
   links: [
+    { label: "Services", href: "#services" },
     { label: "Work", href: "#work" },
-    { label: "Architecture", href: "#architecture" },
     { label: "Notes", href: "#writing" },
     { label: "About", href: "#about" },
   ],

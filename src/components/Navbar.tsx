@@ -1,5 +1,5 @@
 import { memo, useEffect, useRef, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Menu, X, Moon, Sun, ArrowRight, Github, Linkedin, Mail } from "lucide-react";
 import { useSiteContent } from "@/data/siteContent";
 import { cn } from "@/lib/utils";
@@ -7,8 +7,16 @@ import { useTheme } from "@/hooks/use-theme";
 import { useLocale } from "@/hooks/use-locale";
 import { BrandIdentity } from "@/components/BrandIdentity";
 
+interface NavItem {
+  label: string;
+  href: string;
+  pageHref: string;
+  num: string;
+}
+
 function Navbar() {
   const location = useLocation();
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   const mobileToggleRef = useRef<HTMLButtonElement>(null);
@@ -20,7 +28,7 @@ function Navbar() {
   const isLight = theme === "light";
   const isArabic = locale === "ar";
   const isHomePage = location.pathname === "/";
-  const ctaHref = !isHomePage && nav.cta.href.startsWith("#") ? `/${nav.cta.href}` : nav.cta.href;
+  const ctaHref = isHomePage ? "#contact" : "/contact";
 
   const scrollToHash = (hash: string) => {
     const id = hash.replace(/^#/, "");
@@ -38,19 +46,82 @@ function Navbar() {
 
   const handleNavClick = (
     event: React.MouseEvent<HTMLAnchorElement>,
-    href: string,
+    item: NavItem,
   ) => {
-    if (isHomePage && href.startsWith("#")) {
-      event.preventDefault();
-      const success = scrollToHash(href);
-      if (success) {
-        window.history.pushState(null, "", href);
-        setActiveHref(href);
+    setOpen(false);
+
+    if (isHomePage) {
+      if (item.href.startsWith("#")) {
+        event.preventDefault();
+        const success = scrollToHash(item.href);
+        if (success) {
+          window.history.pushState(null, "", item.href);
+          setActiveHref(item.href);
+        }
       }
-      setOpen(false);
-    } else {
-      setOpen(false);
+      return;
     }
+
+    // On a subpage:
+    const isCurrentPage =
+      location.pathname === item.pageHref ||
+      (item.pageHref !== "/" &&
+        !item.pageHref.startsWith("/#") &&
+        location.pathname.startsWith(item.pageHref));
+
+    if (isCurrentPage) {
+      event.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+
+    if (item.pageHref.startsWith("/#")) {
+      event.preventDefault();
+      navigate(item.pageHref);
+      return;
+    }
+
+    event.preventDefault();
+    navigate(item.pageHref);
+  };
+
+  const handleBrandClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    setOpen(false);
+    if (isHomePage) {
+      event.preventDefault();
+      const success = scrollToHash("#home");
+      if (success) {
+        window.history.pushState(null, "", "#home");
+        setActiveHref("#home");
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    } else {
+      event.preventDefault();
+      navigate("/");
+    }
+  };
+
+  const handleCtaClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    setOpen(false);
+    if (isHomePage) {
+      event.preventDefault();
+      const success = scrollToHash("#contact");
+      if (success) {
+        window.history.pushState(null, "", "#contact");
+        setActiveHref("#contact");
+      }
+      return;
+    }
+
+    if (location.pathname === "/contact") {
+      event.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+
+    event.preventDefault();
+    navigate("/contact");
   };
 
   useEffect(() => {
@@ -76,23 +147,28 @@ function Navbar() {
         setActiveHref("#writing");
       } else if (location.pathname === "/about") {
         setActiveHref("#about");
-      } else if (location.pathname === "/projects") {
+      } else if (location.pathname.startsWith("/projects")) {
         setActiveHref("#work");
+      } else if (location.pathname === "/contact") {
+        setActiveHref("#contact");
       } else {
         setActiveHref("");
       }
       return;
     }
 
-    const sectionToNavMap: Record<string, string> = {
-      home: "#home",
-      services: "#services",
-      architecture: "#services",
-      work: "#work",
-      writing: "#writing",
-      about: "#about",
-      contact: "#contact",
-    };
+    const sectionThresholds = [
+      { id: "contact", href: "#contact" },
+      { id: "faq", href: "#about" },
+      { id: "about", href: "#about" },
+      { id: "process", href: "#about" },
+      { id: "zaakiy", href: "#writing" },
+      { id: "writing", href: "#writing" },
+      { id: "work", href: "#work" },
+      { id: "services", href: "#services" },
+      { id: "architecture", href: "#services" },
+      { id: "home", href: "#home" },
+    ];
 
     const updateActiveSection = () => {
       const scrollY = window.scrollY;
@@ -106,13 +182,13 @@ function Navbar() {
         return;
       }
 
-      const targetOffset = 150;
-      for (const [id, href] of Object.entries(sectionToNavMap)) {
-        const el = document.getElementById(id);
+      const targetOffset = 180;
+      for (const section of sectionThresholds) {
+        const el = document.getElementById(section.id);
         if (!el) continue;
         const rect = el.getBoundingClientRect();
-        if (rect.top <= targetOffset && rect.bottom > targetOffset) {
-          setActiveHref(href);
+        if (rect.top <= targetOffset) {
+          setActiveHref(section.href);
           break;
         }
       }
@@ -171,11 +247,11 @@ function Navbar() {
     return () => document.removeEventListener("keydown", handleKeyboard);
   }, [open]);
 
-  const navItems = [
-    { label: isArabic ? "الخدمات" : "Services", href: "#services", num: "01" },
-    { label: isArabic ? "الأعمال" : "Work", href: "#work", num: "02" },
-    { label: isArabic ? "نبذة عني" : "About", href: "#about", num: "03" },
-    { label: isArabic ? "الملاحظات" : "Notes", href: "#writing", num: "04" },
+  const navItems: NavItem[] = [
+    { label: isArabic ? "الخدمات" : "Services", href: "#services", pageHref: "/#services", num: "01" },
+    { label: isArabic ? "الأعمال" : "Work", href: "#work", pageHref: "/projects", num: "02" },
+    { label: isArabic ? "الملاحظات" : "Notes", href: "#writing", pageHref: "/blog", num: "03" },
+    { label: isArabic ? "نبذة عني" : "About", href: "#about", pageHref: "/about", num: "04" },
   ];
 
   return (
@@ -191,8 +267,8 @@ function Navbar() {
         <div className="flex h-[72px] sm:h-20 items-center justify-between">
           {/* LEFT: SanuKhan.dev Brand Wordmark */}
           <a
-            href={isHomePage ? "#home" : "/#home"}
-            onClick={(e) => handleNavClick(e, "#home")}
+            href={isHomePage ? "#home" : "/"}
+            onClick={handleBrandClick}
             className="sk-navbar__brand group select-none"
             aria-label={isArabic ? "العودة إلى الصفحة الرئيسية لسنو خان" : "Sanu Khan home"}
           >
@@ -202,22 +278,32 @@ function Navbar() {
           {/* CENTER / RIGHT: Desktop Nav Links */}
           <div className="hidden md:flex items-center gap-7 lg:gap-8">
             <nav className="flex items-center gap-6 lg:gap-8" aria-label="Main Navigation">
-              {navItems.map((item) => (
-                <a
-                  key={item.href}
-                  href={isHomePage ? item.href : `/${item.href}`}
-                  onClick={(e) => handleNavClick(e, item.href)}
-                  aria-current={activeHref === item.href ? "page" : undefined}
-                  className={cn(
-                    "text-[14.5px] font-medium transition-colors hover:text-accent focus-visible:text-accent",
-                    isHomePage && activeHref === item.href
-                      ? "text-primary font-semibold"
-                      : "text-secondary"
-                  )}
-                >
-                  {item.label}
-                </a>
-              ))}
+              {navItems.map((item) => {
+                const isItemActive = isHomePage
+                  ? activeHref === item.href
+                  : activeHref === item.href ||
+                    location.pathname === item.pageHref ||
+                    (item.pageHref !== "/" &&
+                      !item.pageHref.startsWith("/#") &&
+                      location.pathname.startsWith(item.pageHref));
+
+                return (
+                  <a
+                    key={item.href}
+                    href={isHomePage ? item.href : item.pageHref}
+                    onClick={(e) => handleNavClick(e, item)}
+                    aria-current={isItemActive ? "page" : undefined}
+                    className={cn(
+                      "text-[14.5px] font-medium transition-colors hover:text-accent focus-visible:text-accent",
+                      isItemActive
+                        ? "text-primary font-semibold"
+                        : "text-secondary"
+                    )}
+                  >
+                    {item.label}
+                  </a>
+                );
+              })}
             </nav>
 
             <div className="h-4 w-px bg-border/80" aria-hidden="true" />
@@ -246,7 +332,7 @@ function Navbar() {
             {/* Primary CTA: Let's talk → */}
             <a
               href={ctaHref}
-              onClick={(e) => handleNavClick(e, ctaHref)}
+              onClick={handleCtaClick}
               aria-label={isArabic ? "لنتحدث — الانتقال إلى قسم التواصل" : "Let's talk — Go to contact section"}
               className="sk-navbar__cta inline-flex items-center justify-center h-11 rounded-lg bg-accent px-5 text-[14px] font-semibold text-white transition-colors hover:bg-accent/90 shadow-xs gap-1.5"
             >
@@ -294,19 +380,33 @@ function Navbar() {
           <div className="flex flex-col gap-6 pt-4">
             {/* Big Nav items */}
             <nav className="flex flex-col gap-4" aria-label="Mobile Navigation">
-              {navItems.map((item) => (
-                <a
-                  key={item.href}
-                  href={isHomePage ? item.href : `/${item.href}`}
-                  onClick={(e) => handleNavClick(e, item.href)}
-                  className="flex items-baseline justify-between border-b border-border/60 pb-3 text-2xl font-semibold tracking-tight text-primary transition-colors hover:text-accent"
-                >
-                  <span>{item.label}</span>
-                  <span className="font-mono text-xs font-semibold text-accent/80 tracking-widest">
-                    {item.num}
-                  </span>
-                </a>
-              ))}
+              {navItems.map((item) => {
+                const isItemActive = isHomePage
+                  ? activeHref === item.href
+                  : activeHref === item.href ||
+                    location.pathname === item.pageHref ||
+                    (item.pageHref !== "/" &&
+                      !item.pageHref.startsWith("/#") &&
+                      location.pathname.startsWith(item.pageHref));
+
+                return (
+                  <a
+                    key={item.href}
+                    href={isHomePage ? item.href : item.pageHref}
+                    onClick={(e) => handleNavClick(e, item)}
+                    aria-current={isItemActive ? "page" : undefined}
+                    className={cn(
+                      "flex items-baseline justify-between border-b border-border/60 pb-3 text-2xl font-semibold tracking-tight transition-colors hover:text-accent",
+                      isItemActive ? "text-accent" : "text-primary"
+                    )}
+                  >
+                    <span>{item.label}</span>
+                    <span className="font-mono text-xs font-semibold text-accent/80 tracking-widest">
+                      {item.num}
+                    </span>
+                  </a>
+                );
+              })}
             </nav>
 
             {/* Mobile CTA */}
@@ -314,7 +414,7 @@ function Navbar() {
               <a
                 href={ctaHref}
                 aria-label={isArabic ? "لنتحدث — الانتقال إلى قسم التواصل" : "Let's talk — Go to contact section"}
-                onClick={(e) => handleNavClick(e, ctaHref)}
+                onClick={handleCtaClick}
                 className="sk-navbar__cta inline-flex items-center justify-center w-full h-12 rounded-lg bg-accent text-[15px] font-semibold text-white hover:bg-accent/90 justify-center gap-2"
               >
                 <span>{isArabic ? "لنتحدث" : "Let's talk"}</span>

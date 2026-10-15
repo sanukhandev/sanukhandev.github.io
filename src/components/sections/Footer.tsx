@@ -24,10 +24,10 @@ export function Footer() {
           </p>
         </div>
         <nav aria-label={join(ar, "Footer navigation", "روابط التذييل")}>
-          <a href="/#architecture">{join(ar, "Capabilities", "القدرات")}</a>
-          <a href="/#work">{join(ar, "Work", "الأعمال")}</a>
-          <a href="/#writing">{join(ar, "Notes", "الملاحظات")}</a>
-          <a href="/about">{join(ar, "About", "عني")}</a>
+          <a href="/#services">{join(ar, "Services", "الخدمات")}</a>
+          <a href="/projects">{join(ar, "Work", "الأعمال")}</a>
+          <a href="/blog">{join(ar, "Notes", "الملاحظات")}</a>
+          <a href="/about">{join(ar, "About", "نبذة عني")}</a>
         </nav>
         <div className="sk-footer__links">
           <a

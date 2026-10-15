@@ -122,8 +122,8 @@ const arContent = {
     ...baseNav,
     brand: "سانوخان.ديف",
     links: [
+      { label: "الخدمات", href: "#services" },
       { label: "الأعمال", href: "#work" },
-      { label: "المعمارية", href: "#architecture" },
       { label: "الملاحظات", href: "#writing" },
       { label: "نبذة عني", href: "#about" },
     ],
