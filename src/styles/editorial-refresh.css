@@ -340,8 +340,27 @@ html.locale-ar .sk-process::before { background: linear-gradient(270deg, var(--s
 .sk-about__card-footer { display: flex; align-items: center; justify-content: space-between; padding-block-start: 0.65rem; border-block-start: 1px solid rgba(16, 16, 16, 0.15); }
 .sk-about__card-footer .sk-mono { font-size: 0.62rem; color: var(--sk-orange-ink); letter-spacing: 0.08em; }
 .sk-about__card-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--sk-orange); }
-.sk-about__copy .brand-identity { margin-block: 0.75rem 1.5rem; }
-.sk-about__copy blockquote { max-width: 22ch; margin: 0 0 1.25rem; font-family: var(--sk-display); font-size: clamp(1.8rem, 3.4vw, 3.6rem); font-weight: 700; letter-spacing: -0.04em; line-height: 1.04; }
+.sk-about__copy blockquote {
+  max-width: 24ch;
+  margin: 0 0 1.35rem;
+  padding: 0;
+  border: none;
+  font-family: var(--sk-script);
+  font-size: clamp(2.2rem, 3.8vw, 3.5rem);
+  font-weight: 400;
+  font-style: normal;
+  color: var(--sk-orange-ink);
+  letter-spacing: normal;
+  line-height: 1.25;
+}
+html.locale-ar .sk-about__copy blockquote {
+  font-family: var(--sk-script) !important;
+  font-size: clamp(1.9rem, 3.2vw, 2.9rem);
+  line-height: 1.45;
+}
+html.dark .sk-about__copy blockquote {
+  color: var(--sk-orange);
+}
 .sk-about__copy > p:not(.sk-eyebrow) { max-width: 58ch; margin-block-end: 1.25rem; font-size: 0.95rem; line-height: 1.6; }
 
 /* FAQ - Compact & accessible */
@@ -600,7 +619,7 @@ html.dark .sk-hero__identity { border-color: var(--sk-ivory); }
   .sk-about__card--mid { transform: rotate(1.5deg) translate(4px, 2px); }
   html.locale-ar .sk-about__card--back { transform: rotate(2deg) translate(5px, -3px); }
   html.locale-ar .sk-about__card--mid { transform: rotate(-1.5deg) translate(-4px, 2px); }
-  .sk-about__copy blockquote { max-width: 15ch; font-size: clamp(1.8rem, 8vw, 2.8rem); }
+  .sk-about__copy blockquote { max-width: 18ch; font-size: clamp(1.85rem, 7.5vw, 2.6rem); line-height: 1.25; }
   .sk-faq summary { grid-template-columns: 2.5rem 1fr auto; gap: 0.6rem; font-size: 1.15rem; min-height: 3.5rem; }
   .sk-faq details p { margin-inline: 2.8rem 0; }
   html.locale-ar .sk-faq details p { margin-inline: 2.8rem 0; }
@@ -880,5 +899,180 @@ html.dark .sk-page .devto-content :not(pre) > code {
 
 html.dark .sk-page .devto-content th {
   background: rgba(230, 213, 189, 0.08);
+}
+
+/* ==========================================================================
+   Zaakiy Chat Widget — Editorial system styling, no white borders
+   ========================================================================== */
+
+.zaakiy-chat {
+  font-family: var(--sk-body);
+}
+
+/* Ensure launcher container is completely transparent with no border/shadow box */
+.zaakiy-chat > div:not([role="dialog"]),
+.zaakiy-chat__launcher {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Launcher button */
+.zaakiy-chat__launcher-button {
+  background: var(--sk-orange) !important;
+  color: var(--sk-white) !important;
+  border: none !important;
+  box-shadow: 0 4px 16px rgba(213, 54, 12, 0.4) !important;
+  transition: transform 160ms ease, background-color 160ms ease !important;
+}
+
+.zaakiy-chat__launcher-button:hover {
+  background: var(--sk-orange-ink) !important;
+  transform: translateY(-1px);
+}
+
+.zaakiy-chat__launcher-button:focus-visible {
+  outline: 3px solid var(--sk-orange-ink) !important;
+  outline-offset: 3px !important;
+}
+
+/* Chat Dialog Window */
+.zaakiy-chat__dialog {
+  background-color: var(--sk-ivory) !important;
+  color: var(--sk-black) !important;
+  border: 1px solid var(--sk-black) !important;
+  box-shadow: 0 20px 48px -8px rgba(16, 16, 16, 0.35) !important;
+}
+
+html.dark .zaakiy-chat__dialog {
+  background-color: #141414 !important;
+  color: var(--sk-ivory) !important;
+  border: 1px solid var(--sk-dark-line) !important;
+  box-shadow: 0 20px 48px -8px rgba(0, 0, 0, 0.7) !important;
+}
+
+/* Header inside dialog */
+.zaakiy-chat__header {
+  background-color: rgba(16, 16, 16, 0.05) !important;
+  border-bottom: 1px solid var(--sk-line) !important;
+}
+
+html.dark .zaakiy-chat__header {
+  background-color: rgba(230, 213, 189, 0.05) !important;
+  border-bottom: 1px solid var(--sk-dark-line) !important;
+}
+
+/* Conversation container */
+.zaakiy-chat__body {
+  color: var(--sk-black) !important;
+}
+
+html.dark .zaakiy-chat__body {
+  color: var(--sk-ivory) !important;
+}
+
+/* Suggested questions divider & buttons */
+.zaakiy-chat__suggested-wrapper {
+  border-top: 1px solid var(--sk-line) !important;
+}
+
+html.dark .zaakiy-chat__suggested-wrapper {
+  border-top: 1px solid var(--sk-dark-line) !important;
+}
+
+.zaakiy-chat__suggested-btn {
+  background-color: rgba(16, 16, 16, 0.035) !important;
+  border: 1px solid var(--sk-line) !important;
+  color: var(--sk-black) !important;
+}
+
+.zaakiy-chat__suggested-btn:hover {
+  background-color: rgba(213, 54, 12, 0.08) !important;
+  border-color: var(--sk-orange-ink) !important;
+  color: var(--sk-orange-ink) !important;
+}
+
+html.dark .zaakiy-chat__suggested-btn {
+  background-color: rgba(230, 213, 189, 0.04) !important;
+  border: 1px solid var(--sk-dark-line) !important;
+  color: var(--sk-ivory) !important;
+}
+
+html.dark .zaakiy-chat__suggested-btn:hover {
+  background-color: rgba(213, 54, 12, 0.15) !important;
+  border-color: var(--sk-orange) !important;
+  color: var(--sk-orange) !important;
+}
+
+/* User chat bubble */
+.zaakiy-chat__user-bubble {
+  background-color: rgba(213, 54, 12, 0.12) !important;
+  border: 1px solid var(--sk-orange-ink) !important;
+  color: var(--sk-black) !important;
+}
+
+html.dark .zaakiy-chat__user-bubble {
+  background-color: rgba(213, 54, 12, 0.22) !important;
+  border: 1px solid var(--sk-orange) !important;
+  color: var(--sk-ivory) !important;
+}
+
+/* Bot icon & message */
+.zaakiy-chat__bot-icon {
+  background-color: rgba(213, 54, 12, 0.12) !important;
+  border: 1px solid var(--sk-orange-ink) !important;
+  color: var(--sk-orange-ink) !important;
+}
+
+html.dark .zaakiy-chat__bot-icon {
+  background-color: rgba(213, 54, 12, 0.2) !important;
+  border: 1px solid var(--sk-orange) !important;
+  color: var(--sk-orange) !important;
+}
+
+/* Composer Form & Textarea */
+.zaakiy-chat__form {
+  background-color: var(--sk-ivory) !important;
+  border-top: 1px solid var(--sk-line) !important;
+}
+
+html.dark .zaakiy-chat__form {
+  background-color: #141414 !important;
+  border-top: 1px solid var(--sk-dark-line) !important;
+}
+
+.zaakiy-chat__input {
+  background-color: rgba(16, 16, 16, 0.04) !important;
+  border: 1px solid var(--sk-line) !important;
+  color: var(--sk-black) !important;
+}
+
+.zaakiy-chat__input:focus {
+  border-color: var(--sk-orange-ink) !important;
+  background-color: var(--sk-ivory) !important;
+}
+
+html.dark .zaakiy-chat__input {
+  background-color: rgba(230, 213, 189, 0.05) !important;
+  border: 1px solid var(--sk-dark-line) !important;
+  color: var(--sk-ivory) !important;
+}
+
+html.dark .zaakiy-chat__input:focus {
+  border-color: var(--sk-orange) !important;
+  background-color: #1a1a1a !important;
+}
+
+/* Send Button */
+.zaakiy-chat__send-btn {
+  background-color: var(--sk-orange) !important;
+  color: var(--sk-white) !important;
+  border: none !important;
+}
+
+.zaakiy-chat__send-btn:hover:not(:disabled) {
+  background-color: var(--sk-orange-ink) !important;
 }
 

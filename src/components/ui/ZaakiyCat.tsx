@@ -53,12 +53,12 @@ export function ZaakiyCat({ isOpen, onClick, isArabic = false }: ZaakiyCatProps)
       {/* Floating Purr / Speech Bubble on Hover */}
       <div
         className={cn(
-          "absolute -top-7 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md bg-background/95 px-2 py-0.5 text-[10px] font-mono font-semibold text-accent shadow-sm border border-accent/30 pointer-events-none transition-all duration-200",
+          "absolute -top-7 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md bg-[var(--sk-ivory)] dark:bg-[#1a1a1a] px-2 py-0.5 text-[10px] font-mono font-semibold text-[var(--sk-orange-ink)] dark:text-[var(--sk-orange)] shadow-sm border border-[var(--sk-orange-ink)]/40 dark:border-[var(--sk-orange)]/40 pointer-events-none transition-all duration-200",
           isHovered ? "opacity-100 -translate-y-1 scale-100" : "opacity-0 translate-y-1 scale-90"
         )}
       >
         <span>{isArabic ? "مياو~ 🐾" : "purr~ 🐾"}</span>
-        <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-background rotate-45 border-r border-b border-accent/30" />
+        <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-[var(--sk-ivory)] dark:bg-[#1a1a1a] rotate-45 border-r border-b border-[var(--sk-orange-ink)]/40 dark:border-[var(--sk-orange)]/40" />
       </div>
 
       {/* Cat Animation Container */}
