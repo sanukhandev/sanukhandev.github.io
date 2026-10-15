@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { motion, useInView, useReducedMotion } from "framer-motion";
+import { useInView, useReducedMotion } from "@/hooks/useInView";
 
 type ZaakiyBrainProps = {
   locale: "en" | "ar";
@@ -48,29 +48,33 @@ export function ZaakiyBrain({ locale }: ZaakiyBrainProps) {
         />
         <path className="zaakiy-brain__seam" d="M249 56c-13 38-13 83 0 124 13 42 13 86-1 164" />
         {connections.map((connection, index) => {
-          const highlighted = active === index || active === null && index === 1;
+          const highlighted = active === index || (active === null && index === 1);
           return (
-            <motion.path
+            <path
               key={`${connection.label}-path`}
               className={highlighted ? "zaakiy-brain__connection is-active" : "zaakiy-brain__connection"}
               d={`M ${connection.from[0]} ${connection.from[1]} C ${(connection.from[0] + connection.to[0]) / 2} ${connection.from[1] - 28}, ${(connection.from[0] + connection.to[0]) / 2} ${connection.to[1] + 28}, ${connection.to[0]} ${connection.to[1]}`}
               onPointerEnter={() => setActive(index)}
-              initial={reducedMotion ? { pathLength: 1, opacity: 1 } : { pathLength: 0, opacity: 0 }}
-              animate={inView ? { pathLength: 1, opacity: highlighted ? 1 : 0.44 } : { pathLength: 0, opacity: 0 }}
-              transition={{ duration: reducedMotion ? 0 : 0.7, delay: reducedMotion ? 0 : index * 0.08, ease: "easeOut" }}
+              style={{
+                opacity: inView || reducedMotion ? (highlighted ? 1 : 0.44) : 0,
+                transition: reducedMotion ? "none" : `opacity 0.5s ease-out ${index * 0.06}s`,
+              }}
             />
           );
         })}
         {nodes.map(([cx, cy], index) => (
-          <motion.circle
+          <circle
             key={`${cx}-${cy}`}
             className={active !== null && [0, 1, 2, 5, 6].includes(index) ? "zaakiy-brain__node is-active" : "zaakiy-brain__node"}
             cx={cx}
             cy={cy}
             r={index === 1 || index === 5 ? 7 : 5}
-            initial={reducedMotion ? { opacity: 1 } : { opacity: 0 }}
-            animate={inView ? { opacity: 1, scale: active === index ? 1.45 : 1 } : { opacity: 0 }}
-            transition={{ duration: reducedMotion ? 0 : 0.35, delay: reducedMotion ? 0 : 0.45 + index * 0.05 }}
+            style={{
+              opacity: inView || reducedMotion ? 1 : 0,
+              transform: active === index ? "scale(1.45)" : "scale(1)",
+              transformOrigin: `${cx}px ${cy}px`,
+              transition: reducedMotion ? "none" : `opacity 0.35s ease-out ${0.3 + index * 0.04}s, transform 0.25s ease-out`,
+            }}
           />
         ))}
       </svg>

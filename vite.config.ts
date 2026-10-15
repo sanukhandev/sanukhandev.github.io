@@ -177,8 +177,6 @@ export default defineConfig(({ command, mode }) => {
         "react-dom",
         "react/jsx-runtime",
         "react/jsx-dev-runtime",
-        "@tanstack/react-query",
-        "@tanstack/query-core",
       ],
     },
     build: {
@@ -207,9 +205,6 @@ export default defineConfig(({ command, mode }) => {
             // single "ui" chunk: one entry-level Radix import would then drag
             // every Radix package and icon into the critical path. Left to
             // Vite, they split per consuming route chunk.
-            if (id.includes("node_modules/framer-motion/")) {
-              return "motion";
-            }
             if (id.includes("node_modules/dompurify/")) {
               return "contentHeavy";
             }

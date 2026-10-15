@@ -946,23 +946,6 @@
   }
 }
 
-@keyframes innovationPulseDark {
-  0% {
-    color: rgba(213,54,12,0.86);
-    text-shadow: 0 0 2px rgba(213,54,12,0.2);
-    transform: translateX(0);
-  }
-  50% {
-    color: rgba(213,54,12,0.88);
-    text-shadow: 0 0 14px rgba(213,54,12,0.34);
-    transform: translateX(2px);
-  }
-  100% {
-    color: rgba(213,54,12,0.86);
-    text-shadow: 0 0 2px rgba(213,54,12,0.2);
-    transform: translateX(0);
-  }
-}
 
 @media (max-width: 768px) {
   .section-pad {
@@ -993,26 +976,7 @@
   }
 }
 
-.timeline-year-shimmer {
-  font-size: 16px;
-  font-weight: 900;
-  letter-spacing: 0.05em;
-  line-height: 1;
-  font-variant-numeric: tabular-nums;
-  color: #E6D5BD;
-  filter: drop-shadow(0 0 7px rgba(213,54,12,0.35));
-  animation: timelineYearPulseDark 3.4s ease-in-out infinite;
-}
 
-.timeline-year-vertical {
-  display: inline-block;
-  transform: rotate(-90deg);
-  transform-origin: left top;
-}
-
-html.light .innovation-label {
-  color: rgba(213,54,12,0.9);
-}
 
 html.light .system-backdrop {
   background:
@@ -1071,35 +1035,6 @@ html.light .glass-pill {
     0 10px 24px -18px rgba(213,54,12,0.28);
 }
 
-html.light .innovation-label > span {
-  color: #101010 !important;
-  text-shadow: 0 0 1px rgba(213,54,12,0.22);
-  animation: innovationPulseLight 4.4s ease-in-out infinite;
-}
-
-@keyframes innovationPulseLight {
-  0% {
-    color: #101010;
-    text-shadow: 0 0 1px rgba(213,54,12,0.22);
-    transform: translateX(0);
-  }
-  50% {
-    color: #D5360C;
-    text-shadow: 0 0 8px rgba(213,54,12,0.2);
-    transform: translateX(1px);
-  }
-  100% {
-    color: #101010;
-    text-shadow: 0 0 1px rgba(213,54,12,0.22);
-    transform: translateX(0);
-  }
-}
-
-html.light .timeline-year-shimmer {
-  color: #D5360C;
-  filter: drop-shadow(0 0 5px rgba(213,54,12,0.22));
-  animation: timelineYearPulseLight 3.4s ease-in-out infinite;
-}
 
 /* Zaakiy Chat — Reset launcher container so launcher has no phantom background or border */
 .zaakiy-chat > div:not([role="dialog"]),
@@ -1109,59 +1044,11 @@ html.light .timeline-year-shimmer {
   box-shadow: none !important;
 }
 
-@keyframes timelineYearPulseDark {
-  0% {
-    color: #E6D5BD;
-    filter: drop-shadow(0 0 4px rgba(213,54,12,0.22));
-  }
-  50% {
-    color: #E6D5BD;
-    filter: drop-shadow(0 0 10px rgba(213,54,12,0.4));
-  }
-  100% {
-    color: #E6D5BD;
-    filter: drop-shadow(0 0 4px rgba(213,54,12,0.22));
-  }
-}
 
-@keyframes timelineYearPulseLight {
-  0% {
-    color: #D5360C;
-    filter: drop-shadow(0 0 1px rgba(213,54,12,0.16));
-  }
-  50% {
-    color: #D5360C;
-    filter: drop-shadow(0 0 8px rgba(213,54,12,0.24));
-  }
-  100% {
-    color: #D5360C;
-    filter: drop-shadow(0 0 1px rgba(213,54,12,0.16));
-  }
-}
 
-/* ── Tech Particle Drift ─────────────────────────────────── */
-.tech-particle {
-  opacity: 0;
-  will-change: transform, opacity;
-  animation: techParticleFloat var(--p-dur, 28s) ease-in var(--p-delay, 0s) infinite;
-}
 
-@keyframes techParticleFloat {
-  0% {
-    transform: translateY(0px) translateX(0px);
-    opacity: 0;
-  }
-  8% {
-    opacity: var(--p-op, 0.12);
-  }
-  92% {
-    opacity: var(--p-op, 0.12);
-  }
-  100% {
-    transform: translateY(-110vh) translateX(var(--p-drift, 0px));
-    opacity: 0;
-  }
-}
+
+
 
 .brand-zaakiy,
 .brand-zaakiyv3rse {

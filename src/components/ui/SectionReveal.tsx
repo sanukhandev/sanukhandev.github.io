@@ -1,5 +1,5 @@
-import { type ReactNode } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { type ReactNode, useRef } from "react";
+import { useInView, useReducedMotion } from "@/hooks/useInView";
 
 type SectionRevealProps = {
   children: ReactNode;
@@ -8,26 +8,31 @@ type SectionRevealProps = {
 };
 
 /**
- * A restrained, one-time viewport reveal that leaves content almost fully
- * visible before animation. Motion is progressive enhancement, not navigation.
+ * A restrained, one-time viewport reveal that leaves content visible before animation.
+ * Uses native IntersectionObserver and CSS transitions instead of framer-motion.
  * All content remains in the DOM, with no layout-height changes or scroll hijack.
  */
 export function SectionReveal({ children, delay = 0, className }: SectionRevealProps) {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "0px 0px -48px 0px" });
   const shouldReduceMotion = useReducedMotion();
 
+  const isVisible = shouldReduceMotion || inView;
+  const clampedDelay = Math.max(0, Math.min(delay, 0.16));
+
   return (
-    <motion.div
+    <div
+      ref={ref}
       className={className}
-      initial={shouldReduceMotion ? false : { opacity: 1, y: 18 }}
-      whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.08, margin: "0px 0px -48px 0px" }}
-      transition={{
-        duration: 0.62,
-        delay: Math.max(0, Math.min(delay, 0.16)),
-        ease: [0.22, 1, 0.36, 1],
+      style={{
+        opacity: isVisible ? 1 : 0.94,
+        transform: isVisible ? "none" : "translateY(18px)",
+        transition: shouldReduceMotion
+          ? "none"
+          : `opacity 0.62s cubic-bezier(0.22, 1, 0.36, 1) ${clampedDelay}s, transform 0.62s cubic-bezier(0.22, 1, 0.36, 1) ${clampedDelay}s`,
       }}
     >
       {children}
-    </motion.div>
+    </div>
   );
 }
