@@ -202,18 +202,6 @@ export const services = [
   },
 ];
 
-export const workCategories = [
-  "All",
-  "Commerce",
-  "Integration",
-  "Platform",
-  "Operations Intelligence",
-  "Automation",
-  "AI",
-  "Operations",
-  "Infrastructure",
-] as const;
-export type WorkCategory = (typeof workCategories)[number];
 
 export const works: Array<{
   title: string;
@@ -444,56 +432,6 @@ export const articles = [
   },
 ];
 
-export const certifications = [
-  {
-    issuer: "Simplilearn",
-    title: "Introduction to Cyber Security",
-    issued: "Apr 2023",
-    credentialId: "MycyWRDvWyb",
-    category: "Security",
-    url: "https://simpli.app.link/MycyWRDvWyb",
-  },
-  {
-    issuer: "HackerRank",
-    title: "Python (Basic)",
-    issued: "Jan 2022",
-    credentialId: "8124d504fd5d",
-    category: "Programming",
-    url: "https://www.hackerrank.com/certificates/8124d504fd5d",
-  },
-  {
-    issuer: "HackerRank",
-    title: "SQL (Intermediate)",
-    issued: "Feb 2022",
-    credentialId: "0568be8a2030",
-    category: "Database",
-    url: "https://www.hackerrank.com/certificates/0568be8a2030",
-  },
-  {
-    issuer: "HackerRank",
-    title: "React (Basic)",
-    issued: "Feb 2022",
-    credentialId: "81d2dee86295",
-    category: "Frontend",
-    url: "https://www.hackerrank.com/certificates/81d2dee86295",
-  },
-  {
-    issuer: "HackerRank",
-    title: "Problem Solving (Intermediate)",
-    issued: "Feb 2022",
-    credentialId: "56d29c99f14d",
-    category: "Algorithms",
-    url: "https://www.hackerrank.com/certificates/56d29c99f14d",
-  },
-  {
-    issuer: "Udemy",
-    title: "React - The Complete Guide",
-    issued: "Jan 2022",
-    credentialId: "UC-119237dc-9851-489c-8f06-313fca17fdc1",
-    category: "Advanced Frontend",
-    url: "https://www.udemy.com/certificate/UC-119237dc-9851-489c-8f06-313fca17fdc1/",
-  },
-];
 
 export const footer = {
   brand: "SanuKhan.dev",

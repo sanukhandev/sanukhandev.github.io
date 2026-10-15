@@ -19,8 +19,14 @@ const getInitialLocale = (): Locale => {
   return stored === "ar" ? "ar" : "en";
 };
 
-export function LocaleProvider({ children }: { children: React.ReactNode }) {
-  const [locale, setLocaleState] = useState<Locale>(getInitialLocale);
+export function LocaleProvider({
+  children,
+  initialLocale,
+}: {
+  children: React.ReactNode;
+  initialLocale?: Locale;
+}) {
+  const [locale, setLocaleState] = useState<Locale>(() => initialLocale ?? getInitialLocale());
 
   const setLocale = useCallback(
     (nextLocale: Locale) => {

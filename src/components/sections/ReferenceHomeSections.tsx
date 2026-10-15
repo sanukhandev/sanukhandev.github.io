@@ -9,7 +9,6 @@ import { ZaakiyBrain } from "@/components/ui/ZaakiyBrain";
 import { useDevToArticles } from "@/hooks/use-devto-articles";
 import { useLocale } from "@/hooks/use-locale";
 import { useSiteContent } from "@/data/siteContent";
-import { getLocalizedCaseStudy } from "@/data/caseStudies";
 
 const join = (isArabic: boolean, en: string, ar: string) => (isArabic ? ar : en);
 const HERO_MATRIX_WORDS_EN = ["clarity", "structure", "resilience", "reliability"];
@@ -35,7 +34,7 @@ export function ReferenceHero() {
 
   return <section id="home" className="sk-hero" aria-labelledby="sk-hero-title"><div className="sk-shell sk-hero__grid">
     <div className="sk-hero__intro"><motion.p className="sk-eyebrow" {...enter(0.02)}><span aria-hidden="true">01</span>{join(ar, "INTRODUCTION", "مقدمة")}</motion.p><h1 id="sk-hero-title"><span className="sk-hero__word">{join(ar, "Engineering", "أهندس")}</span><br /><span className="sk-hero__matrix-line"><MatrixScrambleWord words={ar ? HERO_MATRIX_WORDS_AR : HERO_MATRIX_WORDS_EN} isArabic={ar} interval={3400} className="sk-hero__matrix-word" /></span><br />{join(ar, "into complex", "في الأنظمة")}<br /><span>{join(ar, "systems.", "المعقدة.")}</span></h1><motion.p className="sk-hero__lead" {...enter(0.28)}>{join(ar, "I connect business problems, architecture and delivery across enterprise systems, integrations and cloud platforms.", "أربط بين مشكلات الأعمال والعمارة والتنفيذ عبر الأنظمة المؤسسية والتكاملات والمنصات السحابية.")}</motion.p><motion.div className="sk-hero__actions" {...enter(0.38)}><a className="sk-button sk-button--accent" href="#work">{join(ar, "View selected work", "استعرض الأعمال المختارة")} <ArrowRight size={17} aria-hidden="true" className="rtl:rotate-180" /></a><a className="sk-text-link" href="mailto:hello@sanukhan.dev">{join(ar, "Start a conversation", "ابدأ محادثة")} <ArrowUpRight size={17} aria-hidden="true" /></a></motion.div><motion.a className="sk-hero__resume" href="/Sanu%20Khan%20-%20Resume.pdf" download {...enter(0.44)}><Download size={14} aria-hidden="true" /> {join(ar, "Download résumé", "تحميل السيرة الذاتية")}</motion.a><motion.p className="sk-script-note" {...enter(0.48)}>{join(ar, "Make the invisible legible.", "اجعل ما لا يُرى واضحاً.")}</motion.p></div>
-    <motion.figure className="sk-hero__portrait" {...enter(0.18, 26)}><BrushRevealPortrait mirrored={ar} alt={join(ar, "Portrait of Sanu Khan wearing a beige blazer", "صورة سانو خان بسترة بيج")} ariaLabel={join(ar, "Portrait. Move your pointer to reveal the original colors, or focus to reveal the full-color image.", "صورة. حرّك المؤشر لإظهار الألوان الأصلية أو استخدم التركيز لإظهار الصورة الملونة.")} /></motion.figure>
+    <motion.figure className="sk-hero__portrait" {...enter(0.18, 26)}><BrushRevealPortrait mirrored={ar} alt={join(ar, "Portrait of Sanu Khan wearing a beige blazer", "صورة سانو خان بسترة بيج")} ariaLabel={join(ar, "Portrait of Sanu Khan", "صورة سانو خان")} /></motion.figure>
     <motion.aside className="sk-hero__identity" aria-label={join(ar, "Professional identity", "الهوية المهنية")} {...enter(0.25)}><div className="sk-hero__identity-block"><span className="sk-eyebrow"><span aria-hidden="true">/</span>{join(ar, "POSITION", "المجال")}</span><h2>{join(ar, "Tech Lead · Solution Expert", "قائد تقني · خبير حلول")}</h2><p>{join(ar, "Architecture-to-delivery ownership for systems that have to work in the real world.", "ملكية كاملة من العمارة إلى التنفيذ لأنظمة يجب أن تعمل في الواقع.")}</p></div><dl className="sk-hero__facts"><div><dt>{join(ar, "BASED IN", "الموقع")}</dt><dd><MapPin size={15} aria-hidden="true" /> Dubai, UAE</dd></div><div><dt>{join(ar, "FOCUS", "التركيز")}</dt><dd>{join(ar, "Integration · Platforms · Reliability", "التكامل · المنصات · الموثوقية")}</dd></div><div><dt>{join(ar, "SIGNATURE RESEARCH", "البحث المميز")}</dt><dd>ZaakiyV3RSE</dd></div></dl></motion.aside>
   </div></section>;
 }
@@ -54,13 +53,77 @@ export function ReferenceServices() {
   return <section id="architecture" className="sk-section sk-capabilities"><span id="services" className="sk-anchor" aria-hidden="true" /><div className="sk-shell"><SectionHeading isArabic={ar} eyebrow={join(ar, "WHAT I SOLVE", "ما أتعامل معه")} title={join(ar, "Where architecture meets execution.", "حيث تلتقي العمارة بالتنفيذ.")} intro={join(ar, "The discipline is not choosing more technology. It is creating a system the business and the engineering team can understand, operate and evolve.", "الممارسة ليست اختيار المزيد من التقنيات، بل بناء نظام يمكن للأعمال والفريق الهندسي فهمه وتشغيله وتطويره.")} /><div className="sk-capabilities__list">{capabilities.map(([number, title, description]) => <article className="sk-capability" key={number}><span className="sk-capability__number sk-mono">{number}</span><h3>{title}</h3><p>{description}</p><ArrowUpRight className="sk-capability__arrow" size={20} aria-hidden="true" /></article>)}</div><div className="sk-system-line" aria-hidden="true"><span>CONTEXT</span><i /><span>ARCHITECTURE</span><i /><span>DELIVERY</span><i /><span>OUTCOMES</span></div></div></section>;
 }
 
-export function ReferenceExpertise() { return null; }
+
+const SELECTED_PROJECTS_EN = [
+  {
+    slug: "enterprise-retail-integration",
+    title: "Enterprise Retail Integration",
+    subtitle: "Connecting product, inventory, pricing and order flows across enterprise and commerce platforms.",
+    domain: "Enterprise Retail & Omnichannel Commerce"
+  },
+  {
+    slug: "airline-retailing-aggregation",
+    title: "Airline Retailing & Aggregation",
+    subtitle: "Normalising airline content and booking workflows across B2B and B2C platforms.",
+    domain: "Travel Technology & Airline Distribution"
+  },
+  {
+    slug: "automotive-omnichannel-platform",
+    title: "Automotive Omnichannel Platform",
+    subtitle: "Creating a shared workflow across digital and operational vehicle processes.",
+    domain: "Automotive Retail & Fleet Operations"
+  },
+  {
+    slug: "real-estate-erp-architecture",
+    title: "AI-Assisted Real Estate ERP Architecture",
+    subtitle: "Designing a multi-branch property, leasing, payments, maintenance and inventory platform in a 25-hour AI-assisted product engineering sprint.",
+    domain: "Real Estate Operations & Product Architecture"
+  },
+  {
+    slug: "zaakiy-v3rse",
+    title: "Zaakiy V3RSE — Operational Intelligence Agentic Platform",
+    subtitle: "Designing a configuration-driven, multi-tenant agent platform that combines source-of-truth routing, enterprise RAG, live connectors, deterministic calculations and LLM reasoning.",
+    domain: "AI Platforms & Operational Intelligence"
+  }
+];
+
+const SELECTED_PROJECTS_AR = [
+  {
+    slug: "enterprise-retail-integration",
+    title: "تكامل التجزئة للمؤسسات",
+    subtitle: "ربط تدفقات المنتجات والمخزون والتسعير والطلبات عبر المؤسسة ومنصات التجارة.",
+    domain: "تجزئة المؤسسات والتجارة متعددة القنوات"
+  },
+  {
+    slug: "airline-retailing-aggregation",
+    title: "تجميع وتجزئة رحلات الطيران",
+    subtitle: "توحيد محتوى الطيران وسير عمل الحجز عبر منصات B2B و B2C.",
+    domain: "تقنيات السفر وتوزيع رحلات الطيران"
+  },
+  {
+    slug: "automotive-omnichannel-platform",
+    title: "منصة السيارات متعددة القنوات",
+    subtitle: "إنشاء سير عمل مشترك عبر العمليات الرقمية والتشغيلية للسيارات.",
+    domain: "تجزئة السيارات وعمليات الأسطول"
+  },
+  {
+    slug: "real-estate-erp-architecture",
+    title: "عمارة نظام ERP عقاري بمساعدة الذكاء الاصطناعي",
+    subtitle: "تصميم منصة متعددة الفروع للعقارات والتأجير والمدفوعات والصيانة والمخزون ضمن sprint هندسي مدته 25 ساعة.",
+    domain: "عمليات العقارات وعمارة المنتجات"
+  },
+  {
+    slug: "zaakiy-v3rse",
+    title: "Zaakiy V3RSE — Operational Intelligence Agentic Platform",
+    subtitle: "Designing a configuration-driven, multi-tenant agent platform that combines source-of-truth routing, enterprise RAG, live connectors, deterministic calculations and LLM reasoning.",
+    domain: "AI Platforms & Operational Intelligence"
+  }
+];
 
 export function ReferenceProjects() {
   const { locale } = useLocale();
   const ar = locale === "ar";
-  const ids = ["enterprise-retail-integration", "airline-retailing-aggregation", "automotive-omnichannel-platform", "real-estate-erp-architecture", "zaakiy-v3rse"];
-  const projects = ids.map((slug) => getLocalizedCaseStudy(slug, locale)).filter(Boolean);
+  const projects = ar ? SELECTED_PROJECTS_AR : SELECTED_PROJECTS_EN;
   const visuals = ["/media/project-retail-cover", "/media/project-airline-cover", "/media/project-automotive-cover", "/media/project-erp-cover", "/media/project-zaakiy-cover"];
   return <section id="work" className="sk-section sk-work"><div className="sk-shell"><SectionHeading isArabic={ar} eyebrow={join(ar, "SELECTED WORK", "أعمال مختارة")} title={join(ar, "Systems I've helped shape.", "أنظمة ساهمت في تشكيلها.")} intro={join(ar, "Case studies grounded in integration challenges, operating constraints and architectural decisions.", "دراسات حالة تستند إلى تحديات التكامل والقيود التشغيلية والقرارات المعمارية.")} /><div className="sk-work__grid">{projects.map((project, index) => { const isFeatured = index === 0; const isCompact = index > 2; return <Link to={`/projects/${project.slug}`} key={project.slug} className={`sk-project ${isFeatured ? "sk-project--featured" : ""} ${isCompact ? "sk-project--compact" : "sk-project--supporting"}`}><div className="sk-project__media"><picture className="sk-project__picture"><source type="image/avif" srcSet={`${visuals[index]}-480.avif 480w, ${visuals[index]}-720.avif 720w, ${visuals[index]}-960.avif 960w`} sizes="(max-width: 767px) 100vw, (max-width: 1050px) 50vw, 60vw" /><img src={`${visuals[index]}.webp`} alt={join(ar, `Conceptual architecture visual for ${project.title}`, `تصور معماري لـ ${project.title}`)} loading="lazy" width={960} height={640} /></picture><span className="sk-project__index sk-mono">0{index + 1}</span></div><div className="sk-project__copy"><span className="sk-mono">{project.domain}</span><h3>{project.title}</h3><p>{project.subtitle}</p><span className="sk-text-link">{join(ar, "Read case study", "اقرأ دراسة الحالة")} <ArrowUpRight size={16} aria-hidden="true" /></span></div></Link>; })}</div><div className="sk-section__footer"><Link to="/projects" className="sk-text-link">{join(ar, "View all architecture work", "عرض جميع الأعمال المعمارية")} <ArrowRight size={17} aria-hidden="true" className="rtl:rotate-180" /></Link></div></div></section>;
 }
@@ -80,7 +143,6 @@ export function ReferenceZaakiy() {
   return <section id="zaakiy" className="sk-zaakiy"><div className="sk-shell sk-zaakiy__grid"><div className="sk-zaakiy__copy"><p className="sk-eyebrow"><span aria-hidden="true">05</span>{join(ar, "SIGNATURE RESEARCH / OPERATIONS INTELLIGENCE", "البحث المميز / الذكاء التشغيلي")}</p><div className="brand-zaakiy sk-zaakiy__wordmark">ZaakiyV3RSE</div><h2>{join(ar, "Beyond uptime. Toward outcome intelligence.", "ما بعد الجاهزية. نحو ذكاء النتائج.")}</h2><p>{join(ar, "ZaakiyV3RSE explores how systems can connect technical signals to operational context and reason about whether a workflow delivered its intended outcome.", "يستكشف ZaakiyV3RSE كيف يمكن للأنظمة ربط الإشارات التقنية بالسياق التشغيلي والتفكير في تحقق النتيجة المقصودة من سير العمل.")}</p><Link to="/projects/zaakiy-v3rse" className="sk-button sk-button--light">{join(ar, "Explore the research", "استكشف البحث")} <ArrowUpRight size={17} aria-hidden="true" /></Link></div><figure className="sk-zaakiy__visual"><ZaakiyBrain locale={locale} /><figcaption className="sk-mono">{join(ar, "CONCEPTUAL VISUAL / NOT A LIVE SYSTEM", "تصور مفاهيمي / ليس نظاماً حياً")}</figcaption></figure></div></section>;
 }
 
-export function ReferenceEngagement() { return null; }
 
 export function ReferenceProcess() {
   const { locale } = useLocale();

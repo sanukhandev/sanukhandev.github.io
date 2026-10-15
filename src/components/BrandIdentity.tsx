@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 import { useLocale } from "@/hooks/use-locale";
+import { SanuKhanLogo } from "@/components/SanuKhanLogo";
 
 type BrandIdentityProps = {
   className?: string;
@@ -7,7 +8,7 @@ type BrandIdentityProps = {
   showDescriptor?: boolean;
 };
 
-/** The single source of truth for the Sanu Khan wordmark and positioning line. */
+/** The single source of truth for the Sanu Khan brand logo and positioning line. */
 export function BrandIdentity({
   className,
   compact = false,
@@ -18,7 +19,7 @@ export function BrandIdentity({
 
   return (
     <span className={cn("brand-identity", compact && "brand-identity--compact", className)}>
-      <span className="brand-identity__wordmark">SANU KHAN</span>
+      <SanuKhanLogo compact={compact} />
       {showDescriptor && <span className="brand-identity__descriptor">{descriptor}</span>}
     </span>
   );

@@ -18,8 +18,8 @@ export function Footer() {
           <p>
             {join(
               ar,
-              "Tech Lead · Solution Architect | Dubai, UAE",
-              "قائد تقني · معماري حلول | دبي، الإمارات",
+              "Tech Lead · Solution Expert | Dubai, UAE",
+              "قائد تقني · خبير حلول | دبي، الإمارات",
             )}
           </p>
         </div>

@@ -2,7 +2,6 @@ import { memo, useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Menu, X, Moon, Sun, ArrowRight, Github, Linkedin, Mail } from "lucide-react";
 import { useSiteContent } from "@/data/siteContent";
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useTheme } from "@/hooks/use-theme";
 import { useLocale } from "@/hooks/use-locale";
@@ -197,18 +196,14 @@ function Navbar() {
             </div>
 
             {/* Primary CTA: Let's talk → */}
-            <Button
-              asChild
-              className="sk-navbar__cta h-11 rounded-lg bg-accent px-5 text-[14px] font-semibold text-white transition-colors hover:bg-accent/90 shadow-xs gap-1.5"
-            >
-              <a
+            <a
                 href={ctaHref}
                 aria-label={isArabic ? "لنتحدث — الانتقال إلى قسم التواصل" : "Let's talk — Go to contact section"}
+                className="sk-navbar__cta inline-flex items-center justify-center h-11 rounded-lg bg-accent px-5 text-[14px] font-semibold text-white transition-colors hover:bg-accent/90 shadow-xs gap-1.5"
               >
                 <span>{isArabic ? "لنتحدث" : "Let's talk"}</span>
                 <ArrowRight className="h-4 w-4 rtl:rotate-180" />
               </a>
-            </Button>
           </div>
 
           {/* MOBILE: Menu Trigger */}
@@ -267,19 +262,15 @@ function Navbar() {
 
               {/* Mobile CTA */}
               <div className="pt-2">
-                <Button
-                  asChild
-                  className="sk-navbar__cta w-full h-12 rounded-lg bg-accent text-[15px] font-semibold text-white hover:bg-accent/90 justify-center gap-2"
-                >
-                  <a
+                <a
                     href={ctaHref}
                     aria-label={isArabic ? "لنتحدث — الانتقال إلى قسم التواصل" : "Let's talk — Go to contact section"}
                     onClick={() => setOpen(false)}
+                    className="sk-navbar__cta inline-flex items-center justify-center w-full h-12 rounded-lg bg-accent text-[15px] font-semibold text-white hover:bg-accent/90 justify-center gap-2"
                   >
                     <span>{isArabic ? "لنتحدث" : "Let's talk"}</span>
                     <ArrowRight className="h-4 w-4 rtl:rotate-180" />
                   </a>
-                </Button>
               </div>
             </div>
 

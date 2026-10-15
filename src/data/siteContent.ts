@@ -4,10 +4,8 @@ import {
   skills as baseSkills,
   services as baseServices,
   works as baseWorks,
-  workCategories as baseWorkCategories,
-  articles as baseArticles,
-  certifications as baseCertifications,
-  footer as baseFooter,
+    articles as baseArticles,
+    footer as baseFooter,
 } from "@/data/siteData";
 import { useLocale } from "@/hooks/use-locale";
 
@@ -242,39 +240,11 @@ const arContent = {
       scope: "هندسة منصات عالمية",
     },
   ],
-  workCategories: baseWorkCategories,
   articles: baseArticles.map((article, index) => ({
     ...article,
     category: arArticleCategoryMap[article.category] ?? article.category,
     title: arArticlesByIndex[index]?.title ?? article.title,
     excerpt: arArticlesByIndex[index]?.excerpt ?? article.excerpt,
-  })),
-  certifications: baseCertifications.map((cert, index) => ({
-    ...cert,
-    title:
-      index === 0
-        ? "مقدمة في الأمن السيبراني"
-        : index === 1
-          ? "بايثون (أساسيات)"
-          : index === 2
-            ? "SQL (متوسط)"
-            : index === 3
-              ? "React (أساسيات)"
-              : index === 4
-                ? "حل المشكلات (متوسط)"
-                : "React - الدليل الكامل",
-    category:
-      index === 0
-        ? "الأمن"
-        : index === 1
-          ? "البرمجة"
-          : index === 2
-            ? "قواعد البيانات"
-            : index === 3
-              ? "الواجهة الأمامية"
-              : index === 4
-                ? "الخوارزميات"
-                : "واجهة أمامية متقدمة",
   })),
   footer: {
     ...baseFooter,
@@ -571,9 +541,7 @@ const enContent = {
   skills: baseSkills,
   services: baseServices,
   works: baseWorks,
-  workCategories: baseWorkCategories,
   articles: baseArticles,
-  certifications: baseCertifications,
   footer: baseFooter,
   ui: {
     localeSwitch: { en: "English", ar: "Arabic" },

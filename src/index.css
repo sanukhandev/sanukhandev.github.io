@@ -3,14 +3,7 @@
 @tailwind utilities;
 
 @layer base {
-  @font-face {
-    font-family: "Laren Modern";
-    src: url("/assets/fonts/laren-modern-demo.regular.otf") format("opentype");
-    font-weight: 400 700;
-    font-style: normal;
-    font-display: swap;
-  }
-
+  
   :root {
     /* Reference image color palette: #E6D5BD canvas, #E6D5BD cards, #E6D5BD sand. */
     --bg: #E6D5BD;
@@ -373,9 +366,8 @@
     font-family: "Caveat", "Dancing Script", "Brush Script MT", cursive;
   }
 
-  .font-anta,
   .brand-zaakiy {
-    font-family: "Anta", sans-serif;
+    font-family: var(--sk-display, "Montserrat", sans-serif);
     color: var(--accent);
   }
 
@@ -1195,7 +1187,7 @@ html.light .zaakiy-chat .placeholder\:text-\[\#8a90a8\]::placeholder {
 
 .brand-zaakiy,
 .brand-zaakiyv3rse {
-  font-family:"Anta",ui-sans-serif,system-ui,sans-serif !important;
+  font-family: var(--sk-display, "Montserrat", sans-serif) !important;
   letter-spacing:.04em;
   font-weight:700;
   background:none;

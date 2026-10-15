@@ -1,6 +1,3 @@
-import { useCallback, useRef, useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
-
 type BrushRevealPortraitProps = {
   className?: string;
   alt: string;
@@ -8,138 +5,53 @@ type BrushRevealPortraitProps = {
   mirrored?: boolean;
 };
 
-type BrushPoint = { x: number; y: number };
-const portraitSrc = "/hero-avatar-cutout.avif";
-const portraitSrcSet = "/hero-avatar-cutout-360.avif 360w, /hero-avatar-cutout-720.avif 720w, /hero-avatar-cutout.avif 900w";
-const portraitSizes = "(max-width: 767px) min(100vw, 350px), (max-width: 1050px) 430px, 600px";
+const avifSrcSet =
+  "/hero-avatar-latest-480.avif 480w, /hero-avatar-latest-720.avif 720w, /hero-avatar-latest.avif 1122w";
+const webpSrcSet =
+  "/hero-avatar-latest-480.webp 480w, /hero-avatar-latest-720.webp 720w, /hero-avatar-latest.webp 1122w";
+const portraitSizes =
+  "(max-width: 767px) min(100vw, 480px), (max-width: 1050px) 720px, 1122px";
 
 /**
- * Two identical image layers guarantee pixel-perfect registration at every
- * viewport. The full-color layer is exposed with overlapping soft-edged,
- * slightly irregular CSS mask stamps. Framer Motion fades the reveal layer.
+ * BrushRevealPortrait — Optimized web-render avatar portrait.
  *
- * No canvas redraw, bitmap stretching, or new animation dependency.
+ * Renders the clean, full-color responsive photograph via modern AVIF and WebP
+ * sources without pointer tracking, runtime canvas redraws, or brush masking.
  */
-export function BrushRevealPortrait({ className = "", alt, ariaLabel, mirrored = false }: BrushRevealPortraitProps) {
-  const reducedMotion = useReducedMotion();
-  const pointsRef = useRef<BrushPoint[]>([]);
-  const rafRef = useRef<number | null>(null);
-  const [mask, setMask] = useState<string>("");
-  const [expanded, setExpanded] = useState(false);
-  const [hasInteracted, setHasInteracted] = useState(false);
-
-  const paint = useCallback((clientX: number, clientY: number, rect: DOMRect) => {
-    if (rafRef.current) return;
-    rafRef.current = window.requestAnimationFrame(() => {
-      rafRef.current = null;
-      const pointerX = clientX - rect.left;
-      const x = mirrored ? rect.width - pointerX : pointerX;
-      const y = clientY - rect.top;
-      if (x < 0 || y < 0 || x > rect.width || y > rect.height) return;
-      setHasInteracted(true);
-
-      const previous = pointsRef.current.at(-1);
-      const distance = previous ? Math.hypot(x - previous.x, y - previous.y) : Infinity;
-      if (distance < 13) return;
-
-      // Interpolate long pointer jumps so a quick gesture stays brush-like.
-      const stamps = previous ? Math.min(8, Math.ceil(distance / 26)) : 1;
-      const added = Array.from({ length: stamps }, (_, index) => {
-        const t = (index + 1) / stamps;
-        return {
-          x: previous ? previous.x + (x - previous.x) * t : x,
-          y: previous ? previous.y + (y - previous.y) * t : y,
-        };
-      });
-      pointsRef.current = [...pointsRef.current, ...added].slice(-45);
-
-      const gradients = pointsRef.current.flatMap((point) => {
-        const px = point.x.toFixed(1);
-        const py = point.y.toFixed(1);
-        return [
-          `radial-gradient(ellipse 43px 54px at ${px}px ${py}px, #000 0%, #000 54%, transparent 100%)`,
-          `radial-gradient(ellipse 8px 31px at ${(point.x - 17).toFixed(1)}px ${(point.y + 5).toFixed(1)}px, #000 0%, transparent 100%)`,
-        ];
-      });
-      setMask(gradients.join(", "));
-    });
-  }, [mirrored]);
-
-  const reset = useCallback(() => {
-    if (rafRef.current) {
-      window.cancelAnimationFrame(rafRef.current);
-      rafRef.current = null;
-    }
-    pointsRef.current = [];
-    setMask("");
-    setExpanded(false);
-  }, []);
-
-  const reveal = expanded ? "none" : mask || "linear-gradient(transparent, transparent)";
-  const visible = expanded || mask.length > 0;
-
+export function BrushRevealPortrait({
+  className = "",
+  alt,
+  ariaLabel,
+  mirrored = false,
+}: BrushRevealPortraitProps) {
   return (
     <div
       className={`hero-brush-avatar ${mirrored ? "hero-brush-avatar--mirrored" : ""} ${className}`}
-      tabIndex={0}
       role="group"
-      aria-label={ariaLabel ?? "Portrait. Move your pointer to paint in the original colors, or focus with the keyboard to reveal the full-color image."}
-      onPointerEnter={(event) => {
-        if (event.pointerType === "mouse" || event.pointerType === "pen") {
-          paint(event.clientX, event.clientY, event.currentTarget.getBoundingClientRect());
-        }
-      }}
-      onPointerMove={(event) => {
-        if (event.pointerType === "mouse" || event.pointerType === "pen") {
-          paint(event.clientX, event.clientY, event.currentTarget.getBoundingClientRect());
-        }
-      }}
-      onPointerLeave={reset}
-      onPointerDown={(event) => {
-        if (event.pointerType === "touch") {
-          setHasInteracted(true);
-          setExpanded(true);
-        }
-      }}
-      onFocus={() => {
-        setHasInteracted(true);
-        setExpanded(true);
-      }}
-      onBlur={reset}
+      aria-label={ariaLabel ?? alt}
     >
-      <img
-        src={portraitSrc}
-        srcSet={portraitSrcSet}
-        sizes={portraitSizes}
-        alt={alt}
-        width={900}
-        height={1200}
-        ref={(element) => element?.setAttribute("fetchpriority", "high")}
-        decoding="async"
-        className="hero-brush-avatar__photo"
-      />
-      <motion.img
-        src={hasInteracted ? portraitSrc : undefined}
-        srcSet={hasInteracted ? portraitSrcSet : undefined}
-        sizes={hasInteracted ? portraitSizes : undefined}
-        alt=""
-        aria-hidden="true"
-        width={900}
-        height={1200}
-        draggable={false}
-        decoding="async"
-        className="hero-brush-avatar__color"
-        style={{
-          maskImage: reveal,
-          WebkitMaskImage: reveal,
-          maskRepeat: "no-repeat",
-          WebkitMaskRepeat: "no-repeat",
-          maskComposite: "add",
-        }}
-        initial={false}
-        animate={{ opacity: visible ? 1 : 0 }}
-        transition={reducedMotion ? { duration: 0 } : { duration: 0.22, ease: "easeOut" }}
-      />
+      <picture className="hero-brush-avatar__picture">
+        <source
+          type="image/avif"
+          srcSet={avifSrcSet}
+          sizes={portraitSizes}
+        />
+        <source
+          type="image/webp"
+          srcSet={webpSrcSet}
+          sizes={portraitSizes}
+        />
+        <img
+          src="/hero-avatar-latest.webp"
+          alt={alt}
+          width={1122}
+          height={1402}
+          loading="eager"
+          decoding="async"
+          className="hero-brush-avatar__photo"
+          ref={(element) => element?.setAttribute("fetchpriority", "high")}
+        />
+      </picture>
     </div>
   );
 }

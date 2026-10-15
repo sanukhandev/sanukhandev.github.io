@@ -1,32 +1,34 @@
 import { describe, expect, it } from "vitest";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { BrushRevealPortrait } from "@/components/ui/BrushRevealPortrait";
 
-describe("BrushRevealPortrait", () => {
-  it("keeps both image layers registered to the same actual photograph", () => {
+describe("BrushRevealPortrait (Optimized Web Render)", () => {
+  it("renders optimized picture element with responsive AVIF and WebP sources", () => {
     const { container } = render(<BrushRevealPortrait alt="Portrait of Sanu Khan" />);
-    const images = container.querySelectorAll("img");
-    expect(images).toHaveLength(2);
-    expect(images[0]).toHaveAttribute("src", "/hero-avatar-cutout.avif");
-    expect(images[1]).not.toHaveAttribute("src");
-    expect(images[0]).toHaveAttribute("srcset", expect.stringContaining("/hero-avatar-cutout-360.avif 360w"));
-    expect(images[1]).not.toHaveAttribute("srcset");
-    expect(images[0]).toHaveAttribute("alt", "Portrait of Sanu Khan");
-    expect(images[1]).toHaveAttribute("aria-hidden", "true");
-    fireEvent.focus(screen.getByRole("group"));
-    expect(images[1]).toHaveAttribute("src", "/hero-avatar-cutout.avif");
-    expect(images[1]).toHaveAttribute("srcset", expect.stringContaining("/hero-avatar-cutout-720.avif 720w"));
-    expect(container.querySelector("canvas")).toBeNull();
-  });
+    const picture = container.querySelector("picture");
+    expect(picture).not.toBeNull();
 
-  it("offers a keyboard full-color reveal without pointer input", () => {
-    render(<BrushRevealPortrait alt="Portrait of Sanu Khan" />);
-    const portrait = screen.getByRole("group");
-    const layers = portrait.querySelectorAll("img");
-    fireEvent.focus(portrait);
-    expect(layers[1].style.maskImage).toBe("none");
-    fireEvent.blur(portrait);
-    expect(layers[1].style.maskImage).toContain("linear-gradient");
+    const sources = container.querySelectorAll("source");
+    expect(sources).toHaveLength(2);
+    expect(sources[0]).toHaveAttribute("type", "image/avif");
+    expect(sources[0]).toHaveAttribute("srcset", expect.stringContaining("/hero-avatar-latest-480.avif 480w"));
+    expect(sources[0]).toHaveAttribute("srcset", expect.stringContaining("/hero-avatar-latest.avif 1122w"));
+    expect(sources[1]).toHaveAttribute("type", "image/webp");
+    expect(sources[1]).toHaveAttribute("srcset", expect.stringContaining("/hero-avatar-latest-480.webp 480w"));
+    expect(sources[1]).toHaveAttribute("srcset", expect.stringContaining("/hero-avatar-latest.webp 1122w"));
+
+    const img = container.querySelector("img");
+    expect(img).not.toBeNull();
+    expect(img).toHaveAttribute("src", "/hero-avatar-latest.webp");
+    expect(img).toHaveAttribute("alt", "Portrait of Sanu Khan");
+    expect(img).toHaveAttribute("width", "1122");
+    expect(img).toHaveAttribute("height", "1402");
+    expect(img).toHaveAttribute("loading", "eager");
+    expect(img).toHaveAttribute("decoding", "async");
+    expect(img).toHaveAttribute("fetchpriority", "high");
+
+    // Clean render: No canvas or unneeded overhead
+    expect(container.querySelector("canvas")).toBeNull();
   });
 
   it("marks the portrait as mirrored when the Arabic layout requests it", () => {
