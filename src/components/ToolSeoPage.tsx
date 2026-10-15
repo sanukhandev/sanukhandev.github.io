@@ -74,11 +74,11 @@ export default function ToolSeoPage(props: ToolSeoPageProps) {
           </section>
 
           <section className="mt-8 grid gap-4 lg:grid-cols-2">
-            <div className="rounded-xl border border-default bg-secondary p-4">
+            <div className="rounded-xl border border-border bg-secondary p-4">
               <h2 className="text-[18px] font-semibold text-primary">Example Input</h2>
               <pre className="mt-3 overflow-x-auto text-[13px] text-secondary">{exampleInput}</pre>
             </div>
-            <div className="rounded-xl border border-default bg-secondary p-4">
+            <div className="rounded-xl border border-border bg-secondary p-4">
               <h2 className="text-[18px] font-semibold text-primary">Example Output</h2>
               <pre className="mt-3 overflow-x-auto text-[13px] text-secondary">{exampleOutput}</pre>
             </div>
