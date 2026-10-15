@@ -45,7 +45,7 @@ export function Footer() {
             LinkedIn <ArrowUpRight size={13} aria-hidden="true" />
           </a>
           <a href="mailto:hello@sanukhan.dev">
-            <Mail size={14} aria-hidden="true" /> Email
+            <Mail size={14} aria-hidden="true" /> {join(ar, "Email", "البريد الإلكتروني")}
           </a>
         </div>
       </div>

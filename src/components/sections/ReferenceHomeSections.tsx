@@ -44,7 +44,7 @@ export function ReferenceProof() {
   const { locale } = useLocale();
   const ar = locale === "ar";
   const { profile } = useSiteContent();
-  return <section className="sk-proof" aria-label={join(ar, "Selected impact", "أثر مختار")}><div className="sk-shell sk-proof__layout"><div className="sk-proof__intro"><p className="sk-eyebrow"><span aria-hidden="true">02</span>{join(ar, "SELECTED IMPACT", "أثر مختار")}</p><p>{join(ar, "Verified signals from the work behind the systems.", "مؤشرات موثقة من العمل خلف هذه الأنظمة.")}</p></div><div className="sk-proof__metrics">{profile.impactMetrics.map((metric) => <div className="sk-proof__metric" key={metric.label}><strong>{metric.value}</strong><span>{metric.label}</span></div>)}</div><div className="sk-proof__platforms"><span className="sk-mono">ECOSYSTEMS</span><span>Azure</span><span>AWS</span><span>Kubernetes</span><span>Kafka</span><span>ERP / PIM</span><span>Power Platform</span></div></div></section>;
+  return <section className="sk-proof" aria-label={join(ar, "Selected impact", "أثر مختار")}><div className="sk-shell sk-proof__layout"><div className="sk-proof__intro"><p className="sk-eyebrow"><span aria-hidden="true">02</span>{join(ar, "SELECTED IMPACT", "أثر مختار")}</p><p>{join(ar, "Verified signals from the work behind the systems.", "مؤشرات موثقة من العمل خلف هذه الأنظمة.")}</p></div><div className="sk-proof__metrics">{profile.impactMetrics.map((metric) => <div className="sk-proof__metric" key={metric.label}><strong>{metric.value}</strong><span>{metric.label}</span></div>)}</div><div className="sk-proof__platforms"><span className="sk-mono">{join(ar, "ECOSYSTEMS", "البيئات التقنية")}</span><span>Azure</span><span>AWS</span><span>Kubernetes</span><span>Kafka</span><span>ERP / PIM</span><span>Power Platform</span></div></div></section>;
 }
 
 export function ReferenceServices() {
@@ -136,13 +136,13 @@ export function ReferenceServices() {
           ))}
         </div>
         <div className="sk-system-line" aria-hidden="true">
-          <span>CONTEXT</span>
+          <span>{join(ar, "CONTEXT", "السياق")}</span>
           <i />
-          <span>ARCHITECTURE</span>
+          <span>{join(ar, "ARCHITECTURE", "العمارة")}</span>
           <i />
-          <span>DELIVERY</span>
+          <span>{join(ar, "DELIVERY", "التنفيذ")}</span>
           <i />
-          <span>OUTCOMES</span>
+          <span>{join(ar, "OUTCOMES", "النتائج")}</span>
         </div>
       </div>
     </section>
@@ -210,9 +210,9 @@ const SELECTED_PROJECTS_AR = [
   },
   {
     slug: "zaakiy-v3rse",
-    title: "Zaakiy V3RSE — Operational Intelligence Agentic Platform",
-    subtitle: "Designing a configuration-driven, multi-tenant agent platform that combines source-of-truth routing, enterprise RAG, live connectors, deterministic calculations and LLM reasoning.",
-    domain: "AI Platforms & Operational Intelligence"
+    title: "منصة Zaakiy V3RSE — منصة الوكلاء للذكاء التشغيلي",
+    subtitle: "تصميم منصة وكلاء موجهة بالإعدادات ومتعددة المستأجرين، تجمع بين التوجيه المعتمد وRAG المؤسسي والموصلات الحية والحسابات الحتمية واستدلال النماذج اللغوية.",
+    domain: "منصات الذكاء الاصطناعي والذكاء التشغيلي"
   }
 ];
 
@@ -511,7 +511,7 @@ export function ReferenceAbout() {
                 />
               </div>
               <div className="sk-about__card-footer">
-                <span className="sk-mono">SANU KHAN // PERSPECTIVE</span>
+                <span className="sk-mono">{join(ar, "SANU KHAN // PERSPECTIVE", "سانو خان // رؤية شخصية")}</span>
                 <span className="sk-about__card-dot" aria-hidden="true" />
               </div>
             </div>
@@ -619,11 +619,11 @@ export function ReferenceContact() {
           </p>
           <div className="sk-contact__paths">
             <div>
-              <span className="sk-mono">01 / REVIEW</span>
+              <span className="sk-mono">{join(ar, "01 / REVIEW", "01 / مراجعة")}</span>
               <strong>{join(ar, "Architecture & technical review", "مراجعة العمارة والتقنيات")}</strong>
             </div>
             <div>
-              <span className="sk-mono">02 / DELIVERY</span>
+              <span className="sk-mono">{join(ar, "02 / DELIVERY", "02 / تنفيذ")}</span>
               <strong>{join(ar, "Platform & integration delivery", "تطوير المنصات والتكامل")}</strong>
             </div>
           </div>

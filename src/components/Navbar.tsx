@@ -226,7 +226,7 @@ function Navbar() {
             <div className="flex items-center gap-2">
               <button
                 type="button"
-                aria-label={isLight ? "Switch to dark theme" : "Switch to light theme"}
+                aria-label={isLight ? (isArabic ? "التبديل إلى الوضع الداكن" : "Switch to dark theme") : (isArabic ? "التبديل إلى الوضع الفاتح" : "Switch to light theme")}
                 onClick={toggleTheme}
                 className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-border text-secondary hover:text-primary hover:border-accent/40 transition-colors"
               >
@@ -269,7 +269,7 @@ function Navbar() {
             <button
               type="button"
               className="grid h-11 w-11 place-items-center rounded-lg border border-border text-primary hover:border-accent/40 transition-colors"
-              aria-label={open ? "Close menu" : "Open menu"}
+              aria-label={open ? (isArabic ? "إغلاق القائمة" : "Close menu") : (isArabic ? "فتح القائمة" : "Open menu")}
               aria-expanded={open}
               aria-controls="mobile-navigation"
               ref={mobileToggleRef}
@@ -333,7 +333,7 @@ function Navbar() {
                     className="inline-flex h-10 items-center gap-2 rounded-lg border border-border px-3.5 text-xs font-semibold text-secondary hover:text-primary"
                   >
                     {isLight ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
-                    <span>{isLight ? "Dark mode" : "Light mode"}</span>
+                    <span>{isLight ? (isArabic ? "الوضع الداكن" : "Dark mode") : (isArabic ? "الوضع الفاتح" : "Light mode")}</span>
                   </button>
 
                   <button

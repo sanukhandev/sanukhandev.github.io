@@ -149,7 +149,7 @@ const arContent = {
       { value: "13+", label: "سنوات الخبرة" },
       { value: "100+", label: "أنظمة تم تسليمها" },
       { value: "9", label: "أسواق مخدومة" },
-      { value: "800K+", label: "أنظمة على نطاق منتج" },
+      { value: "1M+", label: "أنظمة على نطاق منتج" },
     ],
     ctas: [
       { label: "لنتحدث", href: "#contact", variant: "hire" as const },
