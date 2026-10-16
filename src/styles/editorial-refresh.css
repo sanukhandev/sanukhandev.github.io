@@ -1,23 +1,8 @@
 /*
  * Sanu Khan brand system
- * Keratus / Montserrat / Sloop Script / IBM Plex Mono
+ * Montserrat / Sloop Script / IBM Plex Mono
  * Ivory, black and orange only. This file owns the homepage composition.
  */
-@font-face {
-  font-family: "Keratus";
-  src: url("/assets/fonts/Keratus-Medium.ttf") format("truetype");
-  font-weight: 100 900;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Roba";
-  src: url("/assets/fonts/Roba-Regular.ttf") format("truetype");
-  font-weight: 400 700;
-  font-style: normal;
-  font-display: swap;
-}
 
 :root {
   --sk-ivory: #e6d5bd;
@@ -28,7 +13,7 @@
   --sk-fg: var(--sk-black);
   --sk-bg: var(--sk-ivory);
   --sk-fg-muted: rgba(16, 16, 16, 0.78);
-  --sk-font-brand: "Keratus", var(--sk-display);
+  --sk-font-brand: var(--sk-display);
   --sk-display: "Montserrat", Arial, sans-serif;
   --sk-body: "Montserrat", Arial, sans-serif;
   --sk-mono: "IBM Plex Mono", Consolas, monospace;
@@ -87,7 +72,6 @@ html.dark {
 .sk-navbar .sk-shell { max-width: var(--sk-max); }
 .sk-navbar__brand { display: inline-flex; min-height: 44px; align-items: center; text-decoration: none; }
 .sk-navbar__brand:hover { opacity: 0.8; }
-.sk-navbar__brand .brand-identity__wordmark { font-size: 1.03rem; }
 .sk-navbar__brand .brand-identity__descriptor { display: none; }
 .sk-navbar nav a { color: var(--sk-black) !important; font-family: var(--sk-mono); font-size: 0.82rem; letter-spacing: 0.05em; text-transform: uppercase; font-weight: 500; }
 .sk-navbar nav a:hover, .sk-navbar nav a[aria-current="page"] { color: var(--sk-orange-ink) !important; }
@@ -484,7 +468,7 @@ html.dark .sk-logo-grad-stop-100 { stop-color: #D5360C !important; }
 html.dark .sk-mobile-nav { background: var(--sk-black) !important; border-color: var(--sk-dark-line) !important; }
 html.dark .sk-mobile-nav a { color: var(--sk-ivory) !important; }
 html.dark .sk-capabilities, html.dark .sk-journal, html.dark .sk-faq, html.dark .sk-work, html.dark .sk-about { background: var(--sk-black); color: var(--sk-ivory); border-color: var(--sk-dark-line); }
-html.dark .sk-capability, html.dark .sk-faq__list, html.dark .sk-faq details, html.dark .sk-project--compact { border-color: var(--sk-dark-line); }
+html.dark .sk-capability, html.dark .sk-faq__list, html.dark .sk-faq details { border-color: var(--sk-dark-line); }
 html.dark .sk-capability p { color: rgba(230, 213, 189, 0.82) !important; }
 html.dark .sk-capability:hover, html.dark .sk-capability:focus-visible { background: rgba(230, 213, 189, 0.05); }
 html.dark .sk-capability:hover h3 { color: var(--sk-orange); }
@@ -503,8 +487,6 @@ html.dark .sk-about__copy > p:not(.sk-eyebrow) { color: rgba(230, 213, 189, 0.88
 html.dark .sk-about__card--front { background: #1a1816; border-color: rgba(230, 213, 189, 0.3); color: var(--sk-ivory); }
 html.dark .sk-about__card-footer { border-color: rgba(230, 213, 189, 0.2); }
 html.dark .sk-about__card-footer .sk-mono { color: var(--sk-orange); }
-html.dark .sk-about__portrait { background: color-mix(in srgb, var(--sk-ivory) 10%, var(--sk-black)); }
-html.dark .sk-about__portrait img { filter: grayscale(1) brightness(0.9); }
 html.dark .sk-hero { border-bottom: none !important; }
 html.dark .sk-section { border-color: var(--sk-dark-line); }
 html.dark .sk-hero h1 .sk-hero__word { color: var(--sk-ivory); }

@@ -182,6 +182,7 @@ export default defineConfig(({ command, mode }) => {
     build: {
       target: "esnext",
       cssCodeSplit: true,
+      cssMinify: true,
       minify: "esbuild",
       sourcemap: isAnalyze,
       rollupOptions: {
