@@ -1,4 +1,3 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Suspense, lazy, useEffect, useRef } from "react";
 import {
   BrowserRouter,
@@ -82,7 +81,6 @@ const BlogSlugRedirect = () => {
   return <Navigate to={`/blog/${slug}`} replace />;
 };
 
-const queryClient = new QueryClient();
 
 const routeFallback = (
   <div
@@ -237,13 +235,11 @@ const AppShell = () => {
 };
 
 const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <LocaleProvider>
-      <ThemeProvider>
-        <AppShell />
-      </ThemeProvider>
-    </LocaleProvider>
-  </QueryClientProvider>
+  <LocaleProvider>
+    <ThemeProvider>
+      <AppShell />
+    </ThemeProvider>
+  </LocaleProvider>
 );
 
 export default App;

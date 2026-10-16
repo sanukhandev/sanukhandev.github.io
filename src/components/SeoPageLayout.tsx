@@ -105,7 +105,7 @@ export default function SeoPageLayout(props: SeoPageLayoutProps) {
             ))}
           </div>
 
-          <section className="mt-10 rounded-2xl border border-default bg-secondary p-6">
+          <section className="mt-10 rounded-2xl border border-border bg-secondary p-6">
             <h2 className="text-[24px] font-bold text-primary">{cta.text}</h2>
             <a
               className="mt-3 inline-flex rounded-lg bg-accent px-4 py-2 text-[14px] font-semibold text-on-accent"

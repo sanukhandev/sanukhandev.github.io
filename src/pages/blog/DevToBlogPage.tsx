@@ -182,18 +182,18 @@ export default function DevToBlogPage() {
         <Navbar />
         <main className="flex-1 pt-24 pb-20 sm:pt-28">
           <div className="sk-shell max-w-2xl mx-auto text-center border border-[var(--sk-line)] p-12">
-            <p className="sk-mono text-[var(--sk-orange-ink)] mb-2">ERROR 404</p>
-            <h1 className="text-3xl font-bold text-[var(--sk-black)]">
+            <p className="sk-mono text-[var(--sk-orange-ink)] dark:text-[var(--sk-orange)] mb-2">ERROR 404</p>
+            <h1 className="text-3xl font-bold text-[var(--sk-fg)]">
               {ar ? "المقال غير متوفر" : "Article Not Found"}
             </h1>
-            <p className="mt-3 text-base text-[var(--sk-black)] opacity-75">
+            <p className="mt-3 text-base text-[var(--sk-fg)] opacity-75">
               {ar
                 ? "تعذر تحميل هذا المقال. يمكنك تصفح بقية المقالات من الفهرس."
                 : "The requested article is currently unavailable or may have been moved."}
             </p>
             <Link
               to="/blog"
-              className="mt-6 inline-flex items-center gap-2 px-5 py-2.5 bg-[var(--sk-black)] text-[var(--sk-ivory)] text-sm font-semibold hover:bg-[var(--sk-orange-ink)] transition-colors"
+              className="mt-6 inline-flex items-center gap-2 px-5 py-2.5 bg-[var(--sk-fg)] text-[var(--sk-bg)] text-sm font-semibold hover:bg-[var(--sk-orange)] hover:text-white transition-colors"
             >
               <ArrowLeft className="h-4 w-4 rtl:rotate-180" />{" "}
               {ar ? "العودة إلى المدونة" : "Back to Blog Index"}
@@ -267,7 +267,7 @@ export default function DevToBlogPage() {
               <div className="sticky top-28 max-h-[calc(100vh-9rem)] overflow-y-auto space-y-6 pr-2">
                 <Link
                   to="/blog"
-                  className="sk-mono text-[var(--sk-orange-ink)] hover:text-[var(--sk-black)] transition-colors inline-flex items-center gap-1.5 text-xs font-semibold"
+                  className="sk-mono text-[var(--sk-orange-ink)] dark:text-[var(--sk-orange)] hover:text-[var(--sk-fg)] transition-colors inline-flex items-center gap-1.5 text-xs font-semibold"
                 >
                   <ArrowLeft className="h-3.5 w-3.5 rtl:rotate-180" />{" "}
                   {ar ? "كل المقالات" : "ALL ARTICLES"}
@@ -275,8 +275,8 @@ export default function DevToBlogPage() {
 
                 {toc.length > 0 && (
                   <div className="border-t border-[var(--sk-line)] pt-5">
-                    <p className="sk-mono text-[var(--sk-black)] font-semibold mb-3 flex items-center gap-1.5 text-xs tracking-wider uppercase">
-                      <BookOpen className="h-3.5 w-3.5 text-[var(--sk-orange-ink)]" />
+                    <p className="sk-mono text-[var(--sk-fg)] font-semibold mb-3 flex items-center gap-1.5 text-xs tracking-wider uppercase">
+                      <BookOpen className="h-3.5 w-3.5 text-[var(--sk-orange-ink)] dark:text-[var(--sk-orange)]" />
                       {ar ? "جدول المحتويات" : "CONTENTS"}
                     </p>
                     <ul className="space-y-1.5 text-xs">
@@ -288,8 +288,8 @@ export default function DevToBlogPage() {
                               href={`#${item.id}`}
                               className={`block py-1 text-xs leading-snug transition-colors ${
                                 isActive
-                                  ? "font-bold text-[var(--sk-orange-ink)] border-l-2 border-[var(--sk-orange-ink)] pl-2"
-                                  : "text-[var(--sk-black)] opacity-70 hover:opacity-100 hover:text-[var(--sk-black)] pl-2.5"
+                                  ? "font-bold text-[var(--sk-orange-ink)] dark:text-[var(--sk-orange)] border-l-2 border-[var(--sk-orange-ink)] dark:border-[var(--sk-orange)] pl-2"
+                                  : "text-[var(--sk-fg)] opacity-70 hover:opacity-100 hover:text-[var(--sk-orange)] pl-2.5"
                               }`}
                               style={{
                                 paddingInlineStart: `${
@@ -319,15 +319,15 @@ export default function DevToBlogPage() {
                 )}
 
                 <div className="border-t border-[var(--sk-line)] pt-5 text-xs space-y-2">
-                  <p className="sk-mono text-[var(--sk-orange-ink)] font-semibold uppercase">
+                  <p className="sk-mono text-[var(--sk-orange-ink)] dark:text-[var(--sk-orange)] font-semibold uppercase">
                     {ar ? "بيانات القراءة" : "ARTICLE METRICS"}
                   </p>
                   {published && (
-                    <p className="text-[var(--sk-black)] opacity-75">
+                    <p className="text-[var(--sk-fg)] opacity-75">
                       {ar ? "تاريخ النشر:" : "Published:"} {published}
                     </p>
                   )}
-                  <p className="text-[var(--sk-black)] opacity-75">
+                  <p className="text-[var(--sk-fg)] opacity-75">
                     {ar ? "وقت القراءة المقدر:" : "Est. reading time:"} ~{readingMinutes}{" "}
                     {ar ? "دقائق" : "min"}
                   </p>
@@ -344,7 +344,7 @@ export default function DevToBlogPage() {
               <div className="xl:hidden mb-6">
                 <Link
                   to="/blog"
-                  className="sk-mono text-[var(--sk-orange-ink)] inline-flex items-center gap-1.5 text-xs font-semibold"
+                  className="sk-mono text-[var(--sk-orange-ink)] dark:text-[var(--sk-orange)] inline-flex items-center gap-1.5 text-xs font-semibold"
                 >
                   <ArrowLeft className="h-3.5 w-3.5 rtl:rotate-180" />{" "}
                   {ar ? "العودة إلى جميع المقالات" : "BACK TO ALL ARTICLES"}
@@ -359,37 +359,37 @@ export default function DevToBlogPage() {
               </p>
 
               {/* H1 Title */}
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[var(--sk-black)] leading-[1.12]">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[var(--sk-fg)] leading-[1.12]">
                 {article.title}
               </h1>
 
               {/* Excerpt / Lead */}
-              <p className="mt-4 text-lg sm:text-xl leading-relaxed text-[var(--sk-black)] opacity-85 font-normal">
+              <p className="mt-4 text-lg sm:text-xl leading-relaxed text-[var(--sk-fg)] opacity-85 font-normal">
                 {article.description}
               </p>
 
               {/* Meta row */}
-              <div className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs sm:text-sm text-[var(--sk-black)] opacity-75 pb-6 border-b border-[var(--sk-line)]">
+              <div className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs sm:text-sm text-[var(--sk-fg)] opacity-75 pb-6 border-b border-[var(--sk-line)]">
                 {published && (
                   <span className="inline-flex items-center gap-1.5">
-                    <Calendar className="h-3.5 w-3.5 text-[var(--sk-orange-ink)]" />
+                    <Calendar className="h-3.5 w-3.5 text-[var(--sk-orange-ink)] dark:text-[var(--sk-orange)]" />
                     {published}
                   </span>
                 )}
                 <span className="opacity-40">•</span>
                 <span className="inline-flex items-center gap-1.5">
-                  <BookOpen className="h-3.5 w-3.5 text-[var(--sk-orange-ink)]" />
+                  <BookOpen className="h-3.5 w-3.5 text-[var(--sk-orange-ink)] dark:text-[var(--sk-orange)]" />
                   ~{readingMinutes} {ar ? "دقائق قراءة" : "min read"}
                 </span>
                 <span className="opacity-40">•</span>
-                <span className="font-semibold text-[var(--sk-black)]">
+                <span className="font-semibold text-[var(--sk-fg)]">
                   {profile.name}
                 </span>
                 <a
                   href={article.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="ml-auto inline-flex items-center gap-1 text-[var(--sk-orange-ink)] font-semibold hover:underline"
+                  className="ml-auto inline-flex items-center gap-1 text-[var(--sk-orange-ink)] dark:text-[var(--sk-orange)] font-semibold hover:underline"
                 >
                   <ExternalLink className="h-3.5 w-3.5" /> Dev.to
                 </a>
@@ -414,7 +414,7 @@ export default function DevToBlogPage() {
                   {article.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="px-2.5 py-1 border border-[var(--sk-line)] text-xs font-mono uppercase text-[var(--sk-black)] opacity-75"
+                      className="px-2.5 py-1 border border-[var(--sk-line)] text-xs font-mono uppercase text-[var(--sk-fg)] opacity-75"
                     >
                       #{tag}
                     </span>
@@ -430,7 +430,7 @@ export default function DevToBlogPage() {
                 />
               ) : (
                 <div className="mt-8 border border-[var(--sk-line)] p-8 text-center">
-                  <p className="text-base text-[var(--sk-black)] opacity-80">
+                  <p className="text-base text-[var(--sk-fg)] opacity-80">
                     {ar
                       ? "المحتوى الكامل منشور على Dev.to."
                       : "Full article content is available on Dev.to."}
@@ -460,7 +460,7 @@ export default function DevToBlogPage() {
                 </a>
                 <Link
                   to="/blog"
-                  className="inline-flex items-center gap-1.5 px-5 py-2.5 border border-[var(--sk-line)] text-sm font-semibold text-[var(--sk-black)] hover:border-[var(--sk-black)] transition-colors"
+                  className="inline-flex items-center gap-1.5 px-5 py-2.5 border border-[var(--sk-line)] text-sm font-semibold text-[var(--sk-fg)] hover:border-[var(--sk-fg)] transition-colors"
                 >
                   <ArrowLeft className="h-4 w-4 rtl:rotate-180" />{" "}
                   {ar ? "فهرس المقالات" : "Back to Blog Index"}
@@ -470,7 +470,7 @@ export default function DevToBlogPage() {
               {/* Keep Reading Section */}
               {recentPosts.length > 0 && (
                 <section className="mt-16 border-t border-[var(--sk-line)] pt-10">
-                  <p className="sk-mono text-[var(--sk-orange-ink)] font-semibold mb-6">
+                  <p className="sk-mono text-[var(--sk-orange-ink)] dark:text-[var(--sk-orange)] font-semibold mb-6">
                     {ar ? "مواضيع مقترحة للقراءة" : "CONTINUE READING"}
                   </p>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -478,16 +478,16 @@ export default function DevToBlogPage() {
                       <Link
                         key={post.id}
                         to={post.localPath}
-                        className="group flex flex-col justify-between border border-[var(--sk-line)] p-5 hover:border-[var(--sk-black)] hover:-translate-y-0.5 transition-all"
+                        className="group flex flex-col justify-between border border-[var(--sk-line)] p-5 hover:border-[var(--sk-fg)] hover:-translate-y-0.5 transition-all"
                       >
                         <div>
-                          <p className="sk-mono text-[var(--sk-orange-ink)] text-xs mb-2">
+                          <p className="sk-mono text-[var(--sk-orange-ink)] dark:text-[var(--sk-orange)] text-xs mb-2">
                             {post.tags[0]?.toUpperCase() || "ENGINEERING"}
                           </p>
-                          <h3 className="text-base font-bold text-[var(--sk-black)] group-hover:text-[var(--sk-orange-ink)] transition-colors line-clamp-2 leading-snug">
+                          <h3 className="text-base font-bold text-[var(--sk-fg)] group-hover:text-[var(--sk-orange)] transition-colors line-clamp-2 leading-snug">
                             {post.title}
                           </h3>
-                          <p className="text-xs text-[var(--sk-black)] opacity-75 mt-2 line-clamp-2 leading-relaxed">
+                          <p className="text-xs text-[var(--sk-fg)] opacity-75 mt-2 line-clamp-2 leading-relaxed">
                             {post.description}
                           </p>
                         </div>
@@ -500,7 +500,7 @@ export default function DevToBlogPage() {
                               )}
                             </span>
                           )}
-                          <span className="sk-text-link inline-flex items-center gap-1 font-semibold text-[var(--sk-orange-ink)]">
+                          <span className="sk-text-link inline-flex items-center gap-1 font-semibold text-[var(--sk-orange-ink)] dark:text-[var(--sk-orange)] group-hover:text-[var(--sk-fg)]">
                             {ar ? "قراءة" : "Read"}{" "}
                             <ArrowRight className="h-3 w-3 rtl:rotate-180" />
                           </span>
@@ -524,15 +524,15 @@ export default function DevToBlogPage() {
                       className="h-12 w-12 rounded-full object-cover border border-[var(--sk-line)]"
                     />
                     <div>
-                      <p className="text-sm font-bold text-[var(--sk-black)]">
+                      <p className="text-sm font-bold text-[var(--sk-fg)]">
                         {profile.name}
                       </p>
-                      <p className="sk-mono text-[11px] text-[var(--sk-orange-ink)]">
+                      <p className="sk-mono text-[11px] text-[var(--sk-orange-ink)] dark:text-[var(--sk-orange)]">
                         Tech Lead &amp; Architect
                       </p>
                     </div>
                   </div>
-                  <p className="mt-3 text-xs leading-relaxed text-[var(--sk-black)] opacity-80">
+                  <p className="mt-3 text-xs leading-relaxed text-[var(--sk-fg)] opacity-80">
                     13+ years building distributed systems, event-driven
                     architecture, and enterprise cloud solutions.
                   </p>
@@ -540,7 +540,7 @@ export default function DevToBlogPage() {
                     href="https://dev.to/sanukhandev"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-[var(--sk-orange-ink)] hover:underline"
+                    className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-[var(--sk-orange-ink)] dark:text-[var(--sk-orange)] hover:underline"
                   >
                     <ExternalLink className="h-3 w-3" /> Follow on Dev.to
                   </a>
@@ -549,14 +549,14 @@ export default function DevToBlogPage() {
                 {/* Article Tags */}
                 {article.tags.length > 0 && (
                   <div className="border border-[var(--sk-line)] p-5">
-                    <p className="sk-mono text-[var(--sk-orange-ink)] text-xs font-semibold mb-3 flex items-center gap-1.5 uppercase">
+                    <p className="sk-mono text-[var(--sk-orange-ink)] dark:text-[var(--sk-orange)] text-xs font-semibold mb-3 flex items-center gap-1.5 uppercase">
                       <Hash className="h-3.5 w-3.5" /> Topic Tags
                     </p>
                     <div className="flex flex-wrap gap-1.5">
                       {article.tags.map((tag) => (
                         <span
                           key={tag}
-                          className="px-2 py-0.5 border border-[var(--sk-line)] text-[11px] font-mono uppercase text-[var(--sk-black)] opacity-80"
+                          className="px-2 py-0.5 border border-[var(--sk-line)] text-[11px] font-mono uppercase text-[var(--sk-fg)] opacity-80"
                         >
                           #{tag}
                         </span>
@@ -568,18 +568,18 @@ export default function DevToBlogPage() {
                 {/* More notes */}
                 {recentPosts.length > 0 && (
                   <div className="border border-[var(--sk-line)] p-5">
-                    <p className="sk-mono text-[var(--sk-orange-ink)] text-xs font-semibold mb-3 uppercase">
+                    <p className="sk-mono text-[var(--sk-orange-ink)] dark:text-[var(--sk-orange)] text-xs font-semibold mb-3 uppercase">
                       More Architecture Notes
                     </p>
                     <ul className="space-y-3">
                       {recentPosts.slice(0, 4).map((post) => (
                         <li key={post.id}>
                           <Link to={post.localPath} className="group block">
-                            <p className="text-xs font-semibold text-[var(--sk-black)] group-hover:text-[var(--sk-orange-ink)] transition-colors line-clamp-2 leading-snug">
+                            <p className="text-xs font-semibold text-[var(--sk-fg)] group-hover:text-[var(--sk-orange)] transition-colors line-clamp-2 leading-snug">
                               {post.title}
                             </p>
                             {post.publishedAt && (
-                              <p className="sk-mono text-[10px] text-[var(--sk-black)] opacity-55 mt-1">
+                              <p className="sk-mono text-[10px] text-[var(--sk-fg)] opacity-60 mt-1">
                                 {new Date(post.publishedAt).toLocaleDateString(
                                   undefined,
                                   {

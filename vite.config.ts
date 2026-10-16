@@ -177,13 +177,12 @@ export default defineConfig(({ command, mode }) => {
         "react-dom",
         "react/jsx-runtime",
         "react/jsx-dev-runtime",
-        "@tanstack/react-query",
-        "@tanstack/query-core",
       ],
     },
     build: {
       target: "esnext",
       cssCodeSplit: true,
+      cssMinify: true,
       minify: "esbuild",
       sourcemap: isAnalyze,
       rollupOptions: {
@@ -193,25 +192,26 @@ export default defineConfig(({ command, mode }) => {
           // `immutable, max-age=31536000` header in vercel.json pins
           // returning visitors to a stale entry chunk for a year.
           manualChunks(id) {
+            const normalizedId = id.replace(/\\/g, "/");
             if (
-              id.includes("node_modules/react/") ||
-              id.includes("node_modules/react-dom/") ||
-              id.includes("node_modules/scheduler/")
+              normalizedId.includes("node_modules/react/") ||
+              normalizedId.includes("node_modules/react-dom/") ||
+              normalizedId.includes("node_modules/scheduler/")
             ) {
               return "vendor";
             }
-            if (id.includes("node_modules/react-router")) {
+            if (normalizedId.includes("node_modules/react-router")) {
               return "routingData";
             }
             // @radix-ui and lucide-react are deliberately NOT lumped into a
             // single "ui" chunk: one entry-level Radix import would then drag
             // every Radix package and icon into the critical path. Left to
             // Vite, they split per consuming route chunk.
-            if (id.includes("node_modules/framer-motion/")) {
-              return "motion";
-            }
-            if (id.includes("node_modules/dompurify/")) {
+            if (normalizedId.includes("node_modules/dompurify/")) {
               return "contentHeavy";
+            }
+            if (normalizedId.includes("/src/data/caseStudies")) {
+              return "caseStudies";
             }
           },
         },

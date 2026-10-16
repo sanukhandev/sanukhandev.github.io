@@ -52,4 +52,16 @@ describe("SanuKhanLogo & BrandIdentity", () => {
     expect(container.querySelector(".sk-logo-svg")).not.toBeNull();
     expect(container.textContent).toContain("قائد تقني / خبير حلول");
   });
+
+  it("includes semantic foreground classes and dark-theme gradient stops for theme legibility", () => {
+    const { container } = render(<SanuKhanLogo />);
+    const sanu = container.querySelector(".sk-logo__sanu");
+    const khan = container.querySelector(".sk-logo__khan");
+    expect(sanu).toHaveClass("fill-current");
+    expect(khan).toHaveClass("fill-current");
+
+    expect(container.querySelector(".sk-logo-grad-stop-0")).not.toBeNull();
+    expect(container.querySelector(".sk-logo-grad-stop-50")).not.toBeNull();
+    expect(container.querySelector(".sk-logo-grad-stop-100")).not.toBeNull();
+  });
 });

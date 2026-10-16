@@ -143,12 +143,12 @@ export default function BlogIndex() {
               <span aria-hidden="true">/</span>
               {ar ? "الملاحظات الهندسية" : "ENGINEERING JOURNAL"}
             </p>
-            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[var(--sk-black)] leading-[1.08]">
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[var(--sk-fg)] leading-[1.08]">
               {ar
                 ? "المقالات وملاحظات العمارة البرمجية"
                 : "Articles & Architecture Notes"}
             </h1>
-            <p className="mt-4 max-w-2xl text-base sm:text-lg text-[var(--sk-black)] opacity-85 leading-relaxed">
+            <p className="mt-4 max-w-2xl text-base sm:text-lg text-[var(--sk-fg)] opacity-85 leading-relaxed">
               {ar
                 ? "دراسات متعمقة حول الأنظمة الموزعة وتكامل المؤسسات وعمارة الأنظمة المعتمدة على الأحداث وموثوقية الإنتاج."
                 : "Field notes, deep dives and design decisions on distributed platforms, enterprise integration, event-driven systems and production reliability."}
@@ -160,7 +160,7 @@ export default function BlogIndex() {
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
               {/* Search box */}
               <div className="relative flex-1 max-w-xl">
-                <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--sk-black)] opacity-50 rtl:left-auto rtl:right-3.5 pointer-events-none" />
+                <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--sk-fg)] opacity-50 rtl:left-auto rtl:right-3.5 pointer-events-none" />
                 <input
                   type="search"
                   value={query}
@@ -170,13 +170,13 @@ export default function BlogIndex() {
                       ? "ابحث في المقالات والمواضيع..."
                       : "Search by title, topic, or keyword..."
                   }
-                  className="w-full pl-10 pr-9 py-2.5 rtl:pl-9 rtl:pr-10 bg-transparent border border-[var(--sk-line)] rounded-none text-sm text-[var(--sk-black)] placeholder:text-[var(--sk-black)]/45 focus:outline-none focus:border-[var(--sk-orange-ink)] transition-colors"
+                  className="w-full pl-10 pr-9 py-2.5 rtl:pl-9 rtl:pr-10 bg-transparent border border-[var(--sk-line)] rounded-none text-sm text-[var(--sk-fg)] placeholder:text-[var(--sk-fg)]/45 focus:outline-none focus:border-[var(--sk-orange-ink)] transition-colors"
                 />
                 {query && (
                   <button
                     type="button"
                     onClick={() => onSearchChange("")}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-[var(--sk-black)] opacity-50 hover:opacity-100 rtl:right-auto rtl:left-3"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-[var(--sk-fg)] opacity-50 hover:opacity-100 rtl:right-auto rtl:left-3"
                     aria-label={ar ? "مسح البحث" : "Clear search"}
                   >
                     <X className="h-4 w-4" />
@@ -199,7 +199,7 @@ export default function BlogIndex() {
 
             {/* Tag Pills */}
             <div className="mt-5 flex flex-wrap items-center gap-2">
-              <span className="sk-mono text-[var(--sk-black)] opacity-60 mr-1 flex items-center gap-1 rtl:mr-0 rtl:ml-1">
+              <span className="sk-mono text-[var(--sk-fg)] opacity-60 mr-1 flex items-center gap-1 rtl:mr-0 rtl:ml-1">
                 <Tag className="h-3 w-3" /> {ar ? "الموضوع:" : "TOPIC:"}
               </span>
               {allTags.map((tag) => {
@@ -211,8 +211,8 @@ export default function BlogIndex() {
                     onClick={() => onTagChange(tag)}
                     className={`inline-flex items-center px-3 py-1 text-xs font-mono tracking-wider uppercase transition-colors ${
                       isSelected
-                        ? "bg-[var(--sk-black)] text-[var(--sk-ivory)] border border-[var(--sk-black)]"
-                        : "border border-[var(--sk-line)] text-[var(--sk-black)] hover:border-[var(--sk-black)] bg-transparent"
+                        ? "bg-[var(--sk-fg)] text-[var(--sk-bg)] border border-[var(--sk-fg)]"
+                        : "border border-[var(--sk-line)] text-[var(--sk-fg)] hover:border-[var(--sk-fg)] bg-transparent"
                     }`}
                   >
                     {tag === "all" ? (ar ? "الكل" : "ALL") : `#${tag}`}
@@ -242,17 +242,17 @@ export default function BlogIndex() {
                   return (
                     <article
                       key={post.href}
-                      className="group flex flex-col justify-between border border-[var(--sk-line)] bg-transparent p-6 sm:p-8 transition-all duration-200 hover:-translate-y-1 hover:border-[var(--sk-black)] hover:shadow-lg"
+                      className="group flex flex-col justify-between border border-[var(--sk-line)] bg-transparent p-6 sm:p-8 transition-all duration-200 hover:-translate-y-1 hover:border-[var(--sk-fg)] hover:shadow-lg"
                     >
                       <div>
                         {/* Top Meta: Index & Category */}
                         <div className="flex items-center justify-between gap-2 border-b border-[var(--sk-line)] pb-3 text-xs">
-                          <span className="sk-mono text-[var(--sk-orange-ink)] font-semibold">
+                          <span className="sk-mono text-[var(--sk-orange-ink)] dark:text-[var(--sk-orange)] font-semibold">
                             {post.tags[0] || (ar ? "هندسة" : "ENGINEERING")} /{" "}
                             {String(globalIdx).padStart(2, "0")}
                           </span>
                           {dateStr && (
-                            <span className="sk-mono text-[var(--sk-black)] opacity-65 flex items-center gap-1.5">
+                            <span className="sk-mono text-[var(--sk-fg)] opacity-70 flex items-center gap-1.5">
                               <Calendar className="h-3 w-3" />
                               {dateStr}
                             </span>
@@ -260,14 +260,14 @@ export default function BlogIndex() {
                         </div>
 
                         {/* Title */}
-                        <h2 className="mt-4 text-xl sm:text-2xl font-bold leading-snug text-[var(--sk-black)] group-hover:text-[var(--sk-orange-ink)] transition-colors">
+                        <h2 className="mt-4 text-xl sm:text-2xl font-bold leading-snug text-[var(--sk-fg)] group-hover:text-[var(--sk-orange)] transition-colors">
                           <Link to={post.href} className="hover:underline">
                             {post.title}
                           </Link>
                         </h2>
 
                         {/* Excerpt / Summary */}
-                        <p className="mt-3 text-[15px] sm:text-base leading-relaxed text-[var(--sk-black)] opacity-85 line-clamp-3">
+                        <p className="mt-3 text-[15px] sm:text-base leading-relaxed text-[var(--sk-fg)] opacity-85 line-clamp-3">
                           {post.description}
                         </p>
                       </div>
@@ -278,7 +278,7 @@ export default function BlogIndex() {
                           {post.tags.slice(0, 3).map((tag) => (
                             <span
                               key={tag}
-                              className="text-[11px] font-mono text-[var(--sk-black)] opacity-60"
+                              className="text-[11px] font-mono text-[var(--sk-fg)] opacity-70"
                             >
                               #{tag}
                             </span>
@@ -286,7 +286,7 @@ export default function BlogIndex() {
                         </div>
                         <Link
                           to={post.href}
-                          className="sk-text-link shrink-0 inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--sk-orange-ink)] group-hover:text-[var(--sk-black)]"
+                          className="sk-text-link shrink-0 inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--sk-orange-ink)] dark:text-[var(--sk-orange)] group-hover:text-[var(--sk-fg)]"
                         >
                           {ar ? "اقرأ المقال" : "Read article"}
                           <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1 rtl:rotate-180" />
@@ -298,10 +298,10 @@ export default function BlogIndex() {
               </div>
             ) : (
               <div className="border border-[var(--sk-line)] p-12 text-center my-12">
-                <p className="text-xl font-bold text-[var(--sk-black)]">
+                <p className="text-xl font-bold text-[var(--sk-fg)]">
                   {ar ? "لم يتم العثور على مقالات" : "No articles found"}
                 </p>
-                <p className="mt-2 text-sm text-[var(--sk-black)] opacity-70">
+                <p className="mt-2 text-sm text-[var(--sk-fg)] opacity-75">
                   {ar
                     ? "جرّب تغيير عبارة البحث أو اختيار موضوع آخر."
                     : "Try adjusting your search terms or clearing selected topic filters."}
@@ -309,7 +309,7 @@ export default function BlogIndex() {
                 <button
                   type="button"
                   onClick={clearFilters}
-                  className="mt-6 inline-flex items-center gap-2 px-5 py-2.5 bg-[var(--sk-black)] text-[var(--sk-ivory)] text-sm font-semibold hover:bg-[var(--sk-orange-ink)] transition-colors"
+                  className="mt-6 inline-flex items-center gap-2 px-5 py-2.5 bg-[var(--sk-fg)] text-[var(--sk-bg)] text-sm font-semibold hover:bg-[var(--sk-orange)] hover:text-white transition-colors"
                 >
                   {ar ? "إعادة ضبط التصفية" : "Reset filters"}
                 </button>
@@ -320,7 +320,7 @@ export default function BlogIndex() {
           {/* Pagination */}
           {totalPages > 1 && (
             <div className="mt-12 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-[var(--sk-line)] pt-6">
-              <p className="sk-mono text-xs text-[var(--sk-black)] opacity-70">
+              <p className="sk-mono text-xs text-[var(--sk-fg)] opacity-75">
                 {ar
                   ? `عرض ${paginatedPosts.length} من إجمالي ${filteredPosts.length} مقال`
                   : `Showing ${paginatedPosts.length} of ${filteredPosts.length} articles`}
@@ -333,12 +333,12 @@ export default function BlogIndex() {
                     setPage((p) => Math.max(1, p - 1));
                     window.scrollTo({ top: 0, behavior: "smooth" });
                   }}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 border border-[var(--sk-line)] text-xs font-mono uppercase text-[var(--sk-black)] disabled:opacity-30 disabled:pointer-events-none hover:border-[var(--sk-black)] transition-colors"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 border border-[var(--sk-line)] text-xs font-mono uppercase text-[var(--sk-fg)] disabled:opacity-30 disabled:pointer-events-none hover:border-[var(--sk-fg)] transition-colors"
                 >
                   <ArrowLeft className="h-3.5 w-3.5 rtl:rotate-180" />{" "}
                   {ar ? "السابق" : "Prev"}
                 </button>
-                <span className="sk-mono text-xs px-3 py-1 text-[var(--sk-black)]">
+                <span className="sk-mono text-xs px-3 py-1 text-[var(--sk-fg)]">
                   {ar
                     ? `صفحة ${page} من ${totalPages}`
                     : `Page ${page} of ${totalPages}`}
@@ -350,7 +350,7 @@ export default function BlogIndex() {
                     setPage((p) => Math.min(totalPages, p + 1));
                     window.scrollTo({ top: 0, behavior: "smooth" });
                   }}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 border border-[var(--sk-line)] text-xs font-mono uppercase text-[var(--sk-black)] disabled:opacity-30 disabled:pointer-events-none hover:border-[var(--sk-black)] transition-colors"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 border border-[var(--sk-line)] text-xs font-mono uppercase text-[var(--sk-fg)] disabled:opacity-30 disabled:pointer-events-none hover:border-[var(--sk-fg)] transition-colors"
                 >
                   {ar ? "التالي" : "Next"}{" "}
                   <ArrowRight className="h-3.5 w-3.5 rtl:rotate-180" />

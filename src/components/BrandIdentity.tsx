@@ -18,7 +18,7 @@ export function BrandIdentity({
   const descriptor = locale === "ar" ? "قائد تقني / خبير حلول" : "TECH LEAD / SOLUTION EXPERT";
 
   return (
-    <span className={cn("brand-identity", compact && "brand-identity--compact", className)}>
+    <span className={cn("brand-identity text-[var(--sk-fg)]", compact && "brand-identity--compact", className)}>
       <SanuKhanLogo compact={compact} />
       {showDescriptor && <span className="brand-identity__descriptor">{descriptor}</span>}
     </span>

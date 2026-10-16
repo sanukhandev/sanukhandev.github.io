@@ -74,7 +74,7 @@ export default function BlogSeoPage(props: BlogSeoPageProps) {
           {/* Breadcrumb back link */}
           <Link
             to="/blog"
-            className="sk-mono text-[var(--sk-orange-ink)] inline-flex items-center gap-1.5 text-xs font-semibold mb-6 hover:text-[var(--sk-black)] transition-colors"
+            className="sk-mono text-[var(--sk-orange-ink)] dark:text-[var(--sk-orange)] inline-flex items-center gap-1.5 text-xs font-semibold mb-6 hover:text-[var(--sk-fg)] transition-colors"
           >
             <ArrowLeft className="h-3.5 w-3.5" /> BACK TO ALL ARTICLES
           </Link>
@@ -83,18 +83,18 @@ export default function BlogSeoPage(props: BlogSeoPageProps) {
             <span aria-hidden="true">/</span> ENGINEERING GUIDE
           </p>
 
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[var(--sk-black)] leading-[1.12]">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[var(--sk-fg)] leading-[1.12]">
             {h1}
           </h1>
 
-          <p className="mt-4 text-lg sm:text-xl leading-relaxed text-[var(--sk-black)] opacity-85 font-normal">
+          <p className="mt-4 text-lg sm:text-xl leading-relaxed text-[var(--sk-fg)] opacity-85 font-normal">
             {keywordLead}
           </p>
 
           {/* Table of contents */}
           {toc.length > 0 && (
             <section className="mt-8 border border-[var(--sk-line)] p-6">
-              <h2 className="sk-mono text-[var(--sk-orange-ink)] font-semibold flex items-center gap-2 text-xs uppercase tracking-wider mb-3">
+              <h2 className="sk-mono text-[var(--sk-orange-ink)] dark:text-[var(--sk-orange)] font-semibold flex items-center gap-2 text-xs uppercase tracking-wider mb-3">
                 <BookOpen className="h-4 w-4" /> Table of Contents
               </h2>
               <ul className="space-y-2 text-sm">
@@ -102,7 +102,7 @@ export default function BlogSeoPage(props: BlogSeoPageProps) {
                   <li key={item.id}>
                     <a
                       href={`#${item.id}`}
-                      className="text-[var(--sk-black)] opacity-80 hover:opacity-100 hover:text-[var(--sk-orange-ink)] hover:underline transition-colors"
+                      className="text-[var(--sk-fg)] opacity-80 hover:opacity-100 hover:text-[var(--sk-orange)] hover:underline transition-colors"
                     >
                       {item.label}
                     </a>
@@ -116,10 +116,10 @@ export default function BlogSeoPage(props: BlogSeoPageProps) {
           <div className="mt-10 space-y-12">
             {sections.map((section) => (
               <section key={section.id} id={section.id} className="scroll-mt-24">
-                <h2 className="text-2xl sm:text-3xl font-bold text-[var(--sk-black)] pb-3 border-b border-[var(--sk-line)]">
+                <h2 className="text-2xl sm:text-3xl font-bold text-[var(--sk-fg)] pb-3 border-b border-[var(--sk-line)]">
                   {section.title}
                 </h2>
-                <div className="mt-4 space-y-4 text-base sm:text-lg leading-relaxed text-[var(--sk-black)] opacity-90">
+                <div className="mt-4 space-y-4 text-base sm:text-lg leading-relaxed text-[var(--sk-fg)] opacity-90">
                   {section.paragraphs.map((p, index) => (
                     <p key={index}>{p}</p>
                   ))}
@@ -139,7 +139,7 @@ export default function BlogSeoPage(props: BlogSeoPageProps) {
               <p className="sk-eyebrow mb-2">
                 <span aria-hidden="true">/</span> FREQUENTLY ASKED
               </p>
-              <h2 className="text-2xl sm:text-3xl font-bold text-[var(--sk-black)] mb-6">
+              <h2 className="text-2xl sm:text-3xl font-bold text-[var(--sk-fg)] mb-6">
                 Questions &amp; Practical Answers
               </h2>
               <div className="space-y-4">
@@ -148,10 +148,10 @@ export default function BlogSeoPage(props: BlogSeoPageProps) {
                     key={item.q}
                     className="border border-[var(--sk-line)] p-5 sm:p-6"
                   >
-                    <h3 className="text-lg font-bold text-[var(--sk-black)]">
+                    <h3 className="text-lg font-bold text-[var(--sk-fg)]">
                       {item.q}
                     </h3>
-                    <p className="mt-2 text-base leading-relaxed text-[var(--sk-black)] opacity-85">
+                    <p className="mt-2 text-base leading-relaxed text-[var(--sk-fg)] opacity-85">
                       {item.a}
                     </p>
                   </article>
@@ -166,14 +166,14 @@ export default function BlogSeoPage(props: BlogSeoPageProps) {
               className="mt-12 border-t border-[var(--sk-line)] pt-8"
               aria-label="Related guides"
             >
-              <p className="sk-mono text-[var(--sk-orange-ink)] text-xs font-semibold uppercase tracking-wider mb-3">
+              <p className="sk-mono text-[var(--sk-orange-ink)] dark:text-[var(--sk-orange)] text-xs font-semibold uppercase tracking-wider mb-3">
                 Related Engineering Guides
               </p>
               <ul className="flex flex-wrap gap-3">
                 {links.map((link) => (
                   <li key={link.href}>
                     <Link
-                      className="sk-text-link inline-flex items-center gap-1 text-sm font-semibold text-[var(--sk-orange-ink)] hover:text-[var(--sk-black)]"
+                      className="sk-text-link inline-flex items-center gap-1 text-sm font-semibold text-[var(--sk-orange-ink)] dark:text-[var(--sk-orange)] hover:text-[var(--sk-fg)]"
                       to={link.href}
                     >
                       {link.label} <ArrowUpRight className="h-3.5 w-3.5" />

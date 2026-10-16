@@ -5,71 +5,66 @@ import { pageSeoAr } from "@/lib/seo";
 describe("Arabic Localization Integrity Tests", () => {
   it("should have valid ar locale content structure", () => {
     expect(siteContent.ar).toBeDefined();
-    expect(siteContent.ar.ui).toBeDefined();
+    expect(siteContent.ar.profile).toBeDefined();
+    expect(siteContent.ar.nav).toBeDefined();
+    expect(siteContent.ar.services).toBeDefined();
+    expect(siteContent.ar.works).toBeDefined();
+    expect(siteContent.ar.articles).toBeDefined();
+    expect(siteContent.ar.footer).toBeDefined();
   });
 
-  it("should contain localized hero UI strings", () => {
-    const { hero } = siteContent.ar.ui;
-    expect(hero.eyebrow).toBe("معماري تقني · قائد هندسي");
-    expect(hero.headline).toContain("أصمم وأبني منصات");
-    expect(hero.exploreWork).toBe("استعرض أعمالي");
-    expect(hero.viewArchitecture).toBe("استعرض المعمارية");
-    expect(hero.credibilityLine.length).toBeGreaterThan(0);
+  it("should contain localized profile and identity", () => {
+    const { profile } = siteContent.ar;
+    expect(profile.name).toBe("سانو خان");
+    expect(profile.role).toBe("معماري تقني · قائد هندسي");
+    expect(profile.meta.length).toBeGreaterThan(0);
   });
 
-  it("should contain localized production systems data", () => {
-    const { works } = siteContent.ar.ui;
-    expect(works.eyebrow).toBe("منصات إنتاجية مختارة");
-    expect(works.myContributionLabel).toBe("مساهمتي");
-    expect(works.viewProject).toBe("عرض المشروع");
-    expect(works.systemsData.length).toBe(4);
-    expect(works.systemsData[0].title).toBe("منصة تجارة إقليمية للمؤسسات");
+  it("should contain localized navigation items", () => {
+    const { nav } = siteContent.ar;
+    expect(nav.links.length).toBeGreaterThan(0);
+    const labels = nav.links.map((item) => item.label);
+    expect(labels).toContain("الخدمات");
+    expect(labels).toContain("الأعمال");
   });
 
-  it("should contain localized architecture case study data", () => {
-    const { architecture } = siteContent.ar.ui;
-    expect(architecture.eyebrow).toBe("دراسة حالة معمارية");
-    expect(architecture.challengeLabel).toBe("التحدي");
-    expect(architecture.topologyLabel).toBe("مخطط المعمارية الهندسية");
-    expect(architecture.keyDecisionsLabel).toBe("القرارات المعمارية الرئيسية");
-    expect(architecture.whyArchitectureLabel).toBe("لماذا هذه المعمارية؟");
-    expect(architecture.keyDecisions.length).toBe(5);
+  it("should contain localized production works data", () => {
+    const { works } = siteContent.ar;
+    expect(works.length).toBeGreaterThan(0);
+    expect(works[0].title).toBeDefined();
+    expect(works[0].solution).toBeDefined();
   });
 
-  it("should contain localized domains data", () => {
-    const { whatIArchitect } = siteContent.ar.ui;
-    expect(whatIArchitect.eyebrow).toBe("مجالات الهندسة");
-    expect(whatIArchitect.domainsData.length).toBe(4);
-    expect(whatIArchitect.domainsData[0].title).toBe("هندسة المنصات");
+  it("should contain localized services with architecture impact", () => {
+    const { services } = siteContent.ar;
+    expect(services.length).toBeGreaterThan(0);
+    expect(services[0].role).toBeDefined();
+    expect(services[0].impact.length).toBeGreaterThan(0);
   });
 
-  it("should contain localized Zaakiy personal R&D data", () => {
-    const { zaakiy } = siteContent.ar.ui;
-    expect(zaakiy.eyebrow).toBe("بحث وتطوير شخصي");
-    expect(zaakiy.exploreLink).toBe("استكشف Zaakiy");
-    expect(zaakiy.flowNodes.length).toBe(5);
-    expect(zaakiy.exploringItems.length).toBe(6);
+  it("should contain localized technical articles and categories", () => {
+    const { articles } = siteContent.ar;
+    expect(articles.length).toBeGreaterThan(0);
+    expect(articles[0].title).toBeDefined();
   });
 
-  it("should contain localized engineering notes data", () => {
-    const { engineeringNotes } = siteContent.ar.ui;
-    expect(engineeringNotes.eyebrow).toBe("ملاحظات هندسية");
-    expect(engineeringNotes.readArticle).toBe("قراءة المقال");
-    expect(engineeringNotes.viewAll).toContain("عرض جميع الملاحظات الهندسية");
-    expect(siteContent.ar.articles.length).toBeGreaterThan(0);
+  it("should contain localized footer and contact information", () => {
+    const { footer } = siteContent.ar;
+    expect(footer.brand).toBe("سانوخان.ديف");
+    expect(footer.contact.location).toBe("دبي، الإمارات");
+    expect(footer.contact.cta.label).toBe("لنتحدث");
+    expect(footer.copyright).toContain("سانو خان");
   });
 
-  it("should contain localized beyond architecture data", () => {
-    const { beyondArchitecture } = siteContent.ar.ui;
-    expect(beyondArchitecture.eyebrow).toBe("ما بعد مخطط المعمارية");
-    expect(beyondArchitecture.processFlow.length).toBe(6);
-    expect(beyondArchitecture.leadershipItems.length).toBe(4);
+  it("should contain localized skills clusters", () => {
+    const { skills } = siteContent.ar;
+    expect(skills.clusters.length).toBeGreaterThan(0);
   });
 
-  it("should contain localized footer CTA data", () => {
-    const { footer } = siteContent.ar.ui;
-    expect(footer.ctaHeading).toContain("تحديات هندسية معقدة");
-    expect(footer.ctaButton).toBe("لنتحدث");
+  it("should have parity between English and Arabic content keys", () => {
+    const enKeys = Object.keys(siteContent.en).sort();
+    const arKeys = Object.keys(siteContent.ar).sort();
+    expect(arKeys).toEqual(enKeys);
   });
 
   it("should contain localized SEO metadata for all main routes", () => {
