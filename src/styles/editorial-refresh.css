@@ -90,15 +90,13 @@ html.dark {
 
 /* Hero - Anchored flush to screen bottom on all screens, seamless connection to Proof */
 .sk-hero {
-  --sk-hero-headroom: clamp(2rem, 3.5vw, 3.5rem);
   position: relative;
   min-height: calc(100vh - 80px);
   min-height: calc(100dvh - 80px);
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding-block-start: var(--sk-hero-headroom);
-  padding-block-end: 0 !important;
+  padding-block: 0 !important;
   border-bottom: none !important;
 }
 .sk-hero__grid {
@@ -106,13 +104,19 @@ html.dark {
   grid-template-columns: minmax(0, 1.15fr) minmax(70px, 0.22fr) minmax(280px, 0.95fr);
   gap: clamp(0.75rem, 1.8vw, 2.25rem);
   align-items: end;
-  min-height: calc(100vh - 80px - var(--sk-hero-headroom));
-  min-height: calc(100dvh - 80px - var(--sk-hero-headroom));
+  min-height: calc(100vh - 80px);
+  min-height: calc(100dvh - 80px);
   flex: 1;
   margin-bottom: 0 !important;
   padding-bottom: 0 !important;
 }
-.sk-hero__intro { position: relative; z-index: 4; align-self: start; min-width: 0; padding-block-end: clamp(1rem, 1.8vw, 1.75rem); }
+.sk-hero__intro {
+  position: relative;
+  z-index: 4;
+  align-self: center;
+  min-width: 0;
+  padding-block: clamp(1rem, 1.5vw, 2rem);
+}
 .sk-hero h1 { max-width: 9.5ch; margin: 0.35rem 0 0; font-size: clamp(2.8rem, 5.8vw, 6.2rem); line-height: 0.85; letter-spacing: -0.04em; }
 .sk-hero h1 span { color: var(--sk-orange); }
 .sk-hero h1 .sk-hero__word { color: var(--sk-black); white-space: nowrap; }
@@ -135,10 +139,10 @@ html.dark {
   margin-inline: clamp(-8.5rem, -7.5vw, -4rem);
   justify-self: center;
   align-self: end !important;
-  width: min(clamp(480px, 46vw, 760px), calc((100dvh - 80px - var(--sk-hero-headroom)) * (1122 / 1402)));
+  width: min(clamp(480px, 46vw, 760px), calc((100dvh - 80px) * (1122 / 1402)));
   max-width: none;
   height: auto;
-  max-height: calc(100dvh - 80px - var(--sk-hero-headroom));
+  max-height: calc(100dvh - 80px);
   aspect-ratio: 1122 / 1402;
   line-height: 0;
   vertical-align: bottom;
@@ -175,7 +179,16 @@ html.dark {
   object-position: center bottom;
   vertical-align: bottom;
 }
-.sk-hero__identity { position: relative; z-index: 4; align-self: start; margin-block-start: 0; border-block-start: 1px solid var(--sk-black); min-width: 0; text-align: right; padding-block-end: clamp(1rem, 1.8vw, 1.75rem); }
+.sk-hero__identity {
+  position: relative;
+  z-index: 4;
+  align-self: center;
+  margin-block-start: 0;
+  border-block-start: 1px solid var(--sk-black);
+  min-width: 0;
+  text-align: right;
+  padding-block: clamp(1rem, 1.5vw, 2rem);
+}
 .sk-hero__identity-block { padding-block: 0.75rem 1.25rem; }
 .sk-hero__identity h2 { max-width: 18ch; margin: 0.65rem 0 0.65rem auto; font-size: clamp(1.6rem, 2.3vw, 2.5rem); line-height: 1.1; }
 .sk-hero__identity p { margin: 0 0 0 auto; max-width: 28ch; font-size: 0.9rem; line-height: 1.45; }
@@ -503,19 +516,17 @@ html.dark .sk-button--light:hover { background: #2c2926; color: var(--sk-white) 
 
 @media (max-width: 1050px) {
   .sk-hero {
-    --sk-hero-headroom: clamp(1.5rem, 2.8vw, 2.5rem);
     min-height: calc(100vh - 80px);
     min-height: calc(100dvh - 80px);
-    padding-block-start: var(--sk-hero-headroom);
-    padding-block-end: 0 !important;
+    padding-block: 0 !important;
     border-bottom: none !important;
   }
   .sk-hero__grid {
     grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
     grid-template-rows: auto auto;
     gap: 1.5rem;
-    min-height: calc(100vh - 80px - var(--sk-hero-headroom));
-    min-height: calc(100dvh - 80px - var(--sk-hero-headroom));
+    min-height: calc(100vh - 80px);
+    min-height: calc(100dvh - 80px);
     align-items: end;
     margin-bottom: 0 !important;
     padding-bottom: 0 !important;
@@ -548,7 +559,7 @@ html.dark .sk-button--light:hover { background: #2c2926; color: var(--sk-white) 
     padding-bottom: 0 !important;
     width: min(100%, 460px);
     height: auto;
-    max-height: calc(100dvh - 80px - var(--sk-hero-headroom));
+    max-height: calc(100dvh - 80px);
     align-self: end !important;
     justify-self: end !important;
     line-height: 0;
@@ -591,13 +602,14 @@ html.dark .sk-button--light:hover { background: #2c2926; color: var(--sk-white) 
     margin-bottom: 0 !important;
     padding-bottom: 0 !important;
   }
-  .sk-hero__intro { order: 1; padding-block-end: 0; }
+  .sk-hero__intro { order: 1; padding-block-end: 0; align-self: stretch; }
   .sk-hero__identity {
     order: 2;
     display: block;
     margin-block-start: 0;
     padding-block-end: 0;
     border-block-start: 1px solid var(--sk-line);
+    align-self: stretch;
   }
   .sk-hero__identity-block { padding-block: 0.5rem 0.4rem; }
   .sk-hero__identity h2 { font-size: 1.15rem; margin: 0.25rem 0; }
