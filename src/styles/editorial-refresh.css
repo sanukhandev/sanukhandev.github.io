@@ -90,13 +90,14 @@ html.dark {
 
 /* Hero - Anchored flush to screen bottom on all screens, seamless connection to Proof */
 .sk-hero {
+  --sk-hero-headroom: clamp(2rem, 3.5vw, 3.5rem);
   position: relative;
   min-height: calc(100vh - 80px);
   min-height: calc(100dvh - 80px);
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding-block-start: clamp(0.75rem, 1.5vw, 1.25rem);
+  padding-block-start: var(--sk-hero-headroom);
   padding-block-end: 0 !important;
   border-bottom: none !important;
 }
@@ -105,8 +106,8 @@ html.dark {
   grid-template-columns: minmax(0, 1.15fr) minmax(70px, 0.22fr) minmax(280px, 0.95fr);
   gap: clamp(0.75rem, 1.8vw, 2.25rem);
   align-items: end;
-  min-height: calc(100vh - 80px);
-  min-height: calc(100dvh - 80px);
+  min-height: calc(100vh - 80px - var(--sk-hero-headroom));
+  min-height: calc(100dvh - 80px - var(--sk-hero-headroom));
   flex: 1;
   margin-bottom: 0 !important;
   padding-bottom: 0 !important;
@@ -134,10 +135,10 @@ html.dark {
   margin-inline: clamp(-8.5rem, -7.5vw, -4rem);
   justify-self: center;
   align-self: end !important;
-  width: min(clamp(480px, 46vw, 760px), calc((100dvh - 80px - clamp(0.75rem, 1.5vw, 1.25rem)) * (1122 / 1402)));
+  width: min(clamp(480px, 46vw, 760px), calc((100dvh - 80px - var(--sk-hero-headroom)) * (1122 / 1402)));
   max-width: none;
   height: auto;
-  max-height: calc(100dvh - 80px - clamp(0.75rem, 1.5vw, 1.25rem));
+  max-height: calc(100dvh - 80px - var(--sk-hero-headroom));
   aspect-ratio: 1122 / 1402;
   line-height: 0;
   vertical-align: bottom;
@@ -502,8 +503,10 @@ html.dark .sk-button--light:hover { background: #2c2926; color: var(--sk-white) 
 
 @media (max-width: 1050px) {
   .sk-hero {
+    --sk-hero-headroom: clamp(1.5rem, 2.8vw, 2.5rem);
     min-height: calc(100vh - 80px);
     min-height: calc(100dvh - 80px);
+    padding-block-start: var(--sk-hero-headroom);
     padding-block-end: 0 !important;
     border-bottom: none !important;
   }
@@ -511,8 +514,8 @@ html.dark .sk-button--light:hover { background: #2c2926; color: var(--sk-white) 
     grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
     grid-template-rows: auto auto;
     gap: 1.5rem;
-    min-height: calc(100vh - 80px);
-    min-height: calc(100dvh - 80px);
+    min-height: calc(100vh - 80px - var(--sk-hero-headroom));
+    min-height: calc(100dvh - 80px - var(--sk-hero-headroom));
     align-items: end;
     margin-bottom: 0 !important;
     padding-bottom: 0 !important;
@@ -545,7 +548,7 @@ html.dark .sk-button--light:hover { background: #2c2926; color: var(--sk-white) 
     padding-bottom: 0 !important;
     width: min(100%, 460px);
     height: auto;
-    max-height: calc(100dvh - 80px - 1rem);
+    max-height: calc(100dvh - 80px - var(--sk-hero-headroom));
     align-self: end !important;
     justify-self: end !important;
     line-height: 0;
@@ -566,12 +569,13 @@ html.dark .sk-button--light:hover { background: #2c2926; color: var(--sk-white) 
 
 @media (max-width: 767px) {
   .sk-hero {
+    --sk-hero-headroom: clamp(1.25rem, 3.5vw, 1.75rem);
     min-height: calc(100vh - 72px);
     min-height: calc(100dvh - 72px);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding-block-start: 0.75rem;
+    padding-block-start: var(--sk-hero-headroom);
     padding-block-end: 0 !important;
     border-bottom: none !important;
   }
@@ -581,8 +585,8 @@ html.dark .sk-button--light:hover { background: #2c2926; color: var(--sk-white) 
     align-items: stretch;
     justify-content: space-between;
     gap: 1rem;
-    min-height: calc(100vh - 72px);
-    min-height: calc(100dvh - 72px);
+    min-height: calc(100vh - 72px - var(--sk-hero-headroom));
+    min-height: calc(100dvh - 72px - var(--sk-hero-headroom));
     flex: 1;
     margin-bottom: 0 !important;
     padding-bottom: 0 !important;
