@@ -3,7 +3,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/sections/Footer";
 import SeoMeta from "@/components/SeoMeta";
 import { getLocalizedCaseStudies } from "@/data/caseStudies";
-import { buildBreadcrumbListSchema } from "@/lib/schema";
+import { buildBreadcrumbListSchema, buildProjectsCollectionSchema } from "@/lib/schema";
 import { useLocale } from "@/hooks/use-locale";
 import { getLocalizedPageSeo } from "@/lib/seo";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
@@ -18,24 +18,17 @@ export default function ProjectsPage() {
   return (
     <>
       <SeoMeta
-        title={isArabic ? "أعمال معمارية مختارة ودراسات حالة — سانو خان" : "Selected Architecture Work & Case Studies — Sanu Khan"}
-        description={isArabic ? "دراسات حالة تفصيلية لتكاملات المؤسسات والمنصات العقارية والذكاء التشغيلي والتجارب الرقمية الصحية بواسطة مهندس البرمجيات ومعماري الحلول سانو خان." : "Architecture case studies by Dubai-based Software Engineer and Solution Architect Sanu Khan, covering enterprise integrations, AI operational intelligence, real estate ERP, healthcare and automotive platforms."}
+        title={seo.title}
+        description={seo.description}
         canonicalPath={seo.canonicalPath}
-        keywords={[
-          "architecture case studies",
-          "enterprise retail integration",
-          "airline retailing NDC aggregation",
-          "automotive omnichannel platform",
-          "headless healthcare digital experience",
-          "Zaakiy V3RSE operational intelligence",
-          "agentic AI platform",
-          "Next.js WordPress headless CMS",
-          "solution architecture case studies"
+        keywords={seo.keywords}
+        schema={[
+          buildProjectsCollectionSchema(caseStudies),
+          buildBreadcrumbListSchema([
+            { name: isArabic ? "الرئيسية" : "Home", path: "/" },
+            { name: isArabic ? "الأعمال" : "Projects", path: "/projects" },
+          ]),
         ]}
-        schema={buildBreadcrumbListSchema([
-          { name: isArabic ? "الرئيسية" : "Home", path: "/" },
-          { name: isArabic ? "الأعمال" : "Projects", path: "/projects" }
-        ])}
       />
 
       <Navbar />

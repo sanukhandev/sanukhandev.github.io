@@ -59,11 +59,10 @@ export default function BlogIndex() {
   const fallbackPosts: BlogCard[] = useMemo(
     () =>
       fallbackArticles.map((post) => ({
-        href: `/blog/${slugFromDevToUrl(post.url)}`,
+        href: post.localPath || `/blog/${slugFromDevToUrl(post.url)}`,
         title: post.title,
         description: post.excerpt,
-        tags: [post.category],
-        readTime: post.readTime,
+        tags: post.tags?.length ? post.tags : [post.category],
       })),
     [],
   );
@@ -126,7 +125,7 @@ export default function BlogIndex() {
         title={seo.title}
         description={seo.description}
         canonicalPath={seo.canonicalPath}
-        keywords={"keywords" in seo ? seo.keywords : undefined}
+        keywords={seo.keywords}
         schema={buildBreadcrumbListSchema([
           { name: "Home", path: "/" },
           { name: "Blog", path: "/blog" },

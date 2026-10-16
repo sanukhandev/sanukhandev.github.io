@@ -3,10 +3,18 @@ import BlogSeoPage from "@/components/BlogSeoPage";
 export default function NodejsApiBestPracticesPage() {
   return (
     <BlogSeoPage
-      title="Node.js API Best Practices | Sanu Khan"
-      description="Nodejs api best practices for architecture, security, observability, resilience, and team-scale delivery in modern backend platforms."
+      title="Node.js API Best Practices — Contract-First Architecture & Resilience | Sanu Khan"
+      description="Production Node.js API best practices by Solution Architect Sanu Khan: contract-first design, Zod validation, idempotency, retry policies, security boundaries, and observability."
       canonicalPath="/blog/nodejs-api-best-practices"
       h1="Node.js API Best Practices for Scalable Engineering"
+      keywords={[
+        "Node.js API Best Practices",
+        "Contract-First API Design",
+        "Node.js Microservices Architecture",
+        "API Idempotency & Resilience",
+        "Zod Validation Middleware Node.js",
+        "Sanu Khan Engineering Blog",
+      ]}
       keywordLead="Nodejs api best practices are essential when APIs become the backbone of product delivery. This guide focuses on patterns that help teams ship reliable endpoints, evolve contracts safely, and maintain predictable behavior under high traffic and integration complexity."
       toc={[
         { id: "contracts", label: "Contract-First API Design" },

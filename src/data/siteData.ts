@@ -210,7 +210,7 @@ export const works: Array<{
   outcome: string;
   tags: string[];
   scope: string;
-  category: Exclude<WorkCategory, "All">;
+  category: string;
 }> = [
   {
     title: "Operational Intelligence Ecosystem",

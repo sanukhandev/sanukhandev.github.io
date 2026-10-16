@@ -3,11 +3,21 @@ import SeoPageLayout from "@/components/SeoPageLayout";
 export default function ApiIntegrationServicesPage() {
   return (
     <SeoPageLayout
-      title="API Integration Services | Sanu Khan"
-      description="API integration services for ERPs, PIMs, headless storefronts, and enterprise platforms using event-driven architecture, contract-first APIs, and resilient cloud delivery."
+      title="API & Enterprise Integration Services in Dubai, UAE (SAP, ERP, Kafka) | Sanu Khan"
+      description="Enterprise API integration services in Dubai, UAE for SAP ERP, PIM, OMS, NDC airline retailing, and headless commerce using event-driven architecture and Kafka/Azure."
       canonicalPath="/api-integration-services"
       h1="API Integration Services for Enterprise-Grade Reliability"
       intro="My API integration services are designed for organizations that need dependable data flow across platforms without operational chaos. The focus is on contract integrity, observability, and event reliability so integrations remain stable even as business logic and partner systems evolve."
+      keywords={[
+        "API Integration Services UAE",
+        "Enterprise Integration Architect Dubai",
+        "SAP ERP Integration Dubai",
+        "Event-Driven Architecture Kafka Azure",
+        "PIM OMS Commerce Integration",
+        "Airline NDC API Integration",
+        "Middleware & API Gateway Architect UAE",
+        "Sanu Khan",
+      ]}
       sections={[
         {
           id: "problem",
@@ -44,6 +54,8 @@ export default function ApiIntegrationServicesPage() {
         href: "mailto:hello@sanukhan.dev?subject=API%20Integration%20Services",
       }}
       links={[
+        { label: "Enterprise Retail Integration Case Study", href: "/projects/enterprise-retail-integration" },
+        { label: "Airline NDC Retailing Case Study", href: "/projects/airline-retailing-aggregation" },
         { label: "Node.js Developer UAE", href: "/nodejs-developer-uae" },
         {
           label: "Curl to JSON Converter",
@@ -57,10 +69,19 @@ export default function ApiIntegrationServicesPage() {
       schema={{
         "@context": "https://schema.org",
         "@type": "Service",
-        name: "API Integration Services",
-        provider: { "@type": "Person", name: "Sanu Khan" },
-        serviceType: "Enterprise API Integration",
-        areaServed: "MENA",
+        name: "Enterprise API & ERP Integration Services",
+        provider: {
+          "@type": "Person",
+          "@id": "https://www.sanukhan.dev/#person",
+          name: "Sanu Khan",
+          url: "https://www.sanukhan.dev",
+        },
+        serviceType: "Enterprise API & Event-Driven Integration",
+        areaServed: [
+          { "@type": "City", name: "Dubai" },
+          { "@type": "Country", name: "United Arab Emirates" },
+          { "@type": "Country", name: "Saudi Arabia" },
+        ],
       }}
     />
   );

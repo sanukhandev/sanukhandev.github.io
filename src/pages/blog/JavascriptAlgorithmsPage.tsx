@@ -3,10 +3,18 @@ import BlogSeoPage from "@/components/BlogSeoPage";
 export default function JavascriptAlgorithmsPage() {
   return (
     <BlogSeoPage
-      title="JavaScript Algorithms Guide | Sanu Khan"
-      description="A practical javascript algorithms guide covering complexity, patterns, optimization strategy, and production implementation examples for engineering teams."
+      title="JavaScript Algorithms for Production Engineering — Complexity & Patterns | Sanu Khan"
+      description="Practical JavaScript algorithms guide by Solution Architect Sanu Khan covering Big O complexity, sliding window patterns, lookup optimization, and production guardrails."
       canonicalPath="/blog/javascript-algorithms"
       h1="JavaScript Algorithms for Real Product Engineering"
+      keywords={[
+        "JavaScript Algorithms",
+        "JavaScript Performance Optimization",
+        "Sliding Window Pattern JavaScript",
+        "Big O Complexity Production",
+        "Frontend & Backend Algorithm Patterns",
+        "Sanu Khan Engineering Blog",
+      ]}
       keywordLead="JavaScript algorithms are not only interview topics. In production systems they directly affect API latency, UI responsiveness, and infrastructure cost. This guide explains how to reason about algorithmic decisions in real engineering workflows and how to choose implementations that remain stable as traffic and data scale."
       toc={[
         { id: "thinking", label: "Algorithmic Thinking in Product Teams" },

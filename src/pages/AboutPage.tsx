@@ -2,10 +2,10 @@ import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/sections/Footer";
 import SeoMeta from "@/components/SeoMeta";
-import { buildBreadcrumbListSchema } from "@/lib/schema";
+import { buildBreadcrumbListSchema, buildProfilePageSchema } from "@/lib/schema";
 import { useLocale } from "@/hooks/use-locale";
 import { getLocalizedPageSeo } from "@/lib/seo";
-import { ArrowRight, Download, FileText } from "lucide-react";
+import { ArrowRight, Download } from "lucide-react";
 
 export default function AboutPage() {
   const { locale } = useLocale();
@@ -61,20 +61,22 @@ export default function AboutPage() {
   return (
     <>
       <SeoMeta
-        title={isArabic ? "نبذة عن سانو خان — خبير حلول ومهندس منصات" : "About Sanu Khan — Solution Expert & Platform Engineer"}
-        description={isArabic ? "الخلفية الشخصية، التطور المهني، والقيم التقنية لسانو خان — خبير حلول يمتلك 13+ عاماً في تصميم أنظمة المؤسسات." : "Personal background, career progression, and technical values of Sanu Khan — Solution Expert with 13+ years designing enterprise systems."}
+        title={seo.title}
+        description={seo.description}
         canonicalPath={seo.canonicalPath}
         kind="profile"
-        keywords={[
-          "About Sanu Khan",
-          "Solution Expert Dubai",
-          "Platform Engineering Lead",
-          "Enterprise Systems Architect"
+        keywords={seo.keywords}
+        schema={[
+          buildProfilePageSchema({
+            name: seo.title,
+            description: seo.description,
+            path: "/about",
+          }),
+          buildBreadcrumbListSchema([
+            { name: isArabic ? "الرئيسية" : "Home", path: "/" },
+            { name: isArabic ? "نبذة عني" : "About", path: "/about" }
+          ]),
         ]}
-        schema={buildBreadcrumbListSchema([
-          { name: isArabic ? "الرئيسية" : "Home", path: "/" },
-          { name: isArabic ? "نبذة عني" : "About", path: "/about" }
-        ])}
       />
 
       <Navbar />

@@ -47,6 +47,7 @@ export default function SeoMeta({
     modifiedTime,
   });
   const schemaPayload = schema ? safeJsonLdStringify(schema) : "";
+  const arAlternateUrl = `${metadata.canonicalUrl}?lang=ar`;
 
   return (
     <Helmet prioritizeSeoTags>
@@ -57,16 +58,24 @@ export default function SeoMeta({
         <meta name="keywords" content={metadata.keywords} />
       ) : null}
       <meta name="robots" content={metadata.robots} />
+      <meta name="googlebot" content={metadata.robots} />
       <meta name="author" content={metadata.author} />
       <meta property="og:title" content={metadata.title} />
       <meta property="og:description" content={metadata.description} />
       <meta property="og:url" content={metadata.canonicalUrl} />
       <meta property="og:type" content={metadata.type} />
       <meta property="og:image" content={metadata.ogImage} />
+      <meta property="og:image:alt" content={metadata.title} />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
       <meta property="og:site_name" content={metadata.siteName} />
       <meta
         property="og:locale"
         content={locale === "ar" ? "ar_AE" : "en_AE"}
+      />
+      <meta
+        property="og:locale:alternate"
+        content={locale === "ar" ? "en_AE" : "ar_AE"}
       />
       {metadata.publishedTime ? (
         <meta
@@ -84,8 +93,18 @@ export default function SeoMeta({
       <meta name="twitter:title" content={metadata.title} />
       <meta name="twitter:description" content={metadata.description} />
       <meta name="twitter:image" content={metadata.ogImage} />
+      <meta name="twitter:image:alt" content={metadata.title} />
       <meta name="twitter:creator" content={metadata.twitterCreator} />
       <link rel="canonical" href={metadata.canonicalUrl} />
+      {!noindex ? (
+        <link rel="alternate" hrefLang="en" href={metadata.canonicalUrl} />
+      ) : null}
+      {!noindex ? (
+        <link rel="alternate" hrefLang="ar" href={arAlternateUrl} />
+      ) : null}
+      {!noindex ? (
+        <link rel="alternate" hrefLang="x-default" href={metadata.canonicalUrl} />
+      ) : null}
       {schemaPayload ? (
         <script type="application/ld+json">{schemaPayload}</script>
       ) : null}

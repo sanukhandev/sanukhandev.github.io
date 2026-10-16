@@ -5,7 +5,7 @@ import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
 import SeoMeta from "@/components/SeoMeta";
 import { getLocalizedCaseStudy, getLocalizedCaseStudies } from "@/data/caseStudies";
 import { ArrowLeft, ArrowRight, CheckCircle2, ShieldAlert, Cpu, GitBranch, Terminal } from "lucide-react";
-import { buildBreadcrumbListSchema, buildCreativeWorkSchema } from "@/lib/schema";
+import { buildBreadcrumbListSchema, buildCreativeWorkSchema, buildTechArticleSchema } from "@/lib/schema";
 import { useLocale } from "@/hooks/use-locale";
 
 export default function CaseStudyDetailPage() {
@@ -23,20 +23,35 @@ export default function CaseStudyDetailPage() {
   const currentIndex = allCaseStudies.findIndex((cs) => cs.slug === slug);
   const nextCaseStudy = allCaseStudies[(currentIndex + 1) % allCaseStudies.length];
 
+  const caseStudyKeywords = [
+    ...caseStudy.themes,
+    ...caseStudy.systemsInvolved,
+    caseStudy.domain,
+    caseStudy.title,
+    "Sanu Khan",
+    "Solution Architect Dubai",
+    "Architecture Case Study",
+  ];
+
   return (
     <>
       <SeoMeta
-        title={`${caseStudy.title} — ${isArabic ? "دراسة حالة" : "Case Study"} | Sanu Khan`}
+        title={`${caseStudy.title} — ${isArabic ? "دراسة حالة معمارية" : "Architecture Case Study"} | Sanu Khan`}
         description={caseStudy.summary}
         canonicalPath={`/projects/${caseStudy.slug}`}
         kind="article"
-        keywords={caseStudy.themes}
+        keywords={caseStudyKeywords}
         schema={[
           buildBreadcrumbListSchema([
             { name: isArabic ? "الرئيسية" : "Home", path: "/" },
             { name: isArabic ? "الأعمال" : "Projects", path: "/projects" },
             { name: caseStudy.title, path: `/projects/${caseStudy.slug}` },
           ]),
+          buildTechArticleSchema({
+            title: `${caseStudy.title} — Architecture Case Study`,
+            description: caseStudy.summary,
+            path: `/projects/${caseStudy.slug}`,
+          }),
           buildCreativeWorkSchema({
             title: caseStudy.title,
             description: caseStudy.summary,
@@ -260,4 +275,3 @@ export default function CaseStudyDetailPage() {
     </>
   );
 }
-

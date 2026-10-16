@@ -4,7 +4,8 @@ import { SectionReveal } from "@/components/ui/SectionReveal";
 import SeoMeta from "@/components/SeoMeta";
 import { useLocale } from "@/hooks/use-locale";
 import { getLocalizedPageSeo } from "@/lib/seo";
-import { buildHomepageSchemas } from "@/lib/schema";
+import { buildFaqSchema, buildHomepageSchemas } from "@/lib/schema";
+import { searchFocusedFaqs } from "@/data/faqData";
 import Footer from "@/components/sections/Footer";
 import {
   ReferenceHero,
@@ -21,7 +22,15 @@ import {
 
 const Index = () => {
   const { locale } = useLocale();
+  const isArabic = locale === "ar";
   const currentSeo = getLocalizedPageSeo("home", locale);
+
+  const homeFaqSchema = buildFaqSchema(
+    searchFocusedFaqs.slice(0, 6).map((item) => ({
+      q: isArabic ? item.question.ar : item.question.en,
+      a: isArabic ? item.answer.ar : item.answer.en,
+    })),
+  );
 
   return (
     <div className="sk-page relative min-h-screen">
@@ -30,26 +39,16 @@ const Index = () => {
         href="#main-content"
         className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 z-[100] rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-white shadow-md focus:outline-none focus:ring-2 focus:ring-white"
       >
-        {locale === "ar" ? "الانتقال إلى المحتوى الرئيسي" : "Skip to content"}
+        {isArabic ? "الانتقال إلى المحتوى الرئيسي" : "Skip to content"}
       </a>
 
       <SeoMeta
-        title="Software Engineer & Solution Expert in Dubai, UAE"
-        description="Software Engineer and Solution Expert in Dubai, UAE with 13+ years designing enterprise integrations, distributed platforms and cloud systems across retail, airline, automotive and SaaS environments."
+        title={currentSeo.title}
+        description={currentSeo.description}
         canonicalPath={currentSeo.canonicalPath}
-        keywords={[
-          "Software Engineer UAE",
-          "Software Engineer Dubai",
-          "Solution Expert Dubai",
-          "Platform Engineer UAE",
-          "Enterprise Integration Expert",
-          "Cloud Expert Dubai",
-          "Distributed Systems Architect",
-          "Event-Driven Architecture",
-          "Sanu Khan",
-        ]}
+        keywords={currentSeo.keywords}
         kind="profile"
-        schema={buildHomepageSchemas()}
+        schema={[...buildHomepageSchemas(), homeFaqSchema]}
       />
 
       <Navbar />

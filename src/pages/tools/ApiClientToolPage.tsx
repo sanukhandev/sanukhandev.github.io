@@ -3,11 +3,19 @@ import ToolSeoPage from "@/components/ToolSeoPage";
 export default function ApiClientToolPage() {
   return (
     <ToolSeoPage
-      title="API Client Tool | Sanu Khan"
-      description="API client tool for testing REST endpoints with headers, body payloads, and response inspection to accelerate backend and integration debugging."
+      title="Online REST API Client & Endpoint Tester Tool | Sanu Khan"
+      description="Free browser-based REST API client tool for testing HTTP endpoints with custom headers, JSON body payloads, and response inspection for integration debugging."
       canonicalPath="/tools/api-client-tool"
       h1="API Client Tool for Fast Endpoint Testing"
       schemaName="API Client Tool"
+      keywords={[
+        "Online API Client Tool",
+        "REST API Tester Online",
+        "HTTP Request Builder Browser",
+        "Test API Endpoints Online",
+        "Integration Debugging Utility",
+        "Sanu Khan Developer Tools",
+      ]}
       intro={[
         "This api client tool provides a lightweight browser-based workflow for testing endpoint behavior during development and integration phases. It supports request method selection, header inputs, and payload testing to help engineers verify contracts before code merges.",
         "In distributed systems, the fastest teams are those that can validate assumptions quickly. A practical API client shortens feedback loops and reduces friction between backend, frontend, and QA stakeholders.",

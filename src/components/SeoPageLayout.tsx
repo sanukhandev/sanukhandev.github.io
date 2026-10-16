@@ -19,6 +19,7 @@ type SeoPageLayoutProps = {
   sections: Array<{ id: string; title: string; content: string[] }>;
   cta: { text: string; action: string; href: string };
   links: LinkItem[];
+  keywords?: string[];
   schema?: Record<string, unknown> | Array<Record<string, unknown>>;
 };
 
@@ -32,6 +33,7 @@ export default function SeoPageLayout(props: SeoPageLayoutProps) {
     sections,
     cta,
     links,
+    keywords,
     schema,
   } = props;
 
@@ -44,10 +46,12 @@ export default function SeoPageLayout(props: SeoPageLayoutProps) {
     url: `https://www.sanukhan.dev${canonicalPath}`,
     provider: {
       "@type": "Person",
+      "@id": "https://www.sanukhan.dev/#person",
       name: "Sanu Khan",
       url: "https://www.sanukhan.dev",
     },
     areaServed: [
+      { "@type": "City", name: "Dubai" },
       { "@type": "Country", name: "United Arab Emirates" },
       { "@type": "Country", name: "Saudi Arabia" },
       { "@type": "Country", name: "Qatar" },
@@ -78,6 +82,7 @@ export default function SeoPageLayout(props: SeoPageLayoutProps) {
         title={title}
         description={description}
         canonicalPath={canonicalPath}
+        keywords={keywords}
         schema={pageSchemas}
       />
       <Navbar />
