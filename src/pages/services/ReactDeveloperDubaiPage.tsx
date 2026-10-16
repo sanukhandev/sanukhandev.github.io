@@ -3,11 +3,20 @@ import SeoPageLayout from "@/components/SeoPageLayout";
 export default function ReactDeveloperDubaiPage() {
   return (
     <SeoPageLayout
-      title="React Developer Dubai | Sanu Khan"
-      description="React developer Dubai services for high-performance web platforms, design systems, and scalable frontend architecture delivered by Sanu Khan."
+      title="React Developer Dubai & Frontend Architect in UAE | Sanu Khan"
+      description="React & Next.js Developer in Dubai, UAE for high-performance web applications, bilingual RTL/LTR design systems, and scalable frontend architecture by Sanu Khan."
       canonicalPath="/react-developer-dubai"
       h1="React Developer Dubai for Performance-Driven Frontend Systems"
       intro="As a React developer Dubai product teams partner with, I build frontend systems that stay fast, accessible, and maintainable as features and traffic grow. The goal is not just shipping UI, but creating an engineering foundation where design consistency, state predictability, and release speed can coexist."
+      keywords={[
+        "React Developer Dubai",
+        "React Developer UAE",
+        "Next.js Architect Dubai",
+        "Frontend Architect UAE",
+        "TypeScript Frontend Engineer Dubai",
+        "Bilingual Arabic RTL Design Systems",
+        "Sanu Khan",
+      ]}
       sections={[
         {
           id: "problem",
@@ -49,6 +58,10 @@ export default function ReactDeveloperDubaiPage() {
           href: "/full-stack-consultant-uae",
         },
         {
+          label: "Headless Healthcare Digital Experience",
+          href: "/projects/headless-healthcare-digital-experience",
+        },
+        {
           label: "JSON Formatter Online Tool",
           href: "/tools/json-formatter-online",
         },
@@ -60,10 +73,18 @@ export default function ReactDeveloperDubaiPage() {
       schema={{
         "@context": "https://schema.org",
         "@type": "Service",
-        name: "React Developer Dubai",
-        provider: { "@type": "Person", name: "Sanu Khan" },
-        areaServed: "Dubai",
-        serviceType: "React Frontend Engineering",
+        name: "React & Next.js Frontend Engineering Dubai",
+        provider: {
+          "@type": "Person",
+          "@id": "https://www.sanukhan.dev/#person",
+          name: "Sanu Khan",
+          url: "https://www.sanukhan.dev",
+        },
+        areaServed: [
+          { "@type": "City", name: "Dubai" },
+          { "@type": "Country", name: "United Arab Emirates" },
+        ],
+        serviceType: "React & Next.js Frontend Architecture",
       }}
     />
   );

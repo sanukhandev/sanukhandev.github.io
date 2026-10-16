@@ -17,16 +17,12 @@ export default function ContactPage() {
         title={seo.title}
         description={seo.description}
         canonicalPath={seo.canonicalPath}
-        keywords={[
-          "contact sanu khan",
-          "architecture consulting contact",
-          "technical strategy dubai",
-        ]}
+        keywords={seo.keywords}
         schema={[
           buildContactPageSchema(),
           buildBreadcrumbListSchema([
-            { name: "Home", path: "/" },
-            { name: "Contact", path: "/contact" },
+            { name: isAr ? "الرئيسية" : "Home", path: "/" },
+            { name: isAr ? "التواصل" : "Contact", path: "/contact" },
           ]),
         ]}
       />

@@ -98,14 +98,10 @@ export default defineConfig(({ command, mode }) => {
     }),
   ];
   const shouldPrerender =
-    mode === "production" &&
-    (process.env.PRERENDER === "true" ||
-      (process.env.CI !== "true" && process.env.VERCEL !== "1"));
+    mode === "production" && process.env.PRERENDER_PUPPETEER === "true";
 
-  // vite-plugin-prerender has ESM/CJS interop issues in dev config loading.
-  // Set PRERENDER=true in the deploy environment so public routes expose
-  // page-specific metadata before JavaScript executes. CI can validate the
-  // normal SPA build without requiring a system Chromium installation.
+  // Deterministic SEO & static route HTML generation runs via `postbuild`
+  // (`scripts/prerender-routes.mjs`) on all environments (local, CI, Vercel).
   if (shouldPrerender) {
     const vitePrerender = require("vite-plugin-prerender");
     plugins.push(

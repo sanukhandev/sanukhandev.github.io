@@ -26,6 +26,9 @@ type BlogSeoPageProps = {
   sections: Section[];
   faq: Array<{ q: string; a: string }>;
   links: Array<{ label: string; href: string }>;
+  keywords?: string[];
+  publishedTime?: string;
+  modifiedTime?: string;
 };
 
 export default function BlogSeoPage(props: BlogSeoPageProps) {
@@ -39,6 +42,9 @@ export default function BlogSeoPage(props: BlogSeoPageProps) {
     sections,
     faq,
     links,
+    keywords,
+    publishedTime = "2026-01-15",
+    modifiedTime = "2026-10-16",
   } = props;
 
   const schemas = [
@@ -46,6 +52,9 @@ export default function BlogSeoPage(props: BlogSeoPageProps) {
       title: h1,
       description,
       path: canonicalPath,
+      publishedTime,
+      modifiedTime,
+      tags: keywords,
     }),
     buildBreadcrumbListSchema([
       { name: "Home", path: "/" },
@@ -64,6 +73,9 @@ export default function BlogSeoPage(props: BlogSeoPageProps) {
         title={title}
         description={description}
         canonicalPath={canonicalPath}
+        keywords={keywords}
+        publishedTime={publishedTime}
+        modifiedTime={modifiedTime}
         kind="article"
         schema={schemas}
       />

@@ -2,8 +2,9 @@ import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/sections/Footer";
 import SeoMeta from "@/components/SeoMeta";
-import { pageSeo } from "@/lib/seo";
+import { getLocalizedPageSeo, SITE_URL } from "@/lib/seo";
 import { buildBreadcrumbListSchema } from "@/lib/schema";
+import { useLocale } from "@/hooks/use-locale";
 
 const tools = [
   {
@@ -24,17 +25,37 @@ const tools = [
 ];
 
 export default function ToolsIndex() {
+  const { locale } = useLocale();
+  const isAr = locale === "ar";
+  const seo = getLocalizedPageSeo("toolsIndex", locale);
+
+  const toolsItemListSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Developer Tools by Sanu Khan",
+    itemListElement: tools.map((tool, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: tool.title,
+      description: tool.description,
+      url: `${SITE_URL}${tool.href}`,
+    })),
+  };
+
   return (
     <>
       <SeoMeta
-        title={pageSeo.toolsIndex.title}
-        description={pageSeo.toolsIndex.description}
-        canonicalPath={pageSeo.toolsIndex.canonicalPath}
-        keywords={pageSeo.toolsIndex.keywords}
-        schema={buildBreadcrumbListSchema([
-          { name: "Home", path: "/" },
-          { name: "Tools", path: "/tools" },
-        ])}
+        title={seo.title}
+        description={seo.description}
+        canonicalPath={seo.canonicalPath}
+        keywords={seo.keywords}
+        schema={[
+          toolsItemListSchema,
+          buildBreadcrumbListSchema([
+            { name: isAr ? "الرئيسية" : "Home", path: "/" },
+            { name: isAr ? "أدوات المطورين" : "Tools", path: "/tools" },
+          ]),
+        ]}
       />
       <Navbar />
       <main className="min-h-[100dvh] bg-background pt-28 pb-20 text-foreground">

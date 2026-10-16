@@ -82,10 +82,12 @@ const main = async () => {
   const devtoBlogRoutes = await fetchDevToBlogRoutes();
   const routes = Array.from(new Set([...staticRoutes, ...devtoBlogRoutes]));
 
-  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${routes
-    .map(
-      (route) => `  <url>\n    <loc>${SITE}${route}</loc>\n    <lastmod>${LASTMOD}</lastmod>\n    <changefreq>${changefreqFor(route)}</changefreq>\n    <priority>${priorityFor(route)}</priority>\n  </url>`,
-    )
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${routes
+    .map((route) => {
+      const loc = `${SITE}${route}`;
+      const arLoc = `${loc}?lang=ar`;
+      return `  <url>\n    <loc>${loc}</loc>\n    <xhtml:link rel="alternate" hreflang="en" href="${loc}" />\n    <xhtml:link rel="alternate" hreflang="ar" href="${arLoc}" />\n    <xhtml:link rel="alternate" hreflang="x-default" href="${loc}" />\n    <lastmod>${LASTMOD}</lastmod>\n    <changefreq>${changefreqFor(route)}</changefreq>\n    <priority>${priorityFor(route)}</priority>\n  </url>`;
+    })
     .join("\n")}\n</urlset>\n`;
 
   writeFileSync(resolve(process.cwd(), "public", "sitemap.xml"), xml, "utf8");

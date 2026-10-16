@@ -3,11 +3,19 @@ import ToolSeoPage from "@/components/ToolSeoPage";
 export default function CurlToJsonToolPage() {
   return (
     <ToolSeoPage
-      title="Curl to JSON Converter | Sanu Khan"
-      description="Curl to JSON converter for transforming command-line requests into structured JSON configs useful for API docs, testing, and client generation workflows."
+      title="cURL to JSON Converter Online — API Request Parser | Sanu Khan"
+      description="Free online cURL to JSON converter for transforming command-line cURL requests into structured JSON configs for API documentation, testing, and SDK workflows."
       canonicalPath="/tools/curl-to-json-converter"
       h1="Curl to JSON Converter for Integration Workflows"
       schemaName="Curl to JSON Converter"
+      keywords={[
+        "cURL to JSON Converter",
+        "Convert cURL to JSON Online",
+        "Parse cURL Command",
+        "API Request Config Generator",
+        "Integration Workflow Tools",
+        "Sanu Khan Developer Tools",
+      ]}
       intro={[
         "The curl to json converter helps engineers translate command-line API snippets into reusable JSON structures that can be shared in documentation, tool configs, and test suites. This eliminates repetitive manual parsing and reduces mistakes in complex headers and body payload extraction.",
         "Teams that manage multiple integrations can standardize request definitions faster when cURL commands are transformed into clear machine-readable objects.",

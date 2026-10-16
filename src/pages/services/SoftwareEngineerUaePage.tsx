@@ -3,11 +3,22 @@ import SeoPageLayout from "@/components/SeoPageLayout";
 export default function SoftwareEngineerUaePage() {
   return (
     <SeoPageLayout
-      title="Software Engineer & Solution Architect in Dubai, UAE"
-      description="Software engineering and solution architecture for production platforms, enterprise integrations and cloud systems in Dubai, UAE."
+      title="Software Engineer & Solution Architect in Dubai, UAE | Sanu Khan"
+      description="Hire Sanu Khan — Senior Software Engineer, Solution Architect, and Tech Lead in Dubai, UAE for production platforms, enterprise SAP/API integrations, and cloud systems."
       canonicalPath="/software-engineer-uae"
       h1="Software Engineer and Solution Architect for Production Platforms"
       intro="I help teams in the UAE turn complex business requirements into reliable software platforms, from architecture and API integration through delivery and production hardening."
+      keywords={[
+        "Software Engineer UAE",
+        "Software Engineer Dubai",
+        "Solution Architect Dubai",
+        "Solution Architect UAE",
+        "Tech Lead Dubai",
+        "Senior Software Engineer UAE",
+        "Enterprise Integration Architect Dubai",
+        "Cloud Architect UAE",
+        "Sanu Khan",
+      ]}
       sections={[
         {
           id: "engineering",
@@ -41,6 +52,7 @@ export default function SoftwareEngineerUaePage() {
       }}
       links={[
         { label: "API Integration Services", href: "/api-integration-services" },
+        { label: "Full Stack Consultant UAE", href: "/full-stack-consultant-uae" },
         { label: "Zaakiy V3RSE AI Platform", href: "/projects/zaakiy-v3rse" },
         { label: "Garage Management Architecture", href: "/projects/garage-management-and-diagnostics" },
         { label: "Real Estate ERP Architecture", href: "/projects/real-estate-erp-architecture" },
@@ -50,14 +62,19 @@ export default function SoftwareEngineerUaePage() {
       schema={{
         "@context": "https://schema.org",
         "@type": "Service",
-        name: "Software Engineering and Solution Architecture",
-        serviceType: "Software Engineering",
+        name: "Software Engineering and Solution Architecture in Dubai, UAE",
+        serviceType: "Software Engineering & Solution Architecture",
         provider: {
           "@type": "Person",
+          "@id": "https://www.sanukhan.dev/#person",
           name: "Sanu Khan",
           url: "https://www.sanukhan.dev",
         },
-        areaServed: { "@type": "Country", name: "United Arab Emirates" },
+        areaServed: [
+          { "@type": "City", name: "Dubai" },
+          { "@type": "City", name: "Abu Dhabi" },
+          { "@type": "Country", name: "United Arab Emirates" },
+        ],
       }}
     />
   );

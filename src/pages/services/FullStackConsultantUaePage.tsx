@@ -3,11 +3,21 @@ import SeoPageLayout from "@/components/SeoPageLayout";
 export default function FullStackConsultantUaePage() {
   return (
     <SeoPageLayout
-      title="Full Stack Consultant UAE | Sanu Khan"
-      description="Full stack consultant UAE for architecture, backend APIs, frontend systems, and cloud delivery. Build scalable products with technical leadership from Sanu Khan."
+      title="Full Stack Consultant UAE & Technical Lead in Dubai | Sanu Khan"
+      description="Full Stack Consultant in Dubai, UAE for product architecture, Node.js/TypeScript backend APIs, React frontend platforms, and cloud delivery led by Sanu Khan."
       canonicalPath="/full-stack-consultant-uae"
       h1="Full Stack Consultant UAE for End-to-End Product Execution"
       intro="As a full stack consultant UAE businesses engage for complex digital initiatives, I work across product architecture, backend systems, frontend platforms, and delivery operations. The value is in combining strategic architecture with implementation detail so teams can move from concept to reliable production systems faster."
+      keywords={[
+        "Full Stack Consultant UAE",
+        "Full Stack Developer Dubai",
+        "Technical Consultant Dubai",
+        "Tech Lead UAE",
+        "Fractional CTO Dubai",
+        "Node.js React Consultant UAE",
+        "Product Architecture Consulting Dubai",
+        "Sanu Khan",
+      ]}
       sections={[
         {
           id: "problem",
@@ -47,19 +57,29 @@ export default function FullStackConsultantUaePage() {
       }}
       links={[
         { label: "React Developer Dubai", href: "/react-developer-dubai" },
+        { label: "Node.js Developer UAE", href: "/nodejs-developer-uae" },
         {
           label: "API Integration Services",
           href: "/api-integration-services",
         },
+        { label: "Selected Architecture Case Studies", href: "/projects" },
         { label: "Tools Library", href: "/tools" },
       ]}
       schema={{
         "@context": "https://schema.org",
         "@type": "Service",
         name: "Full Stack Consultant UAE",
-        provider: { "@type": "Person", name: "Sanu Khan" },
-        areaServed: "UAE",
-        serviceType: "Full Stack Product Consulting",
+        provider: {
+          "@type": "Person",
+          "@id": "https://www.sanukhan.dev/#person",
+          name: "Sanu Khan",
+          url: "https://www.sanukhan.dev",
+        },
+        areaServed: [
+          { "@type": "City", name: "Dubai" },
+          { "@type": "Country", name: "United Arab Emirates" },
+        ],
+        serviceType: "Full Stack Product & Architecture Consulting",
       }}
     />
   );

@@ -15,6 +15,7 @@ type ToolSeoPageProps = {
   exampleOutput: string;
   links: Array<{ label: string; href: string }>;
   schemaName: string;
+  keywords?: string[];
 };
 
 export default function ToolSeoPage(props: ToolSeoPageProps) {
@@ -29,6 +30,7 @@ export default function ToolSeoPage(props: ToolSeoPageProps) {
     exampleOutput,
     links,
     schemaName,
+    keywords,
   } = props;
 
   return (
@@ -37,15 +39,28 @@ export default function ToolSeoPage(props: ToolSeoPageProps) {
         title={title}
         description={description}
         canonicalPath={canonicalPath}
+        keywords={keywords}
         schema={[
           {
             "@context": "https://schema.org",
             "@type": "SoftwareApplication",
             name: schemaName,
-            applicationCategory: "DeveloperTool",
-            operatingSystem: "Web",
+            description,
+            applicationCategory: "DeveloperApplication",
+            operatingSystem: "Any",
             inLanguage: "en",
             url: `https://www.sanukhan.dev${canonicalPath}`,
+            author: {
+              "@type": "Person",
+              "@id": "https://www.sanukhan.dev/#person",
+              name: "Sanu Khan",
+              url: "https://www.sanukhan.dev",
+            },
+            offers: {
+              "@type": "Offer",
+              price: "0",
+              priceCurrency: "USD",
+            },
           },
           buildBreadcrumbListSchema([
             { name: "Home", path: "/" },

@@ -1,277 +1,415 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://www.sanukhan.dev/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sanukhan.dev/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.sanukhan.dev/?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sanukhan.dev/" />
     <lastmod>2026-10-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://www.sanukhan.dev/about</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sanukhan.dev/about" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.sanukhan.dev/about?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sanukhan.dev/about" />
     <lastmod>2026-10-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.92</priority>
   </url>
   <url>
     <loc>https://www.sanukhan.dev/projects</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sanukhan.dev/projects" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.sanukhan.dev/projects?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sanukhan.dev/projects" />
     <lastmod>2026-10-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.92</priority>
   </url>
   <url>
     <loc>https://www.sanukhan.dev/projects/enterprise-retail-integration</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sanukhan.dev/projects/enterprise-retail-integration" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.sanukhan.dev/projects/enterprise-retail-integration?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sanukhan.dev/projects/enterprise-retail-integration" />
     <lastmod>2026-10-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.88</priority>
   </url>
   <url>
     <loc>https://www.sanukhan.dev/projects/airline-retailing-aggregation</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sanukhan.dev/projects/airline-retailing-aggregation" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.sanukhan.dev/projects/airline-retailing-aggregation?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sanukhan.dev/projects/airline-retailing-aggregation" />
     <lastmod>2026-10-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.88</priority>
   </url>
   <url>
     <loc>https://www.sanukhan.dev/projects/automotive-omnichannel-platform</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sanukhan.dev/projects/automotive-omnichannel-platform" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.sanukhan.dev/projects/automotive-omnichannel-platform?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sanukhan.dev/projects/automotive-omnichannel-platform" />
     <lastmod>2026-10-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.88</priority>
   </url>
   <url>
     <loc>https://www.sanukhan.dev/projects/real-estate-erp-architecture</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sanukhan.dev/projects/real-estate-erp-architecture" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.sanukhan.dev/projects/real-estate-erp-architecture?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sanukhan.dev/projects/real-estate-erp-architecture" />
     <lastmod>2026-10-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.88</priority>
   </url>
   <url>
     <loc>https://www.sanukhan.dev/projects/garage-management-and-diagnostics</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sanukhan.dev/projects/garage-management-and-diagnostics" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.sanukhan.dev/projects/garage-management-and-diagnostics?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sanukhan.dev/projects/garage-management-and-diagnostics" />
     <lastmod>2026-10-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.88</priority>
   </url>
   <url>
     <loc>https://www.sanukhan.dev/projects/headless-healthcare-digital-experience</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sanukhan.dev/projects/headless-healthcare-digital-experience" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.sanukhan.dev/projects/headless-healthcare-digital-experience?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sanukhan.dev/projects/headless-healthcare-digital-experience" />
     <lastmod>2026-10-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.88</priority>
   </url>
   <url>
     <loc>https://www.sanukhan.dev/projects/zaakiy-v3rse</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sanukhan.dev/projects/zaakiy-v3rse" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.sanukhan.dev/projects/zaakiy-v3rse?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sanukhan.dev/projects/zaakiy-v3rse" />
     <lastmod>2026-10-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.88</priority>
   </url>
   <url>
     <loc>https://www.sanukhan.dev/software-engineer-uae</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sanukhan.dev/software-engineer-uae" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.sanukhan.dev/software-engineer-uae?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sanukhan.dev/software-engineer-uae" />
     <lastmod>2026-10-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.88</priority>
   </url>
   <url>
     <loc>https://www.sanukhan.dev/contact</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sanukhan.dev/contact" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.sanukhan.dev/contact?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sanukhan.dev/contact" />
     <lastmod>2026-10-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.92</priority>
   </url>
   <url>
     <loc>https://www.sanukhan.dev/faq</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sanukhan.dev/faq" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.sanukhan.dev/faq?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sanukhan.dev/faq" />
     <lastmod>2026-10-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.88</priority>
   </url>
   <url>
     <loc>https://www.sanukhan.dev/tools</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sanukhan.dev/tools" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.sanukhan.dev/tools?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sanukhan.dev/tools" />
     <lastmod>2026-10-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.sanukhan.dev/tools/json-formatter-online</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sanukhan.dev/tools/json-formatter-online" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.sanukhan.dev/tools/json-formatter-online?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sanukhan.dev/tools/json-formatter-online" />
     <lastmod>2026-10-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.sanukhan.dev/tools/api-client-tool</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sanukhan.dev/tools/api-client-tool" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.sanukhan.dev/tools/api-client-tool?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sanukhan.dev/tools/api-client-tool" />
     <lastmod>2026-10-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.sanukhan.dev/tools/curl-to-json-converter</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sanukhan.dev/tools/curl-to-json-converter" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.sanukhan.dev/tools/curl-to-json-converter?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sanukhan.dev/tools/curl-to-json-converter" />
     <lastmod>2026-10-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.sanukhan.dev/blog</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sanukhan.dev/blog" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.sanukhan.dev/blog?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sanukhan.dev/blog" />
     <lastmod>2026-10-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.sanukhan.dev/blog/javascript-algorithms</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sanukhan.dev/blog/javascript-algorithms" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.sanukhan.dev/blog/javascript-algorithms?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sanukhan.dev/blog/javascript-algorithms" />
     <lastmod>2026-10-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.sanukhan.dev/blog/nodejs-api-best-practices</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sanukhan.dev/blog/nodejs-api-best-practices" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.sanukhan.dev/blog/nodejs-api-best-practices?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sanukhan.dev/blog/nodejs-api-best-practices" />
     <lastmod>2026-10-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.sanukhan.dev/nodejs-developer-uae</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sanukhan.dev/nodejs-developer-uae" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.sanukhan.dev/nodejs-developer-uae?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sanukhan.dev/nodejs-developer-uae" />
     <lastmod>2026-10-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.88</priority>
   </url>
   <url>
     <loc>https://www.sanukhan.dev/react-developer-dubai</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sanukhan.dev/react-developer-dubai" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.sanukhan.dev/react-developer-dubai?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sanukhan.dev/react-developer-dubai" />
     <lastmod>2026-10-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.88</priority>
   </url>
   <url>
     <loc>https://www.sanukhan.dev/api-integration-services</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sanukhan.dev/api-integration-services" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.sanukhan.dev/api-integration-services?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sanukhan.dev/api-integration-services" />
     <lastmod>2026-10-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.88</priority>
   </url>
   <url>
     <loc>https://www.sanukhan.dev/full-stack-consultant-uae</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sanukhan.dev/full-stack-consultant-uae" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.sanukhan.dev/full-stack-consultant-uae?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sanukhan.dev/full-stack-consultant-uae" />
     <lastmod>2026-10-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.88</priority>
   </url>
   <url>
     <loc>https://www.sanukhan.dev/blog/52-possibilities-5-cards-no-guessing-heres-the-algorithm-89c</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sanukhan.dev/blog/52-possibilities-5-cards-no-guessing-heres-the-algorithm-89c" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.sanukhan.dev/blog/52-possibilities-5-cards-no-guessing-heres-the-algorithm-89c?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sanukhan.dev/blog/52-possibilities-5-cards-no-guessing-heres-the-algorithm-89c" />
     <lastmod>2026-10-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.sanukhan.dev/blog/i-built-an-erp-in-25-hours-with-ai-vibe-coding-is-getting-serious-1e2k</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sanukhan.dev/blog/i-built-an-erp-in-25-hours-with-ai-vibe-coding-is-getting-serious-1e2k" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.sanukhan.dev/blog/i-built-an-erp-in-25-hours-with-ai-vibe-coding-is-getting-serious-1e2k?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sanukhan.dev/blog/i-built-an-erp-in-25-hours-with-ai-vibe-coding-is-getting-serious-1e2k" />
     <lastmod>2026-10-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.sanukhan.dev/blog/codex-cli-01570-broke-on-windows-heres-how-i-got-back-to-work-do-not-update-codex--19gh</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sanukhan.dev/blog/codex-cli-01570-broke-on-windows-heres-how-i-got-back-to-work-do-not-update-codex--19gh" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.sanukhan.dev/blog/codex-cli-01570-broke-on-windows-heres-how-i-got-back-to-work-do-not-update-codex--19gh?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sanukhan.dev/blog/codex-cli-01570-broke-on-windows-heres-how-i-got-back-to-work-do-not-update-codex--19gh" />
     <lastmod>2026-10-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.sanukhan.dev/blog/stop-scaling-out-your-server-might-just-need-more-ram-5781</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sanukhan.dev/blog/stop-scaling-out-your-server-might-just-need-more-ram-5781" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.sanukhan.dev/blog/stop-scaling-out-your-server-might-just-need-more-ram-5781?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sanukhan.dev/blog/stop-scaling-out-your-server-might-just-need-more-ram-5781" />
     <lastmod>2026-10-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.sanukhan.dev/blog/round-robin-is-lying-to-you-equal-traffic-equal-load-6io</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sanukhan.dev/blog/round-robin-is-lying-to-you-equal-traffic-equal-load-6io" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.sanukhan.dev/blog/round-robin-is-lying-to-you-equal-traffic-equal-load-6io?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sanukhan.dev/blog/round-robin-is-lying-to-you-equal-traffic-equal-load-6io" />
     <lastmod>2026-10-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.sanukhan.dev/blog/how-to-choose-between-sql-nosql-and-everything-in-between-5gl4</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sanukhan.dev/blog/how-to-choose-between-sql-nosql-and-everything-in-between-5gl4" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.sanukhan.dev/blog/how-to-choose-between-sql-nosql-and-everything-in-between-5gl4?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sanukhan.dev/blog/how-to-choose-between-sql-nosql-and-everything-in-between-5gl4" />
     <lastmod>2026-10-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.sanukhan.dev/blog/how-to-scale-a-backend-from-1-user-to-1-million-users-2k6p</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sanukhan.dev/blog/how-to-scale-a-backend-from-1-user-to-1-million-users-2k6p" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.sanukhan.dev/blog/how-to-scale-a-backend-from-1-user-to-1-million-users-2k6p?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sanukhan.dev/blog/how-to-scale-a-backend-from-1-user-to-1-million-users-2k6p" />
     <lastmod>2026-10-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.sanukhan.dev/blog/how-to-think-about-system-design-without-just-drawing-boxes-24el</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sanukhan.dev/blog/how-to-think-about-system-design-without-just-drawing-boxes-24el" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.sanukhan.dev/blog/how-to-think-about-system-design-without-just-drawing-boxes-24el?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sanukhan.dev/blog/how-to-think-about-system-design-without-just-drawing-boxes-24el" />
     <lastmod>2026-10-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.sanukhan.dev/blog/operational-intelligence-the-missing-nervous-system-of-modern-business-operations-4bf</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sanukhan.dev/blog/operational-intelligence-the-missing-nervous-system-of-modern-business-operations-4bf" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.sanukhan.dev/blog/operational-intelligence-the-missing-nervous-system-of-modern-business-operations-4bf?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sanukhan.dev/blog/operational-intelligence-the-missing-nervous-system-of-modern-business-operations-4bf" />
     <lastmod>2026-10-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.sanukhan.dev/blog/how-claude-code-improved-my-linkedin-profile-visibility--390b</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sanukhan.dev/blog/how-claude-code-improved-my-linkedin-profile-visibility--390b" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.sanukhan.dev/blog/how-claude-code-improved-my-linkedin-profile-visibility--390b?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sanukhan.dev/blog/how-claude-code-improved-my-linkedin-profile-visibility--390b" />
     <lastmod>2026-10-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.sanukhan.dev/blog/aruvixcom-a-private-offline-first-developer-toolkit-for-json-apis-qa-and-frontend-utilities-416d</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sanukhan.dev/blog/aruvixcom-a-private-offline-first-developer-toolkit-for-json-apis-qa-and-frontend-utilities-416d" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.sanukhan.dev/blog/aruvixcom-a-private-offline-first-developer-toolkit-for-json-apis-qa-and-frontend-utilities-416d?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sanukhan.dev/blog/aruvixcom-a-private-offline-first-developer-toolkit-for-json-apis-qa-and-frontend-utilities-416d" />
     <lastmod>2026-10-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.sanukhan.dev/blog/api-gateway-the-bouncer-your-microservices-didnt-know-they-needed-1j0e</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sanukhan.dev/blog/api-gateway-the-bouncer-your-microservices-didnt-know-they-needed-1j0e" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.sanukhan.dev/blog/api-gateway-the-bouncer-your-microservices-didnt-know-they-needed-1j0e?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sanukhan.dev/blog/api-gateway-the-bouncer-your-microservices-didnt-know-they-needed-1j0e" />
     <lastmod>2026-10-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.sanukhan.dev/blog/duckdb-the-sqlite-of-analytics-you-didnt-know-you-needed-579m</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sanukhan.dev/blog/duckdb-the-sqlite-of-analytics-you-didnt-know-you-needed-579m" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.sanukhan.dev/blog/duckdb-the-sqlite-of-analytics-you-didnt-know-you-needed-579m?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sanukhan.dev/blog/duckdb-the-sqlite-of-analytics-you-didnt-know-you-needed-579m" />
     <lastmod>2026-10-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.sanukhan.dev/blog/unmasking-javascript-proxies-the-secret-agents-of-your-objects-4eac</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sanukhan.dev/blog/unmasking-javascript-proxies-the-secret-agents-of-your-objects-4eac" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.sanukhan.dev/blog/unmasking-javascript-proxies-the-secret-agents-of-your-objects-4eac?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sanukhan.dev/blog/unmasking-javascript-proxies-the-secret-agents-of-your-objects-4eac" />
     <lastmod>2026-10-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.sanukhan.dev/blog/creating-a-merge-sort-array-prototype-for-nested-objects-strings-and-numbers-in-javascript-4l3j</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sanukhan.dev/blog/creating-a-merge-sort-array-prototype-for-nested-objects-strings-and-numbers-in-javascript-4l3j" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.sanukhan.dev/blog/creating-a-merge-sort-array-prototype-for-nested-objects-strings-and-numbers-in-javascript-4l3j?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sanukhan.dev/blog/creating-a-merge-sort-array-prototype-for-nested-objects-strings-and-numbers-in-javascript-4l3j" />
     <lastmod>2026-10-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.sanukhan.dev/blog/why-project-euler-might-be-the-most-powerful-dsa-trainer-youre-not-using-yet-293c</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sanukhan.dev/blog/why-project-euler-might-be-the-most-powerful-dsa-trainer-youre-not-using-yet-293c" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.sanukhan.dev/blog/why-project-euler-might-be-the-most-powerful-dsa-trainer-youre-not-using-yet-293c?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sanukhan.dev/blog/why-project-euler-might-be-the-most-powerful-dsa-trainer-youre-not-using-yet-293c" />
     <lastmod>2026-10-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.sanukhan.dev/blog/how-warp-terminal-saved-me-from-a-git-disaster-with-just-one-prompt-3fge</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sanukhan.dev/blog/how-warp-terminal-saved-me-from-a-git-disaster-with-just-one-prompt-3fge" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.sanukhan.dev/blog/how-warp-terminal-saved-me-from-a-git-disaster-with-just-one-prompt-3fge?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sanukhan.dev/blog/how-warp-terminal-saved-me-from-a-git-disaster-with-just-one-prompt-3fge" />
     <lastmod>2026-10-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.sanukhan.dev/blog/building-a-cost-effective-full-stack-saas-platform-a-practical-guide-for-small-to-mid-size-it-2d44</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sanukhan.dev/blog/building-a-cost-effective-full-stack-saas-platform-a-practical-guide-for-small-to-mid-size-it-2d44" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.sanukhan.dev/blog/building-a-cost-effective-full-stack-saas-platform-a-practical-guide-for-small-to-mid-size-it-2d44?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sanukhan.dev/blog/building-a-cost-effective-full-stack-saas-platform-a-practical-guide-for-small-to-mid-size-it-2d44" />
     <lastmod>2026-10-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.sanukhan.dev/blog/unravelling-p-vs-np-how-this-unsolved-problem-influences-the-future-of-ai-with-quantum-computing-37c3</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sanukhan.dev/blog/unravelling-p-vs-np-how-this-unsolved-problem-influences-the-future-of-ai-with-quantum-computing-37c3" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.sanukhan.dev/blog/unravelling-p-vs-np-how-this-unsolved-problem-influences-the-future-of-ai-with-quantum-computing-37c3?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sanukhan.dev/blog/unravelling-p-vs-np-how-this-unsolved-problem-influences-the-future-of-ai-with-quantum-computing-37c3" />
     <lastmod>2026-10-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.sanukhan.dev/blog/p-vs-np-problem-the-ultimate-computer-math-puzzle-5hj0</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sanukhan.dev/blog/p-vs-np-problem-the-ultimate-computer-math-puzzle-5hj0" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.sanukhan.dev/blog/p-vs-np-problem-the-ultimate-computer-math-puzzle-5hj0?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sanukhan.dev/blog/p-vs-np-problem-the-ultimate-computer-math-puzzle-5hj0" />
     <lastmod>2026-10-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.sanukhan.dev/blog/a-comprehensive-guide-to-big-o-notation-and-efficient-coding-practices-with-examples-44n2</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sanukhan.dev/blog/a-comprehensive-guide-to-big-o-notation-and-efficient-coding-practices-with-examples-44n2" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.sanukhan.dev/blog/a-comprehensive-guide-to-big-o-notation-and-efficient-coding-practices-with-examples-44n2?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sanukhan.dev/blog/a-comprehensive-guide-to-big-o-notation-and-efficient-coding-practices-with-examples-44n2" />
     <lastmod>2026-10-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.sanukhan.dev/blog/the-sliding-window-technique-a-powerful-algorithm-for-javascript-developers-3nfm</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sanukhan.dev/blog/the-sliding-window-technique-a-powerful-algorithm-for-javascript-developers-3nfm" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.sanukhan.dev/blog/the-sliding-window-technique-a-powerful-algorithm-for-javascript-developers-3nfm?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sanukhan.dev/blog/the-sliding-window-technique-a-powerful-algorithm-for-javascript-developers-3nfm" />
     <lastmod>2026-10-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>

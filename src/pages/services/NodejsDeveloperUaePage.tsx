@@ -3,11 +3,20 @@ import SeoPageLayout from "@/components/SeoPageLayout";
 export default function NodejsDeveloperUaePage() {
   return (
     <SeoPageLayout
-      title="Node.js Developer UAE | Sanu Khan"
-      description="Node.js developer UAE services for scalable APIs, integrations, and cloud-native delivery. Hire Sanu Khan for architecture-led backend execution in Dubai."
+      title="Node.js Developer UAE & Backend Architect in Dubai | Sanu Khan"
+      description="Node.js Developer & Backend Architect in Dubai, UAE for high-throughput APIs, NestJS/TypeScript microservices, Kafka event streams, and enterprise cloud delivery."
       canonicalPath="/nodejs-developer-uae"
       h1="Node.js Developer UAE for Scalable Product Engineering"
       intro="As a Node.js developer UAE teams can rely on, I focus on building resilient API platforms that stay fast under load, remain maintainable across releases, and integrate cleanly with enterprise systems. The work combines architecture strategy, delivery governance, and implementation depth so technical decisions do not drift away from business outcomes."
+      keywords={[
+        "Node.js Developer UAE",
+        "Node.js Developer Dubai",
+        "Backend Architect Dubai",
+        "TypeScript NestJS Engineer UAE",
+        "Microservices & API Architect Dubai",
+        "High-Throughput Node.js APIs",
+        "Sanu Khan",
+      ]}
       sections={[
         {
           id: "problem",
@@ -48,6 +57,7 @@ export default function NodejsDeveloperUaePage() {
           label: "API Integration Services",
           href: "/api-integration-services",
         },
+        { label: "Full Stack Consultant UAE", href: "/full-stack-consultant-uae" },
         { label: "API Client Tool", href: "/tools/api-client-tool" },
         {
           label: "Node.js API Best Practices Blog",
@@ -57,10 +67,18 @@ export default function NodejsDeveloperUaePage() {
       schema={{
         "@context": "https://schema.org",
         "@type": "Service",
-        name: "Node.js Developer UAE",
-        provider: { "@type": "Person", name: "Sanu Khan" },
-        areaServed: "UAE",
-        serviceType: "Node.js API Development",
+        name: "Node.js Developer & Backend Architecture UAE",
+        provider: {
+          "@type": "Person",
+          "@id": "https://www.sanukhan.dev/#person",
+          name: "Sanu Khan",
+          url: "https://www.sanukhan.dev",
+        },
+        areaServed: [
+          { "@type": "City", name: "Dubai" },
+          { "@type": "Country", name: "United Arab Emirates" },
+        ],
+        serviceType: "Node.js & TypeScript Backend Engineering",
       }}
     />
   );
