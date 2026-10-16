@@ -676,5 +676,3 @@ export function ReferenceContact() {
     </section>
   );
 }
-
-export { default as ReferenceFooter } from "@/components/sections/Footer";

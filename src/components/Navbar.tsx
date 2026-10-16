@@ -1,11 +1,11 @@
 import { memo, useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Menu, X, Moon, Sun, ArrowRight, Github, Linkedin, Mail } from "lucide-react";
-import { useSiteContent } from "@/data/siteContent";
 import { cn } from "@/lib/utils";
 import { useTheme } from "@/hooks/use-theme";
 import { useLocale } from "@/hooks/use-locale";
 import { BrandIdentity } from "@/components/BrandIdentity";
+import { useScrollSpy, type SectionThreshold } from "@/hooks/useScrollSpy";
 
 interface NavItem {
   label: string;
@@ -14,21 +14,37 @@ interface NavItem {
   num: string;
 }
 
+const SECTION_THRESHOLDS: SectionThreshold[] = [
+  { id: "contact", href: "#contact" },
+  { id: "faq", href: "#about" },
+  { id: "about", href: "#about" },
+  { id: "process", href: "#about" },
+  { id: "zaakiy", href: "#writing" },
+  { id: "writing", href: "#writing" },
+  { id: "work", href: "#work" },
+  { id: "services", href: "#services" },
+  { id: "architecture", href: "#services" },
+  { id: "home", href: "#home" },
+];
+
 function Navbar() {
   const location = useLocation();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   const mobileToggleRef = useRef<HTMLButtonElement>(null);
-  const [scrolled, setScrolled] = useState(false);
-  const [activeHref, setActiveHref] = useState("#home");
   const { theme, toggleTheme } = useTheme();
   const { locale, setLocale } = useLocale();
-  const { nav } = useSiteContent();
   const isLight = theme === "light";
   const isArabic = locale === "ar";
   const isHomePage = location.pathname === "/";
   const ctaHref = isHomePage ? "#contact" : "/contact";
+
+  const { scrolled, activeHref, setActiveHref } = useScrollSpy({
+    isHomePage,
+    pathname: location.pathname,
+    thresholds: SECTION_THRESHOLDS,
+  });
 
   const scrollToHash = (hash: string) => {
     const id = hash.replace(/^#/, "");
@@ -124,13 +140,6 @@ function Navbar() {
     navigate("/contact");
   };
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
   // Handle cross-route or initial load hash scroll
   useEffect(() => {
     if (!isHomePage || !location.hash) return;
@@ -140,63 +149,6 @@ function Navbar() {
     }, 120);
     return () => clearTimeout(timer);
   }, [isHomePage, location.hash]);
-
-  useEffect(() => {
-    if (!isHomePage) {
-      if (location.pathname.startsWith("/blog")) {
-        setActiveHref("#writing");
-      } else if (location.pathname === "/about") {
-        setActiveHref("#about");
-      } else if (location.pathname.startsWith("/projects")) {
-        setActiveHref("#work");
-      } else if (location.pathname === "/contact") {
-        setActiveHref("#contact");
-      } else {
-        setActiveHref("");
-      }
-      return;
-    }
-
-    const sectionThresholds = [
-      { id: "contact", href: "#contact" },
-      { id: "faq", href: "#about" },
-      { id: "about", href: "#about" },
-      { id: "process", href: "#about" },
-      { id: "zaakiy", href: "#writing" },
-      { id: "writing", href: "#writing" },
-      { id: "work", href: "#work" },
-      { id: "services", href: "#services" },
-      { id: "architecture", href: "#services" },
-      { id: "home", href: "#home" },
-    ];
-
-    const updateActiveSection = () => {
-      const scrollY = window.scrollY;
-      if (scrollY < 80) {
-        setActiveHref("#home");
-        return;
-      }
-
-      if (window.innerHeight + scrollY >= document.documentElement.scrollHeight - 80) {
-        setActiveHref("#contact");
-        return;
-      }
-
-      const targetOffset = 180;
-      for (const section of sectionThresholds) {
-        const el = document.getElementById(section.id);
-        if (!el) continue;
-        const rect = el.getBoundingClientRect();
-        if (rect.top <= targetOffset) {
-          setActiveHref(section.href);
-          break;
-        }
-      }
-    };
-
-    window.addEventListener("scroll", updateActiveSection, { passive: true });
-    return () => window.removeEventListener("scroll", updateActiveSection);
-  }, [isHomePage, location.pathname]);
 
   // Lock body scroll when mobile menu is open
   useEffect(() => {

@@ -5,6 +5,7 @@ import SeoMeta from "@/components/SeoMeta";
 import { useLocale } from "@/hooks/use-locale";
 import { getLocalizedPageSeo } from "@/lib/seo";
 import { buildHomepageSchemas } from "@/lib/schema";
+import Footer from "@/components/sections/Footer";
 import {
   ReferenceHero,
   ReferenceProof,
@@ -16,7 +17,6 @@ import {
   ReferenceAbout,
   ReferenceFaq,
   ReferenceContact,
-  ReferenceFooter,
 } from "@/components/sections/ReferenceHomeSections";
 
 const Index = () => {
@@ -65,7 +65,7 @@ const Index = () => {
         <SectionReveal><ReferenceAbout /></SectionReveal>
         <SectionReveal><ReferenceFaq /></SectionReveal>
         <SectionReveal><ReferenceContact /></SectionReveal>
-        <ReferenceFooter />
+        <Footer />
       </main>
     </div>
   );
