@@ -1,6 +1,6 @@
 import { memo, useEffect, useRef, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { Menu, X, Moon, Sun, ArrowRight, Github, Linkedin, Mail } from "lucide-react";
+import { useLocation, useNavigate, Link } from "react-router-dom";
+import { X, Moon, Sun, ArrowRight, Github, Linkedin, Mail, ExternalLink } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useTheme } from "@/hooks/use-theme";
 import { useLocale } from "@/hooks/use-locale";
@@ -16,6 +16,8 @@ interface NavItem {
 
 const SECTION_THRESHOLDS: SectionThreshold[] = [
   { id: "contact", href: "#contact" },
+  { id: "showcase", href: "#work" },
+  { id: "bento", href: "#about" },
   { id: "faq", href: "#about" },
   { id: "about", href: "#about" },
   { id: "process", href: "#about" },
@@ -30,9 +32,9 @@ const SECTION_THRESHOLDS: SectionThreshold[] = [
 function Navbar() {
   const location = useLocation();
   const navigate = useNavigate();
-  const [open, setOpen] = useState(false);
-  const mobileMenuRef = useRef<HTMLDivElement>(null);
-  const mobileToggleRef = useRef<HTMLButtonElement>(null);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const drawerRef = useRef<HTMLDivElement>(null);
+  const toggleBtnRef = useRef<HTMLButtonElement>(null);
   const { theme, toggleTheme } = useTheme();
   const { locale, setLocale } = useLocale();
   const isLight = theme === "light";
@@ -50,7 +52,7 @@ function Navbar() {
     const id = hash.replace(/^#/, "");
     const el = document.getElementById(id);
     if (!el) return false;
-    const headerOffset = 84;
+    const headerOffset = 80;
     const elementPosition = el.getBoundingClientRect().top;
     const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
     window.scrollTo({
@@ -64,7 +66,7 @@ function Navbar() {
     event: React.MouseEvent<HTMLAnchorElement>,
     item: NavItem,
   ) => {
-    setOpen(false);
+    setDrawerOpen(false);
 
     if (isHomePage) {
       if (item.href.startsWith("#")) {
@@ -78,7 +80,6 @@ function Navbar() {
       return;
     }
 
-    // On a subpage:
     const isCurrentPage =
       location.pathname === item.pageHref ||
       (item.pageHref !== "/" &&
@@ -101,8 +102,18 @@ function Navbar() {
     navigate(item.pageHref);
   };
 
+  const handleDrawerLinkClick = (href: string) => {
+    setDrawerOpen(false);
+    if (href.startsWith("/#") && isHomePage) {
+      const hash = href.replace(/^\//, "");
+      scrollToHash(hash);
+    } else {
+      navigate(href);
+    }
+  };
+
   const handleBrandClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
-    setOpen(false);
+    setDrawerOpen(false);
     if (isHomePage) {
       event.preventDefault();
       const success = scrollToHash("#home");
@@ -119,7 +130,7 @@ function Navbar() {
   };
 
   const handleCtaClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
-    setOpen(false);
+    setDrawerOpen(false);
     if (isHomePage) {
       event.preventDefault();
       const success = scrollToHash("#contact");
@@ -140,7 +151,6 @@ function Navbar() {
     navigate("/contact");
   };
 
-  // Handle cross-route or initial load hash scroll
   useEffect(() => {
     if (!isHomePage || !location.hash) return;
     const targetHash = location.hash;
@@ -150,9 +160,9 @@ function Navbar() {
     return () => clearTimeout(timer);
   }, [isHomePage, location.hash]);
 
-  // Lock body scroll when mobile menu is open
+  // Lock body scroll when drawer is open
   useEffect(() => {
-    if (open) {
+    if (drawerOpen) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
@@ -160,16 +170,16 @@ function Navbar() {
     return () => {
       document.body.style.overflow = "";
     };
-  }, [open]);
+  }, [drawerOpen]);
 
-  // Focus the drawer on open; trap Tab and restore focus when Escape closes it.
+  // Trap focus and close drawer on Escape
   useEffect(() => {
-    if (!open) return;
+    if (!drawerOpen) return;
 
-    const menu = mobileMenuRef.current;
+    const drawer = drawerRef.current;
     const focusable = () =>
       Array.from(
-        menu?.querySelectorAll<HTMLElement>(
+        drawer?.querySelectorAll<HTMLElement>(
           'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
         ) ?? [],
       );
@@ -178,8 +188,8 @@ function Navbar() {
     const handleKeyboard = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         event.preventDefault();
-        setOpen(false);
-        mobileToggleRef.current?.focus();
+        setDrawerOpen(false);
+        toggleBtnRef.current?.focus();
         return;
       }
       if (event.key !== "Tab") return;
@@ -197,7 +207,7 @@ function Navbar() {
     };
     document.addEventListener("keydown", handleKeyboard);
     return () => document.removeEventListener("keydown", handleKeyboard);
-  }, [open]);
+  }, [drawerOpen]);
 
   const navItems: NavItem[] = [
     { label: isArabic ? "الخدمات" : "Services", href: "#services", pageHref: "/#services", num: "01" },
@@ -206,230 +216,282 @@ function Navbar() {
     { label: isArabic ? "نبذة عني" : "About", href: "#about", pageHref: "/about", num: "04" },
   ];
 
+  const drawerLinks = [
+    { label: isArabic ? "الرئيسية" : "HOME", href: "/" },
+    { label: isArabic ? "نبذة عني" : "ABOUT", href: "/about" },
+    { label: isArabic ? "الخدمات" : "SERVICES", href: "/#services" },
+    { label: isArabic ? "الأعمال" : "PROJECTS", href: "/projects" },
+    { label: isArabic ? "المقالات" : "BLOGS", href: "/blog" },
+    { label: isArabic ? "التواصل" : "CONTACT", href: "/contact" },
+  ];
+
   return (
-    <header
-      className={cn(
-        "sk-navbar fixed inset-x-0 top-0 z-50 transition-all duration-200",
-        scrolled
-          ? "border-b border-border/80 bg-background/95 backdrop-blur-md shadow-xs"
-          : "border-b border-transparent bg-transparent"
-      )}
-    >
-      <div className="sk-shell">
-        <div className="flex h-[72px] sm:h-20 items-center justify-between">
-          {/* LEFT: SanuKhan.dev Brand Wordmark */}
-          <a
-            href={isHomePage ? "#home" : "/"}
-            onClick={handleBrandClick}
-            className="sk-navbar__brand group select-none"
-            aria-label={isArabic ? "العودة إلى الصفحة الرئيسية لسنو خان" : "Sanu Khan home"}
-          >
-            <BrandIdentity compact />
-          </a>
-
-          {/* CENTER / RIGHT: Desktop Nav Links */}
-          <div className="hidden md:flex items-center gap-7 lg:gap-8">
-            <nav className="flex items-center gap-6 lg:gap-8" aria-label="Main Navigation">
-              {navItems.map((item) => {
-                const isItemActive = isHomePage
-                  ? activeHref === item.href
-                  : activeHref === item.href ||
-                    location.pathname === item.pageHref ||
-                    (item.pageHref !== "/" &&
-                      !item.pageHref.startsWith("/#") &&
-                      location.pathname.startsWith(item.pageHref));
-
-                return (
-                  <a
-                    key={item.href}
-                    href={isHomePage ? item.href : item.pageHref}
-                    onClick={(e) => handleNavClick(e, item)}
-                    aria-current={isItemActive ? "page" : undefined}
-                    className={cn(
-                      "text-[14.5px] font-medium transition-colors hover:text-accent focus-visible:text-accent",
-                      isItemActive
-                        ? "text-primary font-semibold"
-                        : "text-secondary"
-                    )}
-                  >
-                    {item.label}
-                  </a>
-                );
-              })}
-            </nav>
-
-            <div className="h-4 w-px bg-border/80" aria-hidden="true" />
-
-            {/* Theme & Locale Toggles */}
-            <div className="flex items-center gap-2">
-              <button
-                type="button"
-                aria-label={isLight ? (isArabic ? "التبديل إلى الوضع الداكن" : "Switch to dark theme") : (isArabic ? "التبديل إلى الوضع الفاتح" : "Switch to light theme")}
-                onClick={toggleTheme}
-                className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-border text-secondary hover:text-primary hover:border-accent/40 transition-colors"
-              >
-                {isLight ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
-              </button>
-
-              <button
-                type="button"
-                aria-label={locale === "en" ? "التبديل إلى العربية" : "Switch to English"}
-                onClick={() => setLocale(locale === "en" ? "ar" : "en")}
-                className="inline-flex h-9 px-2.5 items-center justify-center rounded-lg border border-border text-xs font-semibold text-secondary hover:text-primary hover:border-accent/40 transition-colors"
-              >
-                {locale === "en" ? "ع" : "EN"}
-              </button>
-            </div>
-
-            {/* Primary CTA: Let's talk → */}
+    <>
+      <header
+        className={cn(
+          "sk-navbar fixed inset-x-0 top-0 z-50 transition-all duration-200 border-b border-border/80 bg-background/95 backdrop-blur-md shadow-xs text-foreground"
+        )}
+      >
+        <div className="sk-shell">
+          <div className="flex h-[72px] sm:h-20 items-center justify-between">
+            {/* LEFT: Logo Wordmark */}
             <a
-              href={ctaHref}
-              onClick={handleCtaClick}
-              aria-label={isArabic ? "لنتحدث — الانتقال إلى قسم التواصل" : "Let's talk — Go to contact section"}
-              className="sk-navbar__cta inline-flex items-center justify-center h-11 rounded-lg bg-accent px-5 text-[14px] font-semibold text-white transition-colors hover:bg-accent/90 shadow-xs gap-1.5"
+              href={isHomePage ? "#home" : "/"}
+              onClick={handleBrandClick}
+              className="sk-navbar__brand group select-none flex items-center"
+              aria-label={isArabic ? "العودة إلى الصفحة الرئيسية لسنو خان" : "Sanu Khan home"}
             >
-              <span>{isArabic ? "لنتحدث" : "Let's talk"}</span>
-              <ArrowRight className="h-4 w-4 rtl:rotate-180" />
+              <BrandIdentity compact />
             </a>
-          </div>
 
-          {/* MOBILE: Menu Trigger */}
-          <div className="flex items-center gap-2 md:hidden">
-            <button
-              type="button"
-              aria-label={locale === "en" ? "العربية" : "EN"}
-              onClick={() => setLocale(locale === "en" ? "ar" : "en")}
-              className="inline-flex h-10 px-2.5 items-center justify-center rounded-lg border border-border text-xs font-semibold text-secondary"
-            >
-              {locale === "en" ? "ع" : "EN"}
-            </button>
+            {/* CENTER: Desktop Nav Links (Maintains strict routing.test.tsx compliance) */}
+            <div className="hidden md:flex items-center gap-7 lg:gap-8">
+              <nav className="flex items-center gap-6 lg:gap-8" aria-label="Main Navigation">
+                {navItems.map((item) => {
+                  const isItemActive = isHomePage
+                    ? activeHref === item.href
+                    : activeHref === item.href ||
+                      location.pathname === item.pageHref ||
+                      (item.pageHref !== "/" &&
+                        !item.pageHref.startsWith("/#") &&
+                        location.pathname.startsWith(item.pageHref));
 
-            <button
-              type="button"
-              className="grid h-11 w-11 place-items-center rounded-lg border border-border text-primary hover:border-accent/40 transition-colors"
-              aria-label={open ? (isArabic ? "إغلاق القائمة" : "Close menu") : (isArabic ? "فتح القائمة" : "Open menu")}
-              aria-expanded={open}
-              aria-controls="mobile-navigation"
-              ref={mobileToggleRef}
-              onClick={() => setOpen((v) => !v)}
-            >
-              {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-            </button>
-          </div>
-        </div>
-      </div>
+                  return (
+                    <a
+                      key={item.href}
+                      href={isHomePage ? item.href : item.pageHref}
+                      onClick={(e) => handleNavClick(e, item)}
+                      aria-current={isItemActive ? "page" : undefined}
+                      className={cn(
+                        "text-[14.5px] font-medium transition-colors hover:text-accent focus-visible:text-accent",
+                        isItemActive
+                          ? "text-primary font-bold border-b-2 border-accent pb-0.5"
+                          : "text-foreground/80 hover:text-accent"
+                      )}
+                    >
+                      {item.label}
+                    </a>
+                  );
+                })}
+              </nav>
 
-      {/* MOBILE FULLSCREEN MENU OVERLAY */}
-      {open && (
-        <div
-          id="mobile-navigation"
-          ref={mobileMenuRef}
-          role="dialog"
-          aria-modal="true"
-          aria-label={isArabic ? "القائمة الرئيسية" : "Mobile navigation"}
-          className="sk-mobile-nav fixed inset-0 top-[72px] sm:top-20 z-40 bg-background/98 backdrop-blur-xl border-t border-border flex flex-col justify-between p-6 sm:p-8 md:hidden overflow-y-auto animate-in fade-in slide-in-from-top-2 duration-200"
-        >
-          <div className="flex flex-col gap-6 pt-4">
-            {/* Big Nav items */}
-            <nav className="flex flex-col gap-4" aria-label="Mobile Navigation">
-              {navItems.map((item) => {
-                const isItemActive = isHomePage
-                  ? activeHref === item.href
-                  : activeHref === item.href ||
-                    location.pathname === item.pageHref ||
-                    (item.pageHref !== "/" &&
-                      !item.pageHref.startsWith("/#") &&
-                      location.pathname.startsWith(item.pageHref));
+              <div className="h-4 w-px bg-border" aria-hidden="true" />
 
-                return (
-                  <a
-                    key={item.href}
-                    href={isHomePage ? item.href : item.pageHref}
-                    onClick={(e) => handleNavClick(e, item)}
-                    aria-current={isItemActive ? "page" : undefined}
-                    className={cn(
-                      "flex items-baseline justify-between border-b border-border/60 pb-3 text-2xl font-semibold tracking-tight transition-colors hover:text-accent",
-                      isItemActive ? "text-accent" : "text-primary"
-                    )}
-                  >
-                    <span>{item.label}</span>
-                    <span className="font-mono text-xs font-semibold text-accent/80 tracking-widest">
-                      {item.num}
-                    </span>
-                  </a>
-                );
-              })}
-            </nav>
+              {/* Theme & Locale Toggles */}
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  aria-label={
+                    isLight
+                      ? isArabic
+                        ? "التبديل إلى الوضع الداكن"
+                        : "Switch to dark theme"
+                      : isArabic
+                      ? "التبديل إلى الوضع الفاتح"
+                      : "Switch to light theme"
+                  }
+                  onClick={toggleTheme}
+                  className="inline-flex h-9 w-9 items-center justify-center rounded-sm border border-border text-foreground/80 hover:text-foreground hover:border-accent/60 transition-colors"
+                >
+                  {isLight ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
+                </button>
 
-            {/* Mobile CTA */}
-            <div className="pt-2">
+                <button
+                  type="button"
+                  aria-label={locale === "en" ? "التبديل إلى العربية" : "Switch to English"}
+                  onClick={() => setLocale(locale === "en" ? "ar" : "en")}
+                  className="inline-flex h-9 px-2.5 items-center justify-center rounded-sm border border-border text-xs font-semibold text-foreground/80 hover:text-foreground hover:border-accent/60 transition-colors"
+                >
+                  {locale === "en" ? "ع" : "EN"}
+                </button>
+              </div>
+
+              {/* Primary CTA: Let's talk → */}
               <a
                 href={ctaHref}
-                aria-label={isArabic ? "لنتحدث — الانتقال إلى قسم التواصل" : "Let's talk — Go to contact section"}
                 onClick={handleCtaClick}
-                className="sk-navbar__cta inline-flex items-center justify-center w-full h-12 rounded-lg bg-accent text-[15px] font-semibold text-white hover:bg-accent/90 justify-center gap-2"
+                aria-label={isArabic ? "لنتحدث — الانتقال إلى قسم التواصل" : "Let's talk — Go to contact section"}
+                className="sk-navbar__cta inline-flex items-center justify-center h-10 rounded-sm px-5 text-[14px] font-semibold transition-colors shadow-xs gap-1.5 bg-accent text-white hover:bg-accent/90"
               >
                 <span>{isArabic ? "لنتحدث" : "Let's talk"}</span>
                 <ArrowRight className="h-4 w-4 rtl:rotate-180" />
               </a>
+
+              {/* Fullscreen Drawer Trigger (Video Menu Icon) */}
+              <button
+                type="button"
+                ref={toggleBtnRef}
+                onClick={() => setDrawerOpen(true)}
+                aria-label={isArabic ? "فتح القائمة الكاملة" : "Open full menu drawer"}
+                className="flex flex-col justify-center items-center h-10 w-10 gap-1.5 rounded-sm p-2 transition-transform hover:scale-105 text-foreground"
+              >
+                <span className="block h-0.5 w-6 bg-current" />
+                <span className="block h-0.5 w-4 self-end bg-current" />
+              </button>
+            </div>
+
+            {/* MOBILE: Triggers */}
+            <div className="flex items-center gap-2 md:hidden">
+              <button
+                type="button"
+                aria-label={locale === "en" ? "العربية" : "EN"}
+                onClick={() => setLocale(locale === "en" ? "ar" : "en")}
+                className="inline-flex h-10 px-2.5 items-center justify-center rounded-sm border border-border text-xs font-semibold text-foreground"
+              >
+                {locale === "en" ? "ع" : "EN"}
+              </button>
+
+              <button
+                type="button"
+                className="flex flex-col justify-center items-center h-10 w-10 gap-1.5 rounded-sm p-2 transition-transform text-foreground"
+                aria-label={drawerOpen ? (isArabic ? "إغلاق القائمة" : "Close menu") : (isArabic ? "فتح القائمة" : "Open menu")}
+                aria-expanded={drawerOpen}
+                aria-controls="fullscreen-drawer"
+                onClick={() => setDrawerOpen((v) => !v)}
+              >
+                <span className="block h-0.5 w-6 bg-current" />
+                <span className="block h-0.5 w-4 self-end bg-current" />
+              </button>
             </div>
           </div>
+        </div>
+      </header>
 
-            {/* Bottom Controls & Social Links */}
-            <div className="pt-8 border-t border-border/80 flex flex-col gap-5">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <button
-                    type="button"
-                    onClick={toggleTheme}
-                    className="inline-flex h-10 items-center gap-2 rounded-lg border border-border px-3.5 text-xs font-semibold text-secondary hover:text-primary"
-                  >
-                    {isLight ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
-                    <span>{isLight ? (isArabic ? "الوضع الداكن" : "Dark mode") : (isArabic ? "الوضع الفاتح" : "Light mode")}</span>
-                  </button>
+      {/* FULLSCREEN SLIDE-OUT DRAWER OVERLAY */}
+      {drawerOpen && (
+        <div
+          id="fullscreen-drawer"
+          ref={drawerRef}
+          role="dialog"
+          aria-modal="true"
+          aria-label={isArabic ? "قائمة التصفح الكاملة" : "Fullscreen navigation drawer"}
+          className="sk-video-drawer"
+        >
+          {/* Top Bar inside Drawer */}
+          <div className="flex items-center justify-between pb-6 border-b border-white/15">
+            <span className="font-mono text-xs uppercase tracking-widest text-white/50">
+              {isArabic ? "سانو خان // قائمة التصفح" : "SanuKhan.dev // Solutions & Systems"}
+            </span>
+            <button
+              type="button"
+              onClick={() => setDrawerOpen(false)}
+              aria-label={isArabic ? "إغلاق القائمة" : "Close navigation"}
+              className="h-12 w-12 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-black transition-colors"
+            >
+              <X className="h-6 w-6" />
+            </button>
+          </div>
 
-                  <button
-                    type="button"
-                    onClick={() => setLocale(locale === "en" ? "ar" : "en")}
-                    className="inline-flex h-10 items-center gap-1.5 rounded-lg border border-border px-3.5 text-xs font-semibold text-secondary hover:text-primary"
+          {/* Center Main: Links Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 py-10 items-center">
+            {/* Left Column: Massive Menu Links with + */}
+            <div className="lg:col-span-8 flex flex-col sk-video-drawer__nav">
+              {drawerLinks.map((link) => (
+                <button
+                  key={link.label}
+                  type="button"
+                  onClick={() => handleDrawerLinkClick(link.href)}
+                  className="w-full text-start group py-2"
+                >
+                  <span className="flex items-center justify-between">
+                    <span>{link.label}</span>
+                    <span className="drawer-plus">+</span>
+                  </span>
+                </button>
+              ))}
+            </div>
+
+            {/* Right Column: Contact Details, Hours & Socials */}
+            <div className="lg:col-span-4 border-t lg:border-t-0 lg:border-l border-white/15 lg:pl-10 space-y-8 font-mono text-sm">
+              <div className="space-y-2">
+                <span className="text-white/40 uppercase text-xs tracking-wider block">
+                  {isArabic ? "الموقع الجغرافي" : "Based In"}
+                </span>
+                <p className="text-white text-base font-sans font-medium">Dubai, United Arab Emirates</p>
+                <p className="text-white/60 text-xs">
+                  {isArabic ? "متاح للاستشارات التقنية وهندسة النظم" : "Available for Consulting & Tech Leadership"}
+                </p>
+              </div>
+
+              <div className="space-y-2">
+                <span className="text-white/40 uppercase text-xs tracking-wider block">
+                  {isArabic ? "البريد الإلكتروني المباشر" : "Direct Email"}
+                </span>
+                <a
+                  href="mailto:hello@sanukhan.dev"
+                  className="text-accent text-base font-semibold hover:underline block"
+                >
+                  hello@sanukhan.dev
+                </a>
+              </div>
+
+              <div className="space-y-3">
+                <span className="text-white/40 uppercase text-xs tracking-wider block">
+                  {isArabic ? "الشبكات المهنية" : "Networks"}
+                </span>
+                <div className="flex flex-col gap-2.5">
+                  <a
+                    href="https://www.linkedin.com/in/sanukhandev/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-white/80 hover:text-white transition-colors"
                   >
-                    <span>{locale === "en" ? "العربية" : "English"}</span>
-                  </button>
+                    <Linkedin className="h-4 w-4 text-accent" />
+                    <span>LinkedIn Profile</span>
+                    <ExternalLink className="h-3 w-3 opacity-50" />
+                  </a>
+                  <a
+                    href="https://github.com/sanukhandev"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-white/80 hover:text-white transition-colors"
+                  >
+                    <Github className="h-4 w-4 text-accent" />
+                    <span>GitHub Repositories</span>
+                    <ExternalLink className="h-3 w-3 opacity-50" />
+                  </a>
+                  <a
+                    href="https://dev.to/sanukhandev"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-white/80 hover:text-white transition-colors"
+                  >
+                    <Mail className="h-4 w-4 text-accent" />
+                    <span>DEV Community Articles</span>
+                    <ExternalLink className="h-3 w-3 opacity-50" />
+                  </a>
                 </div>
               </div>
 
-              {/* Social Channels */}
-              <div className="flex items-center gap-5 text-sm font-medium text-secondary">
-                <a
-                  href="https://www.linkedin.com/in/sanukhandev/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 hover:text-accent transition-colors"
+              {/* Theme & Language Controls inside Drawer */}
+              <div className="pt-4 border-t border-white/10 flex items-center gap-3">
+                <button
+                  type="button"
+                  onClick={toggleTheme}
+                  className="inline-flex items-center gap-2 px-3.5 py-2 rounded-sm border border-white/20 text-xs text-white/90 hover:bg-white/10"
                 >
-                  <Linkedin className="h-4 w-4 text-accent" />
-                  LinkedIn
-                </a>
-                <a
-                  href="https://github.com/sanukhandev"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 hover:text-accent transition-colors"
+                  {isLight ? <Moon className="h-3.5 w-3.5" /> : <Sun className="h-3.5 w-3.5" />}
+                  <span>{isLight ? (isArabic ? "الوضع الداكن" : "Dark Mode") : (isArabic ? "الوضع الفاتح" : "Light Mode")}</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setLocale(locale === "en" ? "ar" : "en")}
+                  className="px-3.5 py-2 rounded-sm border border-white/20 text-xs font-semibold text-white/90 hover:bg-white/10"
                 >
-                  <Github className="h-4 w-4 text-accent" />
-                  GitHub
-                </a>
-                <a
-                  href="mailto:hello@sanukhan.dev"
-                  className="inline-flex items-center gap-1.5 hover:text-accent transition-colors"
-                >
-                  <Mail className="h-4 w-4 text-accent" />
-                  Email
-                </a>
+                  {locale === "en" ? "العربية" : "English"}
+                </button>
               </div>
             </div>
           </div>
-        )}
-    </header>
+
+          {/* Bottom Copyright in Drawer */}
+          <div className="pt-6 border-t border-white/15 flex items-center justify-between text-xs text-white/40 font-mono">
+            <span>© {new Date().getFullYear()} Sanu Khan · All Architecture Reserved</span>
+            <span>Dubai, UAE</span>
+          </div>
+        </div>
+      )}
+    </>
   );
 }
 

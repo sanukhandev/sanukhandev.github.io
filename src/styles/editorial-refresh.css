@@ -5,13 +5,13 @@
  */
 
 :root {
-  --sk-ivory: #e6d5bd;
+  --sk-ivory: #ffffff;
   --sk-black: #101010;
   --sk-orange: #d5360c;
   --sk-orange-ink: #ad2a09;
   --sk-white: #fff;
   --sk-fg: var(--sk-black);
-  --sk-bg: var(--sk-ivory);
+  --sk-bg: #ffffff;
   --sk-fg-muted: rgba(16, 16, 16, 0.78);
   --sk-font-brand: var(--sk-display);
   --sk-display: "Montserrat", Arial, sans-serif;
@@ -21,14 +21,14 @@
   --sk-script: "Sloop Script", "Allura", cursive;
   --sk-gutter: clamp(1rem, 4.5vw, 4.75rem);
   --sk-max: 1440px;
-  --sk-line: rgba(16, 16, 16, 0.2);
-  --sk-dark-line: rgba(230, 213, 189, 0.22);
+  --sk-line: rgba(16, 16, 16, 0.15);
+  --sk-dark-line: rgba(255, 255, 255, 0.18);
 }
 
 html.dark {
-  --sk-fg: var(--sk-ivory);
+  --sk-fg: #ffffff;
   --sk-bg: var(--sk-black);
-  --sk-fg-muted: rgba(230, 213, 189, 0.82);
+  --sk-fg-muted: rgba(255, 255, 255, 0.82);
 }
 
 .sk-page {
@@ -68,17 +68,22 @@ html.dark {
 .sk-anchor { position: absolute; inset-block-start: -5rem; }
 
 /* Navigation */
-.sk-navbar { background: rgba(230, 213, 189, 0.94); border-color: var(--sk-line) !important; color: var(--sk-black); backdrop-filter: blur(12px); }
+.sk-navbar { background: rgba(255, 255, 255, 0.96); border-color: var(--sk-line) !important; color: var(--sk-black); backdrop-filter: blur(12px); }
+html.dark .sk-navbar { background: rgba(16, 16, 16, 0.96); color: #ffffff; }
 .sk-navbar .sk-shell { max-width: var(--sk-max); }
 .sk-navbar__brand { display: inline-flex; min-height: 44px; align-items: center; text-decoration: none; }
 .sk-navbar__brand:hover { opacity: 0.8; }
 .sk-navbar__brand .brand-identity__descriptor { display: none; }
 .sk-navbar nav a { color: var(--sk-black) !important; font-family: var(--sk-mono); font-size: 0.82rem; letter-spacing: 0.05em; text-transform: uppercase; font-weight: 500; }
+html.dark .sk-navbar nav a { color: #ffffff !important; }
 .sk-navbar nav a:hover, .sk-navbar nav a[aria-current="page"] { color: var(--sk-orange-ink) !important; }
+html.dark .sk-navbar nav a:hover, html.dark .sk-navbar nav a[aria-current="page"] { color: var(--sk-orange) !important; }
 .sk-navbar__cta { border-radius: 0 !important; background: var(--sk-orange) !important; color: var(--sk-white) !important; }
 .sk-navbar__cta span, .sk-navbar__cta svg { color: var(--sk-white) !important; }
-.sk-mobile-nav { background: var(--sk-ivory) !important; border-color: var(--sk-black) !important; }
+.sk-mobile-nav { background: #ffffff !important; border-color: var(--sk-line) !important; }
+html.dark .sk-mobile-nav { background: #101010 !important; color: #ffffff !important; }
 .sk-mobile-nav a { color: var(--sk-black) !important; }
+html.dark .sk-mobile-nav a { color: #ffffff !important; }
 
 /* Brand identity */
 .brand-identity { display: inline-flex; flex-direction: column; gap: 0.25rem; color: var(--sk-fg); line-height: 1; }
@@ -1325,6 +1330,418 @@ main:not(:has(#hero)) :is(article, section) > header {
     transform: none !important;
   }
 }
+
+/* ──────────────────────────────────────────────────────────
+   Video Reference System (.sk-video-*)
+   Exact composition, typography, color palette and motion from the reference video
+   ────────────────────────────────────────────────────────── */
+
+/* 1. Hero Stage */
+.sk-video-hero {
+  position: relative;
+  min-height: calc(100vh - 72px);
+  min-height: calc(100dvh - 72px);
+  background-color: #FFFFFF;
+  color: #101010;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--sk-line);
+}
+
+html.dark .sk-video-hero {
+  background-color: #101010;
+  color: #FFFFFF;
+  border-bottom-color: rgba(255, 255, 255, 0.15);
+}
+
+.sk-video-hero__grid-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, rgba(16, 16, 16, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(16, 16, 16, 0.05) 1px, transparent 1px);
+  background-size: 25% 33.333%;
+  z-index: 1;
+}
+
+html.dark .sk-video-hero__grid-overlay {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+}
+
+@media (max-width: 768px) {
+  .sk-video-hero__grid-overlay {
+    background-size: 50% 25%;
+  }
+}
+
+.sk-video-hero__crosshair {
+  position: absolute;
+  font-family: var(--sk-mono);
+  font-size: 14px;
+  color: rgba(16, 16, 16, 0.25);
+  transform: translate(-50%, -50%);
+  user-select: none;
+  pointer-events: none;
+  z-index: 2;
+}
+
+html.dark .sk-video-hero__crosshair {
+  color: rgba(255, 255, 255, 0.25);
+}
+
+.sk-video-hero__watermark {
+  position: absolute;
+  inset-inline: 0;
+  top: 15%;
+  font-family: var(--sk-display);
+  font-size: clamp(5.5rem, 16vw, 22rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  color: rgba(16, 16, 16, 0.035);
+  text-align: center;
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+  user-select: none;
+  pointer-events: none;
+  z-index: 2;
+  white-space: nowrap;
+}
+
+html.dark .sk-video-hero__watermark {
+  color: rgba(255, 255, 255, 0.04);
+}
+
+.sk-video-hero__cutout-wrap {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(92vw, 680px);
+  max-height: 86%;
+  z-index: 4;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  pointer-events: none;
+}
+
+.sk-video-hero__cutout {
+  max-height: calc(100dvh - 120px);
+  width: auto;
+  object-fit: contain;
+  object-position: bottom center;
+  filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.3));
+}
+
+.sk-video-hero__top-left {
+  position: relative;
+  z-index: 6;
+  max-width: 380px;
+  padding: clamp(1.5rem, 3vw, 3rem) clamp(1rem, 2.5vw, 2.5rem);
+}
+
+.sk-video-hero__bottom-left {
+  position: relative;
+  z-index: 6;
+  padding: clamp(1.5rem, 3vw, 3rem) clamp(1rem, 2.5vw, 2.5rem);
+}
+
+.sk-video-hero__headline {
+  font-family: var(--sk-display);
+  font-size: clamp(3.2rem, 8vw, 8.5rem);
+  font-weight: 800;
+  line-height: 0.88;
+  letter-spacing: -0.045em;
+  color: #FFFFFF;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.sk-video-hero__floating-card-top {
+  position: absolute;
+  top: clamp(2rem, 8vw, 5rem);
+  inset-inline-end: clamp(1rem, 4vw, 4rem);
+  width: clamp(180px, 20vw, 250px);
+  background: #FFFFFF;
+  color: #101010;
+  padding: 10px;
+  border-radius: 4px;
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.35);
+  z-index: 6;
+  transition: transform 240ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 240ms ease;
+}
+
+.sk-video-hero__floating-card-top:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 28px 50px -10px rgba(0, 0, 0, 0.45);
+}
+
+.sk-video-hero__floating-card-top img {
+  width: 100%;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  border-radius: 2px;
+}
+
+.sk-video-hero__floating-card-top .card-tag {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 8px;
+  font-family: var(--sk-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.05em;
+  color: #101010;
+}
+
+.sk-video-hero__floating-card-bottom {
+  position: absolute;
+  bottom: clamp(2rem, 6vw, 4rem);
+  inset-inline-end: clamp(1rem, 4vw, 4rem);
+  background: #101010;
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
+  z-index: 6;
+  text-decoration: none;
+  transition: transform 200ms ease, border-color 200ms ease, background-color 200ms ease;
+}
+
+.sk-video-hero__floating-card-bottom:hover {
+  transform: translateY(-3px);
+  border-color: #D5360C;
+  background: #181716;
+}
+
+/* 2. Fullscreen Drawer Navigation */
+.sk-video-drawer {
+  position: fixed;
+  inset: 0;
+  background: #101010;
+  color: #FFFFFF;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(1.5rem, 4vw, 4rem);
+  overflow-y: auto;
+  animation: skDrawerEnter 280ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes skDrawerEnter {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.sk-video-drawer__nav a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--sk-display);
+  font-size: clamp(2.4rem, 6vw, 5.5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  text-decoration: none;
+  letter-spacing: -0.04em;
+  padding-block: 0.35rem;
+  transition: color 180ms ease, transform 180ms ease;
+}
+
+.sk-video-drawer__nav a:hover {
+  color: #D5360C;
+  transform: translateX(8px);
+}
+
+:lang(ar) .sk-video-drawer__nav a:hover {
+  transform: translateX(-8px);
+}
+
+.sk-video-drawer__nav a .drawer-plus {
+  font-family: var(--sk-mono);
+  font-size: clamp(1.8rem, 3.5vw, 3.5rem);
+  color: #D5360C;
+  transition: transform 200ms ease;
+}
+
+.sk-video-drawer__nav a:hover .drawer-plus {
+  transform: rotate(90deg);
+}
+
+/* 3. Brand Marquee */
+.sk-video-marquee-wrap {
+  background: #FFFFFF;
+  color: #101010;
+  border-bottom: 1px solid var(--sk-line);
+  padding-block: 1rem;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+html.dark .sk-video-marquee-wrap {
+  background: #181716;
+  color: #E6D5BD;
+  border-bottom-color: rgba(230, 213, 189, 0.15);
+}
+
+.sk-video-marquee-track {
+  display: flex;
+  align-items: center;
+  gap: 3.5rem;
+  white-space: nowrap;
+  animation: skMarquee 28s linear infinite;
+}
+
+@keyframes skMarquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+:lang(ar) .sk-video-marquee-track {
+  animation: skMarqueeRtl 28s linear infinite;
+}
+
+@keyframes skMarqueeRtl {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(50%); }
+}
+
+/* 4. Interactive Service Accordion */
+.sk-video-service-row {
+  border-top: 1px solid var(--sk-line);
+  padding-block: clamp(1.2rem, 2.5vw, 2.2rem);
+  transition: background-color 200ms ease, padding-inline 200ms ease;
+}
+
+.sk-video-service-row:hover,
+.sk-video-service-row.is-active {
+  background: rgba(213, 54, 12, 0.04);
+}
+
+html.dark .sk-video-service-row:hover,
+html.dark .sk-video-service-row.is-active {
+  background: rgba(213, 54, 12, 0.08);
+}
+
+.sk-video-service-title {
+  font-family: var(--sk-display);
+  font-size: clamp(1.6rem, 3vw, 2.8rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  transition: color 180ms ease;
+}
+
+.sk-video-service-row:hover .sk-video-service-title,
+.sk-video-service-row.is-active .sk-video-service-title {
+  color: var(--sk-orange);
+}
+
+/* 5. Process Cards */
+.sk-video-process-card {
+  background: #101010;
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: clamp(1.5rem, 2.5vw, 2.5rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 260px;
+  transition: transform 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
+}
+
+.sk-video-process-card:hover {
+  transform: translateY(-4px);
+  border-color: #D5360C;
+  box-shadow: 0 16px 32px rgba(213, 54, 12, 0.18);
+}
+
+.sk-video-process-card .card-plus {
+  color: #D5360C;
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+/* 6. Pricing Toggle & Cards */
+.sk-video-pricing-card {
+  background: #101010;
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  padding: clamp(1.5rem, 3vw, 2.8rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 200ms ease, border-color 200ms ease;
+}
+
+.sk-video-pricing-card:hover {
+  transform: translateY(-3px);
+  border-color: #D5360C;
+}
+
+/* 7. Contact Split Section */
+.sk-video-contact-stage {
+  position: relative;
+  background-color: #101010;
+  color: #FFFFFF;
+  border-radius: 12px;
+  overflow: hidden;
+  padding: clamp(2rem, 5vw, 5rem);
+}
+
+.sk-video-contact-stage__bg {
+  position: absolute;
+  inset: 0;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  opacity: 0.65;
+  filter: blur(8px);
+  pointer-events: none;
+}
+
+.sk-video-contact-card {
+  background: rgba(16, 16, 16, 0.88);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.5);
+}
+
+/* 8. Footer Watermark */
+.sk-video-footer-watermark {
+  font-family: var(--sk-display);
+  font-size: clamp(3.5rem, 11vw, 13rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  color: currentColor;
+  opacity: 0.95;
+  line-height: 0.88;
+  margin: 0;
+  user-select: none;
+}
+
 
 
 

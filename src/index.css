@@ -5,19 +5,19 @@
 @layer base {
   
   :root {
-    /* Reference image color palette: #E6D5BD canvas, #E6D5BD cards, #E6D5BD sand. */
-    --bg: #E6D5BD;
-    --surface: #E6D5BD;
-    --surface-elevated: #E6D5BD;
+    /* Clean crisp white canvas palette, dark contrast text, and burnt orange accents */
+    --bg: #ffffff;
+    --surface: #ffffff;
+    --surface-elevated: #ffffff;
     --text: #101010;
     --text-secondary: #2a2723;
     --text-muted: #524d45;
-    --border: rgba(16, 16, 16, 0.2);
+    --border: rgba(16, 16, 16, 0.15);
 
-    /* Legacy variable names retained for compatibility; values use the coral palette. */
+    /* Primary brand accent */
     --primary-green: #AD2A09;
     --primary-green-hover: #D5360C;
-    --primary-soft: color-mix(in srgb,#D5360C 8%,#E6D5BD);
+    --primary-soft: color-mix(in srgb,#D5360C 8%,#ffffff);
     --strong-dark-green: #101010;
 
     /* Semantic Compatibility Aliases */
@@ -34,24 +34,24 @@
     --container: 1280px;
 
     /* HSL Mappings for Tailwind & Radix UI */
-    --background: 35 45% 82%;
+    --background: 0 0% 100%;
     --foreground: 0 0% 6%;
-    --card: 35 45% 82%;
+    --card: 0 0% 100%;
     --card-foreground: 0 0% 6%;
-    --popover: 35 45% 82%;
+    --popover: 0 0% 100%;
     --popover-foreground: 0 0% 6%;
     --primary: 0 0% 6%;
-    --primary-foreground: 35 45% 82%;
-    --secondary: 35 30% 74%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 96%;
     --secondary-foreground: 0 0% 6%;
-    --muted: 35 25% 76%;
-    --muted-foreground: 25 15% 28%;
+    --muted: 0 0% 95%;
+    --muted-foreground: 0 0% 38%;
     --accent-hsl: 13 89% 44%;
     --accent-foreground-hsl: 0 0% 100%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
-    --border-hsl: 34 16% 43%;
-    --input-hsl: 34 16% 43%;
+    --border-hsl: 0 0% 88%;
+    --input-hsl: 0 0% 88%;
     --ring: 12 90% 36%;
     --radius: 0.625rem;
 
@@ -61,23 +61,22 @@
     --site-surface: var(--surface);
     --site-border-strong: var(--border);
 
-    --surface-2-bg: color-mix(in srgb,#101010 4%,#E6D5BD);
+    --surface-2-bg: #f9f9f9;
     --surface-anchor-bg: #101010;
   }
 
   html.dark {
-    /* Dark alternative: same warm reference palette, high-contrast readability. */
+    /* Dark theme: deep blacks, pure white text, high contrast readability. */
     --bg: #101010;
     --surface: #181716;
     --surface-elevated: #211f1d;
-    --text: #E6D5BD;
-    --text-secondary: rgba(230, 213, 189, 0.85);
-    --text-muted: rgba(230, 213, 189, 0.68);
-    --border: rgba(230, 213, 189, 0.22);
+    --text: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.85);
+    --text-muted: rgba(255, 255, 255, 0.65);
+    --border: rgba(255, 255, 255, 0.18);
 
-    /* Legacy variable names retained; warm-peach dark-mode accent. */
-    --primary-green: #E6D5BD;
-    --primary-green-hover: #E6D5BD;
+    --primary-green: #ffffff;
+    --primary-green-hover: #ffffff;
     --primary-soft: color-mix(in srgb,#D5360C 18%,#101010);
     --strong-dark-green: #101010;
 
@@ -91,21 +90,21 @@
 
     /* HSL Mappings for Tailwind & Radix UI */
     --background: 0 0% 6%;
-    --foreground: 35 45% 82%;
+    --foreground: 0 0% 100%;
     --card: 0 0% 9%;
-    --card-foreground: 35 45% 82%;
+    --card-foreground: 0 0% 100%;
     --popover: 0 0% 9%;
-    --popover-foreground: 35 45% 82%;
-    --primary: 35 45% 82%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 0 0% 100%;
     --primary-foreground: 0 0% 6%;
     --secondary: 0 0% 14%;
-    --secondary-foreground: 35 45% 82%;
+    --secondary-foreground: 0 0% 100%;
     --muted: 0 0% 14%;
-    --muted-foreground: 35 35% 75%;
+    --muted-foreground: 0 0% 70%;
     --accent-hsl: 13 89% 44%;
     --accent-foreground-hsl: 0 0% 100%;
-    --border-hsl: 35 15% 30%;
-    --input-hsl: 35 15% 30%;
+    --border-hsl: 0 0% 20%;
+    --input-hsl: 0 0% 20%;
     --ring: 13 89% 44%;
 
     --site-bg: var(--bg);
