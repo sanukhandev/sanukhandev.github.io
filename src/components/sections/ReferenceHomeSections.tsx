@@ -36,7 +36,7 @@ export function ReferenceHero() {
         decoding="async"
         fetchPriority="high"
         loading="eager"
-        src="/assets/images/sanu-khan-cinematic-monochrome-transparent.webp"
+        src="/assets/images/hero_avatar.png"
       />
       <div className="hero-proj">
         <img alt="Architecture concept" decoding="async" loading="lazy" src="/assets/architecture.jpg" />
