@@ -7,6 +7,7 @@ import { getLocalizedPageSeo } from "@/lib/seo";
 import { buildFaqSchema, buildHomepageSchemas } from "@/lib/schema";
 import { searchFocusedFaqs } from "@/data/faqData";
 import Footer from "@/components/sections/Footer";
+import { EditorialExpertise } from "@/components/sections/EditorialExpertise";
 import {
   ReferenceHero,
   ReferenceProof,
@@ -57,6 +58,7 @@ const Index = () => {
         <ReferenceHero />
         <ReferenceProof />
         <SectionReveal><ReferenceServices /></SectionReveal>
+        <SectionReveal><EditorialExpertise /></SectionReveal>
         <SectionReveal><ReferenceProjects /></SectionReveal>
         <SectionReveal><ReferenceWriting /></SectionReveal>
         <SectionReveal><ReferenceZaakiy /></SectionReveal>

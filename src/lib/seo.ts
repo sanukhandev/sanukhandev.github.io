@@ -117,9 +117,9 @@ export const buildSeoMetadata = (input: BuildSeoInput): SeoMetadata => {
 
 export const pageSeo = {
   home: {
-    title: "Sanu Khan — Solution Architect, Tech Lead & Software Engineer in Dubai, UAE",
+    title: "Sanu Khan — Tech Lead, Full-Stack Developer & Solution Architect in Dubai",
     description:
-      "Sanu Khan is a Solution Architect, Tech Lead, and Senior Software Engineer in Dubai, UAE with 13+ years designing enterprise integrations (SAP, Kafka, Azure), distributed platforms, and AI systems.",
+      "Sanu Khan is a Dubai-based Tech Lead and solution architect with 13+ years in full-stack development, system design, API integrations, automation and tech consulting.",
     canonicalPath: "/",
     keywords: [
       "Sanu Khan",
@@ -137,6 +137,12 @@ export const pageSeo = {
       "React Developer Dubai",
       "Event-Driven Architecture Kafka Azure",
       "ZaakiyV3RSE",
+      "Full-Stack Developer Dubai",
+      "System Design Expert UAE",
+      "Integration Expert Dubai",
+      "Process Automation Expert",
+      "Technology Business Consultant UAE",
+      "Technical Writer and Content Strategist",
     ],
   },
   blogIndex: {
@@ -234,9 +240,9 @@ export const pageSeo = {
 
 export const pageSeoAr = {
   home: {
-    title: "Sanu Khan | سانو خان — معماري حلول، خبير تقني وقائد هندسي في دبي، الإمارات",
+    title: "سانو خان | قائد تقني وخبير حلول وتطوير متكامل في دبي",
     description:
-      "سانو خان خبير تقني ومعماري حلول وقائد هندسي في دبي، الإمارات بخبرة +13 عاماً في تصميم وبناء منصات إنتاجية للتجارة الرقمية وتقنيات السفر وتكامل الأنظمة المؤسسية والهندسة السحابية.",
+      "سانو خان خبير تقني وقائد هندسي في دبي بخبرة تزيد عن 13 عاماً في التطوير المتكامل وتصميم الأنظمة وعمارة الحلول والتكاملات وأتمتة العمليات والاستشارات التقنية.",
     canonicalPath: "/",
     keywords: [
       "سانو خان",
@@ -251,6 +257,12 @@ export const pageSeoAr = {
       "تقنيات السفر",
       "خبير سحابي الإمارات",
       "قائد تقني دبي",
+      "تطوير متكامل دبي",
+      "تصميم الأنظمة",
+      "خبير تكامل الأنظمة",
+      "أتمتة العمليات",
+      "استشارات تقنية وتجارية",
+      "كاتب تقني واستراتيجي محتوى",
     ],
   },
   blogIndex: {

@@ -14,6 +14,7 @@ import "@fontsource/ibm-plex-sans-arabic/arabic-700.css";
 import App from "./App.tsx";
 import "./index.css";
 import "./styles/editorial-refresh.css";
+import "./styles/collage-upgrade.css";
 
 createRoot(document.getElementById("root")!).render(
 	<HelmetProvider>
