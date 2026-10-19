@@ -6,7 +6,8 @@ describe("Bilingual editorial expertise", () => {
     expect(expertiseAreas).toHaveLength(7);
     expect(new Set(expertiseAreas.map((item) => item.id)).size).toBe(7);
     for (const item of expertiseAreas) {
-      expect(item.href).toMatch(/^\/[a-z\/-]+$/);
+      expect(item.href.startsWith("/")).toBe(true);
+      expect(item.href.slice(1)).toMatch(/^[a-z-]+$/);
       expect(item.number).toMatch(/^0[1-7]$/);
     }
   });
