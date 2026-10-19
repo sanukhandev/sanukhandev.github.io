@@ -36,7 +36,7 @@ const Index = () => {
   );
 
   return (
-    <div className="sk-page relative min-h-screen">
+    <div className="editorial-content min-h-screen">
       {/* Accessible Skip to Content Link (WCAG 2.2 AA) */}
       <a
         href="#main-content"

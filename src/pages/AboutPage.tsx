@@ -1,111 +1,119 @@
-import { Link } from "react-router-dom";
+import { memo, type FormEvent } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/sections/Footer";
 import SeoMeta from "@/components/SeoMeta";
 import { buildBreadcrumbListSchema, buildProfilePageSchema } from "@/lib/schema";
 import { useLocale } from "@/hooks/use-locale";
 import { getLocalizedPageSeo } from "@/lib/seo";
-import { ArrowRight, Award, ChevronDown, Download, Sparkles, Terminal } from "lucide-react";
-import { searchFocusedFaqs } from "@/data/faqData";
 
-export default function AboutPage() {
+export function AboutPage() {
   const { locale } = useLocale();
-  const isArabic = locale === "ar";
+  const ar = locale === "ar";
   const seo = getLocalizedPageSeo("about", locale);
-
-  const careerMilestones = isArabic
-    ? [
-        {
-          era: "2010 – 2016",
-          title: "هندسة الشبكات والأنظمة",
-          detail: "إدارة البنية التحتية الفيزيائية وخوادم Linux والتوجيه وموثوقية الشبكة. بناء رؤية من الخارج إلى الداخل لموثوقية البرمجيات."
-        },
-        {
-          era: "2016 – 2020",
-          title: "هندسة التطبيقات والبحث والتطوير",
-          detail: "تطوير تطبيقات الويب الكاملة وأدوات الوسائط اللحظية وتطبيقات Android وحلول أتمتة المؤسسات الداخلية."
-        },
-        {
-          era: "2021",
-          title: "تقنيات السفر ومنصات التجميع",
-          detail: "بناء محولات تكامل NDC لشركات الطيران وسير عمل الحجز ومحركات توزيع السفر B2B تحت قيود التوافر العالي."
-        },
-        {
-          era: "2022 – حتى الآن",
-          title: "عمارة الحلول والقيادة التقنية",
-          detail: "تصميم تكاملات المؤسسات عبر SAP ERP و PIM ومتاجر التجارة ومنظومات OMS على المنصات السحابية."
-        }
-      ]
-    : [
-        {
-          era: "2010 – 2016",
-          title: "Network & Systems Engineering",
-          detail: "Managed physical infrastructure, Linux servers, routing, and network reliability. Built an outside-in view of software reliability."
-        },
-        {
-          era: "2016 – 2020",
-          title: "Application & R&D Engineering",
-          detail: "Developed full-stack web applications, real-time media tools, Android apps, and internal enterprise automation solutions."
-        },
-        {
-          era: "2021",
-          title: "Travel Tech & Aggregation Platforms",
-          detail: "Built airline NDC integration adapters, booking sagas, and B2B travel distribution engines with high-availability constraints."
-        },
-        {
-          era: "2022 – Present",
-          title: "Solution Architecture & Technical Leadership",
-          detail: "Architecting enterprise integrations across SAP ERP, PIM, commerce storefronts, and OMS ecosystems on cloud platforms."
-        }
-      ];
 
   const achievements = [
     {
-      title: isArabic ? "قيادة تكاملات التجارة متعددة القنوات" : "Enterprise Omnichannel Architect",
-      subtitle: isArabic ? "إنجاز معمارية" : "Architecture Milestone",
-      year: "2023 - 2024",
-      icon: <Award className="h-6 w-6 text-accent" />,
-      desc: isArabic
-        ? "تصميم مسارات المزامنة اللحظية للأسعار والكتالوج عبر علامات عالمية في 9 أسواق."
-        : "Engineered real-time price & catalog sync pipelines across 9 global regional markets.",
+      symbol: "⌘",
+      title: ar ? "تكامل أنظمة تجارة التجزئة المؤسسية" : "ENTERPRISE RETAIL INTEGRATION",
+      desc: ar
+        ? "مزامنة البيانات بين أنظمة متعددة وتنسيق عمليات التجارة عبر الأسواق الإقليمية."
+        : "Multi-system data synchronization and commerce orchestration across regional markets.",
     },
     {
-      title: isArabic ? "مؤسس منصة ZaakiyV3RSE" : "Creator of ZaakiyV3RSE",
-      subtitle: isArabic ? "بحث مميز" : "Signature Research",
-      year: "2024 - 2026",
-      icon: <Sparkles className="h-6 w-6 text-accent" />,
-      desc: isArabic
-        ? "تصميم وتطوير منصة وكلاء الذكاء التشغيلي التي تجمع بين الحسابات الحتمية وRAG المؤسسي."
-        : "Architected multi-tenant operational intelligence platform combining deterministic reasoning and enterprise RAG.",
+      symbol: "◎",
+      title: ar ? "منصات متعددة المستأجرين" : "MULTI-TENANT PLATFORM SYSTEMS",
+      desc: ar
+        ? "بنية سحابية أصلية تركز على عزل البيانات وسهولة النشر والاستقلالية التشغيلية."
+        : "Cloud-native architecture emphasizing isolation and deployability.",
     },
     {
-      title: isArabic ? "محرك تجميع وتوزيع رحلات الطيران" : "Airline NDC Retailing Engine",
-      subtitle: isArabic ? "هندسة النظم الموزعة" : "Distributed Systems",
-      year: "2021 - 2022",
-      icon: <Terminal className="h-6 w-6 text-accent" />,
-      desc: isArabic
-        ? "بناء محولات تكامل NDC لشركات الطيران مع التسامح التام مع تأخيرات استجابة الموردين."
-        : "High-throughput NDC travel aggregation adapters with sub-second resilience under peak loads.",
+      symbol: "↗",
+      title: ar ? "توزيع حجوزات ومحتوى الطيران B2B" : "AIRLINE B2B CONTENT & BOOKING",
+      desc: ar
+        ? "تكامل معايير NDC وبناء قنوات توزيع سفر عالية التوسع والتوافر."
+        : "NDC-led integration and scalable travel distribution pipelines.",
     },
     {
-      title: isArabic ? "الريادة السحابية والشهادات المهنية" : "Cloud Native & Microservices Mastery",
-      subtitle: isArabic ? "اعتماد تقني" : "Cloud Leadership",
-      year: "2020 - Present",
-      icon: <Award className="h-6 w-6 text-accent" />,
-      desc: isArabic
-        ? "تنفيذ معمارية السحابة على Azure وAWS وKubernetes لخدمة ملايين المستخدمين والعمليات."
-        : "Cloud-native architectures delivered on Azure, AWS & Kubernetes for millions of enterprise operations.",
+      symbol: "✳",
+      title: ar ? "مبادرة ZAAKIYV3RSE" : "ZAAKIYV3RSE INITIATIVE",
+      desc: ar
+        ? "الذكاء التشغيلي والأتمتة المتقدمة وتطوير أدوات هندسية مبتكرة."
+        : "Operational intelligence, automation and product experimentation.",
     },
   ];
 
+  const milestones = [
+    {
+      era: "2022 — PRESENT",
+      title: ar ? "قائد تقني وخبير حلول" : "TECH LEAD & SOLUTION EXPERT",
+      desc: ar
+        ? "عمارة تجارة المؤسسات، وتدفق الأحداث، والتكاملات السحابية، والقيادة الهندسية للفرق."
+        : "Enterprise commerce architecture, event streaming, integrations and technical leadership.",
+    },
+    {
+      era: "2021 — 2022",
+      title: ar ? "مهندس منصات وتطوير شامل" : "FULL STACK & PLATFORM ENGINEER",
+      desc: ar
+        ? "أنظمة ERP، وتجارب أسواق شركات الطيران، والأنظمة الخلفية عالية التحمل."
+        : "ERP systems, airline marketplace experiences and resilient backends.",
+    },
+    {
+      era: "2016 — 2020",
+      title: ar ? "مهندس بحث وتطوير R&D" : "R&D ENGINEER",
+      desc: ar
+        ? "أدوات التعاون بالفيديو، وسير عمل المؤسسات، والتطبيقات الحديثة، والأتمتة."
+        : "Video collaboration, enterprise workflows, applications and automation.",
+    },
+    {
+      era: "2010 — PRESENT",
+      title: ar ? "مستشار حلول مستقل" : "INDEPENDENT SOLUTION CONSULTANT",
+      desc: ar
+        ? "استشارات البرمجيات كخدمة SaaS، وأدوات الذكاء الاصطناعي، وتصميم المنصات، والاستشارات التقنية الشاملة."
+        : "SaaS, AI tooling, platform design and full-stack technology consulting.",
+    },
+  ];
+
+  const visions = [
+    {
+      title: ar ? "الأنظمة قبل الشاشات" : "SYSTEMS BEFORE SCREENS",
+      desc: ar
+        ? "فهم سير عمل الأعمال الشامل قبل الانشغال بتحسين الواجهات السطحية."
+        : "Understand the end-to-end business workflow before optimizing an interface.",
+    },
+    {
+      title: ar ? "المتانة من البداية" : "RESILIENCE BY DESIGN",
+      desc: ar
+        ? "التصميم تحسباً للأعطال، مع وضوح ملكية البيانات، والمراقبة المستمرة، وسهولة الصيانة."
+        : "Design for failure, data ownership, monitoring and maintainability.",
+    },
+    {
+      title: ar ? "الأشخاص يصنعون نجاح التقنية" : "PEOPLE MAKE TECHNOLOGY WORK",
+      desc: ar
+        ? "القيادة بالوضوح، وشرح المفاضلات الهندسية، وتمكين فرق العمل من التسليم بثقة."
+        : "Lead with clarity, communicate trade-offs and enable delivery teams.",
+    },
+  ];
+
+  const handleContactSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    const name = formData.get("name") as string;
+    const email = formData.get("email") as string;
+    const message = formData.get("message") as string;
+    const subject = encodeURIComponent(`About Page Enquiry from ${name}`);
+    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nProject details:\n${message}`);
+    window.location.href = `mailto:hello@sanukhan.dev?subject=${subject}&body=${body}`;
+  };
+
   return (
-    <>
+    <div className="editorial-content min-h-screen">
       <SeoMeta
         title={seo.title}
         description={seo.description}
         canonicalPath={seo.canonicalPath}
-        kind="profile"
         keywords={seo.keywords}
+        kind="profile"
         schema={[
           buildProfilePageSchema({
             name: seo.title,
@@ -113,217 +121,334 @@ export default function AboutPage() {
             path: "/about",
           }),
           buildBreadcrumbListSchema([
-            { name: isArabic ? "الرئيسية" : "Home", path: "/" },
-            { name: isArabic ? "نبذة عني" : "About", path: "/about" }
+            { name: ar ? "الرئيسية" : "Home", path: "/" },
+            { name: ar ? "نبذة عني" : "About", path: "/about" },
           ]),
         ]}
       />
 
       <Navbar />
 
-      <main className="min-h-screen bg-background text-foreground pt-20">
-        {/* Top Video-Matching Hero Banner */}
-        <section className="border-b border-border/80 py-16 sm:py-24 bg-background">
-          <div className="sk-shell space-y-4">
-            <div className="flex items-center justify-between font-mono text-xs text-muted-foreground uppercase">
-              <span>Sanu Khan ®</span>
-              <span>©2026 [Scroll to Explore]</span>
+      <main id="main-content">
+        <header className="intro shell">
+          <div className="eyebrow">SANU KHAN ®</div>
+          <div className="overline">
+            <h1>
+              {ar ? "نبذة " : "ABOUT "}
+              <span style={{ color: "#f04913" }}>{ar ? "عني." : "ME."}</span>
+            </h1>
+            <div className="crumb">
+              ©2026 [{ar ? "مرر للاستكشاف" : "Scroll to explore"}]
+              <br />
+              {ar ? "نبذة / المسيرة" : "ABOUT / STORY"}
             </div>
-            <div className="space-y-2">
-              <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold uppercase tracking-tight text-primary">
-                {isArabic ? "نبذة عن سانو خان" : "ABOUT SANU KHAN"}
-              </h1>
-              <p className="sk-script-note text-2xl sm:text-3xl text-accent block font-normal tracking-normal lowercase">
-                {isArabic ? "حيث تلتقي العمارة الهندسية بدقة التنفيذ" : "where architecture meets execution."}
+          </div>
+        </header>
+
+        <div className="photo-strip">
+          <img alt="Architecture systems" decoding="async" loading="lazy" src="/assets/architecture.jpg" />
+          <img alt="AI workflow automation" decoding="async" loading="lazy" src="/assets/ai.jpg" />
+          <img alt="Commerce orchestration" decoding="async" loading="lazy" src="/assets/commerce.jpg" />
+          <img alt="Enterprise system integration" decoding="async" loading="lazy" src="/assets/integration.jpg" />
+        </div>
+
+        <section className="section shell">
+          <div className="two">
+            <div>
+              <div className="labelrow">
+                <span className="spark">✳</span>
+                <span className="eyebrow">{ar ? "نبذة عن سانو" : "ABOUT SANU"}</span>
+              </div>
+              <h2 className="section-heading">
+                {ar ? (
+                  <>
+                    أؤمن بأن
+                    <br />
+                    الهندسة المعمارية
+                    <br />
+                    تصنع <span className="muted">الوضوح.</span>
+                  </>
+                ) : (
+                  <>
+                    I BELIEVE
+                    <br />
+                    ARCHITECTURE
+                    <br />
+                    CREATES <span className="muted">CLARITY.</span>
+                  </>
+                )}
+              </h2>
+            </div>
+            <div>
+              <p className="lead">
+                {ar
+                  ? "أنا سانو خان — قائد تقني، وخبير حلول معمارية، ومطور لمنصات الإنتاج، مقيم في دبي. يمتد نطاق عملي عبر تكاملات المؤسسات، والعمارة السحابية، والتطوير المتكامل، والأتمتة الذكية."
+                  : "I’m Sanu Khan — a tech lead, solutions expert and builder of production platforms, based in Dubai. My work spans enterprise integrations, cloud architecture, full-stack engineering and intelligent automation."}
+              </p>
+              <div className="three" style={{ marginTop: "55px", gap: "5px" }}>
+                <div className="stat">
+                  <strong>13+</strong>
+                  <small>{ar ? "سنوات خبرة" : "Years"}</small>
+                </div>
+                <div className="stat">
+                  <strong>100+</strong>
+                  <small>{ar ? "حلول منجزة" : "Solutions"}</small>
+                </div>
+                <div className="stat">
+                  <strong>9</strong>
+                  <small>{ar ? "أسواق إقليمية" : "Markets"}</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="section dark-zone">
+          <div className="shell">
+            <div className="labelrow">
+              <span className="spark">✳</span>
+              <span className="eyebrow">{ar ? "العمارة / الإنجازات" : "ARCHITECTURE / ACHIEVEMENTS"}</span>
+            </div>
+            <div className="splithead">
+              <h2 className="section-heading">
+                {ar ? (
+                  <>
+                    ما ساهمت
+                    <br />
+                    في <span className="light-orange">إنجازه.</span>
+                  </>
+                ) : (
+                  <>
+                    WHAT I’VE
+                    <br />
+                    HELPED <span className="light-orange">DELIVER.</span>
+                  </>
+                )}
+              </h2>
+              <p className="lead right" style={{ color: "#aaa" }}>
+                {ar
+                  ? "منصات واقعية. قيود عملية. نتائج تشغيلية حقيقية."
+                  : "Real platforms. Real constraints. Real operational outcomes."}
               </p>
             </div>
-          </div>
-        </section>
-
-        {/* Horizontal Photo Reel (Video frame 00:41) */}
-        <section className="py-6 border-b border-border/80 overflow-hidden bg-secondary/15">
-          <div className="sk-shell">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <div className="aspect-3/4 overflow-hidden border border-border bg-secondary/20">
-                <img
-                  src="/assets/images/sanu-khan-editorial-monochrome.webp"
-                  alt={isArabic ? "صورة سانو خان السينمائية بالأبيض والأسود" : "Sanu Khan Editorial Monochrome Portrait"}
-                  className="w-full h-full object-cover filter contrast-110 hover:scale-105 transition-transform duration-500"
-                />
-              </div>
-              <div className="aspect-3/4 overflow-hidden border border-border">
-                <img
-                  src="/media/architecture-capabilities.avif"
-                  alt="Architecture Design"
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                />
-              </div>
-              <div className="aspect-3/4 overflow-hidden border border-border">
-                <img
-                  src="/assets/images/sanu-workstation.webp"
-                  alt="Engineering Workstation"
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                />
-              </div>
-              <div className="aspect-3/4 overflow-hidden border border-border">
-                <img
-                  src="/media/zaakiy-intelligence.avif"
-                  alt="AI Intelligence Systems"
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                />
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Belief Statement (Video frame 00:42) */}
-        <section className="py-16 sm:py-24 border-b border-border/80">
-          <div className="sk-shell space-y-10 max-w-4xl">
-            <span className="font-mono text-xs uppercase tracking-widest text-accent font-semibold block">
-              {isArabic ? "[ الرؤية والمنهجية ]" : "[ CORE BELIEF ]"}
-            </span>
-            <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tight text-primary leading-tight">
-              {isArabic
-                ? "عمارة برمجية تربط الرؤية الاستراتيجية بالواقع التشغيلي الموثوق."
-                : "ARCHITECTURE THAT BRIDGES BUSINESS VISION AND OPERATIONAL REALITY."}
-            </h2>
-            <p className="text-base sm:text-lg text-secondary leading-relaxed">
-              {isArabic
-                ? "كل منصة مصممة للقضاء على نقاط الفشل المنفردة، ورفع الجاهزية إلى 99.99%، وتقديم أداء سريع الاستجابة يدعم العمليات التجارية الكبرى دون انقطاع."
-                : "Every system is architected to eliminate failure cascades, maximize uptime, and deliver clean, scalable throughput that powers high-volume business operations."}
-            </p>
-
-            <div className="grid grid-cols-3 gap-6 pt-6 border-t border-border">
-              <div>
-                <span className="text-3xl sm:text-4xl font-extrabold font-display text-accent block">
-                  100+
-                </span>
-                <span className="font-mono text-xs uppercase text-muted-foreground mt-1 block">
-                  {isArabic ? "أنظمة تم تسليمها" : "Successful Systems"}
-                </span>
-              </div>
-              <div>
-                <span className="text-3xl sm:text-4xl font-extrabold font-display text-primary block">
-                  13+
-                </span>
-                <span className="font-mono text-xs uppercase text-muted-foreground mt-1 block">
-                  {isArabic ? "سنوات خبرة" : "Years Experience"}
-                </span>
-              </div>
-              <div>
-                <span className="text-3xl sm:text-4xl font-extrabold font-display text-primary block">
-                  9
-                </span>
-                <span className="font-mono text-xs uppercase text-muted-foreground mt-1 block">
-                  {isArabic ? "أسواق عالمية" : "Global Markets"}
-                </span>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Achievements Section (Video frame 00:44 - 00:48) */}
-        <section className="py-20 sm:py-28 bg-[#101010] text-white">
-          <div className="sk-shell space-y-14">
-            <div className="space-y-3">
-              <span className="font-mono text-xs uppercase tracking-widest text-[#D5360C] font-semibold block">
-                {isArabic ? "[ الإنجازات والاعتمادات ]" : "[ HONORS & ACHIEVEMENTS ]"}
-              </span>
-              <h2 className="text-3xl sm:text-5xl font-extrabold uppercase tracking-tight text-white">
-                SANU <span className="text-[#D5360C]">®</span> ACHIEVEMENTS
-              </h2>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {achievements.map((item) => (
-                <div
-                  key={item.title}
-                  className="border border-white/15 bg-white/5 p-8 flex flex-col justify-between space-y-6 hover:border-[#D5360C] transition-colors"
-                >
-                  <div className="flex items-center justify-between">
-                    <div>{item.icon}</div>
-                    <span className="font-mono text-xs text-white/50">{item.year}</span>
-                  </div>
-                  <div className="space-y-2">
-                    <span className="font-mono text-xs uppercase text-[#D5360C] block font-semibold">
-                      {item.subtitle}
-                    </span>
-                    <h3 className="text-xl font-bold uppercase tracking-tight text-white">
-                      {item.title}
-                    </h3>
-                    <p className="text-xs text-white/70 leading-relaxed pt-2">
-                      {item.desc}
-                    </p>
-                  </div>
+            <div className="two" style={{ marginTop: "53px" }}>
+              {achievements.map((ach) => (
+                <div key={ach.title} className="achievement">
+                  <div className="symbol">{ach.symbol}</div>
+                  <h4>{ach.title}</h4>
+                  <p>{ach.desc}</p>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Career Progression Timeline */}
-        <section className="py-20 sm:py-28 border-b border-border/80">
-          <div className="sk-shell space-y-12 max-w-4xl">
-            <div className="space-y-2">
-              <span className="font-mono text-xs uppercase tracking-widest text-accent font-semibold block">
-                {isArabic ? "[ المسيرة المهنية ]" : "[ CAREER PROGRESSION ]"}
-              </span>
-              <h2 className="text-3xl sm:text-4xl font-extrabold uppercase tracking-tight text-primary">
-                {isArabic ? "التطور المهني المستمر" : "PURPOSE-DRIVEN EXPERIENCES"}
+        <section className="section shell">
+          <div className="labelrow">
+            <span className="spark">✳</span>
+            <span className="eyebrow">{ar ? "التطور المهني" : "CAREER PROGRESSION"}</span>
+          </div>
+          <h2 className="section-heading">
+            {ar ? (
+              <>
+                خبرات هادفة
+                <br />
+                في <span className="muted">الهندسة التقنية.</span>
+              </>
+            ) : (
+              <>
+                PURPOSE-DRIVEN
+                <br />
+                <span className="muted">ENGINEERING EXPERIENCE.</span>
+              </>
+            )}
+          </h2>
+          <div className="two" style={{ marginTop: "45px" }}>
+            <img
+              alt="Enterprise engineering"
+              decoding="async"
+              loading="lazy"
+              src="/assets/enterprise.jpg"
+              style={{ height: "340px", width: "100%", objectFit: "cover" }}
+            />
+            <img
+              alt="Backend systems"
+              decoding="async"
+              loading="lazy"
+              src="/assets/backend.jpg"
+              style={{ height: "340px", width: "100%", objectFit: "cover" }}
+            />
+          </div>
+          <div style={{ marginTop: "60px" }}>
+            {milestones.map((m) => (
+              <div key={m.era} className="experience-item">
+                <span className="eyebrow orange">{m.era}</span>
+                <h3>{m.title}</h3>
+                <p>{m.desc}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="section shell">
+          <div className="labelrow">
+            <span className="spark">✳</span>
+            <span className="eyebrow">{ar ? "القيم والمبادئ" : "VALUES"}</span>
+          </div>
+          <h2 className="section-heading">
+            {ar ? (
+              <>
+                كيف أفكر
+                <br />
+                في <span className="muted">الأنظمة.</span>
+              </>
+            ) : (
+              <>
+                HOW I THINK
+                <br />
+                <span className="muted">ABOUT SYSTEMS.</span>
+              </>
+            )}
+          </h2>
+          <div className="three" style={{ marginTop: "40px" }}>
+            {visions.map((v) => (
+              <div key={v.title} className="vision">
+                <h3>{v.title}</h3>
+                <p>{v.desc}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="section shell">
+          <div className="qa">
+            <div>
+              <div className="labelrow">
+                <span className="spark">✳</span>
+                <span className="eyebrow">FAQ</span>
+              </div>
+              <h2 className="section-heading">
+                {ar ? (
+                  <>
+                    الأسئلة
+                    <br />
+                    الشائعة
+                  </>
+                ) : (
+                  <>
+                    FREQUENT
+                    <br />
+                    QUESTIONS
+                  </>
+                )}
               </h2>
             </div>
-
-            <div className="space-y-6 divide-y divide-border">
-              {careerMilestones.map((m) => (
-                <div key={m.title} className="pt-6 first:pt-0 flex flex-col sm:flex-row sm:items-start gap-4 sm:gap-8">
-                  <span className="text-xs font-mono font-bold text-accent shrink-0 sm:w-32">
-                    {m.era}
-                  </span>
-                  <div className="space-y-1">
-                    <h3 className="text-lg font-bold text-primary">{m.title}</h3>
-                    <p className="text-sm text-secondary leading-relaxed">{m.detail}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className="pt-6">
-              <a
-                href="/Sanu%20Khan%20-%20Resume.pdf"
-                download
-                className="inline-flex items-center gap-2 border border-border px-5 py-2.5 text-xs font-mono uppercase font-semibold text-primary hover:border-accent hover:text-accent transition-colors"
-              >
-                <Download className="h-4 w-4" />
-                <span>{isArabic ? "تحميل السيرة الذاتية (PDF)" : "Download Full Résumé (PDF)"}</span>
-              </a>
+            <div>
+              <details className="faqrow faq-details">
+                <summary>01. {ar ? "ما الذي يمكنك مساعدة فريقنا في تسليمه؟" : "What can you help our team deliver?"}</summary>
+                <p>
+                  {ar
+                    ? "أعمل مع الفرق على عمارة الحلول، المنصات المتكاملة، تكاملات المؤسسات، الأتمتة بالذكاء الاصطناعي، والقيادة التقنية."
+                    : "I work with teams on solution architecture, full-stack platforms, enterprise integrations, AI-assisted automation, and technical leadership."}
+                </p>
+              </details>
+              <details className="faqrow faq-details">
+                <summary>02. {ar ? "هل تتعاون مع فرق المنتجات الحالية؟" : "Do you collaborate with existing product teams?"}</summary>
+                <p>
+                  {ar
+                    ? "نعم. أتكامل مع فرق المنتج والهندسة والأعمال الحالية، موائماً القرارات مع نتائج التسليم والقيود التشغيلية."
+                    : "Yes. I integrate with existing product, engineering and business teams, aligning decisions with delivery outcomes and operational constraints."}
+                </p>
+              </details>
+              <details className="faqrow faq-details">
+                <summary>03. {ar ? "ما هي الأنظمة والمنصات التي تعمل معها؟" : "Which systems and platforms do you work with?"}</summary>
+                <p>
+                  {ar
+                    ? "توثق محفظتي العمل مع Azure و AWS و Kafka و Node.js و React و Java و SAP و PIM وتكاملات API و Kubernetes."
+                    : "The repository documents work with Azure, AWS, Kafka, Node.js, React, Java, SAP, PIM, API integration and Kubernetes."}
+                </p>
+              </details>
+              <details className="faqrow faq-details">
+                <summary>04. {ar ? "هل يمكنك المساعدة في تحديث منصة قائمة؟" : "Can you help modernize an existing platform?"}</summary>
+                <p>
+                  {ar
+                    ? "نعم. يمكنني تقييم التبعيات القديمة واقتراح تحديث تدريجي مدعوم بمراحل انتقال خاضعة للمراقبة."
+                    : "Yes. I can assess legacy dependencies and recommend incremental modernization backed by observable migration milestones."}
+                </p>
+              </details>
+              <details className="faqrow faq-details">
+                <summary>05. {ar ? "هل تعمل عن بُعد وعبر المناطق؟" : "Do you work remotely and across regions?"}</summary>
+                <p>
+                  {ar
+                    ? "نعم. توثق محفظتي تسليم مشاريع في تسعة أسواق، من دبي ومع فرق عمل موزعة عالمياً."
+                    : "Yes. My portfolio documents delivery across nine markets, from Dubai and with distributed teams."}
+                </p>
+              </details>
             </div>
           </div>
         </section>
 
-        {/* FAQ Section on About page */}
-        <section className="py-20 sm:py-28 bg-background">
-          <div className="sk-shell space-y-12 max-w-4xl">
-            <h2 className="text-2xl sm:text-4xl font-extrabold uppercase tracking-tight text-primary">
-              {isArabic ? "أسئلة متكررة حول التعاون" : "FREQUENT QUESTIONS"}
-            </h2>
-            <div className="divide-y divide-border border-t border-b border-border">
-              {searchFocusedFaqs.slice(0, 4).map((item) => (
-                <details key={item.id} className="py-4 group cursor-pointer">
-                  <summary className="flex items-center justify-between text-base font-bold uppercase tracking-tight text-primary list-none">
-                    <span>{isArabic ? item.question.ar : item.question.en}</span>
-                    <ChevronDown className="h-4 w-4 text-accent transition-transform group-open:rotate-180" />
-                  </summary>
-                  <p className="mt-2 text-sm text-secondary leading-relaxed">
-                    {isArabic ? item.answer.ar : item.answer.en}
-                  </p>
-                </details>
-              ))}
+        <section className="section shell">
+          <div className="footer-cta">
+            <form aria-label="Quick enquiry" className="contact-box" onSubmit={handleContactSubmit}>
+              <h4>SANU KHAN ®</h4>
+              <p className="tiny">{ar ? "هل لديك مشروع في بالك؟" : "HAVE A PROJECT IN MIND?"}</p>
+              <div className="formrow">
+                <label htmlFor="quick-about-name">{ar ? "الاسم" : "Your Name"}</label>
+                <input id="quick-about-name" name="name" placeholder="Jane Smith" required type="text" />
+              </div>
+              <div className="formrow">
+                <label htmlFor="quick-about-email">{ar ? "البريد المهني" : "Work Email"}</label>
+                <input id="quick-about-email" name="email" placeholder="jane@company.com" required type="email" />
+              </div>
+              <div className="formrow">
+                <label htmlFor="quick-about-message">{ar ? "تفاصيل المشروع" : "Project Context"}</label>
+                <textarea
+                  id="quick-about-message"
+                  name="message"
+                  placeholder={ar ? "أخبرني عما تقوم ببنائه..." : "Tell me what you're building..."}
+                  required
+                />
+              </div>
+              <button className="button dark" type="submit" style={{ justifyContent: "space-between", width: "100%" }}>
+                {ar ? "إرسال رسالة" : "SEND AN EMAIL"} <span className="arrow">↗</span>
+              </button>
+            </form>
+            <div>
+              <div className="labelrow">
+                <span className="spark">✳</span>
+                <span className="eyebrow">{ar ? "ما وراء الموجز" : "BEYOND THE BRIEF"}</span>
+              </div>
+              <h2>
+                {ar ? (
+                  <>
+                    لنبنِ معاً
+                    <br />
+                    ما <span className="light-orange">يدوم.</span>
+                  </>
+                ) : (
+                  <>
+                    LET'S BUILD
+                    <br />
+                    SOMETHING
+                    <br />
+                    THAT <span className="light-orange">LASTS.</span>
+                  </>
+                )}
+              </h2>
+              <p className="lead" style={{ maxWidth: "430px" }}>
+                {ar
+                  ? "العمارة الهندسية والتطوير والتسليم. حوار بناء في كل خطوة."
+                  : "Architecture, engineering and delivery. One thoughtful conversation at a time."}
+              </p>
             </div>
           </div>
         </section>
 
         <Footer />
       </main>
-    </>
+    </div>
   );
 }
+
+export default memo(AboutPage);

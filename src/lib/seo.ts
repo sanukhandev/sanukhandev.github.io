@@ -236,6 +236,18 @@ export const pageSeo = {
       "Full Stack & Cloud Advisory UAE",
     ],
   },
+  services: {
+    title: "Services — Solution Architecture, Full Stack & Automation | Sanu Khan",
+    description:
+      "Solution architecture, enterprise system integration, full-stack application engineering, and intelligent automation services by Sanu Khan in Dubai, UAE.",
+    canonicalPath: "/services",
+    keywords: [
+      "Solution Architecture Services Dubai",
+      "Enterprise Integration Consulting UAE",
+      "Full Stack Engineering Services",
+      "Sanu Khan Services",
+    ],
+  },
 } as const;
 
 export const pageSeoAr = {
@@ -338,6 +350,18 @@ export const pageSeoAr = {
       "تواصل مع سانو خان",
       "استشارات تقنية دبي",
       "معماري حلول الإمارات",
+    ],
+  },
+  services: {
+    title: "الخدمات — تصميم النظم، التطوير المتكامل، والأتمتة | سانو خان",
+    description:
+      "خدمات الاستشارات المعمارية، وتصميم النظم، وتكامل المؤسسات، وهندسة المنصات السحابية والأتمتة الذكية في دبي، الإمارات.",
+    canonicalPath: "/services",
+    keywords: [
+      "خدمات عمارة الحلول دبي",
+      "استشارات تكامل المؤسسات الإمارات",
+      "تطوير التطبيقات المتكاملة",
+      "خدمات سانو خان",
     ],
   },
 } as const;

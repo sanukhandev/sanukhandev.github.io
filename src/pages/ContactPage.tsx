@@ -1,33 +1,35 @@
-import { useState, type FormEvent } from "react";
+import { memo, useState, type FormEvent } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/sections/Footer";
 import SeoMeta from "@/components/SeoMeta";
 import { buildBreadcrumbListSchema, buildContactPageSchema } from "@/lib/schema";
 import { useLocale } from "@/hooks/use-locale";
 import { getLocalizedPageSeo } from "@/lib/seo";
-import { ArrowUpRight, ChevronDown, Clock, Mail, MapPin, Phone } from "lucide-react";
-import { searchFocusedFaqs } from "@/data/faqData";
 
-export default function ContactPage() {
+export function ContactPage() {
   const { locale } = useLocale();
-  const isAr = locale === "ar";
+  const ar = locale === "ar";
   const seo = getLocalizedPageSeo("contact", locale);
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
-  const [submitted, setSubmitted] = useState(false);
+
+  const [form, setForm] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    message: "",
+  });
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    const body = ["Name: " + form.name, "Email: " + form.email, "", form.message].join("\n");
-    window.location.href =
-      "mailto:hello@sanukhan.dev?subject=" +
-      encodeURIComponent("Direct Project Inquiry — sanukhan.dev") +
-      "&body=" +
-      encodeURIComponent(body);
-    setSubmitted(true);
+    const name = `${form.firstName} ${form.lastName}`.trim();
+    const subject = encodeURIComponent(`Portfolio enquiry from ${name}`);
+    const body = encodeURIComponent(
+      `Name: ${name}\nEmail: ${form.email}\n\nProject details:\n${form.message}`
+    );
+    window.location.href = `mailto:hello@sanukhan.dev?subject=${subject}&body=${body}`;
   };
 
   return (
-    <>
+    <div className="editorial-content min-h-screen">
       <SeoMeta
         title={seo.title}
         description={seo.description}
@@ -36,176 +38,281 @@ export default function ContactPage() {
         schema={[
           buildContactPageSchema(),
           buildBreadcrumbListSchema([
-            { name: isAr ? "الرئيسية" : "Home", path: "/" },
-            { name: isAr ? "التواصل" : "Contact", path: "/contact" },
+            { name: ar ? "الرئيسية" : "Home", path: "/" },
+            { name: ar ? "التواصل" : "Contact", path: "/contact" },
           ]),
         ]}
       />
+
       <Navbar />
 
-      <main className="min-h-screen bg-background text-foreground pt-20">
-        {/* Top Header Banner matching video frame 01:37 */}
-        <section className="border-b border-border/80 py-16 sm:py-24 bg-background">
-          <div className="sk-shell space-y-4">
-            <div className="flex items-center justify-between font-mono text-xs text-muted-foreground uppercase">
-              <span>Sanu Khan ®</span>
-              <span>©2026 [Scroll to Explore]</span>
-            </div>
-            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold uppercase tracking-tight text-primary">
-              {isAr ? "تواصل معي" : "CONTACT ME"}
+      <main id="main-content">
+        <header className="intro shell">
+          <div className="eyebrow">SANU KHAN ®</div>
+          <div className="overline">
+            <h1>
+              {ar ? "تواصل " : "CONTACT "}
+              <span style={{ color: "#f04913" }}>{ar ? "معي." : "ME."}</span>
             </h1>
-          </div>
-        </section>
-
-        {/* Info Grid (Video frame 01:38): Get In Touch, Address, Hours */}
-        <section className="border-b border-border/80 py-14 bg-secondary/15">
-          <div className="sk-shell">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {/* Box 1: Get in touch */}
-              <div className="border border-border bg-background p-8 space-y-4">
-                <span className="font-mono text-xs uppercase text-accent font-semibold block">
-                  {isAr ? "جاهز للبدء؟" : "READY TO START?"}
-                </span>
-                <h2 className="text-3xl font-extrabold uppercase tracking-tight text-primary">
-                  {isAr ? "لنتحدث مباشرة" : "GET IN TOUCH"}
-                </h2>
-                <a
-                  href="mailto:hello@sanukhan.dev"
-                  className="inline-flex items-center gap-2 font-mono text-xs font-bold uppercase text-accent hover:underline pt-2"
-                >
-                  <span>{isAr ? "احجز استشارة معمارية" : "BOOK AN ARCHITECTURE CALL"}</span>
-                  <ArrowUpRight className="h-4 w-4" />
-                </a>
-              </div>
-
-              {/* Box 2: Address */}
-              <div className="border border-border bg-background p-8 space-y-3">
-                <div className="flex items-center gap-2 font-mono text-xs text-muted-foreground uppercase">
-                  <MapPin className="h-4 w-4 text-accent" />
-                  <span>{isAr ? "الموقع الجغرافي" : "Address"}</span>
-                </div>
-                <p className="text-lg font-bold text-primary font-sans">
-                  Dubai Silicon Oasis &amp; Downtown
-                </p>
-                <p className="text-xs font-mono text-muted-foreground">
-                  Dubai, United Arab Emirates
-                </p>
-              </div>
-
-              {/* Box 3: Open Hours & Contact */}
-              <div className="border border-border bg-background p-8 space-y-3">
-                <div className="flex items-center gap-2 font-mono text-xs text-muted-foreground uppercase">
-                  <Clock className="h-4 w-4 text-accent" />
-                  <span>{isAr ? "أوقات التوفر" : "Open Hours"}</span>
-                </div>
-                <p className="text-lg font-bold text-primary font-sans">
-                  DAILY: 09:00 AM – 06:00 PM GST
-                </p>
-                <div className="pt-2 flex flex-col gap-1 font-mono text-xs text-secondary">
-                  <span>hello@sanukhan.dev</span>
-                  <span>+971 (Direct Advisory by Request)</span>
-                </div>
-              </div>
+            <div className="crumb">
+              ©2026 [{ar ? "مرر للاستكشاف" : "Scroll to explore"}]
+              <br />
+              {ar ? "تواصل / محادثة" : "CONTACT / CONVERSATION"}
             </div>
           </div>
-        </section>
+        </header>
 
-        {/* Dark Contact Form (Video frame 01:40) */}
-        <section className="py-20 sm:py-28 bg-[#101010] text-white">
-          <div className="sk-shell max-w-4xl space-y-12">
-            <div className="space-y-3">
-              <span className="font-mono text-xs uppercase tracking-widest text-[#D5360C] font-semibold block">
-                {isAr ? "[ إرسال استفسار ]" : "[ DIRECT INQUIRY ]"}
-              </span>
-              <h2 className="text-3xl sm:text-5xl font-extrabold uppercase tracking-tight text-white">
-                SANU <span className="text-[#D5360C]">®</span> ARCHITECTURE ADVISORY
+        <section className="section shell" style={{ paddingTop: "15px" }}>
+          <div className="two" style={{ alignItems: "start" }}>
+            <div>
+              <div className="labelrow">
+                <span className="spark">✳</span>
+                <span className="eyebrow">{ar ? "جاهز للتواصل؟" : "READY TO CONNECT?"}</span>
+              </div>
+              <h2 className="section-heading">
+                {ar ? (
+                  <>
+                    لنبقَ على
+                    <br />
+                    تواصل.
+                  </>
+                ) : (
+                  <>
+                    GET IN
+                    <br />
+                    TOUCH.
+                  </>
+                )}
               </h2>
+              <p className="lead" style={{ maxWidth: "420px", margin: "24px 0" }}>
+                {ar
+                  ? "تحدٍ في تصميم النظم، أو منصة تحتاج للبناء، أو فريق يحتاج لقيادة تقنية؟ لنبدأ محادثة مثمرة."
+                  : "An architecture challenge, a platform to build or a team to lead? Start a conversation."}
+              </p>
+              <a className="button" href="mailto:hello@sanukhan.dev">
+                {ar ? "راسل سانو" : "EMAIL SANU"} <span className="arrow">↗</span>
+              </a>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-6 font-mono text-xs">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div className="contact-cards">
+              <div className="info-card">
+                <span className="cap">{ar ? "المقر" : "BASED IN"}</span>
+                <strong>
+                  {ar ? (
+                    <>
+                      دبي،
+                      <br />
+                      الإمارات العربية المتحدة
+                    </>
+                  ) : (
+                    <>
+                      DUBAI,
+                      <br />
+                      UNITED ARAB EMIRATES
+                    </>
+                  )}
+                </strong>
+              </div>
+              <div className="info-card">
+                <span className="cap">{ar ? "أسلوب التعاون" : "COLLABORATION"}</span>
+                <strong>
+                  {ar ? (
+                    <>
+                      عن بُعد
+                      <br />
+                      وحضورياً
+                    </>
+                  ) : (
+                    <>
+                      REMOTE
+                      <br />
+                      &amp; ON-SITE
+                    </>
+                  )}
+                </strong>
+              </div>
+              <div className="info-card">
+                <span className="cap">{ar ? "الهاتف" : "PHONE"}</span>
+                <strong dir="ltr">+971 56 386 0850</strong>
+              </div>
+              <div className="info-card">
+                <span className="cap">{ar ? "البريد الإلكتروني" : "EMAIL"}</span>
+                <strong>hello@sanukhan.dev</strong>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="section dark-zone">
+          <div className="shell">
+            <div className="labelrow">
+              <span className="spark">✳</span>
+              <span className="eyebrow">{ar ? "استفسارات المشاريع" : "PROJECT ENQUIRIES"}</span>
+            </div>
+            <div className="two">
+              <h2 className="section-heading">
+                {ar ? (
+                  <>
+                    لنتحدث عن
+                    <br />
+                    نظامك <span className="light-orange">القادم.</span>
+                  </>
+                ) : (
+                  <>
+                    LET’S TALK
+                    <br />
+                    ABOUT YOUR
+                    <br />
+                    <span className="light-orange">NEXT SYSTEM.</span>
+                  </>
+                )}
+              </h2>
+              <p className="lead" style={{ maxWidth: "480px", color: "#ccc", alignSelf: "end" }}>
+                {ar
+                  ? "شارك متطلبات مشروعك، وتحدياتك التقنية، أو فكرة التعاون. وسيفتح النموذج رسالة مباشرة إلى البريد الرسمي."
+                  : "Share your requirements, technical challenges, or collaboration idea. Use the verified contact email for a real enquiry."}
+              </p>
+            </div>
+
+            <form
+              aria-label="Contact enquiry"
+              className="form-dark"
+              onSubmit={handleSubmit}
+              style={{ marginTop: "50px" }}
+            >
+              <div className="two">
                 <div>
-                  <label className="text-white/60 uppercase block mb-2">
-                    @FIRST NAME *
-                  </label>
+                  <label htmlFor="contact-firstName">{ar ? "01 / الاسم الأول" : "01 / FIRST NAME"}</label>
                   <input
+                    id="contact-firstName"
+                    name="firstName"
+                    placeholder="Jane"
                     required
-                    value={form.name}
-                    onChange={(e) => setForm({ ...form, name: e.target.value })}
-                    placeholder="Jane Smith"
-                    className="w-full h-12 bg-white/5 border border-white/20 px-4 text-white placeholder:text-white/30 focus:outline-none focus:border-[#D5360C]"
+                    type="text"
+                    value={form.firstName}
+                    onChange={(e) => setForm({ ...form, firstName: e.target.value })}
                   />
                 </div>
                 <div>
-                  <label className="text-white/60 uppercase block mb-2">
-                    @EMAIL ADDRESS *
-                  </label>
+                  <label htmlFor="contact-lastName">{ar ? "02 / اسم العائلة" : "02 / LAST NAME"}</label>
                   <input
-                    type="email"
+                    id="contact-lastName"
+                    name="lastName"
+                    placeholder="Smith"
                     required
-                    value={form.email}
-                    onChange={(e) => setForm({ ...form, email: e.target.value })}
-                    placeholder="jane@company.com"
-                    className="w-full h-12 bg-white/5 border border-white/20 px-4 text-white placeholder:text-white/30 focus:outline-none focus:border-[#D5360C]"
+                    type="text"
+                    value={form.lastName}
+                    onChange={(e) => setForm({ ...form, lastName: e.target.value })}
                   />
                 </div>
               </div>
 
-              <div>
-                <label className="text-white/60 uppercase block mb-2">
-                  @MESSAGE &amp; PROJECT CONTEXT *
-                </label>
-                <textarea
-                  rows={5}
-                  required
-                  value={form.message}
-                  onChange={(e) => setForm({ ...form, message: e.target.value })}
-                  placeholder={isAr ? "نطاق المشروع، الأنظمة المستهدفة، الجدول الزمني..." : "Describe the system scope, constraints, and timeline..."}
-                  className="w-full bg-white/5 border border-white/20 p-4 text-white placeholder:text-white/30 focus:outline-none focus:border-[#D5360C]"
-                />
-              </div>
+              <label htmlFor="contact-email">{ar ? "03 / البريد المهني" : "03 / WORK EMAIL"}</label>
+              <input
+                id="contact-email"
+                name="email"
+                placeholder="jane@company.com"
+                required
+                type="email"
+                value={form.email}
+                onChange={(e) => setForm({ ...form, email: e.target.value })}
+              />
 
-              <button
-                type="submit"
-                className="inline-flex items-center gap-3 bg-[#D5360C] text-white px-8 py-4 text-xs font-mono uppercase font-bold tracking-wider hover:bg-[#B52D09] transition-colors shadow-lg"
-              >
-                <span>{isAr ? "إرسال الاستفسار الآن" : "SUBMIT NOW"}</span>
-                <ArrowUpRight className="h-4 w-4" />
+              <label htmlFor="contact-message">{ar ? "04 / تفاصيل المشروع" : "04 / PROJECT CONTEXT"}</label>
+              <textarea
+                id="contact-message"
+                name="message"
+                placeholder={ar ? "ما الذي تقوم ببنائه أو تطويره؟" : "What are you building or improving?"}
+                required
+                value={form.message}
+                onChange={(e) => setForm({ ...form, message: e.target.value })}
+              />
+
+              <button className="button" type="submit">
+                {ar ? "بدء المحادثة" : "START A CONVERSATION"} <span className="arrow">↗</span>
               </button>
 
-              {submitted && (
-                <p className="text-xs text-accent pt-2">
-                  {isAr ? "يتم الآن فتح تطبيق البريد الخاص بك مع تفاصيل الاستفسار." : "Opening your email client with the message pre-filled."}
-                </p>
-              )}
+              <p className="tiny" style={{ color: "#aaa", marginTop: "12px" }}>
+                {ar
+                  ? "يفتح إرسال النموذج برنامج البريد الإلكتروني المثبت لديك. لا يتم تخزين أي بيانات شخصية على هذا الموقع."
+                  : "Submission opens your configured email client. No personal data is stored on this site."}
+              </p>
             </form>
           </div>
         </section>
 
-        {/* FAQ Section */}
-        <section className="py-20 sm:py-28 bg-background">
-          <div className="sk-shell max-w-4xl space-y-12">
-            <h2 className="text-3xl sm:text-4xl font-extrabold uppercase tracking-tight text-primary">
-              {isAr ? "الأسئلة المتكررة" : "FREQUENT QUESTIONS"}
-            </h2>
-            <div className="divide-y divide-border border-t border-b border-border">
-              {searchFocusedFaqs.slice(0, 4).map((item) => (
-                <details key={item.id} className="py-4 group cursor-pointer">
-                  <summary className="flex items-center justify-between text-base font-bold uppercase tracking-tight text-primary list-none">
-                    <span>{isAr ? item.question.ar : item.question.en}</span>
-                    <ChevronDown className="h-4 w-4 text-accent transition-transform group-open:rotate-180" />
-                  </summary>
-                  <p className="mt-2 text-sm text-secondary leading-relaxed">
-                    {isAr ? item.answer.ar : item.answer.en}
-                  </p>
-                </details>
-              ))}
+        <section className="section shell">
+          <div className="qa">
+            <div>
+              <div className="labelrow">
+                <span className="spark">✳</span>
+                <span className="eyebrow">FAQ</span>
+              </div>
+              <h2 className="section-heading">
+                {ar ? (
+                  <>
+                    الأسئلة
+                    <br />
+                    الشائعة
+                  </>
+                ) : (
+                  <>
+                    FREQUENT
+                    <br />
+                    QUESTIONS
+                  </>
+                )}
+              </h2>
+            </div>
+            <div>
+              <details className="faqrow faq-details">
+                <summary>01. {ar ? "ما الذي يمكنك مساعدة فريقنا في تسليمه؟" : "What can you help our team deliver?"}</summary>
+                <p>
+                  {ar
+                    ? "أعمل مع الفرق على عمارة الحلول، المنصات المتكاملة، تكاملات المؤسسات، الأتمتة بالذكاء الاصطناعي، والقيادة التقنية."
+                    : "I work with teams on solution architecture, full-stack platforms, enterprise integrations, AI-assisted automation, and technical leadership."}
+                </p>
+              </details>
+              <details className="faqrow faq-details">
+                <summary>02. {ar ? "هل تتعاون مع فرق المنتجات الحالية؟" : "Do you collaborate with existing product teams?"}</summary>
+                <p>
+                  {ar
+                    ? "نعم. أتكامل مع فرق المنتج والهندسة والأعمال الحالية، موائماً القرارات مع نتائج التسليم والقيود التشغيلية."
+                    : "Yes. I integrate with existing product, engineering and business teams, aligning decisions with delivery outcomes and operational constraints."}
+                </p>
+              </details>
+              <details className="faqrow faq-details">
+                <summary>03. {ar ? "ما هي الأنظمة والمنصات التي تعمل معها؟" : "Which systems and platforms do you work with?"}</summary>
+                <p>
+                  {ar
+                    ? "توثق محفظتي العمل مع Azure و AWS و Kafka و Node.js و React و Java و SAP و PIM وتكاملات API و Kubernetes."
+                    : "The repository documents work with Azure, AWS, Kafka, Node.js, React, Java, SAP, PIM, API integration and Kubernetes."}
+                </p>
+              </details>
+              <details className="faqrow faq-details">
+                <summary>04. {ar ? "هل يمكنك المساعدة في تحديث منصة قائمة؟" : "Can you help modernize an existing platform?"}</summary>
+                <p>
+                  {ar
+                    ? "نعم. يمكنني تقييم التبعيات القديمة واقتراح تحديث تدريجي مدعوم بمراحل انتقال خاضعة للمراقبة."
+                    : "Yes. I can assess legacy dependencies and recommend incremental modernization backed by observable migration milestones."}
+                </p>
+              </details>
+              <details className="faqrow faq-details">
+                <summary>05. {ar ? "هل تعمل عن بُعد وعبر المناطق؟" : "Do you work remotely and across regions?"}</summary>
+                <p>
+                  {ar
+                    ? "نعم. توثق محفظتي تسليم مشاريع في تسعة أسواق، من دبي ومع فرق عمل موزعة عالمياً."
+                    : "Yes. My portfolio documents delivery across nine markets, from Dubai and with distributed teams."}
+                </p>
+              </details>
             </div>
           </div>
         </section>
 
         <Footer />
       </main>
-    </>
+    </div>
   );
 }
+
+export default memo(ContactPage);

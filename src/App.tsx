@@ -34,6 +34,7 @@ const ToolsIndex = lazyWithRetry(() => import("./pages/ToolsIndex.tsx"));
 const BlogIndex = lazyWithRetry(() => import("./pages/BlogIndex.tsx"));
 const AboutPage = lazyWithRetry(() => import("./pages/AboutPage.tsx"));
 const ProjectsPage = lazyWithRetry(() => import("./pages/ProjectsPage.tsx"));
+const ServicesPage = lazyWithRetry(() => import("./pages/ServicesPage.tsx"));
 const ContactPage = lazyWithRetry(() => import("./pages/ContactPage.tsx"));
 const JsonFormatterToolPage = lazyWithRetry(
   () => import("./pages/tools/JsonFormatterToolPage.tsx"),
@@ -156,6 +157,7 @@ const AppShell = () => {
               <Route path="/" element={<Index />} />
               <Route path="/tools" element={<ToolsIndex />} />
               <Route path="/about" element={<AboutPage />} />
+              <Route path="/services" element={<ServicesPage />} />
               <Route path="/projects" element={<ProjectsPage />} />
               <Route
                 path="/projects/:slug"
@@ -163,6 +165,7 @@ const AppShell = () => {
               />
               <Route path="/contact" element={<ContactPage />} />
               <Route path="/faq" element={<FaqPage />} />
+              <Route path="/articles" element={<BlogIndex />} />
               <Route
                 path="/tools/json-formatter-online"
                 element={<JsonFormatterToolPage />}

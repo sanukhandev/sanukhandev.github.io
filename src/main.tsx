@@ -15,6 +15,7 @@ import App from "./App.tsx";
 import "./index.css";
 import "./styles/editorial-refresh.css";
 import "./styles/collage-upgrade.css";
+import "./styles/editorial-site.css";
 
 createRoot(document.getElementById("root")!).render(
 	<HelmetProvider>

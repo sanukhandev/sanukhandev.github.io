@@ -120,7 +120,7 @@ export default function BlogIndex() {
   };
 
   return (
-    <div className="sk-page relative min-h-screen flex flex-col">
+    <div className="editorial-content sk-page relative min-h-screen flex flex-col">
       <SeoMeta
         title={seo.title}
         description={seo.description}
