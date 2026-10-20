@@ -8,8 +8,8 @@ import { buildFaqSchema, buildHomepageSchemas } from "@/lib/schema";
 import { searchFocusedFaqs } from "@/data/faqData";
 import Footer from "@/components/sections/Footer";
 import { EditorialExpertise } from "@/components/sections/EditorialExpertise";
+import HeroSection from "@/components/ui/glassmorphism-trust-hero";
 import {
-  ReferenceHero,
   ReferenceProof,
   ReferenceImpact,
   ReferenceServices,
@@ -57,7 +57,7 @@ const Index = () => {
       <Navbar />
 
       <main id="main-content" className="pt-0">
-        <ReferenceHero />
+        <HeroSection />
         <ReferenceProof />
         <SectionReveal><ReferenceImpact /></SectionReveal>
         <SectionReveal><ReferenceServices /></SectionReveal>

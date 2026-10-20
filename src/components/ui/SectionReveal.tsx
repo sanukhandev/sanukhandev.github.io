@@ -25,11 +25,11 @@ export function SectionReveal({ children, delay = 0, className }: SectionRevealP
       ref={ref}
       className={className}
       style={{
-        opacity: isVisible ? 1 : 0.94,
-        transform: isVisible ? "none" : "translateY(18px)",
+        opacity: 1,
+        transform: isVisible ? "none" : "translateY(10px)",
         transition: shouldReduceMotion
           ? "none"
-          : `opacity 0.62s cubic-bezier(0.22, 1, 0.36, 1) ${clampedDelay}s, transform 0.62s cubic-bezier(0.22, 1, 0.36, 1) ${clampedDelay}s`,
+          : `transform 0.5s cubic-bezier(0.22, 1, 0.36, 1) ${clampedDelay}s`,
       }}
     >
       {children}

@@ -1,13 +1,15 @@
 import { type FormEvent } from "react";
 import { Link } from "react-router-dom";
-import { ZaakiyBrain } from "@/components/ui/ZaakiyBrain";
+import { ArrowUpRight, ArrowRight, Layers, Bot, Workflow, Cpu } from "lucide-react";
+import { LampContainer } from "@/components/ui/lamp";
 import { useLocale } from "@/hooks/use-locale";
+import { GlassCard, GlassBadge } from "@/components/ui/glass-card";
 
 // Strict bilingual selector: t(isArabic, englishText, arabicText)
 const t = (isArabic: boolean, en: string, ar: string) => (isArabic ? ar : en);
 
 /* ──────────────────────────────────────────────────────────
-   1. HERO SECTION: Editorial Home Hero matching editorial-site
+   1. HERO SECTION (Fallback if directly referenced)
    ────────────────────────────────────────────────────────── */
 export function ReferenceHero() {
   const { locale } = useLocale();
@@ -29,15 +31,11 @@ export function ReferenceHero() {
           <span>{t(ar, "EXPLORE MY STORY", "اكتشف مسيرتي")}</span> <span className="arrow">↗</span>
         </Link>
       </div>
-      <img
-        alt={t(ar, "Sanu Khan — monochrome portrait from the portfolio repository", "سانو خان — صورة بورتريه أحادية اللون")}
-        className="hero-portrait"
-        data-fallback="/assets/portrait-placeholder.png"
-        decoding="async"
-        fetchPriority="high"
-        loading="eager"
-        src="/assets/images/hero_avatar.png"
-      />
+      <div className="hero-statement">
+        <div className="hero-statement-text">
+          {t(ar, "Engineering Clarity into Business Systems.", "هندسة الوضوح في منظومات الأعمال.")}
+        </div>
+      </div>
       <div className="hero-proj">
         <img alt="Architecture concept" decoding="async" loading="lazy" src="/assets/architecture.jpg" />
         <div className="card-caption">
@@ -59,95 +57,186 @@ export function ReferenceHero() {
 }
 
 /* ──────────────────────────────────────────────────────────
-   2. PROOF / MARQUEE TICKER
+   2. PROOF / MARQUEE TICKER: Refined Technical Strip
    ────────────────────────────────────────────────────────── */
 export function ReferenceProof() {
+  const { locale } = useLocale();
+  const ar = locale === "ar";
+
+  const ROLES = [
+    { en: "SYSTEM ARCHITECTURE", ar: "معمارية النظم" },
+    { en: "ENTERPRISE INTEGRATION", ar: "تكامل الأنظمة المؤسسية" },
+    { en: "FULL-STACK ENGINEERING", ar: "الهندسة المتكاملة" },
+    { en: "AI AGENTS", ar: "وكلاء الذكاء الاصطناعي" },
+    { en: "WORKFLOW AUTOMATION", ar: "أتمتة مسارات العمل" },
+    { en: "CLOUD & PLATFORM ENGINEERING", ar: "هندسة السحابة والمنصات" },
+  ];
+
+  const items = [...ROLES, ...ROLES, ...ROLES];
+
   return (
-    <div className="marquee shell">
-      <span>AZURE &amp; AWS</span>
-      <span>EVENT-DRIVEN SYSTEMS</span>
-      <span>FULL STACK</span>
-      <span>PLATFORM ENGINEERING</span>
-      <span>AI AUTOMATION</span>
+    <div
+      className="w-full overflow-hidden border-b border-black/[0.08] dark:border-white/10 bg-[#F7F7F5]/80 dark:bg-[#101010]/80 backdrop-blur-md py-4 sm:py-5"
+      aria-label={t(ar, "مجالات الخبرة الهندسية", "Technical Capabilities Marquee")}
+    >
+      <div className="proof-ticker-track flex items-center whitespace-nowrap">
+        {items.map((role, idx) => (
+          <div key={idx} className="flex items-center gap-6 shrink-0 px-4">
+            <span className="font-extrabold uppercase text-xs sm:text-[13.5px] tracking-wider text-[#101010] dark:text-[#f7f7f5]">
+              {ar ? role.ar : role.en}
+            </span>
+            <span className="text-[#D5360C] text-xs select-none">✳</span>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
 
 /* ──────────────────────────────────────────────────────────
-   3. IMPACT: 01 / INTRODUCTION
+   3. ABOUT / BEYOND CODE: Built for Impact
    ────────────────────────────────────────────────────────── */
 export function ReferenceImpact() {
   const { locale } = useLocale();
   const ar = locale === "ar";
 
   return (
-    <section className="section shell">
-      <div className="labelrow">
-        <span className="spark">✳</span>
-        <span className="eyebrow">{t(ar, "01 / INTRODUCTION", "01 / مقدمة")}</span>
-      </div>
-      <div className="impact-grid">
-        <div>
-          <h2>
-            {ar ? (
-              <>
-                أثري
-                <br />
-                من خلال
-                <br />
-                <span className="muted">الهندسة.</span>
-              </>
-            ) : (
-              <>
-                MY IMPACT
-                <br />
-                THROUGH
-                <br />
-                <span className="muted">ENGINEERING.</span>
-              </>
-            )}
-          </h2>
-          <p className="lead" style={{ maxWidth: "490px", marginTop: "35px" }}>
-            {t(
-              ar,
-              "I connect architecture with execution — designing resilient platforms, leading teams and delivering solutions across enterprise ecosystems.",
-              "أربط التصميم المعماري بالتنفيذ من خلال بناء منصات موثوقة وقيادة الفرق وتسليم حلول للمؤسسات."
-            )}
-          </p>
-          <img
-            alt={t(ar, "Conceptual illustration of an engineering discipline or system", "رسم توضيحي لمنظومة هندسية")}
-            className="impact-img"
-            decoding="async"
-            loading="lazy"
-            src="/assets/platform.jpg"
-            style={{ height: "250px", width: "70%", margin: "30px 0 0 12%" }}
-          />
+    <section
+      id="about"
+      className="relative w-full py-20 sm:py-24 md:py-28"
+      aria-label={t(ar, "عني — ما وراء الشيفرة", "About Me — Beyond Code")}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center gap-2 mb-3">
+          <span className="text-[#D5360C] text-sm">✳</span>
+          <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#AD2A09] dark:text-[#E6D5BD]">
+            {t(ar, "01 / حولي — ما وراء الشيفرة", "01 / ABOUT ME — BEYOND CODE")}
+          </span>
         </div>
-        <div>
-          <img
-            alt={t(ar, "Conceptual illustration of an engineering discipline or system", "رسم توضيحي لمنظومة هندسية")}
-            className="impact-img"
-            decoding="async"
-            loading="lazy"
-            src="/assets/enterprise.jpg"
-          />
-          <div className="impact-details">
-            <div className="impact-number">
-              <strong>13+</strong>
-              <span>{t(ar, "YEARS OF EXPERIENCE", "سنوات خبرة")}</span>
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+          {/* ── Left Column (7 cols): Editorial Narrative ── */}
+          <div className="lg:col-span-7 flex flex-col space-y-6">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tight leading-[1.05] text-[#101010] dark:text-white">
+              {ar ? (
+                <>
+                  ما وراء الشيفرة.
+                  <br />
+                  <span className="text-[#D5360C]">مبني لصنع الأثر.</span>
+                </>
+              ) : (
+                <>
+                  BEYOND CODE.
+                  <br />
+                  <span className="text-[#D5360C]">BUILT FOR IMPACT.</span>
+                </>
+              )}
+            </h2>
+
+            <div className="space-y-4 text-base sm:text-lg text-[#2a2723] dark:text-zinc-300 leading-relaxed font-normal">
+              <p>
+                {t(
+                  ar,
+                  "أنا قائد تقني ومهندس حلول معمارية مقيم في دبي بخبرة تزيد عن 13 عاماً في بناء وتكامل المنصات الرقمية.",
+                  "I'm a Dubai-based Tech Lead and Solution Architect with 13+ years of experience building and integrating digital platforms."
+                )}
+              </p>
+              <p>
+                {t(
+                  ar,
+                  "أعمل عبر هندسة المعمارية، والتطوير الشامل، والبنية السحابية، والأتمتة — محولاً متطلبات الأعمال المعقدة إلى أنظمة تعتمد عليها الفرق بثقة وتطورها باستمرار.",
+                  "I work across architecture, full-stack engineering, cloud infrastructure, and automation—turning difficult business requirements into systems that teams can confidently operate and evolve."
+                )}
+              </p>
+              <p className="font-semibold text-[#101010] dark:text-white">
+                {t(
+                  ar,
+                  "يجمع أسلوبي بين الملكية التقنية، والتنفيذ العملي المتقن، والتعاون الوثيق بين فرق الهندسة والأعمال.",
+                  "My approach combines technical ownership, practical execution, and collaboration across engineering and business teams."
+                )}
+              </p>
             </div>
-            <div className="impact-number">
-              <strong>100+</strong>
-              <span>{t(ar, "SOLUTIONS DELIVERED", "حلول تم تسليمها")}</span>
+
+            {/* Core Capabilities Chips */}
+            <div className="pt-4 border-t border-black/[0.08] dark:border-white/10">
+              <div className="text-xs font-mono font-bold tracking-wider uppercase text-zinc-500 dark:text-zinc-400 mb-3">
+                {t(ar, "القدرات الهندسية الأساسية", "CORE CAPABILITIES")}
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {[
+                  { en: "System Architecture", ar: "معمارية النظم" },
+                  { en: "AI Agents", ar: "وكلاء الذكاء الاصطناعي" },
+                  { en: "Enterprise Integrations", ar: "تكامل الأنظمة المؤسسية" },
+                  { en: "Workflow Automation", ar: "أتمتة مسارات العمل" },
+                  { en: "Technical Leadership", ar: "القيادة التقنية" },
+                ].map((cap) => (
+                  <GlassBadge key={cap.en} variant="light">
+                    {ar ? cap.ar : cap.en}
+                  </GlassBadge>
+                ))}
+              </div>
             </div>
-            <div className="impact-number">
-              <strong>9</strong>
-              <span>{t(ar, "REGIONAL MARKETS", "أسواق إقليمية")}</span>
+
+            {/* CTAs */}
+            <div className="pt-4 flex flex-wrap items-center gap-5">
+              <a
+                href="#work"
+                className="group inline-flex items-center gap-2 text-xs sm:text-sm font-black uppercase tracking-wider text-[#101010] dark:text-white hover:text-[#D5360C] transition-colors"
+              >
+                <span className="border-b-2 border-current pb-0.5">
+                  {t(ar, "استكشف أعمالي", "EXPLORE SELECTED WORK")}
+                </span>
+                <span className="text-[#D5360C] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
+                  ↗
+                </span>
+              </a>
+
+              <a
+                href="#contact"
+                className="group inline-flex items-center gap-2 text-xs sm:text-sm font-black uppercase tracking-wider text-[#101010] dark:text-white hover:text-[#D5360C] transition-colors"
+              >
+                <span className="border-b-2 border-current pb-0.5">
+                  {t(ar, "لنتواصل معاً", "LET'S CONNECT")}
+                </span>
+                <span className="text-[#D5360C] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
+                  ↗
+                </span>
+              </a>
             </div>
-            <div className="impact-number">
-              <strong>1M+</strong>
-              <span>{t(ar, "PRODUCT SCALE SYSTEMS", "أنظمة واسعة النطاق")}</span>
-            </div>
+          </div>
+
+          {/* ── Right Column (5 cols): Authentic Portrait & "How I Work" Glass Card ── */}
+          <div className="lg:col-span-5 flex flex-col space-y-6">
+            <GlassCard variant="light" className="p-3 sm:p-4">
+              <div className="relative aspect-[4/5] overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800">
+                <img
+                  alt={t(ar, "صورة سانو خان الهندسية", "Sanu Khan — Tech Lead & Solution Architect")}
+                  className="w-full h-full object-cover object-top filter grayscale contrast-[1.08] transition-transform duration-500 hover:scale-[1.02]"
+                  decoding="async"
+                  loading="lazy"
+                  src="/assets/images/sanu-khan-editorial-monochrome.webp"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute bottom-3 start-3 end-3 flex items-center justify-between text-xs font-mono text-white/95 px-3 py-2 bg-black/60 backdrop-blur-md rounded-lg border border-white/10">
+                  <span>SANU KHAN // DUBAI</span>
+                  <span className="text-[#E6D5BD]">TECH LEAD</span>
+                </div>
+              </div>
+            </GlassCard>
+
+            {/* "How I Work" Glass Statement */}
+            <GlassCard variant="light" className="p-5 sm:p-6">
+              <div className="text-xs font-mono font-bold uppercase tracking-wider text-[#D5360C] mb-2">
+                {t(ar, "// فلسفة العمل", "// HOW I WORK")}
+              </div>
+              <p className="text-xs sm:text-[13.5px] text-[#2a2723] dark:text-zinc-300 leading-relaxed font-normal">
+                {t(
+                  ar,
+                  "أصمم الأنظمة بوضوح كافٍ للتطور، وبمتانة تضمن الثقة في أصعب ظروف الإنتاج. الاستراتيجية تصبح ذات معنى حقيقي فقط عندما تعمل بنجاح مع مستخدمين فعليين.",
+                  "Clear architecture boundaries, pragmatic engineering standards, and direct cross-functional collaboration. Making technology deliver predictable business outcomes."
+                )}
+              </p>
+            </GlassCard>
           </div>
         </div>
       </div>
@@ -156,95 +245,141 @@ export function ReferenceImpact() {
 }
 
 /* ──────────────────────────────────────────────────────────
-   4. SERVICES: 02 / WHAT I SOLVE
+   4. SERVICES: 02 / Engineering That Moves Business Forward
    ────────────────────────────────────────────────────────── */
 export function ReferenceServices() {
   const { locale } = useLocale();
   const ar = locale === "ar";
 
+  const services = [
+    {
+      num: "01",
+      title: { en: "Solution Architecture", ar: "هندسة معمارية الحلول" },
+      desc: {
+        en: "Designing scalable systems, defining technical direction, and turning complex requirements into executable architecture.",
+        ar: "تصميم أنظمة قابلة للتوسع، وتحديد التوجه التقني، وتحويل متطلبات الأعمال المعقدة إلى معمارية تنفيذية واضحة.",
+      },
+      image: "/assets/architecture.jpg",
+      icon: Cpu,
+    },
+    {
+      num: "02",
+      title: { en: "Full-Stack Engineering", ar: "التطوير الهندسي الشامل" },
+      desc: {
+        en: "Building production-ready applications, APIs, and platforms with a focus on maintainability, performance, and usability.",
+        ar: "بناء تطبيقات وواجهات برمجية ومنصات متكاملة جاهزة للإنتاج مع التركيز على سهولة الصيانة والأداء وتجربة الاستخدام.",
+      },
+      image: "/assets/frontend.jpg",
+      icon: Layers,
+    },
+    {
+      num: "03",
+      title: { en: "Enterprise Integration", ar: "تكامل الأنظمة المؤسسية" },
+      desc: {
+        en: "Connecting ERP, PIM, commerce, and distributed systems through reliable APIs, event-driven architecture, and automation.",
+        ar: "ربط أنظمة ERP وPIM والتجارة والأنظمة الموزعة من خلال واجهات برمجية موثوقة وبنية قائمة على الأحداث.",
+      },
+      image: "/assets/integration.jpg",
+      icon: Workflow,
+    },
+    {
+      num: "04",
+      title: { en: "AI & Process Automation", ar: "الذكاء الاصطناعي وأتمتة العمليات" },
+      desc: {
+        en: "Designing intelligent agents, enterprise knowledge workflows, and automated business processes with appropriate human oversight.",
+        ar: "تصميم وكلاء أذكياء، ومسارات استرجاع المعرفة المؤسسية، وأتمتة العمليات مع إشراف بشري مسؤول.",
+      },
+      image: "/assets/automation.jpg",
+      icon: Bot,
+    },
+  ];
+
   return (
-    <section id="services" className="section shell">
-      <div className="labelrow">
-        <span className="spark">✳</span>
-        <span className="eyebrow">{t(ar, "02 / WHAT I SOLVE", "02 / المشكلات التي أعالجها")}</span>
-      </div>
-      <div className="splithead">
-        <h2 className="section-heading">
-          {ar ? (
-            <>
-              هندسة
-              <br />
-              تدفع <span className="muted">عجلة</span>
-              <br />
-              الأعمال للأمام.
-            </>
-          ) : (
-            <>
-              ENGINEERING
-              <br />
-              THAT <span className="muted">MOVES</span>
-              <br />
-              BUSINESS FORWARD.
-            </>
-          )}
-        </h2>
-        <div className="right">
-          <p className="lead">
-            {t(ar, "From technical direction to production delivery.", "من التخطيط التقني إلى التسليم في بيئة الإنتاج.")}
-          </p>
-          <Link className="button dark" to="/services">
-            {t(ar, "ALL CAPABILITIES", "جميع الخدمات")} <span className="arrow">↗</span>
-          </Link>
-        </div>
-      </div>
-      <div style={{ marginTop: "55px" }}>
-        <div className="service-row">
-          <span className="number">01 ✳</span>
-          <h3>{t(ar, "SOLUTIONS ARCHITECTURE", "هندسة الحلول")}</h3>
-          <p>
-            {t(
-              ar,
-              "Systems thinking, platform boundaries, design decisions and scalable foundations.",
-              "تصميم الأنظمة وحدود المنصات والقرارات المعمارية وأسس التوسع."
-            )}
-          </p>
-          <img alt="Solutions Architecture" decoding="async" loading="lazy" src="/assets/architecture.jpg" />
-        </div>
-        <div className="service-row">
-          <span className="number">02 ✳</span>
-          <h3>{t(ar, "FULL-STACK ENGINEERING", "التطوير المتكامل")}</h3>
-          <p>
-            {t(
-              ar,
-              "Modern digital experiences backed by resilient services and dependable APIs.",
-              "تجارب رقمية حديثة تدعمها خدمات مرنة وواجهات برمجة موثوقة."
-            )}
-          </p>
-          <img alt="Full-Stack Engineering" decoding="async" loading="lazy" src="/assets/frontend.jpg" />
-        </div>
-        <div className="service-row">
-          <span className="number">03 ✳</span>
-          <h3>{t(ar, "ENTERPRISE INTEGRATION", "تكامل أنظمة المؤسسات")}</h3>
-          <p>
-            {t(
-              ar,
-              "ERP, PIM, storefront and event-streaming systems working as one.",
-              "ربط أنظمة ERP وPIM والمتاجر وتدفقات الأحداث في منظومة واحدة."
-            )}
-          </p>
-          <img alt="Enterprise Integration" decoding="async" loading="lazy" src="/assets/integration.jpg" />
-        </div>
-        <div className="service-row">
-          <span className="number">04 ✳</span>
-          <h3>{t(ar, "AI & PROCESS AUTOMATION", "الذكاء الاصطناعي وأتمتة العمليات")}</h3>
-          <p>
-            {t(
-              ar,
-              "Intelligent workflows that reduce operational friction and improve coordination.",
-              "سير عمل ذكي يقلّل التعقيد التشغيلي ويحسّن التنسيق."
-            )}
-          </p>
-          <img alt="AI & Process Automation" decoding="async" loading="lazy" src="/assets/automation.jpg" />
+    <section
+      id="services"
+      className="relative w-full py-20 sm:py-24 md:py-28"
+      aria-label={t(ar, "الخدمات الهندسية", "Engineering Services")}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <header className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-12 sm:pb-16 border-b border-black/[0.08] dark:border-white/10">
+          <div>
+            <div className="inline-flex items-center gap-2 mb-3">
+              <span className="text-[#D5360C] text-sm">✳</span>
+              <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#AD2A09] dark:text-[#E6D5BD]">
+                {t(ar, "02 / الخدمات الهندسية", "02 / WHAT I SOLVE")}
+              </span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tight leading-[1.05] text-[#101010] dark:text-white">
+              {ar ? (
+                <>
+                  هندسة تدفع
+                  <br />
+                  <span className="text-[#D5360C]">الأعمال للأمام.</span>
+                </>
+              ) : (
+                <>
+                  ENGINEERING THAT
+                  <br />
+                  <span className="text-[#D5360C]">MOVES BUSINESS FORWARD.</span>
+                </>
+              )}
+            </h2>
+          </div>
+          <div className="max-w-md flex flex-col items-start gap-4">
+            <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed font-normal">
+              {t(
+                ar,
+                "من القرارات المعمارية والتخطيط التقني إلى تسليم بيئات الإنتاج، أساعد الفرق على ربط المنصات وبناء أنظمة رقمية موثوقة.",
+                "From architecture decisions to production delivery, I help teams connect platforms, simplify complexity, and build reliable digital systems."
+              )}
+            </p>
+            <Link
+              to="/services"
+              className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#D5360C] hover:underline"
+            >
+              <span>{t(ar, "استكشف جميع الخدمات", "VIEW ALL SERVICES")}</span>
+              <span>↗</span>
+            </Link>
+          </div>
+        </header>
+
+        {/* 4 Distinct Glass Capability Rows */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-12">
+          {services.map((item) => (
+            <GlassCard key={item.num} variant="light" className="flex flex-col justify-between p-6 sm:p-8">
+              <div>
+                <div className="flex items-center justify-between pb-4 mb-5 border-b border-black/[0.06] dark:border-white/10">
+                  <span className="text-xs font-mono font-bold text-[#D5360C] tracking-widest">
+                    {item.num} ✳
+                  </span>
+                  <item.icon className="h-5 w-5 text-zinc-500 dark:text-zinc-400" />
+                </div>
+
+                <div className="relative aspect-[16/9] overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800 mb-5">
+                  <img
+                    alt={item.title[locale]}
+                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                    decoding="async"
+                    loading="lazy"
+                    src={item.image}
+                  />
+                </div>
+
+                <h3 className="text-xl sm:text-2xl font-bold uppercase tracking-tight text-[#101010] dark:text-white mb-2.5">
+                  {item.title[locale]}
+                </h3>
+
+                <p className="text-xs sm:text-[13.5px] leading-relaxed text-zinc-600 dark:text-zinc-300 font-normal">
+                  {item.desc[locale]}
+                </p>
+              </div>
+
+              <div className="pt-6 mt-6 border-t border-black/[0.06] dark:border-white/10 flex items-center justify-between text-xs font-bold text-[#D5360C]">
+                <span>{t(ar, "معايير إنتاجية معتمدة", "ENTERPRISE-GRADE")}</span>
+                <span>↗</span>
+              </div>
+            </GlassCard>
+          ))}
         </div>
       </div>
     </section>
@@ -252,183 +387,272 @@ export function ReferenceServices() {
 }
 
 /* ──────────────────────────────────────────────────────────
-   5. PROJECTS: 03 / SELECTED WORK (12-col asymmetric masonry)
+   5. SELECTED WORK: 03 / Systems I've Helped Shape
    ────────────────────────────────────────────────────────── */
 export function ReferenceProjects() {
   const { locale } = useLocale();
   const ar = locale === "ar";
 
+  // 3 Primary Curated Featured Case Studies + 1 Multi-Tenant Platform
+  const projects = [
+    {
+      id: "p1",
+      slug: "/projects/enterprise-retail-integration",
+      image: "/assets/commerce.jpg",
+      index: "01 ↗",
+      tag: t(ar, "التجارة المؤسسية // تدفق الأحداث", "ENTERPRISE COMMERCE // EVENT STREAMING"),
+      title: t(ar, "شبكة تكامل التجارة الإقليمية", "Enterprise Retail Integration"),
+      desc: t(
+        ar,
+        "بنية تحتية موزعة عالية الإنتاجية لمزامنة الطلبات والكتالوجات وتنسيق المخزون في الوقت الفعلي عبر 9 أسواق إقليمية.",
+        "High-throughput distributed event streaming backbone orchestrating multi-region order workflows, inventory sync, and peak-scale resilience across 9 markets."
+      ),
+      stack: ["APACHE KAFKA", "SAP ERP", "MICROSERVICES"],
+    },
+    {
+      id: "p2",
+      slug: "/projects/airline-retailing-aggregation",
+      image: "/assets/systems.jpg",
+      index: "02 ↗",
+      tag: t(ar, "توزيع الطيران // معمارية B2B", "AIRLINE NDC // WORKFLOW FABRIC"),
+      title: t(ar, "منصة تجميع حجوزات الطيران", "Airline Retailing & Aggregation"),
+      desc: t(
+        ar,
+        "بنية توزيع طيران متعددة الموردين تربط بروتوكول NDC بحجوزات المؤسسات مع زمن استجابة منخفض وموثوقية عالية.",
+        "Connected travel distribution workflows, low-latency multi-supplier flight aggregation, and resilient B2B booking services."
+      ),
+      stack: ["SYSTEMS ARCHITECTURE", "NDC PROTOCOL", "AZURE CLOUD"],
+    },
+    {
+      id: "p3",
+      slug: "/projects/zaakiy-v3rse",
+      image: "/assets/observability.jpg",
+      index: "03 ↗",
+      tag: t(ar, "ذكاء تشغيلي // وكلاء RAG", "OPERATIONAL INTELLIGENCE // AI AGENTS"),
+      title: t(ar, "منظومة Zaakiy V3RSE للذكاء التشغيلي", "Zaakiy V3RSE Architecture"),
+      desc: t(
+        ar,
+        "استكشاف تطبيقي لكيفية توظيف وكلاء الذكاء الاصطناعي والمعرفة المؤسسية لتحويل الإشارات التشغيلية إلى قرارات واعية ونتائج قابلة للتحقق.",
+        "An exploration of how AI agents, enterprise knowledge, and connected systems turn operational signals into contextual decisions and verifiable outcomes."
+      ),
+      stack: ["ENTERPRISE RAG", "AI AGENTS", "TELEMETRY"],
+    },
+  ];
+
   return (
-    <section id="work" className="section shell">
-      <div className="labelrow">
-        <span className="spark">✳</span>
-        <span className="eyebrow">{t(ar, "03 / SELECTED WORK", "03 / أعمال مختارة")}</span>
-      </div>
-      <div className="splithead">
-        <h2 className="section-heading">
-          {ar ? (
-            <>
-              أنظمة ساهمت
-              <br />
-              <span className="muted">في بنائها.</span>
-            </>
-          ) : (
-            <>
-              SYSTEMS I’VE
-              <br />
-              <span className="muted">HELPED SHAPE.</span>
-            </>
-          )}
-        </h2>
-        <p className="lead right">
-          {t(
-            ar,
-            "A selection of complex platforms, integration fabrics and automation systems.",
-            "نماذج من المنصات المعقدة وأنظمة التكامل والأتمتة."
-          )}
-        </p>
-      </div>
-      <div className="grid-gallery" style={{ marginTop: "80px" }}>
-        <div className="project-card p1">
-          <img
-            alt="Operational Intelligence Ecosystem"
-            className="project-image"
-            decoding="async"
-            loading="lazy"
-            src="/assets/systems.jpg"
-          />
-          <div className="card-caption">
-            <Link aria-label="View portfolio project gallery item 1" to="/projects/zaakiy-v3rse">
-              <span>{t(ar, "OPERATIONAL INTELLIGENCE ECOSYSTEM", "منظومة الذكاء التشغيلي")}</span>
+    <section
+      id="work"
+      className="relative w-full py-20 sm:py-24 md:py-28"
+      aria-label={t(ar, "أعمال مختارة", "Selected Work")}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <header className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-12 sm:pb-16 border-b border-black/[0.08] dark:border-white/10">
+          <div>
+            <div className="inline-flex items-center gap-2 mb-3">
+              <span className="text-[#D5360C] text-sm">✳</span>
+              <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#AD2A09] dark:text-[#E6D5BD]">
+                {t(ar, "03 / أعمال مختارة", "03 / SELECTED WORK")}
+              </span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tight leading-[1.05] text-[#101010] dark:text-white">
+              {ar ? (
+                <>
+                  أنظمة ساهمت
+                  <br />
+                  <span className="text-[#D5360C]">في بنائها.</span>
+                </>
+              ) : (
+                <>
+                  SYSTEMS I'VE
+                  <br />
+                  <span className="text-[#D5360C]">HELPED SHAPE.</span>
+                </>
+              )}
+            </h2>
+          </div>
+          <div className="max-w-md flex flex-col items-start gap-4">
+            <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed font-normal">
+              {t(
+                ar,
+                "أعمال مختارة عبر التجارة المؤسسية، والمنصات الموزعة، وهندسة التكامل، والذكاء الاصطناعي التشغيلي.",
+                "Selected work across enterprise commerce, distributed platforms, integration architecture, and intelligent automation."
+              )}
+            </p>
+            <Link
+              to="/projects"
+              className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#D5360C] hover:underline"
+            >
+              <span>{t(ar, "جميع المشاريع وحالات الدراسة", "VIEW ALL CASE STUDIES")}</span>
               <span>↗</span>
             </Link>
           </div>
-          <div className="tiny muted">{t(ar, "AI WORKFLOWS / ENTERPRISE", "سير عمل ذكي / مؤسسي")}</div>
+        </header>
+
+        {/* Curated 3 Primary Project Cards Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 pt-12">
+          {projects.map((proj) => (
+            <GlassCard key={proj.id} variant="light" className="flex flex-col justify-between p-6 sm:p-7">
+              <div>
+                <div className="flex items-center justify-between pb-3 mb-4 border-b border-black/[0.06] dark:border-white/10">
+                  <span className="text-[11px] font-mono font-bold text-zinc-600 dark:text-zinc-400 uppercase tracking-wider truncate max-w-[200px]">
+                    {proj.tag}
+                  </span>
+                  <span className="text-xs font-mono font-bold text-[#D5360C] shrink-0">
+                    {proj.index}
+                  </span>
+                </div>
+
+                <div className="relative aspect-[16/10] overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800 mb-5">
+                  <img
+                    alt={proj.title}
+                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                    decoding="async"
+                    loading="lazy"
+                    src={proj.image}
+                  />
+                </div>
+
+                <h3 className="text-xl sm:text-[22px] font-bold uppercase tracking-tight text-[#101010] dark:text-white mb-2.5">
+                  <Link to={proj.slug} className="hover:text-[#D5360C] transition-colors">
+                    {proj.title}
+                  </Link>
+                </h3>
+
+                <p className="text-xs sm:text-[13.5px] leading-relaxed text-zinc-600 dark:text-zinc-300 font-normal">
+                  {proj.desc}
+                </p>
+              </div>
+
+              <div className="pt-6 mt-6 border-t border-black/[0.06] dark:border-white/10 flex flex-col gap-4">
+                <div className="flex flex-wrap gap-1.5">
+                  {proj.stack.map((item) => (
+                    <span
+                      key={item}
+                      className="text-[10.5px] font-mono px-2 py-0.5 rounded bg-black/[0.04] dark:bg-white/[0.06] text-zinc-700 dark:text-zinc-300 border border-black/5 dark:border-white/10"
+                    >
+                      {item}
+                    </span>
+                  ))}
+                </div>
+
+                <Link
+                  to={proj.slug}
+                  className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#D5360C] hover:underline"
+                >
+                  <span>{t(ar, "عرض حالة الدراسة", "View Case Study")}</span>
+                  <span>↗</span>
+                </Link>
+              </div>
+            </GlassCard>
+          ))}
         </div>
-        <div className="project-card p2">
-          <img
-            alt="Retail Event Processing Network"
-            className="project-image"
-            decoding="async"
-            loading="lazy"
-            src="/assets/commerce.jpg"
-          />
-          <div className="card-caption">
-            <Link aria-label="View portfolio project gallery item 2" to="/projects/enterprise-retail-integration">
-              <span>{t(ar, "RETAIL EVENT PROCESSING NETWORK", "شبكة معالجة أحداث تجارة التجزئة")}</span>
-              <span>↗</span>
-            </Link>
-          </div>
-          <div className="tiny muted">{t(ar, "EVENT STREAMING / COMMERCE", "تدفق الأحداث / التجارة")}</div>
-        </div>
-        <div className="project-card p3">
-          <img
-            alt="Enterprise Integration Fabric"
-            className="project-image"
-            decoding="async"
-            loading="lazy"
-            src="/assets/integration.jpg"
-          />
-          <div className="card-caption">
-            <Link aria-label="View portfolio project gallery item 3" to="/projects/enterprise-retail-integration">
-              <span>{t(ar, "ENTERPRISE INTEGRATION FABRIC", "منصة تكامل الأنظمة المؤسسية")}</span>
-              <span>↗</span>
-            </Link>
-          </div>
-          <div className="tiny muted">{t(ar, "AZURE / SERVERLESS", "سحابي / معالجة بدون خوادم")}</div>
-        </div>
-        <div className="project-card p4">
-          <img
-            alt="Multi-Tenant Platform Infrastructure"
-            className="project-image"
-            decoding="async"
-            loading="lazy"
-            src="/assets/platform.jpg"
-          />
-          <div className="card-caption">
-            <Link aria-label="View portfolio project gallery item 4" to="/projects/automotive-omnichannel-platform">
-              <span>{t(ar, "MULTI-TENANT PLATFORM INFRASTRUCTURE", "بنية المنصات متعددة المستأجرين")}</span>
-              <span>↗</span>
-            </Link>
-          </div>
-          <div className="tiny muted">{t(ar, "SaaS / CLOUD NATIVE", "برمجيات كخدمة / سحابية")}</div>
-        </div>
-        <div className="project-card p5">
-          <img
-            alt="AI-Assisted Workflow Automation"
-            className="project-image"
-            decoding="async"
-            loading="lazy"
-            src="/assets/automation.jpg"
-          />
-          <div className="card-caption">
-            <Link aria-label="View portfolio project gallery item 5" to="/projects/zaakiy-v3rse">
-              <span>{t(ar, "AI-ASSISTED WORKFLOW AUTOMATION", "أتمتة سير العمل بمساعدة الذكاء الاصطناعي")}</span>
-              <span>↗</span>
-            </Link>
-          </div>
-          <div className="tiny muted">{t(ar, "INTELLIGENT AUTOMATION", "أتمتة ذكية")}</div>
-        </div>
-      </div>
-      <div style={{ textAlign: "center", marginTop: "70px" }}>
-        <Link className="button dark" to="/projects">
-          {t(ar, "EXPLORE ALL WORK", "استكشف جميع الأعمال")} <span className="arrow">↗</span>
-        </Link>
       </div>
     </section>
   );
 }
 
 /* ──────────────────────────────────────────────────────────
-   6. APPROACH: 04 / APPROACH
+   6. APPROACH: 04 / A Process Built to Work
    ────────────────────────────────────────────────────────── */
 export function ReferenceProcess() {
   const { locale } = useLocale();
   const ar = locale === "ar";
 
+  const steps = [
+    {
+      num: "01",
+      title: { en: "Discover", ar: "الاستكشاف" },
+      desc: {
+        en: "Understand business goals, operational constraints, and the real problem to solve.",
+        ar: "فهم أهداف الأعمال والقيود التشغيلية والمشكلة الحقيقية المراد حلها.",
+      },
+    },
+    {
+      num: "02",
+      title: { en: "Architect", ar: "التصميم المعماري" },
+      desc: {
+        en: "Design the system boundaries, integration contracts, and implementation strategy.",
+        ar: "تحديد حدود النظام والعقود البرمجية واستراتيجية التنفيذ العملية والمفاضلات.",
+      },
+    },
+    {
+      num: "03",
+      title: { en: "Build", ar: "التنفيذ المتين" },
+      desc: {
+        en: "Translate architecture into production-ready software with iterative validation.",
+        ar: "تحويل التصميم إلى برمجيات جاهزة للإنتاج مع التحقق المتكرر والمسؤولية الهندسية.",
+      },
+    },
+    {
+      num: "04",
+      title: { en: "Evolve", ar: "التطوير والاعتمادية" },
+      desc: {
+        en: "Measure results, improve reliability, and refine systems as requirements change.",
+        ar: "قياس النتائج وتحسين الموثوقية وتطوير الأنظمة مع نمو تعقيد الأعمال.",
+      },
+    },
+  ];
+
   return (
-    <section className="section shell">
-      <div className="center">
-        <div className="labelrow" style={{ justifyContent: "center" }}>
-          <span className="spark">✳</span>
-          <span className="eyebrow">{t(ar, "04 / APPROACH", "04 / منهجية")}</span>
+    <section
+      id="process"
+      className="relative w-full py-20 sm:py-24 md:py-28"
+      aria-label={t(ar, "منهجية العمل", "Engineering Approach")}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center max-w-2xl mx-auto mb-14">
+          <div className="inline-flex items-center gap-2 mb-3">
+            <span className="text-[#D5360C] text-sm">✳</span>
+            <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#AD2A09] dark:text-[#E6D5BD]">
+              {t(ar, "04 / منهجية العمل", "04 / APPROACH")}
+            </span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight leading-[1.05] text-[#101010] dark:text-white">
+            {ar ? (
+              <>
+                منهجية
+                <br />
+                <span className="text-[#D5360C]">صممت للنجاح.</span>
+              </>
+            ) : (
+              <>
+                A PROCESS
+                <br />
+                <span className="text-[#D5360C]">BUILT TO WORK.</span>
+              </>
+            )}
+          </h2>
+          <p className="mt-4 text-sm sm:text-base text-zinc-600 dark:text-zinc-400">
+            {t(
+              ar,
+              "نهج عملي يربط سياق الأعمال بالقرارات التقنية ونتائج بيئات الإنتاج الحقيقية.",
+              "A practical approach that connects business context, technical decisions, and production outcomes."
+            )}
+          </p>
         </div>
-        <h2 className="section-heading">
-          {ar ? (
-            <>
-              منهجية
-              <br />
-              <span className="muted">صممت للنجاح.</span>
-            </>
-          ) : (
-            <>
-              A PROCESS
-              <br />
-              <span className="muted">BUILT TO WORK.</span>
-            </>
-          )}
-        </h2>
-      </div>
-      <div className="four" style={{ marginTop: "45px" }}>
-        <div className="processcard">
-          <span className="step">01 / 04</span>
-          <h3>{t(ar, "DISCOVER", "الاستكشاف")}</h3>
-          <p>{t(ar, "Understand the system, users, constraints and real business problem.", "فهم النظام والمستخدمين والقيود والمشكلة التجارية الفعلية.")}</p>
-        </div>
-        <div className="processcard">
-          <span className="step">02 / 04</span>
-          <h3>{t(ar, "ARCHITECT", "التصميم المعماري")}</h3>
-          <p>{t(ar, "Choose boundaries, contracts, operating model and pragmatic trade-offs.", "تحديد الحدود والعقود التقنية ونموذج التشغيل والمفاضلات العملية.")}</p>
-        </div>
-        <div className="processcard">
-          <span className="step">03 / 04</span>
-          <h3>{t(ar, "BUILD", "التنفيذ")}</h3>
-          <p>{t(ar, "Ship maintainable systems with feedback and clear engineering ownership.", "تسليم أنظمة قابلة للصيانة مع ملاحظات مستمرة ومسؤولية هندسية واضحة.")}</p>
-        </div>
-        <div className="processcard">
-          <span className="step">04 / 04</span>
-          <h3>{t(ar, "EVOLVE", "التطوير المستمر")}</h3>
-          <p>{t(ar, "Measure, iterate and improve reliability as complexity grows.", "القياس والتحسين المستمر ورفع الاعتمادية مع نمو التعقيد.")}</p>
+
+        {/* 4 Connected Light Glass Stage Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          {steps.map((step) => (
+            <GlassCard key={step.num} variant="light" className="flex flex-col justify-between p-6">
+              <div>
+                <span className="text-xs font-mono font-bold text-[#D5360C] tracking-widest block mb-4">
+                  {step.num} / 04 ✳
+                </span>
+                <h3 className="text-lg sm:text-xl font-bold uppercase tracking-tight text-[#101010] dark:text-white mb-2">
+                  {step.title[locale]}
+                </h3>
+                <p className="text-xs sm:text-[13px] leading-relaxed text-zinc-600 dark:text-zinc-300 font-normal">
+                  {step.desc[locale]}
+                </p>
+              </div>
+              <div className="pt-4 mt-6 border-t border-black/[0.06] dark:border-white/10">
+                <span className="text-[11px] font-mono text-zinc-400 dark:text-zinc-500 uppercase tracking-wider">
+                  STAGE VERIFICATION
+                </span>
+              </div>
+            </GlassCard>
+          ))}
         </div>
       </div>
     </section>
@@ -436,136 +660,144 @@ export function ReferenceProcess() {
 }
 
 /* ──────────────────────────────────────────────────────────
-   7. PROOF OVER PROMISES: 05 / PROOF OVER PROMISES
+   7. PROOF OVER PROMISES: Compact Evidence Band
    ────────────────────────────────────────────────────────── */
 export function ReferenceBento() {
   const { locale } = useLocale();
   const ar = locale === "ar";
 
   return (
-    <section className="section shell">
-      <div className="labelrow">
-        <span className="spark">✳</span>
-        <span className="eyebrow">{t(ar, "05 / PROOF OVER PROMISES", "05 / نتائج ملموسة")}</span>
+    <section className="relative w-full py-16 sm:py-20 bg-black/[0.02] dark:bg-white/[0.02]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <GlassCard variant="light" className="p-8 sm:p-10 flex flex-col lg:flex-row lg:items-center justify-between gap-8">
+          <div>
+            <div className="inline-flex items-center gap-2 mb-2">
+              <span className="text-[#D5360C] text-sm">✳</span>
+              <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#AD2A09] dark:text-[#E6D5BD]">
+                {t(ar, "05 / نتائج مثبتة", "05 / PROOF OVER PROMISES")}
+              </span>
+            </div>
+            <h3 className="text-2xl sm:text-3xl font-black uppercase tracking-tight text-[#101010] dark:text-white">
+              {ar
+                ? "أدلة في الأنظمة، وليست مجرد وعود."
+                : "PROOF IN THE SYSTEMS. NOT JUST THE PROMISES."}
+            </h3>
+            <p className="max-w-xl text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 mt-2">
+              {ar
+                ? "تسليم منصات حيوية للأعمال وتكاملات موثوقة عبر 9 أسواق إقليمية، مبنية وفق أعلى معايير الاستقرار الهندسي."
+                : "Real platform outcomes: high-availability commerce integrations, multi-market catalog synchronization, and low-latency API networks."}
+            </p>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-6 sm:gap-8 pt-4 lg:pt-0 border-t lg:border-t-0 lg:border-s border-black/[0.08] dark:border-white/10 lg:ps-8">
+            <div>
+              <div className="text-3xl sm:text-4xl font-black text-[#D5360C]">13+</div>
+              <div className="text-xs font-bold uppercase tracking-wider text-[#101010] dark:text-white mt-1">
+                {t(ar, "سنوات خبرة", "Years Experience")}
+              </div>
+            </div>
+            <div>
+              <div className="text-3xl sm:text-4xl font-black text-[#D5360C]">100+</div>
+              <div className="text-xs font-bold uppercase tracking-wider text-[#101010] dark:text-white mt-1">
+                {t(ar, "أنظمة إنتاجية", "Delivered Systems")}
+              </div>
+            </div>
+            <div>
+              <div className="text-3xl sm:text-4xl font-black text-[#D5360C]">9</div>
+              <div className="text-xs font-bold uppercase tracking-wider text-[#101010] dark:text-white mt-1">
+                {t(ar, "أسواق مدعومة", "Regional Markets")}
+              </div>
+            </div>
+          </div>
+        </GlassCard>
       </div>
-      <h2 className="section-heading">
-        {ar ? (
-          <>
-            التركيز على هندسة
-            <br />
-            تنتج <span className="muted">نتائج.</span>
-          </>
-        ) : (
-          <>
-            FOCUSED ON
-            <br />
-            ENGINEERING THAT
-            <br />
-            <span className="muted">DELIVERS RESULTS.</span>
-          </>
-        )}
-      </h2>
-      <div className="three" style={{ marginTop: "50px" }}>
-        <div className="resultblock">
-          <div className="huge">13+</div>
-          <p>{t(ar, "YEARS BUILDING BUSINESS-CRITICAL PLATFORMS", "سنوات في بناء منصات الأعمال الحيوية")}</p>
-          <hr style={{ margin: "20px 0", borderColor: "var(--line)" }} />
-          <div className="huge">9</div>
-          <p>{t(ar, "MARKETS SUPPORTED IN ENTERPRISE COMMERCE", "أسواق إقليمية مدعومة في التجارة المؤسسية")}</p>
-        </div>
-        <img
-          alt="SaaS platform engineering"
-          decoding="async"
-          loading="lazy"
-          src="/assets/saas.jpg"
-          style={{ width: "100%", height: "420px", objectFit: "cover" }}
-        />
-        <img
-          alt="AI systems integration"
-          decoding="async"
-          loading="lazy"
-          src="/assets/ai.jpg"
-          style={{ width: "100%", height: "420px", objectFit: "cover" }}
-        />
-      </div>
-      <img
-        alt="Backend distributed infrastructure"
-        className="wide-image"
-        decoding="async"
-        loading="lazy"
-        src="/assets/backend.jpg"
-      />
     </section>
   );
 }
 
 /* ──────────────────────────────────────────────────────────
-   8. THE WAY I WORK: 06 / THE WAY I WORK
+   8. LEADERSHIP: 06 / Technical Ownership & Shared Success
    ────────────────────────────────────────────────────────── */
 export function ReferenceTestimonials() {
   const { locale } = useLocale();
   const ar = locale === "ar";
 
+  const pillars = [
+    {
+      title: { en: "Architecture Ownership", ar: "ملكية المعمارية" },
+      desc: {
+        en: "Make system boundaries, risks, and technical decisions understandable and actionable across teams.",
+        ar: "توضيح حدود الأنظمة والمخاطر والقرارات المعمارية لتكون مفهومة وقابلة للتنفيذ عبر الفرق.",
+      },
+    },
+    {
+      title: { en: "Engineering Leadership", ar: "القيادة الهندسية" },
+      desc: {
+        en: "Support teams through clear direction, collaborative problem-solving, and pragmatic technical standards.",
+        ar: "دعم الفرق من خلال التوجيه الواضح، وحل المشكلات التشاركي، والمعايير الهندسية العملية.",
+      },
+    },
+    {
+      title: { en: "Business Alignment", ar: "المواءمة مع الأعمال" },
+      desc: {
+        en: "Connect engineering investments with operational value, delivery priorities, and long-term maintainability.",
+        ar: "ربط الاستثمارات الهندسية بالقيمة التشغيلية وأولويات التسليم وسهولة الصيانة على المدى الطويل.",
+      },
+    },
+  ];
+
   return (
-    <section className="section shell">
-      <div className="labelrow">
-        <span className="spark">✳</span>
-        <span className="eyebrow">{t(ar, "06 / THE WAY I WORK", "06 / طريقة عملي")}</span>
-      </div>
-      <div className="splithead">
-        <h2 className="section-heading">
-          {ar ? (
-            <>
-              المسؤولية.
-              <br />
-              الوضوح. <span className="muted">روح الفريق.</span>
-            </>
-          ) : (
-            <>
-              OWNERSHIP.
-              <br />
-              CLARITY. <span className="muted">TEAMWORK.</span>
-            </>
-          )}
-        </h2>
-        <p className="lead right">
-          {t(
-            ar,
-            "The qualities I value in every delivery team and technical partnership.",
-            "القيم التي ألتزم بها في كل فريق عمل وشراكة تقنية."
-          )}
-        </p>
-      </div>
-      <div className="quotes" style={{ marginTop: "45px" }}>
-        <div className="quote">
-          <b>✳ {t(ar, "ARCHITECTURE WITH INTENT", "عمارة هادفة")}</b>
-          <p>
+    <section className="relative w-full py-20 sm:py-24">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <header className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-12 border-b border-black/[0.08] dark:border-white/10">
+          <div>
+            <div className="inline-flex items-center gap-2 mb-3">
+              <span className="text-[#D5360C] text-sm">✳</span>
+              <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#AD2A09] dark:text-[#E6D5BD]">
+                {t(ar, "06 / المسؤولية المشتركة", "06 / TECHNICAL LEADERSHIP")}
+              </span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight leading-[1.05] text-[#101010] dark:text-white">
+              {ar ? (
+                <>
+                  الملكية التقنية.
+                  <br />
+                  <span className="text-[#D5360C]">النجاح المشترك.</span>
+                </>
+              ) : (
+                <>
+                  TECHNICAL OWNERSHIP.
+                  <br />
+                  <span className="text-[#D5360C]">SHARED SUCCESS.</span>
+                </>
+              )}
+            </h2>
+          </div>
+          <p className="max-w-md text-sm sm:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed font-normal">
             {t(
               ar,
-              "Systems should be clear enough to evolve and resilient enough to trust.",
-              "يجب أن تكون الأنظمة واضحة بما يكفي للتطور وقوية بما يكفي للثقة بها."
+              "الهندسة القوية لا تقتصر على تصميم أنظمة أفضل فحسب؛ بل تجعل القرارات واضحة وتضمن استدامة الحلول.",
+              "Strong engineering is not only about designing better systems. It's about making decisions clear, enabling teams, and ensuring solutions survive beyond deployment."
             )}
           </p>
-        </div>
-        <div className="quote">
-          <b>✳ {t(ar, "DELIVERY OVER THEATRE", "التسليم الحقيقي فوق الاستعراض")}</b>
-          <p>
-            {t(
-              ar,
-              "Good strategy is meaningful only when it reaches real users and production.",
-              "الاستراتيجية الجيدة تكتسب معناها فقط حين تصل إلى المستخدمين الفعليين وبيئة الإنتاج."
-            )}
-          </p>
-        </div>
-        <div className="quote">
-          <b>✳ {t(ar, "ALL-TEAM THINKING", "تفكير الفريق المتكامل")}</b>
-          <p>
-            {t(
-              ar,
-              "Effective technical leadership makes complex work collaborative.",
-              "القيادة التقنية الفعالة تحول العمل المعقد إلى إنجاز جماعي متعاون."
-            )}
-          </p>
+        </header>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-10">
+          {pillars.map((pillar, i) => (
+            <GlassCard key={i} variant="light" className="p-6 sm:p-7 flex flex-col justify-between">
+              <div>
+                <span className="text-xs font-mono font-bold text-[#D5360C] block mb-3">
+                  0{i + 1} // PRINCIPLE
+                </span>
+                <h3 className="text-lg sm:text-xl font-bold uppercase tracking-tight text-[#101010] dark:text-white mb-2.5">
+                  {pillar.title[locale]}
+                </h3>
+                <p className="text-xs sm:text-[13.5px] text-zinc-600 dark:text-zinc-300 leading-relaxed font-normal">
+                  {pillar.desc[locale]}
+                </p>
+              </div>
+            </GlassCard>
+          ))}
         </div>
       </div>
     </section>
@@ -573,234 +805,384 @@ export function ReferenceTestimonials() {
 }
 
 /* ──────────────────────────────────────────────────────────
-   9. WRITING: 07 / WRITING
+   9. WRITING: 07 / Notes From The Engineering Desk
    ────────────────────────────────────────────────────────── */
 export function ReferenceWriting() {
   const { locale } = useLocale();
   const ar = locale === "ar";
 
+  const articles = [
+    {
+      slug: "/blog/api-gateway-the-bouncer-your-microservices-didnt-know-they-needed-1j0e",
+      title: "API Gateway: The Bouncer Your Microservices Didn’t Know They Needed",
+      tag: "ARCHITECTURE",
+      image: "/assets/backend.jpg",
+      desc: t(ar, "نظرة عملية على تأمين ومراقبة بوابات واجهات البرمجة.", "A practical look at secure, observable API entry points."),
+      date: "OCT 2026",
+    },
+    {
+      slug: "/blog/duckdb-the-sqlite-of-analytics-you-didnt-know-you-needed-579m",
+      title: "DuckDB: The SQLite of Analytics You Didn’t Know You Needed",
+      tag: "DATA ENGINEERING",
+      image: "/assets/ai.jpg",
+      desc: t(ar, "تحليلات محلية سريعة دون أعباء إدارة البنية التحتية.", "Fast local analytics without infrastructure overhead."),
+      date: "SEP 2026",
+    },
+    {
+      slug: "/blog/unmasking-javascript-proxies-the-secret-agents-of-your-objects-4eac",
+      title: "JavaScript Proxy Explained: The Secret Agents of Your Objects",
+      tag: "JAVASCRIPT",
+      image: "/assets/frontend.jpg",
+      desc: t(ar, "التعامل الديناميكي مع الكائنات، والتحقق، والتفاعلية.", "Dynamic object handling, validation, and reactivity."),
+      date: "AUG 2026",
+    },
+  ];
+
   return (
-    <section id="writing" className="section shell">
-      <div className="labelrow">
-        <span className="spark">✳</span>
-        <span className="eyebrow">{t(ar, "07 / WRITING", "07 / مقالات وملاحظات")}</span>
-      </div>
-      <div className="splithead">
-        <h2 className="section-heading">
-          {ar ? (
-            <>
-              أحدث
-              <br />
-              <span className="muted">ملاحظات هندسية.</span>
-            </>
-          ) : (
-            <>
-              LATEST
-              <br />
-              <span className="muted">ENGINEERING NOTES.</span>
-            </>
-          )}
-        </h2>
-        <p className="lead right">
-          {t(
-            ar,
-            "Systems thinking, architecture decisions, and practical lessons from the field.",
-            "تأملات في تصميم الأنظمة والقرارات المعمارية ودروس عملية من الميدان."
-          )}
-        </p>
-      </div>
-      <div className="three" style={{ marginTop: "45px" }}>
-        <div className="article-card" data-article="true">
-          <h3>
-            <Link to="/blog/api-gateway-the-bouncer-your-microservices-didnt-know-they-needed-1j0e">
-              API Gateway: The Bouncer Your Microservices Didn’t Know They Needed
-            </Link>
-          </h3>
-          <span className="tag">ARCHITECTURE</span>
-          <img alt="API Gateway editorial" decoding="async" loading="lazy" src="/assets/backend.jpg" />
-          <p>{t(ar, "A practical look at secure, observable API entry points.", "نظرة عملية على تأمين ومراقبة بوابات واجهات البرمجة.")}</p>
-          <div className="meta">
-            <span>WRITTEN BY<br /><b>Sanu Khan</b></span>
-            <span>TECHNICAL NOTES<br /><b>DEV.TO / SANUKHAN</b></span>
+    <section
+      id="writing"
+      className="relative w-full py-20 sm:py-24 md:py-28"
+      aria-label={t(ar, "مقالات وملاحظات هندسية", "Engineering Notes")}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <header className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-12 sm:pb-16 border-b border-black/[0.08] dark:border-white/10">
+          <div>
+            <div className="inline-flex items-center gap-2 mb-3">
+              <span className="text-[#D5360C] text-sm">✳</span>
+              <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#AD2A09] dark:text-[#E6D5BD]">
+                {t(ar, "07 / مقالات وملاحظات", "07 / WRITING")}
+              </span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tight leading-[1.05] text-[#101010] dark:text-white">
+              {ar ? (
+                <>
+                  ملاحظات من
+                  <br />
+                  <span className="text-[#D5360C]">المكتب الهندسي.</span>
+                </>
+              ) : (
+                <>
+                  NOTES FROM THE
+                  <br />
+                  <span className="text-[#D5360C]">ENGINEERING DESK.</span>
+                </>
+              )}
+            </h2>
           </div>
-          <Link className="read-more" to="/blog/api-gateway-the-bouncer-your-microservices-didnt-know-they-needed-1j0e">
-            {t(ar, "READ ARTICLE ↗", "اقرأ المقال ↗")}
-          </Link>
-        </div>
-        <div className="article-card" data-article="true">
-          <h3>
-            <Link to="/blog/duckdb-the-sqlite-of-analytics-you-didnt-know-you-needed-579m">
-              DuckDB: The SQLite of Analytics You Didn’t Know You Needed
+          <div className="max-w-md flex flex-col items-start gap-4">
+            <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed font-normal">
+              {t(
+                ar,
+                "تفكير معماري، ومفاضلات تقنية، ودروس مستفادة من بناء وإدارة الأنظمة الرقمية الحديثة.",
+                "Practical thinking on software architecture, engineering trade-offs, automation, and the systems behind modern digital products."
+              )}
+            </p>
+            <Link
+              to="/blog"
+              className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#D5360C] hover:underline"
+            >
+              <span>{t(ar, "قراءة جميع المقالات على DEV.TO", "VIEW ALL WRITING")}</span>
+              <span>↗</span>
             </Link>
-          </h3>
-          <span className="tag">DATA ENGINEERING</span>
-          <img alt="DuckDB editorial" decoding="async" loading="lazy" src="/assets/ai.jpg" />
-          <p>{t(ar, "Fast local analytics without infrastructure overhead.", "تحليلات محلية سريعة دون أعباء إدارة البنية التحتية.")}</p>
-          <div className="meta">
-            <span>WRITTEN BY<br /><b>Sanu Khan</b></span>
-            <span>TECHNICAL NOTES<br /><b>DEV.TO / SANUKHAN</b></span>
           </div>
-          <Link className="read-more" to="/blog/duckdb-the-sqlite-of-analytics-you-didnt-know-you-needed-579m">
-            {t(ar, "READ ARTICLE ↗", "اقرأ المقال ↗")}
-          </Link>
+        </header>
+
+        {/* 3 Curated Light Glass Article Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-12">
+          {articles.map((art) => (
+            <GlassCard key={art.slug} variant="light" className="flex flex-col justify-between p-6">
+              <div>
+                <div className="flex items-center justify-between pb-3 mb-4 border-b border-black/[0.06] dark:border-white/10">
+                  <span className="text-[11px] font-mono font-bold text-[#D5360C] uppercase tracking-wider">
+                    {art.tag}
+                  </span>
+                  <span className="text-[11px] font-mono text-zinc-500 dark:text-zinc-400">
+                    {art.date}
+                  </span>
+                </div>
+
+                <div className="relative aspect-[16/10] overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800 mb-4">
+                  <img
+                    alt={art.title}
+                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                    decoding="async"
+                    loading="lazy"
+                    src={art.image}
+                  />
+                </div>
+
+                <h3 className="text-lg font-bold tracking-tight text-[#101010] dark:text-white mb-2 leading-snug">
+                  <Link to={art.slug} className="hover:text-[#D5360C] transition-colors">
+                    {art.title}
+                  </Link>
+                </h3>
+
+                <p className="text-xs sm:text-[13px] leading-relaxed text-zinc-600 dark:text-zinc-300 font-normal">
+                  {art.desc}
+                </p>
+              </div>
+
+              <div className="pt-5 mt-5 border-t border-black/[0.06] dark:border-white/10">
+                <Link
+                  to={art.slug}
+                  className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#D5360C] hover:underline"
+                >
+                  <span>{t(ar, "اقرأ المقال", "Read Article")}</span>
+                  <span>↗</span>
+                </Link>
+              </div>
+            </GlassCard>
+          ))}
         </div>
-        <div className="article-card" data-article="true">
-          <h3>
-            <Link to="/blog/unmasking-javascript-proxies-the-secret-agents-of-your-objects-4eac">
-              JavaScript Proxy Explained
-            </Link>
-          </h3>
-          <span className="tag">JAVASCRIPT</span>
-          <img alt="JavaScript Proxy editorial" decoding="async" loading="lazy" src="/assets/frontend.jpg" />
-          <p>{t(ar, "Dynamic object handling, validation and reactivity.", "التعامل الديناميكي مع الكائنات، والتحقق، والتفاعلية.")}</p>
-          <div className="meta">
-            <span>WRITTEN BY<br /><b>Sanu Khan</b></span>
-            <span>TECHNICAL NOTES<br /><b>DEV.TO / SANUKHAN</b></span>
-          </div>
-          <Link className="read-more" to="/blog/unmasking-javascript-proxies-the-secret-agents-of-your-objects-4eac">
-            {t(ar, "READ ARTICLE ↗", "اقرأ المقال ↗")}
-          </Link>
-        </div>
-      </div>
-      <div style={{ marginTop: "38px" }}>
-        <Link className="button dark" to="/blog">
-          {t(ar, "READ ALL ARTICLES", "قراءة جميع المقالات")} <span className="arrow">↗</span>
-        </Link>
       </div>
     </section>
   );
 }
 
 /* ──────────────────────────────────────────────────────────
-   10. INDEPENDENT INITIATIVE: 08 / ZAAKIYV3RSE
+   10. SIGNATURE RESEARCH: 08 / Zaakiy V3RSE (Lamp Experience)
    ────────────────────────────────────────────────────────── */
 export function ReferenceZaakiy() {
   const { locale } = useLocale();
   const ar = locale === "ar";
 
+  const capabilities = ar
+    ? [
+        "استرجاع مؤسسي (RAG)",
+        "وكلاء ذكاء اصطناعي",
+        "تكامل حي للأنظمة",
+        "ذكاء مسارات العمل",
+      ]
+    : [
+        "Enterprise RAG",
+        "AI Agents",
+        "Live Integrations",
+        "Workflow Intelligence",
+      ];
+
   return (
-    <section id="zaakiy" className="workbench">
-      <div className="shell">
-        <div className="splithead">
-          <div>
-            <div className="labelrow">
-              <span className="spark">✳</span>
-              <span className="eyebrow">{t(ar, "08 / INDEPENDENT INITIATIVE", "08 / مبادرة مستقلة")}</span>
-            </div>
-            <h2>
-              MEET <span className="light-orange">ZAAKIY</span>
-              <br />
-              V3RSE.
-            </h2>
+    <section
+      id="zaakiy"
+      className="relative w-full"
+      aria-label={t(
+        ar,
+        "أبحاث مميزة // الذكاء التشغيلي",
+        "SIGNATURE RESEARCH / OPERATIONAL INTELLIGENCE"
+      )}
+    >
+      <LampContainer
+        colorVariant="orange"
+        className="bg-[#0b0b0c] text-white pt-24 sm:pt-28 md:pt-32 pb-16 sm:pb-20"
+        contentClassName="max-w-7xl px-4 sm:px-6 lg:px-8 w-full"
+      >
+        {/* Row 1: Full-width Centered Identity & Lamp-illuminated Headline */}
+        <div className="w-full text-center flex flex-col items-center mb-10 sm:mb-14">
+          <div className="inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-500/10 px-4 py-1.5 backdrop-blur-md mb-3.5">
+            <span className="text-[#D5360C] text-xs">✳</span>
+            <span className="text-[11px] sm:text-xs font-extrabold uppercase tracking-widest text-[#E6D5BD]">
+              {t(
+                ar,
+                "SIGNATURE RESEARCH / OPERATIONAL INTELLIGENCE",
+                "أبحاث مميزة // الذكاء التشغيلي"
+              )}
+            </span>
           </div>
-          <p className="lead right">
+
+          <div className="text-xs sm:text-sm font-mono font-bold uppercase tracking-[0.3em] text-[#D5360C] mb-3">
+            ZaakiyV3RSE
+          </div>
+
+          <h2 className="bg-gradient-to-b from-white via-[#f7f7f5] to-[#c8c8c4] py-1 bg-clip-text text-center text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black uppercase tracking-tight text-transparent max-w-5xl leading-[1.06]">
             {t(
               ar,
-              "An exploration of operational intelligence, automation and connected digital experiences.",
-              "استكشاف للذكاء التشغيلي والأتمتة والتجارب الرقمية المتصلة."
+              "Beyond uptime. Toward outcome intelligence.",
+              "أبعد من مجرد استقرار الأنظمة. نحو ذكاء يحقق النتائج."
             )}
-          </p>
+          </h2>
         </div>
-        <div className="my-8">
-          <ZaakiyBrain locale={locale} />
+
+        {/* Row 2: 1/2 Split (Side 1: Text & Capabilities, Side 2: Observability Architecture Visual) */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center w-full">
+          {/* Side 1: Text */}
+          <div className="flex flex-col items-start text-start">
+            <div className="inline-flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider text-[#D5360C] mb-4">
+              <span>//</span>
+              <span>{t(ar, "AUTONOMOUS SYSTEM TELEMETRY", "القياس عن بُعد للأنظمة الذاتية")}</span>
+            </div>
+
+            <p className="text-base sm:text-lg md:text-xl text-[#d4d4d0] leading-relaxed font-normal">
+              {t(
+                ar,
+                "Zaakiy V3RSE explores how AI agents, enterprise knowledge, and connected systems can turn operational signals into contextual decisions and verifiable outcomes.",
+                "استكشاف تطبيقي لكيفية توظيف وكلاء الذكاء الاصطناعي والمعرفة المؤسسية والأنظمة المتصلة لتحويل الإشارات التشغيلية إلى قرارات واعية ونتائج قابلة للتحقق."
+              )}
+            </p>
+
+            <div className="flex flex-wrap items-center gap-2 sm:gap-2.5 mt-6">
+              {capabilities.map((label) => (
+                <span
+                  key={label}
+                  className="px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white/5 border border-white/10 text-[#E6D5BD]"
+                >
+                  {label}
+                </span>
+              ))}
+            </div>
+
+            <div className="mt-8">
+              <Link
+                to="/projects/zaakiy-v3rse"
+                className="inline-flex items-center gap-3 px-7 py-3.5 bg-[#D5360C] text-white font-extrabold text-xs sm:text-sm uppercase tracking-wider hover:bg-[#AD2A09] transition-all rounded-sm shadow-lg shadow-orange-950/40"
+              >
+                <span>{t(ar, "EXPLORE ZAAKIY V3RSE", "استكشف ZAAKIY V3RSE")}</span>
+                <span className="text-base">↗</span>
+              </Link>
+            </div>
+          </div>
+
+          {/* Side 2: Observability Dashboard & Telemetry Visual */}
+          <div className="w-full">
+            <div className="relative overflow-hidden rounded-xl border border-white/15 bg-white/[0.03] shadow-2xl">
+              {/* Terminal HUD Header */}
+              <div className="flex items-center justify-between px-4 py-3 border-b border-white/10 bg-black/40 text-xs font-mono text-zinc-400">
+                <div className="flex items-center gap-2">
+                  <span className="w-2.5 h-2.5 rounded-full bg-red-500/80 inline-block" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80 inline-block" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-green-500/80 inline-block" />
+                  <span className="ms-2 text-[11px] uppercase tracking-wider text-zinc-300">
+                    ZaakiyV3RSE // Observability Hub
+                  </span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="inline-block w-2 h-2 rounded-full bg-[#D5360C] animate-pulse" />
+                  <span className="text-[10px] text-zinc-400 font-mono">
+                    {t(ar, "عرض حي", "LIVE TELEMETRY")}
+                  </span>
+                </div>
+              </div>
+
+              {/* Image with Controlled Zoom */}
+              <div className="relative aspect-[16/10] overflow-hidden bg-zinc-900">
+                <img
+                  alt="ZaakiyV3RSE Observability and Intelligence Dashboard"
+                  className="w-full h-full object-cover transition-transform duration-700 ease-out hover:scale-105"
+                  decoding="async"
+                  loading="lazy"
+                  src="/assets/observability.jpg"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
+
+                {/* Conceptual Demonstration Overlay Badge (No unsubstantiated claims) */}
+                <div className="absolute bottom-4 start-4 end-4 flex items-center justify-between text-xs font-mono text-white/90 bg-black/60 backdrop-blur-md px-3.5 py-2 rounded border border-white/10">
+                  <span className="text-zinc-300">AGENT ORCHESTRATION</span>
+                  <span className="text-[#D5360C] font-bold">RESEARCH PROTOTYPE</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <img
-          alt="ZaakiyV3RSE Observability"
-          className="wide-image"
-          decoding="async"
-          loading="lazy"
-          src="/assets/observability.jpg"
-        />
-        <p className="tiny" style={{ marginTop: "15px", color: "#aaa" }}>
-          {t(ar, "FOUNDER / PRODUCT THINKING / INTELLIGENT SYSTEMS", "مؤسس / تفكير منتج / أنظمة ذكية")}
-        </p>
-      </div>
+      </LampContainer>
     </section>
   );
 }
 
 /* ──────────────────────────────────────────────────────────
-   11. FAQ: 09 / FAQ
+   11. FAQ: 09 / Frequently Asked Questions
    ────────────────────────────────────────────────────────── */
 export function ReferenceFaq() {
   const { locale } = useLocale();
   const ar = locale === "ar";
 
+  const faqs = [
+    {
+      q: t(ar, "What kind of technology challenges do you help solve?", "ما هي التحديات التقنية التي تساعد الفرق في حلها؟"),
+      a: t(
+        ar,
+        "I work with teams on solution architecture, full-stack platforms, enterprise integrations, AI-assisted automation, and technical leadership.",
+        "أعمل مع الفرق على عمارة الحلول، والمنصات المتكاملة، وتكاملات الأنظمة المؤسسية، والأتمتة بالذكاء الاصطناعي، والقيادة الهندسية."
+      ),
+    },
+    {
+      q: t(ar, "Do you collaborate with existing product and engineering teams?", "هل تتعاون مع فرق المنتجات والهندسة الحالية؟"),
+      a: t(
+        ar,
+        "Yes. I integrate with existing product, engineering and business teams, aligning architectural decisions with delivery outcomes and operational constraints.",
+        "نعم. أتكامل مع فرق المنتج والهندسة والأعمال الحالية، موائماً القرارات المعمارية مع نتائج التسليم والقيود التشغيلية."
+      ),
+    },
+    {
+      q: t(ar, "Which systems and platforms do you work with?", "ما هي الأنظمة والمنصات التي تعمل معها؟"),
+      a: t(
+        ar,
+        "The portfolio documents work with Azure Cloud, AWS, Kafka event streaming, Node.js, React, Java, SAP ERP, PIM platforms, and Kubernetes.",
+        "توثق محفظتي العمل مع سحابة Azure وAWS، وتدفق أحداث Kafka، وNode.js، وReact، وJava، وSAP ERP، ومنصات PIM، وKubernetes."
+      ),
+    },
+    {
+      q: t(ar, "Can you help modernize an existing legacy platform?", "هل يمكنك المساعدة في تحديث منصة قديمة قائمة؟"),
+      a: t(
+        ar,
+        "Yes. I assess legacy dependencies and recommend incremental modernization backed by observable migration milestones without disrupting live business.",
+        "نعم. أقوم بتقييم التبعيات القديمة واقتراح تحديث تدريجي مدعوم بمراحل انتقال خاضعة للمراقبة دون تعطيل الأعمال الحية."
+      ),
+    },
+    {
+      q: t(ar, "Do you work remotely and across regions?", "هل تعمل عن بُعد وعبر الأسواق الإقليمية؟"),
+      a: t(
+        ar,
+        "Yes. My portfolio documents successful production deliveries across nine regional markets, from Dubai and with distributed engineering teams.",
+        "نعم. توثق محفظتي تسليم مشاريع ناجحة في تسعة أسواق إقليمية، انطلاقاً من دبي ومع فرق عمل هندسية موزعة عالمياً."
+      ),
+    },
+  ];
+
   return (
-    <section id="faq" className="section shell">
-      <div className="qa">
-        <div>
-          <div className="labelrow">
-            <span className="spark">✳</span>
-            <span className="eyebrow">FAQ</span>
+    <section id="faq" className="relative w-full py-20 sm:py-24" aria-label="FAQ">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14">
+          <div className="lg:col-span-5">
+            <div className="inline-flex items-center gap-2 mb-3">
+              <span className="text-[#D5360C] text-sm">✳</span>
+              <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#AD2A09] dark:text-[#E6D5BD]">
+                FAQ
+              </span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight leading-[1.05] text-[#101010] dark:text-white">
+              {ar ? (
+                <>
+                  الأسئلة
+                  <br />
+                  <span className="text-[#D5360C]">الشائعة.</span>
+                </>
+              ) : (
+                <>
+                  FREQUENT
+                  <br />
+                  <span className="text-[#D5360C]">QUESTIONS.</span>
+                </>
+              )}
+            </h2>
           </div>
-          <h2 className="section-heading">
-            {ar ? (
-              <>
-                الأسئلة
-                <br />
-                الشائعة
-              </>
-            ) : (
-              <>
-                FREQUENT
-                <br />
-                QUESTIONS
-              </>
-            )}
-          </h2>
-        </div>
-        <div>
-          <details className="faqrow faq-details">
-            <summary>01. {t(ar, "What can you help our team deliver?", "ما الذي يمكنك مساعدة فريقنا في تسليمه؟")}</summary>
-            <p>
-              {t(
-                ar,
-                "I work with teams on solution architecture, full-stack platforms, enterprise integrations, AI-assisted automation, and technical leadership.",
-                "أعمل مع الفرق على عمارة الحلول، المنصات المتكاملة، تكاملات المؤسسات، الأتمتة بالذكاء الاصطناعي، والقيادة التقنية."
-              )}
-            </p>
-          </details>
-          <details className="faqrow faq-details">
-            <summary>02. {t(ar, "Do you collaborate with existing product teams?", "هل تتعاون مع فرق المنتجات الحالية؟")}</summary>
-            <p>
-              {t(
-                ar,
-                "Yes. I integrate with existing product, engineering and business teams, aligning decisions with delivery outcomes and operational constraints.",
-                "نعم. أتكامل مع فرق المنتج والهندسة والأعمال الحالية، موائماً القرارات مع نتائج التسليم والقيود التشغيلية."
-              )}
-            </p>
-          </details>
-          <details className="faqrow faq-details">
-            <summary>03. {t(ar, "Which systems and platforms do you work with?", "ما هي الأنظمة والمنصات التي تعمل معها؟")}</summary>
-            <p>
-              {t(
-                ar,
-                "The repository documents work with Azure, AWS, Kafka, Node.js, React, Java, SAP, PIM, API integration and Kubernetes.",
-                "توثق محفظتي العمل مع Azure و AWS و Kafka و Node.js و React و Java و SAP و PIM وتكاملات API و Kubernetes."
-              )}
-            </p>
-          </details>
-          <details className="faqrow faq-details">
-            <summary>04. {t(ar, "Can you help modernize an existing platform?", "هل يمكنك المساعدة في تحديث منصة قائمة؟")}</summary>
-            <p>
-              {t(
-                ar,
-                "Yes. I can assess legacy dependencies and recommend incremental modernization backed by observable migration milestones.",
-                "نعم. يمكنني تقييم التبعيات القديمة واقتراح تحديث تدريجي مدعوم بمراحل انتقال خاضعة للمراقبة."
-              )}
-            </p>
-          </details>
-          <details className="faqrow faq-details">
-            <summary>05. {t(ar, "Do you work remotely and across regions?", "هل تعمل عن بُعد وعبر المناطق؟")}</summary>
-            <p>
-              {t(
-                ar,
-                "Yes. My portfolio documents delivery across nine markets, from Dubai and with distributed teams.",
-                "نعم. توثق محفظتي تسليم مشاريع في تسعة أسواق، من دبي ومع فرق عمل موزعة عالمياً."
-              )}
-            </p>
-          </details>
+
+          <div className="lg:col-span-7 space-y-4">
+            {faqs.map((faq, i) => (
+              <GlassCard key={i} variant="light" className="p-5 sm:p-6">
+                <details className="group cursor-pointer">
+                  <summary className="flex items-center justify-between text-base sm:text-lg font-bold text-[#101010] dark:text-white list-none">
+                    <span>
+                      0{i + 1}. {faq.q}
+                    </span>
+                    <span className="text-[#D5360C] font-mono text-lg transition-transform group-open:rotate-45">
+                      +
+                    </span>
+                  </summary>
+                  <p className="mt-4 text-xs sm:text-[14px] leading-relaxed text-zinc-600 dark:text-zinc-300 font-normal">
+                    {faq.a}
+                  </p>
+                </details>
+              </GlassCard>
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -808,7 +1190,7 @@ export function ReferenceFaq() {
 }
 
 /* ──────────────────────────────────────────────────────────
-   12. CONTACT: BEYOND THE BRIEF / FOOTER CTA
+   12. CONTACT: Let's Build Something That Lasts
    ────────────────────────────────────────────────────────── */
 export function ReferenceContact() {
   const { locale } = useLocale();
@@ -827,62 +1209,121 @@ export function ReferenceContact() {
   };
 
   return (
-    <section id="contact" className="section shell">
-      <div className="footer-cta">
-        <form aria-label="Quick enquiry" className="contact-box" onSubmit={handleContactSubmit}>
-          <h4>SANU KHAN ®</h4>
-          <p className="tiny">{t(ar, "HAVE A PROJECT IN MIND?", "هل لديك مشروع في بالك؟")}</p>
-          <div className="formrow">
-            <label htmlFor="quick-index-name">{t(ar, "Your Name", "الاسم")}</label>
-            <input id="quick-index-name" name="name" placeholder="Jane Smith" required type="text" />
+    <section id="contact" className="relative w-full py-20 sm:py-24 md:py-28" aria-label="Contact">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <GlassCard
+          variant="dark"
+          className="bg-gradient-to-br from-[#121214] to-[#1c120f] border border-white/15 p-8 sm:p-12 md:p-16 text-white"
+        >
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+            {/* Form */}
+            <div className="lg:col-span-6">
+              <form aria-label="Quick enquiry" onSubmit={handleContactSubmit} className="space-y-4">
+                <div className="mb-4">
+                  <span className="text-xs font-mono font-bold tracking-widest text-[#D5360C] uppercase block mb-1">
+                    SANU KHAN ®
+                  </span>
+                  <h3 className="text-xl sm:text-2xl font-bold uppercase tracking-tight text-white">
+                    {t(ar, "هل لديك مشروع أو تحدٍ تقني؟", "HAVE A PROJECT IN MIND?")}
+                  </h3>
+                </div>
+
+                <div>
+                  <label htmlFor="quick-index-name" className="block text-xs font-mono uppercase tracking-wider text-zinc-400 mb-1.5">
+                    {t(ar, "الاسم", "Your Name")}
+                  </label>
+                  <input
+                    id="quick-index-name"
+                    name="name"
+                    placeholder="Jane Smith"
+                    required
+                    type="text"
+                    className="w-full rounded-lg border border-white/15 bg-white/5 px-4 py-3 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-[#D5360C]"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="quick-index-email" className="block text-xs font-mono uppercase tracking-wider text-zinc-400 mb-1.5">
+                    {t(ar, "البريد المهني", "Work Email")}
+                  </label>
+                  <input
+                    id="quick-index-email"
+                    name="email"
+                    placeholder="jane@company.com"
+                    required
+                    type="email"
+                    className="w-full rounded-lg border border-white/15 bg-white/5 px-4 py-3 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-[#D5360C]"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="quick-index-message" className="block text-xs font-mono uppercase tracking-wider text-zinc-400 mb-1.5">
+                    {t(ar, "تفاصيل المشروع", "Project Context")}
+                  </label>
+                  <textarea
+                    id="quick-index-message"
+                    name="message"
+                    rows={4}
+                    placeholder={t(ar, "أخبرني عما تقوم ببنائه...", "Tell me what you're building...")}
+                    required
+                    className="w-full rounded-lg border border-white/15 bg-white/5 px-4 py-3 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-[#D5360C] resize-none"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  className="w-full inline-flex items-center justify-between rounded-lg bg-[#D5360C] px-6 py-4 text-xs font-extrabold uppercase tracking-wider text-white shadow-lg hover:bg-[#AD2A09] transition-all"
+                >
+                  <span>{t(ar, "إرسال رسالة بريد إلكتروني", "SEND AN EMAIL")}</span>
+                  <span className="text-base">↗</span>
+                </button>
+              </form>
+            </div>
+
+            {/* Narrative / Callout */}
+            <div className="lg:col-span-6 flex flex-col justify-center space-y-6">
+              <div className="inline-flex items-center gap-2">
+                <span className="text-[#D5360C] text-sm">✳</span>
+                <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#E6D5BD]">
+                  {t(ar, "ما وراء الموجز", "BEYOND THE BRIEF")}
+                </span>
+              </div>
+
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tight leading-[1.02] text-white">
+                {ar ? (
+                  <>
+                    لنبنِ معاً
+                    <br />
+                    ما <span className="text-[#D5360C]">يدوم.</span>
+                  </>
+                ) : (
+                  <>
+                    LET'S BUILD
+                    <br />
+                    SOMETHING
+                    <br />
+                    THAT <span className="text-[#D5360C]">LASTS.</span>
+                  </>
+                )}
+              </h2>
+
+              <p className="text-base sm:text-lg text-zinc-300 leading-relaxed font-normal">
+                {t(
+                  ar,
+                  "من التكاملات المعقدة إلى المنصات الذكية، لنحول تحديك التقني القادم إلى حل هندسي موثوق يعمل بكفاءة.",
+                  "From complex integrations to intelligent platforms, let's turn your next technical challenge into a solution that works."
+                )}
+              </p>
+
+              <div className="pt-4 border-t border-white/10 flex items-center gap-4 text-xs font-mono text-zinc-400">
+                <span className="text-[#D5360C]">DIRECT:</span>
+                <a href="mailto:hello@sanukhan.dev" className="text-white hover:text-[#D5360C] underline">
+                  hello@sanukhan.dev
+                </a>
+              </div>
+            </div>
           </div>
-          <div className="formrow">
-            <label htmlFor="quick-index-email">{t(ar, "Work Email", "البريد المهني")}</label>
-            <input id="quick-index-email" name="email" placeholder="jane@company.com" required type="email" />
-          </div>
-          <div className="formrow">
-            <label htmlFor="quick-index-message">{t(ar, "Project Context", "تفاصيل المشروع")}</label>
-            <textarea
-              id="quick-index-message"
-              name="message"
-              placeholder={t(ar, "Tell me what you're building...", "أخبرني عما تقوم ببنائه...")}
-              required
-            />
-          </div>
-          <button className="button dark" type="submit" style={{ justifyContent: "space-between", width: "100%" }}>
-            {t(ar, "SEND AN EMAIL", "إرسال رسالة")} <span className="arrow">↗</span>
-          </button>
-        </form>
-        <div>
-          <div className="labelrow">
-            <span className="spark">✳</span>
-            <span className="eyebrow">{t(ar, "BEYOND THE BRIEF", "ما وراء الموجز")}</span>
-          </div>
-          <h2>
-            {ar ? (
-              <>
-                لنبنِ معاً
-                <br />
-                ما <span className="light-orange">يدوم.</span>
-              </>
-            ) : (
-              <>
-                LET'S BUILD
-                <br />
-                SOMETHING
-                <br />
-                THAT <span className="light-orange">LASTS.</span>
-              </>
-            )}
-          </h2>
-          <p className="lead" style={{ maxWidth: "430px" }}>
-            {t(
-              ar,
-              "Architecture, engineering and delivery. One thoughtful conversation at a time.",
-              "العمارة الهندسية والتطوير والتسليم. حوار بناء في كل خطوة."
-            )}
-          </p>
-        </div>
+        </GlassCard>
       </div>
     </section>
   );

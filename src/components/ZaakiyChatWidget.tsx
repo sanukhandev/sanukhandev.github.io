@@ -451,25 +451,19 @@ export default function ZaakiyChatWidget({
         </div>
       )}
 
-      {/* Floating Launcher Button Container with Perched Animated Cat */}
+      {/* Floating Launcher Button with Compact Glassmorphism */}
       <div className="zaakiy-chat__launcher relative inline-flex flex-col items-end">
-        <ZaakiyCat
-          isOpen={open}
-          onClick={() => setOpen((v) => !v)}
-          isArabic={isArabic}
-        />
-
         <button
           ref={launcherRef}
           type="button"
           onClick={() => setOpen((v) => !v)}
           className={cn(
-            "zaakiy-chat__launcher-button relative inline-flex h-11 items-center gap-2 rounded-full border-0 px-4 text-xs font-semibold text-white shadow-md transition-all focus:outline-none",
-            open && "opacity-95"
+            "zaakiy-chat__launcher-button inline-flex h-10 sm:h-11 items-center gap-2 rounded-full border border-white/20 bg-[#101010]/90 px-3.5 sm:px-4 text-xs font-bold uppercase tracking-wider text-white backdrop-blur-md shadow-xl transition-all hover:bg-[#D5360C] hover:border-white/40 focus:outline-none focus:ring-2 focus:ring-[#D5360C]",
+            open && "bg-[#D5360C] border-white/30"
           )}
           aria-label={isArabic ? "اسأل Zaakiy — فتح مساعد Zaakiy" : "Ask Zaakiy — Open Zaakiy Portfolio Assistant"}
         >
-          <MessageCircle className="h-4 w-4" />
+          <Bot className="h-4 w-4 text-[#E6D5BD]" />
           <span className="font-medium">{isArabic ? "اسأل Zaakiy" : "Ask Zaakiy"}</span>
         </button>
       </div>

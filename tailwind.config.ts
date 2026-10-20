@@ -149,6 +149,9 @@ export default {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      backgroundImage: {
+        "gradient-conic": "conic-gradient(var(--conic-position), var(--tw-gradient-stops))",
+      },
       transitionDuration: {
         2400: "2400ms",
       },

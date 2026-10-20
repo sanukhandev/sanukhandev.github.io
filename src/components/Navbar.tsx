@@ -16,16 +16,14 @@ interface NavItem {
 
 const SECTION_THRESHOLDS: SectionThreshold[] = [
   { id: "contact", href: "#contact" },
-  { id: "showcase", href: "#work" },
-  { id: "bento", href: "#about" },
-  { id: "faq", href: "#about" },
-  { id: "about", href: "#about" },
-  { id: "process", href: "#about" },
-  { id: "zaakiy", href: "#writing" },
+  { id: "faq", href: "#writing" },
+  { id: "zaakiy", href: "#work" },
   { id: "writing", href: "#writing" },
+  { id: "process", href: "#work" },
   { id: "work", href: "#work" },
+  { id: "expertise", href: "#services" },
   { id: "services", href: "#services" },
-  { id: "architecture", href: "#services" },
+  { id: "about", href: "#about" },
   { id: "home", href: "#home" },
 ];
 
@@ -229,7 +227,7 @@ function Navbar() {
     <>
       <header
         className={cn(
-          "sk-navbar fixed inset-x-0 top-0 z-50 transition-all duration-200 border-b border-border/80 bg-background/95 backdrop-blur-md shadow-xs text-foreground"
+          "sk-navbar fixed inset-x-0 top-0 z-50 transition-all duration-200 border-b border-black/[0.08] dark:border-white/10 bg-[#F7F7F5]/85 dark:bg-[#101010]/85 backdrop-blur-md shadow-xs text-foreground"
         )}
       >
         <div className="sk-shell">
@@ -263,9 +261,9 @@ function Navbar() {
                       onClick={(e) => handleNavClick(e, item)}
                       aria-current={isItemActive ? "page" : undefined}
                       className={cn(
-                        "text-[14.5px] font-medium transition-colors hover:text-accent focus-visible:text-accent",
+                        "text-[14.5px] font-medium transition-colors hover:text-accent focus-visible:text-accent relative py-1",
                         isItemActive
-                          ? "text-primary font-bold border-b-2 border-accent pb-0.5"
+                          ? "text-primary font-bold after:absolute after:bottom-0 after:inset-x-0 after:h-0.5 after:bg-accent"
                           : "text-foreground/80 hover:text-accent"
                       )}
                     >
@@ -316,18 +314,6 @@ function Navbar() {
                 <span>{isArabic ? "لنتحدث" : "Let's talk"}</span>
                 <ArrowRight className="h-4 w-4 rtl:rotate-180" />
               </a>
-
-              {/* Fullscreen Drawer Trigger (Video Menu Icon) */}
-              <button
-                type="button"
-                ref={toggleBtnRef}
-                onClick={() => setDrawerOpen(true)}
-                aria-label={isArabic ? "فتح القائمة الكاملة" : "Open full menu drawer"}
-                className="flex flex-col justify-center items-center h-10 w-10 gap-1.5 rounded-sm p-2 transition-transform hover:scale-105 text-foreground"
-              >
-                <span className="block h-0.5 w-6 bg-current" />
-                <span className="block h-0.5 w-4 self-end bg-current" />
-              </button>
             </div>
 
             {/* MOBILE: Triggers */}
