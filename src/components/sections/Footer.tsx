@@ -1,6 +1,7 @@
 import { memo } from "react";
 import { Link } from "react-router-dom";
 import { useLocale } from "@/hooks/use-locale";
+import { SanuKhanLogo } from "@/components/SanuKhanLogo";
 
 export function Footer() {
   const { locale } = useLocale();
@@ -11,6 +12,11 @@ export function Footer() {
       <footer className="footer shell">
         <div className="footgrid">
           <div>
+            <div className="mb-5">
+              <Link to="/" aria-label="SanuKhan.dev" className="inline-block transition-opacity hover:opacity-90">
+                <SanuKhanLogo />
+              </Link>
+            </div>
             <p>
               {ar ? (
                 <>
@@ -73,8 +79,6 @@ export function Footer() {
             </a>
           </div>
         </div>
-
-        <div className="giantword">SanuKhan®</div>
       </footer>
 
       <div className="copyright">

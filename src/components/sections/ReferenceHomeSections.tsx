@@ -19,7 +19,7 @@ export function ReferenceHero() {
     <section id="home" className="home-hero">
       <div className="hero-bgtext">ENGINEERING FIRST.</div>
       <div className="hero-kicker">
-        <span className="eyebrow">{t(ar, "TECH LEAD / SOLUTION ARCHITECT", "قائد تقني / مهندس حلول")}</span>
+        <span className="eyebrow">{t(ar, "TECH LEAD / SOLUTIONING EXPERT", "قائد تقني / خبير حلول")}</span>
         <p>
           {t(
             ar,
@@ -135,7 +135,7 @@ export function ReferenceImpact() {
 
             <div className="space-y-4 text-base sm:text-lg text-[#2a2723] dark:text-zinc-300 leading-relaxed font-normal">
               <p>
-                {t(ar, "I'm a Dubai-based Tech Lead and Solution Architect with 13+ years of experience building and integrating digital platforms.", "أنا قائد تقني ومهندس حلول معمارية مقيم في دبي بخبرة تزيد عن 13 عاماً في بناء وتكامل المنصات الرقمية.")}
+                {t(ar, "I'm a Dubai-based Tech Lead and Solutioning Expert with 13+ years of experience building and integrating digital platforms.", "أنا قائد تقني وخبير حلول مقيم في دبي بخبرة تزيد عن 13 عاماً في بناء وتكامل المنصات الرقمية.")}
               </p>
               <p>
                 {t(ar, "I work across architecture, full-stack engineering, cloud infrastructure, and automation—turning difficult business requirements into systems that teams can confidently operate and evolve.", "أعمل عبر هندسة المعمارية، والتطوير الشامل، والبنية السحابية، والأتمتة — محولاً متطلبات الأعمال المعقدة إلى أنظمة تعتمد عليها الفرق بثقة وتطورها باستمرار.")}
@@ -198,7 +198,7 @@ export function ReferenceImpact() {
             <GlassCard variant="light" className="p-3 sm:p-4">
               <div className="relative aspect-[4/5] overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800">
                 <img
-                  alt={t(ar, "Sanu Khan — Tech Lead & Solution Architect", "صورة سانو خان الهندسية")}
+                  alt={t(ar, "Sanu Khan — Tech Lead & Solutioning Expert", "صورة سانو خان الهندسية")}
                   className="w-full h-full object-cover object-top filter grayscale contrast-[1.08] transition-transform duration-500 hover:scale-[1.02]"
                   decoding="async"
                   loading="lazy"

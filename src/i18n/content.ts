@@ -7,7 +7,7 @@ export const navLabels: Record<Locale, Record<string, string>> = {
 
 /** Hand-authored Arabic editorial translations. Published article titles remain in English. */
 const entries: [string, string][] = [
-  ['TECH LEAD / SOLUTION ARCHITECT', 'قائد تقني / مهندس حلول'],
+  ['TECH LEAD / SOLUTIONING EXPERT', 'قائد تقني / خبير حلول'],
   ['ARCHITECTING CONNECTED SYSTEMS.', 'هندسة أنظمة مترابطة.'],
   ['Architecting connected systems. Turning difficult technical challenges into dependable outcomes.', 'أصمم أنظمة مترابطة، وأحوّل التحديات التقنية المعقدة إلى حلول يمكن الاعتماد عليها.'],
   ['EXPLORE MY STORY', 'اكتشف مسيرتي'],

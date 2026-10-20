@@ -54,8 +54,8 @@ export default function HeroSection({ className = "" }: { className?: string }) 
                 <span className="text-[#f7f7f5] text-xs">✳</span>
                 <span className="text-[11px] sm:text-xs font-bold uppercase tracking-widest text-white">
                   {ar
-                    ? "سانو خان / قائد تقني ومهندس حلول"
-                    : "SANU KHAN / TECH LEAD & SOLUTION ARCHITECT"}
+                    ? "سانو خان / قائد تقني وخبير حلول"
+                    : "SANU KHAN / TECH LEAD & SOLUTIONING EXPERT"}
                 </span>
               </div>
 
