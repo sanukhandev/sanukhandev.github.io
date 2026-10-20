@@ -35,7 +35,7 @@ export function AboutPage() {
     },
     {
       symbol: "✳",
-      title: ar ? "مبادرة ZAAKIYV3RSE" : "ZAAKIYV3RSE INITIATIVE",
+      title: ar ? "مبادرة ZAAKIY V3RSE" : "ZAAKIY V3RSE INITIATIVE",
       desc: ar
         ? "الذكاء التشغيلي والأتمتة المتقدمة وتطوير أدوات هندسية مبتكرة."
         : "Operational intelligence, automation and product experimentation.",

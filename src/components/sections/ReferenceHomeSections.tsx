@@ -936,8 +936,14 @@ export function ReferenceZaakiy() {
             </span>
           </div>
 
-          <div className="text-xs sm:text-sm font-mono font-bold uppercase tracking-[0.3em] text-[#D5360C] mb-3">
-            ZaakiyV3RSE
+          <div
+            dir="ltr"
+            className="inline-flex items-baseline justify-center gap-1 text-2xl sm:text-3xl md:text-4xl tracking-tight mb-3 select-none"
+          >
+            <span className="font-normal text-[#F7F7F5]">Zaakiy</span>
+            <span className="font-extrabold text-[#EF470D] drop-shadow-[0_2px_14px_rgba(239,71,13,0.4)]">
+              V3RSE
+            </span>
           </div>
 
           <h2 className="bg-gradient-to-b from-white via-[#f7f7f5] to-[#c8c8c4] py-1 bg-clip-text text-center text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black uppercase tracking-tight text-transparent max-w-5xl leading-[1.06]">
@@ -997,8 +1003,11 @@ export function ReferenceZaakiy() {
                   <span className="w-2.5 h-2.5 rounded-full bg-red-500/80 inline-block" />
                   <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80 inline-block" />
                   <span className="w-2.5 h-2.5 rounded-full bg-green-500/80 inline-block" />
-                  <span className="ms-2 text-[11px] uppercase tracking-wider text-zinc-300">
-                    ZaakiyV3RSE // Observability Hub
+                  <span className="ms-2 text-xs tracking-wider text-zinc-300 inline-flex items-center" dir="ltr">
+                    <span className="font-normal text-zinc-100">Zaakiy</span>
+                    <span className="font-bold text-[#EF470D]">V3RSE</span>
+                    <span className="text-zinc-500 mx-1.5 font-mono">//</span>
+                    <span className="text-[11px] font-mono uppercase text-zinc-400">Observability Hub</span>
                   </span>
                 </div>
                 <div className="flex items-center gap-2">

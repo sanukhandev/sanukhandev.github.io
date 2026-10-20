@@ -441,7 +441,10 @@ export default function ZaakiyChatWidget({
             <div className="flex items-center justify-between text-[11px] text-muted-foreground px-1">
               <span>
                 {isArabic ? "مدعوم بواسطة " : "Powered by "}
-                <span className="brand-zaakiy font-semibold text-accent">ZaakiyV3RSE</span>
+                <span className="inline-flex items-baseline font-sans font-medium" dir="ltr">
+                  <span className="text-foreground font-normal">Zaakiy</span>
+                  <span className="text-[#EF470D] font-bold">V3RSE</span>
+                </span>
               </span>
               <span className="font-mono text-[10px]">
                 {isArabic ? "وضع المعرض" : "Portfolio mode"}
