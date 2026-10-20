@@ -946,10 +946,10 @@ export function ReferenceZaakiy() {
 
           <div
             dir="ltr"
-            className="inline-flex items-baseline justify-center gap-1 text-2xl sm:text-3xl md:text-4xl tracking-tight mt-4 sm:mt-5 select-none"
+            className="inline-flex items-baseline justify-center gap-1 text-2xl sm:text-3xl md:text-4xl font-anta font-bold tracking-wider mt-4 sm:mt-5 select-none"
           >
-            <span className="font-normal text-[#F7F7F5]">Zaakiy</span>
-            <span className="font-extrabold text-[#EF470D] drop-shadow-[0_2px_14px_rgba(239,71,13,0.4)]">
+            <span className="text-white">Zaakiy</span>
+            <span className="text-[#EF470D] drop-shadow-[0_2px_14px_rgba(239,71,13,0.4)]">
               V3RSE
             </span>
           </div>
@@ -1003,11 +1003,11 @@ export function ReferenceZaakiy() {
                   <span className="w-2.5 h-2.5 rounded-full bg-red-500/80 inline-block" />
                   <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80 inline-block" />
                   <span className="w-2.5 h-2.5 rounded-full bg-green-500/80 inline-block" />
-                  <span className="ms-2 text-xs tracking-wider text-zinc-300 inline-flex items-center" dir="ltr">
-                    <span className="font-normal text-zinc-100">Zaakiy</span>
-                    <span className="font-bold text-[#EF470D]">V3RSE</span>
-                    <span className="text-zinc-500 mx-1.5 font-mono">//</span>
-                    <span className="text-[11px] font-mono uppercase text-zinc-400">OpsInt Hub</span>
+                  <span className="ms-2 text-xs tracking-wider text-zinc-300 inline-flex items-center font-anta font-bold" dir="ltr">
+                    <span className="text-white">Zaakiy</span>
+                    <span className="text-[#EF470D]">V3RSE</span>
+                    <span className="text-zinc-500 mx-1.5 font-mono font-normal">//</span>
+                    <span className="text-[11px] font-mono font-normal uppercase text-zinc-400">OpsInt Hub</span>
                   </span>
                 </div>
                 <div className="flex items-center gap-2">

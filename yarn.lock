@@ -221,6 +221,11 @@
     "@eslint/core" "^0.17.0"
     levn "^0.4.1"
 
+"@fontsource/anta@^5.3.0":
+  version "5.3.0"
+  resolved "https://registry.npmjs.org/@fontsource/anta/-/anta-5.3.0.tgz#2aaa071ed9150936933f81735ef542a8164230cf"
+  integrity sha512-ZVMDmZoZRShTb78NsiD8wpLX3yOG+OmjGZBuaKm0ImpUy+ZUn4V/Pvpay4qc/LQLV7tfZFXHUY1fZX3c1JTSNA==
+
 "@fontsource/ibm-plex-mono@^5.3.0":
   version "5.3.0"
   resolved "https://registry.npmjs.org/@fontsource/ibm-plex-mono/-/ibm-plex-mono-5.3.0.tgz"
