@@ -31,16 +31,12 @@ export default function HeroSection({ className = "" }: { className?: string }) 
       aria-label={ar ? "القسم الرئيسي" : "Hero Introduction"}
       className={`relative w-full bg-[#D5360C] text-white overflow-hidden font-sans min-h-[92vh] flex flex-col justify-center pt-24 pb-16 lg:pt-28 lg:pb-20 ${className}`}
     >
-      {/* Background Subtle Texture */}
+      {/* Background Subtle Depth Overlay (Zero external network latency) */}
       <div
-        className="absolute inset-0 z-0 bg-cover bg-center opacity-20 mix-blend-overlay pointer-events-none"
+        className="absolute inset-0 z-0 opacity-40 mix-blend-overlay pointer-events-none"
         style={{
-          backgroundImage:
-            "url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1920&auto=format&fit=crop')",
-          maskImage:
-            "linear-gradient(180deg, transparent, black 10%, black 85%, transparent)",
-          WebkitMaskImage:
-            "linear-gradient(180deg, transparent, black 10%, black 85%, transparent)",
+          background:
+            "radial-gradient(ellipse 80% 60% at 75% 20%, rgba(255,255,255,0.25) 0%, transparent 70%), radial-gradient(ellipse 70% 50% at 20% 85%, rgba(0,0,0,0.2) 0%, transparent 70%)",
         }}
       />
 

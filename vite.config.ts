@@ -199,6 +199,9 @@ export default defineConfig(({ command, mode }) => {
             if (normalizedId.includes("node_modules/react-router")) {
               return "routingData";
             }
+            if (normalizedId.includes("node_modules/framer-motion/")) {
+              return "motion";
+            }
             // @radix-ui and lucide-react are deliberately NOT lumped into a
             // single "ui" chunk: one entry-level Radix import would then drag
             // every Radix package and icon into the critical path. Left to
