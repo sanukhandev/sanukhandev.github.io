@@ -77,7 +77,7 @@ export function ReferenceProof() {
   return (
     <div
       className="w-full overflow-hidden border-b border-black/[0.08] dark:border-white/10 bg-[#F7F7F5]/80 dark:bg-[#101010]/80 backdrop-blur-md py-4 sm:py-5"
-      aria-label={t(ar, "مجالات الخبرة الهندسية", "Technical Capabilities Marquee")}
+      aria-label={t(ar, "Technical Capabilities Marquee", "مجالات الخبرة الهندسية")}
     >
       <div className="proof-ticker-track flex items-center whitespace-nowrap">
         {items.map((role, idx) => (
@@ -104,13 +104,13 @@ export function ReferenceImpact() {
     <section
       id="about"
       className="relative w-full py-20 sm:py-24 md:py-28"
-      aria-label={t(ar, "عني — ما وراء الشيفرة", "About Me — Beyond Code")}
+      aria-label={t(ar, "About Me — Beyond Code", "عني — ما وراء الشيفرة")}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center gap-2 mb-3">
           <span className="text-[#D5360C] text-sm">✳</span>
           <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#AD2A09] dark:text-[#E6D5BD]">
-            {t(ar, "01 / حولي — ما وراء الشيفرة", "01 / ABOUT ME — BEYOND CODE")}
+            {t(ar, "01 / ABOUT ME — BEYOND CODE", "01 / حولي — ما وراء الشيفرة")}
           </span>
         </div>
 
@@ -135,32 +135,20 @@ export function ReferenceImpact() {
 
             <div className="space-y-4 text-base sm:text-lg text-[#2a2723] dark:text-zinc-300 leading-relaxed font-normal">
               <p>
-                {t(
-                  ar,
-                  "أنا قائد تقني ومهندس حلول معمارية مقيم في دبي بخبرة تزيد عن 13 عاماً في بناء وتكامل المنصات الرقمية.",
-                  "I'm a Dubai-based Tech Lead and Solution Architect with 13+ years of experience building and integrating digital platforms."
-                )}
+                {t(ar, "I'm a Dubai-based Tech Lead and Solution Architect with 13+ years of experience building and integrating digital platforms.", "أنا قائد تقني ومهندس حلول معمارية مقيم في دبي بخبرة تزيد عن 13 عاماً في بناء وتكامل المنصات الرقمية.")}
               </p>
               <p>
-                {t(
-                  ar,
-                  "أعمل عبر هندسة المعمارية، والتطوير الشامل، والبنية السحابية، والأتمتة — محولاً متطلبات الأعمال المعقدة إلى أنظمة تعتمد عليها الفرق بثقة وتطورها باستمرار.",
-                  "I work across architecture, full-stack engineering, cloud infrastructure, and automation—turning difficult business requirements into systems that teams can confidently operate and evolve."
-                )}
+                {t(ar, "I work across architecture, full-stack engineering, cloud infrastructure, and automation—turning difficult business requirements into systems that teams can confidently operate and evolve.", "أعمل عبر هندسة المعمارية، والتطوير الشامل، والبنية السحابية، والأتمتة — محولاً متطلبات الأعمال المعقدة إلى أنظمة تعتمد عليها الفرق بثقة وتطورها باستمرار.")}
               </p>
               <p className="font-semibold text-[#101010] dark:text-white">
-                {t(
-                  ar,
-                  "يجمع أسلوبي بين الملكية التقنية، والتنفيذ العملي المتقن، والتعاون الوثيق بين فرق الهندسة والأعمال.",
-                  "My approach combines technical ownership, practical execution, and collaboration across engineering and business teams."
-                )}
+                {t(ar, "My approach combines technical ownership, practical execution, and collaboration across engineering and business teams.", "يجمع أسلوبي بين الملكية التقنية، والتنفيذ العملي المتقن، والتعاون الوثيق بين فرق الهندسة والأعمال.")}
               </p>
             </div>
 
             {/* Core Capabilities Chips */}
             <div className="pt-4 border-t border-black/[0.08] dark:border-white/10">
               <div className="text-xs font-mono font-bold tracking-wider uppercase text-zinc-500 dark:text-zinc-400 mb-3">
-                {t(ar, "القدرات الهندسية الأساسية", "CORE CAPABILITIES")}
+                {t(ar, "CORE CAPABILITIES", "القدرات الهندسية الأساسية")}
               </div>
               <div className="flex flex-wrap gap-2">
                 {[
@@ -184,7 +172,7 @@ export function ReferenceImpact() {
                 className="group inline-flex items-center gap-2 text-xs sm:text-sm font-black uppercase tracking-wider text-[#101010] dark:text-white hover:text-[#D5360C] transition-colors"
               >
                 <span className="border-b-2 border-current pb-0.5">
-                  {t(ar, "استكشف أعمالي", "EXPLORE SELECTED WORK")}
+                  {t(ar, "EXPLORE SELECTED WORK", "استكشف أعمالي")}
                 </span>
                 <span className="text-[#D5360C] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
                   ↗
@@ -196,7 +184,7 @@ export function ReferenceImpact() {
                 className="group inline-flex items-center gap-2 text-xs sm:text-sm font-black uppercase tracking-wider text-[#101010] dark:text-white hover:text-[#D5360C] transition-colors"
               >
                 <span className="border-b-2 border-current pb-0.5">
-                  {t(ar, "لنتواصل معاً", "LET'S CONNECT")}
+                  {t(ar, "LET'S CONNECT", "لنتواصل معاً")}
                 </span>
                 <span className="text-[#D5360C] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
                   ↗
@@ -210,7 +198,7 @@ export function ReferenceImpact() {
             <GlassCard variant="light" className="p-3 sm:p-4">
               <div className="relative aspect-[4/5] overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800">
                 <img
-                  alt={t(ar, "صورة سانو خان الهندسية", "Sanu Khan — Tech Lead & Solution Architect")}
+                  alt={t(ar, "Sanu Khan — Tech Lead & Solution Architect", "صورة سانو خان الهندسية")}
                   className="w-full h-full object-cover object-top filter grayscale contrast-[1.08] transition-transform duration-500 hover:scale-[1.02]"
                   decoding="async"
                   loading="lazy"
@@ -227,14 +215,10 @@ export function ReferenceImpact() {
             {/* "How I Work" Glass Statement */}
             <GlassCard variant="light" className="p-5 sm:p-6">
               <div className="text-xs font-mono font-bold uppercase tracking-wider text-[#D5360C] mb-2">
-                {t(ar, "// فلسفة العمل", "// HOW I WORK")}
+                {t(ar, "// HOW I WORK", "// فلسفة العمل")}
               </div>
               <p className="text-xs sm:text-[13.5px] text-[#2a2723] dark:text-zinc-300 leading-relaxed font-normal">
-                {t(
-                  ar,
-                  "أصمم الأنظمة بوضوح كافٍ للتطور، وبمتانة تضمن الثقة في أصعب ظروف الإنتاج. الاستراتيجية تصبح ذات معنى حقيقي فقط عندما تعمل بنجاح مع مستخدمين فعليين.",
-                  "Clear architecture boundaries, pragmatic engineering standards, and direct cross-functional collaboration. Making technology deliver predictable business outcomes."
-                )}
+                {t(ar, "Clear architecture boundaries, pragmatic engineering standards, and direct cross-functional collaboration. Making technology deliver predictable business outcomes.", "أصمم الأنظمة بوضوح كافٍ للتطور، وبمتانة تضمن الثقة في أصعب ظروف الإنتاج. الاستراتيجية تصبح ذات معنى حقيقي فقط عندما تعمل بنجاح مع مستخدمين فعليين.")}
               </p>
             </GlassCard>
           </div>
@@ -298,7 +282,7 @@ export function ReferenceServices() {
     <section
       id="services"
       className="relative w-full py-20 sm:py-24 md:py-28"
-      aria-label={t(ar, "الخدمات الهندسية", "Engineering Services")}
+      aria-label={t(ar, "Engineering Services", "الخدمات الهندسية")}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <header className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-12 sm:pb-16 border-b border-black/[0.08] dark:border-white/10">
@@ -306,7 +290,7 @@ export function ReferenceServices() {
             <div className="inline-flex items-center gap-2 mb-3">
               <span className="text-[#D5360C] text-sm">✳</span>
               <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#AD2A09] dark:text-[#E6D5BD]">
-                {t(ar, "02 / الخدمات الهندسية", "02 / WHAT I SOLVE")}
+                {t(ar, "02 / WHAT I SOLVE", "02 / الخدمات الهندسية")}
               </span>
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tight leading-[1.05] text-[#101010] dark:text-white">
@@ -327,17 +311,13 @@ export function ReferenceServices() {
           </div>
           <div className="max-w-md flex flex-col items-start gap-4">
             <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed font-normal">
-              {t(
-                ar,
-                "من القرارات المعمارية والتخطيط التقني إلى تسليم بيئات الإنتاج، أساعد الفرق على ربط المنصات وبناء أنظمة رقمية موثوقة.",
-                "From architecture decisions to production delivery, I help teams connect platforms, simplify complexity, and build reliable digital systems."
-              )}
+              {t(ar, "From architecture decisions to production delivery, I help teams connect platforms, simplify complexity, and build reliable digital systems.", "من القرارات المعمارية والتخطيط التقني إلى تسليم بيئات الإنتاج، أساعد الفرق على ربط المنصات وبناء أنظمة رقمية موثوقة.")}
             </p>
             <Link
               to="/services"
               className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#D5360C] hover:underline"
             >
-              <span>{t(ar, "استكشف جميع الخدمات", "VIEW ALL SERVICES")}</span>
+              <span>{t(ar, "VIEW ALL SERVICES", "استكشف جميع الخدمات")}</span>
               <span>↗</span>
             </Link>
           </div>
@@ -375,7 +355,7 @@ export function ReferenceServices() {
               </div>
 
               <div className="pt-6 mt-6 border-t border-black/[0.06] dark:border-white/10 flex items-center justify-between text-xs font-bold text-[#D5360C]">
-                <span>{t(ar, "معايير إنتاجية معتمدة", "ENTERPRISE-GRADE")}</span>
+                <span>{t(ar, "ENTERPRISE-GRADE", "معايير إنتاجية معتمدة")}</span>
                 <span>↗</span>
               </div>
             </GlassCard>
@@ -400,13 +380,9 @@ export function ReferenceProjects() {
       slug: "/projects/enterprise-retail-integration",
       image: "/assets/commerce.jpg",
       index: "01 ↗",
-      tag: t(ar, "التجارة المؤسسية // تدفق الأحداث", "ENTERPRISE COMMERCE // EVENT STREAMING"),
-      title: t(ar, "شبكة تكامل التجارة الإقليمية", "Enterprise Retail Integration"),
-      desc: t(
-        ar,
-        "بنية تحتية موزعة عالية الإنتاجية لمزامنة الطلبات والكتالوجات وتنسيق المخزون في الوقت الفعلي عبر 9 أسواق إقليمية.",
-        "High-throughput distributed event streaming backbone orchestrating multi-region order workflows, inventory sync, and peak-scale resilience across 9 markets."
-      ),
+      tag: t(ar, "ENTERPRISE COMMERCE // EVENT STREAMING", "التجارة المؤسسية // تدفق الأحداث"),
+      title: t(ar, "Enterprise Retail Integration", "شبكة تكامل التجارة الإقليمية"),
+      desc: t(ar, "High-throughput distributed event streaming backbone orchestrating multi-region order workflows, inventory sync, and peak-scale resilience across 9 markets.", "بنية تحتية موزعة عالية الإنتاجية لمزامنة الطلبات والكتالوجات وتنسيق المخزون في الوقت الفعلي عبر 9 أسواق إقليمية."),
       stack: ["APACHE KAFKA", "SAP ERP", "MICROSERVICES"],
     },
     {
@@ -414,13 +390,9 @@ export function ReferenceProjects() {
       slug: "/projects/airline-retailing-aggregation",
       image: "/assets/systems.jpg",
       index: "02 ↗",
-      tag: t(ar, "توزيع الطيران // معمارية B2B", "AIRLINE NDC // WORKFLOW FABRIC"),
-      title: t(ar, "منصة تجميع حجوزات الطيران", "Airline Retailing & Aggregation"),
-      desc: t(
-        ar,
-        "بنية توزيع طيران متعددة الموردين تربط بروتوكول NDC بحجوزات المؤسسات مع زمن استجابة منخفض وموثوقية عالية.",
-        "Connected travel distribution workflows, low-latency multi-supplier flight aggregation, and resilient B2B booking services."
-      ),
+      tag: t(ar, "AIRLINE NDC // WORKFLOW FABRIC", "توزيع الطيران // معمارية B2B"),
+      title: t(ar, "Airline Retailing & Aggregation", "منصة تجميع حجوزات الطيران"),
+      desc: t(ar, "Connected travel distribution workflows, low-latency multi-supplier flight aggregation, and resilient B2B booking services.", "بنية توزيع طيران متعددة الموردين تربط بروتوكول NDC بحجوزات المؤسسات مع زمن استجابة منخفض وموثوقية عالية."),
       stack: ["SYSTEMS ARCHITECTURE", "NDC PROTOCOL", "AZURE CLOUD"],
     },
     {
@@ -428,13 +400,9 @@ export function ReferenceProjects() {
       slug: "/projects/zaakiy-v3rse",
       image: "/assets/observability.jpg",
       index: "03 ↗",
-      tag: t(ar, "ذكاء تشغيلي // وكلاء RAG", "OPERATIONAL INTELLIGENCE // AI AGENTS"),
-      title: t(ar, "منظومة Zaakiy V3RSE للذكاء التشغيلي", "Zaakiy V3RSE Architecture"),
-      desc: t(
-        ar,
-        "استكشاف تطبيقي لكيفية توظيف وكلاء الذكاء الاصطناعي والمعرفة المؤسسية لتحويل الإشارات التشغيلية إلى قرارات واعية ونتائج قابلة للتحقق.",
-        "An exploration of how AI agents, enterprise knowledge, and connected systems turn operational signals into contextual decisions and verifiable outcomes."
-      ),
+      tag: t(ar, "OPERATIONAL INTELLIGENCE // AI AGENTS", "ذكاء تشغيلي // وكلاء RAG"),
+      title: t(ar, "Zaakiy V3RSE Architecture", "منظومة Zaakiy V3RSE للذكاء التشغيلي"),
+      desc: t(ar, "An exploration of how AI agents, enterprise knowledge, and connected systems turn operational signals into contextual decisions and verifiable outcomes.", "استكشاف تطبيقي لكيفية توظيف وكلاء الذكاء الاصطناعي والمعرفة المؤسسية لتحويل الإشارات التشغيلية إلى قرارات واعية ونتائج قابلة للتحقق."),
       stack: ["ENTERPRISE RAG", "AI AGENTS", "TELEMETRY"],
     },
   ];
@@ -443,7 +411,7 @@ export function ReferenceProjects() {
     <section
       id="work"
       className="relative w-full py-20 sm:py-24 md:py-28"
-      aria-label={t(ar, "أعمال مختارة", "Selected Work")}
+      aria-label={t(ar, "Selected Work", "أعمال مختارة")}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <header className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-12 sm:pb-16 border-b border-black/[0.08] dark:border-white/10">
@@ -451,7 +419,7 @@ export function ReferenceProjects() {
             <div className="inline-flex items-center gap-2 mb-3">
               <span className="text-[#D5360C] text-sm">✳</span>
               <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#AD2A09] dark:text-[#E6D5BD]">
-                {t(ar, "03 / أعمال مختارة", "03 / SELECTED WORK")}
+                {t(ar, "03 / SELECTED WORK", "03 / أعمال مختارة")}
               </span>
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tight leading-[1.05] text-[#101010] dark:text-white">
@@ -472,17 +440,13 @@ export function ReferenceProjects() {
           </div>
           <div className="max-w-md flex flex-col items-start gap-4">
             <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed font-normal">
-              {t(
-                ar,
-                "أعمال مختارة عبر التجارة المؤسسية، والمنصات الموزعة، وهندسة التكامل، والذكاء الاصطناعي التشغيلي.",
-                "Selected work across enterprise commerce, distributed platforms, integration architecture, and intelligent automation."
-              )}
+              {t(ar, "Selected work across enterprise commerce, distributed platforms, integration architecture, and intelligent automation.", "أعمال مختارة عبر التجارة المؤسسية، والمنصات الموزعة، وهندسة التكامل، والذكاء الاصطناعي التشغيلي.")}
             </p>
             <Link
               to="/projects"
               className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#D5360C] hover:underline"
             >
-              <span>{t(ar, "جميع المشاريع وحالات الدراسة", "VIEW ALL CASE STUDIES")}</span>
+              <span>{t(ar, "VIEW ALL CASE STUDIES", "جميع المشاريع وحالات الدراسة")}</span>
               <span>↗</span>
             </Link>
           </div>
@@ -539,7 +503,7 @@ export function ReferenceProjects() {
                   to={proj.slug}
                   className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#D5360C] hover:underline"
                 >
-                  <span>{t(ar, "عرض حالة الدراسة", "View Case Study")}</span>
+                  <span>{t(ar, "View Case Study", "عرض حالة الدراسة")}</span>
                   <span>↗</span>
                 </Link>
               </div>
@@ -597,14 +561,14 @@ export function ReferenceProcess() {
     <section
       id="process"
       className="relative w-full py-20 sm:py-24 md:py-28"
-      aria-label={t(ar, "منهجية العمل", "Engineering Approach")}
+      aria-label={t(ar, "Engineering Approach", "منهجية العمل")}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-14">
           <div className="inline-flex items-center gap-2 mb-3">
             <span className="text-[#D5360C] text-sm">✳</span>
             <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#AD2A09] dark:text-[#E6D5BD]">
-              {t(ar, "04 / منهجية العمل", "04 / APPROACH")}
+              {t(ar, "04 / APPROACH", "04 / منهجية العمل")}
             </span>
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight leading-[1.05] text-[#101010] dark:text-white">
@@ -623,11 +587,7 @@ export function ReferenceProcess() {
             )}
           </h2>
           <p className="mt-4 text-sm sm:text-base text-zinc-600 dark:text-zinc-400">
-            {t(
-              ar,
-              "نهج عملي يربط سياق الأعمال بالقرارات التقنية ونتائج بيئات الإنتاج الحقيقية.",
-              "A practical approach that connects business context, technical decisions, and production outcomes."
-            )}
+            {t(ar, "A practical approach that connects business context, technical decisions, and production outcomes.", "نهج عملي يربط سياق الأعمال بالقرارات التقنية ونتائج بيئات الإنتاج الحقيقية.")}
           </p>
         </div>
 
@@ -674,7 +634,7 @@ export function ReferenceBento() {
             <div className="inline-flex items-center gap-2 mb-2">
               <span className="text-[#D5360C] text-sm">✳</span>
               <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#AD2A09] dark:text-[#E6D5BD]">
-                {t(ar, "05 / نتائج مثبتة", "05 / PROOF OVER PROMISES")}
+                {t(ar, "05 / PROOF OVER PROMISES", "05 / نتائج مثبتة")}
               </span>
             </div>
             <h3 className="text-2xl sm:text-3xl font-black uppercase tracking-tight text-[#101010] dark:text-white">
@@ -693,19 +653,19 @@ export function ReferenceBento() {
             <div>
               <div className="text-3xl sm:text-4xl font-black text-[#D5360C]">13+</div>
               <div className="text-xs font-bold uppercase tracking-wider text-[#101010] dark:text-white mt-1">
-                {t(ar, "سنوات خبرة", "Years Experience")}
+                {t(ar, "Years Experience", "سنوات خبرة")}
               </div>
             </div>
             <div>
               <div className="text-3xl sm:text-4xl font-black text-[#D5360C]">100+</div>
               <div className="text-xs font-bold uppercase tracking-wider text-[#101010] dark:text-white mt-1">
-                {t(ar, "أنظمة إنتاجية", "Delivered Systems")}
+                {t(ar, "Delivered Systems", "أنظمة إنتاجية")}
               </div>
             </div>
             <div>
               <div className="text-3xl sm:text-4xl font-black text-[#D5360C]">9</div>
               <div className="text-xs font-bold uppercase tracking-wider text-[#101010] dark:text-white mt-1">
-                {t(ar, "أسواق مدعومة", "Regional Markets")}
+                {t(ar, "Regional Markets", "أسواق مدعومة")}
               </div>
             </div>
           </div>
@@ -754,7 +714,7 @@ export function ReferenceTestimonials() {
             <div className="inline-flex items-center gap-2 mb-3">
               <span className="text-[#D5360C] text-sm">✳</span>
               <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#AD2A09] dark:text-[#E6D5BD]">
-                {t(ar, "06 / المسؤولية المشتركة", "06 / TECHNICAL LEADERSHIP")}
+                {t(ar, "06 / TECHNICAL LEADERSHIP", "06 / المسؤولية المشتركة")}
               </span>
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight leading-[1.05] text-[#101010] dark:text-white">
@@ -774,11 +734,7 @@ export function ReferenceTestimonials() {
             </h2>
           </div>
           <p className="max-w-md text-sm sm:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed font-normal">
-            {t(
-              ar,
-              "الهندسة القوية لا تقتصر على تصميم أنظمة أفضل فحسب؛ بل تجعل القرارات واضحة وتضمن استدامة الحلول.",
-              "Strong engineering is not only about designing better systems. It's about making decisions clear, enabling teams, and ensuring solutions survive beyond deployment."
-            )}
+            {t(ar, "Strong engineering is not only about designing better systems. It's about making decisions clear, enabling teams, and ensuring solutions survive beyond deployment.", "الهندسة القوية لا تقتصر على تصميم أنظمة أفضل فحسب؛ بل تجعل القرارات واضحة وتضمن استدامة الحلول.")}
           </p>
         </header>
 
@@ -817,7 +773,7 @@ export function ReferenceWriting() {
       title: "API Gateway: The Bouncer Your Microservices Didn’t Know They Needed",
       tag: "ARCHITECTURE",
       image: "/assets/backend.jpg",
-      desc: t(ar, "نظرة عملية على تأمين ومراقبة بوابات واجهات البرمجة.", "A practical look at secure, observable API entry points."),
+      desc: t(ar, "A practical look at secure, observable API entry points.", "نظرة عملية على تأمين ومراقبة بوابات واجهات البرمجة."),
       date: "OCT 2026",
     },
     {
@@ -825,7 +781,7 @@ export function ReferenceWriting() {
       title: "DuckDB: The SQLite of Analytics You Didn’t Know You Needed",
       tag: "DATA ENGINEERING",
       image: "/assets/ai.jpg",
-      desc: t(ar, "تحليلات محلية سريعة دون أعباء إدارة البنية التحتية.", "Fast local analytics without infrastructure overhead."),
+      desc: t(ar, "Fast local analytics without infrastructure overhead.", "تحليلات محلية سريعة دون أعباء إدارة البنية التحتية."),
       date: "SEP 2026",
     },
     {
@@ -833,7 +789,7 @@ export function ReferenceWriting() {
       title: "JavaScript Proxy Explained: The Secret Agents of Your Objects",
       tag: "JAVASCRIPT",
       image: "/assets/frontend.jpg",
-      desc: t(ar, "التعامل الديناميكي مع الكائنات، والتحقق، والتفاعلية.", "Dynamic object handling, validation, and reactivity."),
+      desc: t(ar, "Dynamic object handling, validation, and reactivity.", "التعامل الديناميكي مع الكائنات، والتحقق، والتفاعلية."),
       date: "AUG 2026",
     },
   ];
@@ -842,7 +798,7 @@ export function ReferenceWriting() {
     <section
       id="writing"
       className="relative w-full py-20 sm:py-24 md:py-28"
-      aria-label={t(ar, "مقالات وملاحظات هندسية", "Engineering Notes")}
+      aria-label={t(ar, "Engineering Notes", "مقالات وملاحظات هندسية")}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <header className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-12 sm:pb-16 border-b border-black/[0.08] dark:border-white/10">
@@ -850,7 +806,7 @@ export function ReferenceWriting() {
             <div className="inline-flex items-center gap-2 mb-3">
               <span className="text-[#D5360C] text-sm">✳</span>
               <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#AD2A09] dark:text-[#E6D5BD]">
-                {t(ar, "07 / مقالات وملاحظات", "07 / WRITING")}
+                {t(ar, "07 / WRITING", "07 / مقالات وملاحظات")}
               </span>
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tight leading-[1.05] text-[#101010] dark:text-white">
@@ -871,17 +827,13 @@ export function ReferenceWriting() {
           </div>
           <div className="max-w-md flex flex-col items-start gap-4">
             <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed font-normal">
-              {t(
-                ar,
-                "تفكير معماري، ومفاضلات تقنية، ودروس مستفادة من بناء وإدارة الأنظمة الرقمية الحديثة.",
-                "Practical thinking on software architecture, engineering trade-offs, automation, and the systems behind modern digital products."
-              )}
+              {t(ar, "Practical thinking on software architecture, engineering trade-offs, automation, and the systems behind modern digital products.", "تفكير معماري، ومفاضلات تقنية، ودروس مستفادة من بناء وإدارة الأنظمة الرقمية الحديثة.")}
             </p>
             <Link
               to="/blog"
               className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#D5360C] hover:underline"
             >
-              <span>{t(ar, "قراءة جميع المقالات على DEV.TO", "VIEW ALL WRITING")}</span>
+              <span>{t(ar, "VIEW ALL WRITING", "قراءة جميع المقالات على DEV.TO")}</span>
               <span>↗</span>
             </Link>
           </div>
@@ -927,7 +879,7 @@ export function ReferenceWriting() {
                   to={art.slug}
                   className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#D5360C] hover:underline"
                 >
-                  <span>{t(ar, "اقرأ المقال", "Read Article")}</span>
+                  <span>{t(ar, "Read Article", "اقرأ المقال")}</span>
                   <span>↗</span>
                 </Link>
               </div>
@@ -964,11 +916,7 @@ export function ReferenceZaakiy() {
     <section
       id="zaakiy"
       className="relative w-full"
-      aria-label={t(
-        ar,
-        "أبحاث مميزة // الذكاء التشغيلي",
-        "SIGNATURE RESEARCH / OPERATIONAL INTELLIGENCE"
-      )}
+      aria-label={t(ar, "SIGNATURE RESEARCH / OPERATIONAL INTELLIGENCE", "أبحاث مميزة // الذكاء التشغيلي")}
     >
       <LampContainer
         colorVariant="orange"
@@ -1056,7 +1004,7 @@ export function ReferenceZaakiy() {
                 <div className="flex items-center gap-2">
                   <span className="inline-block w-2 h-2 rounded-full bg-[#D5360C] animate-pulse" />
                   <span className="text-[10px] text-zinc-400 font-mono">
-                    {t(ar, "عرض حي", "LIVE TELEMETRY")}
+                    {t(ar, "LIVE TELEMETRY", "عرض حي")}
                   </span>
                 </div>
               </div>
@@ -1224,13 +1172,13 @@ export function ReferenceContact() {
                     SANU KHAN ®
                   </span>
                   <h3 className="text-xl sm:text-2xl font-bold uppercase tracking-tight text-white">
-                    {t(ar, "هل لديك مشروع أو تحدٍ تقني؟", "HAVE A PROJECT IN MIND?")}
+                    {t(ar, "HAVE A PROJECT IN MIND?", "هل لديك مشروع أو تحدٍ تقني؟")}
                   </h3>
                 </div>
 
                 <div>
                   <label htmlFor="quick-index-name" className="block text-xs font-mono uppercase tracking-wider text-zinc-400 mb-1.5">
-                    {t(ar, "الاسم", "Your Name")}
+                    {t(ar, "Your Name", "الاسم")}
                   </label>
                   <input
                     id="quick-index-name"
@@ -1244,7 +1192,7 @@ export function ReferenceContact() {
 
                 <div>
                   <label htmlFor="quick-index-email" className="block text-xs font-mono uppercase tracking-wider text-zinc-400 mb-1.5">
-                    {t(ar, "البريد المهني", "Work Email")}
+                    {t(ar, "Work Email", "البريد المهني")}
                   </label>
                   <input
                     id="quick-index-email"
@@ -1258,13 +1206,13 @@ export function ReferenceContact() {
 
                 <div>
                   <label htmlFor="quick-index-message" className="block text-xs font-mono uppercase tracking-wider text-zinc-400 mb-1.5">
-                    {t(ar, "تفاصيل المشروع", "Project Context")}
+                    {t(ar, "Project Context", "تفاصيل المشروع")}
                   </label>
                   <textarea
                     id="quick-index-message"
                     name="message"
                     rows={4}
-                    placeholder={t(ar, "أخبرني عما تقوم ببنائه...", "Tell me what you're building...")}
+                    placeholder={t(ar, "Tell me what you're building...", "أخبرني عما تقوم ببنائه...")}
                     required
                     className="w-full rounded-lg border border-white/15 bg-white/5 px-4 py-3 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-[#D5360C] resize-none"
                   />
@@ -1274,7 +1222,7 @@ export function ReferenceContact() {
                   type="submit"
                   className="w-full inline-flex items-center justify-between rounded-lg bg-[#D5360C] px-6 py-4 text-xs font-extrabold uppercase tracking-wider text-white shadow-lg hover:bg-[#AD2A09] transition-all"
                 >
-                  <span>{t(ar, "إرسال رسالة بريد إلكتروني", "SEND AN EMAIL")}</span>
+                  <span>{t(ar, "SEND AN EMAIL", "إرسال رسالة بريد إلكتروني")}</span>
                   <span className="text-base">↗</span>
                 </button>
               </form>
@@ -1285,7 +1233,7 @@ export function ReferenceContact() {
               <div className="inline-flex items-center gap-2">
                 <span className="text-[#D5360C] text-sm">✳</span>
                 <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#E6D5BD]">
-                  {t(ar, "ما وراء الموجز", "BEYOND THE BRIEF")}
+                  {t(ar, "BEYOND THE BRIEF", "ما وراء الموجز")}
                 </span>
               </div>
 
@@ -1308,11 +1256,7 @@ export function ReferenceContact() {
               </h2>
 
               <p className="text-base sm:text-lg text-zinc-300 leading-relaxed font-normal">
-                {t(
-                  ar,
-                  "من التكاملات المعقدة إلى المنصات الذكية، لنحول تحديك التقني القادم إلى حل هندسي موثوق يعمل بكفاءة.",
-                  "From complex integrations to intelligent platforms, let's turn your next technical challenge into a solution that works."
-                )}
+                {t(ar, "From complex integrations to intelligent platforms, let's turn your next technical challenge into a solution that works.", "من التكاملات المعقدة إلى المنصات الذكية، لنحول تحديك التقني القادم إلى حل هندسي موثوق يعمل بكفاءة.")}
               </p>
 
               <div className="pt-4 border-t border-white/10 flex items-center gap-4 text-xs font-mono text-zinc-400">
