@@ -925,7 +925,7 @@ export function ReferenceZaakiy() {
       >
         {/* Row 1: Full-width Centered Identity & Lamp-illuminated Headline */}
         <div className="w-full text-center flex flex-col items-center mb-10 sm:mb-14">
-          <div className="inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-500/10 px-4 py-1.5 backdrop-blur-md mb-3.5">
+          <div className="inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-500/10 px-4 py-1.5 backdrop-blur-md mb-4 sm:mb-5">
             <span className="text-[#D5360C] text-xs">✳</span>
             <span className="text-[11px] sm:text-xs font-extrabold uppercase tracking-widest text-[#E6D5BD]">
               {t(
@@ -936,16 +936,6 @@ export function ReferenceZaakiy() {
             </span>
           </div>
 
-          <div
-            dir="ltr"
-            className="inline-flex items-baseline justify-center gap-1 text-2xl sm:text-3xl md:text-4xl tracking-tight mb-3 select-none"
-          >
-            <span className="font-normal text-[#F7F7F5]">Zaakiy</span>
-            <span className="font-extrabold text-[#EF470D] drop-shadow-[0_2px_14px_rgba(239,71,13,0.4)]">
-              V3RSE
-            </span>
-          </div>
-
           <h2 className="bg-gradient-to-b from-white via-[#f7f7f5] to-[#c8c8c4] py-1 bg-clip-text text-center text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black uppercase tracking-tight text-transparent max-w-5xl leading-[1.06]">
             {t(
               ar,
@@ -953,6 +943,16 @@ export function ReferenceZaakiy() {
               "أبعد من مجرد استقرار الأنظمة. نحو ذكاء يحقق النتائج."
             )}
           </h2>
+
+          <div
+            dir="ltr"
+            className="inline-flex items-baseline justify-center gap-1 text-2xl sm:text-3xl md:text-4xl tracking-tight mt-4 sm:mt-5 select-none"
+          >
+            <span className="font-normal text-[#F7F7F5]">Zaakiy</span>
+            <span className="font-extrabold text-[#EF470D] drop-shadow-[0_2px_14px_rgba(239,71,13,0.4)]">
+              V3RSE
+            </span>
+          </div>
         </div>
 
         {/* Row 2: 1/2 Split (Side 1: Text & Capabilities, Side 2: Observability Architecture Visual) */}
@@ -1007,7 +1007,7 @@ export function ReferenceZaakiy() {
                     <span className="font-normal text-zinc-100">Zaakiy</span>
                     <span className="font-bold text-[#EF470D]">V3RSE</span>
                     <span className="text-zinc-500 mx-1.5 font-mono">//</span>
-                    <span className="text-[11px] font-mono uppercase text-zinc-400">Observability Hub</span>
+                    <span className="text-[11px] font-mono uppercase text-zinc-400">OpsInt Hub</span>
                   </span>
                 </div>
                 <div className="flex items-center gap-2">
