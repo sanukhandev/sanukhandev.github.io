@@ -50,6 +50,12 @@ export default function ProjectsPage() {
             </p>
           </header>
 
+          <Link to="/projects/agentic-rag-implementation" className="block rounded-xl border border-border bg-secondary/20 p-6 sm:p-8 hover:border-accent transition-colors">
+            <span className="font-mono text-xs uppercase tracking-widest text-accent">Featured / AI architecture</span>
+            <h2 className="mt-3 text-2xl font-bold text-primary">Agentic RAG Implementation</h2>
+            <p className="mt-3 text-sm leading-relaxed text-secondary">Multi-tenant knowledge ingestion, pgvector retrieval, tenant-scoped AI conversations and n8n workflow orchestration.</p>
+            <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-accent">{isArabic ? "عرض المشروع" : "Explore the implementation"} <ArrowRight size={16} /></span>
+          </Link>
           {/* Flagship Case Studies List */}
           <div className="space-y-12">
             {caseStudies.map((cs, idx) => (
