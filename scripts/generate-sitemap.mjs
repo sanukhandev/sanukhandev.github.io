@@ -10,6 +10,7 @@ const staticRoutes = [
   "/",
   "/about",
   "/projects",
+  "/projects/agentic-rag-implementation",
   "/projects/enterprise-retail-integration",
   "/projects/airline-retailing-aggregation",
   "/projects/automotive-omnichannel-platform",
