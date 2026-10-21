@@ -142,6 +142,28 @@ const staticRoutes = [
     ],
   },
   {
+    route: "/projects/agentic-rag-implementation",
+    canonicalPath: "/projects/agentic-rag-implementation",
+    title: "Agentic RAG Implementation — Multi-Tenant AI Architecture | Sanu Khan",
+    description: "Technical case study of a multi-tenant RAG platform with document ingestion, pgvector retrieval, n8n orchestration and tenant-scoped AI.",
+    keywords: "Agentic RAG, RAG implementation, multi-tenant AI, pgvector, n8n, AI architecture, Sanu Khan",
+    ogType: "article",
+    h1: "Agentic RAG — Knowledge into Action",
+    summary: "A multi-tenant AI platform designed for approved enterprise knowledge, grounded conversations and orchestrated business workflows.",
+    sections: [
+      "Knowledge Ingestion and Embeddings",
+      "Tenant-Scoped pgvector Retrieval",
+      "n8n Intent Orchestration and Governance",
+    ],
+    schemas: [
+      breadcrumbSchema([
+        { name: "Home", path: "/" },
+        { name: "Projects", path: "/projects" },
+        { name: "Agentic RAG Implementation", path: "/projects/agentic-rag-implementation" },
+      ]),
+    ],
+  },
+  {
     route: "/projects/enterprise-retail-integration",
     canonicalPath: "/projects/enterprise-retail-integration",
     title: "Enterprise Retail Integration — Case Study | Sanu Khan",
