@@ -67,6 +67,7 @@ const NodejsApiBestPracticesPage = lazyWithRetry(
   () => import("./pages/blog/NodejsApiBestPracticesPage.tsx"),
 );
 const FaqPage = lazyWithRetry(() => import("./pages/FaqPage.tsx"));
+const RagImplementationPage = lazyWithRetry(() => import("./pages/RagImplementationPage.tsx"));
 const CaseStudyDetailPage = lazyWithRetry(
   () => import("./pages/CaseStudyDetailPage.tsx"),
 );
@@ -157,6 +158,7 @@ const AppShell = () => {
               <Route path="/tools" element={<ToolsIndex />} />
               <Route path="/about" element={<AboutPage />} />
               <Route path="/projects" element={<ProjectsPage />} />
+              <Route path="/projects/agentic-rag-implementation" element={<RagImplementationPage />} />
               <Route
                 path="/projects/:slug"
                 element={<CaseStudyDetailPage />}
