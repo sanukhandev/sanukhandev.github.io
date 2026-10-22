@@ -2,6 +2,7 @@ import { memo, type FormEvent } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/sections/Footer";
 import SeoMeta from "@/components/SeoMeta";
+import { ResponsiveImage } from "@/components/ui/ResponsiveImage";
 import { buildBreadcrumbListSchema, buildProfilePageSchema } from "@/lib/schema";
 import { useLocale } from "@/hooks/use-locale";
 import { getLocalizedPageSeo } from "@/lib/seo";
@@ -145,11 +146,19 @@ export function AboutPage() {
           </div>
         </header>
 
-        <div className="photo-strip">
-          <img alt="Architecture systems" decoding="async" loading="lazy" src="/assets/architecture.jpg" />
-          <img alt="AI workflow automation" decoding="async" loading="lazy" src="/assets/ai.jpg" />
-          <img alt="Commerce orchestration" decoding="async" loading="lazy" src="/assets/commerce.jpg" />
-          <img alt="Enterprise system integration" decoding="async" loading="lazy" src="/assets/integration.jpg" />
+        <div className="photo-strip grid grid-cols-2 md:grid-cols-4 gap-3 my-6">
+          <div className="overflow-hidden rounded-xl bg-zinc-900 aspect-[16/10]">
+            <ResponsiveImage alt="Architecture systems" src="/assets/architecture.jpg" className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
+          </div>
+          <div className="overflow-hidden rounded-xl bg-zinc-900 aspect-[16/10]">
+            <ResponsiveImage alt="AI workflow automation" src="/assets/ai.jpg" className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
+          </div>
+          <div className="overflow-hidden rounded-xl bg-zinc-900 aspect-[16/10]">
+            <ResponsiveImage alt="Commerce orchestration" src="/assets/commerce.jpg" className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
+          </div>
+          <div className="overflow-hidden rounded-xl bg-zinc-900 aspect-[16/10]">
+            <ResponsiveImage alt="Enterprise system integration" src="/assets/integration.jpg" className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
+          </div>
         </div>
 
         <section className="section shell">

@@ -68,6 +68,11 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
           }}
           {...rest}
         />
+        {/* Specular inner hairline border for 2026 Calm Precision */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 rounded-[inherit] ring-1 ring-inset ring-black/10 dark:ring-white/10 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)] z-10"
+        />
       </div>
     );
   }
@@ -106,6 +111,11 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
           ...style,
         }}
         {...rest}
+      />
+      {/* Specular inner hairline border for 2026 Calm Precision */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 rounded-[inherit] ring-1 ring-inset ring-black/10 dark:ring-white/10 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)] z-10"
       />
     </div>
   );

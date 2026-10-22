@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/sections/Footer";
 import SeoMeta from "@/components/SeoMeta";
+import { ResponsiveImage } from "@/components/ui/ResponsiveImage";
 import { getLocalizedCaseStudies } from "@/data/caseStudies";
 import { buildBreadcrumbListSchema, buildProjectsCollectionSchema } from "@/lib/schema";
 import { useLocale } from "@/hooks/use-locale";
@@ -120,19 +121,20 @@ export function ProjectsPage() {
             }}
           >
             {projects.map((project, index) => (
-              <article key={project.title} className="project-card dark-card" style={{ padding: "16px" }}>
+              <article key={project.title} className="project-card dark-card relative rounded-2xl p-4 shadow-xl shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)]">
+                {/* Corner registration crosshairs for architectural precision */}
+                <div aria-hidden="true" className="absolute top-2 start-2.5 text-[10px] font-mono text-zinc-400/40 select-none">+</div>
+                <div aria-hidden="true" className="absolute top-2 end-2.5 text-[10px] font-mono text-zinc-400/40 select-none">+</div>
+
                 <Link
                   to={`/projects/${project.slug}`}
-                  className="block overflow-hidden"
+                  className="block overflow-hidden rounded-xl bg-zinc-900"
                   aria-label={`Read case study for ${project.title}`}
                 >
-                  <img
+                  <ResponsiveImage
                     src={project.image}
                     alt={`Conceptual illustration for ${project.title}`}
-                    loading="lazy"
-                    decoding="async"
-                    className="project-image"
-                    style={{ width: "100%", height: "280px", objectFit: "cover" }}
+                    className="w-full aspect-[16/10] object-cover transition-transform duration-500 hover:scale-105"
                   />
                 </Link>
                 <div style={{ paddingTop: "18px" }}>

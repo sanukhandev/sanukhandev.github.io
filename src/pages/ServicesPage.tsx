@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/sections/Footer";
 import SeoMeta from "@/components/SeoMeta";
+import { ResponsiveImage } from "@/components/ui/ResponsiveImage";
 import { useLocale } from "@/hooks/use-locale";
 import { getLocalizedPageSeo } from "@/lib/seo";
 import { buildBreadcrumbListSchema } from "@/lib/schema";
@@ -164,7 +165,9 @@ export function ServicesPage() {
                     {ar ? "ناقش هذا المجال" : "DISCUSS THIS AREA"} <span className="arrow">↗</span>
                   </Link>
                 </div>
-                <img alt={cap.title} decoding="async" loading="lazy" src={cap.img} />
+                <div className="overflow-hidden rounded-xl bg-zinc-900 aspect-[16/10] w-full max-w-[280px]">
+                  <ResponsiveImage alt={cap.title} src={cap.img} className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
+                </div>
               </div>
             ))}
           </div>
