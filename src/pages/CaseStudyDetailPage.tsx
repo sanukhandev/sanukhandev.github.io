@@ -1,19 +1,38 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams, Link, Navigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/sections/Footer";
-import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
+import { ResponsiveImage } from "@/components/ui/ResponsiveImage";
 import SeoMeta from "@/components/SeoMeta";
 import { getLocalizedCaseStudy, getLocalizedCaseStudies } from "@/data/caseStudies";
 import { ArrowLeft, ArrowRight, CheckCircle2, ShieldAlert, Cpu, GitBranch, Terminal, Sparkles, BookOpen } from "lucide-react";
 import { buildBreadcrumbListSchema, buildCreativeWorkSchema, buildTechArticleSchema } from "@/lib/schema";
 import { useLocale } from "@/hooks/use-locale";
 
+const CASE_STUDY_IMAGES: Record<string, string> = {
+  "zaakiy-v3rse": "/assets/systems.jpg",
+  "enterprise-retail-integration": "/assets/commerce.jpg",
+  "automotive-omnichannel-platform": "/assets/platform.jpg",
+  "airline-retailing-aggregation": "/assets/observability.jpg",
+  "real-estate-erp-architecture": "/assets/architecture.jpg",
+  "garage-management-and-diagnostics": "/assets/automation.jpg",
+  "headless-healthcare-digital-experience": "/assets/integration.jpg",
+};
+
 export default function CaseStudyDetailPage() {
   const { slug } = useParams<{ slug: string }>();
   const { locale } = useLocale();
   const isArabic = locale === "ar";
   const [viewMode, setViewMode] = useState<"overview" | "architecture">("overview");
+
+  // Instantly scroll to top when opening or switching case studies
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "instant" as ScrollBehavior,
+    });
+  }, [slug]);
 
   const caseStudy = getLocalizedCaseStudy(slug || "", locale);
   const allCaseStudies = getLocalizedCaseStudies(locale);
@@ -141,8 +160,13 @@ export default function CaseStudyDetailPage() {
           </div>
 
           {/* Cover Media Slot */}
-          <div className="mt-8 mb-10 portfolio-article-cover">
-            <MediaPlaceholder kind="project" />
+          <div className="mt-8 mb-10 overflow-hidden rounded-2xl bg-zinc-950 border border-border/80 shadow-xl shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)]">
+            <ResponsiveImage
+              src={CASE_STUDY_IMAGES[caseStudy.slug] || "/assets/systems.jpg"}
+              alt={caseStudy.title}
+              className="w-full aspect-[16/9] object-cover"
+              priority
+            />
           </div>
 
           {viewMode === "overview" ? (

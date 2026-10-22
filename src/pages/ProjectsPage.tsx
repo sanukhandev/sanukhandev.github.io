@@ -37,24 +37,14 @@ export function ProjectsPage() {
         : "Kafka and Azure Event Hubs based event processing for multi-region product, pricing, and inventory synchronization.",
     },
     {
-      slug: "zaakiy-v3rse",
-      title: "AI-Assisted Workflow Automation",
-      ar: "أتمتة سير العمل بمساعدة الذكاء الاصطناعي",
-      image: "/assets/automation.jpg",
-      category: "AI / PROCESS",
+      slug: "airline-retailing-aggregation",
+      title: "Airline NDC Retailing & Aggregation Fabric",
+      ar: "منصة تجميع حجوزات الطيران والتوزيع الجديد",
+      image: "/assets/observability.jpg",
+      category: "DISTRIBUTED / AIRLINE",
       detail: ar
-        ? "أتمتة وتنسيق يراعي السياق لتقليل التدخل اليدوي وتحسين الاستجابة التشغيلية السريعة."
-        : "Context-aware automation and orchestration to reduce manual coordination and improve operational response.",
-    },
-    {
-      slug: "enterprise-retail-integration",
-      title: "Enterprise Integration Fabric",
-      ar: "منصة تكامل الأنظمة المؤسسية",
-      image: "/assets/integration.jpg",
-      category: "INTEGRATIONS / AZURE",
-      detail: ar
-        ? "طبقات تحقق وتكامل بدون خوادم Serverless تربط منصات الأعمال بعقود خدمات مرنة ومقاومة للأعطال."
-        : "Serverless validation and integration layers connecting business platforms with resilient service contracts.",
+        ? "بنية توزيع وتجميع حجوزات طيران عالية الكثافة تدمج معايير NDC وتدفق الأسعار والحجوزات الفورية بدون تأخير."
+        : "High-throughput airline retailing aggregation fabric integrating IATA NDC standards, real-time fare streaming, and resilient booking pipelines.",
     },
     {
       slug: "automotive-omnichannel-platform",
@@ -67,14 +57,24 @@ export function ProjectsPage() {
         : "Tenant-aware service architecture with separated deployment, scaling, and observability boundaries.",
     },
     {
-      slug: "airline-retailing-aggregation",
-      title: "Real-Time Observability & Monitoring Layer",
-      ar: "منظومة المراقبة والاستدلال اللحظي",
-      image: "/assets/observability.jpg",
-      category: "CLOUD / TELEMETRY",
+      slug: "real-estate-erp-architecture",
+      title: "AI-Assisted Real Estate ERP Architecture",
+      ar: "معمارية تخطيط موارد المؤسسات العقارية المدعومة بالذكاء الاصطناعي",
+      image: "/assets/architecture.jpg",
+      category: "ENTERPRISE / ERP",
       detail: ar
-        ? "تتبع موزع ومراقبة موحدة تمكن من الاكتشاف الاستباقي والتشخيص الفوري للأعطال المعقدة."
-        : "Distributed tracing and consolidated monitoring enabling proactive detection and diagnostics.",
+        ? "منصة عمليات عقارية متعددة الفروع مع عزل الصلاحيات، وتدفقات مالية قابلة للتدقيق، ومساعد ذكاء اصطناعي واعي بالأذونات."
+        : "Branch-aware real estate operations platform with strict domain invariants, auditable ledger workflows, and permission-aware AI tooling.",
+    },
+    {
+      slug: "headless-healthcare-digital-experience",
+      title: "Headless Healthcare Experience & Integration",
+      ar: "منصة الرعاية الصحية الرقمية والتكامل السريري",
+      image: "/assets/integration.jpg",
+      category: "HEALTHCARE / INTEGRATIONS",
+      detail: ar
+        ? "طبقات تكامل بدون خوادم Serverless تربط منصات الرعاية الصحية بعقود خدمات مرنة ومقاومة للأعطال مع مراعاة حماية البيانات."
+        : "Serverless validation and integration layers connecting healthcare platforms with resilient, compliant, and privacy-first service contracts.",
     },
   ];
 

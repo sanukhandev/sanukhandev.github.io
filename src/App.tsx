@@ -12,6 +12,7 @@ import { LocaleProvider } from "@/hooks/use-locale";
 import { trackEvent, trackPageView } from "@/utils/analytics";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { lazyWithRetry } from "@/utils/lazyWithRetry";
+import ScrollToTop from "@/components/ScrollToTop";
 
 const runWhenIdle = (fn: () => void) => {
   if (typeof window === "undefined") {
@@ -150,6 +151,7 @@ function AnalyticsTracker() {
 const AppShell = () => {
   return (
     <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+        <ScrollToTop />
         <AnalyticsTracker />
         <ErrorBoundary>
           <Suspense fallback={routeFallback}>
