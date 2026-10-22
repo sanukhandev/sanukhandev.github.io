@@ -1,6 +1,6 @@
 import { type FormEvent } from "react";
 import { Link } from "react-router-dom";
-import { ArrowUpRight, ArrowRight, Layers, Bot, Workflow, Cpu } from "lucide-react";
+import { Layers, Bot, Workflow, Cpu } from "lucide-react";
 import { LampContainer } from "@/components/ui/lamp";
 import { useLocale } from "@/hooks/use-locale";
 import { GlassCard, GlassBadge } from "@/components/ui/glass-card";
@@ -8,53 +8,7 @@ import { ResponsiveImage } from "@/components/ui/ResponsiveImage";
 import { useSectionData } from "@/lib/i18n";
 
 /* ──────────────────────────────────────────────────────────
-   1. HERO SECTION (Fallback if directly referenced)
-   ────────────────────────────────────────────────────────── */
-export function ReferenceHero() {
-  const { locale } = useLocale();
-  const ar = locale === "ar";
-  const hero = useSectionData("hero");
-
-  return (
-    <section id="home" className="home-hero">
-      <div className="hero-bgtext">ENGINEERING FIRST.</div>
-      <div className="hero-kicker">
-        <span className="eyebrow">{hero.eyebrow}</span>
-        <p>{hero.subheading}</p>
-        <Link className="button white" to="/about">
-          <span>{hero.exploreWork}</span> <span className="arrow">↗</span>
-        </Link>
-      </div>
-      <div className="hero-statement">
-        <div className="hero-statement-text">
-          {hero.headlinePrefix} {hero.headlineSuffix} {hero.headlineHighlight}
-        </div>
-      </div>
-      <div className="hero-proj">
-        <ResponsiveImage
-          alt="Architecture concept"
-          src="/assets/architecture.jpg"
-          className="w-full h-full object-cover"
-        />
-        <div className="card-caption">
-          <span>{ar ? "هندسة الحلول / 01" : "ARCHITECTURE / 01"}</span>
-          <span>↗</span>
-        </div>
-      </div>
-      <div className="hero-title">
-        {ar ? <>سانو<br />خان</> : <>SANU<br />KHAN</>}
-      </div>
-      <div className="hero-bottom">
-        <span>{ar ? "مقيم في دبي · أعمل عبر الحدود" : "BASED IN DUBAI · WORKING ACROSS BORDERS"}</span>
-        <span>{ar ? "مرّر للاستكشاف ↓" : "SCROLL TO EXPLORE ↓"}</span>
-        <span>EN / AR · LIGHT / DARK</span>
-      </div>
-    </section>
-  );
-}
-
-/* ──────────────────────────────────────────────────────────
-   2. PROOF / MARQUEE TICKER: Refined Technical Strip
+   1. PROOF / MARQUEE TICKER: Refined Technical Strip
    ────────────────────────────────────────────────────────── */
 export function ReferenceProof() {
   const proof = useSectionData("proof");

@@ -91,11 +91,11 @@ const getProfessionalFallbackResponse = (query: string, email: string, isArabic 
   }
 
   if (q.includes("contact") || q.includes("email") || q.includes("hire") || q.includes("reach") || q.includes("touch")) {
-    return `You can reach Sanu directly via email at ${email} or connect on LinkedIn. He is based in Dubai, UAE and open to solution architecture and engineering leadership roles.`;
+    return `You can reach Sanu directly via email at ${email} or connect on LinkedIn. He is based in Dubai, UAE and open to solutioning expert and engineering leadership roles.`;
   }
 
   if (q.includes("skill") || q.includes("stack") || q.includes("tech") || q.includes("node") || q.includes("react")) {
-    return "Technical Specializations:\n• Architecture: Solution Architecture, Domain-Driven Design, Microservices, Event-Driven Systems\n• Engineering: Node.js, TypeScript, React, Azure Cloud, Kafka, REST/GraphQL APIs, PIM/ERP Integrations";
+    return "Technical Specializations:\n• Architecture: Solutioning Expert, Domain-Driven Design, Microservices, Event-Driven Systems\n• Engineering: Node.js, TypeScript, React, Azure Cloud, Kafka, REST/GraphQL APIs, PIM/ERP Integrations";
   }
 
   return `Sanu Khan is a Solution Expert & Platform Engineering Leader based in Dubai, UAE with 13+ years of experience.\n\nFeel free to ask about his enterprise case studies or reach out directly at ${email}.`;
