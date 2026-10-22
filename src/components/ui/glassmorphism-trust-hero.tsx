@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import {
   ArrowUpRight,
   Layers,
@@ -24,27 +25,26 @@ function parseStatValue(raw: string) {
   };
 }
 
-/** Smooth cubic ease-out counting animation component with SSR/prerender safety */
+/** Smooth quartic ease-out counting animation component with SSR/prerender safety */
 function AnimatedCounter({ value }: { value: string }) {
   const { prefix, target, suffix } = useMemo(() => parseStatValue(value), [value]);
-  // Default to target so static prerender & SEO crawlers see the full number immediately
   const [count, setCount] = useState(target);
 
   useEffect(() => {
-    // Check reduced motion preference
     if (typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setCount(target);
       return;
     }
 
     setCount(0);
-    const duration = 1400; // 1.4s smooth ease
+    const duration = 2000; // 2s serene, smooth ease
     const startTime = performance.now();
 
     const update = (now: number) => {
       const elapsed = now - startTime;
       const progress = Math.min(elapsed / duration, 1);
-      // Cubic ease-out
-      const eased = 1 - Math.pow(1 - progress, 3);
+      // Silky quartic ease-out for a smooth breeze deceleration
+      const eased = 1 - Math.pow(1 - progress, 4);
       setCount(Math.round(eased * target));
 
       if (progress < 1) {
@@ -65,60 +65,18 @@ function AnimatedCounter({ value }: { value: string }) {
   );
 }
 
+// Gentle, organic ease curve for fluid breeze motion
+const breezeEase = [0.16, 1, 0.3, 1] as const;
+
 export default function HeroSection({ className = "" }: { className?: string }) {
   const { locale } = useLocale();
   const ar = locale === "ar";
   const hero = useSectionData("hero");
+  const prefersReduced = useReducedMotion();
 
-  // Typewriter state for the primary headline
   const part1 = hero.headlinePrefix; // "ENGINEERING CLARITY"
   const part2 = hero.headlineSuffix; // "INTO COMPLEX"
   const part3 = hero.headlineHighlight; // "SYSTEMS."
-
-  const totalLength = useMemo(
-    () => part1.length + 1 + part2.length + 1 + part3.length,
-    [part1, part2, part3]
-  );
-
-  // Initialize with full length for SSR & SEO prerendering
-  const [typedLength, setTypedLength] = useState(totalLength);
-  const [isTypingDone, setIsTypingDone] = useState(true);
-
-  useEffect(() => {
-    // Respect user motion preference
-    if (typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setTypedLength(totalLength);
-      setIsTypingDone(true);
-      return;
-    }
-
-    setTypedLength(0);
-    setIsTypingDone(false);
-
-    let current = 0;
-    const interval = setInterval(() => {
-      current += 1;
-      setTypedLength(current);
-      if (current >= totalLength) {
-        clearInterval(interval);
-        setIsTypingDone(true);
-      }
-    }, 28); // brisk, responsive typing cadence
-
-    return () => clearInterval(interval);
-  }, [totalLength]);
-
-  // Derived visible slices for line 1, line 2 prefix, and line 2 highlight
-  const len1 = part1.length;
-  const len2 = len1 + 1 + part2.length;
-
-  const visiblePart1 = part1.slice(0, Math.min(typedLength, len1));
-  const visiblePart2 =
-    typedLength > len1
-      ? part2.slice(0, Math.max(0, Math.min(typedLength - len1 - 1, part2.length)))
-      : "";
-  const visiblePart3 =
-    typedLength > len2 ? part3.slice(0, Math.max(0, typedLength - len2 - 1)) : "";
 
   return (
     <section
@@ -140,8 +98,13 @@ export default function HeroSection({ className = "" }: { className?: string }) 
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-14 items-center">
           {/* ── LEFT COLUMN: Core Positioning & Identity ── */}
           <div className="lg:col-span-7 flex flex-col justify-center space-y-6 sm:space-y-7">
-            {/* Minimal Eyebrow & Status Pill */}
-            <div className="flex flex-wrap items-center gap-2.5">
+            {/* Minimal Eyebrow & Status Pill with Gentle Float */}
+            <motion.div
+              initial={prefersReduced ? false : { opacity: 0, y: 14, filter: "blur(6px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              transition={{ duration: 0.9, ease: breezeEase }}
+              className="flex flex-wrap items-center gap-2.5"
+            >
               <div className="inline-flex items-center gap-2 rounded-full border border-black/[0.08] dark:border-white/10 bg-black/[0.02] dark:bg-white/[0.04] px-3.5 py-1.5 backdrop-blur-md">
                 <span className="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                 <span className="text-[11px] sm:text-xs font-mono font-bold uppercase tracking-wider text-zinc-700 dark:text-zinc-300">
@@ -153,60 +116,93 @@ export default function HeroSection({ className = "" }: { className?: string }) 
                 <MapPin className="w-3 h-3 text-[#D5360C]" />
                 <span>{hero.location}</span>
               </div>
-            </div>
+            </motion.div>
 
-            {/* Typewriter Animated Headline */}
-            <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-[4.5rem] xl:text-[5rem] font-black uppercase tracking-tight leading-[0.98] text-[#141413] dark:text-white min-h-[2.1em]">
+            {/* Headline with Staggered Breeze Blur-Reveal */}
+            <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-[4.5rem] xl:text-[5rem] font-black uppercase tracking-tight leading-[0.98] text-[#141413] dark:text-white">
               {/* Screen-reader accessible complete string */}
               <span className="sr-only">
                 {part1} {part2} {part3}
               </span>
 
-              {/* Visually animated typewriter display */}
-              <span aria-hidden="true">
-                {visiblePart1}
+              {/* Visually animated breeze display */}
+              <span aria-hidden="true" className="block">
+                <motion.span
+                  className="inline-block"
+                  initial={prefersReduced ? false : { opacity: 0, y: 20, filter: "blur(10px)" }}
+                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                  transition={{ duration: 1.05, ease: breezeEase, delay: 0.08 }}
+                >
+                  {part1}
+                </motion.span>
                 <br />
-                {visiblePart2}
-                {visiblePart2 && visiblePart3 ? " " : ""}
-                <span className="text-[#D5360C] drop-shadow-[0_2px_14px_rgba(213,54,12,0.2)]">
-                  {visiblePart3}
-                </span>
-                {/* Blinking Orange Terminal Cursor */}
-                <span
-                  className={`inline-block w-[3.5px] h-[0.8em] bg-[#D5360C] ml-1.5 rtl:ml-0 rtl:mr-1.5 align-baseline transition-opacity duration-300 ${
-                    isTypingDone ? "animate-pulse opacity-70" : "opacity-100"
-                  }`}
-                />
+                <motion.span
+                  className="inline-block"
+                  initial={prefersReduced ? false : { opacity: 0, y: 20, filter: "blur(10px)" }}
+                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                  transition={{ duration: 1.05, ease: breezeEase, delay: 0.24 }}
+                >
+                  {part2}{" "}
+                </motion.span>
+                <motion.span
+                  className="inline-block text-[#D5360C] drop-shadow-[0_2px_16px_rgba(213,54,12,0.22)]"
+                  initial={prefersReduced ? false : { opacity: 0, y: 20, filter: "blur(10px)", scale: 0.98 }}
+                  animate={{ opacity: 1, y: 0, filter: "blur(0px)", scale: 1 }}
+                  transition={{ duration: 1.15, ease: breezeEase, delay: 0.4 }}
+                >
+                  {part3}
+                </motion.span>
               </span>
             </h1>
 
-            {/* Improved Senior Subheading */}
-            <p className="max-w-2xl text-base sm:text-lg lg:text-xl text-zinc-600 dark:text-zinc-300 leading-relaxed font-normal">
+            {/* Smooth Breathing Subheading */}
+            <motion.p
+              initial={prefersReduced ? false : { opacity: 0, y: 16, filter: "blur(6px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              transition={{ duration: 1.0, ease: breezeEase, delay: 0.32 }}
+              className="max-w-2xl text-base sm:text-lg lg:text-xl text-zinc-600 dark:text-zinc-300 leading-relaxed font-normal"
+            >
               {hero.subheading}
-            </p>
+            </motion.p>
 
-            {/* Primary & Secondary CTAs */}
-            <div className="flex flex-wrap items-center gap-4 pt-2">
-              <a
+            {/* Primary & Secondary CTAs with Smooth Micro-Physics */}
+            <motion.div
+              initial={prefersReduced ? false : { opacity: 0, y: 16, filter: "blur(6px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              transition={{ duration: 0.95, ease: breezeEase, delay: 0.44 }}
+              className="flex flex-wrap items-center gap-4 pt-2"
+            >
+              <motion.a
                 href="#work"
-                className="group inline-flex items-center justify-center gap-2 rounded-lg bg-[#D5360C] px-7 py-3.5 text-xs sm:text-sm font-extrabold uppercase tracking-wider text-white transition-all hover:bg-[#AD2A09] hover:shadow-lg hover:shadow-orange-950/20 active:scale-[0.98]"
+                whileHover={{ y: -2, scale: 1.01 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ duration: 0.2 }}
+                className="group inline-flex items-center justify-center gap-2 rounded-lg bg-[#D5360C] px-7 py-3.5 text-xs sm:text-sm font-extrabold uppercase tracking-wider text-white shadow-md shadow-orange-950/15 transition-all hover:bg-[#AD2A09] hover:shadow-xl hover:shadow-orange-950/25"
               >
                 <span>{hero.exploreWork}</span>
                 <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 rtl:rotate-90" />
-              </a>
+              </motion.a>
 
-              <a
+              <motion.a
                 href="#contact"
-                className="group inline-flex items-center justify-center gap-2 rounded-lg border border-black/15 dark:border-white/15 bg-black/[0.02] dark:bg-white/[0.04] px-7 py-3.5 text-xs sm:text-sm font-bold uppercase tracking-wider text-[#141413] dark:text-white backdrop-blur-md transition-all hover:border-[#D5360C]/60 hover:bg-black/5 dark:hover:bg-white/5 active:scale-[0.98]"
+                whileHover={{ y: -2, scale: 1.01 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ duration: 0.2 }}
+                className="group inline-flex items-center justify-center gap-2 rounded-lg border border-black/15 dark:border-white/15 bg-black/[0.02] dark:bg-white/[0.04] px-7 py-3.5 text-xs sm:text-sm font-bold uppercase tracking-wider text-[#141413] dark:text-white backdrop-blur-md transition-all hover:border-[#D5360C]/60 hover:bg-black/5 dark:hover:bg-white/5"
               >
                 <span>{hero.letsConnect}</span>
                 <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 rtl:rotate-90 text-[#D5360C]" />
-              </a>
-            </div>
+              </motion.a>
+            </motion.div>
           </div>
 
-          {/* ── RIGHT COLUMN: Clean, Floating Telemetry (No Heavy Background Card) ── */}
-          <div className="lg:col-span-5 flex flex-col justify-center space-y-8">
+          {/* ── RIGHT COLUMN: Clean, Floating Telemetry with Breeze Glide ── */}
+          <motion.div
+            initial={prefersReduced ? false : { opacity: 0, y: 22, filter: "blur(8px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            transition={{ duration: 1.15, ease: breezeEase, delay: 0.28 }}
+            className="lg:col-span-5 flex flex-col justify-center space-y-8"
+          >
             {/* Telemetry Header Strip */}
             <div className="flex items-center justify-between pb-3.5 border-b border-black/[0.08] dark:border-white/10">
               <div className="flex items-center gap-2 text-xs font-mono font-bold tracking-wider uppercase text-zinc-800 dark:text-zinc-200">
@@ -218,7 +214,7 @@ export default function HeroSection({ className = "" }: { className?: string }) 
               </span>
             </div>
 
-            {/* 4 Verified Indicators Grid with Animated Counters */}
+            {/* 4 Verified Indicators Grid with Silky Animated Counters */}
             <div className="grid grid-cols-2 gap-x-8 gap-y-7 text-start">
               {hero.stats.map((stat, i) => (
                 <div
@@ -249,18 +245,20 @@ export default function HeroSection({ className = "" }: { className?: string }) 
                 {hero.capabilities.map((capabilityName, i) => {
                   const Icon = CAPABILITY_ICONS[i % CAPABILITY_ICONS.length];
                   return (
-                    <div
+                    <motion.div
                       key={capabilityName}
-                      className="flex items-center gap-1.5 rounded-md border border-black/[0.08] dark:border-white/10 bg-black/[0.02] dark:bg-white/[0.03] px-3 py-1.5 text-xs font-mono text-zinc-700 dark:text-zinc-300 hover:border-[#D5360C]/50 hover:text-primary transition-colors"
+                      whileHover={{ y: -1, scale: 1.02 }}
+                      transition={{ duration: 0.18 }}
+                      className="flex items-center gap-1.5 rounded-md border border-black/[0.08] dark:border-white/10 bg-black/[0.02] dark:bg-white/[0.03] px-3 py-1.5 text-xs font-mono text-zinc-700 dark:text-zinc-300 hover:border-[#D5360C]/50 hover:text-primary transition-colors cursor-default"
                     >
                       <Icon className="h-3.5 w-3.5 shrink-0 text-[#D5360C]" />
                       <span>{capabilityName}</span>
-                    </div>
+                    </motion.div>
                   );
                 })}
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
