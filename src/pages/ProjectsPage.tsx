@@ -9,74 +9,78 @@ import { buildBreadcrumbListSchema, buildProjectsCollectionSchema } from "@/lib/
 import { useLocale } from "@/hooks/use-locale";
 import { getLocalizedPageSeo } from "@/lib/seo";
 
+interface ProjectCatalogItem {
+  slug: string;
+  title: string;
+  ar: string;
+  image: string;
+  category: string;
+  detailEn: string;
+  detailAr: string;
+}
+
+const PROJECTS_CATALOG: readonly ProjectCatalogItem[] = [
+  {
+    slug: "zaakiy-v3rse",
+    title: "Operational Intelligence Ecosystem",
+    ar: "منظومة الذكاء التشغيلي",
+    image: "/assets/systems.jpg",
+    category: "AI / OPERATIONS",
+    detailEn: "Architected event-driven operational intelligence with telemetry, AI-assisted orchestration, and distributed workflow automation.",
+    detailAr: "تصميم منظومة ذكاء تشغيلي قائمة على تدفق الأحداث مع تتبع القياسات عن بُعد، والتنسيق الذكي، وأتمتة العمليات الموزعة.",
+  },
+  {
+    slug: "enterprise-retail-integration",
+    title: "Retail Event Processing Network",
+    ar: "شبكة معالجة أحداث تجارة التجزئة",
+    image: "/assets/commerce.jpg",
+    category: "EVENT-DRIVEN / COMMERCE",
+    detailEn: "Kafka and Azure Event Hubs based event processing for multi-region product, pricing, and inventory synchronization.",
+    detailAr: "معالجة أحداث تعتمد على Kafka وAzure Event Hubs لمزامنة المنتجات والتسعير والمخزون عبر أسواق إقليمية متعددة.",
+  },
+  {
+    slug: "airline-retailing-aggregation",
+    title: "Airline NDC Retailing & Aggregation Fabric",
+    ar: "منصة تجميع حجوزات الطيران والتوزيع الجديد",
+    image: "/assets/observability.jpg",
+    category: "DISTRIBUTED / AIRLINE",
+    detailEn: "High-throughput airline retailing aggregation fabric integrating IATA NDC standards, real-time fare streaming, and resilient booking pipelines.",
+    detailAr: "بنية توزيع وتجميع حجوزات طيران عالية الكثافة تدمج معايير NDC وتدفق الأسعار والحجوزات الفورية بدون تأخير.",
+  },
+  {
+    slug: "automotive-omnichannel-platform",
+    title: "Multi-Tenant Platform Infrastructure",
+    ar: "بنية المنصات متعددة المستأجرين",
+    image: "/assets/platform.jpg",
+    category: "SAAS / INFRASTRUCTURE",
+    detailEn: "Tenant-aware service architecture with separated deployment, scaling, and observability boundaries.",
+    detailAr: "بنية معمارية تراعي متطلبات المستأجرين مع حدود منفصلة للنشر والتوسع والمراقبة اللحظية.",
+  },
+  {
+    slug: "real-estate-erp-architecture",
+    title: "AI-Assisted Real Estate ERP Architecture",
+    ar: "معمارية تخطيط موارد المؤسسات العقارية المدعومة بالذكاء الاصطناعي",
+    image: "/assets/architecture.jpg",
+    category: "ENTERPRISE / ERP",
+    detailEn: "Branch-aware real estate operations platform with strict domain invariants, auditable ledger workflows, and permission-aware AI tooling.",
+    detailAr: "منصة عمليات عقارية متعددة الفروع مع عزل الصلاحيات، وتدفقات مالية قابلة للتدقيق، ومساعد ذكاء اصطناعي واعي بالأذونات.",
+  },
+  {
+    slug: "headless-healthcare-digital-experience",
+    title: "Headless Healthcare Experience & Integration",
+    ar: "منصة الرعاية الصحية الرقمية والتكامل السريري",
+    image: "/assets/integration.jpg",
+    category: "HEALTHCARE / INTEGRATIONS",
+    detailEn: "Serverless validation and integration layers connecting healthcare platforms with resilient, compliant, and privacy-first service contracts.",
+    detailAr: "طبقات تكامل بدون خوادم Serverless تربط منصات الرعاية الصحية بعقود خدمات مرنة ومقاومة للأعطال مع مراعاة حماية البيانات.",
+  },
+];
+
 export function ProjectsPage() {
   const { locale } = useLocale();
   const ar = locale === "ar";
   const seo = getLocalizedPageSeo("projects", locale);
   const caseStudies = getLocalizedCaseStudies(locale);
-
-  const projects = [
-    {
-      slug: "zaakiy-v3rse",
-      title: "Operational Intelligence Ecosystem",
-      ar: "منظومة الذكاء التشغيلي",
-      image: "/assets/systems.jpg",
-      category: "AI / OPERATIONS",
-      detail: ar
-        ? "تصميم منظومة ذكاء تشغيلي قائمة على تدفق الأحداث مع تتبع القياسات عن بُعد، والتنسيق الذكي، وأتمتة العمليات الموزعة."
-        : "Architected event-driven operational intelligence with telemetry, AI-assisted orchestration, and distributed workflow automation.",
-    },
-    {
-      slug: "enterprise-retail-integration",
-      title: "Retail Event Processing Network",
-      ar: "شبكة معالجة أحداث تجارة التجزئة",
-      image: "/assets/commerce.jpg",
-      category: "EVENT-DRIVEN / COMMERCE",
-      detail: ar
-        ? "معالجة أحداث تعتمد على Kafka وAzure Event Hubs لمزامنة المنتجات والتسعير والمخزون عبر أسواق إقليمية متعددة."
-        : "Kafka and Azure Event Hubs based event processing for multi-region product, pricing, and inventory synchronization.",
-    },
-    {
-      slug: "airline-retailing-aggregation",
-      title: "Airline NDC Retailing & Aggregation Fabric",
-      ar: "منصة تجميع حجوزات الطيران والتوزيع الجديد",
-      image: "/assets/observability.jpg",
-      category: "DISTRIBUTED / AIRLINE",
-      detail: ar
-        ? "بنية توزيع وتجميع حجوزات طيران عالية الكثافة تدمج معايير NDC وتدفق الأسعار والحجوزات الفورية بدون تأخير."
-        : "High-throughput airline retailing aggregation fabric integrating IATA NDC standards, real-time fare streaming, and resilient booking pipelines.",
-    },
-    {
-      slug: "automotive-omnichannel-platform",
-      title: "Multi-Tenant Platform Infrastructure",
-      ar: "بنية المنصات متعددة المستأجرين",
-      image: "/assets/platform.jpg",
-      category: "SAAS / INFRASTRUCTURE",
-      detail: ar
-        ? "بنية معمارية تراعي متطلبات المستأجرين مع حدود منفصلة للنشر والتوسع والمراقبة اللحظية."
-        : "Tenant-aware service architecture with separated deployment, scaling, and observability boundaries.",
-    },
-    {
-      slug: "real-estate-erp-architecture",
-      title: "AI-Assisted Real Estate ERP Architecture",
-      ar: "معمارية تخطيط موارد المؤسسات العقارية المدعومة بالذكاء الاصطناعي",
-      image: "/assets/architecture.jpg",
-      category: "ENTERPRISE / ERP",
-      detail: ar
-        ? "منصة عمليات عقارية متعددة الفروع مع عزل الصلاحيات، وتدفقات مالية قابلة للتدقيق، ومساعد ذكاء اصطناعي واعي بالأذونات."
-        : "Branch-aware real estate operations platform with strict domain invariants, auditable ledger workflows, and permission-aware AI tooling.",
-    },
-    {
-      slug: "headless-healthcare-digital-experience",
-      title: "Headless Healthcare Experience & Integration",
-      ar: "منصة الرعاية الصحية الرقمية والتكامل السريري",
-      image: "/assets/integration.jpg",
-      category: "HEALTHCARE / INTEGRATIONS",
-      detail: ar
-        ? "طبقات تكامل بدون خوادم Serverless تربط منصات الرعاية الصحية بعقود خدمات مرنة ومقاومة للأعطال مع مراعاة حماية البيانات."
-        : "Serverless validation and integration layers connecting healthcare platforms with resilient, compliant, and privacy-first service contracts.",
-    },
-  ];
 
   return (
     <div className="editorial-content min-h-screen projects-page">
@@ -120,8 +124,8 @@ export function ProjectsPage() {
               marginTop: "40px",
             }}
           >
-            {projects.map((project, index) => (
-              <article key={project.title} className="project-card dark-card relative rounded-2xl p-4 shadow-xl shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)]">
+            {PROJECTS_CATALOG.map((project, index) => (
+              <article key={project.slug} className="project-card dark-card relative rounded-2xl p-4 shadow-xl shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)]">
                 {/* Corner registration crosshairs for architectural precision */}
                 <div aria-hidden="true" className="absolute top-2 start-2.5 text-[10px] font-mono text-zinc-400/40 select-none">+</div>
                 <div aria-hidden="true" className="absolute top-2 end-2.5 text-[10px] font-mono text-zinc-400/40 select-none">+</div>
@@ -148,7 +152,7 @@ export function ProjectsPage() {
                     <Link to={`/projects/${project.slug}`}>{ar ? project.ar : project.title}</Link>
                   </h2>
                   <p className="dark-project-text" style={{ fontSize: "13px", lineHeight: "1.6" }}>
-                    {project.detail}
+                    {ar ? project.detailAr : project.detailEn}
                   </p>
                   <Link className="read-more" to={`/projects/${project.slug}`}>
                     {ar ? "عرض دراسة الحالة ↗" : "VIEW CASE STUDY ↗"}
