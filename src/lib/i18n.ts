@@ -1,7 +1,8 @@
 import en from "@/locales/en.json";
 import ar from "@/locales/ar.json";
-import { useLocale, Locale } from "@/hooks/use-locale";
+import { useLocale, type Locale } from "@/hooks/use-locale";
 
+export type { Locale };
 export type ContentSchema = typeof en;
 export type SectionKey = keyof ContentSchema;
 
