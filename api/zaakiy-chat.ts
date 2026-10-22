@@ -476,8 +476,14 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
       .trim()
       .slice(0, 1500);
 
-    // Authoritative portfolio facts defined on server - protects against client prompt injection
-    const siteScope = [
+    const incomingSiteScope = String(body.siteScope || "").trim().slice(0, 5000);
+    if (sessionId && incomingSiteScope) {
+      setSessionScope(sessionId, incomingSiteScope);
+    }
+
+    // Authoritative portfolio facts defined on server or enriched from content JSON
+    const cachedScope = sessionId ? getSessionScope(sessionId) : "";
+    const siteScope = incomingSiteScope || cachedScope || [
       "Identity: Zaakiy — Sanu Khan's Portfolio Assistant.",
       "Persona & Tone: Professional, calm, concise, technical, and helpful tech lead and solutioning expert representative.",
       "Sanu Khan: Solution Expert & Platform Engineering Leader based in Dubai, UAE with 13+ years experience.",
