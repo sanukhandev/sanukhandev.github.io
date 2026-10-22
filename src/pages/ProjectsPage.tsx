@@ -116,14 +116,7 @@ export function ProjectsPage() {
             <span className="eyebrow">01 / {ar ? "دراسات مختارة" : "SELECTED CASE STUDIES"}</span>
           </div>
 
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
-              gap: "40px",
-              marginTop: "40px",
-            }}
-          >
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 mt-10">
             {PROJECTS_CATALOG.map((project, index) => (
               <article key={project.slug} className="project-card dark-card relative rounded-2xl p-4 shadow-xl shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)]">
                 {/* Corner registration crosshairs for architectural precision */}

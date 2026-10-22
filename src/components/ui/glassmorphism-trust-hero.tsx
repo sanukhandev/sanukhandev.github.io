@@ -209,7 +209,7 @@ export default function HeroSection({ className = "" }: { className?: string }) 
                 <span className="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                 <span>{hero.trackRecord}</span>
               </div>
-              <span className="text-[11px] font-mono text-[#D5360C] font-semibold tabular-nums">
+              <span className="text-[11px] font-mono text-[#AD2A09] dark:text-[#E6D5BD] font-semibold tabular-nums">
                 13+ YRS // PROD
               </span>
             </div>
@@ -226,7 +226,7 @@ export default function HeroSection({ className = "" }: { className?: string }) 
                   <span className="text-4xl sm:text-5xl font-black tracking-tight text-[#141413] dark:text-white tabular-nums">
                     <AnimatedCounter value={stat.value} />
                   </span>
-                  <span className="text-xs uppercase font-bold tracking-wider text-[#D5360C] mt-1.5 font-mono">
+                  <span className="text-xs uppercase font-bold tracking-wider text-[#AD2A09] dark:text-[#E6D5BD] mt-1.5 font-mono">
                     {stat.label}
                   </span>
                   <span className="text-xs text-zinc-500 dark:text-zinc-400 mt-1 leading-snug">

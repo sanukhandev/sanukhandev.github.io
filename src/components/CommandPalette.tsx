@@ -219,10 +219,14 @@ export function CommandPalette({
         prev <= 0 ? Math.max(0, filteredCommands.length - 1) : prev - 1
       );
     } else if (e.key === "Enter") {
-      e.preventDefault();
-      const current = filteredCommands[selectedIndex];
-      if (current) {
-        current.action();
+      // Only execute selected command from search input.
+      // If a button or other element has focus, allow native activation.
+      if (e.target === inputRef.current) {
+        e.preventDefault();
+        const current = filteredCommands[selectedIndex];
+        if (current) {
+          current.action();
+        }
       }
     } else if (e.key === "Escape") {
       e.preventDefault();
