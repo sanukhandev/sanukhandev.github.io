@@ -18,9 +18,10 @@ export interface ResponsiveImageProps extends React.ImgHTMLAttributes<HTMLImageE
 }
 
 /**
- * Next.js-style responsive image optimization component.
- * Delivers CLS prevention, lazy/priority loading, modern AVIF and WebP source sets,
- * responsive sizes, and elegant blur-up placeholder states.
+ * Responsive image component with CLS layout stabilization, lazy/priority loading, and responsive sizes.
+ * - Multi-resolution AVIF & WebP source sets are resolved for portrait & avatar imagery.
+ * - Single-raster editorial assets (such as conceptual architecture diagrams) are rendered with
+ *   asynchronous decoding, aspect-ratio containment, and adaptive viewport sizes.
  */
 export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
   src,
@@ -40,21 +41,28 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
 }) => {
   const [isLoaded, setIsLoaded] = useState(false);
 
-  // Auto-resolve known AVIF and WebP responsive derivatives
+  // Auto-resolve known AVIF and WebP responsive derivatives for portrait and avatar assets
   let resolvedAvifSrcSet = avifSrcSet;
   let resolvedWebpSrcSet = webpSrcSet;
 
-  if (!resolvedAvifSrcSet && (src.includes("hero-avatar") || src.includes("sanu-hero-cutout"))) {
-    resolvedAvifSrcSet = "/hero-avatar-cutout-360.avif 360w, /hero-avatar-cutout-720.avif 720w, /hero-avatar-cutout.avif 1080w";
-  } else if (!resolvedAvifSrcSet && src.endsWith(".webp") && !src.endsWith(".avif")) {
-    const potentialAvif = src.replace(/\.webp$/, ".avif");
-    if (src.includes("/assets/images/sanu.")) {
-      resolvedAvifSrcSet = potentialAvif;
+  if (!resolvedAvifSrcSet) {
+    if (src.includes("hero-avatar-latest") || src.includes("avatar_latest")) {
+      resolvedAvifSrcSet = "/hero-avatar-latest-480.avif 480w, /hero-avatar-latest-720.avif 720w, /hero-avatar-latest.avif 1080w";
+    } else if (src.includes("hero-avatar") || src.includes("sanu-hero-cutout")) {
+      resolvedAvifSrcSet = "/hero-avatar-cutout-360.avif 360w, /hero-avatar-cutout-720.avif 720w, /hero-avatar-cutout.avif 1080w";
+    } else if (src.includes("/assets/images/sanu.") || src.includes("/assets/images/sanu-")) {
+      resolvedAvifSrcSet = "/assets/images/sanu.avif";
     }
   }
 
-  if (!resolvedWebpSrcSet && src.includes("hero-avatar-cutout")) {
-    resolvedWebpSrcSet = "/assets/images/sanu-hero-cutout.webp 720w";
+  if (!resolvedWebpSrcSet) {
+    if (src.includes("hero-avatar-latest") || src.includes("avatar_latest")) {
+      resolvedWebpSrcSet = "/hero-avatar-latest-480.webp 480w, /hero-avatar-latest-720.webp 720w, /hero-avatar-latest.webp 1080w";
+    } else if (src.includes("hero-avatar-cutout") || src.includes("sanu-hero-cutout")) {
+      resolvedWebpSrcSet = "/assets/images/sanu-hero-cutout.webp 720w";
+    } else if (src.includes("/assets/images/sanu.")) {
+      resolvedWebpSrcSet = "/assets/images/sanu.webp";
+    }
   }
 
   const resolvedSizes = sizes || (fill ? "100vw" : "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw");

@@ -1,6 +1,7 @@
 import { memo, useId, type FormEvent } from "react";
 import { GlassCard } from "@/components/ui/glass-card";
 import { useSectionData } from "@/lib/i18n";
+import { useLocale } from "@/hooks/use-locale";
 
 export interface ContactSectionProps {
   id?: string;
@@ -9,6 +10,8 @@ export interface ContactSectionProps {
 
 export function ContactSection({ id = "contact", className = "" }: ContactSectionProps) {
   const contact = useSectionData("contact");
+  const { locale } = useLocale();
+  const ar = locale === "ar";
   const uniqueId = useId();
   const nameId = `${uniqueId}-name`;
   const emailId = `${uniqueId}-email`;
@@ -42,9 +45,9 @@ export function ContactSection({ id = "contact", className = "" }: ContactSectio
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
             {/* Form */}
             <div className="lg:col-span-6">
-              <form aria-label="Quick enquiry" onSubmit={handleContactSubmit} className="space-y-4">
+              <form aria-label={ar ? "نموذج استفسار سريع" : "Quick enquiry"} onSubmit={handleContactSubmit} className="space-y-4">
                 <div className="mb-4">
-                  <span className="text-xs font-mono font-bold tracking-widest text-[#D5360C] uppercase block mb-1">
+                  <span className="text-xs font-mono font-bold tracking-widest text-[#E6D5BD] uppercase block mb-1">
                     {contact.boxTitle}
                   </span>
                   <h3 className="text-xl sm:text-2xl font-bold uppercase tracking-tight text-white">
@@ -101,6 +104,15 @@ export function ContactSection({ id = "contact", className = "" }: ContactSectio
                   <span className="!text-white">{contact.submitButton}</span>
                   <span className="text-base rtl:rotate-180 !text-white">↗</span>
                 </button>
+
+                <p className="text-[11px] font-mono text-zinc-400 pt-1 leading-relaxed">
+                  {ar
+                    ? "يفتح هذا النموذج مسودة بريد في برنامج البريد لديك. أو راسلني مباشرة: "
+                    : "Opens a draft in your email client. Or contact directly: "}
+                  <a href="mailto:hello@sanukhan.dev" className="text-[#E6D5BD] underline hover:text-white">
+                    hello@sanukhan.dev
+                  </a>
+                </p>
               </form>
             </div>
 
@@ -124,7 +136,7 @@ export function ContactSection({ id = "contact", className = "" }: ContactSectio
               </p>
 
               <div className="pt-4 border-t border-white/10 flex items-center gap-4 text-xs font-mono text-zinc-400">
-                <span className="text-[#D5360C]">DIRECT:</span>
+                <span className="text-[#E6D5BD] font-semibold">DIRECT:</span>
                 <a href="mailto:hello@sanukhan.dev" className="text-white hover:text-[#D5360C] underline">
                   hello@sanukhan.dev
                 </a>

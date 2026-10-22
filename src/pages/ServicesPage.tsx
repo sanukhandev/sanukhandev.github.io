@@ -155,7 +155,12 @@ export function ServicesPage() {
                   </Link>
                 </div>
                 <div className="overflow-hidden rounded-xl bg-zinc-900 aspect-[16/10] w-full max-w-[280px]">
-                  <ResponsiveImage alt={cap.title} src={cap.img} className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
+                  <ResponsiveImage
+                    alt={cap.title}
+                    src={cap.img}
+                    sizes="(max-width: 900px) 100vw, 280px"
+                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                  />
                 </div>
               </div>
             ))}

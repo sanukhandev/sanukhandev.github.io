@@ -77,6 +77,7 @@ export function ProjectsPage() {
                     <ResponsiveImage
                       src={image}
                       alt={`Conceptual illustration for ${cs.title}`}
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       className="w-full aspect-[16/10] object-cover transition-transform duration-500 hover:scale-105"
                     />
                   </Link>

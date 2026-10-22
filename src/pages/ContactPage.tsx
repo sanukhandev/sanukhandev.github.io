@@ -26,10 +26,10 @@ export function ContactPage() {
     },
     {
       icon: Phone,
-      label: ar ? "الهاتف والواتساب" : "PHONE & WHATSAPP",
+      label: ar ? "الاتصال المباشر" : "DIRECT CALL",
       value: "+971 56 386 0850",
       href: "tel:+971563860850",
-      note: ar ? "متاح خلال ساعات العمل في الإمارات (GST)" : "Available during UAE business hours (GST)",
+      note: ar ? "مكالمات مهنية مباشرة خلال ساعات العمل في الإمارات (GST)" : "Direct telephone inquiries during UAE business hours (GST)",
       action: ar ? "اتصال مباشر ↗" : "Call Direct ↗",
       primary: false,
     },
@@ -44,11 +44,11 @@ export function ContactPage() {
     },
     {
       icon: Clock,
-      label: ar ? "سرعة الاستجابة" : "RESPONSE SLA",
-      value: ar ? "خلال 24 ساعة عمل" : "Within 24 Business Hours",
-      href: "mailto:hello@sanukhan.dev",
-      note: ar ? "مراجعة متأنية للمتطلبات والرسوم المعمارية" : "Thorough initial review of brief or system requirements",
-      action: ar ? "بدء محادثة ↗" : "Start Brief ↗",
+      label: ar ? "نموذج التعاون" : "COLLABORATION MODEL",
+      value: ar ? "عن بُعد وحضورياً" : "Remote & On-Site",
+      href: "#enquiry-form",
+      note: ar ? "استشارات معمارية، قيادة تقنية، ومراجعات تصميم الأنظمة" : "Architecture advisory, technical leadership & system reviews",
+      action: ar ? "استعراض التفاصيل ↗" : "Explore Scope ↗",
       primary: false,
     },
   ];
@@ -127,7 +127,7 @@ export function ContactPage() {
         <header className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 sm:pb-16 border-b border-black/[0.06] dark:border-white/[0.08]">
           <div className="flex flex-wrap items-center gap-2 mb-4">
             <span className="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#D5360C]">
+            <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#AD2A09] dark:text-[#E6D5BD]">
               {ar ? "سانو خان // قنوات التواصل المباشر" : "SANU KHAN // DIRECT ENGAGEMENT"}
             </span>
           </div>
@@ -200,7 +200,7 @@ export function ContactPage() {
                     className={`mt-6 inline-flex items-center gap-1.5 text-xs font-mono font-bold uppercase tracking-wider transition-colors ${
                       channel.primary
                         ? "!text-[#E6D5BD] hover:!text-white"
-                        : "text-[#D5360C] hover:text-[#AD2A09] dark:text-[#E6D5BD]"
+                        : "text-[#AD2A09] dark:text-[#E6D5BD] hover:underline"
                     }`}
                   >
                     <span>{channel.action}</span>
@@ -214,7 +214,7 @@ export function ContactPage() {
         {/* Professional Profiles / Ecosystem */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 border-t border-black/[0.06] dark:border-white/[0.08]">
           <div className="mb-6">
-            <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#D5360C] block mb-1">
+            <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#AD2A09] dark:text-[#E6D5BD] block mb-1">
               {ar ? "الملفات المهنية والشبكات" : "PROFESSIONAL FOOTPRINT"}
             </span>
             <h2 className="text-2xl sm:text-3xl font-black uppercase tracking-tight text-[#141413] dark:text-white">
@@ -238,7 +238,7 @@ export function ContactPage() {
                       <Icon className="w-5 h-5 text-[#D5360C]" />
                       <span className="font-bold text-sm text-[#141413] dark:text-white">{soc.name}</span>
                     </div>
-                    <span className="text-xs font-mono text-zinc-400 group-hover:text-[#D5360C] transition-colors">
+                    <span className="text-xs font-mono text-zinc-400 group-hover:text-[#AD2A09] dark:group-hover:text-[#E6D5BD] transition-colors">
                       {soc.handle} ↗
                     </span>
                   </div>
@@ -258,7 +258,7 @@ export function ContactPage() {
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-black/[0.06] dark:border-white/[0.08]">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             <div className="lg:col-span-4">
-              <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#D5360C] block mb-1">
+              <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#AD2A09] dark:text-[#E6D5BD] block mb-1">
                 {ar ? "الأسئلة الشائعة" : "ENGAGEMENT FAQ"}
               </span>
               <h2 className="text-2xl sm:text-3xl font-black uppercase tracking-tight text-[#141413] dark:text-white">
@@ -279,10 +279,10 @@ export function ContactPage() {
                 >
                   <summary className="cursor-pointer font-bold text-sm sm:text-base text-[#141413] dark:text-white flex items-center justify-between list-none">
                     <span>
-                      <span className="text-[#D5360C] font-mono text-xs me-2">0{idx + 1}.</span>
+                      <span className="text-[#AD2A09] dark:text-[#E6D5BD] font-mono text-xs me-2">0{idx + 1}.</span>
                       {faq.q}
                     </span>
-                    <span className="text-[#D5360C] font-mono text-base transition-transform duration-200 group-open:rotate-45">
+                    <span className="text-[#AD2A09] dark:text-[#E6D5BD] font-mono text-base transition-transform duration-200 group-open:rotate-45">
                       +
                     </span>
                   </summary>

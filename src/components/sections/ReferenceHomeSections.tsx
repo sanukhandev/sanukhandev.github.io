@@ -125,6 +125,7 @@ export function ReferenceImpact() {
                 <ResponsiveImage
                   alt={impact.portraitAlt}
                   src="/assets/images/sanu-khan-editorial-monochrome.webp"
+                  sizes="(max-width: 1024px) 100vw, 42vw"
                   className="w-full h-full object-cover object-top filter grayscale contrast-[1.08] transition-transform duration-500 hover:scale-[1.02]"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
@@ -141,7 +142,7 @@ export function ReferenceImpact() {
               <div aria-hidden="true" className="absolute top-2.5 start-3 text-[10px] font-mono text-zinc-400/40 select-none">+</div>
               <div aria-hidden="true" className="absolute top-2.5 end-3 text-[10px] font-mono text-zinc-400/40 select-none">+</div>
 
-              <div className="text-xs font-mono font-bold uppercase tracking-wider text-[#D5360C] mb-2">
+              <div className="text-xs font-mono font-bold uppercase tracking-wider text-[#AD2A09] dark:text-[#E6D5BD] mb-2">
                 {ar ? "// فلسفة العمل" : "// HOW I WORK"}
               </div>
               <p className="text-xs sm:text-[13.5px] text-[#2a2723] dark:text-zinc-300 leading-relaxed font-normal">
@@ -200,7 +201,7 @@ export function ReferenceServices() {
             </p>
             <Link
               to="/services"
-              className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#D5360C] hover:underline"
+              className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#AD2A09] dark:text-[#E6D5BD] hover:underline"
             >
               <span>{ar ? "استكشف جميع الخدمات" : "VIEW ALL SERVICES"}</span>
               <span>↗</span>
@@ -222,7 +223,7 @@ export function ReferenceServices() {
 
                 <div>
                   <div className="flex items-center justify-between pb-4 mb-5 border-b border-black/[0.06] dark:border-white/10">
-                    <span className="text-xs font-mono font-bold text-[#D5360C] tracking-widest tabular-nums">
+                    <span className="text-xs font-mono font-bold text-[#AD2A09] dark:text-[#E6D5BD] tracking-widest tabular-nums">
                       {item.num}
                     </span>
                     <Icon className="h-5 w-5 text-zinc-500 dark:text-zinc-400" />
@@ -232,6 +233,7 @@ export function ReferenceServices() {
                     <ResponsiveImage
                       alt={item.title}
                       src={img}
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
                     />
                   </div>
@@ -245,7 +247,7 @@ export function ReferenceServices() {
                   </p>
                 </div>
 
-                <div className="pt-6 mt-6 border-t border-black/[0.06] dark:border-white/10 flex items-center justify-between text-xs font-bold text-[#D5360C]">
+                <div className="pt-6 mt-6 border-t border-black/[0.06] dark:border-white/10 flex items-center justify-between text-xs font-bold text-[#AD2A09] dark:text-[#E6D5BD]">
                   <span>{ar ? "معايير إنتاجية معتمدة" : "ENTERPRISE-GRADE"}</span>
                   <span>↗</span>
                 </div>
@@ -293,7 +295,7 @@ export function ReferenceProjects() {
             </p>
             <Link
               to="/projects"
-              className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#D5360C] hover:underline"
+              className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#AD2A09] dark:text-[#E6D5BD] hover:underline"
             >
               <span>{projectsData.cta}</span>
               <span>↗</span>
@@ -318,7 +320,7 @@ export function ReferenceProjects() {
                     <span className="text-[9.5px] font-mono px-1.5 py-0.5 rounded bg-black/[0.03] dark:bg-white/[0.05] border border-black/5 dark:border-white/10 text-zinc-500 dark:text-zinc-400 uppercase">
                       {ar ? "دراسة معمارية" : "Architecture"}
                     </span>
-                    <span className="text-xs font-mono font-bold text-[#D5360C] tabular-nums">
+                    <span className="text-xs font-mono font-bold text-[#AD2A09] dark:text-[#E6D5BD] tabular-nums">
                       {proj.index}
                     </span>
                   </div>
@@ -328,6 +330,7 @@ export function ReferenceProjects() {
                   <ResponsiveImage
                     alt={proj.title}
                     src={proj.image}
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
                   />
                 </div>
@@ -357,7 +360,7 @@ export function ReferenceProjects() {
 
                 <Link
                   to={proj.slug}
-                  className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#D5360C] hover:underline"
+                  className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#AD2A09] dark:text-[#E6D5BD] hover:underline"
                 >
                   <span>{ar ? "عرض دراسة الحالة" : "View Case Study"}</span>
                   <span className="rtl:rotate-180">↗</span>
@@ -407,7 +410,7 @@ export function ReferenceProcess() {
               <div aria-hidden="true" className="absolute top-2.5 end-3 text-[10px] font-mono text-zinc-400/40 select-none">+</div>
 
               <div>
-                <span className="text-xs font-mono font-bold text-[#D5360C] block mb-3">
+                <span className="text-xs font-mono font-bold text-[#AD2A09] dark:text-[#E6D5BD] block mb-3">
                   {step.tag}
                 </span>
                 <div className="text-2xl sm:text-3xl font-black text-[#101010] dark:text-white mb-2 tabular-nums font-mono">
@@ -595,7 +598,7 @@ export function ReferenceWriting() {
 
                 <div>
                   <div className="flex items-center justify-between pb-3 mb-4 border-b border-black/[0.06] dark:border-white/10">
-                    <span className="text-[11px] font-mono font-bold text-[#D5360C] uppercase tracking-wider">
+                    <span className="text-[11px] font-mono font-bold text-[#AD2A09] dark:text-[#E6D5BD] uppercase tracking-wider">
                       {art.tag}
                     </span>
                     <span className="text-[11px] font-mono text-zinc-500 dark:text-zinc-400 tabular-nums">
@@ -607,6 +610,7 @@ export function ReferenceWriting() {
                     <ResponsiveImage
                       alt={art.title}
                       src={img}
+                      sizes="(max-width: 768px) 100vw, 50vw"
                       className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
                     />
                   </div>
@@ -751,6 +755,7 @@ export function ReferenceZaakiy() {
                 <ResponsiveImage
                   alt="ZaakiyV3RSE Observability and Intelligence Dashboard"
                   src="/assets/observability.jpg"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
                   className="w-full h-full object-cover transition-transform duration-700 ease-out hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
@@ -758,7 +763,7 @@ export function ReferenceZaakiy() {
                 {/* Conceptual Demonstration Overlay Badge */}
                 <div className="absolute bottom-4 start-4 end-4 flex items-center justify-between text-xs font-mono text-white/90 bg-black/60 backdrop-blur-md px-3.5 py-2 rounded border border-white/10">
                   <span className="text-zinc-300">{zaakiy.hud.orchestrationBadge}</span>
-                  <span className="text-[#D5360C] font-bold">{zaakiy.hud.prototypeBadge}</span>
+                  <span className="text-[#E6D5BD] font-bold">{zaakiy.hud.prototypeBadge}</span>
                 </div>
               </div>
             </div>

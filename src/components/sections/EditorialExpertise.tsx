@@ -62,7 +62,7 @@ export function EditorialExpertise() {
 
                 <div>
                   <div className="flex items-center justify-between pb-4 mb-4 border-b border-white/[0.08]">
-                    <span className="text-xs font-mono font-bold text-[#D5360C] tracking-widest tabular-nums">
+                    <span className="text-xs font-mono font-bold text-[#AD2A09] dark:text-[#E6D5BD] tracking-widest tabular-nums">
                       {area.number} ✳
                     </span>
                     <ArrowUpRight className="h-4 w-4 text-zinc-400 group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all rtl:rotate-90" />

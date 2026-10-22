@@ -28,7 +28,7 @@ export function Footer() {
             <p style={{ marginTop: "12px" }}>
               <a
                 href={`mailto:${footer.email}`}
-                className="font-mono text-xs font-semibold text-[#D5360C] hover:underline"
+                className="font-mono text-xs font-semibold text-[#AD2A09] dark:text-[#E6D5BD] hover:underline"
               >
                 {footer.email}
               </a>
