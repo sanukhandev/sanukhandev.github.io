@@ -9,72 +9,15 @@ import { buildBreadcrumbListSchema, buildProjectsCollectionSchema } from "@/lib/
 import { useLocale } from "@/hooks/use-locale";
 import { getLocalizedPageSeo } from "@/lib/seo";
 
-interface ProjectCatalogItem {
-  slug: string;
-  title: string;
-  ar: string;
-  image: string;
-  category: string;
-  detailEn: string;
-  detailAr: string;
-}
-
-const PROJECTS_CATALOG: readonly ProjectCatalogItem[] = [
-  {
-    slug: "zaakiy-v3rse",
-    title: "Operational Intelligence Ecosystem",
-    ar: "منظومة الذكاء التشغيلي",
-    image: "/assets/systems.jpg",
-    category: "AI / OPERATIONS",
-    detailEn: "Architected event-driven operational intelligence with telemetry, AI-assisted orchestration, and distributed workflow automation.",
-    detailAr: "تصميم منظومة ذكاء تشغيلي قائمة على تدفق الأحداث مع تتبع القياسات عن بُعد، والتنسيق الذكي، وأتمتة العمليات الموزعة.",
-  },
-  {
-    slug: "enterprise-retail-integration",
-    title: "Retail Event Processing Network",
-    ar: "شبكة معالجة أحداث تجارة التجزئة",
-    image: "/assets/commerce.jpg",
-    category: "EVENT-DRIVEN / COMMERCE",
-    detailEn: "Kafka and Azure Event Hubs based event processing for multi-region product, pricing, and inventory synchronization.",
-    detailAr: "معالجة أحداث تعتمد على Kafka وAzure Event Hubs لمزامنة المنتجات والتسعير والمخزون عبر أسواق إقليمية متعددة.",
-  },
-  {
-    slug: "airline-retailing-aggregation",
-    title: "Airline NDC Retailing & Aggregation Fabric",
-    ar: "منصة تجميع حجوزات الطيران والتوزيع الجديد",
-    image: "/assets/observability.jpg",
-    category: "DISTRIBUTED / AIRLINE",
-    detailEn: "High-throughput airline retailing aggregation fabric integrating IATA NDC standards, real-time fare streaming, and resilient booking pipelines.",
-    detailAr: "بنية توزيع وتجميع حجوزات طيران عالية الكثافة تدمج معايير NDC وتدفق الأسعار والحجوزات الفورية بدون تأخير.",
-  },
-  {
-    slug: "automotive-omnichannel-platform",
-    title: "Multi-Tenant Platform Infrastructure",
-    ar: "بنية المنصات متعددة المستأجرين",
-    image: "/assets/platform.jpg",
-    category: "SAAS / INFRASTRUCTURE",
-    detailEn: "Tenant-aware service architecture with separated deployment, scaling, and observability boundaries.",
-    detailAr: "بنية معمارية تراعي متطلبات المستأجرين مع حدود منفصلة للنشر والتوسع والمراقبة اللحظية.",
-  },
-  {
-    slug: "real-estate-erp-architecture",
-    title: "AI-Assisted Real Estate ERP Architecture",
-    ar: "معمارية تخطيط موارد المؤسسات العقارية المدعومة بالذكاء الاصطناعي",
-    image: "/assets/architecture.jpg",
-    category: "ENTERPRISE / ERP",
-    detailEn: "Branch-aware real estate operations platform with strict domain invariants, auditable ledger workflows, and permission-aware AI tooling.",
-    detailAr: "منصة عمليات عقارية متعددة الفروع مع عزل الصلاحيات، وتدفقات مالية قابلة للتدقيق، ومساعد ذكاء اصطناعي واعي بالأذونات.",
-  },
-  {
-    slug: "headless-healthcare-digital-experience",
-    title: "Headless Healthcare Experience & Integration",
-    ar: "منصة الرعاية الصحية الرقمية والتكامل السريري",
-    image: "/assets/integration.jpg",
-    category: "HEALTHCARE / INTEGRATIONS",
-    detailEn: "Serverless validation and integration layers connecting healthcare platforms with resilient, compliant, and privacy-first service contracts.",
-    detailAr: "طبقات تكامل بدون خوادم Serverless تربط منصات الرعاية الصحية بعقود خدمات مرنة ومقاومة للأعطال مع مراعاة حماية البيانات.",
-  },
-];
+const CASE_STUDY_IMAGES: Record<string, string> = {
+  "zaakiy-v3rse": "/assets/systems.jpg",
+  "enterprise-retail-integration": "/assets/commerce.jpg",
+  "airline-retailing-aggregation": "/assets/observability.jpg",
+  "automotive-omnichannel-platform": "/assets/platform.jpg",
+  "real-estate-erp-architecture": "/assets/architecture.jpg",
+  "garage-management-and-diagnostics": "/assets/automation.jpg",
+  "headless-healthcare-digital-experience": "/assets/integration.jpg",
+};
 
 export function ProjectsPage() {
   const { locale } = useLocale();
@@ -117,42 +60,45 @@ export function ProjectsPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 mt-10">
-            {PROJECTS_CATALOG.map((project, index) => (
-              <article key={project.slug} className="project-card dark-card relative rounded-2xl p-4 shadow-xl shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)]">
-                {/* Corner registration crosshairs for architectural precision */}
-                <div aria-hidden="true" className="absolute top-2 start-2.5 text-[10px] font-mono text-zinc-400/40 select-none">+</div>
-                <div aria-hidden="true" className="absolute top-2 end-2.5 text-[10px] font-mono text-zinc-400/40 select-none">+</div>
+            {caseStudies.map((cs, index) => {
+              const image = CASE_STUDY_IMAGES[cs.slug] || "/assets/systems.jpg";
+              return (
+                <article key={cs.slug} className="project-card dark-card relative rounded-2xl p-4 shadow-xl shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)]">
+                  {/* Corner registration crosshairs for architectural precision */}
+                  <div aria-hidden="true" className="absolute top-2 start-2.5 text-[10px] font-mono text-zinc-400/40 select-none">+</div>
+                  <div aria-hidden="true" className="absolute top-2 end-2.5 text-[10px] font-mono text-zinc-400/40 select-none">+</div>
 
-                <Link
-                  to={`/projects/${project.slug}`}
-                  className="block overflow-hidden rounded-xl bg-zinc-900"
-                  aria-label={`Read case study for ${project.title}`}
-                >
-                  <ResponsiveImage
-                    src={project.image}
-                    alt={`Conceptual illustration for ${project.title}`}
-                    className="w-full aspect-[16/10] object-cover transition-transform duration-500 hover:scale-105"
-                  />
-                </Link>
-                <div style={{ paddingTop: "18px" }}>
-                  <div className="numbered">
-                    {String(index + 1).padStart(2, "0")} / {project.category}
-                  </div>
-                  <h2
-                    style={{ fontSize: "1.15rem", lineHeight: 1.35 }}
-                    className="font-bold uppercase tracking-tight text-primary my-2 hover:text-[#D5360C] transition-colors"
+                  <Link
+                    to={`/projects/${cs.slug}`}
+                    className="block overflow-hidden rounded-xl bg-zinc-900"
+                    aria-label={`Read case study for ${cs.title}`}
                   >
-                    <Link to={`/projects/${project.slug}`}>{ar ? project.ar : project.title}</Link>
-                  </h2>
-                  <p className="dark-project-text" style={{ fontSize: "13px", lineHeight: "1.6" }}>
-                    {ar ? project.detailAr : project.detailEn}
-                  </p>
-                  <Link className="read-more" to={`/projects/${project.slug}`}>
-                    {ar ? "عرض دراسة الحالة ↗" : "VIEW CASE STUDY ↗"}
+                    <ResponsiveImage
+                      src={image}
+                      alt={`Conceptual illustration for ${cs.title}`}
+                      className="w-full aspect-[16/10] object-cover transition-transform duration-500 hover:scale-105"
+                    />
                   </Link>
-                </div>
-              </article>
-            ))}
+                  <div style={{ paddingTop: "18px" }}>
+                    <div className="numbered">
+                      {String(index + 1).padStart(2, "0")} / {cs.domain.toUpperCase()}
+                    </div>
+                    <h2
+                      style={{ fontSize: "1.15rem", lineHeight: 1.35 }}
+                      className="font-bold uppercase tracking-tight text-primary my-2 hover:text-[#D5360C] transition-colors"
+                    >
+                      <Link to={`/projects/${cs.slug}`}>{cs.title}</Link>
+                    </h2>
+                    <p className="dark-project-text" style={{ fontSize: "13px", lineHeight: "1.6" }}>
+                      {cs.summary}
+                    </p>
+                    <Link className="read-more" to={`/projects/${cs.slug}`}>
+                      {ar ? "عرض دراسة الحالة ↗" : "VIEW CASE STUDY ↗"}
+                    </Link>
+                  </div>
+                </article>
+              );
+            })}
           </div>
         </section>
 

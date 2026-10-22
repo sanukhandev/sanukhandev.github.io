@@ -264,3 +264,20 @@ export function getSmartContentResponse(
     ? `سانو خان هو ${c.hero.eyebrow} مقيم في ${c.hero.location} مع خبرة ${c.hero.stats[0].value}.\n\n${c.hero.subheading}\n\nيسعدني إجابتك عن:\n• المشاريع الإنتاجية (التجزئة والطيران)\n• المنهجية الهندسية ومبادئ تصميم الأنظمة\n• الحزمة التقنية (Node.js, Kafka, Azure Cloud)\n\nأو يمكنك التواصل معه مباشرة عبر ${c.footer.email}.`
     : `Sanu Khan is a ${c.hero.eyebrow} based in ${c.hero.location} with ${c.hero.stats[0].value} of platform engineering experience.\n\n${c.hero.subheading}\n\nFeel free to ask about:\n• Production case studies (Retail Commerce & Airline NDC)\n• 4-phase system design & architecture methodology\n• Cloud & event streaming stack (Node.js, Kafka, Azure)\n\nOr connect directly via email at ${c.footer.email}.`;
 }
+
+/**
+ * Strips script tags, HTML markup, and dangerous characters from client-provided context,
+ * wrapping it with an explicit untrusted label.
+ */
+export function sanitizeClientContext(raw?: string): string | undefined {
+  if (!raw || typeof raw !== "string") return undefined;
+  const stripped = raw
+    .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, " ")
+    .replace(/<[^>]*>/g, " ")
+    .replace(/[^\p{L}\p{N}\s\-_/.:]/gu, " ")
+    .replace(/\s+/g, " ")
+    .trim()
+    .slice(0, 160);
+  if (!stripped) return undefined;
+  return `[Untrusted Client Context / Current View]: ${stripped}`;
+}

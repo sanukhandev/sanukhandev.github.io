@@ -17,7 +17,6 @@ const MAX_SESSIONS = 500;
 type SessionEntry = {
   messages: HistoryMessage[];
   lastAccessedAt: number;
-  siteScope?: string;
 };
 
 type ApiHeaders = Record<string, string | string[] | undefined>;
@@ -179,24 +178,33 @@ const getHistory = (sessionId: string): HistoryMessage[] => {
   return entry.messages;
 };
 
-const getSessionScope = (sessionId: string): string => {
-  const entry = conversationMemory.get(sessionId);
-  if (!entry) return "";
-  entry.lastAccessedAt = Date.now();
-  return (entry.siteScope || "").trim();
-};
-
-const setSessionScope = (sessionId: string, siteScope: string) => {
-  const now = Date.now();
-  let entry = conversationMemory.get(sessionId);
-  if (!entry) {
-    entry = { messages: [], lastAccessedAt: now, siteScope };
-    conversationMemory.set(sessionId, entry);
-    evictStaleSessions();
-    return;
-  }
-  entry.siteScope = siteScope;
-  entry.lastAccessedAt = now;
+const SERVER_TRUSTED_PORTFOLIO_FACTS: Record<ZaakiyLocale, string[]> = {
+  en: [
+    "Identity: Zaakiy — Sanu Khan's Portfolio Assistant.",
+    "Persona & Tone: Professional, calm, concise, technical, and helpful tech lead and solutioning expert representative.",
+    "Sanu Khan: Solution Architect, Tech Lead & Platform Engineering Leader based in Dubai, UAE with 13+ years experience.",
+    "Location: Dubai, UAE (GCC).",
+    "Architecture Expertise: Distributed Systems, High-Throughput Event Streaming, Cloud Infrastructure (Azure / AWS), Serverless, Microservices, Enterprise Integrations.",
+    "Key Production Systems: Regional Enterprise Commerce Platform (9 regional markets PIM integration), Enterprise Omnichannel Commerce Fabric, Airline NDC & Travel B2B Marketplace, Airport Commerce & Travel Retail Platform, AI-Assisted Real Estate ERP Architecture, Garage Management & Diagnostic Intelligence Platform, Headless Healthcare & Digital Experience Platform.",
+    "Personal R&D: ZaakiyV3RSE — An AI-native operations intelligence platform exploring agent orchestration, context retrieval, and adaptive workflows.",
+    "Core Capabilities: Solution Architecture, Platform Engineering, Distributed Event-Driven Systems, API Integrations, Cloud Platforms, AI/ML Tooling & Telemetry.",
+    "Stack: Node.js, TypeScript, React, Next.js, Apache Kafka, Azure Event Hubs, Redis, PostgreSQL, MySQL, Docker, Kubernetes.",
+    "Methodology: 4-phase delivery — Discover & Isolate, Architect & Model, Implement & Stream, Harden & Verify.",
+    "Contact: Email at hello@sanukhan.dev, GitHub @sanukhandev, LinkedIn in/sanukhandev.",
+  ],
+  ar: [
+    "الهوية: ذكي (Zaakiy) — مساعد المحفظة الهندسية لسانو خان.",
+    "الشخصية والأسلوب: مهني، هادئ، دقيق، تقني ومساعد يمثل قائد تقني وخبير هندسة حلول.",
+    "سانو خان: مهندس حلول، قائد تقني وقائد هندسة منصات مقيم في دبي، الإمارات بخبرة تزيد عن 13 عاماً.",
+    "الموقع: دبي، الإمارات العربية المتحدة (مجلس التعاون الخليجي).",
+    "الخبرات المعمارية: الأنظمة الموزعة، تدفق الأحداث عالي الكثافة، البنية التحتية السحابية (Azure / AWS)، البنى بدون خوادم Serverless، الخدمات المصغرة Microservices، وتكامل الأنظمة المؤسسية.",
+    "الأنظمة الرئيسية المنجزة: منصة التجارة الإقليمية للمؤسسات (تكامل إدارة المنتجات عبر 9 أسواق إقليمية)، بنية التجارة الشاملة للقنوات، منصة تجميع حجوزات الطيران والتوزيع الجديد NDC، منصة تجارة التجزئة في المطارات والسفر، معمارية ERP العقارية المدعومة بالذكاء الاصطناعي، ومنصة إدارة الورش والتشخيص الذكي.",
+    "البحث والتطوير الشخصي: ZaakiyV3RSE — منظومة ذكاء تشغيلي قائمة على الذكاء الاصطناعي لاستكشاف تنسيق الوكلاء وتتبع القياسات عن بعد.",
+    "القدرات الأساسية: هندسة الحلول، هندسة المنصات، بنية النظم الموزعة المعتمدة على الأحداث، تكامل واجهات البرمجة API، المنصات السحابية، وأدوات الذكاء الاصطناعي.",
+    "حزمة التقنيات: Node.js, TypeScript, React, Next.js, Apache Kafka, Azure Event Hubs, Redis, PostgreSQL, MySQL, Docker, Kubernetes.",
+    "منهجية العمل: 4 مراحل — الاكتشاف والعزل، المعمارية والنمذجة، التنفيذ والتدفق، والتقوية والتحقق.",
+    "التواصل: عبر البريد الإلكتروني hello@sanukhan.dev، جيتهاب @sanukhandev، لينكدإن in/sanukhandev.",
+  ],
 };
 
 const pushHistory = (
@@ -476,22 +484,20 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
       .trim()
       .slice(0, 1500);
 
-    const incomingSiteScope = String(body.siteScope || "").trim().slice(0, 5000);
-    if (sessionId && incomingSiteScope) {
-      setSessionScope(sessionId, incomingSiteScope);
-    }
+    // Server-authoritative portfolio facts: client-provided siteScope is strictly ignored to prevent tampering
+    const trustedFacts = SERVER_TRUSTED_PORTFOLIO_FACTS[locale] || SERVER_TRUSTED_PORTFOLIO_FACTS.en;
+    const siteScope = trustedFacts.join("\n");
 
-    // Authoritative portfolio facts defined on server or enriched from content JSON
-    const cachedScope = sessionId ? getSessionScope(sessionId) : "";
-    const siteScope = incomingSiteScope || cachedScope || [
-      "Identity: Zaakiy — Sanu Khan's Portfolio Assistant.",
-      "Persona & Tone: Professional, calm, concise, technical, and helpful tech lead and solutioning expert representative.",
-      "Sanu Khan: Solution Expert & Platform Engineering Leader based in Dubai, UAE with 13+ years experience.",
-      "Key Systems Built: Regional Enterprise Commerce Platform (9 regional markets PIM integration), Enterprise Omnichannel Commerce Fabric, Airline NDC & Travel B2B Marketplace, Airport Commerce & Travel Retail Platform.",
-      "Personal R&D: ZaakiyV3RSE — An AI-native operations intelligence platform exploring agent orchestration, context retrieval, and adaptive workflows.",
-      "Domains: Enterprise Integrations, Cloud Platforms (Azure/AWS), Distributed Event-Driven Architecture, Microservices, Node.js, TypeScript, React.",
-      `Contact email: ${email}`,
-    ].join("\n");
+    // Client-provided extraContext is sanitized, length-capped, and explicitly labeled as untrusted context
+    const sanitizedExtraContext = incomingExtraContext
+      ? `[Untrusted Client Context / Current View]: ${incomingExtraContext
+          .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, " ")
+          .replace(/<[^>]*>/g, " ")
+          .replace(/[^\p{L}\p{N}\s\-_/.:]/gu, " ")
+          .replace(/\s+/g, " ")
+          .trim()
+          .slice(0, 160)}`
+      : undefined;
 
     if (!userQuestion) {
       sendJson(res, 400, { error: "Missing required fields" });
@@ -507,7 +513,7 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
       locale,
       userQuestion,
       siteScope,
-      extraContext: incomingExtraContext || undefined,
+      extraContext: sanitizedExtraContext,
       email,
       maxChars: maxOutputChars,
       conversationHistory: historySnapshot,

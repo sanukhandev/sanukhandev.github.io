@@ -203,15 +203,51 @@ export default function HeroSection({ className = "" }: { className?: string }) 
             transition={{ duration: 1.15, ease: breezeEase, delay: 0.28 }}
             className="lg:col-span-5 flex flex-col justify-center space-y-8"
           >
-            {/* Telemetry Header Strip */}
-            <div className="flex items-center justify-between pb-3.5 border-b border-black/[0.08] dark:border-white/10">
-              <div className="flex items-center gap-2 text-xs font-mono font-bold tracking-wider uppercase text-zinc-800 dark:text-zinc-200">
-                <span className="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                <span>{hero.trackRecord}</span>
+            {/* Identity-Led Monochrome Portrait with Architectural Frame */}
+            <div className="relative overflow-hidden rounded-2xl border border-black/[0.08] dark:border-white/10 bg-[#FAF8F5]/85 dark:bg-[#121215]/85 backdrop-blur-md p-4 sm:p-5 shadow-lg shadow-black/[0.02] dark:shadow-black/40">
+              {/* Corner crosshairs for architectural precision */}
+              <div aria-hidden="true" className="absolute top-2 start-2 text-[10px] font-mono text-zinc-400/40 select-none">+</div>
+              <div aria-hidden="true" className="absolute top-2 end-2 text-[10px] font-mono text-zinc-400/40 select-none">+</div>
+
+              <div className="flex flex-col sm:flex-row items-center gap-5">
+                <div className="relative w-28 h-32 sm:w-32 sm:h-36 shrink-0 overflow-hidden rounded-xl bg-zinc-950/10 dark:bg-zinc-900 border border-black/5 dark:border-white/10">
+                  <picture>
+                    <source
+                      type="image/avif"
+                      srcSet="/hero-avatar-cutout-360.avif 360w, /hero-avatar-cutout-720.avif 720w, /hero-avatar-cutout.avif 1080w"
+                      sizes="(max-width: 640px) 112px, 128px"
+                    />
+                    <source
+                      type="image/webp"
+                      srcSet="/assets/images/sanu-hero-cutout.webp"
+                    />
+                    <img
+                      src="/assets/images/sanu-hero-cutout.webp"
+                      alt={ar ? "سانو خان — مهندس حلول وقائد تقني" : "Sanu Khan — Solution Architect & Tech Lead"}
+                      width="128"
+                      height="144"
+                      loading="eager"
+                      fetchPriority="high"
+                      decoding="async"
+                      className="w-full h-full object-cover object-top grayscale contrast-[1.08] hover:grayscale-0 transition-all duration-700"
+                    />
+                  </picture>
+                </div>
+                <div className="flex-1 text-start">
+                  <div className="flex items-center gap-2 text-xs font-mono font-bold tracking-wider uppercase text-zinc-800 dark:text-zinc-200">
+                    <span className="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                    <span>{hero.trackRecord}</span>
+                  </div>
+                  <div className="mt-1 text-[11px] font-mono text-[#AD2A09] dark:text-[#E6D5BD] font-semibold tracking-wider">
+                    13+ YRS // DUBAI · GCC
+                  </div>
+                  <p className="mt-1.5 text-xs text-zinc-600 dark:text-zinc-300 leading-relaxed font-normal">
+                    {ar
+                      ? "قيادة منصات موزعة، وتدفق أحداث عالي الكثافة، وهندسة تكامل مؤسسية تدير ملايين المعاملات في الشرق الأوسط."
+                      : "Leading distributed platforms, peak-volume event streaming, and enterprise integration architecture across GCC & global markets."}
+                  </p>
+                </div>
               </div>
-              <span className="text-[11px] font-mono text-[#AD2A09] dark:text-[#E6D5BD] font-semibold tabular-nums">
-                13+ YRS // PROD
-              </span>
             </div>
 
             {/* 4 Verified Indicators Grid with Silky Animated Counters */}
