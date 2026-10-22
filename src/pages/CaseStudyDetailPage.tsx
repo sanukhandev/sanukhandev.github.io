@@ -84,32 +84,32 @@ export default function CaseStudyDetailPage() {
       <Navbar />
 
       <main className="reference-subpage reference-case-study-page min-h-screen bg-background pt-24 pb-16 text-foreground">
-        <article className="container-narrow max-w-4xl">
+        <article className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Back link */}
           <Link
             to="/projects"
-            className="inline-flex items-center gap-2 text-xs font-semibold text-accent hover:underline mb-8"
+            className="inline-flex items-center gap-2 text-xs font-semibold text-accent hover:underline mb-6"
           >
             <ArrowLeft className="h-3.5 w-3.5 rtl:rotate-180" />
             {isArabic ? "العودة إلى الأعمال المعمارية المختارة" : "Back to Selected Architecture Work"}
           </Link>
 
           {/* Header */}
-          <header className="border-b border-border/60 pb-8">
-            <div className="inline-flex items-center gap-2 rounded-md border border-accent/30 bg-accent/10 px-3 py-1 text-xs font-mono uppercase text-accent font-semibold mb-4">
+          <header className="border-b border-border/60 pb-6">
+            <div className="inline-flex items-center gap-2 rounded-md border border-accent/30 bg-accent/10 px-2.5 py-1 text-xs font-mono uppercase text-accent font-semibold mb-3">
               {caseStudy.domain}
             </div>
 
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-primary leading-tight">
+            <h1 className="text-2xl sm:text-3xl md:text-[2rem] lg:text-[2.25rem] font-bold tracking-tight text-primary leading-tight">
               {caseStudy.title}
             </h1>
 
-            <p className="mt-4 text-lg text-secondary leading-relaxed font-medium">
+            <p className="mt-3 text-sm sm:text-base text-secondary leading-relaxed font-normal max-w-3xl">
               {caseStudy.subtitle}
             </p>
 
             {/* Architecture Themes */}
-            <div className="mt-6 flex flex-wrap gap-2">
+            <div className="mt-5 flex flex-wrap gap-2">
               {caseStudy.themes.map((theme) => (
                 <span
                   key={theme}
