@@ -87,7 +87,11 @@ export default function HeroSection({ className = "" }: { className?: string }) 
           {/* ── RIGHT COLUMN: Verified Indicators & Capabilities Glass Panels ── */}
           <div className="lg:col-span-5 flex flex-col space-y-5 lg:space-y-6">
             {/* Verified Indicators Glass Card */}
-            <div className="relative overflow-hidden rounded-3xl border border-white/20 bg-white/10 p-6 sm:p-7 backdrop-blur-xl shadow-2xl">
+            <div className="relative overflow-hidden rounded-3xl border border-white/20 bg-white/10 p-6 sm:p-7 backdrop-blur-xl shadow-2xl shadow-[inset_0_1px_0_0_rgba(255,255,255,0.22)]">
+              {/* Corner crosshairs for architectural precision */}
+              <div aria-hidden="true" className="absolute top-2.5 start-3 text-[10px] font-mono text-white/30 select-none">+</div>
+              <div aria-hidden="true" className="absolute top-2.5 end-3 text-[10px] font-mono text-white/30 select-none">+</div>
+
               <div className="flex items-center justify-between pb-4 mb-5 border-b border-white/15">
                 <div className="flex items-center gap-2 text-xs font-mono font-bold tracking-wider uppercase text-white/90">
                   <span className="inline-block w-2 h-2 rounded-full bg-emerald-400" />
@@ -103,10 +107,10 @@ export default function HeroSection({ className = "" }: { className?: string }) 
                     key={stat.label}
                     className={`flex flex-col ${i >= 2 ? "pt-3 border-t border-white/10" : ""}`}
                   >
-                    <span className="text-3xl sm:text-4xl font-black tracking-tight text-white">
+                    <span className="text-3xl sm:text-4xl font-black tracking-tight text-white tabular-nums">
                       {stat.value}
                     </span>
-                    <span className="text-xs uppercase font-bold tracking-wider text-[#E6D5BD] mt-1">
+                    <span className="text-xs uppercase font-bold tracking-wider text-[#E6D5BD] mt-1 font-mono">
                       {stat.label}
                     </span>
                     <span className="text-[11px] text-white/75 mt-0.5">
@@ -118,7 +122,11 @@ export default function HeroSection({ className = "" }: { className?: string }) 
             </div>
 
             {/* What I Build / What I Solve Glass Panel */}
-            <div className="relative overflow-hidden rounded-3xl border border-white/20 bg-white/10 p-6 sm:p-7 backdrop-blur-xl shadow-2xl">
+            <div className="relative overflow-hidden rounded-3xl border border-white/20 bg-white/10 p-6 sm:p-7 backdrop-blur-xl shadow-2xl shadow-[inset_0_1px_0_0_rgba(255,255,255,0.22)]">
+              {/* Corner crosshairs */}
+              <div aria-hidden="true" className="absolute top-2.5 start-3 text-[10px] font-mono text-white/30 select-none">+</div>
+              <div aria-hidden="true" className="absolute top-2.5 end-3 text-[10px] font-mono text-white/30 select-none">+</div>
+
               <div className="mb-4">
                 <h2 className="text-sm sm:text-base font-black tracking-wider uppercase text-white">
                   {hero.whatIBuildTitle}

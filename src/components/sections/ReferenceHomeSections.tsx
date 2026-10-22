@@ -292,15 +292,24 @@ export function ReferenceProjects() {
         {/* Curated Primary Project Cards Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 pt-12">
           {projectsData.items.map((proj) => (
-            <GlassCard key={proj.id} variant="light" className="flex flex-col justify-between p-6 sm:p-7">
+            <GlassCard key={proj.id} variant="light" className="relative flex flex-col justify-between p-6 sm:p-7">
+              {/* Corner crosshairs for Calm Precision design */}
+              <div aria-hidden="true" className="absolute top-2 start-3 text-[10px] font-mono text-zinc-400/40 select-none">+</div>
+              <div aria-hidden="true" className="absolute top-2 end-3 text-[10px] font-mono text-zinc-400/40 select-none">+</div>
+
               <div>
                 <div className="flex items-center justify-between pb-3 mb-4 border-b border-black/[0.06] dark:border-white/10">
-                  <span className="text-[11px] font-mono font-bold text-zinc-600 dark:text-zinc-400 uppercase tracking-wider truncate max-w-[200px]">
+                  <span className="text-[10.5px] font-mono font-bold text-zinc-600 dark:text-zinc-400 uppercase tracking-wider truncate max-w-[180px]">
                     {proj.tag}
                   </span>
-                  <span className="text-xs font-mono font-bold text-[#D5360C] shrink-0">
-                    {proj.index}
-                  </span>
+                  <div className="flex items-center gap-1.5 shrink-0">
+                    <span className="text-[9.5px] font-mono px-1.5 py-0.5 rounded bg-black/[0.03] dark:bg-white/[0.05] border border-black/5 dark:border-white/10 text-zinc-500 dark:text-zinc-400 uppercase">
+                      {ar ? "دراسة معمارية" : "Architecture"}
+                    </span>
+                    <span className="text-xs font-mono font-bold text-[#D5360C] tabular-nums">
+                      {proj.index}
+                    </span>
+                  </div>
                 </div>
 
                 <div className="relative aspect-[16/10] overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800 mb-5">
@@ -339,7 +348,7 @@ export function ReferenceProjects() {
                   className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#D5360C] hover:underline"
                 >
                   <span>{ar ? "عرض دراسة الحالة" : "View Case Study"}</span>
-                  <span>↗</span>
+                  <span className="rtl:rotate-180">↗</span>
                 </Link>
               </div>
             </GlassCard>
@@ -412,7 +421,11 @@ export function ReferenceBento() {
   return (
     <section className="relative w-full py-16 sm:py-20 bg-black/[0.02] dark:bg-white/[0.02]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <GlassCard variant="light" className="p-8 sm:p-10 flex flex-col lg:flex-row lg:items-center justify-between gap-8">
+        <GlassCard variant="light" className="relative p-8 sm:p-10 flex flex-col lg:flex-row lg:items-center justify-between gap-8">
+          {/* Corner crosshairs for Calm Precision design */}
+          <div aria-hidden="true" className="absolute top-2.5 start-3 text-[10px] font-mono text-zinc-400/40 select-none">+</div>
+          <div aria-hidden="true" className="absolute top-2.5 end-3 text-[10px] font-mono text-zinc-400/40 select-none">+</div>
+
           <div>
             <div className="inline-flex items-center gap-2 mb-2">
               <span className="text-[#D5360C] text-sm">✳</span>
@@ -430,22 +443,22 @@ export function ReferenceBento() {
 
           <div className="flex flex-wrap items-center gap-6 sm:gap-8 pt-4 lg:pt-0 border-t lg:border-t-0 lg:border-s border-black/[0.08] dark:border-white/10 lg:ps-8">
             <div>
-              <div className="text-3xl sm:text-4xl font-black text-[#D5360C]">
+              <div className="text-3xl sm:text-4xl font-black text-[#D5360C] tabular-nums">
                 {bento.blocks.throughput.metric}
               </div>
-              <div className="text-xs font-bold uppercase tracking-wider text-[#101010] dark:text-white mt-1">
+              <div className="text-xs font-bold uppercase tracking-wider text-[#101010] dark:text-white mt-1 font-mono">
                 {bento.blocks.throughput.metricLabel}
               </div>
             </div>
             <div>
-              <div className="text-3xl sm:text-4xl font-black text-[#D5360C]">9</div>
-              <div className="text-xs font-bold uppercase tracking-wider text-[#101010] dark:text-white mt-1">
+              <div className="text-3xl sm:text-4xl font-black text-[#D5360C] tabular-nums">9</div>
+              <div className="text-xs font-bold uppercase tracking-wider text-[#101010] dark:text-white mt-1 font-mono">
                 {bento.blocks.footprint.title}
               </div>
             </div>
             <div>
-              <div className="text-3xl sm:text-4xl font-black text-[#D5360C]">99.9%</div>
-              <div className="text-xs font-bold uppercase tracking-wider text-[#101010] dark:text-white mt-1">
+              <div className="text-3xl sm:text-4xl font-black text-[#D5360C] tabular-nums">99.9%</div>
+              <div className="text-xs font-bold uppercase tracking-wider text-[#101010] dark:text-white mt-1 font-mono">
                 {bento.blocks.production.title}
               </div>
             </div>

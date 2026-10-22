@@ -1,11 +1,13 @@
 import { memo, useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate, Link } from "react-router-dom";
-import { X, Moon, Sun, ArrowRight, Github, Linkedin, Mail, ExternalLink } from "lucide-react";
+import { X, Moon, Sun, ArrowRight, Github, Linkedin, Mail, ExternalLink, Search } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useTheme } from "@/hooks/use-theme";
 import { useLocale } from "@/hooks/use-locale";
 import { useSectionData } from "@/lib/i18n";
 import { BrandIdentity } from "@/components/BrandIdentity";
+import { LiveTelemetryBar } from "@/components/LiveTelemetryBar";
+import { CommandPalette } from "@/components/CommandPalette";
 import { useScrollSpy, type SectionThreshold } from "@/hooks/useScrollSpy";
 
 interface NavItem {
@@ -32,6 +34,7 @@ function Navbar() {
   const location = useLocation();
   const navigate = useNavigate();
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
   const drawerRef = useRef<HTMLDivElement>(null);
   const toggleBtnRef = useRef<HTMLButtonElement>(null);
   const { theme, toggleTheme } = useTheme();
@@ -208,6 +211,18 @@ function Navbar() {
     return () => document.removeEventListener("keydown", handleKeyboard);
   }, [drawerOpen]);
 
+  // Global Cmd+K / Ctrl+K keyboard shortcut for Command Palette
+  useEffect(() => {
+    const handleGlobalKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        setCommandPaletteOpen((prev) => !prev);
+      }
+    };
+    window.addEventListener("keydown", handleGlobalKeyDown);
+    return () => window.removeEventListener("keydown", handleGlobalKeyDown);
+  }, []);
+
   const nav = useSectionData("nav");
 
   const navItems: NavItem[] = [
@@ -278,8 +293,23 @@ function Navbar() {
 
               <div className="h-4 w-px bg-border" aria-hidden="true" />
 
-              {/* Theme & Locale Toggles */}
+              {/* Live Telemetry Bar */}
+              <div className="hidden xl:flex items-center">
+                <LiveTelemetryBar />
+              </div>
+
+              {/* Command Palette Launcher, Theme & Locale Toggles */}
               <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  aria-label={isArabic ? "فتح قائمة الأوامر (⌘K)" : "Open Command Palette (⌘K)"}
+                  onClick={() => setCommandPaletteOpen(true)}
+                  className="inline-flex items-center gap-1.5 h-9 px-2.5 rounded-sm border border-border text-xs font-mono text-foreground/80 hover:text-foreground hover:border-accent/60 transition-colors select-none"
+                >
+                  <Search className="h-3.5 w-3.5 text-zinc-400" />
+                  <kbd className="text-[10px] font-bold text-zinc-500 dark:text-zinc-400">⌘K</kbd>
+                </button>
+
                 <button
                   type="button"
                   aria-label={
@@ -321,6 +351,15 @@ function Navbar() {
 
             {/* MOBILE: Triggers */}
             <div className="flex items-center gap-2 md:hidden">
+              <button
+                type="button"
+                aria-label={isArabic ? "قائمة الأوامر" : "Command Palette"}
+                onClick={() => setCommandPaletteOpen(true)}
+                className="inline-flex h-10 px-2.5 items-center justify-center rounded-sm border border-border text-xs font-mono text-foreground"
+              >
+                ⌘K
+              </button>
+
               <button
                 type="button"
                 aria-label={locale === "en" ? "العربية" : "EN"}
@@ -480,6 +519,12 @@ function Navbar() {
           </div>
         </div>
       )}
+
+      {/* 2026 Calm Precision — Command Palette Modal */}
+      <CommandPalette
+        isOpen={commandPaletteOpen}
+        onClose={() => setCommandPaletteOpen(false)}
+      />
     </>
   );
 }

@@ -7,24 +7,24 @@ export interface GlassCardProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 /**
- * Reusable GlassCard adhering to the Portfolio Glassmorphism System.
- * - light: Warm-white / ivory translucent surface (for editorial sections)
- * - dark: Charcoal translucent surface (for capability grids & Zaakiy)
- * - orange: Translucent white surface on vivid orange backgrounds (hero)
+ * Reusable GlassCard adhering to the 2026 "Calm Precision" Design System.
+ * - light: Warm Alabaster translucent surface with 1px hairline border & specular highlight
+ * - dark: Obsidian/Carbon translucent surface with 1px hairline border & top light reflection
+ * - orange: Translucent white surface on vivid brand orange (hero)
  */
 export const GlassCard = forwardRef<HTMLDivElement, GlassCardProps>(
   ({ className, variant = "light", hoverEffect = true, children, ...props }, ref) => {
     const variantStyles = {
       light:
-        "bg-white/70 dark:bg-[#151515]/75 border border-black/[0.08] dark:border-white/10 backdrop-blur-md shadow-lg shadow-black/[0.03] dark:shadow-black/25 text-[#101010] dark:text-[#f7f7f5]",
+        "bg-[#F2EFE9]/80 dark:bg-[#121215]/85 border border-[#E6E4DD] dark:border-white/[0.08] backdrop-blur-md shadow-sm shadow-black/[0.02] dark:shadow-black/40 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.6)] dark:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)] text-[#141413] dark:text-[#FAFAFA]",
       dark:
-        "bg-white/[0.04] border border-white/[0.12] backdrop-blur-xl shadow-xl shadow-black/40 text-[#f7f7f5]",
+        "bg-[#121215]/85 border border-white/[0.08] backdrop-blur-xl shadow-xl shadow-black/40 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)] text-[#FAFAFA]",
       orange:
-        "bg-white/10 border border-white/20 backdrop-blur-xl shadow-2xl text-white",
+        "bg-white/10 border border-white/20 backdrop-blur-xl shadow-2xl shadow-[inset_0_1px_0_0_rgba(255,255,255,0.18)] text-white",
     };
 
     const hoverStyles = hoverEffect
-      ? "transition-all duration-300 hover:-translate-y-1 hover:border-[#D5360C]/40 hover:shadow-xl"
+      ? "transition-all duration-300 hover:-translate-y-1 hover:border-[#D5360C]/40 hover:shadow-lg dark:hover:border-white/20"
       : "";
 
     return (
@@ -56,11 +56,11 @@ export const GlassBadge = ({
 }) => {
   const badgeStyles = {
     light:
-      "bg-black/[0.04] dark:bg-white/[0.08] border border-black/10 dark:border-white/15 text-[#101010] dark:text-[#f7f7f5]",
+      "bg-black/[0.03] dark:bg-white/[0.06] border border-[#E6E4DD] dark:border-white/[0.08] text-[#141413] dark:text-[#FAFAFA] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.5)] dark:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06)]",
     dark:
-      "bg-white/[0.06] border border-white/15 text-[#f7f7f5]",
+      "bg-white/[0.05] border border-white/[0.08] text-[#FAFAFA] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06)]",
     orange:
-      "bg-white/15 border border-white/25 text-white",
+      "bg-white/15 border border-white/25 text-white shadow-[inset_0_1px_0_0_rgba(255,255,255,0.15)]",
   };
 
   return (
