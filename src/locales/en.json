@@ -1,0 +1,435 @@
+{
+  "nav": {
+    "brandDescriptor": "TECH LEAD / SOLUTION EXPERT",
+    "home": "Home",
+    "services": "Services",
+    "work": "Work",
+    "notes": "Notes",
+    "about": "About",
+    "contact": "Contact",
+    "projects": "Projects",
+    "blogs": "Blogs",
+    "menu": "Menu",
+    "theme": "Theme",
+    "language": "العربية",
+    "close": "Close menu"
+  },
+  "hero": {
+    "eyebrow": "SANU KHAN / TECH LEAD & SOLUTIONING EXPERT",
+    "location": "Dubai, UAE",
+    "headlinePrefix": "ENGINEERING CLARITY",
+    "headlineSuffix": "INTO COMPLEX",
+    "headlineHighlight": "SYSTEMS.",
+    "subheading": "I connect business strategy with engineering execution—building scalable digital platforms, intelligent integrations, and seamless experiences that solve real problems.",
+    "exploreWork": "Explore Selected Work",
+    "letsConnect": "Let's Connect",
+    "trackRecord": "VERIFIED TRACK RECORD",
+    "stats": [
+      {
+        "value": "13+",
+        "label": "Years of Experience",
+        "description": "Architecture & tech leadership"
+      },
+      {
+        "value": "100+",
+        "label": "Systems Delivered",
+        "description": "From concept to production"
+      },
+      {
+        "value": "9",
+        "label": "Markets Served",
+        "description": "Across GCC & Middle East"
+      },
+      {
+        "value": "1M+",
+        "label": "Product-Scale Systems",
+        "description": "High-throughput telemetry"
+      }
+    ],
+    "whatIBuildTitle": "WHAT I BUILD. WHAT I SOLVE.",
+    "whatIBuildDesc": "Connecting systems, automating complexity, and engineering technology that delivers business value.",
+    "capabilities": [
+      "Systems Integration",
+      "AI Agents & RAG",
+      "Workflow Automation",
+      "Solution Architecture",
+      "Technology Consulting"
+    ]
+  },
+  "proof": {
+    "ariaLabel": "Technical Capabilities Marquee",
+    "roles": [
+      "SYSTEM ARCHITECTURE",
+      "ENTERPRISE INTEGRATION",
+      "FULL-STACK ENGINEERING",
+      "AI AGENTS",
+      "WORKFLOW AUTOMATION",
+      "CLOUD & PLATFORM ENGINEERING"
+    ]
+  },
+  "impact": {
+    "eyebrow": "01 / IMPACT & EXPERTISE",
+    "heading1": "ARCHITECTURE THAT SCALES.",
+    "heading2": "BUILT FOR IMPACT.",
+    "bio1": "I'm a Dubai-based Tech Lead and Solutioning Expert with 13+ years of experience building and integrating digital platforms.",
+    "bio2": "I work across architecture, full-stack engineering, cloud infrastructure, and automation—turning difficult business requirements into systems that teams can confidently operate and evolve.",
+    "bio3": "My approach combines technical ownership, practical execution, and collaboration across engineering and business teams.",
+    "capabilitiesLabel": "CORE ARCHITECTURE DOMAINS",
+    "capabilities": [
+      "EVENT-DRIVEN ARCHITECTURE",
+      "DISTRIBUTED CACHING",
+      "FAULT-TOLERANT APIS",
+      "ENTERPRISE SAP / PIM",
+      "KAFKA & AZURE MESSAGING",
+      "KUBERNETES & CI/CD"
+    ],
+    "stats": [
+      {
+        "num": "13+",
+        "label": "Years Experience",
+        "detail": "Enterprise platform engineering"
+      },
+      {
+        "num": "100+",
+        "label": "Solutions Delivered",
+        "detail": "From concept to production"
+      },
+      {
+        "num": "9",
+        "label": "Regional Markets",
+        "detail": "High-concurrency systems"
+      },
+      {
+        "num": "99.9%",
+        "label": "Uptime Architecture",
+        "detail": "Resilient distributed fabrics"
+      }
+    ],
+    "portraitAlt": "Sanu Khan — Tech Lead & Solutioning Expert",
+    "portraitLocation": "SANU KHAN // DUBAI",
+    "portraitRole": "TECH LEAD"
+  },
+  "services": {
+    "badge": "01 / CAPABILITIES",
+    "heading1": "ENGINEERING",
+    "heading2": "THAT MOVES BUSINESS.",
+    "lead": "From system design to production delivery. Practical solutions for platforms that cannot afford failure.",
+    "items": [
+      {
+        "id": "s1",
+        "num": "01 ↗",
+        "title": "Solutions Architecture",
+        "desc": "System boundaries, failure domain isolation, data flow modeling, and pragmatic technology roadmaps designed for resilient scale.",
+        "skills": ["SYSTEM DESIGN", "MICROSERVICES", "AZURE CLOUD"],
+        "href": "/services"
+      },
+      {
+        "id": "s2",
+        "num": "02 ↗",
+        "title": "Full-Stack Platforms",
+        "desc": "High-performance React/Next.js interfaces backed by resilient Node.js microservices and clean contract-first domain APIs.",
+        "skills": ["REACT & NEXT.JS", "NODE.JS", "TYPESCRIPT"],
+        "href": "/services"
+      },
+      {
+        "id": "s3",
+        "num": "03 ↗",
+        "title": "Enterprise Integration",
+        "desc": "Connecting SAP ERP, PIM, storefronts, and third-party APIs via high-throughput Kafka and Azure Event Hub event streams.",
+        "skills": ["SAP ERP", "APACHE KAFKA", "REST & GRAPHQL"],
+        "href": "/services"
+      },
+      {
+        "id": "s4",
+        "num": "04 ↗",
+        "title": "Automation & AI Workflows",
+        "desc": "Agentic orchestration, domain-aware retrieval (RAG), and event-driven automation that reduces operational friction.",
+        "skills": ["AI AGENTS", "ENTERPRISE RAG", "WORKFLOW AUTOMATION"],
+        "href": "/services"
+      }
+    ]
+  },
+  "expertise": {
+    "badge": "CAPABILITIES & SYSTEMS",
+    "heading1": "BUILT TO CONNECT.",
+    "heading2": "DESIGNED TO SCALE.",
+    "lead": "From frontend experiences to distributed systems and intelligent automation, I work across the full engineering lifecycle.",
+    "areas": [
+      {
+        "id": "full-stack",
+        "number": "01",
+        "title": "Full-stack engineering",
+        "description": "Production-minded frontends, APIs and backend services designed as one maintainable product.",
+        "specialties": ["Full-Stack Developer", "Platform Engineering"],
+        "href": "/full-stack-consultant-uae"
+      },
+      {
+        "id": "systems",
+        "number": "02",
+        "title": "System design & solutions",
+        "description": "Clear architecture boundaries, resilience strategies and practical trade-offs for complex platforms.",
+        "specialties": ["System Design", "Solutions Expert"],
+        "href": "/software-engineer-uae"
+      },
+      {
+        "id": "integrations",
+        "number": "03",
+        "title": "Integrations & connected data",
+        "description": "Contract-first APIs and reliable workflows that connect products, platforms and enterprise systems.",
+        "specialties": ["Integration Expert", "API Strategy"],
+        "href": "/api-integration-services"
+      },
+      {
+        "id": "automation",
+        "number": "04",
+        "title": "Process automation",
+        "description": "Reduce manual handoffs through workflow design, integrations and responsible AI-assisted processes.",
+        "specialties": ["Process Automation Expert", "AI Workflows"],
+        "href": "/services"
+      },
+      {
+        "id": "cloud",
+        "number": "05",
+        "title": "Cloud & platforms",
+        "description": "Maintainable infrastructure, observable environments and deployment pipelines that support team velocity.",
+        "specialties": ["Cloud Architect", "DevOps Strategy"],
+        "href": "/services"
+      },
+      {
+        "id": "consulting",
+        "number": "06",
+        "title": "Technical consulting",
+        "description": "Pragmatic technical advice for teams tackling architectural ambiguity, modernizations or platform growth.",
+        "specialties": ["Technical Lead", "Technology Advisory"],
+        "href": "/contact"
+      }
+    ]
+  },
+  "projects": {
+    "badge": "03 / SELECTED WORK",
+    "heading1": "SYSTEMS I'VE",
+    "heading2": "HELPED SHAPE.",
+    "lead": "A selection of distributed platforms, event streaming architectures, and intelligent telemetry systems.",
+    "cta": "EXPLORE ALL 6 ARCHITECTURE CASE STUDIES",
+    "items": [
+      {
+        "id": "p1",
+        "slug": "/projects/enterprise-retail-integration",
+        "image": "/assets/commerce.jpg",
+        "index": "01 ↗",
+        "tag": "ENTERPRISE COMMERCE // EVENT BACKBONE",
+        "title": "Enterprise Retail Integration",
+        "desc": "High-throughput distributed event streaming backbone orchestrating multi-region order workflows, inventory sync, and peak-scale resilience across 9 markets.",
+        "stack": ["APACHE KAFKA", "SAP ERP", "MICROSERVICES"]
+      },
+      {
+        "id": "p2",
+        "slug": "/projects/airline-retailing-aggregation",
+        "image": "/assets/systems.jpg",
+        "index": "02 ↗",
+        "tag": "AIRLINE NDC // WORKFLOW FABRIC",
+        "title": "Airline Retailing & Aggregation",
+        "desc": "Connected travel distribution workflows, low-latency multi-supplier flight aggregation, and resilient B2B booking services.",
+        "stack": ["SYSTEMS ARCHITECTURE", "NDC PROTOCOL", "AZURE CLOUD"]
+      },
+      {
+        "id": "p3",
+        "slug": "/projects/zaakiy-v3rse",
+        "image": "/assets/observability.jpg",
+        "index": "03 ↗",
+        "tag": "OPERATIONAL INTELLIGENCE // AI AGENTS",
+        "title": "Zaakiy V3RSE Architecture",
+        "desc": "An exploration of how AI agents, enterprise knowledge, and connected systems turn operational signals into contextual decisions and verifiable outcomes.",
+        "stack": ["ENTERPRISE RAG", "AI AGENTS", "TELEMETRY"]
+      }
+    ]
+  },
+  "process": {
+    "badge": "04 / METHODOLOGY",
+    "heading1": "DISCOVERY TO",
+    "heading2": "PRODUCTION.",
+    "lead": "A proven, contract-first engineering process that eliminates guesswork and aligns teams around observable delivery milestones.",
+    "steps": [
+      {
+        "num": "01",
+        "title": "DISCOVER & CONSTRAIN",
+        "desc": "Unpack the business domain, identify integration boundaries, audit legacy friction points, and define non-functional SLAs.",
+        "tag": "PHASE 01 // ANALYSIS"
+      },
+      {
+        "num": "02",
+        "title": "ARCHITECT & SPECIFY",
+        "desc": "Design schema contracts, event topology, idempotency mechanisms, and resilience fallback paths with clear ADRs.",
+        "tag": "PHASE 02 // DESIGN"
+      },
+      {
+        "num": "03",
+        "title": "ENGINEER & VALIDATE",
+        "desc": "Iterative delivery with contract testing, stress-testing under peak loads, and telemetry instrumentation from day one.",
+        "tag": "PHASE 03 // EXECUTION"
+      },
+      {
+        "num": "04",
+        "title": "OPERATE & EVOLVE",
+        "desc": "Production handoff with runbooks, structured SLO alerts, knowledge transfer, and incremental modernization roadmaps.",
+        "tag": "PHASE 04 // CONTINUITY"
+      }
+    ]
+  },
+  "bento": {
+    "badge": "05 / PROOF OVER PROMISES",
+    "heading1": "ENGINEERING",
+    "heading2": "EXCELLENCE.",
+    "lead": "How real engineering rigor translates into business continuity, speed to market, and long-term platform maintainability.",
+    "blocks": {
+      "throughput": {
+        "tag": "HIGH-THROUGHPUT ARCHITECTURE",
+        "title": "High-Throughput Event Streaming",
+        "desc": "Architected event-driven distributed backbones processing peak commercial loads across multi-region enterprise environments without message loss or consistency degradation.",
+        "metric": "1M+",
+        "metricLabel": "EVENTS STREAMED DAILY"
+      },
+      "footprint": {
+        "tag": "GLOBAL FOOTPRINT",
+        "title": "9 GCC & Regional Markets",
+        "desc": "Delivered regional platforms engineered for international localization, multi-currency compliance, cross-border synchronization, and resilient geo-redundancy.",
+        "badge": "CROSS-BORDER PLATFORMS"
+      },
+      "techStack": {
+        "tag": "DEEP TECH STACK",
+        "title": "Enterprise Cloud Stack",
+        "desc": "Battle-tested engineering across modern cloud runtimes, messaging fabrics, distributed databases, and frontend frameworks."
+      },
+      "production": {
+        "tag": "PRODUCTION FIRST",
+        "title": "99.9% Uptime Discipline",
+        "desc": "Zero-trust security invariants, circuit breakers, automated health checks, and end-to-end tracing engineered into platform cores."
+      }
+    }
+  },
+  "testimonials": {
+    "badge": "06 / TECHNICAL LEADERSHIP",
+    "heading1": "TECHNICAL OWNERSHIP.",
+    "heading2": "SHARED SUCCESS.",
+    "lead": "Strong engineering makes system decisions clear, enables teams, and ensures solutions survive beyond deployment.",
+    "quotes": [
+      {
+        "title": "ARCHITECTURE OWNERSHIP",
+        "text": "Make system boundaries, risks, and technical decisions understandable and actionable across both engineering teams and business executives."
+      },
+      {
+        "title": "ENGINEERING LEADERSHIP",
+        "text": "Support teams through clear direction, collaborative problem-solving, and pragmatic standards that raise delivery velocity without compromising quality."
+      },
+      {
+        "title": "BUSINESS ALIGNMENT",
+        "text": "Connect engineering investments with operational value, delivery priorities, and long-term maintainability so tech investments pay compound dividends."
+      }
+    ]
+  },
+  "writing": {
+    "badge": "07 / WRITING",
+    "heading1": "NOTES FROM THE",
+    "heading2": "ENGINEERING DESK.",
+    "lead": "Practical thinking on software architecture, engineering trade-offs, automation, and modern systems.",
+    "readArticle": "READ ARTICLE",
+    "viewAll": "EXPLORE ALL ARTICLES",
+    "articles": [
+      {
+        "slug": "api-gateway-the-bouncer-your-microservices-didnt-know-they-needed-1j0e",
+        "title": "API Gateway: The Bouncer Your Microservices Didn't Know They Needed",
+        "tag": "ARCHITECTURE",
+        "desc": "A practical exploration of how an API Gateway handles authentication, rate limiting, and observability across microservices."
+      },
+      {
+        "slug": "duckdb-the-sqlite-of-analytics-you-didnt-know-you-needed-579m",
+        "title": "DuckDB: The SQLite of Analytics You Didn't Know You Needed",
+        "tag": "DATA ENGINEERING",
+        "desc": "Fast, embedded in-process OLAP analytics directly querying Parquet, CSV, and JSON files without infrastructure overhead."
+      },
+      {
+        "slug": "unmasking-javascript-proxies-the-secret-agents-of-your-objects-4eac",
+        "title": "JavaScript Proxy Explained: Practical Patterns for Dynamic Objects",
+        "tag": "JAVASCRIPT",
+        "desc": "Leveraging Proxy traps for runtime schema validation, reactive state pipelines, and defensive object boundaries."
+      }
+    ]
+  },
+  "zaakiy": {
+    "badge": "SIGNATURE RESEARCH / OPERATIONAL INTELLIGENCE",
+    "heading": "Beyond uptime. Toward outcome intelligence.",
+    "wordmark": {
+      "zaakiy": "Zaakiy",
+      "v3rse": "V3RSE"
+    },
+    "telemetryTag": "AUTONOMOUS SYSTEM TELEMETRY",
+    "description": "Zaakiy V3RSE explores how AI agents, enterprise knowledge, and connected systems can turn operational signals into contextual decisions and verifiable outcomes.",
+    "chips": [
+      "Enterprise RAG",
+      "AI Agents",
+      "Live Integrations",
+      "Workflow Intelligence"
+    ],
+    "exploreCta": "EXPLORE ZAAKIY V3RSE",
+    "hud": {
+      "title": "OpsInt Hub",
+      "telemetryStatus": "LIVE TELEMETRY",
+      "prototypeBadge": "RESEARCH PROTOTYPE",
+      "orchestrationBadge": "AGENT ORCHESTRATION"
+    }
+  },
+  "faq": {
+    "badge": "08 / FREQUENT QUESTIONS",
+    "heading1": "FREQUENT",
+    "heading2": "QUESTIONS.",
+    "items": [
+      {
+        "q": "What kind of technology challenges do you help solve?",
+        "a": "I work with teams on solution architecture, full-stack platforms, enterprise integrations (SAP, Kafka, Azure), and AI-assisted automation—bridging technical complexity with business delivery."
+      },
+      {
+        "q": "Do you collaborate with existing product and engineering teams?",
+        "a": "Yes. I integrate with existing technical teams, helping untangle architecture bottlenecks, establishing clear contracts, and aligning system decisions with strategic delivery milestones."
+      },
+      {
+        "q": "Which technologies and platforms are in your core stack?",
+        "a": "My core stack includes Node.js, TypeScript, React, Next.js, Azure Cloud, AWS, Apache Kafka, REST/GraphQL APIs, SAP ERP integration, and Kubernetes container runtimes."
+      },
+      {
+        "q": "Can you help assess and modernize a legacy enterprise system?",
+        "a": "Yes. I conduct architecture health audits, isolate brittle dependencies, and design incremental strangler-fig migration paths that modernize services with zero production downtime."
+      },
+      {
+        "q": "Are you based in Dubai and available for regional or remote engagements?",
+        "a": "Yes. I am based in Dubai, UAE, with extensive experience delivering platforms across nine Middle Eastern and international markets."
+      }
+    ]
+  },
+  "contact": {
+    "badge": "09 / GET IN TOUCH",
+    "heading1": "LET'S BUILD",
+    "heading2": "SOMETHING THAT LASTS.",
+    "lead": "Architecture, engineering, and delivery. One thoughtful conversation at a time.",
+    "boxTitle": "SANU KHAN",
+    "boxSubtitle": "HAVE A PROJECT IN MIND?",
+    "nameLabel": "Your Name",
+    "namePlaceholder": "Jane Smith",
+    "emailLabel": "Work Email",
+    "emailPlaceholder": "jane@company.com",
+    "messageLabel": "Project Context",
+    "messagePlaceholder": "Tell me what you're building...",
+    "submitButton": "SEND AN EMAIL",
+    "emailSubjectPrefix": "Project Enquiry from"
+  },
+  "footer": {
+    "mission": "Building resilient digital platforms,\nconnecting systems and helping teams\nship what matters.",
+    "location": "Dubai, United Arab Emirates",
+    "email": "hello@sanukhan.dev",
+    "navTitle": "NAVIGATION",
+    "followTitle": "FOLLOW",
+    "newsletterTitle": "NEWSLETTER / CONNECT",
+    "newsletterText": "Follow architecture notes, integration patterns and engineering lessons.",
+    "connectButton": "LET'S CONNECT",
+    "copyright": "© 2026 SANU KHAN — ENGINEERED WITH PURPOSE"
+  }
+}

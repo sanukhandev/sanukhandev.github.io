@@ -1,6 +1,6 @@
 import { ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import { expertiseAreas } from "@/data/expertise";
+import { useSectionData } from "@/lib/i18n";
 import { useLocale } from "@/hooks/use-locale";
 
 /**
@@ -10,6 +10,7 @@ import { useLocale } from "@/hooks/use-locale";
 export function EditorialExpertise() {
   const { locale } = useLocale();
   const ar = locale === "ar";
+  const exp = useSectionData("expertise");
 
   return (
     <section
@@ -24,38 +25,26 @@ export function EditorialExpertise() {
             <div className="inline-flex items-center gap-2 mb-3">
               <span className="text-[#D5360C] text-sm">✳</span>
               <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#E6D5BD]">
-                {ar ? "القدرات الهندسية الشاملة" : "CAPABILITIES & SYSTEMS"}
+                {exp.badge}
               </span>
             </div>
             <h2
               id="sk-expertise-title"
               className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tight leading-[1.05]"
             >
-              {ar ? (
-                <>
-                  بنيت لتتصل.
-                  <br />
-                  <span className="text-[#D5360C]">صممت لتتوسع.</span>
-                </>
-              ) : (
-                <>
-                  BUILT TO CONNECT.
-                  <br />
-                  <span className="text-[#D5360C]">DESIGNED TO SCALE.</span>
-                </>
-              )}
+              {exp.heading1}
+              <br />
+              <span className="text-[#D5360C]">{exp.heading2}</span>
             </h2>
           </div>
           <p className="max-w-md text-sm sm:text-base text-zinc-400 leading-relaxed font-normal">
-            {ar
-              ? "من تجارب الواجهات إلى الأنظمة الموزعة والأتمتة الذكية: أعمل عبر دورة حياة الهندسة المتكاملة لربط المنصات وتحقيق نتائج الأعمال."
-              : "From frontend experiences to distributed systems and intelligent automation, I work across the full engineering lifecycle."}
+            {exp.lead}
           </p>
         </header>
 
         {/* Consistent Dark Glass Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 pt-12 sm:pt-14">
-          {expertiseAreas.map((area, index) => {
+          {exp.areas.map((area, index) => {
             // Give the 1st card (Full-stack / Systems) a prominent featured span on desktop
             const isFeatured = index === 0;
 
@@ -66,7 +55,7 @@ export function EditorialExpertise() {
                 className={`group relative flex flex-col justify-between rounded-2xl border border-white/10 bg-white/[0.04] p-6 sm:p-7 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-[#D5360C]/50 hover:bg-white/[0.07] hover:shadow-2xl hover:shadow-black/60 ${
                   isFeatured ? "md:col-span-2 lg:col-span-2" : "col-span-1"
                 }`}
-                aria-label={`${area.title[locale]} — ${ar ? "معرفة المزيد" : "Explore expertise"}`}
+                aria-label={`${area.title} — ${ar ? "معرفة المزيد" : "Explore expertise"}`}
               >
                 <div>
                   <div className="flex items-center justify-between pb-4 mb-4 border-b border-white/10">
@@ -77,11 +66,11 @@ export function EditorialExpertise() {
                   </div>
 
                   <h3 className="text-lg sm:text-xl font-bold uppercase tracking-tight text-white mb-2.5">
-                    {area.title[locale]}
+                    {area.title}
                   </h3>
 
                   <p className="text-xs sm:text-[13.5px] leading-relaxed text-zinc-300 font-normal">
-                    {area.description[locale]}
+                    {area.description}
                   </p>
                 </div>
 
@@ -90,7 +79,7 @@ export function EditorialExpertise() {
                     className="flex flex-wrap gap-2 text-[11px] font-mono text-zinc-400 uppercase tracking-wider"
                     aria-label={ar ? "التخصصات" : "Specialties"}
                   >
-                    {area.specialties[locale].map((specialty) => (
+                    {area.specialties.map((specialty) => (
                       <li
                         key={specialty}
                         className="px-2.5 py-1 rounded-md bg-white/[0.05] border border-white/10 text-[#E6D5BD]"

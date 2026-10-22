@@ -4,6 +4,7 @@ import { X, Moon, Sun, ArrowRight, Github, Linkedin, Mail, ExternalLink } from "
 import { cn } from "@/lib/utils";
 import { useTheme } from "@/hooks/use-theme";
 import { useLocale } from "@/hooks/use-locale";
+import { useSectionData } from "@/lib/i18n";
 import { BrandIdentity } from "@/components/BrandIdentity";
 import { useScrollSpy, type SectionThreshold } from "@/hooks/useScrollSpy";
 
@@ -207,20 +208,22 @@ function Navbar() {
     return () => document.removeEventListener("keydown", handleKeyboard);
   }, [drawerOpen]);
 
+  const nav = useSectionData("nav");
+
   const navItems: NavItem[] = [
-    { label: isArabic ? "الخدمات" : "Services", href: "#services", pageHref: "/#services", num: "01" },
-    { label: isArabic ? "الأعمال" : "Work", href: "#work", pageHref: "/projects", num: "02" },
-    { label: isArabic ? "الملاحظات" : "Notes", href: "#writing", pageHref: "/blog", num: "03" },
-    { label: isArabic ? "نبذة عني" : "About", href: "#about", pageHref: "/about", num: "04" },
+    { label: nav.services, href: "#services", pageHref: "/#services", num: "01" },
+    { label: nav.work, href: "#work", pageHref: "/projects", num: "02" },
+    { label: nav.notes, href: "#writing", pageHref: "/blog", num: "03" },
+    { label: nav.about, href: "#about", pageHref: "/about", num: "04" },
   ];
 
   const drawerLinks = [
-    { label: isArabic ? "الرئيسية" : "HOME", href: "/" },
-    { label: isArabic ? "نبذة عني" : "ABOUT", href: "/about" },
-    { label: isArabic ? "الخدمات" : "SERVICES", href: "/#services" },
-    { label: isArabic ? "الأعمال" : "PROJECTS", href: "/projects" },
-    { label: isArabic ? "المقالات" : "BLOGS", href: "/blog" },
-    { label: isArabic ? "التواصل" : "CONTACT", href: "/contact" },
+    { label: nav.home.toUpperCase(), href: "/" },
+    { label: nav.about.toUpperCase(), href: "/about" },
+    { label: nav.services.toUpperCase(), href: "/#services" },
+    { label: nav.projects.toUpperCase(), href: "/projects" },
+    { label: nav.blogs.toUpperCase(), href: "/blog" },
+    { label: nav.contact.toUpperCase(), href: "/contact" },
   ];
 
   return (

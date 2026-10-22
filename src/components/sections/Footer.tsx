@@ -1,11 +1,11 @@
 import { memo } from "react";
 import { Link } from "react-router-dom";
-import { useLocale } from "@/hooks/use-locale";
 import { SanuKhanLogo } from "@/components/SanuKhanLogo";
+import { useSectionData } from "@/lib/i18n";
 
 export function Footer() {
-  const { locale } = useLocale();
-  const ar = locale === "ar";
+  const footer = useSectionData("footer");
+  const nav = useSectionData("nav");
 
   return (
     <>
@@ -17,45 +17,29 @@ export function Footer() {
                 <SanuKhanLogo />
               </Link>
             </div>
-            <p>
-              {ar ? (
-                <>
-                  بناء منصات رقمية مرنة،
-                  <br />
-                  وربط الأنظمة ومساعدة الفرق
-                  <br />
-                  على تسليم ما يهم.
-                </>
-              ) : (
-                <>
-                  Building resilient digital platforms,
-                  <br />
-                  connecting systems and helping teams
-                  <br />
-                  ship what matters.
-                </>
-              )}
+            <p className="whitespace-pre-line">
+              {footer.mission}
             </p>
-            <b className="tiny">{ar ? "دبي، الإمارات العربية المتحدة" : "Dubai, United Arab Emirates"}</b>
+            <b className="tiny">{footer.location}</b>
             <p style={{ marginTop: "12px" }}>
-              <a href="mailto:hello@sanukhan.dev" style={{ display: "inline" }}>
-                hello@sanukhan.dev
+              <a href={`mailto:${footer.email}`} style={{ display: "inline" }}>
+                {footer.email}
               </a>
             </p>
           </div>
 
           <div>
-            <h4>{ar ? "التنقل" : "NAVIGATION"}</h4>
-            <Link to="/">{ar ? "الرئيسية" : "Home"}</Link>
-            <Link to="/about">{ar ? "نبذة عني" : "About"}</Link>
-            <Link to="/services">{ar ? "الخدمات" : "Services"}</Link>
-            <Link to="/projects">{ar ? "المشاريع" : "Projects"}</Link>
-            <Link to="/blog">{ar ? "المقالات" : "Articles"}</Link>
-            <Link to="/contact">{ar ? "تواصل" : "Contact"}</Link>
+            <h4>{footer.navTitle}</h4>
+            <Link to="/">{nav.home}</Link>
+            <Link to="/about">{nav.about}</Link>
+            <Link to="/services">{nav.services}</Link>
+            <Link to="/projects">{nav.projects}</Link>
+            <Link to="/blog">{nav.blogs || nav.notes}</Link>
+            <Link to="/contact">{nav.contact}</Link>
           </div>
 
           <div>
-            <h4>{ar ? "تابعني" : "FOLLOW"}</h4>
+            <h4>{footer.followTitle}</h4>
             <a href="https://github.com/sanukhandev" rel="noopener noreferrer" target="_blank">
               GitHub ↗
             </a>
@@ -68,21 +52,17 @@ export function Footer() {
           </div>
 
           <div>
-            <h4>{ar ? "النشرة / التواصل" : "NEWSLETTER / CONNECT"}</h4>
-            <p>
-              {ar
-                ? "تابع الملاحظات المعمارية وأنماط التكامل والدروس الهندسية."
-                : "Follow architecture notes, integration patterns and engineering lessons."}
-            </p>
-            <a className="button dark" href="mailto:hello@sanukhan.dev" style={{ marginTop: "14px" }}>
-              {ar ? "لنتواصل" : "LET'S CONNECT"} <span className="arrow">↗</span>
+            <h4>{footer.newsletterTitle}</h4>
+            <p>{footer.newsletterText}</p>
+            <a className="button dark" href={`mailto:${footer.email}`} style={{ marginTop: "14px" }}>
+              {footer.connectButton} <span className="arrow">↗</span>
             </a>
           </div>
         </div>
       </footer>
 
       <div className="copyright">
-        © 2026 SANU KHAN — {ar ? "هندسة تصنع الفارق" : "ENGINEERED WITH PURPOSE"}
+        {footer.copyright}
       </div>
     </>
   );
