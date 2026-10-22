@@ -9,9 +9,8 @@ export function Footer() {
   const nav = useSectionData("nav");
 
   return (
-    <div className="w-full px-4 sm:px-6 lg:px-8 mt-12 sm:mt-16">
-      <div className="max-w-7xl mx-auto border-t border-[#E6E4DD] dark:border-white/[0.08] pt-12 sm:pt-16">
-        <footer className="footer shell !mt-0 !pt-0 pb-12">
+    <footer className="footer w-full bg-[#EAE5DC] dark:bg-[#121215] text-[#141413] dark:text-[#FAFAFA] !mt-16 sm:!mt-24 !pt-16 sm:!pt-20 !pb-12 transition-colors">
+      <div className="shell max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="footgrid">
           <div>
             <div className="mb-5">
@@ -72,16 +71,15 @@ export function Footer() {
             </a>
           </div>
         </div>
-      </footer>
 
-      <div className="copyright font-mono text-[11px] text-zinc-500 flex flex-col sm:flex-row items-center justify-between px-2 sm:px-6 py-5 border-t border-black/5 dark:border-white/5">
-        <span>{footer.copyright}</span>
-        <span className="text-[10.5px] text-zinc-400 mt-2 sm:mt-0 tracking-wider">
-          25.2048° N, 55.2708° E · DUBAI // GCC
-        </span>
+        <div className="copyright font-mono text-[11px] text-zinc-500 flex flex-col sm:flex-row items-center justify-between pt-8 mt-4">
+          <span>{footer.copyright}</span>
+          <span className="text-[10.5px] text-zinc-400 mt-2 sm:mt-0 tracking-wider">
+            25.2048° N, 55.2708° E · DUBAI // GCC
+          </span>
+        </div>
       </div>
-    </div>
-  </div>
+    </footer>
   );
 }
 
