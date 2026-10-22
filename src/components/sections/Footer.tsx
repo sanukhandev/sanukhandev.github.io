@@ -66,8 +66,17 @@ export function Footer() {
           <div>
             <h4 className="font-mono uppercase tracking-wider text-xs">{footer.newsletterTitle}</h4>
             <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">{footer.newsletterText}</p>
-            <a className="button dark font-mono text-xs" href={`mailto:${footer.email}`} style={{ marginTop: "14px" }}>
-              {footer.connectButton} <span className="arrow">↗</span>
+            <a
+              href={`mailto:${footer.email}`}
+              className="group inline-flex items-center justify-between gap-3 mt-3.5 px-4 py-2.5 rounded-lg bg-[#D5360C] hover:bg-[#AD2A09] !text-white font-mono text-xs font-bold uppercase tracking-wider shadow-sm transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D5360C] focus-visible:ring-offset-2"
+            >
+              <span className="!text-white">{footer.connectButton}</span>
+              <span
+                className="inline-grid place-items-center w-5 h-5 rounded bg-white/20 !text-white text-xs transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 rtl:group-hover:-translate-x-0.5"
+                aria-hidden="true"
+              >
+                ↗
+              </span>
             </a>
           </div>
         </div>

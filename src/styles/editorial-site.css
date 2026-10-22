@@ -49,6 +49,8 @@ html[data-theme=dark] .editorial-content .article-card .tag,html.dark .editorial
 html[data-theme=dark] .editorial-content .dark-zone .lead,html.dark .editorial-content .dark-zone .lead{color:#eee}
 html[data-theme=dark] .editorial-content input,html.dark .editorial-content input,html[data-theme=dark] .editorial-content textarea,html.dark .editorial-content textarea{background:#242424;color:white;border-color:#555}
 html[data-theme=dark] .editorial-content .button.dark,html.dark .editorial-content .button.dark{background:#eee;color:#111}
+.editorial-content .button, .editorial-site .button { color: #fff; }
+.editorial-content .button.white, .editorial-site .button.white { color: var(--ink); }
 html[data-theme=dark] .project-card,html.dark .project-card{background:var(--surface);border-color:#2e2e2e}
 html[data-theme=dark] .project-card:hover,html.dark .project-card:hover{border-color:var(--orange-dark);box-shadow:0 8px 30px rgba(0,0,0,.4)}
 html[data-theme=dark] .project-tag-box,html.dark .project-tag-box{background:#fff;color:#111}
