@@ -100,7 +100,10 @@ export default function CaseStudyDetailPage() {
               {caseStudy.domain}
             </div>
 
-            <h1 className="text-xl sm:text-2xl md:text-[1.85rem] font-bold tracking-tight text-primary leading-snug">
+            <h1
+              style={{ fontSize: "clamp(1.35rem, 2.4vw, 1.85rem)", lineHeight: 1.25 }}
+              className="font-bold tracking-tight text-primary"
+            >
               {caseStudy.title}
             </h1>
 

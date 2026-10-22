@@ -1306,14 +1306,30 @@ main:not(:has(#hero)) > .container-narrow,
 main:not(:has(#hero)) article.container-narrow {
   padding-block: clamp(32px, 6vw, 90px);
 }
-main:not(:has(#hero)) header h1,
-main:not(:has(#hero)) > section header h1,
-main:not(:has(#hero)) article > header h1 {
+main:not(:has(#hero)):not(.reference-case-study-page) header h1,
+main:not(:has(#hero)):not(.reference-case-study-page) > section header h1,
+main:not(:has(#hero)):not(.reference-case-study-page) article > header h1 {
   font-size: clamp(42px, 5.7vw, 86px);
   line-height: 1.05;
   font-weight: 700;
   letter-spacing: -.04em;
   text-wrap: balance;
+}
+
+/* Explicit compact case study typography */
+.reference-case-study-page article > header h1 {
+  font-size: clamp(1.35rem, 2.4vw, 1.85rem) !important;
+  line-height: 1.25 !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.02em !important;
+  text-transform: none !important;
+  text-wrap: balance;
+}
+
+/* Projects page intro headline sizing */
+.projects-page .intro h1 {
+  font-size: clamp(2.5rem, 6vw, 4.25rem) !important;
+  line-height: 1.05 !important;
 }
 main:not(:has(#hero)) article > section {
   max-width: 75ch;
