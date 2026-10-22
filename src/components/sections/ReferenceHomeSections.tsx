@@ -116,7 +116,11 @@ export function ReferenceImpact() {
 
           {/* ── Right Column (5 cols): Authentic Portrait & "How I Work" Glass Card ── */}
           <div className="lg:col-span-5 flex flex-col space-y-6">
-            <GlassCard variant="light" className="p-3 sm:p-4">
+            <GlassCard variant="light" className="relative p-3 sm:p-4">
+              {/* Corner crosshairs */}
+              <div aria-hidden="true" className="absolute top-2 start-2.5 text-[10px] font-mono text-zinc-400/40 select-none">+</div>
+              <div aria-hidden="true" className="absolute top-2 end-2.5 text-[10px] font-mono text-zinc-400/40 select-none">+</div>
+
               <div className="relative aspect-[4/5] overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800">
                 <ResponsiveImage
                   alt={impact.portraitAlt}
@@ -132,7 +136,11 @@ export function ReferenceImpact() {
             </GlassCard>
 
             {/* "How I Work" Glass Statement */}
-            <GlassCard variant="light" className="p-5 sm:p-6">
+            <GlassCard variant="light" className="relative p-5 sm:p-6">
+              {/* Corner crosshairs */}
+              <div aria-hidden="true" className="absolute top-2.5 start-3 text-[10px] font-mono text-zinc-400/40 select-none">+</div>
+              <div aria-hidden="true" className="absolute top-2.5 end-3 text-[10px] font-mono text-zinc-400/40 select-none">+</div>
+
               <div className="text-xs font-mono font-bold uppercase tracking-wider text-[#D5360C] mb-2">
                 {ar ? "// فلسفة العمل" : "// HOW I WORK"}
               </div>
@@ -207,10 +215,14 @@ export function ReferenceServices() {
             const img = serviceImages[index % serviceImages.length];
 
             return (
-              <GlassCard key={item.id} variant="light" className="flex flex-col justify-between p-6 sm:p-8">
+              <GlassCard key={item.id} variant="light" className="relative flex flex-col justify-between p-6 sm:p-8">
+                {/* Corner crosshairs for Calm Precision design */}
+                <div aria-hidden="true" className="absolute top-2.5 start-3 text-[10px] font-mono text-zinc-400/40 select-none">+</div>
+                <div aria-hidden="true" className="absolute top-2.5 end-3 text-[10px] font-mono text-zinc-400/40 select-none">+</div>
+
                 <div>
                   <div className="flex items-center justify-between pb-4 mb-5 border-b border-black/[0.06] dark:border-white/10">
-                    <span className="text-xs font-mono font-bold text-[#D5360C] tracking-widest">
+                    <span className="text-xs font-mono font-bold text-[#D5360C] tracking-widest tabular-nums">
                       {item.num}
                     </span>
                     <Icon className="h-5 w-5 text-zinc-500 dark:text-zinc-400" />
@@ -389,12 +401,16 @@ export function ReferenceProcess() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 pt-12">
           {processData.steps.map((step) => (
-            <GlassCard key={step.num} variant="light" className="p-6 sm:p-7 flex flex-col justify-between">
+            <GlassCard key={step.num} variant="light" className="relative p-6 sm:p-7 flex flex-col justify-between">
+              {/* Corner crosshairs for Calm Precision design */}
+              <div aria-hidden="true" className="absolute top-2.5 start-3 text-[10px] font-mono text-zinc-400/40 select-none">+</div>
+              <div aria-hidden="true" className="absolute top-2.5 end-3 text-[10px] font-mono text-zinc-400/40 select-none">+</div>
+
               <div>
                 <span className="text-xs font-mono font-bold text-[#D5360C] block mb-3">
                   {step.tag}
                 </span>
-                <div className="text-2xl sm:text-3xl font-black text-[#101010] dark:text-white mb-2">
+                <div className="text-2xl sm:text-3xl font-black text-[#101010] dark:text-white mb-2 tabular-nums font-mono">
                   {step.num}
                 </div>
                 <h3 className="text-lg font-bold uppercase tracking-tight text-[#101010] dark:text-white mb-2">
@@ -499,9 +515,13 @@ export function ReferenceTestimonials() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-10">
           {testimonials.quotes.map((quote, i) => (
-            <GlassCard key={i} variant="light" className="p-6 sm:p-7 flex flex-col justify-between">
+            <GlassCard key={i} variant="light" className="relative p-6 sm:p-7 flex flex-col justify-between">
+              {/* Corner crosshairs for Calm Precision design */}
+              <div aria-hidden="true" className="absolute top-2.5 start-3 text-[10px] font-mono text-zinc-400/40 select-none">+</div>
+              <div aria-hidden="true" className="absolute top-2.5 end-3 text-[10px] font-mono text-zinc-400/40 select-none">+</div>
+
               <div>
-                <span className="text-xs font-mono font-bold text-[#D5360C] block mb-3">
+                <span className="text-xs font-mono font-bold text-[#D5360C] block mb-3 tabular-nums">
                   0{i + 1} // PRINCIPLE
                 </span>
                 <h3 className="text-lg sm:text-xl font-bold uppercase tracking-tight text-[#101010] dark:text-white mb-2.5">
@@ -568,13 +588,17 @@ export function ReferenceWriting() {
             const img = articleImages[index % articleImages.length];
 
             return (
-              <GlassCard key={art.slug} variant="light" className="flex flex-col justify-between p-6">
+              <GlassCard key={art.slug} variant="light" className="relative flex flex-col justify-between p-6">
+                {/* Corner crosshairs for Calm Precision design */}
+                <div aria-hidden="true" className="absolute top-2.5 start-3 text-[10px] font-mono text-zinc-400/40 select-none">+</div>
+                <div aria-hidden="true" className="absolute top-2.5 end-3 text-[10px] font-mono text-zinc-400/40 select-none">+</div>
+
                 <div>
                   <div className="flex items-center justify-between pb-3 mb-4 border-b border-black/[0.06] dark:border-white/10">
                     <span className="text-[11px] font-mono font-bold text-[#D5360C] uppercase tracking-wider">
                       {art.tag}
                     </span>
-                    <span className="text-[11px] font-mono text-zinc-500 dark:text-zinc-400">
+                    <span className="text-[11px] font-mono text-zinc-500 dark:text-zinc-400 tabular-nums">
                       2026
                     </span>
                   </div>
@@ -694,7 +718,11 @@ export function ReferenceZaakiy() {
 
           {/* Side 2: Observability Dashboard & Telemetry Visual */}
           <div className="w-full">
-            <div className="relative overflow-hidden rounded-xl border border-white/15 bg-white/[0.03] shadow-2xl">
+            <div className="relative overflow-hidden rounded-xl border border-white/15 bg-white/[0.03] shadow-2xl shadow-black/50 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)]">
+              {/* Corner crosshairs for architectural precision */}
+              <div aria-hidden="true" className="absolute top-2 start-2 text-[10px] font-mono text-white/20 select-none pointer-events-none z-10">+</div>
+              <div aria-hidden="true" className="absolute top-2 end-2 text-[10px] font-mono text-white/20 select-none pointer-events-none z-10">+</div>
+
               {/* Terminal HUD Header */}
               <div className="flex items-center justify-between px-4 py-3 border-b border-white/10 bg-black/40 text-xs font-mono text-zinc-400">
                 <div className="flex items-center gap-2">
@@ -767,10 +795,10 @@ export function ReferenceFaq() {
 
           <div className="lg:col-span-7 space-y-4">
             {faq.items.map((item, i) => (
-              <GlassCard key={i} variant="light" className="p-5 sm:p-6">
+              <GlassCard key={i} variant="light" className="relative p-5 sm:p-6">
                 <details className="group cursor-pointer">
                   <summary className="flex items-center justify-between text-base sm:text-lg font-bold text-[#101010] dark:text-white list-none">
-                    <span>
+                    <span className="tabular-nums">
                       0{i + 1}. {item.q}
                     </span>
                     <span className="text-[#D5360C] font-mono text-lg transition-transform group-open:rotate-45">
@@ -813,8 +841,14 @@ export function ReferenceContact() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <GlassCard
           variant="dark"
-          className="bg-gradient-to-br from-[#121214] to-[#1c120f] border border-white/15 p-8 sm:p-12 md:p-16 text-white"
+          className="relative bg-gradient-to-br from-[#121214] to-[#1c120f] border border-white/15 p-8 sm:p-12 md:p-16 text-white shadow-2xl shadow-black/60 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)]"
         >
+          {/* Corner crosshairs for Calm Precision design */}
+          <div aria-hidden="true" className="absolute top-3.5 start-4 text-xs font-mono text-white/20 select-none">+</div>
+          <div aria-hidden="true" className="absolute top-3.5 end-4 text-xs font-mono text-white/20 select-none">+</div>
+          <div aria-hidden="true" className="absolute bottom-3.5 start-4 text-xs font-mono text-white/20 select-none">+</div>
+          <div aria-hidden="true" className="absolute bottom-3.5 end-4 text-xs font-mono text-white/20 select-none">+</div>
+
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
             {/* Form */}
             <div className="lg:col-span-6">

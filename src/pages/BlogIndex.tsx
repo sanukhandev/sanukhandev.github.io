@@ -139,7 +139,7 @@ export default function BlogIndex() {
           {/* Header section */}
           <header className="border-b border-[var(--sk-line)] pb-8 sm:pb-12">
             <div className="flex items-center justify-between font-mono text-xs text-[var(--sk-fg)] opacity-60 uppercase mb-3">
-              <span>Sanu Khan ®</span>
+              <span>Sanu Khan</span>
               <span>©2026 [Scroll to Explore]</span>
             </div>
             <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold uppercase tracking-tight text-[var(--sk-fg)] leading-[1.05]">

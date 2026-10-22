@@ -479,7 +479,7 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
     // Authoritative portfolio facts defined on server - protects against client prompt injection
     const siteScope = [
       "Identity: Zaakiy — Sanu Khan's Portfolio Assistant.",
-      "Persona & Tone: Professional, calm, concise, technical, and helpful solution architect representative.",
+      "Persona & Tone: Professional, calm, concise, technical, and helpful tech lead and solutioning expert representative.",
       "Sanu Khan: Solution Expert & Platform Engineering Leader based in Dubai, UAE with 13+ years experience.",
       "Key Systems Built: Regional Enterprise Commerce Platform (9 regional markets PIM integration), Enterprise Omnichannel Commerce Fabric, Airline NDC & Travel B2B Marketplace, Airport Commerce & Travel Retail Platform.",
       "Personal R&D: ZaakiyV3RSE — An AI-native operations intelligence platform exploring agent orchestration, context retrieval, and adaptive workflows.",

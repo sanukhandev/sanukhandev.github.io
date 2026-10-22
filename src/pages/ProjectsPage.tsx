@@ -98,7 +98,7 @@ export function ProjectsPage() {
       <main id="main-content">
         <header className="intro shell">
           <p className="overline" style={{ display: "flex", justifyContent: "space-between" }}>
-            <span>SANU KHAN ®</span>
+            <span>SANU KHAN</span>
             <span>{ar ? "دراسات هندسية مختارة" : "SELECTED ENGINEERING WORK"}</span>
           </p>
           <h1>{ar ? "المشاريع." : "PROJECTS."}</h1>

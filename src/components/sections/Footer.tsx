@@ -1,6 +1,7 @@
 import { memo } from "react";
 import { Link } from "react-router-dom";
 import { SanuKhanLogo } from "@/components/SanuKhanLogo";
+import { LiveTelemetryBar } from "@/components/LiveTelemetryBar";
 import { useSectionData } from "@/lib/i18n";
 
 export function Footer() {
@@ -9,7 +10,7 @@ export function Footer() {
 
   return (
     <>
-      <footer className="footer shell">
+      <footer className="footer shell border-t border-[#E6E4DD] dark:border-white/[0.08] pt-16 pb-12">
         <div className="footgrid">
           <div>
             <div className="mb-5">
@@ -17,19 +18,30 @@ export function Footer() {
                 <SanuKhanLogo />
               </Link>
             </div>
-            <p className="whitespace-pre-line">
+            <p className="whitespace-pre-line text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed font-normal">
               {footer.mission}
             </p>
-            <b className="tiny">{footer.location}</b>
+            <div className="mt-4 flex items-center gap-2">
+              <b className="tiny font-mono uppercase text-xs text-zinc-500 dark:text-zinc-400 tracking-wider">
+                {footer.location}
+              </b>
+            </div>
             <p style={{ marginTop: "12px" }}>
-              <a href={`mailto:${footer.email}`} style={{ display: "inline" }}>
+              <a
+                href={`mailto:${footer.email}`}
+                className="font-mono text-xs font-semibold text-[#D5360C] hover:underline"
+              >
                 {footer.email}
               </a>
             </p>
+
+            <div className="mt-5">
+              <LiveTelemetryBar />
+            </div>
           </div>
 
           <div>
-            <h4>{footer.navTitle}</h4>
+            <h4 className="font-mono uppercase tracking-wider text-xs">{footer.navTitle}</h4>
             <Link to="/">{nav.home}</Link>
             <Link to="/about">{nav.about}</Link>
             <Link to="/services">{nav.services}</Link>
@@ -39,7 +51,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h4>{footer.followTitle}</h4>
+            <h4 className="font-mono uppercase tracking-wider text-xs">{footer.followTitle}</h4>
             <a href="https://github.com/sanukhandev" rel="noopener noreferrer" target="_blank">
               GitHub ↗
             </a>
@@ -52,17 +64,20 @@ export function Footer() {
           </div>
 
           <div>
-            <h4>{footer.newsletterTitle}</h4>
-            <p>{footer.newsletterText}</p>
-            <a className="button dark" href={`mailto:${footer.email}`} style={{ marginTop: "14px" }}>
+            <h4 className="font-mono uppercase tracking-wider text-xs">{footer.newsletterTitle}</h4>
+            <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">{footer.newsletterText}</p>
+            <a className="button dark font-mono text-xs" href={`mailto:${footer.email}`} style={{ marginTop: "14px" }}>
               {footer.connectButton} <span className="arrow">↗</span>
             </a>
           </div>
         </div>
       </footer>
 
-      <div className="copyright">
-        {footer.copyright}
+      <div className="copyright font-mono text-[11px] text-zinc-500 flex flex-col sm:flex-row items-center justify-between px-4 sm:px-8 py-4 border-t border-black/5 dark:border-white/5">
+        <span>{footer.copyright}</span>
+        <span className="text-[10.5px] text-zinc-400 mt-1 sm:mt-0 tracking-wider">
+          25.2048° N, 55.2708° E · DUBAI // GCC
+        </span>
       </div>
     </>
   );

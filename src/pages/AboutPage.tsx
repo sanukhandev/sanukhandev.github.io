@@ -131,7 +131,7 @@ export function AboutPage() {
 
       <main id="main-content">
         <header className="intro shell">
-          <div className="eyebrow">SANU KHAN ®</div>
+          <div className="eyebrow">SANU KHAN</div>
           <div className="overline">
             <h1>
               {ar ? "نبذة " : "ABOUT "}
@@ -391,7 +391,7 @@ export function AboutPage() {
         <section className="section shell">
           <div className="footer-cta">
             <form aria-label="Quick enquiry" className="contact-box" onSubmit={handleContactSubmit}>
-              <h4>SANU KHAN ®</h4>
+              <h4>SANU KHAN</h4>
               <p className="tiny">{ar ? "هل لديك مشروع في بالك؟" : "HAVE A PROJECT IN MIND?"}</p>
               <div className="formrow">
                 <label htmlFor="quick-about-name">{ar ? "الاسم" : "Your Name"}</label>

@@ -48,7 +48,7 @@ export function ContactPage() {
 
       <main id="main-content">
         <header className="intro shell">
-          <div className="eyebrow">SANU KHAN ®</div>
+          <div className="eyebrow">SANU KHAN</div>
           <div className="overline">
             <h1>
               {ar ? "تواصل " : "CONTACT "}
