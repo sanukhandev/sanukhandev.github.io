@@ -50,7 +50,7 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
       resolvedAvifSrcSet = "/hero-avatar-latest-480.avif 480w, /hero-avatar-latest-720.avif 720w, /hero-avatar-latest.avif 1080w";
     } else if (src.includes("hero-avatar") || src.includes("sanu-hero-cutout")) {
       resolvedAvifSrcSet = "/hero-avatar-cutout-360.avif 360w, /hero-avatar-cutout-720.avif 720w, /hero-avatar-cutout.avif 1080w";
-    } else if (src.includes("/assets/images/sanu.") || src.includes("/assets/images/sanu-")) {
+    } else if (src === "/assets/images/sanu.webp") {
       resolvedAvifSrcSet = "/assets/images/sanu.avif";
     }
   }
@@ -60,7 +60,7 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
       resolvedWebpSrcSet = "/hero-avatar-latest-480.webp 480w, /hero-avatar-latest-720.webp 720w, /hero-avatar-latest.webp 1080w";
     } else if (src.includes("hero-avatar-cutout") || src.includes("sanu-hero-cutout")) {
       resolvedWebpSrcSet = "/assets/images/sanu-hero-cutout.webp 720w";
-    } else if (src.includes("/assets/images/sanu.")) {
+    } else if (src === "/assets/images/sanu.avif") {
       resolvedWebpSrcSet = "/assets/images/sanu.webp";
     }
   }
@@ -82,7 +82,7 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
         height={!fill ? height : undefined}
         loading={priority ? "eager" : "lazy"}
         decoding={priority ? "sync" : "async"}
-        fetchPriority={priority ? "high" : "auto"}
+        fetchPriority={priority ? "high" : undefined}
         sizes={resolvedSizes}
         onLoad={(e) => {
           setIsLoaded(true);

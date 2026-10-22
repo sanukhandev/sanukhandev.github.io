@@ -178,7 +178,7 @@ const getHistory = (sessionId: string): HistoryMessage[] => {
   return entry.messages;
 };
 
-const SERVER_TRUSTED_PORTFOLIO_FACTS: Record<ZaakiyLocale, string[]> = {
+export const SERVER_TRUSTED_PORTFOLIO_FACTS: Record<ZaakiyLocale, string[]> = {
   en: [
     // Identity & Core Profile
     "Identity: Zaakiy AI — Sanu Khan's official Portfolio Assistant and technical representative.",
@@ -217,9 +217,9 @@ const SERVER_TRUSTED_PORTFOLIO_FACTS: Record<ZaakiyLocale, string[]> = {
 
     // Production Case Study 3: Headless Healthcare Digital Experience
     "Case Study: Headless Healthcare & Digital Experience Platform (Slug: headless-healthcare-digital-experience).",
-    "Healthcare Platform Context: Scalable multi-tenant patient portal, clinical scheduling, telemedicine, and doctor availability across GCC hospital networks.",
-    "Healthcare Platform Architecture: Next.js, GraphQL Federation, Azure Kubernetes Service (AKS), HL7/FHIR EHR connectors, Redis cache.",
-    "Healthcare Platform Outcomes: Sub-100ms slot search, zero booking concurrency conflicts, HIPAA/GDPR data isolation, and unified patient record access.",
+    "Healthcare Platform Context: Modernizing healthcare organization marketing and discovery experience across medical specialists, services, departments, clinic locations, and SEO.",
+    "Healthcare Platform Architecture: Next.js frontend with WordPress and ACF as structured headless CMS, connected via controlled WPGraphQL operations, server-side typed view models, CDN edge caching, and HMAC-signed webhook cache revalidation.",
+    "Healthcare Platform Outcomes: Strict server-side CMS isolation (no direct browser CMS traffic), component-driven editorial layouts replacing page-builder bloat, and targeted tag-based cache revalidation.",
 
     // Production Case Study 4: Regional Enterprise Commerce Platform
     "Case Study: Regional Enterprise Commerce Platform / Omnichannel Fabric (Slug: enterprise-retail-integration).",
@@ -257,10 +257,10 @@ const SERVER_TRUSTED_PORTFOLIO_FACTS: Record<ZaakiyLocale, string[]> = {
     "FAQ AI in Enterprise: Configuration-driven agents, deterministic calculation guarantees, grounding LLMs in verified domain models to eliminate hallucination in auditable workflows.",
 
     // Published Technical Writing
-    "Article: 'API Gateway: The Bouncer Your Microservices Didn't Know They Needed' — Authentication, rate limiting, routing, and observability at the cluster edge (/blog/api-gateway-the-bouncer-your-microservices-didnt-know-they-needed-1j0e).",
-    "Article: 'DuckDB: The SQLite of Analytics You Didn't Know You Needed' — In-process columnar OLAP database for fast zero-overhead analytical queries (/blog/duckdb-the-sqlite-of-analytics-you-didnt-know-you-needed-3n6d).",
-    "Article: 'Why Event-Driven Architecture is Essential for Modern Enterprise Scale' — Decoupling high-volume workflows via Kafka and Event Hubs (/blog/why-event-driven-architecture-is-essential-for-modern-enterprise-scale-2k9b).",
-    "Article: 'Deterministic vs. Generative Systems: Architecting AI for Enterprise Workflows' — Why enterprise AI must separate business calculation from semantic reasoning (/blog/deterministic-vs-generative-systems-architecting-ai-for-enterprise-workflows-4m1a).",
+    "Article: 'API Gateway: The Bouncer Your Microservices Didn't Know They Needed' — Authentication, rate limiting, routing, and observability across microservices (/blog/api-gateway-the-bouncer-your-microservices-didnt-know-they-needed-1j0e).",
+    "Article: 'DuckDB: The SQLite of Analytics You Didn't Know You Needed' — Fast in-process columnar OLAP analytics querying Parquet, CSV, and JSON without infrastructure overhead (/blog/duckdb-the-sqlite-of-analytics-you-didnt-know-you-needed-579m).",
+    "Article: 'JavaScript Proxy Explained: Practical Patterns for Dynamic Objects' — Runtime schema validation, reactive state pipelines, and defensive boundaries (/blog/unmasking-javascript-proxies-the-secret-agents-of-your-objects-4eac).",
+    "Article: 'Building a Cost-Effective Full-Stack SaaS Platform' — Architecture patterns and trade-offs for scalable SaaS systems on a lean budget (/blog/building-a-cost-effective-full-stack-saas-platform-a-practical-guide-for-small-to-mid-size-it-2d44).",
 
     // Contact & Collaboration
     "Contact Email: hello@sanukhan.dev for project consulting, solution architecture reviews, and leadership discussions.",
@@ -306,10 +306,10 @@ const SERVER_TRUSTED_PORTFOLIO_FACTS: Record<ZaakiyLocale, string[]> = {
     "نتائج منصة الورش: معالجة فورية للمستشعرات، تسريع تقدير الإصلاح، تقليل وقت انتظار السيارات، وتوثيق سجلات الصيانة بدقة.",
 
     // Production Case Study 3: Headless Healthcare
-    "دراسة حالة: منصة الرعاية الصحية والتجربة الرقمية المفصولة (المسار: headless-healthcare-digital-experience).",
-    "سياق الرعاية الصحية: بوابة مرضى متعددة المؤسسات، حجز مواعيد سريرية، استشارات عن بعد، ومزامنة جداول الأطباء عبر مستشفيات الخليج.",
-    "معمارية الرعاية الصحية: Next.js, GraphQL Federation, Azure Kubernetes Service (AKS), وموصلات HL7/FHIR للربط مع السجلات الطبية EHR.",
-    "نتائج الرعاية الصحية: بحث عن المواعيد في أقل من 100 ميلي ثانية، منع تعارض الحجوزات نهائياً، عزل البيانات وفق HIPAA/GDPR، وملف موحد للمريض.",
+    "دراسة حالة: منصة التجربة الرقمية الصحية وHeadless CMS (المسار: headless-healthcare-digital-experience).",
+    "سياق الرعاية الصحية: تحديث منصة المؤسسة الصحية للمتخصصين والخدمات والأقسام والمواقع الطبية مع تحسين محركات البحث SEO وفصل إدارة المحتوى عن العرض.",
+    "معمارية الرعاية الصحية: منصة Next.js مع WordPress وACF كنظام CMS منظم ومفصول، متصلة عبر عمليات WPGraphQL معتمدة، ونماذج Typed View Models، وتخزين CDN مؤقت مع إعادة تحقق موجهة بـ HMAC.",
+    "نتائج الرعاية الصحية: عزل CMS على الخادم تماماً (منع وصول المتصفح المباشر لـ WordPress)، استبدال أدوات بناء الصفحات العشوائية بمكونات React محددة، وإبطال موجه للكاش دون انقطاع.",
 
     // Production Case Study 4: Regional Enterprise Commerce
     "دراسة حالة: منصة التجارة الإقليمية للمؤسسات / نسيج التجارة الشاملة (المسار: enterprise-retail-integration).",
@@ -348,9 +348,9 @@ const SERVER_TRUSTED_PORTFOLIO_FACTS: Record<ZaakiyLocale, string[]> = {
 
     // Published Technical Writing
     "مقال: 'بوابة واجهات البرمجة API Gateway: الحارس الأمني للخدمات المصغرة' — إدارة المصادقة، تحديد المعدل، التوجيه، والرصد على حافة النظام (/blog/api-gateway-the-bouncer-your-microservices-didnt-know-they-needed-1j0e).",
-    "مقال: 'قاعدة بيانات DuckDB: نظام التحليلات المدمج فائق السرعة' — قاعدة بيانات عمودية مدمجة للاستعلامات التحليلية بدون إعدادات معقدة (/blog/duckdb-the-sqlite-of-analytics-you-didnt-know-you-needed-3n6d).",
-    "مقال: 'أهمية المعمارية المعتمدة على الأحداث في المؤسسات الحديثة' — فك ترابط الأنظمة الضخمة عبر Kafka وEvent Hubs (/blog/why-event-driven-architecture-is-essential-for-modern-enterprise-scale-2k9b).",
-    "مقال: 'الأنظمة الحتمية مقابل التوليدية: هندسة الذكاء الاصطناعي للمؤسسات' — لماذا يجب فصل حسابات الأعمال عن الاستدلال الدلالي (/blog/deterministic-vs-generative-systems-architecting-ai-for-enterprise-workflows-4m1a).",
+    "مقال: 'قاعدة بيانات DuckDB: نظام التحليلات المدمج فائق السرعة' — قاعدة بيانات عمودية مدمجة للاستعلامات التحليلية بدون إعدادات معقدة (/blog/duckdb-the-sqlite-of-analytics-you-didnt-know-you-needed-579m).",
+    "مقال: 'شرح كائنات JavaScript Proxy: أنماط عملية للكائنات الديناميكية' — التحقق من صحة المخطط في وقت التشغيل والحدود الدفاعية للكائنات (/blog/unmasking-javascript-proxies-the-secret-agents-of-your-objects-4eac).",
+    "مقال: 'بناء منصة SaaS متكاملة وفعالة من حيث التكلفة' — أنماط ومفاضلات معمارية لبناء منصات SaaS بميزانية مرنة ومستدامة (/blog/building-a-cost-effective-full-stack-saas-platform-a-practical-guide-for-small-to-mid-size-it-2d44).",
 
     // Contact & Collaboration
     "البريد الإلكتروني للتواصل: hello@sanukhan.dev للاستشارات الهندسية ومراجعة الحلول المعمارية وفرص القيادة التقنية.",
