@@ -100,7 +100,7 @@ export default function CaseStudyDetailPage() {
               {caseStudy.domain}
             </div>
 
-            <h1 className="text-2xl sm:text-3xl md:text-[2rem] lg:text-[2.25rem] font-bold tracking-tight text-primary leading-tight">
+            <h1 className="text-xl sm:text-2xl md:text-[1.85rem] font-bold tracking-tight text-primary leading-snug">
               {caseStudy.title}
             </h1>
 

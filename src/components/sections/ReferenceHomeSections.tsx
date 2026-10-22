@@ -332,11 +332,11 @@ export function ReferenceProjects() {
                   />
                 </div>
 
-                <h3 className="text-xl sm:text-[22px] font-bold uppercase tracking-tight text-[#101010] dark:text-white mb-2.5">
+                <h2 className="text-lg sm:text-xl font-bold uppercase tracking-tight text-[#101010] dark:text-white mb-2 leading-snug">
                   <Link to={proj.slug} className="hover:text-[#D5360C] transition-colors">
                     {proj.title}
                   </Link>
-                </h3>
+                </h2>
 
                 <p className="text-xs sm:text-[13.5px] leading-relaxed text-zinc-600 dark:text-zinc-300 font-normal">
                   {proj.desc}

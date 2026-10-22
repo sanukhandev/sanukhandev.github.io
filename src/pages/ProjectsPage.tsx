@@ -141,9 +141,9 @@ export function ProjectsPage() {
                   <div className="numbered">
                     {String(index + 1).padStart(2, "0")} / {project.category}
                   </div>
-                  <h3 style={{ fontSize: "24px", margin: "10px 0 8px" }}>
+                  <h2 className="text-lg sm:text-xl font-bold uppercase tracking-tight text-primary my-2 hover:text-[#D5360C] transition-colors leading-snug">
                     <Link to={`/projects/${project.slug}`}>{ar ? project.ar : project.title}</Link>
-                  </h3>
+                  </h2>
                   <p className="dark-project-text" style={{ fontSize: "13px", lineHeight: "1.6" }}>
                     {project.detail}
                   </p>
