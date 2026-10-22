@@ -1,7 +1,6 @@
 import { memo } from "react";
 import { Link } from "react-router-dom";
 import { SanuKhanLogo } from "@/components/SanuKhanLogo";
-import { LiveTelemetryBar } from "@/components/LiveTelemetryBar";
 import { useSectionData } from "@/lib/i18n";
 
 export function Footer() {
@@ -34,10 +33,6 @@ export function Footer() {
                 {footer.email}
               </a>
             </p>
-
-            <div className="mt-5">
-              <LiveTelemetryBar />
-            </div>
           </div>
 
           <div>

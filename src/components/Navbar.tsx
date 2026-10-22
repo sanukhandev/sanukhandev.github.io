@@ -6,7 +6,6 @@ import { useTheme } from "@/hooks/use-theme";
 import { useLocale } from "@/hooks/use-locale";
 import { useSectionData } from "@/lib/i18n";
 import { BrandIdentity } from "@/components/BrandIdentity";
-import { LiveTelemetryBar } from "@/components/LiveTelemetryBar";
 import { CommandPalette } from "@/components/CommandPalette";
 import { useScrollSpy, type SectionThreshold } from "@/hooks/useScrollSpy";
 
@@ -290,13 +289,6 @@ function Navbar() {
                   );
                 })}
               </nav>
-
-              <div className="h-4 w-px bg-border" aria-hidden="true" />
-
-              {/* Live Telemetry Bar */}
-              <div className="hidden xl:flex items-center">
-                <LiveTelemetryBar />
-              </div>
 
               {/* Command Palette Launcher, Theme & Locale Toggles */}
               <div className="flex items-center gap-2">
