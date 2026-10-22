@@ -1200,91 +1200,8 @@ html.dark .zaakiy-chat__input:focus {
 }
 
 /* ──────────────────────────────────────────────────────────
-   Editorial Placeholders, Projects & Subpage Media
-   (Consolidated from legacy editorial.css)
+   Projects & Subpage Media
    ────────────────────────────────────────────────────────── */
-.editorial-placeholder {
-  display: flex;
-  position: relative;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  isolation: isolate;
-  overflow: hidden;
-  width: 100%;
-  min-width: 0;
-  aspect-ratio: 16/10;
-  background: var(--sk-black);
-  color: var(--sk-ivory);
-  border: 1px solid color-mix(in srgb, var(--sk-ivory) 52%, transparent);
-}
-.editorial-placeholder::before {
-  content: "";
-  position: absolute;
-  inset: 18px;
-  border: 1px solid color-mix(in srgb, var(--sk-ivory) 28%, transparent);
-  pointer-events: none;
-}
-.editorial-placeholder::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: none;
-  pointer-events: none;
-}
-.editorial-placeholder--portrait {
-  aspect-ratio: 4/5;
-  background: color-mix(in srgb, var(--sk-black) 8%, var(--sk-ivory));
-  color: var(--sk-black);
-  border-color: var(--sk-black);
-}
-.editorial-placeholder--portrait::before {
-  border-color: color-mix(in srgb, var(--sk-black) 25%, transparent);
-}
-.editorial-placeholder--portrait::after {
-  background: none;
-}
-.editorial-placeholder__index {
-  position: absolute;
-  top: 30px;
-  inset-inline-start: 34px;
-  font: 600 12px/1 var(--sk-display);
-  letter-spacing: .13em;
-  z-index: 1;
-}
-.editorial-placeholder__glyph {
-  font: 700 clamp(64px, 12vw, 176px)/1 var(--sk-display);
-  letter-spacing: -.10em;
-  opacity: .78;
-  z-index: 1;
-}
-.editorial-placeholder--portrait .editorial-placeholder__glyph {
-  font-size: clamp(90px, 14vw, 230px);
-  color: var(--sk-orange);
-}
-.editorial-placeholder__label {
-  z-index: 1;
-  position: absolute;
-  bottom: 30px;
-  inset-inline-start: 34px;
-  inset-inline-end: 30px;
-  font: 600 11px/1.5 var(--sk-display);
-  letter-spacing: .13em;
-  text-transform: uppercase;
-}
-.editorial-placeholder__corners {
-  position: absolute;
-  z-index: 1;
-  top: 28px;
-  inset-inline-end: 32px;
-  width: 18px;
-  height: 18px;
-  border-top: 1px solid currentColor;
-  border-inline-end: 1px solid currentColor;
-}
-.portfolio-article-cover .editorial-placeholder {
-  aspect-ratio: 16/8.5;
-}
 
 .projects-page-grid {
   max-width: 100% !important;
@@ -1293,10 +1210,6 @@ html.dark .zaakiy-chat__input:focus {
   border-radius: 0 !important;
   background: transparent !important;
   border-color: color-mix(in srgb, var(--sk-fg) 35%, transparent) !important;
-}
-.projects-page-item .editorial-placeholder {
-  aspect-ratio: 16/8;
-  margin-bottom: 28px;
 }
 .projects-page-item h2 {
   font-size: clamp(26px, 2.6vw, 40px);
@@ -1338,23 +1251,6 @@ main:not(:has(#hero)) :is(article, section) > header {
   border-bottom-color: var(--sk-fg);
 }
 
-@media (max-width: 639px) {
-  .editorial-placeholder::before {
-    inset: 11px;
-  }
-  .editorial-placeholder__index {
-    top: 20px;
-    inset-inline-start: 20px;
-  }
-  .editorial-placeholder__label {
-    bottom: 20px;
-    inset-inline-start: 20px;
-  }
-  .editorial-placeholder__corners {
-    top: 18px;
-    inset-inline-end: 18px;
-  }
-}
 
 /* ──────────────────────────────────────────────────────────
    Native Entrance Transitions (Replaces framer-motion)
