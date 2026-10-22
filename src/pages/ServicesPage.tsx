@@ -1,7 +1,8 @@
-import { memo, type FormEvent } from "react";
+import { memo } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/sections/Footer";
+import ContactSection from "@/components/sections/ContactSection";
 import SeoMeta from "@/components/SeoMeta";
 import { ResponsiveImage } from "@/components/ui/ResponsiveImage";
 import { useLocale } from "@/hooks/use-locale";
@@ -103,18 +104,6 @@ export function ServicesPage() {
     },
   ];
 
-  const handleContactSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const form = e.currentTarget;
-    const formData = new FormData(form);
-    const name = formData.get("name") as string;
-    const email = formData.get("email") as string;
-    const message = formData.get("message") as string;
-    const subject = encodeURIComponent(`Services Enquiry from ${name}`);
-    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nProject details:\n${message}`);
-    window.location.href = `mailto:hello@sanukhan.dev?subject=${subject}&body=${body}`;
-  };
-
   return (
     <div className="editorial-content min-h-screen">
       <SeoMeta
@@ -204,57 +193,7 @@ export function ServicesPage() {
           </div>
         </section>
 
-        <section className="section shell">
-          <div className="footer-cta">
-            <form aria-label="Quick enquiry" className="contact-box" onSubmit={handleContactSubmit}>
-              <h4>SANU KHAN</h4>
-              <p className="tiny">{ar ? "هل لديك مشروع في بالك؟" : "HAVE A PROJECT IN MIND?"}</p>
-              <div className="formrow">
-                <label htmlFor="quick-services-name">{ar ? "الاسم" : "Your Name"}</label>
-                <input id="quick-services-name" name="name" placeholder="Jane Smith" required type="text" />
-              </div>
-              <div className="formrow">
-                <label htmlFor="quick-services-email">{ar ? "البريد المهني" : "Work Email"}</label>
-                <input id="quick-services-email" name="email" placeholder="jane@company.com" required type="email" />
-              </div>
-              <div className="formrow">
-                <label htmlFor="quick-services-message">{ar ? "تفاصيل المشروع" : "Project Context"}</label>
-                <textarea id="quick-services-message" name="message" placeholder={ar ? "أخبرني عما تقوم ببنائه..." : "Tell me what you're building..."} required />
-              </div>
-              <button className="button dark" type="submit" style={{ justifyContent: "space-between", width: "100%" }}>
-                {ar ? "إرسال رسالة" : "SEND AN EMAIL"} <span className="arrow">↗</span>
-              </button>
-            </form>
-            <div>
-              <div className="labelrow">
-                <span className="spark">✳</span>
-                <span className="eyebrow">{ar ? "ما وراء الموجز" : "BEYOND THE BRIEF"}</span>
-              </div>
-              <h2>
-                {ar ? (
-                  <>
-                    لنبنِ معاً
-                    <br />
-                    ما <span className="light-orange">يدوم.</span>
-                  </>
-                ) : (
-                  <>
-                    LET'S BUILD
-                    <br />
-                    SOMETHING
-                    <br />
-                    THAT <span className="light-orange">LASTS.</span>
-                  </>
-                )}
-              </h2>
-              <p className="lead" style={{ maxWidth: "430px" }}>
-                {ar
-                  ? "العمارة الهندسية والتطوير والتسليم. حوار بناء في كل خطوة."
-                  : "Architecture, engineering and delivery. One thoughtful conversation at a time."}
-              </p>
-            </div>
-          </div>
-        </section>
+        <ContactSection />
 
         <Footer />
       </main>

@@ -3,6 +3,7 @@ import { ArrowLeft, ArrowUpRight, BookOpen } from "lucide-react";
 import SeoMeta from "@/components/SeoMeta";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/sections/Footer";
+import ContactSection from "@/components/sections/ContactSection";
 import {
   buildBlogPostingSchema,
   buildBreadcrumbListSchema,
@@ -198,6 +199,7 @@ export default function BlogSeoPage(props: BlogSeoPageProps) {
         </article>
       </main>
 
+      <ContactSection />
       <Footer />
     </div>
   );

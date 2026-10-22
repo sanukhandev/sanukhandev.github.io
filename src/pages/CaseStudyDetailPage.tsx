@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams, Link, Navigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/sections/Footer";
+import ContactSection from "@/components/sections/ContactSection";
 import { ResponsiveImage } from "@/components/ui/ResponsiveImage";
 import SeoMeta from "@/components/SeoMeta";
 import { getLocalizedCaseStudy, getLocalizedCaseStudies } from "@/data/caseStudies";
@@ -450,6 +451,7 @@ export default function CaseStudyDetailPage() {
         </article>
       </main>
 
+      <ContactSection />
       <Footer />
     </>
   );

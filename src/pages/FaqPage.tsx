@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/sections/Footer";
+import ContactSection from "@/components/sections/ContactSection";
 import SeoMeta from "@/components/SeoMeta";
 import { getLocalizedPageSeo } from "@/lib/seo";
 import { buildBreadcrumbListSchema, buildFaqSchema } from "@/lib/schema";
@@ -111,6 +112,7 @@ export default function FaqPage() {
           </div>
         </section>
       </main>
+      <ContactSection />
       <Footer />
     </>
   );

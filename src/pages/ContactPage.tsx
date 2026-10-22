@@ -1,7 +1,10 @@
-import { memo, useState, type FormEvent } from "react";
+import { memo } from "react";
+import { Mail, Phone, MapPin, Clock, Linkedin, Github, ExternalLink, Sparkles, MessageSquare } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/sections/Footer";
+import ContactSection from "@/components/sections/ContactSection";
 import SeoMeta from "@/components/SeoMeta";
+import { GlassCard } from "@/components/ui/glass-card";
 import { buildBreadcrumbListSchema, buildContactPageSchema } from "@/lib/schema";
 import { useLocale } from "@/hooks/use-locale";
 import { getLocalizedPageSeo } from "@/lib/seo";
@@ -11,25 +14,98 @@ export function ContactPage() {
   const ar = locale === "ar";
   const seo = getLocalizedPageSeo("contact", locale);
 
-  const [form, setForm] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    message: "",
-  });
+  const contactChannels = [
+    {
+      icon: Mail,
+      label: ar ? "البريد الإلكتروني المباشر" : "DIRECT EMAIL",
+      value: "hello@sanukhan.dev",
+      href: "mailto:hello@sanukhan.dev",
+      note: ar ? "استفسارات المشاريع، الاستشارات، والفرص الهندسية" : "Project enquiries, technical advisory & architecture",
+      action: ar ? "إرسال بريد ↗" : "Send Email ↗",
+      primary: true,
+    },
+    {
+      icon: Phone,
+      label: ar ? "الهاتف والواتساب" : "PHONE & WHATSAPP",
+      value: "+971 56 386 0850",
+      href: "tel:+971563860850",
+      note: ar ? "متاح خلال ساعات العمل في الإمارات (GST)" : "Available during UAE business hours (GST)",
+      action: ar ? "اتصال مباشر ↗" : "Call Direct ↗",
+      primary: false,
+    },
+    {
+      icon: MapPin,
+      label: ar ? "الموقع الجغرافي" : "LOCATION & BASE",
+      value: ar ? "دبي، الإمارات العربية المتحدة" : "Dubai, United Arab Emirates",
+      href: "https://maps.google.com/?q=Dubai,+United+Arab+Emirates",
+      note: ar ? "حضورياً في الإمارات والخليج · وعن بُعد عالمياً" : "On-site across UAE & GCC · Remote worldwide",
+      action: ar ? "عرض الموقع ↗" : "View Region ↗",
+      primary: false,
+    },
+    {
+      icon: Clock,
+      label: ar ? "سرعة الاستجابة" : "RESPONSE SLA",
+      value: ar ? "خلال 24 ساعة عمل" : "Within 24 Business Hours",
+      href: "mailto:hello@sanukhan.dev",
+      note: ar ? "مراجعة متأنية للمتطلبات والرسوم المعمارية" : "Thorough initial review of brief or system requirements",
+      action: ar ? "بدء محادثة ↗" : "Start Brief ↗",
+      primary: false,
+    },
+  ];
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    const name = `${form.firstName} ${form.lastName}`.trim();
-    const subject = encodeURIComponent(`Portfolio enquiry from ${name}`);
-    const body = encodeURIComponent(
-      `Name: ${name}\nEmail: ${form.email}\n\nProject details:\n${form.message}`
-    );
-    window.location.href = `mailto:hello@sanukhan.dev?subject=${subject}&body=${body}`;
-  };
+  const socialChannels = [
+    {
+      icon: Linkedin,
+      name: "LinkedIn",
+      handle: "/in/sanukhandev",
+      url: "https://www.linkedin.com/in/sanukhandev/",
+      description: ar ? "المسار المهني، الإنجازات وشبكة الأعمال" : "Career updates, leadership notes & professional network",
+    },
+    {
+      icon: Github,
+      name: "GitHub",
+      handle: "@sanukhandev",
+      url: "https://github.com/sanukhandev",
+      description: ar ? "المستودعات البرمجية المفتوحة والأدوات" : "Open source systems, reference architectures & tools",
+    },
+    {
+      icon: ExternalLink,
+      name: "DEV.to",
+      handle: "@sanukhandev",
+      url: "https://dev.to/sanukhandev",
+      description: ar ? "المقالات الهندسية المتعمقة وتجارب الإنتاج" : "Production case studies, architecture deep-dives & tutorials",
+    },
+  ];
+
+  const faqs = [
+    {
+      q: ar ? "ما هي الخدمات الهندسية والمعمارية التي تقدمها؟" : "What architecture & engineering services do you provide?",
+      a: ar
+        ? "أقود تصميم المنصات الموزعة، وهندسة تكامل النظم المؤسسية (SAP, ERP, POS)، وتدفق الأحداث عالي الكثافة عبر Kafka، والاستشارات السحابية على Azure و AWS، والقيادة التقنية للفرق."
+        : "I lead distributed systems design, enterprise integration architecture (SAP, ERP, POS), peak event streaming with Kafka, cloud migrations on Azure/AWS, and technical leadership for delivery teams.",
+    },
+    {
+      q: ar ? "كيف تبدأ مرحلة التعاون واستكشاف المشروع؟" : "How does an engagement typically start?",
+      a: ar
+        ? "نبدأ بجلسة استكشافية لفهم المتطلبات والأهداف والقيود الفنية، يليها تحليل أولي وتوصية معمارية واضحة ومسار تسليم محدد المراحل."
+        : "Engagements start with a technical discovery call to review constraints, scale requirements, and business goals, followed by an architectural roadmap and staged milestones.",
+    },
+    {
+      q: ar ? "هل تقدم استشارات حضورية داخل دولة الإمارات؟" : "Are you available for on-site consulting in Dubai & GCC?",
+      a: ar
+        ? "نعم، أقيم في دبي ومتاح للاجتماعات المعمارية الحضورية وورش العمل التقنية داخل دولة الإمارات ودول مجلس التعاون الخليجي، بالإضافة إلى العمل عن بعد عالمياً."
+        : "Yes, I am based in Dubai and available for on-site architecture workshops, steering sessions, and delivery syncs across the UAE & GCC, alongside remote global collaboration.",
+    },
+    {
+      q: ar ? "هل تتاح خيارات الاستشارات الجزئية أو القيادة التقنية المؤقتة (Fractional Lead)؟" : "Do you offer fractional CTO / technical advisory engagements?",
+      a: ar
+        ? "نعم، أعمل مع الشركات كمستشار معماري جزئي أو قائد تقني للمبادرات الاستراتيجية المعقدة وعمليات إعادة بناء النظم القديمة."
+        : "Yes, I work with select organizations on a fractional architecture advisory or technical leadership basis for high-stakes migrations, system rewrites, and platform modernization.",
+    },
+  ];
 
   return (
-    <div className="editorial-content min-h-screen">
+    <div className="editorial-content min-h-screen bg-[#FAF8F5] dark:bg-[#09090B] text-[#141413] dark:text-[#FAFAFA] transition-colors">
       <SeoMeta
         title={seo.title}
         description={seo.description}
@@ -46,269 +122,180 @@ export function ContactPage() {
 
       <Navbar />
 
-      <main id="main-content">
-        <header className="intro shell">
-          <div className="eyebrow">SANU KHAN</div>
-          <div className="overline">
-            <h1>
-              {ar ? "تواصل " : "CONTACT "}
-              <span style={{ color: "#f04913" }}>{ar ? "معي." : "ME."}</span>
-            </h1>
-            <div className="crumb">
-              ©2026 [{ar ? "مرر للاستكشاف" : "Scroll to explore"}]
-              <br />
-              {ar ? "تواصل / محادثة" : "CONTACT / CONVERSATION"}
-            </div>
+      <main id="main-content" className="pt-24 sm:pt-28 lg:pt-32">
+        {/* Dedicated Contact Header */}
+        <header className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 sm:pb-16 border-b border-black/[0.06] dark:border-white/[0.08]">
+          <div className="flex flex-wrap items-center gap-2 mb-4">
+            <span className="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+            <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#D5360C]">
+              {ar ? "سانو خان // قنوات التواصل المباشر" : "SANU KHAN // DIRECT ENGAGEMENT"}
+            </span>
           </div>
+
+          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black uppercase tracking-tight text-[#141413] dark:text-white leading-[0.98]">
+            {ar ? (
+              <>
+                تواصل <span className="text-[#D5360C]">معي.</span>
+              </>
+            ) : (
+              <>
+                GET IN <span className="text-[#D5360C]">TOUCH.</span>
+              </>
+            )}
+          </h1>
+
+          <p className="mt-6 max-w-3xl text-lg sm:text-xl text-zinc-600 dark:text-zinc-300 leading-relaxed font-normal">
+            {ar
+              ? "متاح لاستشارات عمارة الحلول، قيادة المنصات السحابية الموزعة، ومراجعات تكامل الأنظمة المؤسسية. اختر القناة الأنسب لبدء محادثتنا الهندسية."
+              : "Available for enterprise solution architecture, high-throughput distributed platform leadership, and critical system integration advisory across Dubai, GCC & global markets."}
+          </p>
         </header>
 
-        <section className="section shell" style={{ paddingTop: "15px" }}>
-          <div className="two" style={{ alignItems: "start" }}>
-            <div>
-              <div className="labelrow">
-                <span className="spark">✳</span>
-                <span className="eyebrow">{ar ? "جاهز للتواصل؟" : "READY TO CONNECT?"}</span>
-              </div>
-              <h2 className="section-heading">
-                {ar ? (
-                  <>
-                    لنبقَ على
-                    <br />
-                    تواصل.
-                  </>
-                ) : (
-                  <>
-                    GET IN
-                    <br />
-                    TOUCH.
-                  </>
-                )}
+        {/* Primary Contact Channels Grid */}
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {contactChannels.map((channel) => {
+              const Icon = channel.icon;
+              return (
+                <GlassCard
+                  key={channel.label}
+                  variant={channel.primary ? "dark" : "light"}
+                  className={`relative p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 ${
+                    channel.primary
+                      ? "bg-gradient-to-br from-[#141417] to-[#201511] text-white border-white/15 shadow-xl"
+                      : "border-black/[0.08] dark:border-white/10 shadow-sm"
+                  }`}
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-4">
+                      <div
+                        className={`w-10 h-10 rounded-lg flex items-center justify-center ${
+                          channel.primary
+                            ? "bg-[#D5360C] text-white"
+                            : "bg-black/[0.04] dark:bg-white/[0.06] text-[#D5360C]"
+                        }`}
+                      >
+                        <Icon className="w-5 h-5" />
+                      </div>
+                      <span className="text-[11px] font-mono tracking-wider uppercase text-zinc-400">
+                        {channel.label}
+                      </span>
+                    </div>
+
+                    <div className="text-base sm:text-lg font-bold tracking-tight mb-2 font-mono break-words">
+                      {channel.value}
+                    </div>
+
+                    <p
+                      className={`text-xs leading-relaxed ${
+                        channel.primary ? "text-zinc-300" : "text-zinc-600 dark:text-zinc-400"
+                      }`}
+                    >
+                      {channel.note}
+                    </p>
+                  </div>
+
+                  <a
+                    href={channel.href}
+                    className={`mt-6 inline-flex items-center gap-1.5 text-xs font-mono font-bold uppercase tracking-wider transition-colors ${
+                      channel.primary
+                        ? "!text-[#E6D5BD] hover:!text-white"
+                        : "text-[#D5360C] hover:text-[#AD2A09] dark:text-[#E6D5BD]"
+                    }`}
+                  >
+                    <span>{channel.action}</span>
+                  </a>
+                </GlassCard>
+              );
+            })}
+          </div>
+        </section>
+
+        {/* Professional Profiles / Ecosystem */}
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 border-t border-black/[0.06] dark:border-white/[0.08]">
+          <div className="mb-6">
+            <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#D5360C] block mb-1">
+              {ar ? "الملفات المهنية والشبكات" : "PROFESSIONAL FOOTPRINT"}
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-black uppercase tracking-tight text-[#141413] dark:text-white">
+              {ar ? "منصات العمل والتوثيق المفتوح" : "PUBLIC VERIFICATION & CODE"}
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {socialChannels.map((soc) => {
+              const Icon = soc.icon;
+              return (
+                <a
+                  key={soc.name}
+                  href={soc.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block p-6 rounded-xl border border-black/[0.08] dark:border-white/10 bg-white/50 dark:bg-zinc-900/40 backdrop-blur-sm hover:border-[#D5360C] transition-all duration-200"
+                >
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center gap-2.5">
+                      <Icon className="w-5 h-5 text-[#D5360C]" />
+                      <span className="font-bold text-sm text-[#141413] dark:text-white">{soc.name}</span>
+                    </div>
+                    <span className="text-xs font-mono text-zinc-400 group-hover:text-[#D5360C] transition-colors">
+                      {soc.handle} ↗
+                    </span>
+                  </div>
+                  <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                    {soc.description}
+                  </p>
+                </a>
+              );
+            })}
+          </div>
+        </section>
+
+        {/* 09 / GET IN TOUCH Unified Form & Narrative Section */}
+        <ContactSection id="enquiry-form" />
+
+        {/* Engagement FAQs Section */}
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-black/[0.06] dark:border-white/[0.08]">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            <div className="lg:col-span-4">
+              <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#D5360C] block mb-1">
+                {ar ? "الأسئلة الشائعة" : "ENGAGEMENT FAQ"}
+              </span>
+              <h2 className="text-2xl sm:text-3xl font-black uppercase tracking-tight text-[#141413] dark:text-white">
+                {ar ? "تفاصيل بدء التعاون" : "COMMISSIONING & COLLABORATION"}
               </h2>
-              <p className="lead" style={{ maxWidth: "420px", margin: "24px 0" }}>
+              <p className="mt-3 text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed font-normal">
                 {ar
-                  ? "تحدٍ في تصميم النظم، أو منصة تحتاج للبناء، أو فريق يحتاج لقيادة تقنية؟ لنبدأ محادثة مثمرة."
-                  : "An architecture challenge, a platform to build or a team to lead? Start a conversation."}
+                  ? "إجابات مباشرة حول أسلوب العمل المعماري، النطاق الزمني، ونماذج الشراكة الهندسية."
+                  : "Direct answers regarding architecture advisory scope, working models, and timeline commitments."}
               </p>
-              <a className="button" href="mailto:hello@sanukhan.dev">
-                {ar ? "راسل سانو" : "EMAIL SANU"} <span className="arrow">↗</span>
-              </a>
             </div>
 
-            <div className="contact-cards">
-              <div className="info-card">
-                <span className="cap">{ar ? "المقر" : "BASED IN"}</span>
-                <strong>
-                  {ar ? (
-                    <>
-                      دبي،
-                      <br />
-                      الإمارات العربية المتحدة
-                    </>
-                  ) : (
-                    <>
-                      DUBAI,
-                      <br />
-                      UNITED ARAB EMIRATES
-                    </>
-                  )}
-                </strong>
-              </div>
-              <div className="info-card">
-                <span className="cap">{ar ? "أسلوب التعاون" : "COLLABORATION"}</span>
-                <strong>
-                  {ar ? (
-                    <>
-                      عن بُعد
-                      <br />
-                      وحضورياً
-                    </>
-                  ) : (
-                    <>
-                      REMOTE
-                      <br />
-                      &amp; ON-SITE
-                    </>
-                  )}
-                </strong>
-              </div>
-              <div className="info-card">
-                <span className="cap">{ar ? "الهاتف" : "PHONE"}</span>
-                <strong dir="ltr">+971 56 386 0850</strong>
-              </div>
-              <div className="info-card">
-                <span className="cap">{ar ? "البريد الإلكتروني" : "EMAIL"}</span>
-                <strong>hello@sanukhan.dev</strong>
-              </div>
+            <div className="lg:col-span-8 space-y-3">
+              {faqs.map((faq, idx) => (
+                <details
+                  key={faq.q}
+                  className="group rounded-xl border border-black/[0.08] dark:border-white/10 bg-white/40 dark:bg-zinc-900/30 p-4 sm:p-5 transition-colors open:bg-white/80 dark:open:bg-zinc-900/60"
+                >
+                  <summary className="cursor-pointer font-bold text-sm sm:text-base text-[#141413] dark:text-white flex items-center justify-between list-none">
+                    <span>
+                      <span className="text-[#D5360C] font-mono text-xs me-2">0{idx + 1}.</span>
+                      {faq.q}
+                    </span>
+                    <span className="text-[#D5360C] font-mono text-base transition-transform duration-200 group-open:rotate-45">
+                      +
+                    </span>
+                  </summary>
+                  <p className="mt-3 text-xs sm:text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed font-normal ps-6">
+                    {faq.a}
+                  </p>
+                </details>
+              ))}
             </div>
           </div>
         </section>
 
-        <section className="section dark-zone">
-          <div className="shell">
-            <div className="labelrow">
-              <span className="spark">✳</span>
-              <span className="eyebrow">{ar ? "استفسارات المشاريع" : "PROJECT ENQUIRIES"}</span>
-            </div>
-            <div className="two">
-              <h2 className="section-heading">
-                {ar ? (
-                  <>
-                    لنتحدث عن
-                    <br />
-                    نظامك <span className="light-orange">القادم.</span>
-                  </>
-                ) : (
-                  <>
-                    LET’S TALK
-                    <br />
-                    ABOUT YOUR
-                    <br />
-                    <span className="light-orange">NEXT SYSTEM.</span>
-                  </>
-                )}
-              </h2>
-              <p className="lead" style={{ maxWidth: "480px", color: "#ccc", alignSelf: "end" }}>
-                {ar
-                  ? "شارك متطلبات مشروعك، وتحدياتك التقنية، أو فكرة التعاون. وسيفتح النموذج رسالة مباشرة إلى البريد الرسمي."
-                  : "Share your requirements, technical challenges, or collaboration idea. Use the verified contact email for a real enquiry."}
-              </p>
-            </div>
-
-            <form
-              aria-label="Contact enquiry"
-              className="form-dark"
-              onSubmit={handleSubmit}
-              style={{ marginTop: "50px" }}
-            >
-              <div className="two">
-                <div>
-                  <label htmlFor="contact-firstName">{ar ? "01 / الاسم الأول" : "01 / FIRST NAME"}</label>
-                  <input
-                    id="contact-firstName"
-                    name="firstName"
-                    placeholder="Jane"
-                    required
-                    type="text"
-                    value={form.firstName}
-                    onChange={(e) => setForm({ ...form, firstName: e.target.value })}
-                  />
-                </div>
-                <div>
-                  <label htmlFor="contact-lastName">{ar ? "02 / اسم العائلة" : "02 / LAST NAME"}</label>
-                  <input
-                    id="contact-lastName"
-                    name="lastName"
-                    placeholder="Smith"
-                    required
-                    type="text"
-                    value={form.lastName}
-                    onChange={(e) => setForm({ ...form, lastName: e.target.value })}
-                  />
-                </div>
-              </div>
-
-              <label htmlFor="contact-email">{ar ? "03 / البريد المهني" : "03 / WORK EMAIL"}</label>
-              <input
-                id="contact-email"
-                name="email"
-                placeholder="jane@company.com"
-                required
-                type="email"
-                value={form.email}
-                onChange={(e) => setForm({ ...form, email: e.target.value })}
-              />
-
-              <label htmlFor="contact-message">{ar ? "04 / تفاصيل المشروع" : "04 / PROJECT CONTEXT"}</label>
-              <textarea
-                id="contact-message"
-                name="message"
-                placeholder={ar ? "ما الذي تقوم ببنائه أو تطويره؟" : "What are you building or improving?"}
-                required
-                value={form.message}
-                onChange={(e) => setForm({ ...form, message: e.target.value })}
-              />
-
-              <button className="button" type="submit">
-                {ar ? "بدء المحادثة" : "START A CONVERSATION"} <span className="arrow">↗</span>
-              </button>
-
-              <p className="tiny" style={{ color: "#aaa", marginTop: "12px" }}>
-                {ar
-                  ? "يفتح إرسال النموذج برنامج البريد الإلكتروني المثبت لديك. لا يتم تخزين أي بيانات شخصية على هذا الموقع."
-                  : "Submission opens your configured email client. No personal data is stored on this site."}
-              </p>
-            </form>
-          </div>
-        </section>
-
-        <section className="section shell">
-          <div className="qa">
-            <div>
-              <div className="labelrow">
-                <span className="spark">✳</span>
-                <span className="eyebrow">FAQ</span>
-              </div>
-              <h2 className="section-heading">
-                {ar ? (
-                  <>
-                    الأسئلة
-                    <br />
-                    الشائعة
-                  </>
-                ) : (
-                  <>
-                    FREQUENT
-                    <br />
-                    QUESTIONS
-                  </>
-                )}
-              </h2>
-            </div>
-            <div>
-              <details className="faqrow faq-details">
-                <summary>01. {ar ? "ما الذي يمكنك مساعدة فريقنا في تسليمه؟" : "What can you help our team deliver?"}</summary>
-                <p>
-                  {ar
-                    ? "أعمل مع الفرق على عمارة الحلول، المنصات المتكاملة، تكاملات المؤسسات، الأتمتة بالذكاء الاصطناعي، والقيادة التقنية."
-                    : "I work with teams on solution architecture, full-stack platforms, enterprise integrations, AI-assisted automation, and technical leadership."}
-                </p>
-              </details>
-              <details className="faqrow faq-details">
-                <summary>02. {ar ? "هل تتعاون مع فرق المنتجات الحالية؟" : "Do you collaborate with existing product teams?"}</summary>
-                <p>
-                  {ar
-                    ? "نعم. أتكامل مع فرق المنتج والهندسة والأعمال الحالية، موائماً القرارات مع نتائج التسليم والقيود التشغيلية."
-                    : "Yes. I integrate with existing product, engineering and business teams, aligning decisions with delivery outcomes and operational constraints."}
-                </p>
-              </details>
-              <details className="faqrow faq-details">
-                <summary>03. {ar ? "ما هي الأنظمة والمنصات التي تعمل معها؟" : "Which systems and platforms do you work with?"}</summary>
-                <p>
-                  {ar
-                    ? "توثق محفظتي العمل مع Azure و AWS و Kafka و Node.js و React و Java و SAP و PIM وتكاملات API و Kubernetes."
-                    : "The repository documents work with Azure, AWS, Kafka, Node.js, React, Java, SAP, PIM, API integration and Kubernetes."}
-                </p>
-              </details>
-              <details className="faqrow faq-details">
-                <summary>04. {ar ? "هل يمكنك المساعدة في تحديث منصة قائمة؟" : "Can you help modernize an existing platform?"}</summary>
-                <p>
-                  {ar
-                    ? "نعم. يمكنني تقييم التبعيات القديمة واقتراح تحديث تدريجي مدعوم بمراحل انتقال خاضعة للمراقبة."
-                    : "Yes. I can assess legacy dependencies and recommend incremental modernization backed by observable migration milestones."}
-                </p>
-              </details>
-              <details className="faqrow faq-details">
-                <summary>05. {ar ? "هل تعمل عن بُعد وعبر المناطق؟" : "Do you work remotely and across regions?"}</summary>
-                <p>
-                  {ar
-                    ? "نعم. توثق محفظتي تسليم مشاريع في تسعة أسواق، من دبي ومع فرق عمل موزعة عالمياً."
-                    : "Yes. My portfolio documents delivery across nine markets, from Dubai and with distributed teams."}
-                </p>
-              </details>
-            </div>
-          </div>
-        </section>
-
+        {/* Unified Editorial Footer */}
         <Footer />
       </main>
     </div>

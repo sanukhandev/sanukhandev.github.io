@@ -2,6 +2,7 @@ import { memo } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/sections/Footer";
+import ContactSection from "@/components/sections/ContactSection";
 import SeoMeta from "@/components/SeoMeta";
 import { ResponsiveImage } from "@/components/ui/ResponsiveImage";
 import { getLocalizedCaseStudies } from "@/data/caseStudies";
@@ -102,14 +103,7 @@ export function ProjectsPage() {
           </div>
         </section>
 
-        <section className="section shell text-center" style={{ textAlign: "center", padding: "70px 0" }}>
-          <h2 className="section-heading">{ar ? "لنحل تحديك القادم." : "LET’S SOLVE WHAT’S NEXT."}</h2>
-          <div style={{ marginTop: "30px" }}>
-            <Link className="button dark" to="/contact">
-              {ar ? "تواصل معي" : "WORK WITH ME"} <span className="arrow">↗</span>
-            </Link>
-          </div>
-        </section>
+        <ContactSection />
 
         <Footer />
       </main>

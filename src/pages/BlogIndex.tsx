@@ -11,6 +11,7 @@ import {
 import SeoMeta from "@/components/SeoMeta";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/sections/Footer";
+import ContactSection from "@/components/sections/ContactSection";
 import { useDevToArticles } from "@/hooks/use-devto-articles";
 import { articles as fallbackArticles } from "@/data/siteData";
 import { getLocalizedPageSeo } from "@/lib/seo";
@@ -358,6 +359,7 @@ export default function BlogIndex() {
         </div>
       </main>
 
+      <ContactSection />
       <Footer />
     </div>
   );
