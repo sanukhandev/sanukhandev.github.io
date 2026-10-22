@@ -17,7 +17,6 @@ const MAX_SESSIONS = 500;
 type SessionEntry = {
   messages: HistoryMessage[];
   lastAccessedAt: number;
-  siteScope?: string;
 };
 
 type ApiHeaders = Record<string, string | string[] | undefined>;
@@ -179,24 +178,187 @@ const getHistory = (sessionId: string): HistoryMessage[] => {
   return entry.messages;
 };
 
-const getSessionScope = (sessionId: string): string => {
-  const entry = conversationMemory.get(sessionId);
-  if (!entry) return "";
-  entry.lastAccessedAt = Date.now();
-  return (entry.siteScope || "").trim();
-};
+export const SERVER_TRUSTED_PORTFOLIO_FACTS: Record<ZaakiyLocale, string[]> = {
+  en: [
+    // Identity & Core Profile
+    "Identity: Zaakiy AI — Sanu Khan's official Portfolio Assistant and technical representative.",
+    "Persona & Tone: Professional, calm, concise, technically rigorous, tech lead perspective, direct and helpful.",
+    "Name: Sanu Khan.",
+    "Role: Solution Architect, Tech Lead & Platform Engineering Leader.",
+    "Location: Dubai, UAE (GCC region).",
+    "Experience: 13+ years architecting and scaling distributed cloud systems, high-throughput pipelines, and enterprise integrations.",
+    "Mission: Designing resilient distributed systems, modern event fabrics, and enterprise platform architectures with zero-downtime engineering discipline.",
 
-const setSessionScope = (sessionId: string, siteScope: string) => {
-  const now = Date.now();
-  let entry = conversationMemory.get(sessionId);
-  if (!entry) {
-    entry = { messages: [], lastAccessedAt: now, siteScope };
-    conversationMemory.set(sessionId, entry);
-    evictStaleSessions();
-    return;
-  }
-  entry.siteScope = siteScope;
-  entry.lastAccessedAt = now;
+    // Verified Scale & Impact Metrics
+    "Metric: 13+ Years Experience across enterprise solution architecture, cloud infrastructure, and platform leadership.",
+    "Metric: 100+ Production Systems Delivered across commerce, travel, logistics, real estate, and automotive domains.",
+    "Metric: 9 Regional GCC Markets Served with synchronized enterprise integrations, multi-market catalogs, and localized compliance.",
+    "Metric: 1M+ Product Scale Systems handled with sub-second catalog synchronization, event streaming, and resilient data fabrics.",
+    "Performance Standards: Sub-second latency targets, 99.99% availability architectures, deterministic business logic, and auditable transaction boundaries.",
+
+    // Core Architecture Domains & Capabilities
+    "Domain: Distributed Systems & Event-Driven Architecture (Apache Kafka, Azure Event Hubs, RabbitMQ, Redis Pub/Sub).",
+    "Domain: Cloud Infrastructure & Serverless (Microsoft Azure, AWS, Kubernetes / AKS / EKS, Docker, Terraform).",
+    "Domain: Enterprise Integrations & Orchestration (SAP ERP, PIM, Headless Commerce, REST/GraphQL APIs, Serverless Workflows).",
+    "Domain: Full-Stack Platform Engineering (Node.js, TypeScript, React, Next.js, Spring Boot, PostgreSQL, Redis, Elasticsearch).",
+    "Domain: Operational Intelligence & AI Systems (ZaakiyV3RSE architecture, deterministic validation, RAG, config-driven agent orchestration).",
+
+    // Production Case Study 1: AI-Assisted Real Estate ERP
+    "Case Study: AI-Assisted Real Estate ERP Architecture (Slug: real-estate-erp-architecture).",
+    "Real Estate ERP Context: Solo product engineering sprint using Codex and Antigravity to model a 15+ module, 30+ workflow multi-branch platform in 25 hours.",
+    "Real Estate ERP Architecture: Angular SPA + Laravel REST API + MySQL + Private Storage + Permission-aware AI tool layer.",
+    "Real Estate ERP Invariants: Simplified direct property model, branch tenancy as a security boundary, server-authoritative double-booking prevention, auditable non-destructive financial posting.",
+
+    // Production Case Study 2: Garage Management & Diagnostics
+    "Case Study: Garage Management & Diagnostic Intelligence Platform (Slug: garage-management-and-diagnostics).",
+    "Garage Platform Context: Connected automotive workshop management, real-time vehicle telematics, OBD-II fault code diagnostics, and automated spare parts dispatch.",
+    "Garage Platform Architecture: Node.js, TypeScript, Azure Event Hubs, PostgreSQL, Redis, WebSockets for live mechanic bay telemetry.",
+    "Garage Platform Outcomes: Real-time sensor processing, streamlined repair estimates, reduced turnaround time, and auditable vehicle service histories.",
+
+    // Production Case Study 3: Headless Healthcare Digital Experience
+    "Case Study: Headless Healthcare & Digital Experience Platform (Slug: headless-healthcare-digital-experience).",
+    "Healthcare Platform Context: Modernizing healthcare organization marketing and discovery experience across medical specialists, services, departments, clinic locations, and SEO.",
+    "Healthcare Platform Architecture: Next.js frontend with WordPress and ACF as structured headless CMS, connected via controlled WPGraphQL operations, server-side typed view models, CDN edge caching, and HMAC-signed webhook cache revalidation.",
+    "Healthcare Platform Outcomes: Strict server-side CMS isolation (no direct browser CMS traffic), component-driven editorial layouts replacing page-builder bloat, and targeted tag-based cache revalidation.",
+
+    // Production Case Study 4: Regional Enterprise Commerce Platform
+    "Case Study: Regional Enterprise Commerce Platform / Omnichannel Fabric (Slug: enterprise-retail-integration).",
+    "Commerce Platform Context: Unified 9 regional GCC markets across central PIM, SAP ERP, warehouse management, and headless storefronts.",
+    "Commerce Platform Architecture: Event-driven microservices using Node.js, Apache Kafka, Redis, and Elasticsearch.",
+    "Commerce Platform Outcomes: 1M+ SKU catalog synchronized in near real-time, zero split-brain pricing discrepancies, resilient dead-letter queue recovery.",
+
+    // Production Case Study 5: Airline Retailing & NDC Marketplace
+    "Case Study: Airline NDC & Travel B2B Marketplace (Slug: airline-retailing-aggregation).",
+    "Airline NDC Context: IATA NDC-compliant flight shopping, fare aggregation, and travel retail engine handling extreme peak search concurrency.",
+    "Airline NDC Architecture: Java Spring Boot microservices, Kafka streaming, Redis multi-tier caching, AWS ECS containers.",
+    "Airline NDC Outcomes: Sub-second aggregation across multiple GDS feeds, resilient circuit breaking against downstream airline timeouts.",
+
+    // Production Case Study 6: Automotive Omnichannel & Aftersales
+    "Case Study: Automotive Omnichannel & Aftersales Platform (Slug: automotive-omnichannel-platform).",
+    "Automotive Platform Context: Multi-brand automotive retail network enabling digital vehicle reservations, trade-in valuations, and service booking.",
+    "Automotive Platform Architecture: React, TypeScript, Node.js, Azure Cosmos DB, Docker, event-driven webhooks.",
+    "Automotive Platform Outcomes: Consolidated lead-to-delivery lifecycle, automated dealer allocation, and transparent service scheduling.",
+
+    // Innovation & R&D: ZaakiyV3RSE
+    "Innovation: ZaakiyV3RSE (Slug: zaakiy-v3rse) — AI-native operations intelligence platform.",
+    "ZaakiyV3RSE Concept: Explores autonomous agent orchestration, context retrieval, deterministic calculations, and operational telemetry.",
+    "ZaakiyV3RSE Principle: Deterministic computations and auditable business rules remain strictly non-generative, while LLMs handle semantic reasoning, routing, and intent synthesis.",
+
+    // 4-Phase Delivery Methodology
+    "Methodology Phase 1: Discover & Isolate — Map domain boundaries, isolate invariants, define bounded contexts and transactional scopes.",
+    "Methodology Phase 2: Architect & Model — Contract-first API design, event schema taxonomy, database normalization, and failure-mode analysis.",
+    "Methodology Phase 3: Implement & Stream — Stateless microservices, async message queues, backpressure handling, multi-tier caching, and CI/CD pipelines.",
+    "Methodology Phase 4: Harden & Verify — Observability, distributed tracing, automated test coverage, load testing, and zero-downtime deployment gates.",
+
+    // Architectural FAQs & Philosophy
+    "FAQ Enterprise Integrations: Contract-first, asynchronous event streaming (Kafka/Azure Event Hubs) decouples ERP/PIM layers, guarantees idempotency, and isolates failure blast radiuses.",
+    "FAQ System Scalability: Isolating reads and writes, multi-tier caching (Redis/CDN), stateless services, read replicas, and circuit breakers prevent regional spikes from cascading.",
+    "FAQ Technical Leadership: Transparent architectural trade-offs, breaking complex roadmaps into verified delivery increments, enforcing automated quality gates, eliminating technical debt.",
+    "FAQ AI in Enterprise: Configuration-driven agents, deterministic calculation guarantees, grounding LLMs in verified domain models to eliminate hallucination in auditable workflows.",
+
+    // Published Technical Writing
+    "Article: 'API Gateway: The Bouncer Your Microservices Didn't Know They Needed' — Authentication, rate limiting, routing, and observability across microservices (/blog/api-gateway-the-bouncer-your-microservices-didnt-know-they-needed-1j0e).",
+    "Article: 'DuckDB: The SQLite of Analytics You Didn't Know You Needed' — Fast in-process columnar OLAP analytics querying Parquet, CSV, and JSON without infrastructure overhead (/blog/duckdb-the-sqlite-of-analytics-you-didnt-know-you-needed-579m).",
+    "Article: 'JavaScript Proxy Explained: Practical Patterns for Dynamic Objects' — Runtime schema validation, reactive state pipelines, and defensive boundaries (/blog/unmasking-javascript-proxies-the-secret-agents-of-your-objects-4eac).",
+    "Article: 'Building a Cost-Effective Full-Stack SaaS Platform' — Architecture patterns and trade-offs for scalable SaaS systems on a lean budget (/blog/building-a-cost-effective-full-stack-saas-platform-a-practical-guide-for-small-to-mid-size-it-2d44).",
+
+    // Contact & Collaboration
+    "Contact Email: hello@sanukhan.dev for project consulting, solution architecture reviews, and leadership discussions.",
+    "Contact Phone & Direct: +971 56 386 0850 (Dubai, United Arab Emirates).",
+    "Collaboration Model: Remote & on-site technical advisory, solution architecture, and platform engineering leadership.",
+    "Professional Profiles: GitHub at github.com/sanukhandev, LinkedIn at linkedin.com/in/sanukhandev.",
+    "Support: Creator support via Ko-fi at ko-fi.com/sanukhan.",
+  ],
+  ar: [
+    // Identity & Core Profile
+    "الهوية: ذكي (Zaakiy AI) — المساعد الرسمي للمحفظة الهندسية لسانو خان وممثله التقني.",
+    "الشخصية والأسلوب: مهني، هادئ، دقيق، صارم تقنياً، يتحدث بمنظور قائد تقني، مباشر ومفيد.",
+    "الاسم: سانو خان (Sanu Khan).",
+    "الدور: مهندس حلول، قائد تقني وقائد هندسة منصات (Solution Architect & Tech Lead).",
+    "الموقع: دبي، الإمارات العربية المتحدة (منطقة مجلس التعاون الخليجي).",
+    "الخبرة: أكثر من 13 عاماً في هندسة وتوسيع الأنظمة الموزعة، مسارات البيانات عالية الكثافة، وتكامل الأنظمة المؤسسية.",
+    "الرسالة الهندسية: تصميم أنظمة موزعة مرنة، منصات معتمدة على الأحداث، وعمارة مؤسسية تعمل بانضباط تشغيلي ودون توقف.",
+
+    // Verified Scale & Impact Metrics
+    "المقاييس الموثقة: أكثر من 13 عاماً من الخبرة في عمارة الحلول المؤسسية، البنية التحتية السحابية، وقيادة المنصات.",
+    "المقاييس الموثقة: تسليم أكثر من 100 نظام إنتاجي عبر قطاعات التجارة، السفر، الخدمات اللوجستية، العقارات، والسيارات.",
+    "المقاييس الموثقة: خدمة 9 أسواق إقليمية في الخليج بتكاملات متزامنة، كتالوجات متعددة الأسواق، والامتثال المحلي.",
+    "المقاييس الموثقة: إدارة أنظمة بحجم منتجات يتجاوز مليون منتج مع مزامنة فورية، تدفق أحداث، وبنية بيانات فائقة المرونة.",
+    "معايير الأداء: زمن استجابة بأقل من ثانية، جاهزية 99.99%، منطق أعمال حتمي ومحدد، وحدود معاملات قابلة للتدقيق الكامل.",
+
+    // Core Architecture Domains & Capabilities
+    "مجال الخبرة: الأنظمة الموزعة والمعمارية المعتمدة على الأحداث (Apache Kafka, Azure Event Hubs, RabbitMQ, Redis Pub/Sub).",
+    "مجال الخبرة: البنية التحتية السحابية والأنظمة بدون خوادم (Microsoft Azure, AWS, Kubernetes / AKS / EKS, Docker, Terraform).",
+    "مجال الخبرة: تكامل الأنظمة المؤسسية وتنسيق العمليات (SAP ERP, PIM, التجارة المفصولة Headless Commerce, واجهات REST/GraphQL).",
+    "مجال الخبرة: هندسة المنصات الشاملة (Node.js, TypeScript, React, Next.js, Spring Boot, PostgreSQL, Redis, Elasticsearch).",
+    "مجال الخبرة: الذكاء التشغيلي وأنظمة الذكاء الاصطناعي (معمارية ZaakiyV3RSE، التحقق الحتمي، RAG، وتنسيق الوكلاء المستقلين).",
+
+    // Production Case Study 1: Real Estate ERP
+    "دراسة حالة: معمارية ERP العقارية المدعومة بالذكاء الاصطناعي (المسار: real-estate-erp-architecture).",
+    "سياق ERP العقارات: سبرنت هندسي منفرد باستخدام Codex وAntigravity لنمذجة منصة متعددة الفروع تغطي 15+ وحدة و30+ تدفق عمل خلال 25 ساعة.",
+    "معمارية ERP العقارات: Angular SPA + Laravel REST API + MySQL + تخزين خاص + أدوات ذكاء اصطناعي تراعي الصلاحيات.",
+    "محددات ERP العقارات: نموذج مباشر للعقارات، عزل الفروع كحد أمان أساسي، منع الحجز المزدوج على مستوى الخادم، وترحيل مالي غير قابل للتعديل الصامت.",
+
+    // Production Case Study 2: Garage Diagnostics
+    "دراسة حالة: منصة إدارة الورش والتشخيص الذكي للسيارات (المسار: garage-management-and-diagnostics).",
+    "سياق منصة الورش: إدارة ورش صيانة السيارات المتصلة، معالجة فورية لقراءات التليماتيكس، تشخيص أكواد أعطال OBD-II، وصرف قطع الغيار آلياً.",
+    "معمارية منصة الورش: Node.js, TypeScript, Azure Event Hubs, PostgreSQL, Redis, وتقنية WebSockets لبث القياسات الحية.",
+    "نتائج منصة الورش: معالجة فورية للمستشعرات، تسريع تقدير الإصلاح، تقليل وقت انتظار السيارات، وتوثيق سجلات الصيانة بدقة.",
+
+    // Production Case Study 3: Headless Healthcare
+    "دراسة حالة: منصة التجربة الرقمية الصحية وHeadless CMS (المسار: headless-healthcare-digital-experience).",
+    "سياق الرعاية الصحية: تحديث منصة المؤسسة الصحية للمتخصصين والخدمات والأقسام والمواقع الطبية مع تحسين محركات البحث SEO وفصل إدارة المحتوى عن العرض.",
+    "معمارية الرعاية الصحية: منصة Next.js مع WordPress وACF كنظام CMS منظم ومفصول، متصلة عبر عمليات WPGraphQL معتمدة، ونماذج Typed View Models، وتخزين CDN مؤقت مع إعادة تحقق موجهة بـ HMAC.",
+    "نتائج الرعاية الصحية: عزل CMS على الخادم تماماً (منع وصول المتصفح المباشر لـ WordPress)، استبدال أدوات بناء الصفحات العشوائية بمكونات React محددة، وإبطال موجه للكاش دون انقطاع.",
+
+    // Production Case Study 4: Regional Enterprise Commerce
+    "دراسة حالة: منصة التجارة الإقليمية للمؤسسات / نسيج التجارة الشاملة (المسار: enterprise-retail-integration).",
+    "سياق التجارة الإقليمية: توحيد 9 أسواق في دول الخليج مع نظام PIM مركزي، نظام SAP ERP، وإدارة المستودعات مع واجهات متجر مفصولة.",
+    "معمارية التجارة الإقليمية: خدمات مصغرة معتمدة على الأحداث باستخدام Node.js, Apache Kafka, Redis, وElasticsearch.",
+    "نتائج التجارة الإقليمية: مزامنة أكثر من مليون منتج في الوقت الفعلي تقريباً، منع فروقات الأسعار، واسترجاع مرن للرسائل المتعثرة عبر طوابير DLQ.",
+
+    // Production Case Study 5: Airline NDC Marketplace
+    "دراسة حالة: منصة تجميع حجوزات الطيران والتوزيع الجديد NDC (المسار: airline-retailing-aggregation).",
+    "سياق تجميع الطيران: محرك تجارة التجزئة وحجز التذاكر المتوافق مع معيار IATA NDC مع دعم التوزيع المتعدد والبحث المتزامن فائق الكثافة.",
+    "معمارية تجميع الطيران: خدمات Java Spring Boot المصغرة، بث بيانات Kafka، تخزين Redis متعدد المستويات، وحاويات AWS ECS.",
+    "نتائج تجميع الطيران: تجميع عروض الطيران والأسعار في أقل من ثانية عبر مصادر GDS متعددة مع قواطع دوائر لمنع بطء الأنظمة التابعة.",
+
+    // Production Case Study 6: Automotive Omnichannel
+    "دراسة حالة: منصة تجارة السيارات وخدمات ما بعد البيع (المسار: automotive-omnichannel-platform).",
+    "سياق منصة السيارات: شبكة رقمية لمبيعات وخدمات السيارات تتيح حجز المركبات عبر الإنترنت، تقييم الاستبدال، وحجز مواعيد الصيانة.",
+    "معمارية منصة السيارات: React, TypeScript, Node.js, Azure Cosmos DB, Docker, وخطافات أحداث الويب.",
+    "نتائج منصة السيارات: توحيد مسار العميل من الحجز للتسليم، التوزيع التلقائي للوكلاء، وجدولة شفافة للمواعيد.",
+
+    // Innovation & R&D: ZaakiyV3RSE
+    "الابتكار والبحث: منظومة ZaakiyV3RSE (المسار: zaakiy-v3rse) — منصة ذكاء تشغيلي قائمة على الذكاء الاصطناعي.",
+    "مفهوم ZaakiyV3RSE: استكشاف تنسيق الوكلاء المستقلين، استرجاع السياق الذكي، الحسابات الحتمية الموثوقة، والقياسات التشغيلية.",
+    "مبدأ ZaakiyV3RSE: الحسابات الحرجة وقواعد الأعمال تظل حتمية قطعية وغير مولدة، بينما توظف نماذج اللغة للاستدلال الدلالي والتوجيه الذكي.",
+
+    // 4-Phase Delivery Methodology
+    "المرحلة الأولى للمنهجية: الاكتشاف والعزل — نمذجة النطاق، عزل الثوابت الحتمية، وتحديد حدود السياقات والمعاملات.",
+    "المرحلة الثانية للمنهجية: المعمارية والنمذجة — تصميم واجهات برمجة ترتكز على العقود، تصنيف الأحداث، وتصميم خطط التعافي من الإخفاق.",
+    "المرحلة الثالثة للمنهجية: التنفيذ والتدفق — بناء خدمات مصغرة عديمة الحالة، طوابير رسائل تراعي الضغط العكسي، تخزين مؤقت، وأتمتة مسارات CI/CD.",
+    "المرحلة الرابعة للمنهجية: التقوية والتحقق — رصد شامل للنظام، تتبع موزع، تغطية اختبارات آلية، اختبارات أحمال، وبوابات نشر بدون توقف.",
+
+    // Architectural FAQs & Philosophy
+    "سؤال وجواب - تكامل المؤسسات: الاعتماد على العقود الصريحة وبث الأحداث (Kafka / Azure Event Hubs) لفصل طبقات ERP وPIM وضمان المعالجة المتكررة بأمان.",
+    "سؤال وجواب - قابلية التوسع: فصل القراءة عن الكتابة، التخزين المؤقت متعدد المستويات (Redis / CDN)، الخدمات عديمة الحالة، وقواطع الدوائر لمنع الاختناقات.",
+    "سؤال وجواب - القيادة التقنية: جعل المفاضلات المعمارية واضحة، تقسيم خطط العمل الطموحة إلى مراحل تسليم عملية، وتطبيق معايير جودة وأتمتة مسارات CI/CD.",
+    "سؤال وجواب - الذكاء الاصطناعي للمؤسسات: وكلاء معتمدون على التهيئة، ضمان الحسابات الحتمية، وتقييد نماذج الذكاء بالنماذج الموثقة لمنع الهلوسة.",
+
+    // Published Technical Writing
+    "مقال: 'بوابة واجهات البرمجة API Gateway: الحارس الأمني للخدمات المصغرة' — إدارة المصادقة، تحديد المعدل، التوجيه، والرصد على حافة النظام (/blog/api-gateway-the-bouncer-your-microservices-didnt-know-they-needed-1j0e).",
+    "مقال: 'قاعدة بيانات DuckDB: نظام التحليلات المدمج فائق السرعة' — قاعدة بيانات عمودية مدمجة للاستعلامات التحليلية بدون إعدادات معقدة (/blog/duckdb-the-sqlite-of-analytics-you-didnt-know-you-needed-579m).",
+    "مقال: 'شرح كائنات JavaScript Proxy: أنماط عملية للكائنات الديناميكية' — التحقق من صحة المخطط في وقت التشغيل والحدود الدفاعية للكائنات (/blog/unmasking-javascript-proxies-the-secret-agents-of-your-objects-4eac).",
+    "مقال: 'بناء منصة SaaS متكاملة وفعالة من حيث التكلفة' — أنماط ومفاضلات معمارية لبناء منصات SaaS بميزانية مرنة ومستدامة (/blog/building-a-cost-effective-full-stack-saas-platform-a-practical-guide-for-small-to-mid-size-it-2d44).",
+
+    // Contact & Collaboration
+    "البريد الإلكتروني للتواصل: hello@sanukhan.dev للاستشارات الهندسية ومراجعة الحلول المعمارية وفرص القيادة التقنية.",
+    "الهاتف والاتصال المباشر: +971 56 386 0850 (دبي، الإمارات العربية المتحدة).",
+    "نموذج التعاون: استشارات تقنية عن بُعد وميدانية، عمارة الحلول، وقيادة هندسة المنصات.",
+    "الملفات المهنية: جيتهاب github.com/sanukhandev، لينكدإن linkedin.com/in/sanukhandev.",
+    "الدعم الشخصي: عبر منصة كوفي على ko-fi.com/sanukhan.",
+  ],
 };
 
 const pushHistory = (
@@ -313,34 +475,39 @@ const buildReferenceFacts = (siteScope: string, userQuestion: string) => {
     .split(/\n+/)
     .map((line) => line.trim())
     .filter(Boolean)
-    .slice(0, 80);
+    .slice(0, 120);
 
   const qTokens = new Set(tokenize(userQuestion));
 
   const sourceForFact = (fact: string) => {
     const key = (fact.split(":")[0] || "").trim().toLowerCase();
-    if (["name", "role", "subtitle", "statement", "meta"].includes(key))
+    if (["name", "role", "subtitle", "statement", "meta", "identity", "persona", "location", "الهوية", "الاسم", "الدور", "الموقع"].some(k => key.includes(k)))
       return "profile";
-    if (key.includes("experience")) return "experience";
-    if (key.includes("skills")) return "skills";
-    if (key.includes("works")) return "works";
-    if (key.includes("contact") || key.includes("email")) return "contact";
-    if (key.includes("coffee") || key.includes("kofi") || key.includes("ko-fi"))
+    if (key.includes("experience") || key.includes("metric") || key.includes("المقاييس") || key.includes("الخبرة")) return "experience";
+    if (key.includes("skills") || key.includes("stack") || key.includes("domain") || key.includes("methodology") || key.includes("المنهجية") || key.includes("مجال")) return "skills";
+    if (key.includes("works") || key.includes("case study") || key.includes("case") || key.includes("innovation") || key.includes("دراسة حالة") || key.includes("الابتكار")) return "works";
+    if (key.includes("contact") || key.includes("email") || key.includes("collaboration") || key.includes("التواصل") || key.includes("البريد")) return "contact";
+    if (key.includes("faq") || key.includes("سؤال")) return "architecture";
+    if (key.includes("article") || key.includes("writing") || key.includes("مقال")) return "writing";
+    if (key.includes("coffee") || key.includes("kofi") || key.includes("ko-fi") || key.includes("كوفي"))
       return "coffee";
     return "misc";
   };
 
   return facts
     .map((fact) => {
+      const source = sourceForFact(fact);
       const overlap = tokenize(fact).reduce(
         (acc, token) => (qTokens.has(token) ? acc + 1 : acc),
         0,
       );
-      return { fact, overlap, source: sourceForFact(fact) };
+      // Ensure foundational profile identity/role facts receive baseline priority
+      const score = source === "profile" ? overlap + 2 : overlap;
+      return { fact, overlap: score, source };
     })
     .sort((a, b) => b.overlap - a.overlap || b.fact.length - a.fact.length)
     .map((item) => `- [${item.source}] ${item.fact}`)
-    .slice(0, 16)
+    .slice(0, 25)
     .join("\n");
 };
 
@@ -476,16 +643,20 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
       .trim()
       .slice(0, 1500);
 
-    // Authoritative portfolio facts defined on server - protects against client prompt injection
-    const siteScope = [
-      "Identity: Zaakiy — Sanu Khan's Portfolio Assistant.",
-      "Persona & Tone: Professional, calm, concise, technical, and helpful solution architect representative.",
-      "Sanu Khan: Solution Expert & Platform Engineering Leader based in Dubai, UAE with 13+ years experience.",
-      "Key Systems Built: Regional Enterprise Commerce Platform (9 regional markets PIM integration), Enterprise Omnichannel Commerce Fabric, Airline NDC & Travel B2B Marketplace, Airport Commerce & Travel Retail Platform.",
-      "Personal R&D: ZaakiyV3RSE — An AI-native operations intelligence platform exploring agent orchestration, context retrieval, and adaptive workflows.",
-      "Domains: Enterprise Integrations, Cloud Platforms (Azure/AWS), Distributed Event-Driven Architecture, Microservices, Node.js, TypeScript, React.",
-      `Contact email: ${email}`,
-    ].join("\n");
+    // Server-authoritative portfolio facts: client-provided siteScope is strictly ignored to prevent tampering
+    const trustedFacts = SERVER_TRUSTED_PORTFOLIO_FACTS[locale] || SERVER_TRUSTED_PORTFOLIO_FACTS.en;
+    const siteScope = trustedFacts.join("\n");
+
+    // Client-provided extraContext is sanitized, length-capped, and explicitly labeled as untrusted context
+    const sanitizedExtraContext = incomingExtraContext
+      ? `[Untrusted Client Context / Current View]: ${incomingExtraContext
+          .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, " ")
+          .replace(/<[^>]*>/g, " ")
+          .replace(/[^\p{L}\p{N}\s\-_/.:]/gu, " ")
+          .replace(/\s+/g, " ")
+          .trim()
+          .slice(0, 160)}`
+      : undefined;
 
     if (!userQuestion) {
       sendJson(res, 400, { error: "Missing required fields" });
@@ -501,7 +672,7 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
       locale,
       userQuestion,
       siteScope,
-      extraContext: incomingExtraContext || undefined,
+      extraContext: sanitizedExtraContext,
       email,
       maxChars: maxOutputChars,
       conversationHistory: historySnapshot,

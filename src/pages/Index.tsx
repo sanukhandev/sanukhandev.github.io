@@ -7,15 +7,18 @@ import { getLocalizedPageSeo } from "@/lib/seo";
 import { buildFaqSchema, buildHomepageSchemas } from "@/lib/schema";
 import { searchFocusedFaqs } from "@/data/faqData";
 import Footer from "@/components/sections/Footer";
+import { EditorialExpertise } from "@/components/sections/EditorialExpertise";
+import HeroSection from "@/components/ui/glassmorphism-trust-hero";
 import {
-  ReferenceHero,
   ReferenceProof,
+  ReferenceImpact,
   ReferenceServices,
   ReferenceProjects,
+  ReferenceProcess,
+  ReferenceBento,
+  ReferenceTestimonials,
   ReferenceWriting,
   ReferenceZaakiy,
-  ReferenceProcess,
-  ReferenceAbout,
   ReferenceFaq,
   ReferenceContact,
 } from "@/components/sections/ReferenceHomeSections";
@@ -33,11 +36,11 @@ const Index = () => {
   );
 
   return (
-    <div className="sk-page relative min-h-screen">
+    <div className="editorial-content min-h-screen hairline-grid">
       {/* Accessible Skip to Content Link (WCAG 2.2 AA) */}
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 z-[100] rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-white shadow-md focus:outline-none focus:ring-2 focus:ring-white"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 z-[100] rounded-sm bg-[#D5360C] px-4 py-2 text-sm font-semibold text-white shadow-md focus:outline-none focus:ring-2 focus:ring-white"
       >
         {isArabic ? "الانتقال إلى المحتوى الرئيسي" : "Skip to content"}
       </a>
@@ -53,15 +56,18 @@ const Index = () => {
 
       <Navbar />
 
-      <main id="main-content" className="pt-[72px] sm:pt-20">
-        <ReferenceHero />
+      <main id="main-content" className="pt-0">
+        <HeroSection />
         <ReferenceProof />
+        <SectionReveal><ReferenceImpact /></SectionReveal>
         <SectionReveal><ReferenceServices /></SectionReveal>
+        <SectionReveal><EditorialExpertise /></SectionReveal>
         <SectionReveal><ReferenceProjects /></SectionReveal>
+        <SectionReveal><ReferenceProcess /></SectionReveal>
+        <SectionReveal><ReferenceBento /></SectionReveal>
+        <SectionReveal><ReferenceTestimonials /></SectionReveal>
         <SectionReveal><ReferenceWriting /></SectionReveal>
         <SectionReveal><ReferenceZaakiy /></SectionReveal>
-        <SectionReveal><ReferenceProcess /></SectionReveal>
-        <SectionReveal><ReferenceAbout /></SectionReveal>
         <SectionReveal><ReferenceFaq /></SectionReveal>
         <SectionReveal><ReferenceContact /></SectionReveal>
         <Footer />

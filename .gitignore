@@ -34,3 +34,4 @@ dist-ssr
 .mcp.json
 .opencode.json
 .windsorrules
+*.tsbuildinfo

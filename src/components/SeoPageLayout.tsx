@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import SeoMeta from "@/components/SeoMeta";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/sections/Footer";
+import ContactSection from "@/components/sections/ContactSection";
 import {
   buildBreadcrumbListSchema,
   buildCreativeWorkSchema,
@@ -139,6 +140,7 @@ export default function SeoPageLayout(props: SeoPageLayoutProps) {
           </nav>
         </article>
       </main>
+      <ContactSection />
       <Footer />
     </>
   );

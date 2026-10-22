@@ -105,6 +105,47 @@ const staticRoutes = [
     ],
   },
   {
+    route: "/services",
+    canonicalPath: "/services",
+    title: "Services — Solution Architecture, Full Stack & Automation | Sanu Khan",
+    description: "Solution architecture, full stack platform engineering, enterprise system integrations, and intelligent automation services by Sanu Khan in Dubai, UAE.",
+    keywords: "Solution Architecture Services Dubai, Enterprise Integration Consultant UAE, Full Stack Engineering Services, Sanu Khan Services",
+    ogType: "website",
+    h1: "Services — Solution Architecture, Full Stack & Automation",
+    summary: "From high-level system strategy to hands-on engineering. Practical consultancy for complex platforms, ambitious products and teams.",
+    sections: [
+      "System Design & Solution Architecture",
+      "Full Stack Application Engineering",
+      "Enterprise System Integration",
+      "Cloud & Platform Engineering",
+      "AI & Process Automation",
+      "Technical Leadership & Consulting",
+    ],
+    schemas: [
+      breadcrumbSchema([
+        { name: "Home", path: "/" },
+        { name: "Services", path: "/services" },
+      ]),
+    ],
+  },
+  {
+    route: "/articles",
+    canonicalPath: "/articles",
+    title: "Articles & Technical Notes | Sanu Khan",
+    description: "Systems thinking, architecture decisions, and practical engineering notes from the field by Sanu Khan.",
+    keywords: "Sanu Khan Articles, Software Engineering Notes, Solution Architecture Blog Dubai",
+    ogType: "website",
+    h1: "Articles & Technical Notes",
+    summary: "In-depth engineering notes on distributed systems, API gateways, database architecture, and performance.",
+    sections: ["Recent Articles", "Architecture Patterns", "Platform Engineering"],
+    schemas: [
+      breadcrumbSchema([
+        { name: "Home", path: "/" },
+        { name: "Articles", path: "/articles" },
+      ]),
+    ],
+  },
+  {
     route: "/projects",
     canonicalPath: "/projects",
     title:

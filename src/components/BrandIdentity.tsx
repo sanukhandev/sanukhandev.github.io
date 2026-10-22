@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
-import { useLocale } from "@/hooks/use-locale";
 import { SanuKhanLogo } from "@/components/SanuKhanLogo";
+import { useSectionData } from "@/lib/i18n";
 
 type BrandIdentityProps = {
   className?: string;
@@ -14,13 +14,12 @@ export function BrandIdentity({
   compact = false,
   showDescriptor = true,
 }: BrandIdentityProps) {
-  const { locale } = useLocale();
-  const descriptor = locale === "ar" ? "قائد تقني / خبير حلول" : "TECH LEAD / SOLUTION EXPERT";
+  const nav = useSectionData("nav");
 
   return (
     <span className={cn("brand-identity text-[var(--sk-fg)]", compact && "brand-identity--compact", className)}>
       <SanuKhanLogo compact={compact} />
-      {showDescriptor && <span className="brand-identity__descriptor">{descriptor}</span>}
+      {showDescriptor && <span className="brand-identity__descriptor">{nav.brandDescriptor}</span>}
     </span>
   );
 }

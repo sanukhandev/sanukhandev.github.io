@@ -11,6 +11,7 @@ import {
 import SeoMeta from "@/components/SeoMeta";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/sections/Footer";
+import ContactSection from "@/components/sections/ContactSection";
 import { useDevToArticles } from "@/hooks/use-devto-articles";
 import { articles as fallbackArticles } from "@/data/siteData";
 import { getLocalizedPageSeo } from "@/lib/seo";
@@ -120,7 +121,7 @@ export default function BlogIndex() {
   };
 
   return (
-    <div className="sk-page relative min-h-screen flex flex-col">
+    <div className="editorial-content sk-page relative min-h-screen flex flex-col">
       <SeoMeta
         title={seo.title}
         description={seo.description}
@@ -138,14 +139,12 @@ export default function BlogIndex() {
         <div className="sk-shell">
           {/* Header section */}
           <header className="border-b border-[var(--sk-line)] pb-8 sm:pb-12">
-            <p className="sk-eyebrow mb-3">
-              <span aria-hidden="true">/</span>
-              {ar ? "الملاحظات الهندسية" : "ENGINEERING JOURNAL"}
-            </p>
-            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[var(--sk-fg)] leading-[1.08]">
-              {ar
-                ? "المقالات وملاحظات العمارة البرمجية"
-                : "Articles & Architecture Notes"}
+            <div className="flex items-center justify-between font-mono text-xs text-[var(--sk-fg)] opacity-60 uppercase mb-3">
+              <span>Sanu Khan</span>
+              <span>©2026 [Scroll to Explore]</span>
+            </div>
+            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold uppercase tracking-tight text-[var(--sk-fg)] leading-[1.05]">
+              {ar ? "المقالات الهندسية" : "ARTICLES"}
             </h1>
             <p className="mt-4 max-w-2xl text-base sm:text-lg text-[var(--sk-fg)] opacity-85 leading-relaxed">
               {ar
@@ -360,6 +359,7 @@ export default function BlogIndex() {
         </div>
       </main>
 
+      <ContactSection />
       <Footer />
     </div>
   );

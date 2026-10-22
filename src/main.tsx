@@ -11,9 +11,12 @@ import "@fontsource/ibm-plex-sans-arabic/arabic-400.css";
 import "@fontsource/ibm-plex-sans-arabic/arabic-500.css";
 import "@fontsource/ibm-plex-sans-arabic/arabic-600.css";
 import "@fontsource/ibm-plex-sans-arabic/arabic-700.css";
+import "@fontsource/anta/latin-400.css";
 import App from "./App.tsx";
 import "./index.css";
 import "./styles/editorial-refresh.css";
+import "./styles/collage-upgrade.css";
+import "./styles/editorial-site.css";
 
 createRoot(document.getElementById("root")!).render(
 	<HelmetProvider>

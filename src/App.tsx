@@ -12,6 +12,7 @@ import { LocaleProvider } from "@/hooks/use-locale";
 import { trackEvent, trackPageView } from "@/utils/analytics";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { lazyWithRetry } from "@/utils/lazyWithRetry";
+import ScrollToTop from "@/components/ScrollToTop";
 
 const runWhenIdle = (fn: () => void) => {
   if (typeof window === "undefined") {
@@ -34,6 +35,7 @@ const ToolsIndex = lazyWithRetry(() => import("./pages/ToolsIndex.tsx"));
 const BlogIndex = lazyWithRetry(() => import("./pages/BlogIndex.tsx"));
 const AboutPage = lazyWithRetry(() => import("./pages/AboutPage.tsx"));
 const ProjectsPage = lazyWithRetry(() => import("./pages/ProjectsPage.tsx"));
+const ServicesPage = lazyWithRetry(() => import("./pages/ServicesPage.tsx"));
 const ContactPage = lazyWithRetry(() => import("./pages/ContactPage.tsx"));
 const JsonFormatterToolPage = lazyWithRetry(
   () => import("./pages/tools/JsonFormatterToolPage.tsx"),
@@ -149,6 +151,7 @@ function AnalyticsTracker() {
 const AppShell = () => {
   return (
     <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+        <ScrollToTop />
         <AnalyticsTracker />
         <ErrorBoundary>
           <Suspense fallback={routeFallback}>
@@ -156,6 +159,7 @@ const AppShell = () => {
               <Route path="/" element={<Index />} />
               <Route path="/tools" element={<ToolsIndex />} />
               <Route path="/about" element={<AboutPage />} />
+              <Route path="/services" element={<ServicesPage />} />
               <Route path="/projects" element={<ProjectsPage />} />
               <Route
                 path="/projects/:slug"
@@ -163,6 +167,7 @@ const AppShell = () => {
               />
               <Route path="/contact" element={<ContactPage />} />
               <Route path="/faq" element={<FaqPage />} />
+              <Route path="/articles" element={<BlogIndex />} />
               <Route
                 path="/tools/json-formatter-online"
                 element={<JsonFormatterToolPage />}

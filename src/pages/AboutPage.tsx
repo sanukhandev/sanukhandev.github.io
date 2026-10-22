@@ -1,71 +1,109 @@
-import { Link } from "react-router-dom";
+import { memo } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/sections/Footer";
+import ContactSection from "@/components/sections/ContactSection";
 import SeoMeta from "@/components/SeoMeta";
+import { ResponsiveImage } from "@/components/ui/ResponsiveImage";
 import { buildBreadcrumbListSchema, buildProfilePageSchema } from "@/lib/schema";
 import { useLocale } from "@/hooks/use-locale";
 import { getLocalizedPageSeo } from "@/lib/seo";
-import { ArrowRight, Download } from "lucide-react";
 
-export default function AboutPage() {
+export function AboutPage() {
   const { locale } = useLocale();
-  const isArabic = locale === "ar";
+  const ar = locale === "ar";
   const seo = getLocalizedPageSeo("about", locale);
 
-  const careerMilestones = isArabic
-    ? [
-        {
-          era: "2010 – 2016",
-          title: "هندسة الشبكات والأنظمة",
-          detail: "إدارة البنية التحتية الفيزيائية وخوادم Linux والتوجيه وموثوقية الشبكة. بناء رؤية من الخارج إلى الداخل لموثوقية البرمجيات."
-        },
-        {
-          era: "2016 – 2020",
-          title: "هندسة التطبيقات والبحث والتطوير",
-          detail: "تطوير تطبيقات الويب الكاملة وأدوات الوسائط اللحظية وتطبيقات Android وحلول أتمتة المؤسسات الداخلية."
-        },
-        {
-          era: "2021",
-          title: "تقنيات السفر ومنصات التجميع",
-          detail: "بناء محولات تكامل NDC لشركات الطيران وسير عمل الحجز ومحركات توزيع السفر B2B تحت قيود التوافر العالي."
-        },
-        {
-          era: "2022 – حتى الآن",
-          title: "عمارة الحلول والقيادة التقنية",
-          detail: "تصميم تكاملات المؤسسات عبر SAP ERP و PIM ومتاجر التجارة ومنظومات OMS على المنصات السحابية."
-        }
-      ]
-    : [
-        {
-          era: "2010 – 2016",
-          title: "Network & Systems Engineering",
-          detail: "Managed physical infrastructure, Linux servers, routing, and network reliability. Built an outside-in view of software reliability."
-        },
-        {
-          era: "2016 – 2020",
-          title: "Application & R&D Engineering",
-          detail: "Developed full-stack web applications, real-time media tools, Android apps, and internal enterprise automation solutions."
-        },
-        {
-          era: "2021",
-          title: "Travel Tech & Aggregation Platforms",
-          detail: "Built airline NDC integration adapters, booking sagas, and B2B travel distribution engines with high-availability constraints."
-        },
-        {
-          era: "2022 – Present",
-          title: "Solution Architecture & Technical Leadership",
-          detail: "Architecting enterprise integrations across SAP ERP, PIM, commerce storefronts, and OMS ecosystems on cloud platforms."
-        }
-      ];
+  const achievements = [
+    {
+      symbol: "⌘",
+      title: ar ? "تكامل أنظمة تجارة التجزئة المؤسسية" : "ENTERPRISE RETAIL INTEGRATION",
+      desc: ar
+        ? "مزامنة البيانات بين أنظمة متعددة وتنسيق عمليات التجارة عبر الأسواق الإقليمية."
+        : "Multi-system data synchronization and commerce orchestration across regional markets.",
+    },
+    {
+      symbol: "◎",
+      title: ar ? "منصات متعددة المستأجرين" : "MULTI-TENANT PLATFORM SYSTEMS",
+      desc: ar
+        ? "بنية سحابية أصلية تركز على عزل البيانات وسهولة النشر والاستقلالية التشغيلية."
+        : "Cloud-native architecture emphasizing isolation and deployability.",
+    },
+    {
+      symbol: "↗",
+      title: ar ? "توزيع حجوزات ومحتوى الطيران B2B" : "AIRLINE B2B CONTENT & BOOKING",
+      desc: ar
+        ? "تكامل معايير NDC وبناء قنوات توزيع سفر عالية التوسع والتوافر."
+        : "NDC-led integration and scalable travel distribution pipelines.",
+    },
+    {
+      symbol: "✳",
+      title: ar ? "مبادرة ZAAKIY V3RSE" : "ZAAKIY V3RSE INITIATIVE",
+      desc: ar
+        ? "الذكاء التشغيلي والأتمتة المتقدمة وتطوير أدوات هندسية مبتكرة."
+        : "Operational intelligence, automation and product experimentation.",
+    },
+  ];
+
+  const milestones = [
+    {
+      era: "2022 — PRESENT",
+      title: ar ? "قائد تقني وخبير حلول" : "TECH LEAD & SOLUTION EXPERT",
+      desc: ar
+        ? "عمارة تجارة المؤسسات، وتدفق الأحداث، والتكاملات السحابية، والقيادة الهندسية للفرق."
+        : "Enterprise commerce architecture, event streaming, integrations and technical leadership.",
+    },
+    {
+      era: "2021 — 2022",
+      title: ar ? "مهندس منصات وتطوير شامل" : "FULL STACK & PLATFORM ENGINEER",
+      desc: ar
+        ? "أنظمة ERP، وتجارب أسواق شركات الطيران، والأنظمة الخلفية عالية التحمل."
+        : "ERP systems, airline marketplace experiences and resilient backends.",
+    },
+    {
+      era: "2016 — 2020",
+      title: ar ? "مهندس بحث وتطوير R&D" : "R&D ENGINEER",
+      desc: ar
+        ? "أدوات التعاون بالفيديو، وسير عمل المؤسسات، والتطبيقات الحديثة، والأتمتة."
+        : "Video collaboration, enterprise workflows, applications and automation.",
+    },
+    {
+      era: "2010 — PRESENT",
+      title: ar ? "مستشار حلول مستقل" : "INDEPENDENT SOLUTION CONSULTANT",
+      desc: ar
+        ? "استشارات البرمجيات كخدمة SaaS، وأدوات الذكاء الاصطناعي، وتصميم المنصات، والاستشارات التقنية الشاملة."
+        : "SaaS, AI tooling, platform design and full-stack technology consulting.",
+    },
+  ];
+
+  const visions = [
+    {
+      title: ar ? "الأنظمة قبل الشاشات" : "SYSTEMS BEFORE SCREENS",
+      desc: ar
+        ? "فهم سير عمل الأعمال الشامل قبل الانشغال بتحسين الواجهات السطحية."
+        : "Understand the end-to-end business workflow before optimizing an interface.",
+    },
+    {
+      title: ar ? "المتانة من البداية" : "RESILIENCE BY DESIGN",
+      desc: ar
+        ? "التصميم تحسباً للأعطال، مع وضوح ملكية البيانات، والمراقبة المستمرة، وسهولة الصيانة."
+        : "Design for failure, data ownership, monitoring and maintainability.",
+    },
+    {
+      title: ar ? "الأشخاص يصنعون نجاح التقنية" : "PEOPLE MAKE TECHNOLOGY WORK",
+      desc: ar
+        ? "القيادة بالوضوح، وشرح المفاضلات الهندسية، وتمكين فرق العمل من التسليم بثقة."
+        : "Lead with clarity, communicate trade-offs and enable delivery teams.",
+    },
+  ];
 
   return (
-    <>
+    <div className="editorial-content min-h-screen">
       <SeoMeta
         title={seo.title}
         description={seo.description}
         canonicalPath={seo.canonicalPath}
-        kind="profile"
         keywords={seo.keywords}
+        kind="profile"
         schema={[
           buildProfilePageSchema({
             name: seo.title,
@@ -73,179 +111,287 @@ export default function AboutPage() {
             path: "/about",
           }),
           buildBreadcrumbListSchema([
-            { name: isArabic ? "الرئيسية" : "Home", path: "/" },
-            { name: isArabic ? "نبذة عني" : "About", path: "/about" }
+            { name: ar ? "الرئيسية" : "Home", path: "/" },
+            { name: ar ? "نبذة عني" : "About", path: "/about" },
           ]),
         ]}
       />
 
       <Navbar />
 
-      <main className="reference-subpage reference-about-page min-h-screen bg-background pt-24 pb-16 text-foreground">
-        <article className="container-narrow max-w-4xl space-y-12">
-          {/* Header */}
-          <header className="border-b border-border/60 pb-8">
-            <div className="inline-flex items-center gap-2 text-xs font-mono uppercase text-accent font-semibold mb-3">
-              <span>{isArabic ? "نبذة عني ومسيرتي المهنية" : "About & Career Reflection"}</span>
-            </div>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-primary leading-tight">
-              {isArabic ? "سانو خان" : "Sanu Khan"}
+      <main id="main-content">
+        <header className="intro shell">
+          <div className="eyebrow">SANU KHAN</div>
+          <div className="overline">
+            <h1>
+              {ar ? "نبذة " : "ABOUT "}
+              <span style={{ color: "#f04913" }}>{ar ? "عني." : "ME."}</span>
             </h1>
-            <p className="mt-3 text-lg text-secondary font-medium">
-              {isArabic ? "خبير حلول · قائد هندسة المنصات · دبي، الإمارات" : "Solution Expert · Platform Engineering Lead · Dubai, UAE"}
-            </p>
-          </header>
-
-          {/* 1. Personal Introduction */}
-          <section className="space-y-4 text-base text-secondary leading-relaxed font-normal">
-            <h2 className="text-xl font-bold text-primary mb-2">
-              {isArabic ? "النظر إلى البرمجيات من الخارج إلى الداخل" : "Looking at software from the outside in"}
-            </h2>
-            <p>
-              {isArabic
-                ? "بدأت بالقرب من البنية التحتية أكثر من عمارة التطبيقات. العمل مع الشبكات والأنظمة أعطاني عادة لم أفقدها أبداً: أميل إلى النظر إلى البرمجيات من الخارج إلى الداخل."
-                : "I started closer to infrastructure than application architecture. Working with networks and systems gave me a habit I've never really lost: I tend to look at software from the outside in."}
-            </p>
-            <div className="rounded-xl border border-border bg-secondary/20 p-5 font-mono text-xs sm:text-sm text-primary space-y-1.5">
-              <div className="text-accent font-bold mb-2">
-                {isArabic ? "// الأسئلة التي أبدأ بها:" : "// The questions I start with:"}
-              </div>
-              <div>• {isArabic ? "على ماذا يعتمد هذا النظام؟" : "What does it depend on?"}</div>
-              <div>• {isArabic ? "ما الذي يعتمد عليه؟" : "What depends on it?"}</div>
-              <div>• {isArabic ? "من يمتلك البيانات؟" : "Who owns the data?"}</div>
-              <div>• {isArabic ? "ماذا يحدث عند حدوث عطل؟" : "What happens when something fails?"}</div>
-              <div>• {isArabic ? "كيف يعرف المشغل أن العملية نجحت بالفعل؟" : "How does someone know the process actually worked?"}</div>
+            <div className="crumb">
+              ©2026 [{ar ? "مرر للاستكشاف" : "Scroll to explore"}]
+              <br />
+              {ar ? "نبذة / المسيرة" : "ABOUT / STORY"}
             </div>
-            <p>
-              {isArabic
-                ? "هذا التفكير رافقني عبر هندسة التطبيقات وتجزئة الطيران وتجارة المؤسسات ومنصات السيارات وبيئات التكامل الضخمة. اليوم يقع معظم عملي بين عمارة الحلول وهندسة المنصات والقيادة التقنية."
-                : "That thinking followed me through application engineering, airline retailing, enterprise commerce, automotive platforms and large integration environments. Today most of my work sits somewhere between solution architecture, platform engineering and technical leadership."}
-            </p>
-          </section>
+          </div>
+        </header>
 
-          {/* 2. Career Progression */}
-          <section className="space-y-6">
-            <h2 className="text-xl font-bold text-primary">
-              {isArabic ? "التطور المهني" : "Career Progression"}
-            </h2>
-            <div className="space-y-4 divide-y divide-border/60">
-              {careerMilestones.map((m) => (
-                <div key={m.title} className="pt-4 first:pt-0 flex flex-col sm:flex-row sm:items-start gap-2 sm:gap-6">
-                  <span className="text-xs font-mono font-bold text-accent shrink-0 sm:w-28">
-                    {m.era}
-                  </span>
-                  <div>
-                    <h3 className="text-base font-bold text-primary">{m.title}</h3>
-                    <p className="text-xs sm:text-sm text-secondary leading-relaxed mt-1">{m.detail}</p>
-                  </div>
+        <div className="photo-strip grid grid-cols-2 md:grid-cols-4 gap-3 my-6">
+          <div className="overflow-hidden rounded-xl bg-zinc-900 aspect-[16/10]">
+            <ResponsiveImage alt="Architecture systems" src="/assets/architecture.jpg" className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
+          </div>
+          <div className="overflow-hidden rounded-xl bg-zinc-900 aspect-[16/10]">
+            <ResponsiveImage alt="AI workflow automation" src="/assets/ai.jpg" className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
+          </div>
+          <div className="overflow-hidden rounded-xl bg-zinc-900 aspect-[16/10]">
+            <ResponsiveImage alt="Commerce orchestration" src="/assets/commerce.jpg" className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
+          </div>
+          <div className="overflow-hidden rounded-xl bg-zinc-900 aspect-[16/10]">
+            <ResponsiveImage alt="Enterprise system integration" src="/assets/integration.jpg" className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
+          </div>
+        </div>
+
+        <section className="section shell">
+          <div className="two">
+            <div>
+              <div className="labelrow">
+                <span className="spark">✳</span>
+                <span className="eyebrow">{ar ? "نبذة عن سانو" : "ABOUT SANU"}</span>
+              </div>
+              <h2 className="section-heading">
+                {ar ? (
+                  <>
+                    أؤمن بأن
+                    <br />
+                    الهندسة المعمارية
+                    <br />
+                    تصنع <span className="muted">الوضوح.</span>
+                  </>
+                ) : (
+                  <>
+                    I BELIEVE
+                    <br />
+                    ARCHITECTURE
+                    <br />
+                    CREATES <span className="muted">CLARITY.</span>
+                  </>
+                )}
+              </h2>
+            </div>
+            <div>
+              <p className="lead">
+                {ar
+                  ? "أنا سانو خان — قائد تقني، وخبير حلول معمارية، ومطور لمنصات الإنتاج، مقيم في دبي. يمتد نطاق عملي عبر تكاملات المؤسسات، والعمارة السحابية، والتطوير المتكامل، والأتمتة الذكية."
+                  : "I’m Sanu Khan — a tech lead, solutions expert and builder of production platforms, based in Dubai. My work spans enterprise integrations, cloud architecture, full-stack engineering and intelligent automation."}
+              </p>
+              <div className="three" style={{ marginTop: "55px", gap: "5px" }}>
+                <div className="stat">
+                  <strong>13+</strong>
+                  <small>{ar ? "سنوات خبرة" : "Years"}</small>
+                </div>
+                <div className="stat">
+                  <strong>100+</strong>
+                  <small>{ar ? "حلول منجزة" : "Solutions"}</small>
+                </div>
+                <div className="stat">
+                  <strong>9</strong>
+                  <small>{ar ? "أسواق إقليمية" : "Markets"}</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="section dark-zone">
+          <div className="shell">
+            <div className="labelrow">
+              <span className="spark">✳</span>
+              <span className="eyebrow">{ar ? "العمارة / الإنجازات" : "ARCHITECTURE / ACHIEVEMENTS"}</span>
+            </div>
+            <div className="splithead">
+              <h2 className="section-heading">
+                {ar ? (
+                  <>
+                    ما ساهمت
+                    <br />
+                    في <span className="light-orange">إنجازه.</span>
+                  </>
+                ) : (
+                  <>
+                    WHAT I’VE
+                    <br />
+                    HELPED <span className="light-orange">DELIVER.</span>
+                  </>
+                )}
+              </h2>
+              <p className="lead right" style={{ color: "#aaa" }}>
+                {ar
+                  ? "منصات واقعية. قيود عملية. نتائج تشغيلية حقيقية."
+                  : "Real platforms. Real constraints. Real operational outcomes."}
+              </p>
+            </div>
+            <div className="two" style={{ marginTop: "53px" }}>
+              {achievements.map((ach) => (
+                <div key={ach.title} className="achievement">
+                  <div className="symbol">{ach.symbol}</div>
+                  <h4>{ach.title}</h4>
+                  <p>{ach.desc}</p>
                 </div>
               ))}
             </div>
-          </section>
+          </div>
+        </section>
 
-          {/* 3. Technical Principles */}
-          <section className="space-y-4">
-            <h2 className="text-xl font-bold text-primary">
-              {isArabic ? "ما أهتم به تقنياً" : "What I care about technically"}
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="rounded-xl border border-border bg-secondary/20 p-5">
-                <h3 className="text-sm font-bold text-primary mb-1">
-                  {isArabic ? "ملكية بيانات واضحة" : "Clear Data Ownership"}
-                </h3>
-                <p className="text-xs text-secondary leading-relaxed">
-                  {isArabic
-                    ? "مصدر واحد للحقيقة. إذا ادعى نظامان السلطة على الكيان نفسه دون قواعد مزامنة صريحة، فإن تلف البيانات أمر حتمي."
-                    : "Single sources of truth. If two systems claim authority over the same entity without explicit synchronization rules, data corruption is inevitable."}
-                </p>
+        <section className="section shell">
+          <div className="labelrow">
+            <span className="spark">✳</span>
+            <span className="eyebrow">{ar ? "التطور المهني" : "CAREER PROGRESSION"}</span>
+          </div>
+          <h2 className="section-heading">
+            {ar ? (
+              <>
+                خبرات هادفة
+                <br />
+                في <span className="muted">الهندسة التقنية.</span>
+              </>
+            ) : (
+              <>
+                PURPOSE-DRIVEN
+                <br />
+                <span className="muted">ENGINEERING EXPERIENCE.</span>
+              </>
+            )}
+          </h2>
+          <div className="two" style={{ marginTop: "45px" }}>
+            <img
+              alt="Enterprise engineering"
+              decoding="async"
+              loading="lazy"
+              src="/assets/enterprise.jpg"
+              style={{ height: "340px", width: "100%", objectFit: "cover" }}
+            />
+            <img
+              alt="Backend systems"
+              decoding="async"
+              loading="lazy"
+              src="/assets/backend.jpg"
+              style={{ height: "340px", width: "100%", objectFit: "cover" }}
+            />
+          </div>
+          <div style={{ marginTop: "60px" }}>
+            {milestones.map((m) => (
+              <div key={m.era} className="experience-item">
+                <span className="eyebrow orange">{m.era}</span>
+                <h3>{m.title}</h3>
+                <p>{m.desc}</p>
               </div>
+            ))}
+          </div>
+        </section>
 
-              <div className="rounded-xl border border-border bg-secondary/20 p-5">
-                <h3 className="text-sm font-bold text-primary mb-1">
-                  {isArabic ? "أنماط أعطال صريحة" : "Explicit Failure Modes"}
-                </h3>
-                <p className="text-xs text-secondary leading-relaxed">
-                  {isArabic
-                    ? "التصميم لأوقات انتهاء مهلة APIs أو تراكم الطوابير. التشغيل المتدهور أفضل بكثير من الانهيار المتتالي."
-                    : "Designing for when APIs time out, queues back up, or endpoints return malformed payloads. Degraded operation beats cascading collapse."}
-                </p>
+        <section className="section shell">
+          <div className="labelrow">
+            <span className="spark">✳</span>
+            <span className="eyebrow">{ar ? "القيم والمبادئ" : "VALUES"}</span>
+          </div>
+          <h2 className="section-heading">
+            {ar ? (
+              <>
+                كيف أفكر
+                <br />
+                في <span className="muted">الأنظمة.</span>
+              </>
+            ) : (
+              <>
+                HOW I THINK
+                <br />
+                <span className="muted">ABOUT SYSTEMS.</span>
+              </>
+            )}
+          </h2>
+          <div className="three" style={{ marginTop: "40px" }}>
+            {visions.map((v) => (
+              <div key={v.title} className="vision">
+                <h3>{v.title}</h3>
+                <p>{v.desc}</p>
               </div>
+            ))}
+          </div>
+        </section>
 
-              <div className="rounded-xl border border-border bg-secondary/20 p-5">
-                <h3 className="text-sm font-bold text-primary mb-1">
-                  {isArabic ? "العقود أولاً لـ APIs" : "Contract-First APIs"}
-                </h3>
-                <p className="text-xs text-secondary leading-relaxed">
-                  {isArabic
-                    ? "عقود مخططات صارمة عند الحدود حتى يتمكن المستهلكون والمزودون من التطور بشكل مستقل دون كسر التكاملات."
-                    : "Strict schema contracts at boundaries so consumers and producers can evolve independently without breaking integrations."}
-                </p>
-              </div>
-
-              <div className="rounded-xl border border-border bg-secondary/20 p-5">
-                <h3 className="text-sm font-bold text-primary mb-1">
-                  {isArabic ? "القابلية للتشغيل والقياس" : "Operability & Telemetry"}
-                </h3>
-                <p className="text-xs text-secondary leading-relaxed">
-                  {isArabic
-                    ? "يجب على الأنظمة شرح حالتها للمشغلين. السجلات والتتبع ولوحات القياس يجب أن تعكس نجاح عمليات الأعمال، وليس فقط رموز HTTP."
-                    : "Systems must explain their state to operators. Logging, tracing, and metric dashboards should reflect business process success, not just HTTP codes."}
-                </p>
-              </div>
-            </div>
-          </section>
-
-          {/* 4. Problems Enjoyed */}
-          <section className="space-y-3 border-t border-border/60 pt-8">
-            <h2 className="text-xl font-bold text-primary">
-              {isArabic ? "نوع المشكلات التي أستمتع بحلها" : "What kind of problems I enjoy"}
-            </h2>
-            <p className="text-sm sm:text-base text-secondary leading-relaxed">
-              {isArabic
-                ? "أكون أكثر فاعلية عند فك تشابك تكاملات الأنظمة القديمة المعقدة، أو إنشاء حدود معمارية واضحة لتوسيع المنصات، أو مساعدة الفرق الهندسية على التحول من تسليم الميزات إلى تفكير المنصات."
-                : "I'm most effective when untangling complex legacy integrations, establishing clear architecture boundaries for scaling platforms, or helping engineering teams shift from feature delivery to platform thinking."}
-            </p>
-          </section>
-
-          {/* 5. Resume Download CTA */}
-          <section className="rounded-xl border border-accent/30 bg-accent/5 p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <section className="section shell">
+          <div className="qa">
             <div>
-              <h3 className="text-base font-bold text-primary">
-                {isArabic ? "السيرة الذاتية التفصيلية" : "Detailed Resume"}
-              </h3>
-              <p className="text-xs text-secondary mt-0.5">
-                {isArabic
-                  ? "تحميل نظرة عامة كاملة عن المناصب المهنية والأنظمة المسلمة والقدرات التقنية."
-                  : "Download a complete overview of professional positions, delivered systems, and technical capabilities."}
-              </p>
+              <div className="labelrow">
+                <span className="spark">✳</span>
+                <span className="eyebrow">FAQ</span>
+              </div>
+              <h2 className="section-heading">
+                {ar ? (
+                  <>
+                    الأسئلة
+                    <br />
+                    الشائعة
+                  </>
+                ) : (
+                  <>
+                    FREQUENT
+                    <br />
+                    QUESTIONS
+                  </>
+                )}
+              </h2>
             </div>
+            <div>
+              <details className="faqrow faq-details">
+                <summary>01. {ar ? "ما الذي يمكنك مساعدة فريقنا في تسليمه؟" : "What can you help our team deliver?"}</summary>
+                <p>
+                  {ar
+                    ? "أعمل مع الفرق على عمارة الحلول، المنصات المتكاملة، تكاملات المؤسسات، الأتمتة بالذكاء الاصطناعي، والقيادة التقنية."
+                    : "I work with teams on solution architecture, full-stack platforms, enterprise integrations, AI-assisted automation, and technical leadership."}
+                </p>
+              </details>
+              <details className="faqrow faq-details">
+                <summary>02. {ar ? "هل تتعاون مع فرق المنتجات الحالية؟" : "Do you collaborate with existing product teams?"}</summary>
+                <p>
+                  {ar
+                    ? "نعم. أتكامل مع فرق المنتج والهندسة والأعمال الحالية، موائماً القرارات مع نتائج التسليم والقيود التشغيلية."
+                    : "Yes. I integrate with existing product, engineering and business teams, aligning decisions with delivery outcomes and operational constraints."}
+                </p>
+              </details>
+              <details className="faqrow faq-details">
+                <summary>03. {ar ? "ما هي الأنظمة والمنصات التي تعمل معها؟" : "Which systems and platforms do you work with?"}</summary>
+                <p>
+                  {ar
+                    ? "توثق محفظتي العمل مع Azure و AWS و Kafka و Node.js و React و Java و SAP و PIM وتكاملات API و Kubernetes."
+                    : "The repository documents work with Azure, AWS, Kafka, Node.js, React, Java, SAP, PIM, API integration and Kubernetes."}
+                </p>
+              </details>
+              <details className="faqrow faq-details">
+                <summary>04. {ar ? "هل يمكنك المساعدة في تحديث منصة قائمة؟" : "Can you help modernize an existing platform?"}</summary>
+                <p>
+                  {ar
+                    ? "نعم. يمكنني تقييم التبعيات القديمة واقتراح تحديث تدريجي مدعوم بمراحل انتقال خاضعة للمراقبة."
+                    : "Yes. I can assess legacy dependencies and recommend incremental modernization backed by observable migration milestones."}
+                </p>
+              </details>
+              <details className="faqrow faq-details">
+                <summary>05. {ar ? "هل تعمل عن بُعد وعبر المناطق؟" : "Do you work remotely and across regions?"}</summary>
+                <p>
+                  {ar
+                    ? "نعم. توثق محفظتي تسليم مشاريع في تسعة أسواق، من دبي ومع فرق عمل موزعة عالمياً."
+                    : "Yes. My portfolio documents delivery across nine markets, from Dubai and with distributed teams."}
+                </p>
+              </details>
+            </div>
+          </div>
+        </section>
 
-            <a
-              href="/Sanu Khan - Resume.pdf"
-              download
-              className="inline-flex items-center gap-2 rounded-lg bg-accent px-5 py-2.5 text-xs font-semibold text-white transition-colors hover:bg-accent/90 shrink-0"
-            >
-              <Download className="h-4 w-4" />
-              {isArabic ? "تحميل السيرة الذاتية (PDF)" : "Download Resume (PDF)"}
-            </a>
-          </section>
+        <ContactSection />
 
-          {/* Navigation Links */}
-          <nav className="flex flex-wrap gap-6 pt-4 border-t border-border/60 text-xs font-mono">
-            <Link to="/projects" className="text-accent hover:underline flex items-center gap-1">
-              {isArabic ? "أعمال معمارية مختارة" : "Selected Architecture Work"} <ArrowRight className="h-3 w-3 rtl:rotate-180" />
-            </Link>
-            <Link to="/blog" className="text-accent hover:underline flex items-center gap-1">
-              {isArabic ? "ملاحظات هندسية" : "Engineering Notes"} <ArrowRight className="h-3 w-3 rtl:rotate-180" />
-            </Link>
-            <Link to="/contact" className="text-accent hover:underline flex items-center gap-1">
-              {isArabic ? "التواصل" : "Contact"} <ArrowRight className="h-3 w-3 rtl:rotate-180" />
-            </Link>
-          </nav>
-        </article>
+        <Footer />
       </main>
-
-      <Footer />
-    </>
+    </div>
   );
 }
+
+export default memo(AboutPage);

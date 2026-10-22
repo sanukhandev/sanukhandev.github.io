@@ -1,10 +1,9 @@
-import { MessageCircle, Send, X, Bot, ArrowRight, Minimize2 } from "lucide-react";
+import { Send, X, Bot, ArrowRight, Minimize2 } from "lucide-react";
 import { FormEvent, KeyboardEvent, useMemo, useRef, useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { useLocale } from "@/hooks/use-locale";
-import { useSiteContent } from "@/data/siteContent";
-import { useDevToArticles } from "@/hooks/use-devto-articles";
-import { ZaakiyCat } from "@/components/ui/ZaakiyCat";
+import { getContent, Locale } from "@/lib/i18n";
+import { generateKnowledgeScope, getSmartContentResponse } from "@/lib/zaakiy-knowledge";
 
 type ChatRole = "user" | "assistant";
 
@@ -37,70 +36,6 @@ const writeDailyUsage = (value: number) => {
   window.localStorage.setItem(dailyQuotaKey(), String(value));
 };
 
-const clipText = (text: string, max = MAX_OUTPUT_CHARS) => {
-  const clean = text.replace(/\s+/g, " ").trim();
-  if (clean.length <= max) return clean;
-  return `${clean.slice(0, Math.max(0, max - 1)).trim()}…`;
-};
-
-const getProfessionalFallbackResponse = (query: string, email: string, isArabic = false): string => {
-  const q = query.toLowerCase();
-
-  if (isArabic) {
-    if (q.includes("مرحبا") || q.includes("أهلا") || q.includes("من أنت") || q.includes("من انت")) {
-      return "مرحباً! أنا Zaakiy، مساعد معرض سانو خان. يمكنني الإجابة عن الأسئلة المتعلقة بخبرته الممتدة لأكثر من 13 عاماً في عمارة الحلول، والتكامل المؤسسي، وهندسة المنصات.";
-    }
-
-    if (q.includes("معمارية") || q.includes("تصميم") || q.includes("عمارة") || q.includes("نهج")) {
-      return "يتعامل سانو مع العمارة المعمارية بتحديد حدود النطاق وملكية البيانات أولاً.\n\nأبرز المبادئ المعمارية:\n• فصل خدمات النطاق قبل اختيار قواعد البيانات\n• فرض التحقق الصارم من العقود عند حدود APIs\n• التصميم لمواجهة الأعطال المؤقتة مع تكرار متكافئ القوة (Idempotent)\n• إعطاء الأولوية للقابلية للملاحظة التشغيلية في بيئات الإنتاج";
-    }
-
-    if (q.includes("عمل") || q.includes("أنظمة") || q.includes("مشروع") || q.includes("خبرة") || q.includes("طيران") || q.includes("تجزئة")) {
-      return "قام سانو بتصميم وتسليم أنظمة إنتاجية عالية التوسع:\n\n• منصة التجارة الإقليمية: مزامنة الكتالوج و PIM عبر 9 أسواق مؤسسية\n• سوق NDC للطيران: تجميع رحلات طيران متعددة الموردين وحجز B2B\n• بنية التجارة موحدة القنوات: تكامل قائم على الأحداث يربط ERP بالمتاجر\n• منصة تجارة المطارات: نظام تجارة متعدد المحطات وحجز الصالات";
-    }
-
-    if (q.includes("زاكي") || q.includes("zaakiy") || q.includes("v3rse") || q.includes("ذكاء")) {
-      return "ZaakiyV3RSE هو مشروع بحث وتطوير مستمر لسانو يستكشف الذكاء التشغيلي وتنسيق وكلاء الذكاء الاصطناعي المستقلين واسترجاع السياق والأنظمة المرنة.";
-    }
-
-    if (q.includes("تواصل") || q.includes("بريد") || q.includes("توظيف") || q.includes("اتصال")) {
-      return `يمكنك التواصل مع سانو مباشرة عبر البريد الإلكتروني ${email} أو عبر LinkedIn. مقره في دبي، الإمارات وهو منفتح لفرص القيادة المعمارية والهندسية.`;
-    }
-
-    if (q.includes("مهارات") || q.includes("تقنيات") || q.includes("ستاك")) {
-      return "التخصصات التقنية:\n• العمارة: عمارة الحلول، التصميم الموجه بالنطاق (DDD)، الخدمات المصغرة (Microservices)، الأنظمة القائمة على الأحداث\n• الهندسة: Node.js, TypeScript, React, Azure Cloud, Kafka, REST/GraphQL APIs, PIM/ERP Integrations";
-    }
-
-    return `سانو خان هو معماري حلول وقائد هندسة منصات مقيم في دبي، الإمارات مع خبرة 13+ عاماً.\n\nيسعدني إجابتك عن أي سؤال أو يمكنك التواصل معه مباشرة عبر ${email}.`;
-  }
-
-  if (q.includes("hi") || q.includes("hello") || q.includes("hey") || q.includes("who are you")) {
-    return "Hi — I'm Zaakiy, Sanu Khan's portfolio assistant. I can answer questions about his 13+ years in solution architecture, enterprise integrations, and platform engineering.";
-  }
-
-  if (q.includes("architecture") || q.includes("approach") || q.includes("design") || q.includes("how does sanu")) {
-    return "Sanu approaches architecture by establishing explicit domain boundaries and data ownership first.\n\nKey architectural principles:\n• Decouple domain services before selecting databases\n• Enforce strict contract validation at API boundaries\n• Design for transient failure with idempotent retries\n• Prioritize operational observability in production";
-  }
-
-  if (q.includes("work") || q.includes("system") || q.includes("project") || q.includes("built") || q.includes("experience") || q.includes("airline") || q.includes("retail")) {
-    return "Sanu has architected and delivered high-scale production systems:\n\n• Regional Commerce Platform: PIM/catalog sync across 9 enterprise markets\n• Airline NDC Marketplace: Multi-supplier flight aggregation & B2B booking\n• Omnichannel Commerce Fabric: Event-driven integration linking ERP & storefronts\n• Airport Commerce Platform: Multi-terminal retail and lounge reservation system";
-  }
-
-  if (q.includes("zaakiy") || q.includes("v3rse") || q.includes("ai") || q.includes("r&d")) {
-    return "ZaakiyV3RSE is Sanu's ongoing R&D project exploring operational intelligence, autonomous AI agent orchestration, context retrieval, and resilient workflow systems.";
-  }
-
-  if (q.includes("contact") || q.includes("email") || q.includes("hire") || q.includes("reach") || q.includes("touch")) {
-    return `You can reach Sanu directly via email at ${email} or connect on LinkedIn. He is based in Dubai, UAE and open to solution architecture and engineering leadership roles.`;
-  }
-
-  if (q.includes("skill") || q.includes("stack") || q.includes("tech") || q.includes("node") || q.includes("react")) {
-    return "Technical Specializations:\n• Architecture: Solution Architecture, Domain-Driven Design, Microservices, Event-Driven Systems\n• Engineering: Node.js, TypeScript, React, Azure Cloud, Kafka, REST/GraphQL APIs, PIM/ERP Integrations";
-  }
-
-  return `Sanu Khan is a Solution Expert & Platform Engineering Leader based in Dubai, UAE with 13+ years of experience.\n\nFeel free to ask about his enterprise case studies or reach out directly at ${email}.`;
-};
-
 export default function ZaakiyChatWidget({
   extraContext,
 }: {
@@ -110,9 +45,11 @@ export default function ZaakiyChatWidget({
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const { locale } = useLocale();
-  const content = useSiteContent();
-  const { data: articles } = useDevToArticles(20, open);
-  
+  const activeLocale = (locale === "ar" ? "ar" : "en") as Locale;
+  const content = getContent(activeLocale);
+  const isArabic = activeLocale === "ar";
+  const email = content.footer.email;
+
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const launcherRef = useRef<HTMLButtonElement>(null);
@@ -120,10 +57,6 @@ export default function ZaakiyChatWidget({
   const sessionIdRef = useRef(
     `zaakiy-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`,
   );
-  const scopeSentRef = useRef(false);
-
-  const isArabic = locale === "ar";
-  const email = content.footer.contact.email;
 
   // Start with empty messages feed so welcome state is displayed initially
   const [messages, setMessages] = useState<ChatMessage[]>([]);
@@ -152,41 +85,10 @@ export default function ZaakiyChatWidget({
     return () => window.removeEventListener("keydown", handleKeyDown as unknown as EventListener);
   }, [open]);
 
+  // Dynamically compute authoritative site knowledge scope from content JSON
   const siteScope = useMemo(() => {
-    const works = content.works
-      .map((w) => `${w.title}: ${w.outcome}`)
-      .slice(0, 5)
-      .join(" | ");
-    const services = content.services
-      .map((s) => `${s.company} - ${s.role} (${s.duration})`)
-      .join(" | ");
-    const skills = content.skills.clusters
-      .map((c) => `${c.title}: ${c.tags.join(", ")}`)
-      .join(" | ");
-
-    const blogs =
-      articles && articles.length > 0
-        ? articles
-            .map(
-              (a) =>
-                `"${a.title}" (${a.tags.slice(0, 3).join(", ")}) → https://sanukhan.dev${a.localPath}`,
-            )
-            .join(" | ")
-        : "";
-
-    return [
-      `Identity: Zaakiy — Sanu Khan's Portfolio Assistant.`,
-      `Persona & Tone: Professional, calm, concise, technical, and helpful solution architect representative. Keep responses clear and under 3-4 bullet points or concise paragraphs.`,
-      `Sanu Khan: Solution Expert & Platform Engineering Leader based in Dubai, UAE with 13+ years experience.`,
-      `Key Systems Built: Regional Enterprise Commerce Platform (9 regional markets PIM integration), Enterprise Omnichannel Commerce Fabric, Airline NDC & Travel B2B Marketplace, Airport Commerce & Travel Retail Platform.`,
-      `Personal R&D: ZaakiyV3RSE — An AI-native operations intelligence platform exploring agent orchestration, context retrieval, and adaptive workflows.`,
-      `Experience History: ${services}`,
-      `Skills & Domains: ${skills}`,
-      `Verified Works: ${works}`,
-      ...(blogs ? [`Blogs & Articles: ${blogs}`] : []),
-      `Contact email: ${email}`,
-    ].join("\n");
-  }, [content, email, articles]);
+    return generateKnowledgeScope(activeLocale, extraContext);
+  }, [activeLocale, extraContext]);
 
   const appendMessage = (role: ChatRole, text: string) => {
     setMessages((prev) => [
@@ -216,7 +118,7 @@ export default function ZaakiyChatWidget({
       appendMessage(
         "assistant",
         isArabic
-          ? `وصلنا إلى الحد اليومي للأسئلة. يرجى التواصل مباشرة مع سانو عبر البريد الإلكتروني: ${email}`
+          ? `وصلنا إلى الحد اليومي للاستفسارات. يرجى التواصل مباشرة مع سانو عبر البريد الإلكتروني: ${email}`
           : `Daily query limit reached. Please connect directly with Sanu via email at ${email}.`,
       );
       return;
@@ -228,8 +130,9 @@ export default function ZaakiyChatWidget({
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          locale,
+          locale: activeLocale,
           userQuestion: userText,
+          siteScope,
           extraContext: extraContext || undefined,
           email,
           maxOutputChars: MAX_OUTPUT_CHARS,
@@ -248,13 +151,12 @@ export default function ZaakiyChatWidget({
       }
 
       writeDailyUsage(usage + 1);
-      scopeSentRef.current = true;
       appendMessage("assistant", modelText);
     } catch {
-      // Professional technical fallback when offline / static hosting
+      // Smart technical response engine grounded in localized content JSON
       writeDailyUsage(usage + 1);
-      const fallback = getProfessionalFallbackResponse(userText, email, isArabic);
-      appendMessage("assistant", fallback);
+      const smartReply = getSmartContentResponse(userText, activeLocale, extraContext);
+      appendMessage("assistant", smartReply);
     } finally {
       setLoading(false);
     }
@@ -274,16 +176,16 @@ export default function ZaakiyChatWidget({
 
   const suggestedQuestions = isArabic
     ? [
-        { label: "استكشاف الأعمال المعمارية", query: "ما هي المنصات الإنتاجية التي بناها سانو؟" },
-        { label: "كيف يصمم سانو الأنظمة؟", query: "كيف يتعامل سانو مع تصميم الأنظمة والعمارة المعمارية؟" },
-        { label: "ما هو ZaakiyV3RSE؟", query: "ما هو مشروع ZaakiyV3RSE للبحث والتطوير؟" },
-        { label: "خبرة التكامل المؤسسي", query: "أخبرني عن خبرة سانو في التكامل المؤسسي" },
+        { label: "استكشاف الأعمال والمشاريع", query: "ما هي المنصات الإنتاجية التي بناها سانو؟" },
+        { label: "منهجية تصميم الأنظمة", query: "كيف يتعامل سانو مع تصميم الأنظمة والعمارة المعمارية؟" },
+        { label: "الحزمة والمهارات التقنية", query: "ما هي التقنيات والمنصات الرئيسية في حزمتك الأساسية؟" },
+        { label: "أبحاث Zaakiy V3RSE", query: "ما هو مشروع ZaakiyV3RSE للبحث والتطوير؟" },
       ]
     : [
-        { label: "Explore architecture work", query: "What production systems has Sanu built?" },
-        { label: "How does Sanu approach system design?", query: "How does Sanu approach system design and architecture?" },
-        { label: "What is ZaakiyV3RSE?", query: "What is ZaakiyV3RSE R&D?" },
-        { label: "Show enterprise experience", query: "Tell me about Sanu's enterprise integration experience" },
+        { label: "Explore production case studies", query: "What production systems has Sanu built?" },
+        { label: "System design methodology", query: "How does Sanu approach system design and architecture?" },
+        { label: "Core technologies & stack", query: "Which technologies and platforms are in your core stack?" },
+        { label: "Zaakiy V3RSE R&D", query: "What is ZaakiyV3RSE R&D?" },
       ];
 
   return (
@@ -297,18 +199,21 @@ export default function ZaakiyChatWidget({
           aria-modal="true"
           aria-labelledby="zaakiy-chat-title"
           aria-label={isArabic ? "مساعد معرض سانو خان" : "Zaakiy Portfolio Assistant"}
-          className="zaakiy-chat__dialog mb-3 flex flex-col w-[min(380px,calc(100vw-1.5rem))] h-[min(560px,calc(100vh-6rem))] max-h-[620px] overflow-hidden rounded-[16px] shadow-xl transition-all duration-200"
+          className="zaakiy-chat__dialog mb-3 flex flex-col w-[min(380px,calc(100vw-1.5rem))] h-[min(560px,calc(100vh-6rem))] max-h-[620px] overflow-hidden rounded-[20px] shadow-2xl backdrop-blur-2xl transition-all duration-300 ease-out"
         >
-          {/* Header (56-64px height, understated neutral tone) */}
-          <div className="zaakiy-chat__header flex h-14 shrink-0 items-center justify-between px-4">
+          {/* Header with Frosted Glass Surface */}
+          <div className="zaakiy-chat__header flex h-14 shrink-0 items-center justify-between px-4 border-b border-black/[0.08] dark:border-white/[0.08]">
             <div className="flex items-center gap-2.5">
-              <div className="zaakiy-chat__bot-icon flex h-7 w-7 items-center justify-center rounded-lg">
-                <Bot className="h-3.5 w-3.5" />
+              <div className="zaakiy-chat__bot-icon flex h-8 w-8 items-center justify-center rounded-xl shadow-xs">
+                <Bot className="h-4 w-4" />
               </div>
               <div className="flex flex-col leading-none">
-                <span id="zaakiy-chat-title" className="brand-zaakiy text-[14px] font-semibold text-primary">Zaakiy</span>
+                <div className="flex items-center gap-1.5">
+                  <span id="zaakiy-chat-title" className="brand-zaakiy text-[14px] font-semibold text-primary tracking-tight">Zaakiy</span>
+                  <span className="flex h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                </div>
                 <span className="mt-0.5 text-[11px] text-muted-foreground font-normal">
-                  {isArabic ? "مساعد المعرض" : "Portfolio Assistant"}
+                  {isArabic ? "مساعد المعرض الذكي" : "Portfolio Assistant"}
                 </span>
               </div>
             </div>
@@ -318,7 +223,7 @@ export default function ZaakiyChatWidget({
                 type="button"
                 onClick={() => setOpen(false)}
                 aria-label={isArabic ? "تصغير المساعد" : "Minimize assistant"}
-                className="rounded-md p-1.5 text-muted-foreground hover:bg-secondary hover:text-primary transition-colors"
+                className="rounded-lg p-1.5 text-muted-foreground hover:bg-black/5 dark:hover:bg-white/10 hover:text-primary transition-colors"
               >
                 <Minimize2 className="h-3.5 w-3.5" />
               </button>
@@ -326,7 +231,7 @@ export default function ZaakiyChatWidget({
                 type="button"
                 onClick={() => setOpen(false)}
                 aria-label={isArabic ? "إغلاق المساعد" : "Close assistant"}
-                className="rounded-md p-1.5 text-muted-foreground hover:bg-secondary hover:text-primary transition-colors"
+                className="rounded-lg p-1.5 text-muted-foreground hover:bg-black/5 dark:hover:bg-white/10 hover:text-primary transition-colors"
               >
                 <X className="h-4 w-4" />
               </button>
@@ -344,40 +249,40 @@ export default function ZaakiyChatWidget({
             {/* Welcome State (Shown when no messages have been sent) */}
             {messages.length === 0 && (
               <div className="space-y-4 py-1">
-                <div className="space-y-2">
+                <div className="space-y-2 px-1">
                   <div className="inline-flex items-center gap-1.5 text-[11px] font-mono font-semibold uppercase text-accent tracking-wider">
                     <span className="h-1.5 w-1.5 rounded-full bg-accent" />
                     <span>{isArabic ? "وضع المعرض" : "Portfolio Mode"}</span>
                   </div>
-                  <h4 className="text-[15px] font-semibold text-primary tracking-tight">
+                  <h4 className="text-[16px] font-semibold text-primary tracking-tight">
                     {isArabic ? "مرحباً — أنا Zaakiy." : "Hi — I'm Zaakiy."}
                   </h4>
                   <p className="text-[13px] leading-relaxed text-secondary font-normal">
                     {isArabic
-                      ? "يمكنني مساعدتك في استكشاف أعمال سانو عبر عمارة الحلول، والتكامل المؤسسي، وهندسة المنصات، والقيادة التقنية."
-                      : "I can help you explore Sanu's work across solution architecture, enterprise integration, platform engineering, and technical leadership."}
+                      ? `المساعد الذكي لمعرض سانو خان (${content.hero.location}). يمكنني مساعدتك في استكشاف عمارة الحلول، والتكامل المؤسسي، وهندسة المنصات.`
+                      : `Smart assistant for Sanu Khan's portfolio (${content.hero.location}). I can help you explore solutions architecture, enterprise integrations, and platform engineering.`}
                   </p>
-                  <p className="text-[12px] text-muted-foreground">
+                  <p className="text-[12px] text-muted-foreground font-normal">
                     {isArabic
-                      ? "اسأل عن نظام، أو مجال، أو قرار معماري."
-                      : "Ask about a system, domain, or architectural decision."}
+                      ? "اسأل عن أي نظام، أو منهجية عمل، أو قرار تقني."
+                      : "Ask about any system, engineering methodology, or architectural decision."}
                   </p>
                 </div>
 
-                {/* Suggested Questions Stack */}
+                {/* Suggested Questions Stack without card boxes */}
                 <div className="zaakiy-chat__suggested-wrapper pt-3 space-y-2">
-                  <p className="text-[11px] font-mono uppercase text-muted-foreground tracking-wider font-semibold">
-                    {isArabic ? "أسئلة مقترحة" : "Suggested"}
+                  <p className="text-[11px] font-mono uppercase text-muted-foreground tracking-wider font-semibold px-1">
+                    {isArabic ? "أسئلة مقترحة" : "Suggested questions"}
                   </p>
-                  <div className="grid grid-cols-1 gap-1.5">
+                  <div className="grid grid-cols-1">
                     {suggestedQuestions.map((q) => (
                       <button
                         key={q.label}
                         type="button"
                         onClick={() => handleSendQuery(q.query)}
-                        className="zaakiy-chat__suggested-btn group flex items-center justify-between rounded-lg px-3 py-2 text-left rtl:text-right text-[12.5px] font-medium transition-colors"
+                        className="zaakiy-chat__suggested-btn group flex items-center justify-between py-2 px-1 text-left rtl:text-right text-[12.5px] font-medium transition-all"
                       >
-                        <span>{q.label}</span>
+                        <span className="group-hover:translate-x-1 rtl:group-hover:-translate-x-1 transition-transform">{q.label}</span>
                         <ArrowRight className="h-3.5 w-3.5 text-muted-foreground group-hover:text-accent transition-colors rtl:rotate-180" />
                       </button>
                     ))}
@@ -390,12 +295,12 @@ export default function ZaakiyChatWidget({
             {messages.map((m) => (
               <div key={m.id} className="w-full">
                 {m.role === "user" ? (
-                  <div className="zaakiy-chat__user-bubble ml-auto rtl:ml-0 rtl:mr-auto max-w-[80%] rounded-[12px] px-3.5 py-2 text-[13px] leading-relaxed">
+                  <div className="zaakiy-chat__user-bubble ml-auto rtl:ml-0 rtl:mr-auto max-w-[85%] rounded-[14px] px-3.5 py-2.5 text-[13px] leading-relaxed">
                     {m.text}
                   </div>
                 ) : (
                   <div className="flex items-start gap-2.5 max-w-[95%]">
-                    <div className="zaakiy-chat__bot-icon mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-md">
+                    <div className="zaakiy-chat__bot-icon mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-lg">
                       <Bot className="h-3.5 w-3.5" />
                     </div>
                     <div className="flex-1 space-y-1.5 text-[13px] leading-relaxed text-primary font-normal whitespace-pre-line">
@@ -416,7 +321,7 @@ export default function ZaakiyChatWidget({
           </div>
 
           {/* Composer Input Area */}
-          <form onSubmit={onSubmit} className="zaakiy-chat__form p-3 space-y-2 shrink-0">
+          <form onSubmit={onSubmit} className="zaakiy-chat__form p-3 space-y-2 shrink-0 border-t border-black/[0.08] dark:border-white/[0.08]">
             <div className="flex items-center gap-2">
               <textarea
                 ref={inputRef}
@@ -427,12 +332,12 @@ export default function ZaakiyChatWidget({
                 rows={1}
                 maxLength={400}
                 placeholder={isArabic ? "اسأل عن أعمال سانو…" : "Ask about Sanu's work…"}
-                className="zaakiy-chat__input min-h-[42px] max-h-[90px] flex-1 resize-none rounded-xl px-3.5 py-2.5 text-[13px] outline-none placeholder:text-muted-foreground transition-colors"
+                className="zaakiy-chat__input min-h-[44px] max-h-[90px] flex-1 resize-none rounded-xl px-3.5 py-2.5 text-[13px] outline-none placeholder:text-muted-foreground transition-all"
               />
               <button
                 type="submit"
                 disabled={loading || !input.trim()}
-                className="zaakiy-chat__send-btn inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition-colors disabled:opacity-40 disabled:cursor-not-allowed shadow-xs"
+                className="zaakiy-chat__send-btn inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl transition-all disabled:opacity-40 disabled:cursor-not-allowed shadow-md"
                 aria-label={isArabic ? "إرسال السؤال" : "Send query"}
               >
                 <Send className="h-4 w-4 rtl:rotate-180" />
@@ -441,7 +346,10 @@ export default function ZaakiyChatWidget({
             <div className="flex items-center justify-between text-[11px] text-muted-foreground px-1">
               <span>
                 {isArabic ? "مدعوم بواسطة " : "Powered by "}
-                <span className="brand-zaakiy font-semibold text-accent">ZaakiyV3RSE</span>
+                <span className="inline-flex items-baseline font-sans font-medium" dir="ltr">
+                  <span className="text-foreground font-normal">Zaakiy</span>
+                  <span className="text-[#EF470D] font-bold">V3RSE</span>
+                </span>
               </span>
               <span className="font-mono text-[10px]">
                 {isArabic ? "وضع المعرض" : "Portfolio mode"}
@@ -451,26 +359,24 @@ export default function ZaakiyChatWidget({
         </div>
       )}
 
-      {/* Floating Launcher Button Container with Perched Animated Cat */}
+      {/* Floating Launcher Button with Refined Spatial Glassmorphism */}
       <div className="zaakiy-chat__launcher relative inline-flex flex-col items-end">
-        <ZaakiyCat
-          isOpen={open}
-          onClick={() => setOpen((v) => !v)}
-          isArabic={isArabic}
-        />
-
         <button
           ref={launcherRef}
           type="button"
           onClick={() => setOpen((v) => !v)}
           className={cn(
-            "zaakiy-chat__launcher-button relative inline-flex h-11 items-center gap-2 rounded-full border-0 px-4 text-xs font-semibold text-white shadow-md transition-all focus:outline-none",
-            open && "opacity-95"
+            "zaakiy-chat__launcher-button group relative inline-flex h-11 items-center gap-2.5 rounded-full px-4 text-xs font-semibold uppercase tracking-wider text-white backdrop-blur-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#D5360C]",
+            open && "open"
           )}
           aria-label={isArabic ? "اسأل Zaakiy — فتح مساعد Zaakiy" : "Ask Zaakiy — Open Zaakiy Portfolio Assistant"}
         >
-          <MessageCircle className="h-4 w-4" />
-          <span className="font-medium">{isArabic ? "اسأل Zaakiy" : "Ask Zaakiy"}</span>
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+          </span>
+          <Bot className="h-4 w-4 text-[#E6D5BD] transition-transform duration-200 group-hover:scale-110" />
+          <span className="font-medium tracking-wide">{isArabic ? "اسأل Zaakiy" : "Ask Zaakiy"}</span>
         </button>
       </div>
     </div>

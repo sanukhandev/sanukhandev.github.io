@@ -5,7 +5,7 @@ export const DEFAULT_TWITTER_HANDLE = "@sanukhandev";
 // Must stay a raster format (JPG/PNG): LinkedIn, X, Facebook, Slack and
 // WhatsApp OG scrapers do not decode AVIF/WebP. Regenerate with
 // `node scripts/generate-og-image.mjs`.
-export const DEFAULT_OG_IMAGE = `${SITE_URL}/assets/images/og-card.jpg`;
+export const DEFAULT_OG_IMAGE = `${SITE_URL}/assets/images/sanu-khan-cinematic-og-card.jpg`;
 
 export type SeoKind = "website" | "article" | "profile";
 
@@ -117,9 +117,9 @@ export const buildSeoMetadata = (input: BuildSeoInput): SeoMetadata => {
 
 export const pageSeo = {
   home: {
-    title: "Sanu Khan — Solution Architect, Tech Lead & Software Engineer in Dubai, UAE",
+    title: "Sanu Khan — Tech Lead, Full-Stack Developer & Solution Architect in Dubai",
     description:
-      "Sanu Khan is a Solution Architect, Tech Lead, and Senior Software Engineer in Dubai, UAE with 13+ years designing enterprise integrations (SAP, Kafka, Azure), distributed platforms, and AI systems.",
+      "Sanu Khan is a Dubai-based Tech Lead and solution architect with 13+ years in full-stack development, system design, API integrations, automation and tech consulting.",
     canonicalPath: "/",
     keywords: [
       "Sanu Khan",
@@ -137,6 +137,12 @@ export const pageSeo = {
       "React Developer Dubai",
       "Event-Driven Architecture Kafka Azure",
       "ZaakiyV3RSE",
+      "Full-Stack Developer Dubai",
+      "System Design Expert UAE",
+      "Integration Expert Dubai",
+      "Process Automation Expert",
+      "Technology Business Consultant UAE",
+      "Technical Writer and Content Strategist",
     ],
   },
   blogIndex: {
@@ -230,13 +236,25 @@ export const pageSeo = {
       "Full Stack & Cloud Advisory UAE",
     ],
   },
+  services: {
+    title: "Services — Solution Architecture, Full Stack & Automation | Sanu Khan",
+    description:
+      "Solution architecture, enterprise system integration, full-stack application engineering, and intelligent automation services by Sanu Khan in Dubai, UAE.",
+    canonicalPath: "/services",
+    keywords: [
+      "Solution Architecture Services Dubai",
+      "Enterprise Integration Consulting UAE",
+      "Full Stack Engineering Services",
+      "Sanu Khan Services",
+    ],
+  },
 } as const;
 
 export const pageSeoAr = {
   home: {
-    title: "Sanu Khan | سانو خان — معماري حلول، خبير تقني وقائد هندسي في دبي، الإمارات",
+    title: "Sanu Khan | سانو خان — قائد تقني وخبير حلول وتطوير متكامل في دبي",
     description:
-      "سانو خان خبير تقني ومعماري حلول وقائد هندسي في دبي، الإمارات بخبرة +13 عاماً في تصميم وبناء منصات إنتاجية للتجارة الرقمية وتقنيات السفر وتكامل الأنظمة المؤسسية والهندسة السحابية.",
+      "سانو خان خبير تقني وقائد هندسي في دبي بخبرة تزيد عن 13 عاماً في التطوير المتكامل وتصميم الأنظمة وعمارة الحلول والتكاملات وأتمتة العمليات والاستشارات التقنية.",
     canonicalPath: "/",
     keywords: [
       "سانو خان",
@@ -251,6 +269,12 @@ export const pageSeoAr = {
       "تقنيات السفر",
       "خبير سحابي الإمارات",
       "قائد تقني دبي",
+      "تطوير متكامل دبي",
+      "تصميم الأنظمة",
+      "خبير تكامل الأنظمة",
+      "أتمتة العمليات",
+      "استشارات تقنية وتجارية",
+      "كاتب تقني واستراتيجي محتوى",
     ],
   },
   blogIndex: {
@@ -326,6 +350,18 @@ export const pageSeoAr = {
       "تواصل مع سانو خان",
       "استشارات تقنية دبي",
       "معماري حلول الإمارات",
+    ],
+  },
+  services: {
+    title: "الخدمات — تصميم النظم، التطوير المتكامل، والأتمتة | سانو خان",
+    description:
+      "خدمات الاستشارات المعمارية، وتصميم النظم، وتكامل المؤسسات، وهندسة المنصات السحابية والأتمتة الذكية في دبي، الإمارات.",
+    canonicalPath: "/services",
+    keywords: [
+      "خدمات عمارة الحلول دبي",
+      "استشارات تكامل المؤسسات الإمارات",
+      "تطوير التطبيقات المتكاملة",
+      "خدمات سانو خان",
     ],
   },
 } as const;

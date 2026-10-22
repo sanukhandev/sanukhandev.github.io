@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/sections/Footer";
+import ContactSection from "@/components/sections/ContactSection";
 import SeoMeta from "@/components/SeoMeta";
 import { getLocalizedPageSeo, SITE_URL } from "@/lib/seo";
 import { buildBreadcrumbListSchema } from "@/lib/schema";
@@ -108,6 +109,7 @@ export default function ToolsIndex() {
           </div>
         </section>
       </main>
+      <ContactSection />
       <Footer />
     </>
   );

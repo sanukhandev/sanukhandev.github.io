@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import SeoMeta from "@/components/SeoMeta";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/sections/Footer";
+import ContactSection from "@/components/sections/ContactSection";
 import { buildBreadcrumbListSchema } from "@/lib/schema";
 
 type ToolSeoPageProps = {
@@ -113,6 +114,7 @@ export default function ToolSeoPage(props: ToolSeoPageProps) {
           </nav>
         </article>
       </main>
+      <ContactSection />
       <Footer />
     </>
   );

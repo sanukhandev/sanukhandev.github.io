@@ -13,6 +13,7 @@ import {
 import SeoMeta from "@/components/SeoMeta";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/sections/Footer";
+import ContactSection from "@/components/sections/ContactSection";
 import { profile } from "@/data/siteData";
 import { useDevToArticle, useDevToArticles } from "@/hooks/use-devto-articles";
 import { buildBlogPostingSchema, buildBreadcrumbListSchema } from "@/lib/schema";
@@ -602,6 +603,7 @@ export default function DevToBlogPage() {
         </div>
       </main>
 
+      <ContactSection />
       <Footer />
     </div>
   );
